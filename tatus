@@ -1,0 +1,21 @@
+[33mcommit fc4598700bcc8e7092843f225f9a48f5312259da[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Oscar <oscar@nugoona.com>
+Date:   Sat Aug 2 17:54:46 2025 +0900
+
+    Initial homepage upload
+
+about.html
+app/app.py
+base.html
+css/style.css
+images/favicon.ico
+images/logo.png
+images/x.png
+index.html
+js/main.js
+portfolio.html
+requirements.txt
+services.html
+technology.html
+videos/main._ngn.mp4
+videos/main2._ngn.mp4

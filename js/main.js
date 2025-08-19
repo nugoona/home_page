@@ -89,4 +89,35 @@ formGroups.forEach(group => {
             }
         });
     }
+});
+
+// Dynamic Z-index management for showcase items
+document.addEventListener('DOMContentLoaded', () => {
+    const showcaseContainers = document.querySelectorAll('.showcase-container');
+    
+    showcaseContainers.forEach(container => {
+        const items = container.querySelectorAll('.showcase-item');
+        
+        items.forEach((item, index) => {
+            // Set default z-index
+            item.style.zIndex = index + 1;
+            
+            item.addEventListener('mouseenter', () => {
+                // Set hovered item to highest z-index
+                item.style.zIndex = '100000';
+                
+                // Reset other items in the same container
+                items.forEach((otherItem, otherIndex) => {
+                    if (otherItem !== item) {
+                        otherItem.style.zIndex = otherIndex + 1;
+                    }
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                // Restore default z-index
+                item.style.zIndex = index + 1;
+            });
+        });
+    });
 }); 
