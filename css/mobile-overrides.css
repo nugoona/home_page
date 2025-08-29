@@ -76,23 +76,23 @@
     
     /* 모바일 네비게이션 바 */
     .nav-links {
-        position: fixed !important;
-        top: 60px !important;
-        right: -300px !important;
-        width: auto !important;
-        min-width: 200px !important;
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(10px) !important;
-        padding: 0 !important;
-        flex-direction: column !important;
-        transition: all 0.3s ease !important;
-        z-index: 999 !important;
-        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1) !important;
-        border-radius: 8px !important;
-        height: 250px !important;
-        display: flex !important;
-        gap: 0 !important;
-        margin: 0 !important;
+        position: fixed;
+        top: 60px;
+        right: -300px;
+        width: auto;
+        min-width: 200px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 0;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        z-index: 999;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        height: 250px;
+        display: flex;
+        gap: 0;
+        margin: 0;
     }
 
     .nav-inner {
@@ -101,44 +101,16 @@
     }
 
     .nav-links.active {
-        right: 20px !important;
+        right: 20px;
     }
     
-    .nav-links a {
-        font-size: 18px !important;
-        font-weight: 500 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        height: 50px !important;
-        text-align: center !important;
-        color: #1a1a1a !important;
-        background: transparent !important;
-        border: none !important;
-        transition: all 0.2s ease !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-decoration: none !important;
-        position: relative !important;
-        letter-spacing: -0.01em !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-        opacity: 1 !important;
-    }
-
+    /* 네비게이션 링크 스타일 제거 - common.css에서 처리 */
+    
     .nav-links a:last-child {
-        border-bottom: none !important;
+        border-bottom: none;
     }
 
-    .nav-links a:hover {
-        background: rgba(0, 0, 0, 0.03) !important;
-        color: #000 !important;
-    }
-
-    .nav-links a.active {
-        background: rgba(0, 0, 0, 0.05) !important;
-        color: #000 !important;
-        font-weight: 600 !important;
-    }
+    /* 네비게이션 링크 호버/액티브 스타일 제거 - common.css에서 처리 */
 
     /* 오버레이 제거 - 깔끔한 메뉴만 표시 */
     .mobile-overlay {

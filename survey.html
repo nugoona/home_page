@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>누구나 마케팅 문의하기</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="css/survey.css" rel="stylesheet">
+</head>
+<body>
+    <div class="survey-container">
+        <form class="survey-form" action="https://formspree.io/f/mpwjwqdr" method="POST">
+        <!-- 헤더 섹션 -->
+        <div class="survey-header">
+            <h1>고객님의 소중한 의견을 알려주세요</h1>
+            <div class="intro-text">
+                <p>누구나 컴퍼니에 문의해 주셔서 감사합니다.</p>
+                <p>총 12문항이며 개인정보 관련 문항은 필수가 아니므로 스킵하셔도 좋습니다.</p>
+                <p>작성해주신 정보는 빠른 상담과 정확한 안내를 위해서만 활용됩니다.</p>
+            </div>
+        </div>
+
+        <!-- 업종 카테고리 질문 -->
+        <div class="question-card">
+            <h3 class="question-title ">1. 고객님의 업종 카테고리는 무엇입니까?</h3>
+            <div class="radio-options">
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="fashion">
+                    <span class="radio-custom"></span>
+                    패션의류/뷰티
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="food" >
+                    <span class="radio-custom"></span>
+                    식품
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="household" >
+                    <span class="radio-custom"></span>
+                    생활용품
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="interior" >
+                    <span class="radio-custom"></span>
+                    홈인테리어
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="digital" >
+                    <span class="radio-custom"></span>
+                    가전디지털
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="office" >
+                    <span class="radio-custom"></span>
+                    문구/오피스
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="industry" value="other" >
+                    <span class="radio-custom"></span>
+                    기타: <input type="text" name="industry_other" class="other-input" disabled>
+                </label>
+            </div>
+        </div>
+
+
+
+        <!-- 대행사 관심 포인트 질문 -->
+        <div class="question-card">
+                            <h3 class="question-title">2. 고객님의 광고 운영 포인트는 무엇인가요?</h3>
+            <div class="matrix-question">
+                <table class="matrix-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>매우 중요함</th>
+                            <th>중요함</th>
+                            <th>보통</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>신규 사이트라도 광고를 하면 즉각 매출이 나와야 한다</td>
+                            <td><input type="checkbox" name="point1" value="very_important"></td>
+                            <td><input type="checkbox" name="point1" value="important"></td>
+                            <td><input type="checkbox" name="point1" value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td>타게팅된 유저의 사이트 방문이 늘어나 구매 건수 증대</td>
+                            <td><input type="checkbox" name="point2" value="very_important"></td>
+                            <td><input type="checkbox" name="point2" value="important"></td>
+                            <td><input type="checkbox" name="point2" value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td>판매처가 많으므로 상품 및 상호 브랜드 인지가 중요</td>
+                            <td><input type="checkbox" name="point3" value="very_important"></td>
+                            <td><input type="checkbox" name="point3" value="important"></td>
+                            <td><input type="checkbox" name="point3" value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td>광고비가 어디서 어떻게 사용되는지 공유하고<br>끊임없이 광고주에게 성과 모니터링 보고</td>
+                            <td><input type="checkbox" name="point4" value="very_important"></td>
+                            <td><input type="checkbox" name="point4" value="important"></td>
+                            <td><input type="checkbox" name="point4" value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td>상품 및 사이트 성과 데이터를 통한 경쟁력 분석</td>
+                            <td><input type="checkbox" name="point5" value="very_important"></td>
+                            <td><input type="checkbox" name="point5" value="important"></td>
+                            <td><input type="checkbox" name="point5" value="normal"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 대행사 운영 스타일 질문 -->
+        <div class="question-card">
+            <h3 class="question-title">3. 다음 중 가장 선호하시는 대행사 운영 스타일은 무엇인가요?</h3>
+            <div class="checkbox-options">
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="concept_focus">
+                    <span class="checkbox-custom"></span>
+                    광고 컨셉 내부에서, 대행사는 디렉션에 따라 광고 효율만 집중
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="performance_strategy">
+                    <span class="checkbox-custom"></span>
+                    광고 성과를 통해 상품 판매 전략을 끊임없이 공유
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="initial_setup">
+                    <span class="checkbox-custom"></span>
+                    초기 세팅과 운영팁 정도만 지도(향후 직접운영 계획)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="real_time_adjustment">
+                    <span class="checkbox-custom"></span>
+                    효율 혹은 매출에 따라 광고비 실시간 조정하여 매출이 나온 만큼 광고비를 지출
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="style" value="no_thought">
+                    <span class="checkbox-custom"></span>
+                    딱히 생각해 본 적 없음
+                </label>
+            </div>
+        </div>
+
+        <!-- 온라인 광고 경험 질문 -->
+        <div class="question-card">
+            <h3 class="question-title ">4. 기존에 온라인 광고는 어느 정도 진행해 보셨나요?</h3>
+            <div class="radio-options">
+                <label class="radio-option">
+                    <input type="radio" name="ad_experience" value="none" >
+                    <span class="radio-custom"></span>
+                    진행한 적 없음
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="ad_experience" value="6months" >
+                    <span class="radio-custom"></span>
+                    6개월 이하
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="ad_experience" value="1year" >
+                    <span class="radio-custom"></span>
+                    1년 이하
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="ad_experience" value="over1year" >
+                    <span class="radio-custom"></span>
+                    1년 이상
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="ad_experience" value="other" >
+                    <span class="radio-custom"></span>
+                    기타: <input type="text" name="ad_experience_other" class="other-input" disabled>
+                </label>
+            </div>
+        </div>
+
+        <!-- 광고 매체 질문 -->
+        <div class="question-card">
+            <h3 class="question-title ">5. 광고를 진행하셨다면 주로 어느 매체를 진행하셨나요? (복수 응답 가능)</h3>
+            <div class="checkbox-options">
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="none">
+                    <span class="checkbox-custom"></span>
+                    진행한 적 없음
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="meta">
+                    <span class="checkbox-custom"></span>
+                    메타 (인스타, 페이스북)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="keyword_search">
+                    <span class="checkbox-custom"></span>
+                    키워드 검색광고 (네이버, 구글)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="shopping_search">
+                    <span class="checkbox-custom"></span>
+                    쇼핑 검색광고 (네이버, 쿠팡 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="portal_image">
+                    <span class="checkbox-custom"></span>
+                    포털 이미지 광고 (네이버, 카카오, 네이트 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="google_ads">
+                    <span class="checkbox-custom"></span>
+                    구글애즈
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="app_ads">
+                    <span class="checkbox-custom"></span>
+                    앱광고 (지그재그, 무신사, 오늘의 집 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="ad_media" value="other">
+                    <span class="checkbox-custom"></span>
+                    기타: <input type="text" name="ad_media_other" class="other-input" disabled>
+                </label>
+            </div>
+        </div>
+
+        <!-- 현재 진행 예정 매체 질문 -->
+        <div class="question-card">
+            <h3 class="question-title ">6. 현재 관심 있는 광고 매체는 무엇인가요? (복수 응답 가능)</h3>
+            <div class="checkbox-options">
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="none">
+                    <span class="checkbox-custom"></span>
+                    아직 특정 매체를 정하지 않았습니다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="meta">
+                    <span class="checkbox-custom"></span>
+                    메타 (인스타, 페이스북)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="keyword_search">
+                    <span class="checkbox-custom"></span>
+                    키워드 검색광고 (네이버, 구글)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="shopping_search">
+                    <span class="checkbox-custom"></span>
+                    쇼핑 검색광고 (네이버, 쿠팡 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="portal_image">
+                    <span class="checkbox-custom"></span>
+                    포털 이미지 광고 (네이버, 카카오, 네이트 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="google_ads">
+                    <span class="checkbox-custom"></span>
+                    구글애즈
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="app_ads">
+                    <span class="checkbox-custom"></span>
+                    앱광고 (지그재그, 무신사, 오늘의 집 등)
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="planned_media" value="other">
+                    <span class="checkbox-custom"></span>
+                    기타: <input type="text" name="planned_media_other" class="other-input" disabled>
+                </label>
+            </div>
+        </div>
+
+        <!-- 기존 광고 계정 질문 -->
+        <div class="question-card">
+            <h3 class="question-title">7. 기존에 진행 했던 광고 계정이 있으신가요?</h3>
+            <div class="checkbox-options">
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="dont_know">
+                    <span class="checkbox-custom"></span>
+                    없음 / 직접 관리하지 않아서 잘모른다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="facebook_ad">
+                    <span class="checkbox-custom"></span>
+                    페이스북 광고 계정을 소유하고 있다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="facebook_pixel">
+                    <span class="checkbox-custom"></span>
+                    페이스북 광고 픽셀을 소유하고 있다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="facebook_page">
+                    <span class="checkbox-custom"></span>
+                    비즈니스 목적의 페이스북 페이지 / 인스타 계정을 소유하고 있다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="naver_search">
+                    <span class="checkbox-custom"></span>
+                    네이버 관련 광고 계정을 소유하고 있다
+                </label>
+                <label class="checkbox-option">
+                    <input type="checkbox" name="existing_accounts" value="naver_display">
+                    <span class="checkbox-custom"></span>
+                    구글 애즈 광고 계정을 소유하고 있다
+                </label>
+            </div>
+        </div>
+
+        <!-- 광고비 합리성 질문 -->
+        <div class="question-card">
+                            <h3 class="question-title">8. 고객님이 생각하시는 가장 합리적인 광고비는 다음 중 어느 것과 가깝습니까?</h3>
+            <div class="radio-options">
+
+                <label class="radio-option">
+                    <input type="radio" name="reasonable_cost" value="5_10_percent">
+                    <span class="radio-custom"></span>
+                    광고비는 매출액의 5~10% 정도가 적당하다
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="reasonable_cost" value="under_3_percent">
+                    <span class="radio-custom"></span>
+                    광고 매출의 의존도를 줄이기 위해 매출액의 3% 이상은 쓰지 않으려 한다
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="reasonable_cost" value="300k_daily">
+                    <span class="radio-custom"></span>
+                    1달정도 소액 테스트를 통해 성과가 나오면, 일 30만원 이상 소진해보려고 한다.
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="reasonable_cost" value="kpi_based">
+                    <span class="radio-custom"></span>
+                    ROAS나 CPC 같은 KPI 기준으로 성과에 따라 광고비를 소진해보려고 한다.
+                </label>
+            </div>
+        </div>
+
+        <!-- 사이트 정보 질문 -->
+        <div class="question-card">
+            <h3 class="question-title">9. 사이트 이름 또는 랜딩페이지(URL)는 무엇인가요?</h3>
+            <p class="example-text">예) 누구나컴퍼니 OR nugoona.co.kr</p>
+            <input type="text" name="site_info" class="text-input" placeholder="내 답변">
+        </div>
+
+        <!-- 커뮤니케이션 방식 질문 -->
+        <div class="question-card">
+            <h3 class="question-title ">10. 문의 관련 커뮤니케이션은 어느 방식이 편하신가요?</h3>
+            <div class="radio-options">
+                <label class="radio-option">
+                    <input type="radio" name="communication_method" value="phone" >
+                    <span class="radio-custom"></span>
+                    1.지정된 시간에 전화
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="communication_method" value="video_meeting" >
+                    <span class="radio-custom"></span>
+                    2.지정된 시간에 화상 온라인 미팅
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="communication_method" value="email" >
+                    <span class="radio-custom"></span>
+                    3.이메일 (해당 항목을 선택하실 경우, 아래 기타에 이메일 주소를 남겨주세요)
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="communication_method" value="contact_later" >
+                    <span class="radio-custom"></span>
+                    4.시간 날때 직접 다시 연락을 하겠다
+                </label>
+            </div>
+        </div>
+
+        <!-- 편한 시간 질문 -->
+        <div class="question-card">
+            <h3 class="question-title">11. 문의 관련 커뮤니케이션은 언제가 편하신가요?</h3>
+            <p class="example-text">예) 다음 주 수요일 혹은 목요일 오후 2시~4시에 가능합니다</p>
+            <input type="text" name="convenient_time" class="text-input" placeholder="내 답변">
+        </div>
+
+        <!-- 연락처 정보 질문 -->
+        <div class="question-card">
+            <h3 class="question-title">12. 연락을 원하시면 전화번호 혹은 이메일과 직함을 남겨주세요</h3>
+            <p class="example-text">예) 010-XXXX-XXXX, 박팀장</p>
+            <input type="text" name="contact_info" class="text-input" placeholder="내 답변">
+        </div>
+
+        <!-- 제출 버튼 -->
+        <div class="submit-section">
+            <button type="submit" class="submit-button">제출</button>
+            <a href="index.html" class="home-button">홈페이지</a>
+        </div>
+        </form>
+    </div>
+
+    <script src="js/survey.js"></script>
+</body>
+</html>

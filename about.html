@@ -3,190 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - NGN</title>
+    <title>누구나컴퍼니</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/about.css" rel="stylesheet">
+    <style>
+        /* 인라인 네비게이션 스타일 */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgb(234, 234, 234);
+            border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+            z-index: 999999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 거리 단축, 색상 진하게 */
+        }
+        
+        .nav-inner {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .pricing-btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 0px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-btn:hover {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .nav-brand a {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: rgb(17, 17, 17);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .brand-text {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            letter-spacing: -0.02em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "liga" 1, "kern" 1;
+        }
+        
+        .hamburger-menu,
+        .mobile-overlay {
+            display: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background: none;
+            width: auto;
+            height: auto;
+            flex-direction: row;
+            transform: none;
+            opacity: 1;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-family: 'Pretendard', sans-serif;
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            opacity: 1;
+            transition: opacity 0.2s ease;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-links a.active {
+            opacity: 1;
+            font-weight: 700;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 5px;
+            left: 50%;
+            background-color: #000000;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            max-width: 400px;
+            margin-left: 60px;
+        }
+        
+        /* 페이지 콘텐츠 마진 조정 */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: rgb(234, 234, 234);
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+        
+        /* 어바웃 페이지 전용 스타일 */
+        .about-advantages-section {
+            padding: 4rem 4rem 4rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            visibility: visible;
+            opacity: 1;
+            min-height: 400px;
+            margin-top: 70px;
+        }
+        
+        .about-section-header {
+            text-align: center;
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 60px;
+            margin-bottom: 10rem;
+            margin-top: 0;
+        }
+        
+        .about-section-header h2 {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 10.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: rgb(17, 17, 17);
+            line-height: 0.9;
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .about-section-header h3 {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: rgb(17, 17, 17);
+            line-height: 1.4;
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        /* 푸터 스타일 - 원본 common.css에서 복원 */
+        .site-footer {
+            background: #000000;
+            color: white;
+            padding: 0.1rem 0 0.1rem 0;
+            margin-top: 0.05rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h5 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-section p {
+            font-size: 0.8rem;
+            margin-bottom: 0.05rem;
+            color: #cccccc;
+            line-height: 1.4;
+        }
+        
+        .info-item {
+            display: block;
+            margin-bottom: 0.05rem;
+        }
+        
+        .footer-bottom {
+            margin-top: 0.4rem;
+            padding-top: 0.2rem;
+            border-top: 1px solid #333;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .nav-container { padding: 0 15px; }
+            .nav-menu { gap: 20px; }
+            .nav-link { font-size: 18px; }
+            .nav-logo img { height: 40px; margin-left: 30px; }
+            .brand-text { font-size: 28px; }
+            
+            .footer-container { padding: 0 15px; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-section { min-width: auto; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Cursor -->
-    <div class="cursor"></div>
-
-    <!-- Navigation -->
+    <!-- 네비게이션 -->
     <nav class="site-nav">
         <div class="nav-inner">
             <div class="nav-brand">
-                <a href="index.html">NGN</a>
+                <a href="index.html" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
             </div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="technology.html">Technology</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="about.html" class="active">About</a>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            <div class="nav-center">
+                <div class="nav-links">
+                    <a href="index.html">홈</a>
+                    <a href="services.html">SNS광고</a>
+                    <a href="technology.html">대시보드</a>
+                    <a href="portfolio.html">콘텐츠</a>
+                    <a href="about.html" class="active">소개</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
+                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+            </div>
+            <div class="mobile-overlay"></div>
         </div>
     </nav>
 
-    <!-- About Header -->
-    <header class="page-header">
-        <div class="container">
-            <h1 class="mega-text">Our Story</h1>
-            <div class="text-reveal">
-                <p>Where marketing expertise meets AI innovation</p>
-            </div>
-        </div>
-    </header>
-
-    <!-- About Content -->
-    <section class="about-section">
-        <div class="container">
-            <div class="about-intro">
-                <div class="about-text">
-                    <h2>Who We Are</h2>
-                    <p>NGN is where marketing expertise meets cutting-edge AI technology. Founded by seasoned marketers with over a decade of experience, we're revolutionizing digital marketing through intelligent automation and data-driven strategies.</p>
-                    <div class="experience-circle">
-                        <svg viewBox="0 0 100 100">
-                            <path id="circle-text" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
-                            <text>
-                                <textPath href="#circle-text">EXPERIENCE • INNOVATION • AI •</textPath>
-                            </text>
-                        </svg>
-                        <span class="years">10+</span>
-                        <span class="label">Years</span>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="images/about/team.jpg" alt="NGN Team">
-                </div>
-            </div>
-
-            <!-- Mission & Vision -->
-            <div class="mission-vision">
-                <div class="mission">
-                    <span class="section-number">01</span>
-                    <h3>Our Mission</h3>
-                    <p>To democratize advanced marketing technology, making AI-powered solutions accessible to businesses of all sizes.</p>
-                </div>
-                <div class="vision">
-                    <span class="section-number">02</span>
-                    <h3>Our Vision</h3>
-                    <p>To lead the future of digital marketing where AI and human creativity work in perfect harmony.</p>
-                </div>
-            </div>
-
-            <!-- Why NGN -->
-            <div class="why-ngn">
-                <h2>Why NGN?</h2>
-                <div class="reasons-grid">
-                    <div class="reason-item">
-                        <span class="reason-number">01</span>
-                        <h3>Cost-Effective</h3>
-                        <p>AI automation reduces operational costs, passing savings to clients</p>
-                    </div>
-                    <div class="reason-item">
-                        <span class="reason-number">02</span>
-                        <h3>AI Expertise</h3>
-                        <p>Cutting-edge technology integrated with marketing know-how</p>
-                    </div>
-                    <div class="reason-item">
-                        <span class="reason-number">03</span>
-                        <h3>Results-Driven</h3>
-                        <p>Data-backed strategies for measurable improvements</p>
-                    </div>
-                    <div class="reason-item">
-                        <span class="reason-number">04</span>
-                        <h3>Innovation</h3>
-                        <p>Constantly evolving with the latest AI advancements</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Team Section -->
-            <div class="team-section">
-                <h2>Leadership Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="images/about/ceo.jpg" alt="CEO">
-                        </div>
-                        <div class="member-info">
-                            <h3>CEO Name</h3>
-                            <p>Marketing Strategy Expert</p>
-                            <p class="member-description">10+ years of experience in digital marketing and AI integration</p>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-image">
-                            <img src="images/about/cto.jpg" alt="CTO">
-                        </div>
-                        <div class="member-info">
-                            <h3>CTO Name</h3>
-                            <p>AI Technology Lead</p>
-                            <p class="member-description">Expert in AI/ML and marketing automation systems</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Company Info -->
-            <div class="company-info">
-                <a href="#" class="download-btn btn-circle">
-                    <span class="circle-text">Download Company Profile</span>
-                    <svg class="circle-arrow" viewBox="0 0 24 24">
-                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                    </svg>
-                </a>
-            </div>
+    <section class="about-advantages-section">
+        <div class="about-section-header">
+            <h2>WHAT DRIVES US</h2>
+            <h3>회사소개</h3>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" id="name" required>
-                    <label for="name">Your Name</label>
-                    <div class="line"></div>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" required>
-                    <label for="email">Your Email</label>
-                    <div class="line"></div>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" required></textarea>
-                    <label for="message">Your Message</label>
-                    <div class="line"></div>
-                </div>
-                <button type="submit" class="submit-btn">
-                    <span>Connect With Us</span>
-                    <svg class="circle-arrow" viewBox="0 0 24 24">
-                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </section>
+        <!-- ===== 중앙 콘텐츠 시작 (대표 중심 ABOUT) ===== -->
+        <section class="about-body">
 
-    <!-- Footer -->
+          <!-- 얇은 구분 라인 -->
+          <div class="divider-line"></div>
+
+          <!-- 1) 대표 하이라이트 -->
+          <section class="founder-hero">
+            <div class="founder-photo">
+              <img src="images/oscar.png" alt="대표 최우현">
+            </div>
+            <div class="founder-copy">
+              <h2>최우현</h2>
+              <p>Founder</p>
+              <p>
+                고객이 원하는 온라인 마케팅 니즈를 <strong>추가 비용 없이 AI 기술로 지원</strong>하기 위해 누구나 컴퍼니를 시작했습니다.<br>
+                우리는 보여주기식 성과가 아니라, <strong>데이터와 비용 대비 효과라는 확실한 가치</strong>에 집중합니다.<br>
+                비용 절감과 AI 테크 기술을 통해, 이제는 <strong>누구나 안심하고 마케팅을 맡길 수 있는 시대</strong>를 만들어갑니다.
+              </p>
+              <div class="founder-tags">
+                <span>영상/콘텐츠 제작</span>
+                <span>테크 기반 SNS 광고 10년+</span>
+                <span>SQL 데이터 분석</span>
+                <span>패션/뷰티 50+ 브랜드</span>
+                <span>Facebook Performance Hero</span>
+              </div>
+            </div>
+          </section>
+
+          <div class="divider-line"></div>
+
+          <!-- 2) 회사 철학 -->
+          <div class="section-title">
+            <h2>Our Core Philosophy</h2>
+          </div>
+          <div class="philosophy-container">
+            <section class="philosophy-left">
+              <div class="philosophy-card">
+                <div class="card-content">
+                  <h3><span class="philosophy-bullet"></span>확실한 것이 길을 만든다</h3>
+                  <p>
+                    마케터에게 확실한 것은 <strong>성과 데이터</strong>, 광고주에게 확실한 것은 <strong>비용 대비 효과</strong>입니다.
+                  </p>
+                </div>
+              </div>
+              <div class="philosophy-card">
+                <div class="card-content">
+                  <h3><span class="philosophy-bullet"></span>몰매출 중심</h3>
+                  <p>
+                    광고 성과만 좋아서는 의미가 없습니다. 최종 목표는 언제나 전체 몰매출의 상승입니다.
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section class="philosophy-right">
+              <img src="images/기하1.png" alt="Geometric Art 1">
+            </section>
+          </div>
+
+          <!-- Why NUGOONA Section -->
+          <section class="why-nugoona">
+            <div class="why-background">
+              <img src="images/why2.png" alt="Why NUGOONA Background">
+            </div>
+            <div class="why-content">
+              <div class="why-title">
+                <h3>Why NUGOONA?</h3>
+              </div>
+              <div class="why-description">
+                <div class="why-paragraph-1">
+                  <div class="why-separator"></div>
+                  <div class="why-text-content">
+                    <strong>우리는 결과를 만드는 기본에 집중합니다.</strong>
+                    <span class="why-sub-text">매체를 깊이 이해하고, 클릭율 높은 소재를 발굴하는 일에서 성과는 시작됩니다.</span>
+                  </div>
+                </div>
+                <div class="why-paragraph-2">
+                  <div class="why-separator"></div>
+                  <div class="why-text-content">
+                    <strong>고객마다 광고비 규모는 다르지만, 마케팅의 본질은 같습니다.</strong>
+                    <span class="why-sub-text">AI와 데이터로 불필요한 리소스를 줄이고, 투자한 비용이 더 큰 성과로 이어져야 합니다.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4) 왜 AI 마케팅인가 -->
+          <div class="section-title">
+            <h2>The Reason for AI Marketing</h2>
+          </div>
+          <div class="philosophy-container">
+            <section class="philosophy-left">
+              <div class="philosophy-card">
+                <div class="card-content">
+                  <h3><span class="philosophy-bullet"></span>리소스는 줄이고, 창의성은 키운다</h3>
+                  <p>
+                    마케터가 캠페인 기획과 운영 컨설팅에 집중하기 위해,<br>
+                    AI는 성과 보고와 같은 반복 업무를 대신합니다.
+                  </p>
+                </div>
+              </div>
+              <div class="philosophy-card">
+                <div class="card-content">
+                  <h3><span class="philosophy-bullet"></span>AI로 직접 만들어낸 결과</h3>
+                  <p>
+                    개발자·전문 디자이너 없이 <strong>마케터 주도</strong>로 데이터 대시보드와 홈페이지를 기획·구축했습니다.<br>
+                    말이 아닌 결과로 <strong>비용절감을 증명</strong>합니다.
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section class="philosophy-right">
+              <img src="images/기하2.png" alt="Geometric Art 2">
+            </section>
+          </div>
+
+          <!-- 5) 대표의 배경/신뢰 포인트 -->
+          <div class="section-title">
+            <h2>Experience & Credentials</h2>
+          </div>
+          <section class="credentials">
+            <div class="credential-item">
+              <div class="credential-title">Performance Marketing</div>
+              <p class="credential-description">• 10년 이상 SNS 광고 운영 경험<br>• Python·SQL API를 통한 데이터 분석 및 자동화 경험<br>• 네이버·카카오·구글·메타 등 전 매체 캠페인 운영 전문가</p>
+            </div>
+            <div class="credential-item">
+              <div class="credential-title">Content Production</div>
+              <p class="credential-description">• 다큐멘터리·광고·영화 분야 8년 경력, 영상·이미지 툴 숙련<br>• 브랜드 캠페인 크리에이티브 기획부터 제작까지 풀스택 실행 역량 보유</p>
+            </div>
+            <div class="credential-item">
+              <div class="credential-title">Recognition</div>
+              <p class="credential-description">• Facebook Performance Hero Award 수상<br>• 패션·뷰티 중심 50+ 브랜드 운영 경험</p>
+            </div>
+          </section>
+
+
+
+          <!-- 8) 콜투액션 -->
+          <section class="cta">
+            <div>
+              <div class="contact-label">CONTACT</div>
+              <h3>설문 참여로 더 빠르고 원활한 상담</h3>
+              <p>2분이면 끝나는 설문지를 작성해주시면 귀사의 상황을 빠르게 파악해, 더 효율적인 맞춤형 상담을 진행합니다.</p>
+            </div>
+            <a href="survey.html">
+              설문 참여하기
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </section>
+        </section>
+        <!-- ===== 중앙 콘텐츠 끝 ===== -->
+
+    <!-- 푸터 -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>NGN</h3>
-                    <p>Transforming digital presence with AI</p>
-                </div>
-                <div class="footer-links">
-                    <a href="mailto:contact@ngn.com">contact@ngn.com</a>
-                    <a href="tel:+82-XXX-XXXX">+82-XXX-XXXX</a>
-                </div>
+        <div class="footer-content">
+            <div class="footer-section company-info">
+                <h5>누구나컴퍼니</h5>
+                <p class="company-details">
+                    <span class="info-item">대표 최우현</span>
+                    <span class="info-item">주소 : 서울시 노원구 공릉로34길 62</span>
+                </p>
             </div>
+            <div class="footer-section business-info">
+                <h5>사업 정보</h5>
+                <p class="business-details">
+                    <span class="info-item">사업자등록번호 : 544-02-02671</span>
+                    <span class="info-item">통신판매업신고번호 : 2023-서울노원-1648</span>
+                </p>
+            </div>
+            <div class="footer-section contact-info">
+                <h5>연락처</h5>
+                <p class="contact-details">
+                    <span class="info-item">대표번호 : 010-2781-4543</span>
+                    <span class="info-item">이메일문의 : oscar@nugoona.co.kr</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
         </div>
     </footer>
-
+    
+    <!-- JavaScript -->
     <script src="js/main.js"></script>
 </body>
-</html> 
+</html>
