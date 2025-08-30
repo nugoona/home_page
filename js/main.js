@@ -47,7 +47,7 @@ class CommonElementsLoader {
                     </div>
                     
                     <div class="nav-logo">
-                        <img src="app/static/video/누구나타이틀.gif" alt="NUGUNA">
+                        <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" alt="NUGUNA">
                     </div>
                 </div>
             </nav>
@@ -155,10 +155,10 @@ class CommonElementsLoader {
 
     loadFavicon() {
         const faviconData = [
-            { rel: 'icon', type: 'image/x-icon', href: 'images/favicon.ico' },
-            { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'images/favicons/favicon-32x32.png' },
-            { rel: 'icon', type: 'image/png', sizes: '16x16', href: 'images/favicons/favicon-16x16.png' },
-            { rel: 'apple-touch-icon', sizes: '180x180', href: 'images/favicons/apple-touch-icon.png' }
+            { rel: 'icon', type: 'image/x-icon', href: "{{ url_for('static', filename='img/favicons/favicon.ico') }}" },
+            { rel: 'icon', type: 'image/png', sizes: '32x32', href: "{{ url_for('static', filename='img/favicons/favicon-32x32.png') }}" },
+            { rel: 'icon', type: 'image/png', sizes: '16x16', href: "{{ url_for('static', filename='img/favicons/favicon-16x16.png') }}" },
+            { rel: 'apple-touch-icon', sizes: '180x180', href: "{{ url_for('static', filename='img/favicons/apple-touch-icon.png') }}" }
         ];
 
         faviconData.forEach(data => {

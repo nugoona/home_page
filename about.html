@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나컴퍼니</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/about.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/about.css') }}" rel="stylesheet">
     <style>
         /* 인라인 네비게이션 스타일 */
         .site-nav {
@@ -307,7 +307,7 @@
             </div>
             <div class="nav-right">
                 <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
-                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -329,7 +329,7 @@
           <!-- 1) 대표 하이라이트 -->
           <section class="founder-hero">
             <div class="founder-photo">
-              <img src="images/oscar.png" alt="대표 최우현">
+              <img src="{{ url_for('static', filename='img/oscar.png') }}" alt="대표 최우현">
             </div>
             <div class="founder-copy">
               <h2>최우현</h2>
@@ -375,14 +375,14 @@
               </div>
             </section>
             <section class="philosophy-right">
-              <img src="images/기하1.png" alt="Geometric Art 1">
+              <img src="{{ url_for('static', filename='img/기하1.png') }}" alt="Geometric Art 1">
             </section>
           </div>
 
           <!-- Why NUGOONA Section -->
           <section class="why-nugoona">
             <div class="why-background">
-              <img src="images/why2.png" alt="Why NUGOONA Background">
+              <img src="{{ url_for('static', filename='img/why2.png') }}" alt="Why NUGOONA Background">
             </div>
             <div class="why-content">
               <div class="why-title">
@@ -433,7 +433,7 @@
               </div>
             </section>
             <section class="philosophy-right">
-              <img src="images/기하2.png" alt="Geometric Art 2">
+              <img src="{{ url_for('static', filename='img/기하2.png') }}" alt="Geometric Art 2">
             </section>
           </div>
 
@@ -504,6 +504,6 @@
     </footer>
     
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

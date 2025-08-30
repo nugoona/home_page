@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나 마케팅 문의하기</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/survey.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/survey.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="survey-container">
@@ -394,6 +394,6 @@
         </form>
     </div>
 
-    <script src="js/survey.js"></script>
+    <script src="{{ url_for('static', filename='js/survey.js') }}"></script>
 </body>
 </html>

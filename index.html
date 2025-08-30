@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나컴퍼니</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
-    <link rel="icon" type="image/png" href="images/logo2.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo2.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/index.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
     <style>
         /* 인라인 네비게이션 스타일 */
         .site-nav {
@@ -532,7 +532,7 @@
             </div>
             <div class="nav-right">
                 <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
-                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -540,8 +540,8 @@
 
     <header class="index-hero-section">
         <div class="index-hero-video-container">
-            <video class="index-hero-video" controls autoplay muted loop playsinline preload="auto" poster="videos/main._ngn.mp4">
-                <source src="videos/main._ngn.mp4" type="video/mp4">
+            <video class="index-hero-video" controls autoplay muted loop playsinline preload="metadata" poster="{{ url_for('static', filename='videos/main._ngn.mp4') }}">
+                <source src="{{ url_for('static', filename='videos/main._ngn.mp4') }}" type="video/mp4">
             </video>
             <div class="index-video-overlay"></div>
             <div class="index-centered-text">
@@ -571,7 +571,7 @@
             </div>
             <div class="index-right-video">
                 <video autoplay muted loop playsinline>
-                    <source src="videos/net.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/net.mp4') }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -582,7 +582,7 @@
     <section class="index-full-width-video-section">
         <div class="index-video-container">
             <video class="index-full-width-video" autoplay muted loop playsinline preload="auto">
-                <source src="videos/h1.mp4" type="video/mp4">
+                <source src="{{ url_for('static', filename='videos/h1.mp4') }}" type="video/mp4">
             </video>
         </div>
     </section>
@@ -597,7 +597,7 @@
                 <div class="index-advantage-card">
                     <div class="index-card-video">
                         <video autoplay muted loop playsinline preload="auto">
-                            <source src="videos/K1.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/K1.mp4') }}" type="video/mp4">
                         </video>
                     </div>
                     <div class="index-card-content">
@@ -612,7 +612,7 @@
                 <div class="index-advantage-card">
                     <div class="index-card-video">
                         <video autoplay muted loop playsinline preload="auto">
-                            <source src="videos/k2.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/k2.mp4') }}" type="video/mp4">
                         </video>
                     </div>
                     <div class="index-card-content">
@@ -627,7 +627,7 @@
                 <div class="index-advantage-card">
                     <div class="index-card-video">
                         <video autoplay muted loop playsinline preload="auto">
-                            <source src="videos/K3.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/K3.mp4') }}" type="video/mp4">
                         </video>
                     </div>
                     <div class="index-card-content">
@@ -642,7 +642,7 @@
                 <div class="index-advantage-card">
                     <div class="index-card-video">
                         <video autoplay muted loop playsinline preload="auto">
-                            <source src="videos/K4.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/K4.mp4') }}" type="video/mp4">
                         </video>
                     </div>
                     <div class="index-card-content">
@@ -673,14 +673,14 @@
                     </p>
                 </div>
                 <div class="index-feature-logo">
-                    <img src="images/instagram.png" alt="Instagram" class="index-instagram-logo">
+                    <img src="{{ url_for('static', filename='img/instagram.png') }}" alt="Instagram" class="index-instagram-logo">
                 </div>
                 <div class="index-feature-button">
                     <a href="services.html" class="index-learn-more-btn">더 알아보기</a>
                 </div>
             </div>
             <div class="index-feature-image-panel">
-                <img class="index-feature-hero-image" src="images/aaa1.png" alt="자동 광고 연동 시각화">
+                <img class="index-feature-hero-image" src="{{ url_for('static', filename='img/aaa1.png') }}" alt="자동 광고 연동 시각화">
             </div>
         </div>
     </section>
@@ -688,7 +688,7 @@
     <section class="index-feature-section">
         <div class="index-feature-container">
             <div class="index-feature-image-panel">
-                <img class="index-feature-hero-image" src="images/aaa2.png" alt="GA4 연동 시각화">
+                <img class="index-feature-hero-image" src="{{ url_for('static', filename='img/aaa2.png') }}" alt="GA4 연동 시각화">
             </div>
             <div class="index-feature-text-box">
                 <div class="index-feature-content">
@@ -703,7 +703,7 @@
                     </p>
                 </div>
                 <div class="index-feature-logo">
-                    <img src="images/search.png" alt="Google Analytics" class="index-instagram-logo">
+                    <img src="{{ url_for('static', filename='img/search.png') }}" alt="Google Analytics" class="index-instagram-logo">
                 </div>
                 <div class="index-feature-button">
                     <a href="services.html" class="index-learn-more-btn">더 알아보기</a>
@@ -727,14 +727,14 @@
                     </p>
                 </div>
                 <div class="index-feature-logo">
-                    <img src="images/x.png" alt="NGN Dashboard" class="index-instagram-logo">
+                    <img src="{{ url_for('static', filename='img/x.png') }}" alt="NGN Dashboard" class="index-instagram-logo">
                 </div>
                 <div class="index-feature-button">
                     <a href="technology.html" class="index-learn-more-btn">더 알아보기</a>
                 </div>
             </div>
             <div class="index-feature-image-panel">
-                <img class="index-feature-hero-image" src="images/aaa3.png" alt="NGN 대시보드 시각화">
+                <img class="index-feature-hero-image" src="{{ url_for('static', filename='img/aaa3.png') }}" alt="NGN 대시보드 시각화">
             </div>
         </div>
     </section>

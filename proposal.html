@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나컴퍼니 광고 운영 제안서</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
-    <link rel="icon" type="image/png" href="images/logo2.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo2.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/proposal.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/proposal.css') }}" rel="stylesheet">
 </head>
 <body class="no-anim">
     <!-- 네비게이션 -->
@@ -35,7 +35,7 @@
             </div>
             <div class="nav-right">
                 <a href="proposal.html" class="pricing-btn active">요금 및 서비스</a>
-                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -173,7 +173,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="images/핵1.png" alt="SNS 광고">
+                                <img src="{{ url_for('static', filename='img/핵1.png') }}" alt="SNS 광고">
                             </div>
                         </div>
                         <div class="core-card">
@@ -186,7 +186,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="images/핵3.png" alt="Google Ads Optimization">
+                                <img src="{{ url_for('static', filename='img/핵3.png') }}" alt="Google Ads Optimization">
                             </div>
                         </div>
                         <div class="core-card">
@@ -199,7 +199,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="images/핵2.png" alt="NGN Dashboard">
+                                <img src="{{ url_for('static', filename='img/핵2.png') }}" alt="NGN Dashboard">
                             </div>
                         </div>
                         <div class="core-card">
@@ -212,7 +212,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="images/핵4.png" alt="AI Content Creation">
+                                <img src="{{ url_for('static', filename='img/핵4.png') }}" alt="AI Content Creation">
                             </div>
                         </div>
                     </div>
@@ -366,24 +366,24 @@
                                     <li>네이버GFA / 카카오모먼트 / 구글 / 메타 / 검색광고 등 전 매체 경험</li>
                                 </ul>
                                 <div class="about-bottom-image">
-                                    <img src="images/aw2.png" alt="매체 경험">
+                                    <img src="{{ url_for('static', filename='img/aw2.png') }}" alt="매체 경험">
                                 </div>
                             </div>
                             <div class="about-image">
-                                <img src="images/aw.png" alt="About NGN">
+                                <img src="{{ url_for('static', filename='img/aw.png') }}" alt="About NGN">
                             </div>
                         </div>
                         <div class="about-right">
                             <div class="about-mini">
                                 크리에이티브 역량 (영상·이미지 툴 8년 경험)
                                 <div class="about-mini-image">
-                                    <img src="images/aw3.png" alt="크리에이티브 역량">
+                                    <img src="{{ url_for('static', filename='img/aw3.png') }}" alt="크리에이티브 역량">
                                 </div>
                             </div>
                             <div class="about-mini">
                                 Python/SQL 기반 데이터 분석·자동화
                                 <div class="about-mini-image">
-                                    <img src="images/aw4.png" alt="데이터 분석 자동화">
+                                    <img src="{{ url_for('static', filename='img/aw4.png') }}" alt="데이터 분석 자동화">
                                 </div>
                             </div>
                         </div>

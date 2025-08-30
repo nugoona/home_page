@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나컴퍼니</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
-    <link rel="icon" type="image/png" href="images/logo2.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo2.png') }}" }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/portfolio.css" rel="stylesheet">
-    <link href="css/mobile-overrides.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/portfolio.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/mobile-overrides.css') }}" rel="stylesheet">
     <style>
         /* 인라인 네비게이션 스타일 */
         .site-nav {
@@ -227,7 +227,7 @@
             position: relative;
             overflow: visible;
             margin: 0;
-            background-image: url('../images/배경0816.png') !important;
+            background-image: url('../images/배경0816.png') }}" !important;
             background-size: contain !important;
             background-position: left 500% !important;
             background-repeat: no-repeat !important;
@@ -328,7 +328,7 @@
             </div>
             <div class="nav-right">
                 <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
-                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -358,8 +358,8 @@
                 </div>
             </div>
             <div class="portfolio-right-video">
-                <video id="contentVideo" muted loop playsinline preload="metadata">
-                    <source src="videos/con_main.mp4" type="video/mp4">
+                <video id="contentVideo" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ url_for('static', filename='videos/con_main.mp4') }}" }}" type="video/mp4">
                 </video>
                 <div class="portfolio-video-controls">
                     <button id="muteButton" class="portfolio-mute-btn">
@@ -386,14 +386,14 @@
         </div>
         <div class="showcase-container">
             <div class="showcase-item">
-                <img src="videos/컨텐츠 상품/신발/신발제품샷.png" alt="신발 제품샷" class="showcase-image">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/신발/신발제품샷.png') }}" }}" alt="신발 제품샷" class="showcase-image">
             </div>
             <div class="showcase-item">
-                <img src="videos/컨텐츠 상품/신발/신발전시샷.png" alt="신발 전시샷" class="showcase-image">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/신발/신발전시샷.png" alt="신발 전시샷" class="showcase-image">
             </div>
             <div class="showcase-item">
                 <video class="showcase-video" autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/컨텐츠 상품/신발/신발영상.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/컨텐츠 상품/신발/신발영상.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -402,14 +402,14 @@
     <section class="content-showcase-2">
         <div class="showcase-container-2">
             <div class="showcase-item-2">
-                <img src="videos/컨텐츠 상품/화장품/화장품제품.png" alt="화장품 제품샷" class="showcase-image-2">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/화장품/화장품제품.png" alt="화장품 제품샷" class="showcase-image-2">
             </div>
             <div class="showcase-item-2">
-                <img src="videos/컨텐츠 상품/화장품/화장품화보.png" alt="화장품 화보" class="showcase-image-2">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/화장품/화장품화보.png" alt="화장품 화보" class="showcase-image-2">
             </div>
             <div class="showcase-item-2">
                 <video class="showcase-video-2" autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/컨텐츠 상품/화장품/화장품영상.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/컨텐츠 상품/화장품/화장품영상.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -418,14 +418,14 @@
     <section class="content-showcase-3">
         <div class="showcase-container-3">
             <div class="showcase-item-3">
-                <img src="videos/컨텐츠 상품/워터/워터제품.png" alt="워터 제품샷" class="showcase-image-3">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/워터/워터제품.png" alt="워터 제품샷" class="showcase-image-3">
             </div>
             <div class="showcase-item-3">
-                <img src="videos/컨텐츠 상품/워터/워터화보.png" alt="워터 화보" class="showcase-image-3">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/워터/워터화보.png" alt="워터 화보" class="showcase-image-3">
             </div>
             <div class="showcase-item-3">
                 <video class="showcase-video-3" autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/컨텐츠 상품/워터/워터영상.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/컨텐츠 상품/워터/워터영상.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -434,14 +434,14 @@
     <section class="content-showcase-4">
         <div class="showcase-container-4">
             <div class="showcase-item-4">
-                <img src="videos/컨텐츠 상품/의상/의상제품.png" alt="의상 제품샷" class="showcase-image-4">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/의상/의상제품.png" alt="의상 제품샷" class="showcase-image-4">
             </div>
             <div class="showcase-item-4">
-                <img src="videos/컨텐츠 상품/의상/의상컷.png" alt="의상 컷" class="showcase-image-4">
+                <img src="{{ url_for('static', filename='videos/컨텐츠 상품/의상/의상컷.png" alt="의상 컷" class="showcase-image-4">
             </div>
             <div class="showcase-item-4">
                 <video class="showcase-video-4" autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/컨텐츠 상품/의상/의상클립.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/컨텐츠 상품/의상/의상클립.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -469,7 +469,7 @@
                         </p>
                         <div class="ai-tech-video-container">
                             <video class="ai-tech-video" autoplay muted loop playsinline preload="metadata">
-                                <source src="videos/컨텐츠 상품/AI기술1.mp4" type="video/mp4">
+                                <source src="{{ url_for('static', filename='videos/컨텐츠 상품/AI기술1.mp4" type="video/mp4">
                             </video>
                         </div>
                         <p>
@@ -493,7 +493,7 @@
 
                     <div class="apt-video-container">
                         <video class="apt-video" autoplay muted loop playsinline preload="metadata">
-                            <source src="videos/apt.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/apt.mp4') }}" type="video/mp4">
                         </video>
                     </div>
 
@@ -520,7 +520,7 @@
                 <div class="landing-video-content">
                     <div class="pop-art-video-container">
                         <video class="pop-art-video" autoplay muted loop playsinline preload="metadata">
-                            <source src="videos/팝아트영상.mp4" type="video/mp4">
+                            <source src="{{ url_for('static', filename='videos/팝아트영상.mp4') }}" type="video/mp4">
                         </video>
                     </div>
                 </div>

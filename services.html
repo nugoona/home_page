@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>누구나컴퍼니</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon_new.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="css/services.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/services.css') }}" rel="stylesheet">
     <style>
         /* 인라인 네비게이션 스타일 */
         .site-nav {
@@ -417,7 +417,7 @@
             </div>
             <div class="nav-right">
                 <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
-                <img src="app/static/video/누구나타이틀.gif" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -435,7 +435,7 @@
         <!-- 왼쪽 영상 영역 -->
         <div class="services-video-area">
             <video autoplay muted loop playsinline preload="metadata">
-                <source src="videos/카타1.mp4" type="video/mp4">
+                <source src="{{ url_for('static', filename='videos/카타1.mp4') }}" type="video/mp4">
             </video>
         </div>
         
@@ -507,8 +507,8 @@
             
             <!-- 오른쪽 이미지 영역 -->
             <div class="services-landing-video-content">
-                <img src="images/cata2.png" alt="카탈로그 자동화 이미지" class="services-cata2-image">
-                <img src="images/cata1.png" alt="데이터 흐름 다이어그램" class="services-landing-video">
+                <img src="{{ url_for('static', filename='img/cata2.png') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image">
+                <img src="{{ url_for('static', filename='img/cata1.png') }}" alt="데이터 흐름 다이어그램" class="services-landing-video">
             </div>
         </div>
         
@@ -524,14 +524,14 @@
                     <li><span class="services-number">05</span><strong>상품명으로 검색, 특정 상품들만 광고 세트로</strong><br><span class="services-subtext">→ 예) 원피스 기획전 등 특정 카테고리 제품만 광고 가능</span></li>
                 </ul>
                 <div class="services-category-image">
-                    <img src="images/카타5.png" alt="카테고리 이미지">
+                    <img src="{{ url_for('static', filename='img/카타5.png') }}" alt="카테고리 이미지">
                 </div>
             </div>
             
             <!-- 왼쪽 이미지 -->
             <div class="services-left-image">
                 <video autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/카탈로그.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/카탈로그.mp4') }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -552,7 +552,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성과 좋은 곳에 예산을 자동으로 배분합니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="images/구글1.png" alt="구글 광고 최적화">
+                        <img src="{{ url_for('static', filename='img/구글1.png') }}" alt="구글 광고 최적화">
                     </div>
                 </div>
             </li>
@@ -565,7 +565,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;광고가 실제 매출에 얼마나 기여했는지 알 수 있습니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="images/구글2.png" alt="구매 여정 파악">
+                        <img src="{{ url_for('static', filename='img/구글2.png') }}" alt="구매 여정 파악">
                     </div>
                 </div>
             </li>
@@ -578,7 +578,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스마트한 자동입찰로 광고비 효율이 올라갑니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="images/구글3.png" alt="스마트한 입찰">
+                        <img src="{{ url_for('static', filename='img/구글3.png') }}" alt="스마트한 입찰">
                     </div>
                 </div>
             </li>
@@ -591,7 +591,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실제 행동 기반으로 리타겟팅이 가능해집니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="images/구글4.png" alt="정확한 고객 도달">
+                        <img src="{{ url_for('static', filename='img/구글4.png') }}" alt="정확한 고객 도달">
                     </div>
                 </div>
             </li>
@@ -605,7 +605,7 @@
     <!-- SNS 광고 영상 섹션 -->
     <div class="services-video-section services-sns-video-section">
         <video autoplay muted loop playsinline preload="metadata" class="services-full-video">
-            <source src="videos/sns1.mp4" type="video/mp4">
+            <source src="{{ url_for('static', filename='videos/sns1.mp4') }}" type="video/mp4">
         </video>
     </div>
 
@@ -613,7 +613,7 @@
     <div class="services-jc-image-section">
         <!-- JC 이미지 위 구분선 -->
         <div class="video-bottom-separator-line"></div>
-        <img src="images/jc.png" alt="J-Curve 전략 이미지">
+        <img src="{{ url_for('static', filename='img/jc.png') }}" alt="J-Curve 전략 이미지">
     </div>
 
     <!-- 일반 영상 섹션 -->
@@ -623,7 +623,7 @@
                 <!-- 하얀 가로선 -->
                 <div class="video-top-line"></div>
                 <video autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/main._ngn3.mp4" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/main._ngn3.mp4') }}" type="video/mp4">
                 </video>
                 <div class="services-video-overlay"></div>
                 <div class="services-video-text-overlay">
@@ -665,7 +665,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     
     <script>
         // 3줄 고정 + 색상 순차적 변화 + 최적화된 애니메이션
