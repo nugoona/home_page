@@ -1,0 +1,1114 @@
+/* ===== ABOUT PAGE STYLES ===== */
+/* about.html 페이지 전용 스타일 */
+
+/* About Advantages Section */
+.about-advantages-section {
+    padding: 2rem 4rem 4rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+    min-height: 400px;
+    margin-top: 0;
+}
+
+.about-section-header {
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.about-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 10.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.about-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .about-section-header h2 {
+        font-size: 8rem;
+    }
+    
+    .about-section-header h3 {
+        font-size: 2rem;
+    }
+}
+
+/* ===== 스크린샷 스타일 팀 소개 ===== */
+
+.team-section {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+}
+
+/* 구분선 */
+.divider-line {
+    width: 100%;
+    height: 1px;
+    background: #333;
+    margin: 4rem 0;
+    opacity: 0.3;
+}
+
+/* CTA 섹션 */
+.cta-section {
+    padding: 6rem 4rem;
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.cta-content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-label {
+    display: block;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+.cta-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #000;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 3rem 0;
+}
+
+.cta-arrow {
+    display: inline-block;
+    margin-top: 2rem;
+}
+
+.cta-arrow svg {
+    transition: transform 0.3s ease;
+}
+
+.cta-arrow:hover svg {
+    transform: scale(1.1);
+}
+
+/* 첫 번째 팀원 - CEO (큰 이미지 + 텍스트) */
+.team-member-large {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.member-image-large {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.large-photo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+/* 이미지 컨테이너 */
+.member-image-large {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-content-large {
+    padding: 0 2rem;
+}
+
+.member-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 1.5rem 0;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    position: relative;
+}
+
+.member-name::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.5rem;
+    width: 80px;
+    height: 3px;
+    background: #000;
+}
+
+.member-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 2.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    position: relative;
+}
+
+.member-title::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 50%;
+    width: 1px;
+    height: 2rem;
+    background: #000;
+    transform: translateY(-50%);
+}
+
+.member-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.8;
+    margin: 0 0 3rem 0;
+    position: relative;
+}
+
+.member-description::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1.5rem;
+    width: 60px;
+    height: 1px;
+    background: #666;
+}
+
+.member-achievements h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #000;
+    margin: 0 0 1.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.member-achievements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.member-achievements li {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.member-achievements li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #000;
+    font-weight: 700;
+}
+
+/* 두 번째 팀원 - CTO (텍스트 + 이미지) */
+.team-member-medium {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.member-content-medium {
+    padding: 0 2rem;
+}
+
+.member-image-medium {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.medium-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tech-stack h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.tech-tags span {
+    background: #000;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 중간 이미지 갤러리 */
+.image-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+}
+
+.gallery-main {
+    height: 500px;
+    overflow: hidden;
+}
+
+.gallery-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.gallery-side-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+/* 세 번째 팀원 - Marketing Director */
+.team-member-small {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.member-image-small {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.small-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-content-small {
+    padding: 0 2rem;
+}
+
+.marketing-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #000;
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+}
+
+/* 추가 이미지들 */
+.additional-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+}
+
+.additional-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* 비전 섹션 */
+.vision-section {
+    padding: 0 4rem;
+    margin-bottom: 4rem;
+}
+
+.vision-image {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vision-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vision-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.vision-overlay h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+}
+
+.vision-overlay p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .team-member-large,
+    .team-member-medium,
+    .team-member-small {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 0 2rem;
+    }
+    
+    .image-gallery {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+    }
+    
+    .additional-images {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+    }
+    
+    .member-name {
+        font-size: 3rem;
+    }
+    
+    .vision-overlay h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .about-section-header h2 {
+        font-size: 8rem;
+    }
+    
+    .about-section-header h3 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-advantages-section {
+        padding: 6rem 2rem 2rem 2rem;
+    }
+    
+    .about-section-header h2 {
+        font-size: 5rem;
+    }
+    
+    .about-section-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .team-section {
+        padding: 4rem 0;
+    }
+
+    .team-container {
+        padding: 0 2rem;
+        gap: 2rem;
+        grid-template-columns: 1fr;
+    }
+
+    .member-info {
+        padding: 1.5rem;
+    }
+
+    .member-name {
+        font-size: 2rem;
+    }
+}
+
+
+
+/* 본문 래퍼 */
+.about-body {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 20px 120px;
+}
+
+/* 얇은 구분선 */
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background: #111;
+  opacity: .15;
+  margin: 40px 0 24px;
+}
+
+/* 섹션 제목 */
+.section-title {
+  text-align: left;
+  margin-bottom: 48px;
+}
+
+.section-title h2 {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin: 0;
+}
+
+/* ABOUT 라벨 */
+.about-label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.about-label span {
+  font: 600 12px/1 'Pretendard', sans-serif;
+  letter-spacing: .12em;
+  color: #111;
+  opacity: .6;
+}
+
+/* ===== 대표 하이라이트 ===== */
+.founder-hero {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.founder-photo {
+  padding: 24px;
+}
+
+.founder-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border: 1px solid #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.founder-copy h2 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  color: #111;
+  margin: 0 0 16px;
+}
+
+.founder-copy p {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #111;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+}
+
+/* 태그(칩) 스타일 – 선택 사용 */
+.founder-copy .chip,
+.founder-copy span {
+  border: 1px solid rgba(17,17,17,.15);
+  background: #fff;
+  color: #111;
+  padding: 8px 12px;
+  font: 600 12px/1 'Pretendard', sans-serif;
+  letter-spacing: .04em;
+  display: inline-flex;
+}
+
+.founder-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.founder-tags span {
+  border: 1px solid rgba(17,17,17,.15);
+  background: #fff;
+  color: #111;
+  padding: 8px 12px;
+  font: 600 12px/1 'Pretendard', sans-serif;
+  letter-spacing: .04em;
+  display: inline-flex;
+}
+
+/* ===== 섹션 카드 공통 ===== */
+.philosophy-left .philosophy-card {
+  position: relative;
+  padding: 28px 32px;
+  transition: all 0.3s ease;
+}
+
+
+
+.philosophy-left .philosophy-card p {
+  position: relative;
+  padding-left: 16px;
+}
+
+.philosophy-left .philosophy-card p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(17,17,17,.15);
+}
+
+
+
+.why-ai > div,
+.brand-meaning > div:first-child,
+.closing > div:first-child {
+  background: #fff;
+  border: 1px solid rgba(17,17,17,.08);
+  padding: 28px;
+}
+
+/* 레이아웃 */
+.philosophy-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 72px;
+  align-items: stretch;
+}
+
+.philosophy-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.philosophy-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.philosophy-right img {
+  max-width: 500px;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
+
+/* Why NUGOONA Section - 정적 이미지 */
+.why-nugoona {
+  position: relative;
+  margin-bottom: 72px;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.why-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.why-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 1;
+}
+
+.why-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 4rem 2rem 4rem 2rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.why-title {
+  margin-bottom: 2rem;
+  align-self: flex-start;
+}
+
+.why-title h3 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 5.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  filter: brightness(2);
+}
+
+.why-description {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 8rem;
+  margin-bottom: auto;
+  align-self: flex-start;
+  margin-right: 0;
+  margin-left: 4rem;
+  position: relative;
+}
+
+/* Why NUGOONA 단락 스타일 */
+.why-paragraph-1,
+.why-paragraph-2 {
+  opacity: 1;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  filter: brightness(2);
+  position: relative;
+  padding: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.why-paragraph-2 { margin-left: 0; margin-top: 1rem; }
+
+
+
+/* 구분선 스타일 */
+.why-separator {
+  width: 8px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+
+/* 텍스트 콘텐츠 */
+.why-text-content { flex: 1; }
+
+/* 강조 텍스트 스타일 */
+.why-text-content strong {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  display: block;
+  margin-bottom: 0.1rem;
+  position: relative;
+  color: #ffffff;
+}
+
+/* 서브 텍스트 스타일 */
+.why-sub-text {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  opacity: 0.9;
+  margin-top: 1rem;
+  display: block;
+  color: #ffffff;
+}
+
+.why-ai {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 72px;
+}
+
+.brand-meaning {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 80px;
+}
+
+.closing {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 28px;
+  align-items: stretch;
+  margin-bottom: 88px;
+}
+
+/* 카드 타이틀 */
+.philosophy-left .philosophy-card h3 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #111;
+  margin: 0 0 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.philosophy-bullet {
+  display: inline-block;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: #111;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.philosophy h3,
+.why-ai h3,
+.brand-meaning h3 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #111;
+  margin: 0 0 12px;
+}
+
+
+
+.philosophy-left .philosophy-card p {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #111;
+  opacity: 0.9;
+  margin: 0 0 12px 0;
+  text-align: left;
+  padding-left: 2.7rem;
+  position: relative;
+}
+
+.philosophy-left .philosophy-card p::before {
+  content: '';
+  position: absolute;
+  left: 0.8rem;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #111;
+  opacity: 0.3;
+}
+
+.philosophy-left .philosophy-card p:last-child {
+  margin-bottom: 0;
+}
+
+
+
+/* 브랜드 의미 섹션의 이미지(기하2) */
+.closing img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* 자격/신뢰 포인트 */
+.credentials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 88px;
+}
+
+.credential-item {
+  padding: 24px 24px 28px;
+}
+
+.credential-title {
+  border: 1px solid rgba(17,17,17,.15);
+  background: #fff;
+  color: #111;
+  padding: 8px 12px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .04em;
+  display: inline-flex;
+  margin: 0 0 10px;
+}
+
+.credential-description {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #111;
+  opacity: .9;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+/* FOUNDER'S NOTE */
+.closing blockquote {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #111;
+}
+
+.closing .note-label,
+.note-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .08em;
+  color: #111;
+  opacity: .6;
+  margin-bottom: 12px;
+}
+
+.definition-label {
+  margin-top: 22px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #111;
+}
+
+.definition-text {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+  color: #111;
+}
+
+.contact-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .1em;
+  color: #111;
+  opacity: .6;
+  margin-bottom: 8px;
+}
+
+/* 하단 삽화(기하3) */
+.about-background-art {
+  margin: 80px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.about-background-art img {
+  max-width: 1100px;
+  width: 100%;
+  height: auto;
+  opacity: .9;
+}
+
+/* CTA */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid rgba(17,17,17,.1);
+  padding: 28px 32px;
+}
+
+.cta h3 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #111;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.cta p {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #111;
+  opacity: .85;
+  margin: 8px 0 0;
+}
+
+.cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ffffff;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #ffffff;
+  font: 600 14px/1 'Pretendard', sans-serif;
+  background: #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.cta a:hover {
+  background: #ffffff;
+  color: #2a2a2a;
+  border: 1px solid #2a2a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 42, 42, 0.3);
+}
+
+.cta a:hover svg path {
+  stroke: #2a2a2a;
+}
+
+/* ===== 반응형 ===== */
+@media (max-width: 1400px) {
+  .about-section-header h2 { font-size: 8rem; }
+  .about-section-header h3 { font-size: 2rem; }
+}
+
+@media (max-width: 1024px) {
+  .founder-hero,
+  .brand-meaning,
+  .closing { grid-template-columns: 1fr; }
+  .philosophy,
+  .why-ai { grid-template-columns: 1fr; }
+  .credentials { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .about-advantages-section { padding: 6rem 2rem 2rem; }
+  .about-section-header h2 { font-size: 5rem; }
+  .about-section-header h3 { font-size: 1.5rem; }
+  .about-body { padding: 0 24px 80px; }
+  .cta { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
