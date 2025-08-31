@@ -32,7 +32,10 @@
             </div>
             <div class="nav-right">
                 <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                <video autoplay loop muted playsinline style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                    <source src="{{ asset('videos/ui/ngn_title.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/ui/ngn_title.mp4') }}" type="video/mp4">
+                </video>
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -329,7 +332,7 @@
     <div class="technology-video-text-container">
         <!-- 왼쪽 영상 영역 -->
         <div class="technology-video-area">
-            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/d1.jpg') }}" width="600" height="400">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/d1.webp') }}" width="600" height="400">
                 <source src="{{ asset('videos/hero/d1.webm') }}" type="video/webm">
                 <source src="{{ asset('videos/hero/d1.mp4') }}" type="video/mp4">
             </video>
@@ -388,10 +391,7 @@
                         <p class="technology-dashboard-description"><strong>한 페이지에서</strong> 매출, 방문자수, 광고비, 구매수, ROAS까지<br>핵심 지표를 <strong>빠르게 확인</strong> 할 수 있습니다.</p>
                     </div>
                     <div class="technology-dashboard-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/dash1.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/dash1.png') }}" alt="Dashboard Overview" width="400" height="300" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/dash1.webp') }}" alt="Dashboard Overview" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -403,10 +403,7 @@
                         <p class="technology-dashboard-description">Meta 광고 성과를 캠페인·세트·광고 단위로 분석 가능합니다.<br>단일 이미지 광고 소재는 대시보드에서 그대로 프리뷰 →<br><strong>'지금 내 광고가 어떻게 나가는지'</strong> <strong>즉시 확인</strong>할 수 있습니다.</p>
                     </div>
                     <div class="technology-dashboard-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/dash2.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/dash2.png') }}" alt="Meta Ads Optimization" width="400" height="300" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/dash2.webp') }}" alt="Meta Ads Optimization" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -418,10 +415,7 @@
                         <p class="technology-dashboard-description">예를 들어 <strong>인스타그램에서 유입된 고객이 주로 본 상품들</strong>이<br><strong>무엇인지 확인 가능</strong>합니다. 이를 통해 <strong>광고 소재 선택</strong>에 곧바로<br>활용할 수 있는 <strong>인사이트</strong>를 얻을 수 있습니다.</p>
                     </div>
                     <div class="technology-dashboard-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/dash3.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/dash3.png') }}" alt="Media Source Analysis" width="400" height="300" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/dash3.webp') }}" alt="Media Source Analysis" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -442,10 +436,7 @@
                         <p class="technology-dashboard-description"><strong>Google 스프레드시트 연동</strong>을 통해 필요한 커스텀 데이터까지<br>대시보드에서 필터링 및 시각화 해드립니다. 이를 통해 자사의<br>모든 데이터를 <strong>NGN 대시보드에서 핸들링</strong> 할 수 있습니다.</p>
                     </div>
                     <div class="technology-dashboard-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/dash4.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/dash4.png') }}" alt="Google Sheets Dashboard" width="400" height="300" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/dash4.webp') }}" alt="Google Sheets Dashboard" width="400" height="300" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>

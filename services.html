@@ -32,7 +32,10 @@
             </div>
             <div class="nav-right">
                 <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                <video autoplay loop muted playsinline style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                    <source src="{{ asset('videos/ui/ngn_title.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/ui/ngn_title.mp4') }}" type="video/mp4">
+                </video>
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -468,7 +471,7 @@
     <div class="services-video-text-container">
         <!-- 왼쪽 영상 영역 -->
         <div class="services-video-area">
-            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/카타1.jpg') }}" width="600" height="400">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/카타1.webp') }}" width="600" height="400">
                 <source src="{{ asset('videos/portfolio/카타1.webm') }}" type="video/webm">
                 <source src="{{ asset('videos/portfolio/카타1.mp4') }}" type="video/mp4">
             </video>
@@ -542,14 +545,8 @@
             
             <!-- 오른쪽 이미지 영역 -->
             <div class="services-landing-video-content">
-                <picture>
-                    <source srcset="{{ asset('img/portfolio/cata2.webp') }}" type="image/webp">
-                    <img src="{{ asset('img/portfolio/cata2.png') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image" width="400" height="300" loading="lazy" decoding="async">
-                </picture>
-                <picture>
-                    <source srcset="{{ asset('img/portfolio/cata1.webp') }}" type="image/webp">
-                    <img src="{{ asset('img/portfolio/cata1.png') }}" alt="데이터 흐름 다이어그램" class="services-landing-video" width="600" height="400" loading="lazy" decoding="async">
-                </picture>
+                                    <img src="{{ asset('img/portfolio/cata2.webp') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image" width="400" height="300" loading="lazy" decoding="async">
+                                    <img src="{{ asset('img/portfolio/cata1.webp') }}" alt="데이터 흐름 다이어그램" class="services-landing-video" width="600" height="400" loading="lazy" decoding="async">
             </div>
         </div>
         
@@ -572,6 +569,7 @@
             <!-- 왼쪽 이미지 -->
             <div class="services-left-image">
                 <video autoplay muted loop playsinline>
+                    <source src="{{ asset('videos/portfolio/catalog_main.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/portfolio/catalog_main.mp4') }}" type="video/mp4">
                 </video>
             </div>
@@ -593,10 +591,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성과 좋은 곳에 예산을 자동으로 배분합니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/google1.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/google1.png') }}" alt="구글 광고 최적화" width="300" height="200" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/google1.webp') }}" alt="구글 광고 최적화" width="300" height="200" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -609,10 +604,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;광고가 실제 매출에 얼마나 기여했는지 알 수 있습니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/google2.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/google2.png') }}" alt="구매 여정 파악" width="300" height="200" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/google2.webp') }}" alt="구매 여정 파악" width="300" height="200" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -625,10 +617,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스마트한 자동입찰로 광고비 효율이 올라갑니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/google3.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/google3.png') }}" alt="스마트한 입찰" width="300" height="200" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/google3.webp') }}" alt="스마트한 입찰" width="300" height="200" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -641,10 +630,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실제 행동 기반으로 리타겟팅이 가능해집니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <picture>
-                            <source srcset="{{ asset('img/ui/google4.webp') }}" type="image/webp">
-                            <img src="{{ asset('img/ui/google4.png') }}" alt="정확한 고객 도달" width="300" height="200" loading="lazy" decoding="async">
-                        </picture>
+                        <img src="{{ asset('img/ui/google4.webp') }}" alt="정확한 고객 도달" width="300" height="200" loading="lazy" decoding="async">
                     </div>
                 </div>
             </li>
@@ -657,7 +643,7 @@
 
     <!-- SNS 광고 영상 섹션 -->
     <div class="services-video-section services-sns-video-section">
-        <video autoplay muted loop playsinline preload="metadata" class="services-full-video" poster="{{ asset('thumbs/sns1.jpg') }}" width="1920" height="1080">
+        <video autoplay muted loop playsinline preload="metadata" class="services-full-video" poster="{{ asset('thumbs/sns1.webp') }}" width="1920" height="1080">
             <source src="{{ asset('videos/hero/sns1.webm') }}" type="video/webm">
             <source src="{{ asset('videos/hero/sns1.mp4') }}" type="video/mp4">
         </video>
@@ -667,10 +653,7 @@
     <div class="services-jc-image-section">
         <!-- JC 이미지 위 구분선 -->
         <div class="video-bottom-separator-line"></div>
-        <picture>
-            <source srcset="{{ asset('img/portfolio/jc.webp') }}" type="image/webp">
-            <img src="{{ asset('img/portfolio/jc.png') }}" alt="J-Curve 전략 이미지" width="1920" height="800" loading="lazy" decoding="async">
-        </picture>
+        <img src="{{ asset('img/portfolio/jc.webp') }}" alt="J-Curve 전략 이미지" width="1920" height="800" loading="lazy" decoding="async">
     </div>
 
     <!-- 일반 영상 섹션 -->
@@ -679,7 +662,7 @@
             <div class="services-video-container">
                 <!-- 하얀 가로선 -->
                 <div class="video-top-line"></div>
-                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn3.jpg') }}" width="1920" height="1080">
+                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn3.webp') }}" width="1920" height="1080">
                     <source src="{{ asset('videos/hero/main._ngn3.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/hero/main._ngn3.mp4') }}" type="video/mp4">
                 </video>

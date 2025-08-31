@@ -32,7 +32,10 @@
             </div>
             <div class="nav-right">
                 <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                <video autoplay loop muted playsinline style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                    <source src="{{ asset('videos/ui/ngn_title.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/ui/ngn_title.mp4') }}" type="video/mp4">
+                </video>
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -330,10 +333,7 @@
           <!-- 1) 대표 하이라이트 -->
           <section class="founder-hero">
             <div class="founder-photo">
-              <picture>
-                <source srcset="{{ asset('img/portfolio/oscar.webp') }}" type="image/webp">
-                <img src="{{ asset('img/portfolio/oscar.png') }}" alt="대표 최우현" width="300" height="400" loading="lazy" decoding="async">
-              </picture>
+              <img src="{{ asset('img/portfolio/oscar.webp') }}" alt="대표 최우현" width="300" height="400" loading="lazy" decoding="async">
             </div>
             <div class="founder-copy">
               <h2>최우현</h2>
@@ -379,20 +379,14 @@
               </div>
             </section>
             <section class="philosophy-right">
-              <picture>
-                <source srcset="{{ asset('img/ui/geometry1.webp') }}" type="image/webp">
-                <img src="{{ asset('img/ui/geometry1.png') }}" alt="Geometric Art 1" width="400" height="300" loading="lazy" decoding="async">
-              </picture>
+              <img src="{{ asset('img/ui/geometry1.webp') }}" alt="Geometric Art 1" width="400" height="300" loading="lazy" decoding="async">
             </section>
           </div>
 
           <!-- Why NUGOONA Section -->
           <section class="why-nugoona">
             <div class="why-background">
-              <picture>
-                <source srcset="{{ asset('img/ui/why2.webp') }}" type="image/webp">
-                <img src="{{ asset('img/ui/why2.png') }}" alt="Why NUGOONA Background" width="800" height="600" loading="lazy" decoding="async">
-              </picture>
+              <img src="{{ asset('img/ui/why2.webp') }}" alt="Why NUGOONA Background" width="800" height="600" loading="lazy" decoding="async">
             </div>
             <div class="why-content">
               <div class="why-title">
@@ -443,10 +437,7 @@
               </div>
             </section>
             <section class="philosophy-right">
-              <picture>
-                <source srcset="{{ asset('img/ui/geometry2.webp') }}" type="image/webp">
-                <img src="{{ asset('img/ui/geometry2.png') }}" alt="Geometric Art 2" width="400" height="300" loading="lazy" decoding="async">
-              </picture>
+              <img src="{{ asset('img/ui/geometry2.webp') }}" alt="Geometric Art 2" width="400" height="300" loading="lazy" decoding="async">
             </section>
           </div>
 

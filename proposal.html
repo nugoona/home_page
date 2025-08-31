@@ -177,7 +177,10 @@
             </div>
             <div class="nav-right">
                 <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                <video autoplay loop muted playsinline style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                    <source src="{{ asset('videos/ui/ngn_title.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/ui/ngn_title.mp4') }}" type="video/mp4">
+                </video>
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -318,10 +321,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <picture>
-                                    <source srcset="{{ asset('img/ui/core1.webp') }}" type="image/webp">
-                                    <img src="{{ asset('img/ui/core1.png') }}" alt="SNS 광고" width="200" height="200" loading="lazy" decoding="async">
-                                </picture>
+                                <img src="{{ asset('img/ui/core1.webp') }}" alt="SNS 광고" width="200" height="200" loading="lazy" decoding="async">
                             </div>
                         </div>
                         <div class="core-card">

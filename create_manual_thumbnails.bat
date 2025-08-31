@@ -32,3 +32,4 @@ echo 📁 Check static\thumbs\ folder for generated thumbnails
 pause
 
 
+

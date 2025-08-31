@@ -33,7 +33,10 @@
             </div>
             <div class="nav-right">
                 <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                <video autoplay loop muted playsinline style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+                    <source src="{{ asset('videos/ui/ngn_title.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/ui/ngn_title.mp4') }}" type="video/mp4">
+                </video>
             </div>
             <div class="mobile-overlay"></div>
         </div>
@@ -358,7 +361,7 @@
                 </div>
             </div>
             <div class="portfolio-right-video">
-                <video id="contentVideo" autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/con_main.jpg') }}" width="800" height="600">
+                <video id="contentVideo" autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/con_main.webp') }}" width="800" height="600">
                     <source src="{{ asset('videos/portfolio/con_main.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/portfolio/con_main.mp4') }}" type="video/mp4">
                 </video>
@@ -394,6 +397,7 @@
             </div>
             <div class="showcase-item">
                 <video class="showcase-video" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/shoes/shoes_video.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/content_products/shoes/shoes_video.mp4') }}" type="video/mp4">
                 </video>
             </div>
@@ -410,6 +414,7 @@
             </div>
             <div class="showcase-item-2">
                 <video class="showcase-video-2" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/cosmetics/cosmetic_video.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/content_products/cosmetics/cosmetic_video.mp4') }}" type="video/mp4">
                 </video>
             </div>
@@ -426,6 +431,7 @@
             </div>
             <div class="showcase-item-3">
                 <video class="showcase-video-3" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/water/water_video.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/content_products/water/water_video.mp4') }}" type="video/mp4">
                 </video>
             </div>
@@ -442,6 +448,7 @@
             </div>
             <div class="showcase-item-4">
                 <video class="showcase-video-4" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/clothes/clothes_clip.webm') }}" type="video/webm">
                     <source src="{{ asset('videos/content_products/clothes/clothes_clip.mp4') }}" type="video/mp4">
                 </video>
             </div>
@@ -470,6 +477,7 @@
                         </p>
                         <div class="ai-tech-video-container">
                             <video class="ai-tech-video" autoplay muted loop playsinline preload="metadata">
+                                <source src="{{ asset('videos/content_products/ai_tech1.webm') }}" type="video/webm">
                                 <source src="{{ asset('videos/content_products/ai_tech1.mp4') }}" type="video/mp4">
                             </video>
                         </div>
@@ -494,6 +502,7 @@
 
                     <div class="apt-video-container">
                         <video class="apt-video" autoplay muted loop playsinline preload="metadata">
+                            <source src="{{ asset('videos/portfolio/apt.webm') }}" type="video/webm">
                             <source src="{{ asset('videos/portfolio/apt.mp4') }}" type="video/mp4">
                         </video>
                     </div>
@@ -521,6 +530,7 @@
                 <div class="landing-video-content">
                     <div class="pop-art-video-container">
                         <video class="pop-art-video" autoplay muted loop playsinline preload="metadata">
+                            <source src="{{ asset('videos/portfolio/popart_video.webm') }}" type="video/webm">
                             <source src="{{ asset('videos/portfolio/popart_video.mp4') }}" type="video/mp4">
                         </video>
                     </div>
