@@ -13,7 +13,8 @@ def asset(path):
     """정적 자산 경로 생성 함수"""
     static_url = app.config.get('STATIC_CDN_URL') or '/static'
     version = app.config.get('STATIC_VERSION', '1.0.0')
-    return f"{static_url}/{path}?v={version}".replace('//', '/')
+    # 슬래시 중복 방지: 끝/앞만 잘라내고 안전하게 연결
+    return f"{static_url.rstrip('/')}/{path.lstrip('/')}?v={version}"
 
 @app.route('/')
 def index():
