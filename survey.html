@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>누구나 마케팅 문의하기</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="{{ url_for('static', filename='css/survey.css') }}" rel="stylesheet">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}누구나 마케팅 문의하기 - 빠른 상담 예약{% endblock %}
+{% block description %}2분 설문으로 맞춤형 마케팅 상담 예약{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/survey.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
     <div class="survey-container">
         <form class="survey-form" action="https://formspree.io/f/mpwjwqdr" method="POST">
         <!-- 헤더 섹션 -->
@@ -394,6 +392,5 @@
         </form>
     </div>
 
-    <script src="{{ url_for('static', filename='js/survey.js') }}"></script>
-</body>
-</html>
+    <script src="{{ asset('js/survey.js') }}"></script>
+{% endblock %}

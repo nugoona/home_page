@@ -1,0 +1,10 @@
+[33mb56b786[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m portfolio.html Flask Jinja 문법 오류 수정 완료 - 모든 HTML/JS 파일 검증 완료
+[33m11467c6[m Merge branch 'main' of https://github.com/nugoona/home_page
+[33m38b306d[m Flask Jinja 문법으로 모든 정적 자산 경로 변환 - HTML/JS 파일 82개 경로 수정
+[33mba7a3b8[m Clean up files and optimize images/videos
+[33m5080789[m Add CSS override for hero video visibility
+[33m61a62ae[m Add controls to hero video for autoplay policy
+[33m3065a42[m Optimize all page videos with preload metadata and fix hero video
+[33m3c16dbf[m Initial commit: 누구나컴퍼니 홈페이지 - Flask 앱 및 모든 페이지
+[33m1a8e5cf[m 콘텐츠 페이지 CSS 복원 및 SNS광고 페이지 04,05 항목 추가 완료
+[33mfc45987[m Initial homepage upload

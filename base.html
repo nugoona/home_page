@@ -1,23 +1,45 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NGN - 누구나 컴퍼니</title>
+    <title>{% block title %}NGN - 누구나 컴퍼니{% endblock %}</title>
     
-    <!-- 브라우저 캐시 방지 -->
+    <!-- SEO 메타태그 -->
+    <meta name="description" content="{% block description %}AI-Powered Marketing Agency - 온라인 마케팅 누구나 쉽게{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}온라인마케팅, SNS광고, 구글광고, AI마케팅, 대시보드{% endblock %}">
+    
+    <!-- 브라우저 캐시 방지 (개발용) -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
+    <!-- 파비콘 -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/icons/logo2.webp') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/icons/logo2.webp') }}">
+    
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <!-- 공통 CSS -->
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet">
+    
+    <!-- 페이지별 CSS -->
+    {% block css %}{% endblock %}
 </head>
-<body>
+    <body>
+        <!-- 네비게이션은 각 페이지에서 개별적으로 처리 -->
+
     <!-- 메인 콘텐츠 영역 -->
     <main id="main-content">
+        {% block content %}
         <!-- 페이지별 콘텐츠가 여기에 로드됩니다 -->
+        {% endblock %}
     </main>
+    
+    <!-- 페이지별 JS -->
+    {% block js %}{% endblock %}
 </body>
 </html> 

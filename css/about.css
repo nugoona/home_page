@@ -1,4 +1,12 @@
 /* ===== ABOUT PAGE STYLES ===== */
+
+/* Navigation Override */
+.nav-center {
+    flex: 1;
+    display: flex;
+}
+
+/* .nav-links 스타일 제거 - about.html 인라인에서 처리 */
 /* about.html 페이지 전용 스타일 */
 
 /* About Advantages Section */

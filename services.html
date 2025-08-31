@@ -1,13 +1,43 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>누구나컴퍼니</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="{{ url_for('static', filename='css/services.css') }}" rel="stylesheet">
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 SNS광고 - 메타 인스타그램 광고 전문{% endblock %}
+{% block description %}메타 인스타그램 자동 광고, 구글 GA4 연동 광고 서비스{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/services.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+                <div class="nav-links">
+                    <a href="/" class="nav-link" data-page="home">홈</a>
+                    <a href="/services" class="nav-link" data-page="services">SNS광고</a>
+                    <a href="/technology" class="nav-link" data-page="technology">대시보드</a>
+                    <a href="/portfolio" class="nav-link" data-page="portfolio">콘텐츠</a>
+                    <a href="/about" class="nav-link" data-page="about">소개</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+            </div>
+            <div class="mobile-overlay"></div>
+        </div>
+    </nav>
+
     <style>
         /* 인라인 네비게이션 스타일 */
         .site-nav {
@@ -19,7 +49,7 @@
             background: rgb(234, 234, 234);
             border-bottom: 1px solid rgba(34, 34, 34, 0.05);
             z-index: 999999;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 거리 단축, 색상 진하게 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
         .nav-inner {
@@ -30,13 +60,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-        
-        .nav-center {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 20px;
         }
         
         .nav-right {
@@ -95,7 +118,6 @@
         .nav-links {
             display: flex;
             gap: 35px;
-            margin: 0;
             padding: 0;
             position: relative;
             background: none;
@@ -128,8 +150,6 @@
             opacity: 1;
             font-weight: 700;
         }
-
-
         
         .nav-links a::after {
             content: '';
@@ -155,8 +175,71 @@
             max-width: 400px;
             margin-left: 60px;
         }
+
+        /* 서비스 페이지 전용 스타일 */
         
-        /* 푸터 스타일 - 어바웃 페이지와 동일 */
+        .nav-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-brand a {
+            font-family: 'Pretendard', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: rgb(17, 17, 17);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .brand-text {
+            font-family: 'Inter Tight', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            letter-spacing: -0.02em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "liga" 1, "kern" 1;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .pricing-btn {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 0px;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-btn:hover {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        
+        .hamburger-menu,
+        .mobile-overlay {
+            display: none;
+        }
+        
+
+        
         .site-footer {
             background: #000000;
             color: white;
@@ -209,21 +292,11 @@
             color: #888;
         }
         
-        .nav-logo img {
-            display: block;
-            height: 75px;
-            width: auto;
-            max-width: 400px;
-            object-fit: contain;
-            background: rgb(234, 234, 234);
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
+
         
         /* 페이지 콘텐츠 마진 조정 */
         body {
             margin: 0;
-            padding: 0;
             min-height: 100vh;
             overflow-x: hidden;
             background: rgb(234, 234, 234);
@@ -232,19 +305,9 @@
             scroll-behavior: smooth;
         }
         
-        /* 서비스 페이지 전용 스타일 */
+        /* 서비스 페이지 전용 스타일 - 인라인 오버라이드 */
+        
         .services-advantages-section {
-            padding: 2rem 4rem 4rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: visible;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-            visibility: visible;
-            opacity: 1;
-            min-height: 400px;
             margin-top: 70px;
         }
         
@@ -391,37 +454,8 @@
             z-index: 10;
         }
     </style>
-</head>
-<body>
-    <!-- 네비게이션 -->
-    <nav class="site-nav">
-        <div class="nav-inner">
-            <div class="nav-brand">
-                <a href="index.html" style="display: flex; align-items: center; gap: 10px;">
-                    <span class="brand-text">누구나컴퍼니</span>
-                </a>
-            </div>
-            <div class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="nav-center">
-                <div class="nav-links">
-                    <a href="index.html">홈</a>
-                    <a href="services.html" class="active">SNS광고</a>
-                    <a href="technology.html">대시보드</a>
-                    <a href="portfolio.html">콘텐츠</a>
-                    <a href="about.html">소개</a>
-                </div>
-            </div>
-            <div class="nav-right">
-                <a href="proposal.html" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
-            </div>
-            <div class="mobile-overlay"></div>
-        </div>
-    </nav>
+
+
 
     <section class="services-advantages-section">
         <div class="services-section-header">
@@ -434,8 +468,9 @@
     <div class="services-video-text-container">
         <!-- 왼쪽 영상 영역 -->
         <div class="services-video-area">
-            <video autoplay muted loop playsinline preload="metadata">
-                <source src="{{ url_for('static', filename='videos/카타1.mp4') }}" type="video/mp4">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/카타1.jpg') }}" width="600" height="400">
+                <source src="{{ asset('videos/portfolio/카타1.webm') }}" type="video/webm">
+                <source src="{{ asset('videos/portfolio/카타1.mp4') }}" type="video/mp4">
             </video>
         </div>
         
@@ -507,8 +542,14 @@
             
             <!-- 오른쪽 이미지 영역 -->
             <div class="services-landing-video-content">
-                <img src="{{ url_for('static', filename='img/cata2.png') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image">
-                <img src="{{ url_for('static', filename='img/cata1.png') }}" alt="데이터 흐름 다이어그램" class="services-landing-video">
+                <picture>
+                    <source srcset="{{ asset('img/portfolio/cata2.webp') }}" type="image/webp">
+                    <img src="{{ asset('img/portfolio/cata2.png') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image" width="400" height="300" loading="lazy" decoding="async">
+                </picture>
+                <picture>
+                    <source srcset="{{ asset('img/portfolio/cata1.webp') }}" type="image/webp">
+                    <img src="{{ asset('img/portfolio/cata1.png') }}" alt="데이터 흐름 다이어그램" class="services-landing-video" width="600" height="400" loading="lazy" decoding="async">
+                </picture>
             </div>
         </div>
         
@@ -524,14 +565,14 @@
                     <li><span class="services-number">05</span><strong>상품명으로 검색, 특정 상품들만 광고 세트로</strong><br><span class="services-subtext">→ 예) 원피스 기획전 등 특정 카테고리 제품만 광고 가능</span></li>
                 </ul>
                 <div class="services-category-image">
-                    <img src="{{ url_for('static', filename='img/카타5.png') }}" alt="카테고리 이미지">
+                    <img src="{{ asset('img/portfolio/catalog5.webp') }}" alt="카테고리 이미지">
                 </div>
             </div>
             
             <!-- 왼쪽 이미지 -->
             <div class="services-left-image">
-                <video autoplay muted loop playsinline preload="metadata">
-                    <source src="{{ url_for('static', filename='videos/카탈로그.mp4') }}" type="video/mp4">
+                <video autoplay muted loop playsinline>
+                    <source src="{{ asset('videos/portfolio/catalog_main.mp4') }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -552,7 +593,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성과 좋은 곳에 예산을 자동으로 배분합니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="{{ url_for('static', filename='img/구글1.png') }}" alt="구글 광고 최적화">
+                        <picture>
+                            <source srcset="{{ asset('img/ui/google1.webp') }}" type="image/webp">
+                            <img src="{{ asset('img/ui/google1.png') }}" alt="구글 광고 최적화" width="300" height="200" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </li>
@@ -565,7 +609,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;광고가 실제 매출에 얼마나 기여했는지 알 수 있습니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="{{ url_for('static', filename='img/구글2.png') }}" alt="구매 여정 파악">
+                        <picture>
+                            <source srcset="{{ asset('img/ui/google2.webp') }}" type="image/webp">
+                            <img src="{{ asset('img/ui/google2.png') }}" alt="구매 여정 파악" width="300" height="200" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </li>
@@ -578,7 +625,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스마트한 자동입찰로 광고비 효율이 올라갑니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="{{ url_for('static', filename='img/구글3.png') }}" alt="스마트한 입찰">
+                        <picture>
+                            <source srcset="{{ asset('img/ui/google3.webp') }}" type="image/webp">
+                            <img src="{{ asset('img/ui/google3.png') }}" alt="스마트한 입찰" width="300" height="200" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </li>
@@ -591,7 +641,10 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실제 행동 기반으로 리타겟팅이 가능해집니다.</span>
                     </div>
                     <div class="services-google-ads-image">
-                        <img src="{{ url_for('static', filename='img/구글4.png') }}" alt="정확한 고객 도달">
+                        <picture>
+                            <source srcset="{{ asset('img/ui/google4.webp') }}" type="image/webp">
+                            <img src="{{ asset('img/ui/google4.png') }}" alt="정확한 고객 도달" width="300" height="200" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </div>
             </li>
@@ -604,8 +657,9 @@
 
     <!-- SNS 광고 영상 섹션 -->
     <div class="services-video-section services-sns-video-section">
-        <video autoplay muted loop playsinline preload="metadata" class="services-full-video">
-            <source src="{{ url_for('static', filename='videos/sns1.mp4') }}" type="video/mp4">
+        <video autoplay muted loop playsinline preload="metadata" class="services-full-video" poster="{{ asset('thumbs/sns1.jpg') }}" width="1920" height="1080">
+            <source src="{{ asset('videos/hero/sns1.webm') }}" type="video/webm">
+            <source src="{{ asset('videos/hero/sns1.mp4') }}" type="video/mp4">
         </video>
     </div>
 
@@ -613,7 +667,10 @@
     <div class="services-jc-image-section">
         <!-- JC 이미지 위 구분선 -->
         <div class="video-bottom-separator-line"></div>
-        <img src="{{ url_for('static', filename='img/jc.png') }}" alt="J-Curve 전략 이미지">
+        <picture>
+            <source srcset="{{ asset('img/portfolio/jc.webp') }}" type="image/webp">
+            <img src="{{ asset('img/portfolio/jc.png') }}" alt="J-Curve 전략 이미지" width="1920" height="800" loading="lazy" decoding="async">
+        </picture>
     </div>
 
     <!-- 일반 영상 섹션 -->
@@ -622,8 +679,9 @@
             <div class="services-video-container">
                 <!-- 하얀 가로선 -->
                 <div class="video-top-line"></div>
-                <video autoplay muted loop playsinline preload="metadata">
-                    <source src="{{ url_for('static', filename='videos/main._ngn3.mp4') }}" type="video/mp4">
+                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn3.jpg') }}" width="1920" height="1080">
+                    <source src="{{ asset('videos/hero/main._ngn3.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/hero/main._ngn3.mp4') }}" type="video/mp4">
                 </video>
                 <div class="services-video-overlay"></div>
                 <div class="services-video-text-overlay">
@@ -665,7 +723,7 @@
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     
     <script>
         // 3줄 고정 + 색상 순차적 변화 + 최적화된 애니메이션
@@ -796,5 +854,4 @@
             });
         });
     </script>
-</body>
-</html> 
+{% endblock %} 

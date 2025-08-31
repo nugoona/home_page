@@ -1,21 +1,163 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>누구나컴퍼니 광고 운영 제안서</title>
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicons/favicon_new.ico') }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo2.png') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link href="{{ url_for('static', filename='css/proposal.css') }}" rel="stylesheet">
-</head>
-<body class="no-anim">
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 요금 및 서비스 - 맞춤형 마케팅 솔루션{% endblock %}
+{% block description %}온라인 마케팅 요금체계 및 맞춤형 서비스 안내{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/proposal.css') }}" rel="stylesheet">
+<style>
+/* 인라인 네비게이션 스타일 - proposal 페이지 */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-inner {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pricing-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-btn:hover {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.hamburger-menu,
+.mobile-overlay {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    padding: 0;
+    position: relative;
+    background: none;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    transform: none;
+    opacity: 1;
+    align-items: center;
+}
+
+.nav-links a {
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    padding: 10px 0;
+    position: relative;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-links a.active {
+    opacity: 1;
+    font-weight: 700;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 50%;
+    background-color: #000000;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-logo img {
+    height: 50px;
+    width: auto;
+    max-width: 400px;
+    margin-left: 60px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
     <!-- 네비게이션 -->
     <nav class="site-nav">
         <div class="nav-inner">
             <div class="nav-brand">
-                <a href="index.html" style="display: flex; align-items: center; gap: 10px;">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
                     <span class="brand-text">누구나컴퍼니</span>
                 </a>
             </div>
@@ -24,22 +166,25 @@
                 <span></span>
                 <span></span>
             </div>
-            <div class="nav-center">
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
                 <div class="nav-links">
-                    <a href="index.html">홈</a>
-                    <a href="services.html">SNS광고</a>
-                    <a href="technology.html">대시보드</a>
-                    <a href="portfolio.html">콘텐츠</a>
-                    <a href="about.html">소개</a>
+                    <a href="/" class="nav-link" data-page="home">홈</a>
+                    <a href="/services" class="nav-link" data-page="services">SNS광고</a>
+                    <a href="/technology" class="nav-link" data-page="technology">대시보드</a>
+                    <a href="/portfolio" class="nav-link" data-page="portfolio">콘텐츠</a>
+                    <a href="/about" class="nav-link" data-page="about">소개</a>
                 </div>
             </div>
             <div class="nav-right">
-                <a href="proposal.html" class="pricing-btn active">요금 및 서비스</a>
-                <img src="{{ url_for('static', filename='videos/누구나타이틀.gif') }}" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;" alt="NUGUNA">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
             </div>
             <div class="mobile-overlay"></div>
         </div>
     </nav>
+
+<body class="no-anim">
+
 
     <!-- 메인 컨텐츠 -->
     <main class="proposal-main">
@@ -173,7 +318,10 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="{{ url_for('static', filename='img/핵1.png') }}" alt="SNS 광고">
+                                <picture>
+                                    <source srcset="{{ asset('img/ui/core1.webp') }}" type="image/webp">
+                                    <img src="{{ asset('img/ui/core1.png') }}" alt="SNS 광고" width="200" height="200" loading="lazy" decoding="async">
+                                </picture>
                             </div>
                         </div>
                         <div class="core-card">
@@ -186,7 +334,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="{{ url_for('static', filename='img/핵3.png') }}" alt="Google Ads Optimization">
+                                <img src="{{ asset('img/ui/core3.webp') }}" alt="Google Ads Optimization">
                             </div>
                         </div>
                         <div class="core-card">
@@ -199,7 +347,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="{{ url_for('static', filename='img/핵2.png') }}" alt="NGN Dashboard">
+                                <img src="{{ asset('img/ui/core2.webp') }}" alt="NGN Dashboard">
                             </div>
                         </div>
                         <div class="core-card">
@@ -212,7 +360,7 @@
                                 </ul>
                             </div>
                             <div class="core-card-image">
-                                <img src="{{ url_for('static', filename='img/핵4.png') }}" alt="AI Content Creation">
+                                <img src="{{ asset('img/ui/core4.webp') }}" alt="AI Content Creation">
                             </div>
                         </div>
                     </div>
@@ -366,24 +514,24 @@
                                     <li>네이버GFA / 카카오모먼트 / 구글 / 메타 / 검색광고 등 전 매체 경험</li>
                                 </ul>
                                 <div class="about-bottom-image">
-                                    <img src="{{ url_for('static', filename='img/aw2.png') }}" alt="매체 경험">
+                                    <img src="{{ asset('img/ui/aw2.webp') }}" alt="매체 경험">
                                 </div>
                             </div>
                             <div class="about-image">
-                                <img src="{{ url_for('static', filename='img/aw.png') }}" alt="About NGN">
+                                <img src="{{ asset('img/ui/aw.webp') }}" alt="About NGN">
                             </div>
                         </div>
                         <div class="about-right">
                             <div class="about-mini">
                                 크리에이티브 역량 (영상·이미지 툴 8년 경험)
                                 <div class="about-mini-image">
-                                    <img src="{{ url_for('static', filename='img/aw3.png') }}" alt="크리에이티브 역량">
+                                    <img src="{{ asset('img/ui/aw3.webp') }}" alt="크리에이티브 역량">
                                 </div>
                             </div>
                             <div class="about-mini">
                                 Python/SQL 기반 데이터 분석·자동화
                                 <div class="about-mini-image">
-                                    <img src="{{ url_for('static', filename='img/aw4.png') }}" alt="데이터 분석 자동화">
+                                    <img src="{{ asset('img/ui/aw4.webp') }}" alt="데이터 분석 자동화">
                                 </div>
                             </div>
                         </div>
@@ -468,5 +616,5 @@
             });
         });
     </script>
-</body>
+{% endblock %}
 
