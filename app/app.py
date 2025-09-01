@@ -12,9 +12,15 @@ app.config['STATIC_CDN_URL'] = os.environ.get('STATIC_CDN_URL')  # Cloud Run 환
 def asset(path):
     """정적 자산 경로 생성 함수"""
     static_url = app.config.get('STATIC_CDN_URL') or '/static'
-    version = app.config.get('STATIC_VERSION', '1.0.0')
-    # 슬래시 중복 방지: 끝/앞만 잘라내고 안전하게 연결
-    return f"{static_url.rstrip('/')}/{path.lstrip('/')}?v={version}"
+    version = app.config.get('STATIC_VERSION', '')
+    
+    # GCS 버킷 사용시 버전 파라미터 제거
+    if static_url.startswith('https://storage.googleapis.com'):
+        return f"{static_url.rstrip('/')}/{path.lstrip('/')}"
+    else:
+        # 로컬 개발환경에서만 버전 파라미터 사용
+        version = version or '1.0.0'
+        return f"{static_url.rstrip('/')}/{path.lstrip('/')}?v={version}"
 
 @app.route('/')
 def index():
