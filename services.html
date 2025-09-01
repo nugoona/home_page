@@ -469,8 +469,8 @@
         <!-- 왼쪽 영상 영역 -->
         <div class="services-video-area">
             <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/카타1.webp') }}" width="600" height="400">
-                <source src="{{ asset('videos/portfolio/카타1.webm') }}" type="video/webm">
-                <source src="{{ asset('videos/portfolio/카타1.mp4') }}" type="video/mp4">
+                <source src="{{ url_for('static', filename='videos/portfolio/카타1.webm') }}" type="video/webm">
+                <source src="{{ url_for('static', filename='videos/portfolio/카타1.mp4') }}" type="video/mp4">
             </video>
         </div>
         
@@ -566,8 +566,8 @@
             <!-- 왼쪽 이미지 -->
             <div class="services-left-image">
                 <video autoplay muted loop playsinline>
-                    <source src="{{ asset('videos/portfolio/catalog_main.webm') }}" type="video/webm">
-                    <source src="{{ asset('videos/portfolio/catalog_main.mp4') }}" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/portfolio/catalog_main.webm') }}" type="video/webm">
+                    <source src="{{ url_for('static', filename='videos/portfolio/catalog_main.mp4') }}" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -641,8 +641,8 @@
     <!-- SNS 광고 영상 섹션 -->
     <div class="services-video-section services-sns-video-section">
         <video autoplay muted loop playsinline preload="metadata" class="services-full-video" poster="{{ asset('thumbs/sns1.webp') }}" width="1920" height="1080">
-            <source src="{{ asset('videos/hero/sns1.webm') }}" type="video/webm">
-            <source src="{{ asset('videos/hero/sns1.mp4') }}" type="video/mp4">
+            <source src="{{ url_for('static', filename='videos/hero/sns1.webm') }}" type="video/webm">
+            <source src="{{ url_for('static', filename='videos/hero/sns1.mp4') }}" type="video/mp4">
         </video>
     </div>
 
@@ -660,8 +660,8 @@
                 <!-- 하얀 가로선 -->
                 <div class="video-top-line"></div>
                 <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn3.webp') }}" width="1920" height="1080">
-                    <source src="{{ asset('videos/hero/main._ngn3.webm') }}" type="video/webm">
-                    <source src="{{ asset('videos/hero/main._ngn3.mp4') }}" type="video/mp4">
+                    <source src="{{ url_for('static', filename='videos/hero/main._ngn3.webm') }}" type="video/webm">
+                    <source src="{{ url_for('static', filename='videos/hero/main._ngn3.mp4') }}" type="video/mp4">
                 </video>
                 <div class="services-video-overlay"></div>
                 <div class="services-video-text-overlay">
