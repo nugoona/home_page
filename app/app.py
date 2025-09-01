@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect
 import os
 
 app = Flask(__name__, template_folder='../', static_folder='../static')
@@ -26,20 +26,24 @@ def asset(path):
 def index():
     return render_template('index.html')
 
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/services')
-def services():
+@app.route('/ads')
+def ads():
     return render_template('services.html')
 
-@app.route('/portfolio')
-def portfolio():
+@app.route('/contents')
+def contents():
     return render_template('portfolio.html')
 
-@app.route('/technology')
-def technology():
+@app.route('/dashboard')
+def dashboard():
     return render_template('technology.html')
 
 @app.route('/proposal')
@@ -53,6 +57,48 @@ def survey():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+# 기존 URL들도 리다이렉트로 유지 (SEO 친화적)
+@app.route('/services')
+def services_redirect():
+    return redirect('/ads')
+
+@app.route('/portfolio')
+def portfolio_redirect():
+    return redirect('/contents')
+
+@app.route('/technology')
+def technology_redirect():
+    return redirect('/dashboard')
+
+# HTML 파일명으로도 접근 가능하도록 (리다이렉트)
+@app.route('/about.html')
+def about_html_redirect():
+    return redirect('/about')
+
+@app.route('/services.html')
+def services_html_redirect():
+    return redirect('/ads')
+
+@app.route('/portfolio.html')
+def portfolio_html_redirect():
+    return redirect('/contents')
+
+@app.route('/technology.html')
+def technology_html_redirect():
+    return redirect('/dashboard')
+
+@app.route('/proposal.html')
+def proposal_html_redirect():
+    return redirect('/proposal')
+
+@app.route('/survey.html')
+def survey_html_redirect():
+    return redirect('/survey')
+
+@app.route('/contact.html')
+def contact_html_redirect():
+    return redirect('/contact')
 
 # 건강 체크 엔드포인트 (Cloud Run용)
 @app.route('/health')
