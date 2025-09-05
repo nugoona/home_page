@@ -1,5 +1,9 @@
-# Static assets (generated files - don't commit)
-/static/
+# Static assets - allow CSS and essential files, ignore generated content
+/static/videos/
+/static/thumbs/
+*.mp4
+*.webm
+*.gif
 
 # Build artifacts
 /build/
