@@ -166,16 +166,15 @@ html, body {
 
 .about-section-header h2 {
     font-family: 'Inter Tight', sans-serif;
-    font-size: 3rem;
+    font-size: 2.7rem; /* 3rem → 2.7rem으로 약간 축소 */
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.02em; /* 원래 자간으로 복원 */
     color: rgb(17, 17, 17);
     line-height: 0.9;
     margin: 0;
     text-align: center;
-    white-space: nowrap;
     max-width: 100%;
-    overflow: hidden;
+    white-space: nowrap; /* 한 줄 강제 */
 }
 
 .about-section-header h3 {
