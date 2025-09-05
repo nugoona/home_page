@@ -1,0 +1,1031 @@
+/* ===== INDEX MOBILE PAGE STYLES ===== */
+/* index_mobile.html 페이지 전용 스타일 - 웹과 동일한 구성요소, 모바일 최적화 */
+
+/* Navigation */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 양 끝 배치 */
+}
+
+.nav-brand {
+    /* order 제거 - 기본 순서 유지 */
+}
+
+.hamburger-menu {
+    /* order 제거 - 기본 순서 유지 */
+}
+
+.nav-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-right {
+    display: none; /* 모바일에서는 숨김 */
+}
+
+.nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.hamburger-menu {
+    display: flex !important;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000000;
+}
+
+.hamburger-icon {
+    display: block;
+}
+
+.close-icon {
+    display: none;
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    max-width: 400px;
+    display: block;
+    margin: 2px 0;
+}
+
+.contact-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background: #000;
+    margin: 3px 0;
+    transition: 0.3s;
+    display: block;
+}
+
+
+.mobile-overlay.active {
+    display: block;
+}
+
+.nav-links {
+    background: #000000;
+    align-items: stretch;
+    gap: 0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 9999;
+    display: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links a {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    padding: 1.2rem 2rem;
+    width: 100%;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    line-height: 1.2;
+    border: none;
+}
+
+.nav-links a:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+/* Body */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: rgb(234, 234, 234);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+/* 모든 요소에 box-sizing 적용 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Hero Section */
+.index-hero-section {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* 더 작게 조정 */
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+}
+
+.index-hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: left;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.index-hero-video-container {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* 높이를 늘려서 여백 덮기 */
+    overflow: hidden;
+    background: transparent; /* 회색 배경 제거 */
+    z-index: 999998; /* 네비게이션보다 낮게 설정 */
+}
+
+.index-hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important; /* 영상이 전체 영역을 채우도록 */
+    object-position: center;
+    background: transparent;
+}
+
+.index-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.index-centered-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.index-main-heading {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.index-sub-heading {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.05em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Section - 모바일에서 위아래 배치 */
+.index-content-section {
+    width: 100%;
+    min-height: auto;
+    background-color: rgb(234, 234, 234);
+    display: flex;
+    align-items: flex-start; /* 텍스트를 위쪽으로 붙임 */
+    padding: 0; /* 패딩 완전 제거 */
+    position: relative;
+    overflow: visible;
+    margin: 2rem 0 0 0; /* 상단 마진 추가 */
+}
+
+.index-text-gif-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    align-items: center;
+    justify-content: flex-start; /* 위쪽으로 붙임 */
+    min-height: auto;
+    padding: 0 20px;
+    gap: 0; /* 갭 완전 제거 */
+}
+
+.index-text-content {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding: 0.2rem 0 !important; /* 상하 패딩 대폭 줄임 */
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* 텍스트를 위쪽으로 붙임 */
+    align-items: flex-start !important;
+    text-align: left !important;
+    order: 1; /* 텍스트를 위에 배치 */
+}
+
+.index-company-intro {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0;
+    position: relative;
+    width: 100%;
+}
+
+.index-main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    position: relative;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.index-subtitle-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(17, 17, 17);
+    margin-bottom: 1.5rem;
+    margin-left: 2rem; /* 다른 텍스트와 동일하게 맞춤 */
+    letter-spacing: 0.02em;
+    opacity: 0.8;
+}
+
+.index-text-line-1,
+.index-text-line-2,
+.index-text-line-3 {
+    font-family: 'Pretendard', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-size: 2rem; /* 웹: 3.5rem → 모바일: 2rem */
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 왼쪽 정렬로 되돌림 */
+    gap: 1rem;
+    width: 100%;
+    padding-left: 2rem; /* 텍스트를 더 오른쪽으로 이동 */
+    white-space: nowrap;
+    margin-bottom: 0.1rem;
+}
+
+.index-text-line-2 {
+    font-size: 3rem; /* 웹: 6rem → 모바일: 3rem */
+    padding-left: 0.5rem; /* 라인2만 왼쪽으로 이동 */
+}
+
+.index-text-line-3 {
+    font-size: 3rem; /* 웹: 6rem → 모바일: 3rem */
+    padding-left: 0.5rem; /* 라인3만 왼쪽으로 이동 */
+}
+
+.index-keyword-box {
+    background: rgba(240, 240, 240, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+    padding: 0.4rem 0.8rem; /* 웹: 0.6rem 1.2rem → 모바일: 0.4rem 0.8rem */
+    margin: 0 0.5rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    display: inline-block;
+    white-space: nowrap;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-width: fit-content;
+    opacity: 1 !important; /* 인라인 스타일 덮어쓰기 */
+    transform: translateX(0) !important; /* 인라인 스타일 덮어쓰기 */
+    font-size: 0.8em; /* 웹: 0.9em → 모바일: 0.8em */
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-30px);
+    }
+}
+
+.index-keyword-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.index-keyword-box:hover {
+    background: rgba(250, 250, 250, 0.98);
+    border-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.index-right-video {
+    width: 100% !important; /* 웹: 30% → 모바일: 100% */
+    max-width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px !important; /* 웹: 2rem → 모바일: 1rem */
+    order: 2; /* 비디오를 아래에 배치 */
+}
+
+.index-right-video video {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important; /* 배율대로 표시 */
+    border-radius: 16px !important;
+}
+
+/* Full Width Video Section */
+.index-full-width-video-section {
+    width: 100%;
+    margin: 0;
+    padding: 2rem 0 1rem 0; /* 웹: 4rem 0 2rem 0 → 모바일: 2rem 0 1rem 0 */
+    overflow: hidden;
+    min-height: 60vh; /* 웹: 80vh → 모바일: 60vh */
+}
+
+.index-video-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.index-full-width-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain !important; /* 배율대로 표시 */
+}
+
+/* Advantages Section */
+.index-advantages-section {
+    padding: 2rem 20px 1rem 20px; /* 패딩 더 줄임 */
+    background-color: rgb(234, 234, 234);
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 400px;
+    margin-top: 0;
+}
+
+.index-section-header {
+    margin-bottom: 2rem; /* 3rem → 2rem으로 줄임 */
+    margin-top: 0.5rem; /* 1rem → 0.5rem으로 줄임 */
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.index-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem; /* 3rem → 2.5rem으로 줄임 */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.index-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.3rem; /* 1.5rem → 1.3rem으로 줄임 */
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.index-advantages-grid {
+    max-width: 100%;
+    width: 90%; /* 더 줄임 */
+    margin: 0 auto;
+    display: grid !important;
+    grid-template-columns: 1fr; /* 모바일에서 1x4 그리드 (세로로 4개) */
+    gap: 0.5rem; /* 모바일에 맞게 간격 줄임 */
+    position: relative;
+    z-index: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 0 0.5rem; /* 패딩 더 줄임 */
+    box-sizing: border-box; /* 박스 모델 수정 */
+}
+
+.index-advantage-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.index-advantage-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    /* aspect-ratio 제거 - 영상 원본 비율 유지 */
+    overflow: hidden;
+    border-radius: 16px; /* 모서리 둥글게 */
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.08),
+        0 4px 8px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: block !important;
+    z-index: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 200px; /* 최소 높이 설정 */
+    height: auto; /* 자동 높이 조정 */
+    max-height: 400px; /* 최대 높이 설정 */
+    margin-bottom: 0.5rem;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transform: translateY(0);
+    width: 100%;
+    box-sizing: border-box; /* 박스 모델 수정 */
+}
+
+.index-advantage-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.12),
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        inset 0 2px 0 rgba(255, 255, 255, 0.9);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
+    border-radius: 28px;
+}
+
+.index-card-video {
+    position: relative; /* absolute에서 relative로 변경 */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+.index-card-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 영상이 카드 전체를 채우도록 */
+    transition: all 0.5s ease;
+    border-radius: 16px; /* 카드와 동일한 라운딩 */
+    display: block;
+    background: #000; /* 배경색 설정 */
+}
+
+/* 모든 카드 비디오 동일하게 처리 */
+.index-advantage-item:nth-child(2) .index-card-video video {
+    object-fit: cover; /* 다른 카드와 동일하게 */
+    background: #000;
+    border-radius: 16px; /* 카드와 동일한 라운딩 */
+}
+
+/* 모든 비디오 루프 시 검은 화면 방지 */
+.index-card-video video {
+    transition: opacity 0.1s ease;
+}
+
+.index-card-video video::-webkit-media-controls {
+    display: none !important;
+}
+
+.index-advantage-card:hover .index-card-video video {
+    transform: scale(1.05);
+}
+
+.index-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: linear-gradient(
+        180deg,
+        rgba(17, 17, 17, 0.3) 0%,
+        rgba(17, 17, 17, 0.6) 50%,
+        rgba(17, 17, 17, 0.8) 100%
+    );
+}
+
+.index-advantage-card:hover .index-card-content {
+    opacity: 1;
+}
+
+.index-content-wrapper {
+    padding: 2rem;
+    width: 100%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.5s ease;
+}
+
+.index-advantage-card:hover .index-content-wrapper {
+    transform: translateY(0);
+}
+
+.index-content-wrapper h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.index-card-number-text {
+    position: relative;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    background: rgba(245, 245, 245, 0.95);
+    padding: 20px 20px;
+    border-radius: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    margin: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    width: calc(100% - 3rem);
+}
+
+/* Section Divider */
+.index-section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.1) 20%, rgba(17, 17, 17, 0.3) 50%, rgba(17, 17, 17, 0.1) 80%, transparent 100%);
+    margin: 40px auto; /* 웹: 80px → 모바일: 40px */
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.index-section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: lightMove 6s linear infinite;
+    z-index: -1;
+}
+
+@keyframes lightMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.index-details-label {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.5rem; /* 웹: 4rem → 모바일: 2.5rem */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    text-align: center; /* 웹: left → 모바일: center */
+    margin: 40px auto 40px auto;
+    max-width: 100%;
+    padding: 0 20px; /* 웹: 0 60px → 모바일: 0 20px */
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+/* Feature Section - 모바일에서 위아래 배치 */
+.index-feature-section {
+    padding: 30px 0; /* 웹: 60px 0 → 모바일: 30px 0 */
+    background: rgb(234, 234, 234);
+    position: relative;
+    overflow: hidden;
+}
+
+.index-feature-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px; /* 웹: 0 60px → 모바일: 0 1rem */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    align-items: stretch;
+    gap: 2rem; /* 웹: 120px → 모바일: 2rem */
+    min-height: auto; /* 웹: 700px → 모바일: auto */
+    position: relative;
+}
+
+.index-feature-text-box {
+    flex: none; /* 웹: 1.4 → 모바일: none */
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 24px;
+    padding: 3rem 1.5rem; /* 패딩 증가 */
+    position: relative;
+    z-index: 1; /* z-index 낮춤 */
+    display: flex;
+    align-items: flex-start; /* 상단 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    order: 2; /* 텍스트박스를 아래에 배치 */
+    min-height: 400px; /* 높이 증가 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.index-feature-content {
+    position: relative;
+    z-index: 1; /* z-index 낮춤 */
+    max-width: 100%;
+    text-align: left;
+    margin-left: 0; /* 웹: -60px → 모바일: 0 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.index-feature-logo {
+    position: absolute;
+    top: 24px;
+    right: 24px; /* 오른쪽으로 복원 */
+    z-index: 2;
+}
+
+.index-instagram-logo {
+    width: 48px;
+    height: 48px;
+    opacity: 0.8;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+}
+
+.index-feature-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem; /* 더 작게 조정 */
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: rgb(17, 17, 17);
+    line-height: 1.2;
+    margin: 0 0 1.5rem 0; /* 마진 줄임 */
+    text-align: left;
+    white-space: normal; /* 웹: nowrap → 모바일: normal */
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    overflow-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    padding-right: 60px; /* 로고 공간 확보 */
+}
+
+.index-feature-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem; /* 더 작게 조정 */
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+    line-height: 1.5; /* 줄간격 조정 */
+    margin: 0;
+    letter-spacing: -0.05em;
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    overflow-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+}
+
+.index-feature-button {
+    position: absolute;
+    bottom: 32px; /* 더 아래로 */
+    right: 32px; /* 더 오른쪽으로 */
+    z-index: 2;
+}
+
+.index-learn-more-btn {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    background: rgb(17, 17, 17);
+    border: 1px solid rgb(17, 17, 17);
+    border-radius: 8px;
+    padding: 10px 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    height: 47px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 182px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.index-learn-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.index-learn-more-btn:hover {
+    background: rgb(34, 34, 34);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.index-learn-more-btn:hover::before {
+    left: 100%;
+}
+
+.index-feature-image-panel {
+    flex: none; /* 웹: 2.6 → 모바일: none */
+    background: transparent;
+    border-radius: 32px;
+    padding: 0;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 1; /* 이미지패널을 위에 배치 */
+}
+
+.index-feature-hero-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    mix-blend-mode: multiply;
+}
+
+.index-feature-hero-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Contact Section - 웹과 동일한 디자인 */
+.contact-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.5rem; /* 모바일에 맞게 조정 */
+    font-weight: 800;
+    color: rgb(17, 17, 17);
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.5px rgb(17, 17, 17);
+}
+
+.contact-section {
+    background-color: #2a2a2a;
+    padding: 2rem 20px; /* 모바일에 맞게 조정 */
+    margin: 1rem 0 0 0;
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: column; /* 모바일에서는 세로 배치 */
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 2rem; /* 모바일에서는 간격 추가 */
+    justify-content: space-between;
+}
+
+.contact-left, .contact-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 20px; /* 모바일에 맞게 조정 */
+}
+
+.contact-right {
+    padding-left: 20px; /* 모바일에서는 좌우 패딩 동일 */
+}
+
+.contact-title-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-title-text {
+    font-size: 1.8rem; /* 모바일에 맞게 조정 */
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.contact-description {
+    font-size: 1rem; /* 모바일에 맞게 조정 */
+    color: #cccccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.3; /* 줄간격 더 촘촘하게 */
+    text-align: left;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-item-text {
+    font-size: 1.1rem; /* 모바일에 맞게 조정 */
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.contact-divider {
+    display: none; /* 모바일에서는 구분선 숨김 */
+}
+
+.contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ffffff;
+    color: #2a2a2a;
+    padding: 20px 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem; /* 모바일에 맞게 조정 */
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 0.1rem 0 0.1rem 0;
+    margin-top: 0.05rem;
+}
+
+
+
+.footer-bottom {
+    margin-top: 0.2rem; /* 위쪽 마진 줄임 */
+    padding: 0.5rem 0; /* 상하 패딩 줄임 */
+    /* border-top 제거 */
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+}

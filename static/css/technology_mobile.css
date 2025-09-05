@@ -1,0 +1,774 @@
+/* ===== 모바일 전용 Technology 페이지 스타일 ===== */
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif !important;
+    line-height: 1.6 !important;
+    color: #333 !important;
+    background: #eaeaea !important;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+}
+
+/* 다른 CSS 파일과의 충돌 방지 */
+.technology-advantages-section,
+.technology-section-header,
+.technology-section-header h2,
+.technology-section-header h3 {
+    line-height: inherit !important;
+}
+
+/* 컨테이너 요소들의 적절한 패딩 적용 */
+.mobile-dashboard-intro-container,
+.mobile-dashboard-features-container,
+.mobile-contact-container,
+.nav-inner,
+.technology-section-header,
+.technology-video-text-container,
+.technology-button-container,
+.technology-dashboard-content {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+/* 전체 섹션들의 기본 패딩 */
+.technology-advantages-section,
+.technology-intro-section,
+.technology-video-section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* ===== 모바일 네비게이션 ===== */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.nav-center {
+    display: none;
+}
+
+.nav-right {
+    display: none;
+}
+
+/* 햄버거 메뉴 */
+.hamburger-menu {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu span:nth-child(1) { top: 4px; }
+.hamburger-menu span:nth-child(2) { top: 11px; }
+.hamburger-menu span:nth-child(3) { top: 18px; }
+
+/* 햄버거 메뉴 활성화 상태 */
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 11px;
+}
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 11px;
+}
+
+/* 모바일 네비게이션 메뉴 */
+.nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999998;
+}
+
+.nav-links.active {
+    display: flex;
+    transform: translateX(0);
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+.nav-links a:hover {
+    color: #ccc;
+    transform: scale(1.05);
+}
+
+/* 모바일 오버레이 */
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999997;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.mobile-nav-link {
+    font-family: 'Pretendard', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+.mobile-nav-link:hover {
+    color: #ccc;
+    transform: scale(1.05);
+}
+
+.mobile-pricing-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 0px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+.mobile-pricing-btn:hover {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+/* ===== Technology Advantages Section ===== */
+.technology-advantages-section {
+    padding: 2rem 20px 1rem 20px;
+    background-color: rgb(234, 234, 234);
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+    min-height: 300px;
+    margin-top: 70px;
+}
+
+.technology-section-header {
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.technology-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.technology-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ===== 영상 텍스트 영역 스타일 ===== */
+.technology-video-text-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.technology-video-area {
+    flex: 1;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+    order: 2;
+}
+
+.technology-video-area video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    border: 1px solid #ffffff;
+    overflow: visible;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.technology-text-area {
+    flex: 1;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    order: 1;
+}
+
+.technology-text-line-1 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0;
+    margin-bottom: 0.3rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 0.3rem 0.8rem;
+    border-radius: 0;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.technology-text-line-2 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0;
+    text-align: center;
+    letter-spacing: -0.06em;
+}
+
+/* ===== 검은색 배경 버튼 섹션 ===== */
+.technology-button-section {
+    background: #2a2a2a;
+    padding: 80px 0;
+    margin: 0;
+    width: 100%;
+    position: relative;
+}
+
+.technology-button-section::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #000000;
+}
+
+.technology-button-section::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #000000;
+}
+
+.technology-button-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.technology-demo-button {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 14px 32px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        inset 0 1px 0 rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 240px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.technology-demo-button:hover {
+    transform: translateY(-1px);
+    background: #1f1247;
+    color: #ffffff;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+        0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.button-text {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+}
+
+.button-arrow {
+    font-size: 1.6rem;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    color: #000000;
+}
+
+.technology-demo-button:hover .button-arrow {
+    transform: translateX(4px);
+    color: #ffffff;
+}
+
+/* 버튼 아래 안내 텍스트 */
+.technology-button-note {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #ffffff;
+    text-align: left;
+    margin-top: 16px;
+    opacity: 1;
+    line-height: 1.2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.note-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.note-item:last-child {
+    margin-bottom: 0;
+}
+
+.note-icon {
+    color: #ffffff;
+    flex-shrink: 0;
+    opacity: 1;
+}
+
+/* 몰매출 성과 확인 텍스트 */
+.technology-mall-performance-text {
+    font-size: 2.5rem;
+    font-weight: 720;
+    color: #1a1a1a;
+    margin-top: 80px;
+    margin-bottom: 0;
+    margin-left: 0;
+    text-align: center;
+    position: relative;
+    letter-spacing: -0.02em;
+    padding: 0 20px;
+}
+
+.technology-mall-performance-text::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, #1a1a1a 0%, rgba(26, 26, 26, 0.1) 100%);
+    border-radius: 0;
+}
+
+/* ===== 대시보드 기능 카드 섹션 ===== */
+.technology-dashboard-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 0 60px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.technology-description-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.technology-description-list li {
+    margin-bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+.technology-description-list li:first-child {
+    margin-bottom: 0 !important;
+}
+
+.technology-dashboard-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+}
+
+.technology-dashboard-text-content {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    background: #2a2a2a;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px 20px;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 1);
+    height: auto;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+.technology-dashboard-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.2;
+    margin: 80px 0 0 0;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-left: 0;
+    text-align: center;
+}
+
+.technology-dashboard-heading {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #eaeaea;
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+    letter-spacing: -0.05em;
+    position: relative;
+}
+
+.technology-dashboard-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #eaeaea;
+    border-radius: 2px;
+}
+
+.technology-dashboard-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: #eaeaea;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.technology-dashboard-description strong {
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.technology-dashboard-image {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+.technology-dashboard-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin: 0;
+    padding: 0;
+    display: block;
+    vertical-align: top;
+}
+
+/* ===== 푸터 스타일 ===== */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 0.1rem 0 0.1rem 0;
+    margin-top: 0.05rem;
+}
+
+.footer-content {
+    display: none; /* 모바일에서는 숨김 */
+}
+
+.footer-bottom {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+    padding: 1rem 0;
+}
+
+/* ===== 코드 블록 스타일 ===== */
+.code-content {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.code-line {
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.code-line.indent {
+    padding-left: 20px;
+}
+
+.code-line.indent-2 {
+    padding-left: 40px;
+}
+
+.keyword {
+    color: #1a73e8;
+}
+
+.variable {
+    color: #0f766e;
+}
+
+.property {
+    color: #1e40af;
+}
+
+.string {
+    color: #dc2626;
+}
+
+.comment {
+    color: #5f6368;
+}
+
+/* ===== 반응형 조정 ===== */
+@media (max-width: 480px) {
+    .technology-section-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .technology-section-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .technology-text-line-1 {
+        font-size: 1.5rem;
+    }
+    
+    .technology-text-line-2 {
+        font-size: 2.5rem;
+    }
+    
+    .technology-mall-performance-text {
+        font-size: 2rem;
+    }
+    
+    .technology-dashboard-title {
+        font-size: 1.8rem;
+    }
+    
+    .technology-dashboard-heading {
+        font-size: 1.5rem;
+    }
+    
+    .code-line {
+        font-size: 0.9rem;
+        white-space: normal;
+    }
+    
+    .code-line.indent {
+        padding-left: 15px;
+    }
+    
+    .code-line.indent-2 {
+        padding-left: 30px;
+    }
+}

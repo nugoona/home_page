@@ -1,0 +1,896 @@
+/* ===== PROPOSAL MOBILE PAGE STYLES ===== */
+/* proposal_mobile.html 페이지 전용 스타일 - 웹과 동일한 구성요소, 모바일 최적화 */
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Background */
+html, body {
+    background: #eaeaea !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Navigation - 소개 페이지와 동일 */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #eaeaea;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 10001;
+}
+
+.hamburger-icon, .close-icon {
+    width: 24px;
+    height: 24px;
+    color: #333;
+}
+
+.nav-center {
+    display: none !important;
+}
+
+.nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links a {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    padding: 1.2rem 2rem;
+    width: 100%;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    line-height: 1.2;
+    border: none;
+}
+
+.nav-links a:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+.nav-right {
+    display: none;
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+/* Main Content */
+.proposal-main {
+    margin-top: 60px;
+    background: #eaeaea;
+    min-height: 100vh;
+}
+
+/* Cover Section - 웹과 동일한 디자인 */
+.proposal-cover {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.proposal-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.proposal-cover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.015) 49%, rgba(255, 255, 255, 0.015) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.015) 49%, rgba(255, 255, 255, 0.015) 51%, transparent 52%);
+    background-size: 40px 40px;
+    z-index: 1;
+}
+
+.cover-container {
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    padding: 4rem 1rem;
+}
+
+.cover-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+.cover-logo {
+    text-align: center;
+}
+
+.company-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.company-tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+
+.proposal-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+/* Section Styles */
+.proposal-section {
+    padding: 3rem 1rem;
+    background: #eaeaea;
+}
+
+.tight-section {
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.content-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Pricing Section - 웹과 동일한 디자인 */
+.pricing-cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+.pricing-card {
+    background: #ffffff;
+    border: 1px solid #9ca3af;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.pricing-card.recommended {
+    border-color: #9ca3af;
+    transform: none;
+    box-shadow: none;
+}
+
+.plan-header {
+    margin-bottom: 1.5rem;
+}
+
+.plan-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.plan-price {
+    margin-bottom: 1.5rem;
+}
+
+.price-number {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1;
+}
+
+.price-label {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.plan-budget {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.budget-label {
+    font-weight: 600;
+}
+
+.budget-amount {
+    font-weight: 700;
+    color: #111;
+}
+
+.plan-button {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.plan-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.plan-btn.downgrade {
+    background: #374151;
+    color: #ffffff;
+}
+
+.plan-btn.upgrade {
+    background: #374151;
+    color: #ffffff;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-features li {
+    font-size: 0.95rem;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.plan-features li::before {
+    content: '✓';
+    color: #10b981;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+
+.pricing-note {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.pricing-note p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Core Services Section - 웹과 동일한 디자인 */
+.core-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.core-card {
+    border: 1px solid rgba(45, 55, 72, 0.3);
+    padding: 1rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    box-shadow: 1px 0 1px rgba(0, 0, 0, 0);
+}
+
+.core-card-content {
+    flex: 1;
+}
+
+.core-title {
+    color: #0F497A;
+    font-weight: 800;
+    font-family: 'Inter Tight', sans-serif;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.core-list {
+    margin: 0;
+    padding-left: 1.125rem;
+    color: #000;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    list-style: none;
+}
+
+.core-list li {
+    position: relative;
+    margin-bottom: 0.25rem;
+}
+
+.core-list li::before {
+    content: '•';
+    position: absolute;
+    left: -1.125rem;
+    color: #000;
+    font-weight: bold;
+}
+
+.core-services-section .core-card-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+    background: transparent;
+    text-align: center;
+}
+
+.core-services-section .core-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+    border: none;
+    outline: none;
+    vertical-align: top;
+}
+
+.emphasis-box {
+    background: #111;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.emphasis-box p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Workflow Section - 웹과 동일한 디자인 */
+.workflow-process {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.workflow-step {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.step-box {
+    background: #2A2A2A;
+    color: #ffffff;
+    padding: 0;
+    border: 1px solid #000000;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.step-header {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    padding: 1.125rem 1.375rem;
+    border: 1px solid rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.step-title {
+    font-weight: 600;
+    font-family: 'Inter Tight', sans-serif;
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.step-divider {
+    height: 3px;
+    background: linear-gradient(90deg, 
+        rgba(148, 163, 184, 0.4) 0%, 
+        rgba(148, 163, 184, 0.7) 25%, 
+        rgba(148, 163, 184, 1) 50%, 
+        rgba(148, 163, 184, 0.7) 75%, 
+        rgba(148, 163, 184, 0.4) 100%);
+}
+
+.step-content {
+    padding: 1.125rem 1.375rem;
+    flex: 1;
+}
+
+.step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-list li {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.step-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.step-sub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+.step-sub-list li {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+.step-sub-list li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.workflow-arrow {
+    display: none; /* 모바일에서는 화살표 숨김 */
+}
+
+/* About NGN Section - 웹과 동일한 디자인 */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+.about-left {
+    background: #1a202c;
+    color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #2d3748;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-bullets {
+    margin: 0;
+    padding-left: 1rem;
+    list-style: none;
+}
+
+.about-bullets li {
+    margin: 0.75rem 0;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #ffffff;
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.3;
+}
+
+.about-bullets li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.about-bottom-image {
+    margin: 0.5rem auto 0 auto;
+    width: 120px;
+    padding: 0;
+    text-align: center;
+}
+
+.about-bottom-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    margin: 1rem 0 0 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0;
+    background: transparent;
+    text-align: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+    border: 2px solid rgba(255, 255, 255, 1) !important;
+    outline: none;
+}
+
+.about-right {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.about-mini {
+    border: 1px solid #999999;
+    background: #EAEAEA;
+    color: #000000;
+    padding: 0.875rem 1rem;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+}
+
+.about-mini-image {
+    margin: 0.75rem 0 0 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.about-mini-image img {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* FAQ Section */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.faq-q {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.faq-q:hover {
+    background: #f8f9fa;
+}
+
+.q-plus {
+    font-size: 1.5rem;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .q-plus {
+    transform: rotate(45deg);
+}
+
+.faq-a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    line-height: 1.6;
+    display: none;
+}
+
+.faq-item.active .faq-a {
+    display: block;
+}
+
+/* PDF Download Button */
+.pdf-download-fixed {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.pdf-download-btn {
+    background: #111;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.pdf-download-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer - 소개 페이지와 동일 */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 3rem 1rem 1rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: left;
+    align-items: center;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h5 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-section p {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    color: #cccccc;
+    line-height: 1.4;
+}
+
+.info-item {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .company-name {
+        font-size: 2.5rem;
+    }
+    
+    .proposal-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem;
+    }
+    
+    .core-card {
+        padding: 1.5rem;
+    }
+    
+    .step-box {
+        padding: 1.5rem;
+    }
+    
+    .about-content {
+        padding: 1.5rem;
+    }
+    
+    .about-mini {
+        padding: 1rem;
+    }
+    
+    .faq-q {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .faq-a {
+        padding: 0 1rem 1rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .pdf-download-fixed {
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    .pdf-download-btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.8rem;
+    }
+}

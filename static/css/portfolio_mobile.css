@@ -1,0 +1,1167 @@
+/* ===== PORTFOLIO MOBILE PAGE STYLES ===== */
+/* portfolio_mobile.html 페이지 전용 스타일 - 웹과 동일한 구성요소, 모바일 최적화 */
+
+/* Navigation */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    /* order 제거 - 기본 순서 유지 */
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10001;
+}
+
+.nav-center {
+    display: none !important; /* 모바일에서는 완전히 숨김 */
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.nav-right {
+    display: none; /* 모바일에서는 숨김 */
+}
+
+.nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+
+.hamburger-icon {
+    display: block;
+    color: #333;
+}
+
+.close-icon {
+    display: none;
+    color: #333;
+}
+
+.nav-logo {
+    height: 50px;
+    width: auto;
+    max-width: 400px;
+    display: block;
+    margin: 2px 0;
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+
+
+.nav-links {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgb(234, 234, 234);
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links.active {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.nav-links a {
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 1rem 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+}
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999997;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Body */
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(234, 234, 234);
+    color: rgb(17, 17, 17);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Portfolio Advantages Section - 웹과 동일한 디자인, 크기만 조정 */
+.portfolio-advantages-section {
+    padding: 2rem 20px 2rem 20px; /* 웹: 2rem 4rem 4rem 4rem → 모바일: 2rem 1rem 2rem 1rem */
+    background-color: rgb(234, 234, 234); /* 웹과 동일 */
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 200px; /* 웹: 400px → 모바일: 200px */
+    margin-top: 70px; /* 네비게이션 높이만큼 상단 마진 추가 */
+}
+
+.portfolio-section-header {
+    text-align: center;
+    max-width: 100%; /* 웹: 1920px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 20px; /* 웹: 0 60px → 모바일: 0 1rem */
+}
+
+.portfolio-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 4rem; /* 웹: 10.5rem → 모바일: 4rem */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.portfolio-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem; /* 웹: 2.2rem → 모바일: 1.5rem */
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Portfolio Content Section - 웹과 동일한 디자인, 크기만 조정 */
+.portfolio-content-section {
+    width: 100%;
+    min-height: auto; /* 웹: 100vh → 모바일: auto */
+    background-color: rgb(234, 234, 234); /* 웹과 동일 */
+    display: flex;
+    align-items: center;
+    padding: 2rem 20px; /* 웹: 0 → 모바일: 2rem 1rem */
+    position: relative;
+    overflow: visible;
+    margin: 0;
+    background-image: url('../img/ui/background0816.webp'); /* 웹과 동일한 배경 이미지 */
+    background-size: contain; /* 웹과 동일 */
+    background-position: left 200%; /* 웹: 500% → 모바일: 200% (모바일에 맞게 조정) */
+    background-repeat: no-repeat; /* 웹과 동일 */
+    background-attachment: scroll; /* 웹과 동일 */
+    background-clip: border-box; /* 웹과 동일 */
+    background-origin: border-box; /* 웹과 동일 */
+}
+
+.portfolio-text-gif-container {
+    width: 100%;
+    max-width: 100%; /* 웹: 1920px → 모바일: 100% */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column (위치 조정) */
+    align-items: center;
+    justify-content: center;
+    min-height: auto; /* 웹: 100vh → 모바일: auto */
+    padding: 0;
+    gap: 2rem; /* 웹: 4rem → 모바일: 2rem */
+}
+
+.portfolio-text-content {
+    width: 100% !important; /* 웹: 50% → 모바일: 100% */
+    max-width: 100%; /* 웹: 800px → 모바일: 100% */
+    padding-left: 0;
+    padding: 20px 0;
+    margin-left: 0;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* 웹: flex-start → 모바일: center */
+    text-align: center; /* 웹: left → 모바일: center */
+    order: 1; /* 텍스트를 위에 배치 */
+}
+
+.portfolio-company-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 웹: flex-start → 모바일: center */
+    gap: 1rem;
+}
+
+.portfolio-main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.portfolio-subtitle-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem; /* 웹: 1.2rem → 모바일: 1rem */
+    font-weight: 600;
+    color: rgb(17, 17, 17);
+    margin-bottom: 1rem;
+    margin-left: 0; /* 웹: 8rem → 모바일: 0 */
+    opacity: 0.8;
+}
+
+.portfolio-text-line-1 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2rem; /* 웹: 3.5rem → 모바일: 2rem */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0; /* 웹: 7rem → 모바일: 0 */
+    margin-bottom: -0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.portfolio-text-line-2 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 3rem; /* 웹: 6rem → 모바일: 3rem */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0; /* 웹: 7rem → 모바일: 0 */
+}
+
+.portfolio-keyword-box {
+    background: #eaeaea; /* 연한 회색 배경 */
+    padding: 0.1rem 0.4rem; /* 웹과 동일 */
+    border-radius: 0; /* 웹과 동일 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); /* 투명도 다시 증가: 0.15→0.25 */
+    display: inline-block;
+}
+
+.portfolio-right-video {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    order: 2; /* 영상을 아래에 배치 */
+    margin-top: 1rem;
+}
+
+.portfolio-right-video video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 12px; /* 웹과 동일 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* 웹과 동일 */
+}
+
+.portfolio-video-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+}
+
+.portfolio-mute-btn {
+    background: rgba(0, 0, 0, 0.7); /* 웹과 동일 */
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.portfolio-mute-btn:hover {
+    background: rgba(0, 0, 0, 0.9); /* 웹과 동일 */
+    transform: scale(1.1);
+}
+
+.portfolio-mute-icon,
+.portfolio-unmute-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Content Showcase Sections - 웹과 동일한 디자인, 크기만 조정 */
+.content-showcase {
+    padding: 2rem 20px 1rem 20px; /* 웹: 2rem 2rem 0 2rem → 모바일: 2rem 1rem 1rem 1rem (하단 여백 추가) */
+    background-color: rgb(234, 234, 234); /* 웹과 동일 */
+}
+
+.portfolio-divider {
+    width: 100%;
+    height: 2px; /* 웹과 동일 */
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.15) 50%, transparent 100%); /* 웹과 동일 */
+    margin: 0 0 3rem 0; /* 웹: 0 0 120px 0 → 모바일: 0 0 3rem 0 */
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%); /* 웹과 동일 */
+    animation: lightMove 6s linear infinite; /* 웹과 동일 */
+    z-index: 1;
+}
+
+@keyframes lightMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.showcase-text {
+    max-width: 100%; /* 웹: 1400px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 20px; /* 웹: 0 2rem → 모바일: 0 1rem */
+    text-align: left; /* 웹과 동일 - 왼쪽 정렬 유지 */
+    margin-top: 1rem; /* 웹: 4rem → 모바일: 1rem */
+    margin-bottom: 2rem; /* 웹: 8rem → 모바일: 2rem */
+    padding-left: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem; /* 웹: 2rem → 모바일: 1rem */
+}
+
+/* 하단 가로선 */
+.showcase-text::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem; /* 웹: -2.5rem → 모바일: -1rem */
+    left: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+    width: 30px; /* 웹: 60px → 모바일: 30px */
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.3) 100%); /* 웹과 동일 */
+}
+
+.showcase-text h3 {
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 1.5rem; /* 웹: 2.6rem → 모바일: 1.5rem (조금 더 작게) */
+    font-weight: 300; /* 웹과 동일 */
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.05em; /* 조금 더 작게 */
+    max-width: 100%;
+    position: relative;
+    text-align: left; /* 웹과 동일 - 왼쪽 정렬 유지 */
+    z-index: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    flex: 1;
+}
+
+.showcase-text h3::after {
+    content: '';
+    position: absolute;
+    bottom: -0.8rem; /* 웹: -1.5rem → 모바일: -0.8rem */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.1) 100%); /* 웹과 동일 */
+}
+
+.showcase-text h3 strong {
+    color: rgb(0, 0, 0); /* 웹과 동일 */
+    font-weight: 700; /* 웹과 동일 */
+}
+
+/* 세로선 */
+.showcase-text-vertical-line {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25px; /* 웹: 50px → 모바일: 25px */
+    width: 1px; /* 웹: 2px → 모바일: 1px */
+    height: 100%;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.2) 0%, rgba(17, 17, 17, 0.1) 50%, transparent 100%); /* 웹과 동일 */
+    z-index: 1;
+}
+
+.showcase-container {
+    max-width: 100%; /* 웹: 1400px → 모바일: 100% */
+    margin: 0 auto;
+    margin-top: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+    padding: 0 20px; /* 웹: 0 1rem → 모바일: 0 1rem */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column (위치 조정) */
+    align-items: flex-start; /* center → flex-start로 변경하여 왼쪽 정렬 */
+    justify-content: center;
+    gap: 0.1rem; /* 웹: 3rem → 모바일: 0.1rem (더 줄여서 그룹처럼 보이게) */
+    flex-wrap: nowrap;
+}
+
+/* 첫 번째 줄 - 하나의 하얀 박스 안에서 1:1 비율 */
+.showcase-container .showcase-item:first-child {
+    display: none; /* 기존 첫 번째 아이템 숨김 */
+}
+
+/* 새로운 첫 번째 줄 컨테이너 - 하나의 하얀 박스 */
+.showcase-first-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(248, 249, 250, 0.3) 50%, rgba(241, 243, 244, 0.3) 100%); /* 투명도 0.3 */
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.2rem; /* 더 줄여서 그룹처럼 보이게 */
+    gap: 16px;
+}
+
+/* 라벨 섹션 (왼쪽 50%) */
+.showcase-label-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.case-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+/* 이미지 섹션 (오른쪽 50%) */
+.showcase-image-section {
+    flex: 1;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.showcase-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 첫 번째 이미지 */
+.showcase-item:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 웹과 동일 */
+    border-radius: 16px; /* 웹과 동일 */
+}
+
+/* CASE 1 라벨 - 더 세련되고 모던하게 */
+.showcase-item:first-child::after {
+    content: "# CASE 1";
+    position: absolute;
+    bottom: -3.5rem; /* 웹: -2.5rem → 모바일: -3.5rem (더 큰 여백으로 겹침 방지) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 60px; /* 웹: 80px → 모바일: 60px */
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 0.7rem; /* 웹: 0.85rem → 모바일: 0.7rem */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%); /* 웹과 동일 */
+    padding: 0.3rem 0.8rem; /* 웹: 0.5rem 1rem → 모바일: 0.3rem 0.8rem */
+    border-radius: 16px; /* 웹과 동일 */
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px); /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.08); /* 웹과 동일 */
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03); /* 웹과 동일 */
+}
+
+/* 두 번째 아이템 - 풀너비 */
+.showcase-item:nth-child(2) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 200px; /* 높이 조정 */
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    margin-top: 0.1rem; /* 첫 번째 줄과의 여백 더 줄임 */
+}
+
+/* 케이스 1 두 번째 이미지 - 그림자 제거 */
+.showcase-container .showcase-item:nth-child(2) img,
+.showcase-container .showcase-item:nth-child(2) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 웹과 동일 */
+    border-radius: 12px; /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.06); /* 웹과 동일 */
+    box-shadow: none; /* 그림자 제거 */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 웹과 동일 */
+}
+
+/* 세 번째 아이템 - 풀너비 */
+.showcase-item:nth-child(3) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 250px; /* 높이 조정 */
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    margin-top: 0.1rem; /* 두 번째 아이템과의 여백 더 줄임 */
+}
+
+/* 케이스 1 세 번째 이미지 - 그림자 제거 */
+.showcase-container .showcase-item:nth-child(3) img,
+.showcase-container .showcase-item:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 웹과 동일 */
+    border-radius: 12px; /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.06); /* 웹과 동일 */
+    box-shadow: none; /* 그림자 제거 */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 웹과 동일 */
+}
+
+/* 일반적인 쇼케이스 이미지/비디오 스타일 - 중복 제거 */
+.showcase-image,
+.showcase-video {
+    width: 100%;
+    height: auto;
+    border-radius: 12px; /* 웹과 동일 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 웹과 동일 */
+}
+
+/* Content Showcase 2 - 웹과 동일한 디자인, 크기만 조정 */
+.content-showcase-2 {
+    padding: 2rem 20px 0 20px; /* 웹: 2rem 2rem 0 2rem → 모바일: 2rem 1rem 0 1rem */
+    background: rgb(234, 234, 234); /* 웹과 동일 */
+    position: relative;
+}
+
+.showcase-container-2 {
+    max-width: 100%; /* 웹: 1400px → 모바일: 100% */
+    margin: 0 auto;
+    margin-top: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+    padding: 0 20px; /* 웹: 0 1rem → 모바일: 0 1rem */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column (위치 조정) */
+    align-items: flex-start; /* center → flex-start로 변경하여 왼쪽 정렬 */
+    justify-content: center;
+    gap: 0.1rem; /* 웹: 3rem → 모바일: 0.1rem (더 줄여서 그룹처럼 보이게) */
+    flex-wrap: nowrap;
+}
+
+/* CASE 2 - 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 */
+.showcase-container-2 .showcase-item-2:first-child {
+    display: none; /* 기존 첫 번째 아이템 숨김 */
+}
+
+/* 새로운 첫 번째 줄 컨테이너 - 하나의 하얀 박스 */
+.showcase-first-row-2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(248, 249, 250, 0.3) 50%, rgba(241, 243, 244, 0.3) 100%); /* 투명도 0.3 */
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.2rem; /* 더 줄여서 그룹처럼 보이게 */
+    gap: 16px;
+}
+
+/* 라벨 섹션 (왼쪽 50%) */
+.showcase-label-section-2 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.case-label-2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+/* 이미지 섹션 (오른쪽 50%) */
+.showcase-image-section-2 {
+    flex: 1;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.showcase-image-section-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.showcase-item-2:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 웹과 동일 */
+    border-radius: 16px; /* 웹과 동일 */
+}
+
+/* CASE 2 라벨 - 더 세련되고 모던하게 */
+.showcase-item-2:first-child::after {
+    content: "# CASE 2";
+    position: absolute;
+    bottom: -1.5rem; /* 웹: -2.5rem → 모바일: -1.5rem */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 60px; /* 웹: 80px → 모바일: 60px */
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 0.7rem; /* 웹: 0.85rem → 모바일: 0.7rem */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%); /* 웹과 동일 */
+    padding: 0.3rem 0.8rem; /* 웹: 0.5rem 1rem → 모바일: 0.3rem 0.8rem */
+    border-radius: 16px; /* 웹과 동일 */
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px); /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.08); /* 웹과 동일 */
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03); /* 웹과 동일 */
+}
+
+/* 두 번째 쇼케이스 두 번째, 세 번째 아이템 - 풀너비 */
+.showcase-item-2:nth-child(2) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 200px; /* 높이 조정 */
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    margin-top: 0.1rem; /* 첫 번째 줄과의 여백 더 줄임 */
+}
+
+.showcase-item-2:nth-child(3) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 250px; /* 높이 조정 */
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    margin-top: 0.1rem; /* 두 번째 아이템과의 여백 더 줄임 */
+}
+
+.showcase-item-2:nth-child(2) img,
+.showcase-item-2:nth-child(2) video,
+.showcase-item-2:nth-child(3) img,
+.showcase-item-2:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 웹과 동일 */
+    border-radius: 12px; /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.06); /* 웹과 동일 */
+    box-shadow: none; /* 그림자 제거 */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 웹과 동일 */
+}
+
+/* Content Showcase 3, 4 - 웹과 동일한 디자인, 크기만 조정 */
+.content-showcase-3,
+.content-showcase-4 {
+    padding: 2rem 20px 0 20px; /* 웹: 2rem 2rem 0 2rem → 모바일: 2rem 1rem 0 1rem */
+    background: rgb(234, 234, 234); /* 웹과 동일 */
+    position: relative;
+}
+
+.showcase-container-3,
+.showcase-container-4 {
+    max-width: 100%; /* 웹: 1400px → 모바일: 100% */
+    margin: 0 auto;
+    margin-top: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+    padding: 0 20px; /* 웹: 0 1rem → 모바일: 0 1rem */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column (위치 조정) */
+    align-items: flex-start; /* center → flex-start로 변경하여 왼쪽 정렬 */
+    justify-content: center;
+    gap: 0.1rem; /* 웹: 3rem → 모바일: 0.1rem (더 줄여서 그룹처럼 보이게) */
+    flex-wrap: nowrap;
+}
+
+/* CASE 3 - 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 */
+.showcase-container-3 .showcase-item-3:first-child {
+    display: none; /* 기존 첫 번째 아이템 숨김 */
+}
+
+/* 새로운 첫 번째 줄 컨테이너 - 하나의 하얀 박스 */
+.showcase-first-row-3 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(248, 249, 250, 0.3) 50%, rgba(241, 243, 244, 0.3) 100%); /* 투명도 0.3 */
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.2rem; /* 더 줄여서 그룹처럼 보이게 */
+    gap: 16px;
+}
+
+/* 라벨 섹션 (왼쪽 50%) */
+.showcase-label-section-3 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.case-label-3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+/* 이미지 섹션 (오른쪽 50%) */
+.showcase-image-section-3 {
+    flex: 1;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.showcase-image-section-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* CASE 4 - 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 */
+.showcase-container-4 .showcase-item-4:first-child {
+    display: none; /* 기존 첫 번째 아이템 숨김 */
+}
+
+/* 새로운 첫 번째 줄 컨테이너 - 하나의 하얀 박스 */
+.showcase-first-row-4 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(248, 249, 250, 0.3) 50%, rgba(241, 243, 244, 0.3) 100%); /* 투명도 0.3 */
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.2rem; /* 더 줄여서 그룹처럼 보이게 */
+    gap: 16px;
+}
+
+/* 라벨 섹션 (왼쪽 50%) */
+.showcase-label-section-4 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.case-label-4 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+
+/* 이미지 섹션 (오른쪽 50%) */
+.showcase-image-section-4 {
+    flex: 1;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.showcase-image-section-4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.showcase-item-3:first-child img,
+.showcase-item-4:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 웹과 동일 */
+    border-radius: 16px; /* 웹과 동일 */
+}
+
+/* CASE 3, 4 라벨 - 더 세련되고 모던하게 */
+.showcase-item-3:first-child::after {
+    content: "# CASE 3";
+    position: absolute;
+    bottom: -2rem; /* 웹: -2.5rem → 모바일: -2rem (더 큰 여백으로 겹침 방지) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 60px; /* 웹: 80px → 모바일: 60px */
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 0.7rem; /* 웹: 0.85rem → 모바일: 0.7rem */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%); /* 웹과 동일 */
+    padding: 0.3rem 0.8rem; /* 웹: 0.5rem 1rem → 모바일: 0.3rem 0.8rem */
+    border-radius: 16px; /* 웹과 동일 */
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px); /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.08); /* 웹과 동일 */
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03); /* 웹과 동일 */
+}
+
+.showcase-item-4:first-child::after {
+    content: "# CASE 4";
+    position: absolute;
+    bottom: -2rem; /* 웹: -2.5rem → 모바일: -2rem (더 큰 여백으로 겹침 방지) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 60px; /* 웹: 80px → 모바일: 60px */
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 0.7rem; /* 웹: 0.85rem → 모바일: 0.7rem */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%); /* 웹과 동일 */
+    padding: 0.3rem 0.8rem; /* 웹: 0.5rem 1rem → 모바일: 0.3rem 0.8rem */
+    border-radius: 16px; /* 웹과 동일 */
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px); /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.08); /* 웹과 동일 */
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03); /* 웹과 동일 */
+}
+
+/* 세 번째, 네 번째 쇼케이스 두 번째, 세 번째 아이템 - 풀너비 */
+.showcase-item-3:nth-child(2),
+.showcase-item-4:nth-child(2) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 200px; /* 높이 조정 */
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+    margin-top: 0.1rem; /* 첫 번째 줄과의 여백 더 줄임 */
+}
+
+.showcase-item-3:nth-child(3),
+.showcase-item-4:nth-child(3) {
+    flex: 0 0 auto;
+    width: 100%; /* 풀너비 */
+    height: 250px; /* 높이 조정 */
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+    margin-top: 0.1rem; /* 두 번째 아이템과의 여백 더 줄임 */
+}
+
+.showcase-item-3:nth-child(2) img,
+.showcase-item-3:nth-child(2) video,
+.showcase-item-3:nth-child(3) img,
+.showcase-item-3:nth-child(3) video,
+.showcase-item-4:nth-child(2) img,
+.showcase-item-4:nth-child(2) video,
+.showcase-item-4:nth-child(3) img,
+.showcase-item-4:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 웹과 동일 */
+    border-radius: 12px; /* 웹과 동일 */
+    border: 1px solid rgba(17, 17, 17, 0.06); /* 웹과 동일 */
+    box-shadow: none; /* 그림자 제거 */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 웹과 동일 */
+}
+
+.portfolio-divider-bottom {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #ddd 50%, transparent 100%); /* 웹과 동일 */
+    margin: 3rem 0 2rem 0; /* 웹: 4rem 0 3rem 0 → 모바일: 3rem 0 2rem 0 */
+}
+
+/* Landing Service Section - 웹과 동일한 디자인, 크기만 조정 */
+.landing-service-section {
+    padding: 4rem 0; /* 웹: 4rem 2rem → 모바일: 4rem 0 (좌우 여백 제거) */
+    background-color: rgb(234, 234, 234); /* 웹과 동일 */
+    position: relative;
+    min-height: 100vh; /* 웹과 동일 */
+}
+
+.landing-service-container {
+    max-width: 1400px; /* 웹과 동일 */
+    margin: 0 auto;
+    padding: 0 20px; /* 웹: 0 2rem → 모바일: 0 1rem (여백 최소화) */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column (위치 조정) */
+    gap: 4rem; /* 웹과 동일 */
+    align-items: flex-start; /* 웹과 동일 */
+    position: relative;
+}
+
+.landing-text-content {
+    flex: 1; /* 웹과 동일 */
+    width: 100%; /* 웹: 55% → 모바일: 100% */
+    padding-right: 0; /* 웹: 2rem → 모바일: 0 */
+    order: 1; /* 텍스트를 위에 배치 */
+}
+
+.service-intro {
+    margin-bottom: 5rem; /* 웹과 동일 */
+    position: relative;
+}
+
+.service-intro::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5rem; /* 웹과 동일 */
+    left: 0;
+    width: 60px; /* 웹과 동일 */
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.3) 100%); /* 웹과 동일 */
+}
+
+.intro-main {
+    font-family: 'Inter Tight', sans-serif; /* 웹과 동일 */
+    font-size: 1.8rem; /* 웹: 2.4rem → 모바일: 1.8rem */
+    font-weight: 300; /* 웹과 동일 */
+    color: rgb(17, 17, 17);
+    line-height: 1.1; /* 웹과 동일 */
+    margin-bottom: 0;
+    letter-spacing: -0.08em; /* 웹과 동일 */
+    max-width: 100%;
+    position: relative;
+    text-align: left; /* 웹과 동일 */
+    z-index: 1;
+}
+
+.service-feature {
+    margin-bottom: 3rem; /* 웹과 동일 */
+    text-align: left; /* 웹과 동일 */
+}
+
+.service-feature h4 {
+    font-family: 'Pretendard', sans-serif; /* 웹과 동일 */
+    font-size: 1.4rem; /* 웹: 1.8rem → 모바일: 1.4rem */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    margin-bottom: 1.5rem; /* 웹과 동일 */
+    line-height: 1.3;
+}
+
+.service-feature p {
+    font-family: 'Pretendard', sans-serif; /* 웹과 동일 */
+    font-size: 1rem; /* 웹: 1.2rem → 모바일: 1rem */
+    font-weight: 400;
+    color: #333333; /* #666666 → #333333 (더 진하게) */
+    line-height: 1.3;
+    margin: 0 0 1rem 0;
+}
+
+.ai-tech-video-container,
+.apt-video-container {
+    margin: 2rem 0; /* 웹과 동일 */
+    text-align: left; /* 웹과 동일 */
+}
+
+.ai-tech-video,
+.apt-video {
+    width: 100%;
+    max-width: 100%; /* 모바일: 전체 너비 */
+    height: auto;
+    border-radius: 12px; /* 웹과 동일 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* 웹과 동일 */
+}
+
+.landing-video-content {
+    width: 100%; /* 웹: 45% → 모바일: 100% */
+    position: relative; /* 웹: sticky → 모바일: relative */
+    top: auto; /* 웹: 100px → 모바일: auto */
+    height: fit-content;
+    order: 2; /* 영상을 아래에 배치 */
+}
+
+.pop-art-video-container {
+    width: 100%;
+    max-width: 300px; /* 400px → 300px로 크기 줄임 */
+    margin: 0 auto;
+}
+
+.pop-art-video {
+    width: 100%;
+    height: auto;
+    border-radius: 12px; /* 웹과 동일 */
+    box-shadow: none; /* 그림자 제거 */
+}
+
+/* 히어로 영상처럼 전체 너비로 분리된 비디오 섹션 */
+.portfolio-hero-video-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: #000000; /* 히어로 영상처럼 검은 배경 */
+}
+
+.portfolio-hero-video-section video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 0; /* 히어로 영상처럼 모서리 둥글게 하지 않음 */
+}
+
+/* Footer - 인덱스와 동일한 간소화된 스타일 */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 0.1rem 0 0.1rem 0;
+    margin-top: 0.05rem;
+}
+
+.footer-bottom {
+    margin-top: 0.2rem; /* 위쪽 마진 줄임 */
+    padding: 0.5rem 0; /* 상하 패딩 줄임 */
+    /* border-top 제거 */
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+}
