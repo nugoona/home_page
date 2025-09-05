@@ -1,0 +1,120 @@
+/* ===== NGN 홈페이지 공통 스타일 ===== */
+/* 네비게이션은 각 페이지 인라인에서 개별 처리 */
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #eaeaea;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+/* CSS 변수 */
+:root {
+    --primary-color: #000000;
+    --secondary-color: #eaeaea;
+    --accent-color: #007bff;
+    --text-color: #333333;
+}
+
+/* 네비게이션 스타일은 각 페이지별 인라인으로 처리 */
+
+/* 네비게이션 스타일은 각 페이지별 인라인으로 처리 */
+
+/* ===== 푸터 스타일 ===== */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.footer-section h5 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+/* ===== 페이지 전환 애니메이션 ===== */
+body {
+    transition: opacity 0.15s ease;
+    opacity: 1;
+}
+
+body.page-transition {
+    opacity: 0.95;
+}
+
+/* 링크 기본 스타일 */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* ===== 유틸리티 클래스 ===== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 반응형 기본 설정 */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-section {
+        min-width: auto;
+    }
+}

@@ -1,0 +1,840 @@
+/* ===== 모바일 전용 Technology 페이지 스타일 ===== */
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #eaeaea;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+/* ===== 모바일 네비게이션 ===== */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 999999;
+    height: 60px;
+}
+
+.nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    max-width: 100%;
+}
+
+.nav-brand a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+}
+
+.brand-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.nav-center,
+.nav-right {
+    display: none;
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1000000;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background: #000;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* 네비게이션 스타일은 common.css에서 통일 관리 */
+
+/* ===== Technology Advantages Section (웹 버전 기반) ===== */
+.technology-advantages-section {
+    padding: 2rem 0 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+    min-height: 200px;
+    margin-top: 60px;
+    background-color: #f8f8f8;
+}
+
+.technology-section-header {
+    margin-bottom: 0;
+    margin-top: 1rem;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.technology-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.technology-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ===== 영상 텍스트 영역 (웹 버전 기반) ===== */
+.technology-video-text-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 20px;
+}
+
+.technology-video-area {
+    flex: 1;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 20px;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+}
+
+.technology-video-area video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    border: 1px solid #ffffff;
+    overflow: visible;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.technology-text-area {
+    flex: 1;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+}
+
+.technology-text-line-1 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 0.3rem 0.8rem;
+    border-radius: 0;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.technology-text-line-2 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 0;
+    text-align: center;
+    letter-spacing: -0.06em;
+}
+
+/* ===== 그라데이션 구분선 (웹 버전 기반) ===== */
+.technology-section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.1) 20%, rgba(17, 17, 17, 0.3) 50%, rgba(17, 17, 17, 0.1) 80%, transparent 100%);
+    margin: 40px auto;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.technology-section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: lightMove 6s linear infinite;
+    z-index: -1;
+}
+
+@keyframes lightMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* ===== 검은색 배경 버튼 섹션 (웹 버전 기반) ===== */
+.technology-button-section {
+    background: #2a2a2a;
+    padding: 60px 0;
+    margin: 60px 0 0 0;
+    width: 100%;
+    position: relative;
+}
+
+.technology-button-section::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #000000;
+}
+
+.technology-button-section::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #000000;
+}
+
+.technology-button-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.technology-demo-button {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 14px 32px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        inset 0 1px 0 rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 240px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.technology-demo-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), transparent);
+    transition: left 0.3s ease;
+}
+
+.technology-demo-button:hover {
+    transform: translateY(-1px);
+    background: #1f1247;
+    color: #ffffff;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+        0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.technology-demo-button:hover::before {
+    left: 100%;
+    transition: left 0.1s ease;
+}
+
+.technology-demo-button:hover .button-arrow {
+    transform: translateX(4px);
+    color: #ffffff;
+}
+
+.button-text {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+}
+
+.button-arrow {
+    font-size: 1.6rem;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    color: #000000;
+}
+
+/* ===== 몰매출 성과 확인 텍스트 (웹 버전 기반) ===== */
+.technology-mall-performance-text {
+    font-size: 2.5rem;
+    font-weight: 720;
+    color: #1a1a1a;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    margin-left: 0;
+    text-align: center;
+    position: relative;
+    letter-spacing: -0.02em;
+    padding: 0 20px;
+}
+
+.technology-mall-performance-text::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, #1a1a1a 0%, rgba(26, 26, 26, 0.1) 100%);
+    border-radius: 0;
+}
+
+/* ===== 대시보드 기능 카드 섹션 (웹 버전 기반) ===== */
+.technology-dashboard-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    text-align: center;
+    margin: 60px auto 40px auto;
+    max-width: 100%;
+    padding: 0 20px;
+    letter-spacing: -0.02em;
+}
+
+.technology-dashboard-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.technology-description-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.technology-description-list li {
+    margin-bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+.technology-description-list li:first-child {
+    margin-bottom: 5px;
+}
+
+.technology-dashboard-item {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding: 30px;
+}
+
+.technology-dashboard-text-content {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    background: #2a2a2a;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 1);
+    height: auto;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.technology-dashboard-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.2;
+    margin: 0 0 5px 0;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-left: 0;
+    text-align: center;
+}
+
+.technology-dashboard-heading {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #eaeaea;
+    line-height: 1.2;
+    margin: 0 0 30px 0;
+    letter-spacing: -0.05em;
+    position: relative;
+    text-align: center;
+}
+
+.technology-dashboard-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #eaeaea;
+    border-radius: 2px;
+}
+
+.technology-dashboard-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #eaeaea;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.technology-dashboard-description strong {
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.technology-dashboard-image {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid;
+    border-image: linear-gradient(45deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4)) 1;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.technology-dashboard-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 16/9;
+}
+
+
+
+/* 터미널 디스플레이 스타일 */
+.terminal-display {
+    width: 100%;
+    height: 100%;
+    background: #1e1e1e;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    min-height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.technology-dashboard-image .terminal-display.full-width {
+    width: 100%;
+    height: 400px;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    margin: 0;
+    background: #f8f9fa !important;
+    position: relative;
+    left: 0;
+    border: 3px solid red !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.terminal-header {
+    background: #e9ecef;
+    padding: 12px 16px;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-dot.red {
+    background: #ff5f56;
+}
+
+.terminal-dot.yellow {
+    background: #ffbd2e;
+}
+
+.terminal-dot.green {
+    background: #27ca3f;
+}
+
+.terminal-title {
+    color: #000000;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    margin-left: 8px;
+}
+
+.terminal-menu {
+    margin-left: auto;
+    display: flex;
+    gap: 16px;
+}
+
+.menu-item {
+    color: #000000;
+    font-size: 0.75rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.menu-item:hover {
+    color: #333333;
+}
+
+.terminal-content {
+    flex: 1;
+    display: flex;
+    position: relative;
+    background: #ffffff;
+    min-height: 300px;
+    margin-left: 0;
+}
+
+.line-numbers {
+    background: #f1f3f4;
+    padding: 8px 4px;
+    border-right: 1px solid #dadce0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    min-width: 40px;
+}
+
+.line-numbers span {
+    color: #5f6368;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.4;
+}
+
+.code-content {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.code-line {
+    color: #1a1a1a;
+    font-size: 0.9rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.code-line.indent {
+    padding-left: 20px;
+}
+
+.code-line.indent-2 {
+    padding-left: 40px;
+}
+
+.keyword {
+    color: #1a73e8;
+}
+
+.variable {
+    color: #0f766e;
+}
+
+.property {
+    color: #1e40af;
+}
+
+.string {
+    color: #dc2626;
+}
+
+.scrollbar {
+    width: 12px;
+    background: #e8eaed;
+    border-left: 1px solid #dadce0;
+}
+
+.terminal-statusbar {
+    background: #007acc;
+    padding: 4px 12px;
+    padding-left: 8px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #333;
+}
+
+.status-item {
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+/* 맨 아래 어두운 배경 섹션 */
+.technology-dark-section-bottom {
+    background-color: #2a2a2a;
+    padding: 80px 0;
+    margin: 0;
+    position: relative;
+}
+
+.technology-dark-content-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 20px 40px 25px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.technology-dark-text-area {
+    text-align: left;
+    max-width: 100%;
+    position: relative;
+}
+
+.technology-dark-main-title-bottom {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #EAEAEA;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+    white-space: normal;
+}
+
+.technology-dark-main-title-bottom.second-line {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.technology-dark-main-title-bottom.third-line {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+/* 어두운 배경 섹션의 인라인 데모 버튼 */
+.technology-demo-button-dark-inline {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 8px 16px;
+    height: auto;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+        inset 0 1px 0 rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 4px;
+    vertical-align: middle;
+    text-decoration: none;
+    min-width: 80px;
+}
+
+.technology-demo-button-dark-inline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03), transparent);
+    transition: left 0.3s ease;
+}
+
+.technology-demo-button-dark-inline:hover {
+    transform: translateY(-1px);
+    background: #1f1247;
+    color: #ffffff;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+        0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.technology-demo-button-dark-inline:hover::before {
+    left: 100%;
+    transition: left 0.1s ease;
+}
+
+.technology-demo-button-dark-inline:hover .button-arrow {
+    transform: translateX(4px);
+    color: #ffffff;
+}
+
+.technology-demo-button-dark-inline .button-text {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+    color: inherit;
+}
+
+.technology-demo-button-dark-inline .button-arrow {
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    color: #000000;
+}
+
+/* ===== 푸터 스타일 ===== */
+/* common.css에서 처리하므로 제거 */
+
+/* ===== 반응형 조정 ===== */
+@media (max-width: 480px) {
+    .technology-section-header h2 {
+        font-size: 2.5rem;
+    }
+    
+    .technology-text-line-2 {
+        font-size: 2rem;
+    }
+    
+    .technology-dashboard-title {
+        font-size: 1.8rem;
+    }
+    
+    .technology-dark-main-title-bottom {
+        font-size: 2rem;
+    }
+
+    .technology-dark-main-title-bottom.second-line,
+    .technology-dark-main-title-bottom.third-line {
+        font-size: 1.5rem;
+    }
+}

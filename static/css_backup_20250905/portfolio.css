@@ -1,0 +1,1388 @@
+/* ===== PORTFOLIO PAGE STYLES ===== */
+/* portfolio.html 페이지 전용 스타일 - 기존 style.css에서 복사하여 클래스명 변경 */
+
+/* Navigation Override */
+.nav-center {
+    flex: 1;
+    display: flex;
+}
+
+/* .nav-links 스타일 제거 - portfolio.html 인라인에서 처리 */
+
+/* Portfolio Advantages Section */
+.portfolio-advantages-section {
+    padding: 2rem 4rem 4rem 4rem;
+    background-color: rgb(234, 234, 234);
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 400px;
+    margin-top: 0;
+}
+
+.portfolio-section-header {
+    text-align: center;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.portfolio-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 10.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.portfolio-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Portfolio Content Section */
+.portfolio-content-section {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(234, 234, 234);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    position: relative;
+    overflow: visible;
+    margin: 0;
+    background-image: url('../img/ui/background0816.webp') !important;
+    background-size: contain !important;
+    background-position: left 500% !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-clip: border-box !important;
+    background-origin: border-box !important;
+}
+
+.portfolio-text-gif-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+    gap: 4rem;
+}
+
+.portfolio-text-content {
+    width: 50% !important;
+    max-width: 800px;
+    padding-left: 0;
+    padding: 1rem 0;
+    margin-left: 0;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.portfolio-company-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.portfolio-main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.portfolio-subtitle-text {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgb(17, 17, 17);
+    margin-bottom: 1rem;
+    margin-left: 8rem;
+    opacity: 0.8;
+}
+
+.portfolio-text-line-1 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 7rem;
+    margin-bottom: -0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.portfolio-text-line-2 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    margin-left: 7rem;
+}
+
+.portfolio-keyword-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    box-sizing: border-box;
+    letter-spacing: -0.05em;
+}
+
+/* 포트폴리오 인라인 이미지 스타일 - 텍스트 박스 안에 */
+.portfolio-inline-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-left: 1rem;
+    vertical-align: middle;
+}
+
+.portfolio-right-video {
+    width: 70% !important;
+    max-width: 1050px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.portfolio-right-video video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-right-video video:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio-video-controls {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 10;
+}
+
+.portfolio-mute-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.portfolio-mute-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.portfolio-mute-icon,
+.portfolio-unmute-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Portfolio Section Divider */
+.portfolio-section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.1) 20%, rgba(17, 17, 17, 0.3) 50%, rgba(17, 17, 17, 0.1) 80%, transparent 100%);
+    margin: 20px auto;
+    max-width: 1920px;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: lightMove 6s linear infinite;
+    z-index: 1;
+}
+
+/* Content Showcase */
+.content-showcase {
+    padding: 2rem 2rem 0 2rem;
+    background-color: rgb(234, 234, 234);
+}
+
+.portfolio-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.15) 50%, transparent 100%);
+    margin: 0 0 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: lightMove 6s linear infinite;
+    z-index: 1;
+}
+
+@keyframes lightMove {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.showcase-text {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: left;
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+    padding-left: 3rem;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+/* 하단 가로선 */
+.showcase-text::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5rem;
+    left: 3rem;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.3) 100%);
+}
+
+.showcase-text h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.05em;
+    max-width: 100%;
+    position: relative;
+    text-align: left;
+    z-index: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    flex: 1;
+}
+
+.showcase-text h3::after {
+    content: '';
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.1) 100%);
+}
+
+.showcase-text h3 strong {
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+}
+
+
+
+/* 세로선 */
+.showcase-text-vertical-line {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.2) 0%, rgba(17, 17, 17, 0.1) 50%, transparent 100%);
+    z-index: 1;
+}
+
+/* 포트폴리오 하단 텍스트 스타일 */
+.showcase-text-bottom {
+    flex: 0 0 auto !important;
+    padding: 0 2rem !important;
+    text-align: left !important;
+    height: 120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    box-sizing: border-box !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 6rem !important;
+    position: relative !important;
+}
+
+.showcase-text-bottom h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* showcase-text-bottom 숫자 라벨 */
+.showcase-text-bottom::before {
+    content: '02';
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    z-index: 2;
+}
+
+/* showcase-text-bottom 세로선 */
+.showcase-text-bottom-vertical-line {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.2) 0%, rgba(17, 17, 17, 0.1) 50%, transparent 100%);
+    z-index: 1;
+}
+
+.showcase-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: nowrap;
+}
+
+/* 첫 번째 아이템 - 작은 사이즈 (160px × 160px) - 세련되고 모던하게 */
+.showcase-item:first-child {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 2px 8px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    z-index: 1;
+}
+
+/* 첫 번째 이미지 */
+.showcase-item:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+/* CASE 1 라벨 - 더 세련되고 모던하게 */
+.showcase-item:first-child::after {
+    content: "# CASE 1";
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 80px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* 두 번째 아이템 - 중간 사이즈 (320px × 213px - 3:2 비율, 더 크게) */
+.showcase-item:nth-child(2) {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 213px;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* 케이스 1 두 번째 이미지 - 애플 스타일 그림자 */
+.showcase-container .showcase-item:nth-child(2) img,
+.showcase-container .showcase-item:nth-child(2) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 세 번째 아이템 - 큰 사이즈 (400px × 267px - 3:2 비율, 더 크게) */
+.showcase-item:nth-child(3) {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 267px;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+}
+
+/* 케이스 1 세 번째 이미지 - 애플 스타일 그림자 */
+.showcase-container .showcase-item:nth-child(3) img,
+.showcase-container .showcase-item:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 케이스 1 세 번째 이미지 호버 시 50% 더 크게 - 원래 위치에서 확대 */
+.showcase-container .showcase-item:nth-child(3):hover img,
+.showcase-container .showcase-item:nth-child(3):hover video {
+    transform: scale(1.5);
+    z-index: 1000;
+    box-shadow: 
+        0 24px 64px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.showcase-item {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.showcase-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.showcase-video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content Showcase 2 */
+.content-showcase-2 {
+    padding: 2rem 2rem 0 2rem;
+    background: rgb(234, 234, 234);
+    position: relative;
+}
+
+.showcase-container-2 {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: nowrap;
+}
+
+/* 두 번째 쇼케이스 첫 번째 아이템 - 세련되고 모던하게 */
+.showcase-item-2:first-child {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 2px 8px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    z-index: 1;
+}
+
+.showcase-item-2:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+/* CASE 2 라벨 - 더 세련되고 모던하게 */
+.showcase-item-2:first-child::after {
+    content: "# CASE 2";
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 80px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* 두 번째 쇼케이스 두 번째, 세 번째 아이템 */
+.showcase-item-2:nth-child(2) {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 213px;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+.showcase-item-2:nth-child(3) {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 267px;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+}
+
+.showcase-item-2:nth-child(2) img,
+.showcase-item-2:nth-child(2) video,
+.showcase-item-2:nth-child(3) img,
+.showcase-item-2:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase-item-2:nth-child(3) img,
+.showcase-item-2:nth-child(3) video {
+    border-radius: 12px;
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 케이스 2 세 번째 이미지 호버 시 50% 더 크게 - 원래 위치에서 확대 */
+.showcase-item-2:nth-child(3):hover img,
+.showcase-item-2:nth-child(3):hover video {
+    transform: scale(1.5);
+    z-index: 1000;
+    box-shadow: 
+        0 24px 64px rgba(0, 0, 0, 0.3),
+        0 12px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.showcase-item-2 {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.showcase-item-2:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-image-2 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.showcase-video-2 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content Showcase 3 */
+.content-showcase-3 {
+    padding: 2rem 2rem 0 2rem;
+    background: rgb(234, 234, 234);
+    position: relative;
+}
+
+.showcase-container-3 {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: nowrap;
+}
+
+/* 세 번째 쇼케이스 첫 번째 아이템 - 세련되고 모던하게 */
+.showcase-item-3:first-child {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 2px 8px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    z-index: 1;
+}
+
+.showcase-item-3:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+/* CASE 3 라벨 - 더 세련되고 모던하게 */
+.showcase-item-3:first-child::after {
+    content: "# CASE 3";
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 80px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* 세 번째 쇼케이스 두 번째, 세 번째 아이템 */
+.showcase-item-3:nth-child(2) {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 213px;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+.showcase-item-3:nth-child(3) {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 267px;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+}
+
+.showcase-item-3:nth-child(2) img,
+.showcase-item-3:nth-child(2) video,
+.showcase-item-3:nth-child(3) img,
+.showcase-item-3:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase-item-3:nth-child(3) img,
+.showcase-item-3:nth-child(3) video {
+    border-radius: 12px;
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 케이스 3 세 번째 이미지 호버 시 50% 더 크게 - 원래 위치에서 확대 */
+.showcase-item-3:nth-child(3):hover img,
+.showcase-item-3:nth-child(3):hover video {
+    transform: scale(1.5);
+    z-index: 1000;
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.showcase-item-3 {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.showcase-item-3:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-image-3 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.showcase-video-3 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content Showcase 4 */
+.content-showcase-4 {
+    padding: 2rem 2rem 0 2rem;
+    background: rgb(234, 234, 234);
+    position: relative;
+}
+
+.showcase-container-4 {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: nowrap;
+}
+
+/* 네 번째 쇼케이스 첫 번째 아이템 - 세련되고 모던하게 */
+.showcase-item-4:first-child {
+    flex: 0 0 auto;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #f1f3f4 100%);
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 2px 8px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: visible;
+    z-index: 1;
+}
+
+.showcase-item-4:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+/* CASE 4 라벨 - 더 세련되고 모던하게 */
+.showcase-item-4:first-child::after {
+    content: "# CASE 4";
+    position: absolute;
+    bottom: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 80px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.9);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(17, 17, 17, 0.08);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* 네 번째 쇼케이스 두 번째, 세 번째 아이템 */
+.showcase-item-4:nth-child(2) {
+    flex: 0 0 auto;
+    width: 320px;
+    height: 213px;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+.showcase-item-4:nth-child(3) {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 267px;
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+}
+
+.showcase-item-4:nth-child(2) img,
+.showcase-item-4:nth-child(2) video,
+.showcase-item-4:nth-child(3) img,
+.showcase-item-4:nth-child(3) video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid rgba(17, 17, 17, 0.06);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase-item-4:nth-child(3) img,
+.showcase-item-4:nth-child(3) video {
+    border-radius: 12px;
+    box-shadow: 
+        0 16px 48px rgba(0, 0, 0, 0.25),
+        0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 케이스 4 세 번째 이미지 호버 시 50% 더 크게 - 원래 위치에서 확대 */
+.showcase-item-4:nth-child(3):hover img,
+.showcase-item-4:nth-child(3):hover video {
+    transform: scale(1.5);
+    z-index: 1000;
+    box-shadow: 
+        0 12px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.showcase-item-4 {
+    flex: 1;
+    max-width: 400px;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.showcase-item-4:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.showcase-image-4 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.showcase-video-4 {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.portfolio-divider-bottom {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.15) 50%, transparent 100%);
+    margin: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-divider-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: lightMove 6s linear infinite;
+    z-index: 1;
+}
+
+/* Landing Service Section */
+.landing-service-section {
+    padding: 4rem 2rem;
+    background-color: rgb(234, 234, 234);
+    position: relative;
+    min-height: 100vh;
+}
+
+.landing-service-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+    position: relative;
+}
+
+.landing-text-content {
+    flex: 1;
+    width: 55%;
+    padding-right: 2rem;
+}
+
+.landing-video-content {
+    width: 45%;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.service-intro {
+    margin-bottom: 5rem;
+    position: relative;
+}
+
+.service-intro::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5rem;
+    left: 0;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.3) 100%);
+}
+
+.intro-main {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin-bottom: 0;
+    letter-spacing: -0.08em;
+    max-width: 100%;
+    position: relative;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.intro-main::before {
+    content: '';
+    position: absolute;
+    top: -2rem;
+    left: -3rem;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(17, 17, 17, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.intro-main::after {
+    content: '';
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.1) 100%);
+}
+
+.intro-main strong {
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+}
+
+.service-feature {
+    margin-bottom: 4rem;
+    position: relative;
+    padding-left: 3rem;
+}
+
+/* 세로선 */
+.service-feature::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, rgb(17, 17, 17) 0%, rgba(17, 17, 17, 0.2) 100%);
+}
+
+/* 숫자 라벨들 */
+.service-feature:nth-child(2)::after {
+    content: '01';
+    position: absolute;
+    top: -0.5rem;
+    left: -2rem;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.service-feature:nth-child(3)::after {
+    content: '02';
+    position: absolute;
+    top: -0.5rem;
+    left: -2rem;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.service-feature:nth-child(4)::after {
+    content: '03';
+    position: absolute;
+    top: -0.5rem;
+    left: -2rem;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.service-feature:nth-child(5)::after {
+    content: '04';
+    position: absolute;
+    top: -0.5rem;
+    left: -2rem;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.3);
+    letter-spacing: 0.1em;
+}
+
+.service-feature h4 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    margin-bottom: 1.8rem;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+/* 짧은 밑줄 */
+.service-feature h4::after {
+    content: '';
+    position: absolute;
+    bottom: -0.8rem;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background: rgba(17, 17, 17, 0.2);
+}
+
+.service-feature p {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin-bottom: 0;
+    letter-spacing: -0.005em;
+    max-width: 95%;
+}
+
+.apt-video-container {
+    margin: 30px 0;
+    text-align: right;
+}
+
+.apt-video {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.ai-tech-video-container {
+    margin: 30px 0;
+}
+
+.ai-tech-video {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.landing-video-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pop-art-video-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.pop-art-video {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+/* Hover Effects - 이미지에만 적용 */
+.showcase-container:hover .showcase-item:nth-child(2) img::before,
+.showcase-container:hover .showcase-item:nth-child(3) img::before,
+.showcase-container-2:hover .showcase-item-2:nth-child(2) img::before,
+.showcase-container-2:hover .showcase-item-2:nth-child(3) img::before,
+.showcase-container-3:hover .showcase-item-3:nth-child(2) img::before,
+.showcase-container-3:hover .showcase-item-3:nth-child(3) img::before,
+.showcase-container-4:hover .showcase-item-4:nth-child(2) img::before,
+.showcase-container-4:hover .showcase-item-4:nth-child(3) img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 16px;
+    z-index: 1;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .portfolio-advantages-section {
+        padding: 4rem 2rem 2rem 2rem;
+    }
+    
+    .portfolio-section-header h2 {
+        font-size: 6rem;
+    }
+    
+    .portfolio-section-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .portfolio-text-gif-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+    
+    .portfolio-text-content {
+        width: 100%;
+        max-width: none;
+        padding-left: 1rem;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .portfolio-right-video {
+        width: 100%;
+        max-width: none;
+        padding: 1rem;
+    }
+    
+    .portfolio-text-line-1,
+    .portfolio-text-line-2 {
+        font-size: 2.8rem;
+        white-space: normal;
+        margin-left: 0;
+    }
+    
+    .portfolio-subtitle-text {
+        margin-left: 0;
+    }
+    
+    .showcase-container,
+    .showcase-container-2,
+    .showcase-container-3,
+    .showcase-container-4 {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    
+    .showcase-item,
+    .showcase-item-2,
+    .showcase-item-3,
+    .showcase-item-4 {
+        max-width: 100%;
+    }
+    
+    .landing-service-container {
+        flex-direction: column;
+        gap: 60px;
+        padding: 0 20px;
+    }
+    
+    .portfolio-section-header,
+    .showcase-text {
+        padding: 0 20px;
+    }
+}

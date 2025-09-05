@@ -1,0 +1,483 @@
+/* ===== 모바일 전용 Services 페이지 스타일 ===== */
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #eaeaea;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+}
+
+/* ===== 모바일 네비게이션 ===== */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobile-brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* 햄버거 메뉴 */
+.mobile-hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 24px;
+    height: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-hamburger-menu span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* 모바일 메뉴 오버레이 */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.mobile-nav-link {
+    font-family: 'Pretendard', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+    padding: 10px 0;
+}
+
+.mobile-nav-link:hover {
+    color: #ccc;
+    transform: scale(1.05);
+}
+
+.mobile-pricing-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #333333 100%);
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 0px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+.mobile-pricing-btn:hover {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+/* ===== 모바일 히어로 섹션 ===== */
+.mobile-services-hero {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    text-align: center;
+}
+
+.mobile-services-hero-content {
+    padding: 0 20px;
+}
+
+.mobile-services-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.mobile-services-subtitle {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: -0.01em;
+}
+
+/* ===== 모바일 서비스 소개 섹션 ===== */
+.mobile-services-intro-section {
+    width: 100%;
+    background-color: rgb(234, 234, 234);
+    padding: 3rem 0;
+}
+
+.mobile-services-intro-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mobile-services-intro-content {
+    text-align: center;
+}
+
+.mobile-services-intro-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.mobile-services-intro-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== 모바일 서비스 카드 섹션 ===== */
+.mobile-services-cards-section {
+    width: 100%;
+    background-color: #fff;
+    padding: 3rem 0;
+}
+
+.mobile-services-cards-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mobile-service-card {
+    background: #f8f8f8;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mobile-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-service-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mobile-service-card-icon {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-service-card-icon img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.mobile-service-card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.mobile-service-card-content {
+    text-align: left;
+}
+
+.mobile-service-card-description {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.mobile-service-card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-service-card-features li {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.mobile-service-card-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* ===== 모바일 Contact 섹션 ===== */
+.mobile-contact-title {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgb(17, 17, 17);
+    text-align: center;
+    margin: 2rem auto;
+    padding: 0 20px;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    -webkit-text-stroke: 0.5px rgb(17, 17, 17);
+}
+
+.mobile-contact-section {
+    background-color: #2a2a2a;
+    padding: 2rem 0;
+    margin: 1rem 0 0 0;
+}
+
+.mobile-contact-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 2rem;
+    padding: 0 20px;
+}
+
+.mobile-contact-left,
+.mobile-contact-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1rem;
+}
+
+.mobile-contact-title-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mobile-contact-title-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.mobile-contact-description {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.mobile-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.mobile-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-contact-item-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-contact-item-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.mobile-contact-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ffffff;
+    color: #2a2a2a;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.mobile-contact-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* ===== 반응형 조정 ===== */
+@media (max-width: 480px) {
+    .mobile-services-title {
+        font-size: 2rem;
+    }
+    
+    .mobile-services-subtitle {
+        font-size: 1rem;
+    }
+    
+    .mobile-services-intro-title {
+        font-size: 1.5rem;
+    }
+    
+    .mobile-service-card-title {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-contact-title {
+        font-size: 2rem;
+    }
+    
+    .mobile-contact-title-text {
+        font-size: 1.3rem;
+    }
+}

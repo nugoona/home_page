@@ -1,0 +1,3 @@
+[33ma952ecf[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Fix mobile pages: hamburger X button, keyword box styling, line height
+[33m696dbbd[m Update mobile pages: About, Proposal, and Survey pages with web version design matching
+[33m266a701[m Fix asset() function: completely remove version parameter for GCS
