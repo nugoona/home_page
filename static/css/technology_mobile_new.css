@@ -1,0 +1,997 @@
+/* ===== SERVICES MOBILE PAGE STYLES ===== */
+/* services_mobile.html 페이지 전용 스타일 - 웹과 동일한 구성요소, 모바일 최적화 */
+
+/* Navigation */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(234, 234, 234);
+    border-bottom: 1px solid rgba(34, 34, 34, 0.05);
+    z-index: 999999;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-inner {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    /* order 제거 - 기본 순서 유지 */
+}
+
+.hamburger-menu {
+    /* order 제거 - 기본 순서 유지 */
+}
+
+.nav-center {
+    display: none !important; /* 모바일에서는 완전히 숨김 */
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.nav-right {
+    display: none; /* 모바일에서는 숨김 */
+}
+
+.nav-brand a {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    letter-spacing: -0.02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.hamburger-menu {
+    display: flex !important;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000000;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background: #000;
+    margin: 3px 0;
+    transition: 0.3s;
+    display: block;
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999998;
+}
+
+.mobile-overlay.active {
+    display: block;
+}
+
+.nav-links {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgb(234, 234, 234);
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links.active {
+    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.nav-links a {
+    font-family: 'Pretendard', sans-serif;
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    padding: 10px 0;
+    position: relative;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-links a.active {
+    opacity: 1;
+    font-weight: 700;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 0;
+    background-color: #000000;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Body */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: rgb(234, 234, 234);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+/* 모든 요소에 box-sizing 적용 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Services Advantages Section */
+.services-advantages-section {
+    padding: 2rem 1rem 1rem 1rem; /* 웹: 2rem 4rem 4rem 4rem → 모바일: 2rem 1rem 1rem 1rem */
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+    min-height: 300px; /* 웹: 400px → 모바일: 300px */
+    margin-top: 70px; /* 웹: 0 → 모바일: 70px */
+}
+
+.services-section-header {
+    margin-bottom: 0; /* 웹과 동일 */
+    margin-top: 1rem; /* 웹과 동일 */
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.services-section-header h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 4rem; /* 웹: 10.5rem → 모바일: 4rem */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(17, 17, 17);
+    line-height: 0.9;
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.services-section-header h3 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.5rem; /* 웹: 2.2rem → 모바일: 1.5rem */
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: rgb(17, 17, 17);
+    line-height: 1.4;
+    margin: 0.3rem 0 0 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Video Text Container - 웹과 동일한 구조, 모바일에서 위아래 배치 */
+.services-video-text-container {
+    max-width: 100%; /* 웹: 1600px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 1rem; /* 웹: 0 2rem → 모바일: 0 1rem */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    align-items: center; /* 웹: center → 모바일: center */
+    gap: 2rem; /* 웹: 5rem → 모바일: 2rem */
+    margin-top: 2rem; /* 웹: 17rem → 모바일: 2rem */
+    margin-bottom: 2rem; /* 웹: 80px → 모바일: 2rem */
+}
+
+.services-video-area {
+    flex: none; /* 웹: 2 → 모바일: none */
+    max-width: 100%; /* 웹: none → 모바일: 100% */
+    margin-left: 0; /* 웹: 0 → 모바일: 0 */
+    margin-top: 0; /* 웹: -21rem → 모바일: 0 */
+    z-index: 2;
+    position: relative;
+    order: 2; /* 영상을 아래에 배치 */
+    width: 100%;
+}
+
+.services-video-area video {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain; /* 웹과 동일 */
+    border-radius: 0; /* 웹과 동일 */
+    border: 1px solid #ffffff; /* 웹과 동일 */
+    overflow: visible; /* 웹과 동일 */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* 웹과 동일 */
+}
+
+.services-text-area {
+    flex: none; /* 웹: 1.5 → 모바일: none */
+    padding-left: 0; /* 웹: 0.5rem → 모바일: 0 */
+    margin-left: 0; /* 웹: 0 → 모바일: 0 */
+    margin-top: 0; /* 웹: -21rem → 모바일: 0 */
+    z-index: 2;
+    position: relative;
+    order: 1; /* 텍스트를 위에 배치 */
+    width: 100%;
+    text-align: center; /* 모바일에서는 중앙 정렬 */
+}
+
+.services-text-line-1 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 2rem; /* 2.5rem → 2rem으로 더 줄임 */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0 0 0.5rem 0; /* 웹: 0 0 0.5rem 0 → 모바일: 0 0 0.5rem 0 */
+    letter-spacing: -0.02em;
+    text-align: center; /* 웹: left → 모바일: center */
+    background: rgba(255, 255, 255, 0.45); /* 웹과 동일 */
+    padding: 0.3rem 0.8rem; /* 웹과 동일 */
+    border-radius: 0; /* 웹과 동일 */
+    display: inline-block; /* 웹과 동일 */
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2); /* 웹과 동일 */
+}
+
+.services-text-line-2 {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 3.2rem; /* 4rem → 3.2rem으로 더 줄임 */
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    line-height: 1.1;
+    margin: 0; /* 웹과 동일 */
+    text-align: center; /* 웹: left → 모바일: center */
+    letter-spacing: -0.06em; /* 웹과 동일 */
+}
+
+/* Dark Section - 웹과 동일한 디자인 */
+.services-dark-section {
+    background-color: #2a2a2a; /* 웹과 동일 */
+    padding: 3rem 1rem; /* 웹: 120px 0 → 모바일: 3rem 1rem */
+    margin: 2rem 0; /* 웹: 80px 0 → 모바일: 2rem 0 */
+    min-height: auto; /* 웹: 150px → 모바일: auto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.services-dark-content-container {
+    max-width: 100%; /* 웹: 1600px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 1rem; /* 웹: 0 2rem → 모바일: 0 1rem */
+    padding-right: 0; /* 웹과 동일 */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    align-items: center; /* 웹: center → 모바일: center */
+    gap: 2rem; /* 웹: 2rem → 모바일: 2rem */
+    width: 100%;
+}
+
+.services-dark-text-area {
+    flex: none; /* 웹: 7 → 모바일: none */
+    color: #ffffff; /* 웹과 동일 */
+    padding-left: 0; /* 웹과 동일 */
+    margin-left: 0; /* 웹: -3rem → 모바일: 0 */
+    min-height: auto; /* 웹: 200px → 모바일: auto */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 1; /* 텍스트를 위에 배치 */
+    text-align: center; /* 웹: left → 모바일: center */
+}
+
+.services-dark-main-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2.2rem; /* 3rem → 2.2rem으로 줄임 */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3); /* 웹과 동일 */
+    margin: 0; /* 웹과 동일 */
+    line-height: 1.2; /* 웹과 동일 */
+    letter-spacing: -0.02em; /* 웹과 동일 */
+    transition: color 0.3s ease; /* 웹과 동일 */
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.services-dark-icon-area {
+    flex: none; /* 웹: 3 → 모바일: none */
+    display: flex;
+    flex-direction: column; /* 웹과 동일 */
+    gap: 1rem; /* 웹과 동일 */
+    margin-right: 0; /* 웹과 동일 */
+    margin-left: 0; /* 웹과 동일 */
+    margin-top: 0; /* 웹: -5rem → 모바일: 0 */
+    margin-bottom: 0; /* 웹과 동일 */
+    max-width: 100%; /* 웹: 400px → 모바일: 100% */
+    align-self: center; /* 웹: flex-end → 모바일: center */
+    transform: none; /* 웹: translateX(1rem) → 모바일: none */
+    position: relative;
+    top: 0; /* 웹: -5rem → 모바일: 0 */
+    order: 2; /* 아이콘을 아래에 배치 */
+}
+
+.services-certificate-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 웹과 동일 */
+    padding: 1rem; /* 웹과 동일 */
+    background: rgba(40, 40, 40, 0.9); /* 웹과 동일 */
+    border-radius: 8px; /* 웹과 동일 */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 웹과 동일 */
+    position: relative;
+    overflow: visible; /* 웹과 동일 */
+    width: 100%;
+    max-width: 300px;
+}
+
+.services-certificate-item .services-certificate-icon {
+    width: 48px; /* 웹과 동일 */
+    height: 48px; /* 웹과 동일 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25); /* 웹과 동일 */
+    border-radius: 50%; /* 웹과 동일 */
+    flex-shrink: 0;
+    color: #ffffff; /* 웹과 동일 */
+    filter: 
+        drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.4))
+        drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2)); /* 웹과 동일 */
+}
+
+.services-certificate-icon svg {
+    width: 24px; /* 웹과 동일 */
+    height: 24px; /* 웹과 동일 */
+    filter: 
+        drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.5))
+        drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3)); /* 웹과 동일 */
+}
+
+.services-certificate-content {
+    flex: 1; /* 웹과 동일 */
+}
+
+.services-certificate-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 1rem; /* 1.2rem → 1rem으로 더 줄임 */
+    font-weight: 600;
+    color: #ffffff; /* 웹과 동일 */
+    margin: 0 0 0.4rem 0; /* 웹과 동일 */
+    text-shadow: 
+        1px 1px 0px rgba(0, 0, 0, 0.6),
+        2px 2px 0px rgba(0, 0, 0, 0.4); /* 웹과 동일 */
+}
+
+.services-certificate-subtitle {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.9rem; /* 1.1rem → 0.9rem으로 줄임 */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7); /* 웹과 동일 */
+    margin: 0 0 0.2rem 0; /* 웹과 동일 */
+    text-shadow: 
+        1px 1px 0px rgba(0, 0, 0, 0.6),
+        2px 2px 0px rgba(0, 0, 0, 0.4); /* 웹과 동일 */
+}
+
+.services-certificate-date {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.8rem; /* 1rem → 0.8rem으로 줄임 */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9); /* 웹과 동일 */
+    margin: 0; /* 웹과 동일 */
+    text-shadow: 
+        1px 1px 0px rgba(0, 0, 0, 0.5),
+        2px 2px 0px rgba(0, 0, 0, 0.3); /* 웹과 동일 */
+}
+
+/* 움직이는 하얀색 원 애니메이션 - 웹과 동일 */
+.moving-circle {
+    position: absolute;
+    width: 10px; /* 웹과 동일 */
+    height: 10px; /* 웹과 동일 */
+    background: #cccccc; /* 웹과 동일 */
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.moving-circle.clockwise {
+    animation: moveClockwise 8s linear infinite; /* 웹과 동일 */
+}
+
+.moving-circle.counterclockwise {
+    animation: moveCounterclockwise 8s linear infinite; /* 웹과 동일 */
+}
+
+@keyframes moveClockwise {
+    0% {
+        top: -5px;
+        left: -5px;
+    }
+    35% {
+        top: -5px;
+        left: calc(100% - 5px);
+    }
+    50% {
+        top: calc(100% - 5px);
+        left: calc(100% - 5px);
+    }
+    85% {
+        top: calc(100% - 5px);
+        left: -5px;
+    }
+    100% {
+        top: -5px;
+        left: -5px;
+    }
+}
+
+@keyframes moveCounterclockwise {
+    0% {
+        top: -5px;
+        left: calc(100% - 5px);
+    }
+    35% {
+        top: -5px;
+        left: -5px;
+    }
+    50% {
+        top: calc(100% - 5px);
+        left: -5px;
+    }
+    85% {
+        top: calc(100% - 5px);
+        left: calc(100% - 5px);
+    }
+    100% {
+        top: -5px;
+        left: calc(100% - 5px);
+    }
+}
+
+/* Meta Catalog Text - 웹과 동일한 디자인 */
+.services-meta-catalog-text {
+    font-size: 2rem; /* 2.5rem → 2rem으로 줄임 */
+    font-weight: 720; /* 웹과 동일 */
+    color: #1a1a1a; /* 웹과 동일 */
+    margin-top: 2rem; /* 웹: 200px → 모바일: 2rem */
+    margin-bottom: 1.5rem; /* 웹: 80px → 모바일: 1.5rem */
+    margin-left: 0; /* 웹: 40px → 모바일: 0 */
+    text-align: center; /* 웹: left → 모바일: center */
+    position: relative;
+    letter-spacing: -0.02em; /* 웹과 동일 */
+    padding: 1.5rem 1rem; /* 상하 패딩 추가 */
+}
+
+.services-meta-catalog-text::before,
+.services-meta-catalog-text::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background-color: #666; /* 구분선 색상 */
+}
+
+.services-meta-catalog-text::before {
+    top: 0; /* 상단 구분선 */
+}
+
+.services-meta-catalog-text::after {
+    bottom: 0; /* 하단 구분선 */
+}
+
+/* 메타 카탈로그 영상 */
+.services-meta-catalog-video {
+    width: 100%;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.services-meta-catalog-video video {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Landing Service Section - 웹과 동일한 구조 */
+.services-landing-service-section {
+    margin-top: 1.5rem; /* 웹: 60px → 모바일: 1.5rem */
+    padding: 0 1rem; /* 웹: 0 2rem → 모바일: 0 1rem */
+}
+
+.services-landing-service-container {
+    max-width: 100%; /* 웹: 1600px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 1rem; /* 01, 02, 03번과 동일한 패딩으로 복원 */
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    gap: 2rem; /* 웹: 8rem → 모바일: 2rem */
+    align-items: flex-start;
+}
+
+.services-landing-text-content {
+    flex: none; /* 웹: 4 → 모바일: none */
+    padding-right: 0; /* 웹: 2rem → 모바일: 0 */
+    margin-left: 0; /* 웹: -2rem → 모바일: 0 */
+    order: 1; /* 텍스트를 위에 배치 */
+    width: 100%;
+}
+
+.services-landing-video-content {
+    flex: none; /* 웹: 6 → 모바일: none */
+    position: relative;
+    margin-right: 0; /* 웹: -4rem → 모바일: 0 */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* 웹: 20px → 모바일: 1rem */
+    order: 2; /* 이미지를 아래에 배치 */
+    width: 100%;
+    align-items: center;
+}
+
+.services-cata2-image {
+    width: 100%; /* 웹: 128% → 모바일: 100% */
+    height: auto;
+    border-radius: 12px; /* 웹과 동일 */
+    max-height: 300px; /* 웹: 480px → 모바일: 300px */
+    margin-left: 0; /* 웹: 8rem → 모바일: 0 */
+    object-fit: contain; /* 웹과 동일 */
+    transform-origin: center; /* 웹: left center → 모바일: center */
+}
+
+.services-landing-video {
+    width: 100%; /* 웹: 90% → 모바일: 100% */
+    height: auto;
+    border-radius: 16px; /* 웹과 동일 */
+    max-height: 400px; /* 웹: 1000px → 모바일: 400px */
+    margin-left: 0; /* 웹: 7rem → 모바일: 0 */
+}
+
+/* Description List - 웹과 동일한 디자인 */
+.services-description-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-description-list li {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.2rem; /* 웹: 1.8rem → 모바일: 1.2rem */
+    font-weight: 400;
+    color: rgb(17, 17, 17); /* 웹과 동일 */
+    line-height: 1.0; /* 웹과 동일 */
+    margin-bottom: 2rem; /* 웹: 3rem → 모바일: 2rem */
+    letter-spacing: -0.02em; /* 웹과 동일 */
+    position: relative;
+    padding-left: 1.0rem; /* 텍스트를 더 왼쪽으로 이동 */
+    background: transparent; /* 하얀 배경 절대 금지 */
+}
+
+/* 첫 줄 텍스트 스타일 - 웹과 동일 */
+.services-description-list li strong {
+    font-size: 1.2rem; /* 웹: 1.8rem → 모바일: 1.2rem */
+    font-weight: 700;
+    color: rgb(17, 17, 17); /* 웹과 동일 */
+}
+
+.services-description-list li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px; /* 얇은 그라데이션 바 */
+    height: 100%;
+    background: #333333; /* 단색으로 변경 */
+    border-radius: 0; /* 라운딩 제거 */
+}
+
+.services-description-list li:after {
+    display: none; /* 가로선 제거 */
+}
+
+.services-number {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.9rem; /* 웹과 동일 */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.6); /* 웹과 동일 */
+    position: absolute;
+    top: -0.5rem; /* 웹과 동일 */
+    left: -1.3rem; /* 텍스트 이동에 맞춰 조정 */
+    letter-spacing: 0.1em; /* 웹과 동일 */
+}
+
+.services-subtext {
+    font-family: 'Inter Tight', sans-serif !important;
+    font-size: 0.9rem !important; /* 웹: 1.1rem → 모바일: 0.9rem */
+    font-weight: 400 !important;
+    color: rgba(17, 17, 17, 0.8) !important; /* 웹과 동일 */
+    line-height: 1.0 !important; /* 웹과 동일 */
+    display: inline-block !important; /* 웹과 동일 */
+    margin-top: 0 !important; /* 웹과 동일 */
+    position: relative !important; /* 웹과 동일 */
+    z-index: 1 !important; /* 웹과 동일 */
+}
+
+/* Divider - 웹과 동일한 디자인 */
+.services-divider {
+    width: 80%; /* 웹과 동일 */
+    height: 1px; /* 웹과 동일 */
+    background: linear-gradient(90deg, transparent 0%, rgba(17, 17, 17, 0.15) 50%, transparent 100%); /* 웹과 동일 */
+    margin: 1.5rem auto; /* 웹: 3rem auto → 모바일: 1.5rem auto */
+}
+
+/* Additional Features - 웹과 동일한 구조 */
+.services-additional-features {
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    gap: 2rem; /* 웹: 6rem → 모바일: 2rem */
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-left: 0; /* 웹: 5.5rem → 모바일: 0 */
+    padding-left: 0; /* 추가 패딩 제거 */
+}
+
+.services-left-image {
+    flex: none; /* 웹: 0 0 auto → 모바일: none */
+    margin-left: 0; /* 웹과 동일 */
+    order: 2; /* 이미지를 아래에 배치 */
+    width: 100%;
+    margin-top: 1rem; /* 텍스트와 영상 사이 간격 추가 */
+}
+
+.services-left-image video {
+    width: 100%;
+    max-width: 100%; /* 웹: 800px → 모바일: 100% */
+    border-radius: 8px; /* 웹과 동일 */
+}
+
+.services-right-items {
+    flex: none; /* 웹: 0 0 800px → 모바일: none */
+    margin-left: 0; /* 웹과 동일 */
+    white-space: normal; /* 웹: nowrap → 모바일: normal */
+    overflow: visible; /* 웹과 동일 */
+    order: 1; /* 텍스트를 위에 배치 */
+    width: 100%;
+    padding-left: 1rem; /* 01, 02, 03번과 동일한 패딩으로 오른쪽 이동 */
+}
+
+/* 04, 05번 항목도 01, 02, 03번과 동일한 스타일 적용 */
+.services-right-items .services-description-list li {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 1.2rem; /* 웹: 1.8rem → 모바일: 1.2rem */
+    font-weight: 400;
+    color: rgb(17, 17, 17); /* 웹과 동일 */
+    line-height: 1.0; /* 웹과 동일 */
+    margin-bottom: 2rem; /* 웹: 3rem → 모바일: 2rem */
+    letter-spacing: -0.02em; /* 웹과 동일 */
+    position: relative;
+    padding-left: 1.0rem; /* 텍스트를 더 왼쪽으로 이동 */
+    background: transparent; /* 하얀 배경 절대 금지 */
+}
+
+.services-right-items .services-description-list li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px; /* 얇은 그라데이션 바 */
+    height: 100%;
+    background: #333333; /* 단색으로 변경 */
+    border-radius: 0; /* 라운딩 제거 */
+}
+
+.services-right-items .services-description-list li:after {
+    display: none; /* 가로선 제거 */
+}
+
+.services-right-items .services-number {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.9rem; /* 웹과 동일 */
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.6); /* 웹과 동일 */
+    position: absolute;
+    top: -0.5rem; /* 웹과 동일 */
+    left: -1.3rem; /* 텍스트 이동에 맞춰 조정 */
+    letter-spacing: 0.1em; /* 웹과 동일 */
+}
+
+.services-category-image {
+    margin-top: 1rem; /* 웹: 2rem → 모바일: 1rem */
+    text-align: center; /* 웹과 동일 */
+}
+
+/* cata2 이미지 모바일에서 숨김 */
+.services-cata2-image {
+    display: none;
+}
+
+.services-category-image img {
+    width: 100%;
+    max-width: 100%; /* 웹: 800px → 모바일: 100% */
+    border: 2px solid white; /* 웹과 동일 */
+    border-radius: 8px; /* 웹과 동일 */
+}
+
+/* Google Ads Text - 웹과 동일한 디자인 */
+.services-google-ads-text {
+    font-size: 2rem; /* 메타 카탈로그와 동일한 크기 */
+    font-weight: 720; /* 웹과 동일 */
+    color: #1a1a1a; /* 웹과 동일 */
+    margin-top: 2rem; /* 웹: 200px → 모바일: 2rem */
+    margin-bottom: 1.5rem; /* 웹: 80px → 모바일: 1.5rem */
+    margin-left: 0; /* 웹: 40px → 모바일: 0 */
+    text-align: center; /* 웹: left → 모바일: center */
+    position: relative;
+    letter-spacing: -0.02em; /* 웹과 동일 */
+    padding: 1.5rem 1rem; /* 메타 카탈로그와 동일한 패딩 */
+}
+
+.services-google-ads-text::before,
+.services-google-ads-text::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background-color: #666; /* 메타 카탈로그와 동일한 구분선 */
+}
+
+.services-google-ads-text::before {
+    top: 0; /* 상단 구분선 */
+}
+
+.services-google-ads-text::after {
+    bottom: 0; /* 하단 구분선 */
+}
+
+/* Google Ads Content - 웹과 동일한 구조 */
+.services-google-ads-content {
+    max-width: 100%; /* 웹: 1200px → 모바일: 100% */
+    margin: 0 auto;
+    padding: 0 2rem; /* 숫자와 세로선을 오른쪽으로 이동 */
+    margin-top: 1.5rem; /* 웹: 3rem → 모바일: 1.5rem */
+}
+
+.services-google-ads-item {
+    display: flex;
+    flex-direction: column; /* 웹: row → 모바일: column */
+    align-items: flex-start;
+    gap: 1rem; /* 웹: 2rem → 모바일: 1rem */
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.services-google-ads-text-content {
+    flex: none; /* 웹: 1 → 모바일: none */
+    order: 1; /* 텍스트를 위에 배치 */
+    width: 100%;
+}
+
+.services-google-ads-subtext {
+    font-size: 0.8rem; /* 웹: 0.6em → 모바일: 0.8rem */
+    color: #333; /* 웹과 동일 */
+    line-height: 1.1; /* 웹과 동일 */
+    display: block; /* 웹과 동일 */
+    margin-top: 0.5rem; /* 웹과 동일 */
+}
+
+.services-google-ads-image {
+    flex: none; /* 웹: 1.5 → 모바일: none */
+    text-align: center; /* 웹과 동일 */
+    order: 2; /* 이미지를 아래에 배치 */
+    width: 100%;
+}
+
+.services-google-ads-image img {
+    width: 100%;
+    max-width: 100%; /* 웹: 600px → 모바일: 100% */
+    height: auto;
+    border-radius: 12px; /* 웹과 동일 */
+    border: 2px solid white; /* 웹과 동일 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 웹과 동일 */
+}
+
+/* Video Separator Line - 웹과 동일한 디자인 */
+.video-separator-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #cccccc 20%, #666666 50%, #cccccc 80%, transparent 100%); /* 웹과 동일 */
+    margin: 2rem 0 0.5rem 0; /* 웹: 10rem 0 0.5rem 0 → 모바일: 2rem 0 0.5rem 0 */
+    padding: 0;
+    opacity: 1; /* 웹: 0 → 모바일: 1 */
+}
+
+/* Video Section - 웹과 동일한 디자인 */
+.services-video-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.services-full-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* JC Image Section - 웹과 동일한 디자인 */
+.services-jc-image-section {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.services-jc-image-section img {
+    width: 100%; /* 웹: 70% → 모바일: 100% */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Video Bottom Separator Line - 웹과 동일한 디자인 */
+.video-bottom-separator-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #ffffff 20%, #cccccc 50%, #ffffff 80%, transparent 100%); /* 웹과 동일 */
+    margin: 0;
+    padding: 0;
+}
+
+/* Video Wrapper - 웹과 동일한 구조 */
+.services-video-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.services-video-container {
+    position: relative;
+    width: 100%;
+}
+
+.services-video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.services-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.services-video-text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 1rem; /* 왼쪽 정렬을 위해 left로 변경 */
+    transform: translateY(-50%); /* Y축만 중앙 정렬 */
+    text-align: left; /* 왼쪽 정렬 */
+    z-index: 3;
+    width: calc(100% - 2rem); /* 좌우 패딩 고려 */
+    padding: 0 1rem;
+}
+
+.services-video-heading {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 2rem; /* 1.5rem → 2rem으로 더 크게 */
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.3rem 0; /* 0.5rem → 0.3rem으로 줄간격 더 촘촘하게 */
+    line-height: 1.1; /* 1.2 → 1.1로 줄간격 더 촘촘하게 */
+    letter-spacing: -0.05em; /* -0.02em → -0.05em으로 더 촘촘하게 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.services-video-heading.first-line {
+    font-size: 2.3rem; /* 1.8rem → 2.3rem으로 더 크게 */
+}
+
+.services-video-heading.second-line {
+    font-size: 2.1rem; /* 1.6rem → 2.1rem으로 더 크게 */
+}
+
+.services-video-heading.third-line {
+    font-size: 1.7rem; /* 1.9rem → 1.7rem으로 조정 */
+}
+
+/* Video Top Line - 웹과 동일한 디자인 */
+.video-top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #ffffff 20%, #ffffff 80%, transparent 100%); /* 웹과 동일 */
+    z-index: 10;
+}
+
+/* Footer - 웹과 동일한 구조 */
+.site-footer {
+    background: #000000;
+    color: white;
+    padding: 0.1rem 0 0.1rem 0;
+    margin-top: 0.05rem;
+}
+
+.footer-bottom {
+    margin-top: 0.2rem; /* 위쪽 마진 줄임 */
+    padding: 0.5rem 0; /* 상하 패딩 줄임 */
+    /* border-top 제거 */
+    text-align: center;
+    font-size: 0.7rem;
+    color: #888;
+}
