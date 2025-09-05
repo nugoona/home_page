@@ -1,0 +1,455 @@
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 SNS광고 - 메타 인스타그램 광고 전문{% endblock %}
+{% block description %}메타 인스타그램 자동 광고, 구글 GA4 연동 광고 서비스{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/services_mobile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
+            </div>
+            <div class="hamburger-menu" id="hamburger">
+                <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            </div>
+            <div class="nav-links" style="background: #000000 !important; align-items: stretch !important; gap: 0 !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100vw !important; max-width: 100vw !important; flex-direction: column !important; justify-content: center !important; z-index: 9999 !important; display: none !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;">
+                <a href="/" class="nav-link" data-page="home" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">홈</a>
+                <a href="/services" class="nav-link" data-page="services" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">SNS광고</a>
+                <a href="/technology" class="nav-link" data-page="technology" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">대시보드</a>
+                <a href="/portfolio" class="nav-link" data-page="portfolio" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">콘텐츠</a>
+                <a href="/about" class="nav-link" data-page="about" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">소개</a>
+                <a href="/proposal" class="nav-link" data-page="proposal" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">요금 및 서비스</a>
+            </div>
+            <div class="nav-right">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+            </div>
+            <div class="mobile-overlay" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 9998 !important; display: none !important;"></div>
+        </div>
+    </nav>
+
+    <section class="services-advantages-section">
+        <div class="services-section-header">
+            <h2>SNS ADS</h2>
+            <h3>SNS 광고</h3>
+        </div>
+    </section>
+    
+    <!-- 영상 텍스트 영역 -->
+    <div class="services-video-text-container">
+        <!-- 왼쪽 영상 영역 -->
+        <div class="services-video-area">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/카타1.webp') }}" width="600" height="400">
+                <source src="{{ asset('videos/portfolio/카타1.webm') }}" type="video/webm">
+                <source src="{{ asset('videos/portfolio/카타1.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- 오른쪽 텍스트 영역 -->
+        <div class="services-text-area">
+            <div class="services-text-line-1">
+                SNS광고의 KEY
+            </div>
+            <div class="services-text-line-2">
+                자동화와 최적화
+            </div>
+        </div>
+    </div>
+
+    <!-- 어두운 배경 섹션 -->
+    <div class="services-dark-section">
+        <div class="services-dark-content-container">
+            <div class="services-dark-text-area">
+                <h3 class="services-dark-main-title">10년 AD-TECH 노하우.</h3>
+                <h3 class="services-dark-main-title">SNS 광고 운영은</h3>
+                <h3 class="services-dark-main-title">우리의 전문 분야입니다.</h3>
+            </div>
+            <div class="services-dark-icon-area">
+                <div class="services-certificate-item">
+                    <div class="services-certificate-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="services-certificate-content">
+                        <div class="services-certificate-title">페이스북 퍼포먼스 히어로</div>
+                        <div class="services-certificate-subtitle">AdIntelligence</div>
+                        <div class="services-certificate-date">2020. 2021</div>
+                    </div>
+                    <div class="moving-circle clockwise"></div>
+                </div>
+                <div class="services-certificate-item">
+                    <div class="services-certificate-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="services-certificate-content">
+                        <div class="services-certificate-title">페이스북 GROWTH MVP</div>
+                        <div class="services-certificate-subtitle">AdIntelligence</div>
+                        <div class="services-certificate-date">2021.04</div>
+                    </div>
+                    <div class="moving-circle counterclockwise"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="services-meta-catalog-text">메타 카탈로그 자동 광고</div>
+    
+    <!-- 메타 카탈로그 영상 -->
+    <div class="services-meta-catalog-video">
+        <video autoplay muted loop playsinline>
+            <source src="{{ asset('videos/portfolio/catalog_main.webm') }}" type="video/webm">
+            <source src="{{ asset('videos/portfolio/catalog_main.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- 메타 카탈로그 서비스 섹션 -->
+    <section class="services-landing-service-section">
+        <div class="services-landing-service-container">
+            <!-- 왼쪽 텍스트 영역 -->
+            <div class="services-landing-text-content">
+                <ul class="services-description-list">
+                    <li><span class="services-number">01</span><strong>실시간 베스트를 선별합니다.</strong><br><span class="services-subtext">→ CAFE24등 자사몰 호스트 데이터를 NGN 서버가 수집</span></li>
+                    <li><span class="services-number">02</span><strong>자동으로 광고 소재 교체</strong><br><span class="services-subtext">→ 고급 액세스 API 권한으로 제품세트를 갱신</span></li>
+                </ul>
+                <ul class="services-description-list">
+                    <li><span class="services-number">03</span><strong>항상 최신 베스트 상품이 노출</strong><br><span class="services-subtext">→ 사람이 교체하지 않아도 됩니다</span></li>
+                </ul>
+            </div>
+            
+            <!-- 오른쪽 이미지 영역 -->
+            <div class="services-landing-video-content">
+                                    <img src="{{ asset('img/portfolio/cata2.webp') }}" alt="카탈로그 자동화 이미지" class="services-cata2-image" width="400" height="300" loading="lazy" decoding="async">
+                                    <img src="{{ asset('img/portfolio/cata1.webp') }}" alt="데이터 흐름 다이어그램" class="services-landing-video" width="600" height="400" loading="lazy" decoding="async">
+            </div>
+        </div>
+        
+        <!-- 구분선 추가 -->
+        <div class="services-divider"></div>
+        
+        <!-- 4,5번 항목 섹션 -->
+        <div class="services-additional-features">
+            <!-- 오른쪽 4,5번 항목 -->
+            <div class="services-right-items">
+                <ul class="services-description-list">
+                    <li><span class="services-number">04</span><strong>특정 페이지의 모든 상품, 하나의 광고세트로</strong><br><span class="services-subtext">→ 예) 세일 및 이벤트 페이지 등</span></li>
+                    <li><span class="services-number">05</span><strong>상품명으로 검색, 특정 상품들만 광고 세트로</strong><br><span class="services-subtext">→ 예) 원피스 기획전 등 특정 카테고리 제품만 광고 가능</span></li>
+                </ul>
+                <div class="services-category-image">
+                    <img src="{{ asset('img/portfolio/catalog5.webp') }}" alt="카테고리 이미지">
+                </div>
+            </div>
+            
+            <!-- 왼쪽 이미지 -->
+            <div class="services-left-image">
+                <!-- 영상은 위로 이동됨 -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- 맨 아래 새로운 섹션 -->
+    <div class="services-google-ads-text">구글 광고, GA4와 함께 최적화</div>
+    
+    <!-- 구글 광고 상세 내용 -->
+    <div class="services-google-ads-content">
+        <ul class="services-description-list">
+            <li>
+                <span class="services-number">01</span>
+                <div class="services-google-ads-item">
+                    <div class="services-google-ads-text-content">
+                        <strong>광고 채널을 한 번에 최적화</strong><br>
+                        <span class="services-google-ads-subtext">→ 검색, 디스플레이, 유튜브까지 여러 채널을 하나로 묶어<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성과 좋은 곳에 예산을 자동으로 배분합니다.</span>
+                    </div>
+                    <div class="services-google-ads-image">
+                        <img src="{{ asset('img/ui/google1.webp') }}" alt="구글 광고 최적화" width="300" height="200" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="services-number">02</span>
+                <div class="services-google-ads-item">
+                    <div class="services-google-ads-text-content">
+                        <strong>구매까지 이어지는 여정 파악</strong><br>
+                        <span class="services-google-ads-subtext">→ 상품 보기 → 장바구니 → 결제' 과정을 정확히 추적해,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;광고가 실제 매출에 얼마나 기여했는지 알 수 있습니다.</span>
+                    </div>
+                    <div class="services-google-ads-image">
+                        <img src="{{ asset('img/ui/google2.webp') }}" alt="구매 여정 파악" width="300" height="200" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="services-number">03</span>
+                <div class="services-google-ads-item">
+                    <div class="services-google-ads-text-content">
+                        <strong>데이터로 더 스마트한 입찰</strong><br>
+                        <span class="services-google-ads-subtext">→ 실시간 데이터가 구글 광고에 피드백되면서,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스마트한 자동입찰로 광고비 효율이 올라갑니다.</span>
+                    </div>
+                    <div class="services-google-ads-image">
+                        <img src="{{ asset('img/ui/google3.webp') }}" alt="스마트한 입찰" width="300" height="200" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <span class="services-number">04</span>
+                <div class="services-google-ads-item">
+                    <div class="services-google-ads-text-content">
+                        <strong>내 고객에게만 정확히 도달</strong><br>
+                        <span class="services-google-ads-subtext">→ 이미 구매한 고객, 장바구니에 담고 떠난 고객 등<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;실제 행동 기반으로 리타겟팅이 가능해집니다.</span>
+                    </div>
+                    <div class="services-google-ads-image">
+                        <img src="{{ asset('img/ui/google4.webp') }}" alt="정확한 고객 도달" width="300" height="200" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 맨 아래 새로운 어두운 배경 섹션 -->
+    <!-- 구분선 -->
+    <div class="video-separator-line"></div>
+
+    <!-- SNS 광고 영상 섹션 -->
+    <div class="services-video-section services-sns-video-section">
+        <video autoplay muted loop playsinline preload="metadata" class="services-full-video" poster="{{ asset('thumbs/sns11.webp') }}" width="1920" height="1080">
+            <source src="{{ asset('videos/hero/sns11.webm') }}" type="video/webm">
+            <source src="{{ asset('videos/hero/sns11.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- JC 이미지 섹션 -->
+    <div class="services-jc-image-section">
+        <!-- JC 이미지 위 구분선 -->
+        <div class="video-bottom-separator-line"></div>
+        <img src="{{ asset('img/portfolio/jcc.webp') }}" alt="J-Curve 전략 이미지" width="1920" height="800" loading="lazy" decoding="async">
+    </div>
+
+    <!-- 일반 영상 섹션 -->
+    <div class="services-video-section">
+        <div class="services-video-wrapper">
+            <div class="services-video-container">
+                <!-- 하얀 가로선 -->
+                <div class="video-top-line"></div>
+                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn4.webp') }}" width="1920" height="1080">
+                    <source src="{{ asset('videos/hero/main._ngn4.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/hero/main._ngn4.mp4') }}" type="video/mp4">
+                </video>
+                <div class="services-video-overlay"></div>
+                <div class="services-video-text-overlay">
+                    <h2 class="services-video-heading first-line">베스트 자동 카탈로그.</h2>
+                    <h2 class="services-video-heading second-line">데이터 기반 맞춤전략.</h2>
+                    <h2 class="services-video-heading third-line">매출 중심의 성과를 만드세요.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+    
+    <script>
+        // 햄버거 메뉴 토글
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.mobile-overlay');
+            const hamburgerIcon = document.querySelector('.hamburger-icon');
+            const closeIcon = document.querySelector('.close-icon');
+
+            if (hamburger && navLinks && overlay) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    if (hamburger.classList.contains('active')) {
+                        hamburgerIcon.style.display = 'none';
+                        closeIcon.style.display = 'block';
+                        navLinks.style.display = 'flex';
+                    } else {
+                        hamburgerIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                        navLinks.style.display = 'none';
+                    }
+                });
+
+                overlay.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburgerIcon.style.display = 'block';
+                    closeIcon.style.display = 'none';
+                    navLinks.style.display = 'none';
+                });
+
+                // 네비게이션 링크 클릭 시 메뉴 닫기
+                const navLinkItems = document.querySelectorAll('.nav-links a');
+                navLinkItems.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburgerIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                        navLinks.style.display = 'none';
+                    });
+                });
+            }
+        });
+    </script>
+    
+    <script>
+        // 3줄 고정 + 색상 순차적 변화 + 최적화된 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('SNS 광고 페이지 JavaScript 로드됨!');
+            
+            const titles = document.querySelectorAll('.services-dark-main-title');
+            console.log('찾은 제목 요소들:', titles.length);
+            
+            if (titles.length === 0) {
+                console.error('services-dark-main-title 요소를 찾을 수 없습니다!');
+                return;
+            }
+            
+            let animationId = null;
+            let isAnimating = false;
+            
+            // 초기 설정: 모든 텍스트를 희미하게 표시
+            function initializeText() {
+                titles[0].innerHTML = "10년 AD-TECH 노하우.";
+                titles[1].innerHTML = "SNS 광고 운영은";
+                titles[2].innerHTML = "우리의 전문 분야입니다.";
+                
+                // 모든 텍스트를 희미하게 설정
+                titles.forEach((title, index) => {
+                    title.setAttribute('style', 'color: rgba(255, 255, 255, 0.3); transition: color 0.15s ease;');
+                });
+            }
+            
+            // 텍스트를 하얀색으로 변환
+            function fadeToWhite(element) {
+                return new Promise((resolve) => {
+                    // 첫 번째 줄(10년 AD-TECH 노하우.)은 빠르게, 나머지는 느리게
+                    if (element === titles[0]) {
+                        element.setAttribute('style', 'color: rgb(255, 255, 255); transition: color 0.1s ease;');
+                    } else {
+                        element.setAttribute('style', 'color: rgb(255, 255, 255); transition: color 0.3s ease;');
+                    }
+                    resolve();
+                });
+            }
+            
+            // 텍스트를 희미하게 변환
+            function fadeToDim(element) {
+                return new Promise((resolve) => {
+                    element.setAttribute('style', 'color: rgba(255, 255, 255, 0.3); transition: color 0.15s ease;');
+                    resolve();
+                });
+            }
+            
+            // 애니메이션 한 사이클 실행
+            async function runAnimationCycle() {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                try {
+                    // 초기화: 모든 텍스트를 희미하게
+                    initializeText();
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    
+                    // 첫 번째 줄을 하얀색으로
+                    await fadeToWhite(titles[0]);
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // 두 번째 줄을 하얀색으로
+                    await fadeToWhite(titles[1]);
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // 세 번째 줄을 하얀색으로
+                    await fadeToWhite(titles[2]);
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // 모든 텍스트가 하얀색인 상태로 잠시 유지
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // 모든 텍스트를 다시 희미하게
+                    await fadeToDim(titles[0]);
+                    await fadeToDim(titles[1]);
+                    await fadeToDim(titles[2]);
+                    
+                    // 다음 사이클 전 대기
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                } catch (error) {
+                    console.error('애니메이션 실행 중 오류:', error);
+                } finally {
+                    isAnimating = false;
+                }
+            }
+            
+            // 애니메이션 시작 (최적화된 방식)
+            function startOptimizedAnimation() {
+                console.log('최적화된 애니메이션 시작!');
+                
+                // 첫 번째 사이클 실행
+                runAnimationCycle();
+                
+                // 이후 주기적으로 실행 (while(true) 대신 setInterval 사용)
+                animationId = setInterval(() => {
+                    if (!isAnimating) {
+                        runAnimationCycle();
+                    }
+                }, 4500); // 4.5초마다 체크
+            }
+            
+            // 애니메이션 정지
+            function stopAnimation() {
+                if (animationId) {
+                    clearInterval(animationId);
+                    animationId = null;
+                }
+                isAnimating = false;
+            }
+            
+            // 페이지 로드 후 1초 뒤 애니메이션 시작
+            console.log('1초 후 최적화된 애니메이션 시작 예정');
+            setTimeout(startOptimizedAnimation, 1000);
+            
+            // 페이지 언로드 시 애니메이션 정지
+            window.addEventListener('beforeunload', stopAnimation);
+            
+            // 페이지 가시성 변경 시 애니메이션 제어
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAnimation();
+                } else {
+                    startOptimizedAnimation();
+                }
+            });
+        });
+    </script>
+{% endblock %}

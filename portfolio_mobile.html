@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 콘텐츠 - AI 기반 콘텐츠 제작{% endblock %}
+{% block description %}전문 제작팀의 고품질 콘텐츠 포트폴리오{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/portfolio_mobile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
+            </div>
+            <div class="hamburger-menu" id="hamburger">
+                <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            </div>
+            <div class="nav-links" style="background: #000000 !important; align-items: stretch !important; gap: 0 !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; flex-direction: column !important; justify-content: center !important; z-index: 9999 !important; display: none !important; margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important;">
+                <a href="/" class="nav-link" data-page="home" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">홈</a>
+                <a href="/services" class="nav-link" data-page="services" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">SNS광고</a>
+                <a href="/technology" class="nav-link" data-page="technology" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">대시보드</a>
+                <a href="/portfolio" class="nav-link" data-page="portfolio" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">콘텐츠</a>
+                <a href="/about" class="nav-link" data-page="about" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">소개</a>
+                <a href="/proposal" class="nav-link" data-page="proposal" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important; margin: 0 !important; border-radius: 0 !important; outline: none !important; box-shadow: none !important;">요금 및 서비스</a>
+            </div>
+            <div class="nav-right">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+            </div>
+            <div class="mobile-overlay" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 9998 !important; display: none !important;"></div>
+        </div>
+    </nav>
+
+    <section class="portfolio-advantages-section">
+        <div class="portfolio-section-header">
+            <h2>CONTENT</h2>
+            <h3>AI 컨텐츠 제작</h3>
+        </div>
+    </section>
+
+    <section class="portfolio-content-section">
+        <div class="portfolio-text-gif-container">
+            <div class="portfolio-text-content">
+                <div class="portfolio-company-intro">
+                    <div class="portfolio-main-text">
+                        <div class="portfolio-subtitle-text">AI-Powered Content Creation</div>
+                        <div class="portfolio-text-line-1">
+                            <span class="portfolio-keyword-box">기획과 편집은 사람이</span>
+                        </div>
+                        <div class="portfolio-text-line-2">
+                            <span class="portfolio-keyword-box">제작은 AI</span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 배경 이미지 섹션 바로 아래에 히어로 영상처럼 전체 너비로 분리 -->
+    <section class="portfolio-hero-video-section">
+        <video id="contentVideo" autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/con_main.jpg') }}" width="800" height="600">
+            <source src="{{ asset('videos/portfolio/con_main.webm') }}" type="video/webm">
+            <source src="{{ asset('videos/portfolio/con_main.mp4') }}" type="video/mp4">
+        </video>
+        <div class="portfolio-video-controls">
+            <button id="muteButton" class="portfolio-mute-btn">
+                <svg class="portfolio-mute-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                </svg>
+                <svg class="portfolio-unmute-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <section class="content-showcase">
+        <!-- 구분선 추가 -->
+        <div class="portfolio-divider"></div>
+        
+        <div class="showcase-text">
+            <h3>
+                배경없는 <strong>제품사진</strong>을 기반으로<br>
+                광고이미지와 영상을 제작
+            </h3>
+        </div>
+        <div class="showcase-container">
+            <!-- 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 -->
+            <div class="showcase-first-row">
+                <div class="showcase-label-section">
+                    <span class="case-label"># CASE 1</span>
+                </div>
+                <div class="showcase-image-section">
+                    <img src="{{ asset('img/portfolio/shoes_product.webp') }}" alt="신발 제품샷">
+                </div>
+            </div>
+            
+            <!-- 두 번째 줄: 이미지 풀너비 -->
+            <div class="showcase-item">
+                <img src="{{ asset('img/portfolio/shoes_display.webp') }}" alt="신발 전시샷" class="showcase-image">
+            </div>
+            
+            <!-- 세 번째 줄: 영상 풀너비 -->
+            <div class="showcase-item">
+                <video class="showcase-video" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/shoes/shoes_video.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/content_products/shoes/shoes_video.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-showcase-2">
+        <div class="showcase-container-2">
+            <!-- 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 -->
+            <div class="showcase-first-row-2">
+                <div class="showcase-label-section-2">
+                    <span class="case-label-2"># CASE 2</span>
+                </div>
+                <div class="showcase-image-section-2">
+                    <img src="{{ asset('img/portfolio/cosmetic_product.webp') }}" alt="화장품 제품샷">
+                </div>
+            </div>
+            
+            <!-- 두 번째 줄: 이미지 풀너비 -->
+            <div class="showcase-item-2">
+                <img src="{{ asset('img/portfolio/cosmetic_photo.webp') }}" alt="화장품 화보" class="showcase-image-2">
+            </div>
+            
+            <!-- 세 번째 줄: 영상 풀너비 -->
+            <div class="showcase-item-2">
+                <video class="showcase-video-2" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/cosmetics/cosmetic_video.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/content_products/cosmetics/cosmetic_video.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-showcase-3">
+        <div class="showcase-container-3">
+            <!-- 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 -->
+            <div class="showcase-first-row-3">
+                <div class="showcase-label-section-3">
+                    <span class="case-label-3"># CASE 3</span>
+                </div>
+                <div class="showcase-image-section-3">
+                    <img src="{{ asset('img/portfolio/water_product.webp') }}" alt="워터 제품샷">
+                </div>
+            </div>
+            
+            <!-- 두 번째 줄: 이미지 풀너비 -->
+            <div class="showcase-item-3">
+                <img src="{{ asset('img/portfolio/water_photo.webp') }}" alt="워터 화보" class="showcase-image-3">
+            </div>
+            
+            <!-- 세 번째 줄: 영상 풀너비 -->
+            <div class="showcase-item-3">
+                <video class="showcase-video-3" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/water/water_video.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/content_products/water/water_video.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-showcase-4">
+        <div class="showcase-container-4">
+            <!-- 첫 번째 줄: 하나의 하얀 박스 안에서 1:1 비율 -->
+            <div class="showcase-first-row-4">
+                <div class="showcase-label-section-4">
+                    <span class="case-label-4"># CASE 4</span>
+                </div>
+                <div class="showcase-image-section-4">
+                    <img src="{{ asset('img/portfolio/clothes_product.webp') }}" alt="의상 제품샷">
+                </div>
+            </div>
+            
+            <!-- 두 번째 줄: 이미지 풀너비 -->
+            <div class="showcase-item-4">
+                <img src="{{ asset('img/portfolio/clothes_cut.webp') }}" alt="의상 컷" class="showcase-image-4">
+            </div>
+            
+            <!-- 세 번째 줄: 영상 풀너비 -->
+            <div class="showcase-item-4">
+                <video class="showcase-video-4" autoplay muted loop playsinline preload="metadata">
+                    <source src="{{ asset('videos/content_products/clothes/clothes_clip.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/content_products/clothes/clothes_clip.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        
+        <!-- 하단 구분선 추가 -->
+        <div class="portfolio-divider-bottom"></div>
+        
+        <!-- 랜딩페이지 서비스 섹션 -->
+        <section class="landing-service-section">
+            <div class="landing-service-container">
+                <!-- 왼쪽 텍스트 영역 -->
+                <div class="landing-text-content">
+                    <div class="service-intro">
+                        <p class="intro-main">
+                            누구나 광고 할 수 있도록,<br>
+                            <strong>랜딩페이지도 제작 서비스</strong>
+                        </p>
+                    </div>
+                    
+                    <div class="service-feature">
+                        <h4>AI 기술로 만드는 새로운 광고 경험</h4>
+                        <p>
+                            아직은 실제 촬영만큼의 완벽한 퀄리티에는 미치지<br>
+                            못하지만, <strong>AI 기술은 매일 진화</strong>하고 있습니다.
+                        </p>
+                        <div class="ai-tech-video-container">
+                            <video class="ai-tech-video" autoplay muted loop playsinline preload="metadata">
+                                <source src="{{ asset('videos/content_products/ai_tech1.webm') }}" type="video/webm">
+                                <source src="{{ asset('videos/content_products/ai_tech1.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                        <p>
+                            비주얼 촬영 여건이 부족한 소상공인, 혹은 상업성보다는<br>
+                            재미와 브랜드 이미지를 높이는 숏폼(쇼츠·릴스)<br>
+                            콘텐츠를 원하는 분들에게 AI 광고는 충분히 매력적인<br>
+                            선택지가 될 수 있습니다.
+                        </p>
+                    </div>
+                    
+                    <div class="service-feature">
+                        <h4>다양한 산업 분야에 적용 가능</h4>
+                        <p>
+                            <strong>실제 제품 사진이나 원본 이미지를 기반</strong>으로 제작하며<br>
+                            공산품, 부동산 금융·서비스 업종 등 다양한 분야의 광고<br>
+                            콘텐츠 제작이 가능합니다.
+                        </p>
+                    </div>
+
+                    <div class="apt-video-container">
+                        <video class="apt-video" autoplay muted loop playsinline preload="metadata">
+                            <source src="{{ asset('videos/portfolio/apt.webm') }}" type="video/webm">
+                            <source src="{{ asset('videos/portfolio/apt.mp4') }}" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="service-feature">
+                        <h4>기획부터 제작까지 원스톱</h4>
+                        <p>
+                            <strong>기획은 누구나컴퍼니가 담당</strong>합니다. 기획된 콘티를<br>
+                            바탕으로 AI가 콘텐츠를 제작하며, 합리적인 비용으로<br>
+                            새로운 광고 방식을 경험하실 수 있습니다.
+                        </p>
+                    </div>
+
+                    <div class="service-feature">
+                        <h4>지속 광고 고객을 위한 혜택</h4>
+                        <p>
+                            지속적으로 광고를 집행하는 업체에 한해서, <strong>월 N회<br>
+                            무료 콘텐츠 제작 서비스를 제공</strong>합니다. 제작된 콘텐츠는<br>
+                            인스타그램과 구글 광고에 최적화된 형태로 납품됩니다.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 오른쪽 고정 영상 영역 -->
+                <div class="landing-video-content">
+                    <div class="pop-art-video-container">
+                        <video class="pop-art-video" autoplay muted loop playsinline preload="metadata">
+                            <source src="{{ asset('videos/portfolio/popart_video.webm') }}" type="video/webm">
+                            <source src="{{ asset('videos/portfolio/popart_video.mp4') }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+    
+    <script>
+        // 햄버거 메뉴 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== 포트폴리오 네비게이션 디버깅 시작 ===');
+            
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileOverlay = document.querySelector('.mobile-overlay');
+
+            console.log('햄버거 메뉴 요소들:', { hamburgerMenu, navLinks, mobileOverlay });
+            
+            if (hamburgerMenu && navLinks) {
+                console.log('햄버거 메뉴 이벤트 리스너 추가');
+                
+                hamburgerMenu.addEventListener('click', function(e) {
+                    console.log('=== 포트폴리오 햄버거 메뉴 클릭됨 ===');
+                    console.log('클릭 이벤트:', e);
+                    console.log('클릭 전 navLinks 클래스:', navLinks.className);
+                    console.log('클릭 전 navLinks 스타일:', navLinks.style.cssText);
+                    
+                    navLinks.classList.toggle('active');
+                    mobileOverlay.classList.toggle('active');
+                    hamburgerMenu.classList.toggle('active');
+                    
+                    // active 클래스가 있으면 display: flex, 없으면 display: none
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.style.display = 'flex';
+                    } else {
+                        navLinks.style.display = 'none';
+                    }
+                    
+                    if (mobileOverlay.classList.contains('active')) {
+                        mobileOverlay.style.display = 'block';
+                    } else {
+                        mobileOverlay.style.display = 'none';
+                    }
+                    
+                    console.log('클릭 후 navLinks 클래스:', navLinks.className);
+                    console.log('클릭 후 navLinks 스타일:', navLinks.style.cssText);
+                    console.log('navLinks computed style display:', window.getComputedStyle(navLinks).display);
+                    console.log('navLinks offsetHeight:', navLinks.offsetHeight);
+                    console.log('navLinks offsetWidth:', navLinks.offsetWidth);
+                });
+
+                // 모바일 오버레이 클릭 시 메뉴 닫기
+                if (mobileOverlay) {
+                    mobileOverlay.addEventListener('click', function() {
+                        console.log('오버레이 클릭 - 메뉴 닫기');
+                        navLinks.classList.remove('active');
+                        mobileOverlay.classList.remove('active');
+                        hamburgerMenu.classList.remove('active');
+                    });
+                }
+
+                // 네비게이션 링크 클릭 시 메뉴 닫기
+                const navLinkItems = document.querySelectorAll('.nav-links a');
+                console.log('네비게이션 링크 개수:', navLinkItems.length);
+                
+                navLinkItems.forEach((link, index) => {
+                    console.log(`링크 ${index + 1}:`, link.textContent, link.href);
+                    link.addEventListener('click', function(e) {
+                        console.log(`링크 클릭됨: ${link.textContent} (${link.href})`);
+                        console.log('링크 클릭 이벤트:', e);
+                        navLinks.classList.remove('active');
+                        mobileOverlay.classList.remove('active');
+                        hamburgerMenu.classList.remove('active');
+                    });
+                });
+            } else {
+                console.error('햄버거 메뉴 또는 nav-links 요소를 찾을 수 없음');
+                console.log('hamburgerMenu:', hamburgerMenu);
+                console.log('navLinks:', navLinks);
+            }
+            
+            console.log('=== 포트폴리오 네비게이션 디버깅 설정 완료 ===');
+
+            // 음소거/음소거 해제 버튼 기능
+            const video = document.getElementById('contentVideo');
+            const muteButton = document.getElementById('muteButton');
+            const muteIcon = document.querySelector('.portfolio-mute-icon');
+            const unmuteIcon = document.querySelector('.portfolio-unmute-icon');
+            
+            if (muteButton && video) {
+                muteButton.addEventListener('click', function() {
+                    if (video.muted) {
+                        video.muted = false;
+                        muteIcon.style.display = 'none';
+                        unmuteIcon.style.display = 'block';
+                    } else {
+                        video.muted = true;
+                        muteIcon.style.display = 'block';
+                        unmuteIcon.style.display = 'none';
+                    }
+                });
+            }
+            
+            // 영상이 화면에 완전히 보일 때 재생 시작
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 영상이 화면에 보일 때 재생 시작
+                        video.play().catch(e => console.log('영상 재생 실패:', e));
+                    } else {
+                        // 영상이 화면에서 벗어날 때 일시정지
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.8, // 80% 이상 보일 때 재생 시작
+                rootMargin: '0px'
+            });
+            
+            // contentVideo 요소 관찰 시작
+            if (video) {
+                videoObserver.observe(video);
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
 import os
 
 app = Flask(__name__, template_folder='../', static_folder='../static')
@@ -24,40 +24,79 @@ def asset(path):
         else:
             return f"{static_url.rstrip('/')}/{path.lstrip('/')}"
 
+def is_mobile():
+    """모바일 디바이스 감지 함수"""
+    # URL 파라미터로 강제 모바일 모드 확인
+    force_mobile = request.args.get('mobile', '').lower() in ['true', '1', 'yes']
+    if force_mobile:
+        print("Force mobile mode enabled via URL parameter")
+        return True
+    
+    user_agent = request.headers.get('User-Agent', '').lower()
+    mobile_keywords = ['mobile', 'android', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone', 'opera mini', 'iemobile']
+    
+    # 디버깅을 위한 로그
+    print(f"User-Agent: {user_agent}")
+    
+    is_mobile_device = any(keyword in user_agent for keyword in mobile_keywords)
+    print(f"Is Mobile: {is_mobile_device}")
+    
+    return is_mobile_device
+
 @app.route('/')
 def index():
+    if is_mobile():
+        print("Rendering mobile template: index_mobile.html")
+        return render_template('index_mobile.html')
+    print("Rendering desktop template: index.html")
     return render_template('index.html')
 
 @app.route('/home')
 def home():
+    if is_mobile():
+        return render_template('index_mobile.html')
     return render_template('index.html')
 
 @app.route('/about')
 def about():
+    if is_mobile():
+        return render_template('about_mobile.html')
     return render_template('about.html')
 
 @app.route('/ads')
 def ads():
+    if is_mobile():
+        return render_template('services_mobile.html')
     return render_template('services.html')
 
 @app.route('/contents')
 def contents():
+    if is_mobile():
+        return render_template('portfolio_mobile.html')
     return render_template('portfolio.html')
 
 @app.route('/dashboard')
 def dashboard():
+    if is_mobile():
+        return render_template('technology_mobile.html')
     return render_template('technology.html')
 
 @app.route('/proposal')
 def proposal():
+    if is_mobile():
+        return render_template('proposal_mobile.html')
     return render_template('proposal.html')
 
 @app.route('/survey')
 def survey():
+    if is_mobile():
+        return render_template('survey_mobile.html')
     return render_template('survey.html')
 
 @app.route('/contact')
 def contact():
+    if is_mobile():
+        return render_template('survey_mobile.html')  # 모바일에서는 설문 페이지로 리다이렉트
     return render_template('contact.html')
 
 # 기존 URL들도 리다이렉트로 유지 (SEO 친화적)

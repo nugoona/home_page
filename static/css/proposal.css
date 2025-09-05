@@ -65,9 +65,9 @@ body {
 .nav-center {
     flex: 1;
     display: flex;
-    justify-content: flex-end;
-    padding-right: 20px;
 }
+
+
 
 .nav-right {
     display: flex;
@@ -124,60 +124,7 @@ body {
     display: none;
 }
 
-.nav-links {
-    display: flex;
-    gap: 35px;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    background: none;
-    width: auto;
-    height: auto;
-    flex-direction: row;
-    transform: none;
-    opacity: 1;
-    align-items: center;
-}
-
-.nav-links a {
-    font-family: 'Pretendard', sans-serif;
-    color: #000;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    opacity: 1;
-    transition: opacity 0.2s ease;
-    padding: 10px 0;
-    position: relative;
-}
-
-.nav-links a:hover {
-    opacity: 0.8;
-}
-
-.nav-links a.active {
-    opacity: 1;
-    font-weight: 700;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 5px;
-    left: 50%;
-    background-color: #000;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
+/* .nav-links 스타일 제거 - proposal.html 인라인에서 처리 */
 
 .proposal-main {
     margin-top: 70px;

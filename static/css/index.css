@@ -1,6 +1,14 @@
 /* ===== INDEX PAGE STYLES ===== */
 /* index.html 페이지 전용 스타일 - 기존 style.css에서 복사하여 클래스명 변경 */
 
+/* Navigation Override */
+.nav-center {
+    flex: 1;
+    display: flex;
+}
+
+/* .nav-links 스타일 제거 - index.html 인라인에서 처리 */
+
 /* Hero Section */
 .index-hero-section {
     position: relative;

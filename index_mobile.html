@@ -1,0 +1,468 @@
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 - AI-Powered Marketing Agency{% endblock %}
+{% block description %}온라인 마케팅 누구나 쉽게 - AI 기반 SNS광고, 구글광고, 대시보드 서비스{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/index_mobile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
+            </div>
+            <div class="hamburger-menu" id="hamburger">
+                <!-- 햄버거 아이콘 SVG -->
+                <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <!-- X 아이콘 SVG (숨김) -->
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            </div>
+            <div class="nav-links" style="background: #000000 !important; align-items: stretch !important; gap: 0 !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100vw !important; max-width: 100vw !important; flex-direction: column !important; justify-content: center !important; z-index: 9999 !important; display: none !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;">
+                <a href="/" class="nav-link" data-page="home" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">홈</a>
+                <a href="/services" class="nav-link" data-page="services" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">SNS광고</a>
+                <a href="/technology" class="nav-link" data-page="technology" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">대시보드</a>
+                <a href="/portfolio" class="nav-link" data-page="portfolio" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">콘텐츠</a>
+                <a href="/about" class="nav-link" data-page="about" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">소개</a>
+                <a href="/proposal" class="nav-link" data-page="proposal" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">요금 및 서비스</a>
+            </div>
+            <div class="nav-right">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+            </div>
+            <div class="mobile-overlay" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 9998 !important; display: none !important;"></div>
+        </div>
+    </nav>
+
+    <script>
+        // 햄버거 메뉴 토글
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== 인덱스 페이지 햄버거 메뉴 디버깅 시작 ===');
+            
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.mobile-overlay');
+            const hamburgerIcon = document.querySelector('.hamburger-icon');
+            const closeIcon = document.querySelector('.close-icon');
+
+            console.log('햄버거 요소:', hamburger);
+            console.log('네비게이션 링크:', navLinks);
+            console.log('오버레이:', overlay);
+            console.log('햄버거 아이콘:', hamburgerIcon);
+            console.log('닫기 아이콘:', closeIcon);
+
+            if (hamburger && navLinks && overlay) {
+                console.log('모든 요소가 정상적으로 찾아짐');
+                
+                // nav-links의 초기 스타일 확인
+                console.log('nav-links 초기 스타일:');
+                console.log('- position:', navLinks.style.position);
+                console.log('- top:', navLinks.style.top);
+                console.log('- left:', navLinks.style.left);
+                console.log('- right:', navLinks.style.right);
+                console.log('- width:', navLinks.style.width);
+                console.log('- height:', navLinks.style.height);
+                console.log('- background:', navLinks.style.background);
+                console.log('- display:', navLinks.style.display);
+                console.log('- z-index:', navLinks.style.zIndex);
+                
+                // computed style도 확인
+                const computedStyle = window.getComputedStyle(navLinks);
+                console.log('nav-links computed style:');
+                console.log('- position:', computedStyle.position);
+                console.log('- top:', computedStyle.top);
+                console.log('- left:', computedStyle.left);
+                console.log('- right:', computedStyle.right);
+                console.log('- width:', computedStyle.width);
+                console.log('- height:', computedStyle.height);
+                console.log('- background:', computedStyle.background);
+                console.log('- display:', computedStyle.display);
+                console.log('- z-index:', computedStyle.zIndex);
+
+                hamburger.addEventListener('click', function() {
+                    console.log('햄버거 클릭됨!');
+                    console.log('클릭 전 active 클래스:', hamburger.classList.contains('active'));
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                    
+                    console.log('클릭 후 active 클래스:', hamburger.classList.contains('active'));
+                    console.log('nav-links active 클래스:', navLinks.classList.contains('active'));
+                    console.log('overlay active 클래스:', overlay.classList.contains('active'));
+                    
+                    if (hamburger.classList.contains('active')) {
+                        console.log('메뉴 열기 - X 버튼으로 변환');
+                        hamburgerIcon.style.display = 'none';
+                        closeIcon.style.display = 'block';
+                        navLinks.style.display = 'flex';
+                        
+                        console.log('메뉴 열기 후 nav-links 스타일:');
+                        console.log('- display:', navLinks.style.display);
+                        console.log('- computed display:', window.getComputedStyle(navLinks).display);
+                    } else {
+                        console.log('메뉴 닫기 - 햄버거 아이콘으로 복원');
+                        hamburgerIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                        navLinks.style.display = 'none';
+                        
+                        console.log('메뉴 닫기 후 nav-links 스타일:');
+                        console.log('- display:', navLinks.style.display);
+                        console.log('- computed display:', window.getComputedStyle(navLinks).display);
+                    }
+                });
+
+                overlay.addEventListener('click', function() {
+                    console.log('오버레이 클릭됨 - 메뉴 닫기');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    overlay.classList.remove('active');
+                    hamburgerIcon.style.display = 'block';
+                    closeIcon.style.display = 'none';
+                    navLinks.style.display = 'none';
+                    
+                    console.log('오버레이 클릭 후 active 클래스:', hamburger.classList.contains('active'));
+                });
+
+                // 네비게이션 링크 클릭 시 메뉴 닫기
+                const navLinkItems = document.querySelectorAll('.nav-links a');
+                console.log('네비게이션 링크 개수:', navLinkItems.length);
+                
+                navLinkItems.forEach((link, index) => {
+                    link.addEventListener('click', function() {
+                        console.log(`네비게이션 링크 ${index + 1} 클릭됨 - 메뉴 닫기`);
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        overlay.classList.remove('active');
+                        hamburgerIcon.style.display = 'block';
+                        closeIcon.style.display = 'none';
+                        navLinks.style.display = 'none';
+                        
+                        console.log('링크 클릭 후 active 클래스:', hamburger.classList.contains('active'));
+                    });
+                });
+            } else {
+                console.error('필수 요소를 찾을 수 없음:');
+                console.error('- hamburger:', !!hamburger);
+                console.error('- navLinks:', !!navLinks);
+                console.error('- overlay:', !!overlay);
+            }
+        });
+    </script>
+
+    <header class="index-hero-section">
+        <div class="index-hero-video-container">
+            <video class="index-hero-video" controls autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/main._ngn.jpg') }}">
+                <source src="{{ asset('videos/hero/main.webm') }}" type="video/webm">
+                <source src="{{ asset('videos/hero/main.mp4') }}" type="video/mp4">
+            </video>
+            <div class="index-video-overlay"></div>
+            <div class="index-centered-text">
+                <h2 class="index-main-heading">Online Marketing<br>for Everyone</h2>
+                <p class="index-sub-heading">온라인 마케팅 누구나 쉽게</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="index-content-section">
+        <div class="index-text-gif-container">
+            <div class="index-text-content">
+                <div class="index-company-intro">
+                    <div class="index-main-text">
+                        <div class="index-subtitle-text">AI-Powered Marketing Agency</div>
+                        <div class="index-text-line-1">
+                            <span>누구나 컴퍼니는</span>
+                        </div>
+                        <div class="index-text-line-2">
+                            <span class="index-keyword-box">온라인 마케팅 대행사</span>
+                        </div>
+                        <div class="index-text-line-3">
+                            <span class="index-keyword-box">AI 기반 테크 회사</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-right-video">
+                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/net.jpg') }}">
+                    <source src="{{ asset('videos/hero/net.webm') }}" type="video/webm">
+                    <source src="{{ asset('videos/hero/net.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <div class="index-section-divider"></div>
+
+    <section class="index-full-width-video-section">
+        <div class="index-video-container">
+            <video class="index-full-width-video" autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/h2.webp') }}">
+                <source src="{{ asset('videos/hero/h2.webm') }}" type="video/webm">
+                <source src="{{ asset('videos/hero/h2.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <section class="index-advantages-section">
+        <div class="index-section-header">
+            <h2>KEY ADVANTAGES</h2>
+            <h3>주요 서비스와 기술</h3>
+        </div>
+        <div class="index-advantages-grid">
+            <div class="index-advantage-item">
+                <div class="index-advantage-card">
+                    <div class="index-card-video">
+                                            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/K1.jpg') }}">
+                        <source src="{{ asset('videos/hero/K1.webm') }}" type="video/webm">
+                        <source src="{{ asset('videos/hero/K1.mp4') }}" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="index-card-content">
+                        <div class="index-content-wrapper">
+                            <h3>Automated<br>Instagram Ads</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-card-number-text">메타 자동 카탈로그 광고</div>
+            </div>
+            <div class="index-advantage-item">
+                <div class="index-advantage-card">
+                    <div class="index-card-video">
+                                            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/k2.jpg') }}">
+                        <source src="{{ asset('videos/hero/k2.webm') }}" type="video/webm">
+                        <source src="{{ asset('videos/hero/k2.mp4') }}" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="index-card-content">
+                        <div class="index-content-wrapper">
+                            <h3>Optimized<br>Google Campaigns</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-card-number-text">GA4 연동 - 구글 광고 캠페인</div>
+            </div>
+            <div class="index-advantage-item">
+                <div class="index-advantage-card">
+                    <div class="index-card-video">
+                                            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/K3.jpg') }}">
+                        <source src="{{ asset('videos/hero/K3.webm') }}" type="video/webm">
+                        <source src="{{ asset('videos/hero/K3.mp4') }}" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="index-card-content">
+                        <div class="index-content-wrapper">
+                            <h3>All-in-One<br>Performance Dashboard</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-card-number-text">웹/모바일 데이터 대시보드</div>
+            </div>
+            <div class="index-advantage-item">
+                <div class="index-advantage-card">
+                    <div class="index-card-video">
+                                            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/K4.jpg') }}">
+                        <source src="{{ asset('videos/hero/K4.webm') }}" type="video/webm">
+                        <source src="{{ asset('videos/hero/K4.mp4') }}" type="video/mp4">
+                    </video>
+                    </div>
+                    <div class="index-card-content">
+                        <div class="index-content-wrapper">
+                            <h3>AI-Powered<br>Content Creation</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-card-number-text">AI 기반 콘텐츠 제작</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="index-section-divider"></div>
+    <div class="index-details-label">Details</div>
+
+    <section class="index-feature-section">
+        <div class="index-feature-container">
+            <div class="index-feature-text-box">
+                <div class="index-feature-content">
+                    <h2 class="index-feature-title">
+                        잘 팔리는 사이트 상품,<br>
+                        메타 광고로 바로 연결
+                    </h2>
+                    <p class="index-feature-description">
+                        사이트의 인기상품이 자동으로 메타 광고 소재로 반영,<br>
+                        따로 손댈 필요 없이 <strong>실시간 베스트셀러가 항상 고객에게 노출</strong>.
+                    </p>
+                </div>
+                <div class="index-feature-logo">
+                    <img src="{{ asset('img/icons/instagram.webp') }}" alt="Instagram" class="index-instagram-logo" width="50" height="50" loading="lazy" decoding="async">
+                </div>
+                <div class="index-feature-button">
+                    <a href="/services" class="index-learn-more-btn">더 알아보기</a>
+                </div>
+            </div>
+            <div class="index-feature-image-panel">
+                <img class="index-feature-hero-image" src="{{ asset('img/ui/aaa1.webp') }}" alt="자동 광고 연동 시각화" width="600" height="400" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <section class="index-feature-section">
+        <div class="index-feature-container">
+            <div class="index-feature-image-panel">
+                <img class="index-feature-hero-image" src="{{ asset('img/ui/aaa2.webp') }}" alt="GA4 연동 시각화" width="600" height="400" loading="lazy" decoding="async">
+            </div>
+            <div class="index-feature-text-box">
+                <div class="index-feature-content">
+                    <h2 class="index-feature-title">
+                        구글 GA4 연동으로<br>
+                        광고 성과 극대화
+                    </h2>
+                    <p class="index-feature-description">
+                        GA4와 Google Ads를 연결해 <strong>전환 추적을 정밀화</strong>.<br>
+                        <strong>방문자 행동 기반 타겟팅</strong>으로 광고 효율을 향상.<br>
+                        웹·앱 데이터를 통합 분석해 마케팅 전략을 최적화.
+                    </p>
+                </div>
+                <div class="index-feature-logo">
+                    <img src="{{ asset('img/icons/search.webp') }}" alt="Google Analytics" class="index-instagram-logo" width="50" height="50" loading="lazy" decoding="async">
+                </div>
+                <div class="index-feature-button">
+                    <a href="/services" class="index-learn-more-btn">더 알아보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="index-feature-section">
+        <div class="index-feature-container">
+            <div class="index-feature-text-box">
+                <div class="index-feature-content">
+                    <h2 class="index-feature-title">
+                        고객 니즈에 맞춰 진화하는<br>
+                        NGN 대시보드
+                    </h2>
+                    <p class="index-feature-description">
+                        사이트와 광고 성과는 물론, 광고 소재 미리보기와<br>
+                        맞춤형 Google 시트 연동을 지원. 주요 성과는 언제<br>
+                        어디서나 <strong>실시간으로 모바일에서 확인</strong>.
+                    </p>
+                </div>
+                <div class="index-feature-logo">
+                    <img src="{{ asset('img/icons/x.webp') }}" alt="NGN Dashboard" class="index-instagram-logo" width="50" height="50" loading="lazy" decoding="async">
+                </div>
+                <div class="index-feature-button">
+                    <a href="/technology" class="index-learn-more-btn">더 알아보기</a>
+                </div>
+            </div>
+            <div class="index-feature-image-panel">
+                <img class="index-feature-hero-image" src="{{ asset('img/ui/aaa3.webp') }}" alt="NGN 대시보드 시각화" width="600" height="400" loading="lazy" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact 제목 -->
+    <div class="contact-title">Contact</div>
+    
+    <!-- Contact 섹션 -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <!-- 왼쪽 영역 -->
+            <div class="contact-left">
+                <div class="contact-title-section">
+                    <h3 class="contact-title-text">설문 참여로 더 빠르고<br>원활한 상담</h3>
+                </div>
+                
+                <p class="contact-description">2분이면 끝나는 설문지를 작성해주시면<br>귀사의 상황을 빠르게 파악해, 더 효율적인<br>맞춤형 상담을 진행합니다.</p>
+                
+                <a href="/survey" class="contact-button">
+                    설문 참여하기
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14M13 5l7 7-7 7" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- 구분선 + 오른쪽 영역 그룹 -->
+            <div class="contact-right-group">
+                            <!-- 구분선과 오른쪽 영역 그룹 -->
+            <div style="display: flex; align-items: stretch;">
+                <!-- 구분선 -->
+                <div class="contact-divider"></div>
+                
+                <!-- 오른쪽 영역 -->
+                <div class="contact-right">
+                <div class="contact-title-section">
+                    <h3 class="contact-title-text">빠른 연락이 필요하신가요?</h3>
+                </div>
+                
+                <p class="contact-description">전화번호와 이메일만 남겨주세요.<br>담당자가 직접 확인 후 즉시 연락드리겠습니다.</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">010-2781-4543</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polyline points="22,6 12,13 2,6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-item-text">oscar@nugoona.co.kr</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 키워드 박스 애니메이션 트리거
+        document.addEventListener('DOMContentLoaded', function() {
+            const keywordBoxes = document.querySelectorAll('.index-keyword-box');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 스크롤 시 애니메이션 적용
+                        entry.target.style.animation = 'slideInFromLeft 1s ease forwards';
+                    } else {
+                        // 화면에서 벗어나면 다시 숨김
+                        entry.target.style.animation = 'none';
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateX(-200px)';
+                    }
+                });
+            }, {
+                threshold: 0.5,
+                rootMargin: '0px 0px -200px 0px'
+            });
+            
+            keywordBoxes.forEach(box => {
+                observer.observe(box);
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,6 +1,8 @@
 /* ===== SERVICES PAGE STYLES ===== */
 /* services.html 페이지 전용 스타일 */
 
+/* Navigation Override - 제거됨, common.css 사용 */
+
 /* Services Advantages Section */
 .services-advantages-section {
     padding: 2rem 4rem 4rem 4rem;

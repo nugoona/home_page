@@ -1,6 +1,14 @@
 /* ===== PORTFOLIO PAGE STYLES ===== */
 /* portfolio.html 페이지 전용 스타일 - 기존 style.css에서 복사하여 클래스명 변경 */
 
+/* Navigation Override */
+.nav-center {
+    flex: 1;
+    display: flex;
+}
+
+/* .nav-links 스타일 제거 - portfolio.html 인라인에서 처리 */
+
 /* Portfolio Advantages Section */
 .portfolio-advantages-section {
     padding: 2rem 4rem 4rem 4rem;
@@ -60,7 +68,7 @@
     position: relative;
     overflow: visible;
     margin: 0;
-    background-image: url('../images/배경0816.png') !important;
+    background-image: url('../img/ui/background0816.webp') !important;
     background-size: contain !important;
     background-position: left 500% !important;
     background-repeat: no-repeat !important;

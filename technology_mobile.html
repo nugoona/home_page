@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+
+{% block title %}누구나컴퍼니 대시보드 - AI 기반 데이터 분석{% endblock %}
+{% block description %}온라인 마케팅 성과 대시보드, 맞춤형 데이터 분석 서비스{% endblock %}
+
+{% block css %}
+<link href="{{ asset('css/technology_mobile.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- 네비게이션 -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <a href="/" style="display: flex; align-items: center; gap: 10px;">
+                    <span class="brand-text">누구나컴퍼니</span>
+                </a>
+            </div>
+            <div class="hamburger-menu" id="hamburger">
+                <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            </div>
+            <div class="nav-links" style="background: #000000 !important; align-items: stretch !important; gap: 0 !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; flex-direction: column !important; justify-content: center !important; z-index: 9999 !important; display: none !important;">
+                <a href="/" class="nav-link" data-page="home" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">홈</a>
+                <a href="/services" class="nav-link" data-page="services" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">SNS광고</a>
+                <a href="/technology" class="nav-link" data-page="technology" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">대시보드</a>
+                <a href="/portfolio" class="nav-link" data-page="portfolio" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">콘텐츠</a>
+                <a href="/about" class="nav-link" data-page="about" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">소개</a>
+                <a href="/proposal" class="nav-link" data-page="proposal" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">요금 및 서비스</a>
+            </div>
+            <div class="nav-right">
+                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
+                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
+            </div>
+            <div class="mobile-overlay" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 9998 !important; display: none !important;"></div>
+        </div>
+    </nav>
+
+    <section class="technology-advantages-section">
+        <div class="technology-section-header" style="text-align: center !important;">
+            <h2 style="font-size: 3.2rem !important; font-weight: 700 !important; margin: 0 0 4px 0 !important; line-height: 1.1 !important;">NGN DASHBOARD</h2>
+            <h3 style="font-size: 1.5rem !important; font-weight: 600 !important; margin: 0 !important; line-height: 1.2 !important;">성과 대시보드</h3>
+        </div>
+    </section>
+    
+    <!-- 영상 텍스트 영역 -->
+    <div class="technology-video-text-container" style="margin-bottom: 0 !important; padding-bottom: 0 !important;">
+        <!-- 왼쪽 영상 영역 -->
+        <div class="technology-video-area">
+            <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/d1.webp') }}" width="600" height="400">
+                <source src="{{ asset('videos/hero/d1.webm') }}" type="video/webm">
+                <source src="{{ asset('videos/hero/d1.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- 오른쪽 텍스트 영역 -->
+        <div class="technology-text-area" style="text-align: center !important;">
+            <div class="technology-text-line-1" style="font-size: 1.8rem !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; line-height: 1.2 !important; color: rgb(17, 17, 17) !important;">
+                언제 어디서나
+            </div>
+            <div class="technology-text-line-2" style="font-size: 2.8rem !important; font-weight: 700 !important; margin: 0 !important; line-height: 1.1 !important; color: rgb(17, 17, 17) !important;">
+                고객 커뮤니케이션
+            </div>
+        </div>
+    </div>
+    
+           <!-- 검은색 배경 버튼 섹션 -->
+       <div class="technology-button-section" style="background-color: #2a2a2a !important;">
+        <div class="technology-button-container">
+            <a href="https://board.nugoona.co.kr/" target="_blank" class="technology-demo-button" style="background-color: #25048a !important; color: #ffffff !important; box-shadow: 0 8px 16px rgba(37, 4, 138, 0.4), 0 4px 8px rgba(37, 4, 138, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important; border: 0.2px solid #ffffff !important;">
+                <span class="button-text" style="color: #ffffff !important;">데모 계정 접속</span>
+                <span class="button-arrow" style="color: #ffffff !important;">→</span>
+            </a>
+            <div class="technology-button-note">
+                <div class="note-item">
+                    <svg class="note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                    </svg>
+                    <span>모바일에서 확인 시 주요 성과 UI만 볼 수 있습니다.</span>
+                </div>
+                <div class="note-item">
+                    <svg class="note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                    </svg>
+                    <span>메타 카탈로그 생성은 데모에서 이용할 수 없습니다.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 몰매출 성과 확인 섹션 -->
+    <div class="technology-mall-performance-text">빠르게 확인 후 마케터와 소통.</div>
+    
+    <!-- 대시보드 기능 카드 섹션 -->
+    <div class="technology-dashboard-content">
+        <ul class="technology-description-list">
+            <li>
+                <div class="technology-dashboard-title">01. Dashboard Overview</div>
+                <div class="technology-dashboard-item">
+                    <div class="technology-dashboard-text-content" style="padding: 25px 25px 25px 45px !important;">
+                        <h3 class="technology-dashboard-heading">판매·방문·광고 성과를 한눈에</h3>
+                        <p class="technology-dashboard-description"><strong>한 페이지에서</strong> 매출, 방문자수, 광고비, 구매수, ROAS까지<br>핵심 지표를 <strong>빠르게 확인 후 마케터와 소통</strong>.</p>
+                    </div>
+                    <div class="technology-dashboard-image">
+                        <img src="{{ asset('img/ui/dash1.webp') }}" alt="Dashboard Overview" width="400" height="300" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="technology-dashboard-title">02. Meta Ads Optimization</div>
+                <div class="technology-dashboard-item">
+                    <div class="technology-dashboard-text-content" style="padding: 25px 25px 25px 45px !important;">
+                        <h3 class="technology-dashboard-heading">메타 광고 UI 최적화</h3>
+                        <p class="technology-dashboard-description">Meta 광고 성과를 캠페인·세트·광고 단위로 분석 가능.<br>단일 이미지 광고 소재는 대시보드에서 그대로 프리뷰 →<br><strong>'지금 내 광고가 어떻게 나가는지'</strong> <strong>즉시 확인</strong>.</p>
+                    </div>
+                    <div class="technology-dashboard-image">
+                        <img src="{{ asset('img/ui/dash2.webp') }}" alt="Meta Ads Optimization" width="400" height="300" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="technology-dashboard-title">03. Media Source Analysis</div>
+                <div class="technology-dashboard-item">
+                    <div class="technology-dashboard-text-content" style="padding: 25px 25px 25px 45px !important;">
+                        <h3 class="technology-dashboard-heading">매체 소스별 관심있는 상품 확인</h3>
+                        <p class="technology-dashboard-description">예를 들어 <strong>인스타그램에서 유입된 고객이 주로 본 상품들</strong>이<br><strong>무엇인지 확인 가능</strong>. 이를 통해 <strong>광고 소재 선택</strong>에 곧바로<br>활용할 수 있는 <strong>인사이트</strong> 획득.</p>
+                    </div>
+                    <div class="technology-dashboard-image">
+                        <img src="{{ asset('img/ui/dash3.webp') }}" alt="Media Source Analysis" width="400" height="300" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 몰매출 성과 확인 섹션 -->
+    <div class="technology-mall-performance-text" style="margin-top: 60px;">대시보드는 계속 진화.</div>
+    
+    <!-- 대시보드 기능 상세 섹션 -->
+    <div class="technology-dashboard-content">
+        <ul class="technology-description-list">
+            <li>
+                <div class="technology-dashboard-title">04. Google Sheets Integration</div>
+                <div class="technology-dashboard-item">
+                    <div class="technology-dashboard-text-content" style="padding: 25px 25px 25px 45px !important;">
+                        <h3 class="technology-dashboard-heading">커스텀 구글시트 데이터 연동</h3>
+                        <p class="technology-dashboard-description"><strong>Google 스프레드시트 연동</strong>을 통해 필요한 커스텀 데이터<br>까지 대시보드에서 필터링 및 시각화. 이를 통해<br>자사의 모든 데이터를 <strong>NGN 대시보드에서 핸들링</strong>.</p>
+                    </div>
+                    <div class="technology-dashboard-image">
+                        <img src="{{ asset('img/ui/dash4.webp') }}" alt="Google Sheets Dashboard" width="400" height="300" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="technology-dashboard-title">05. AI Analysis Engine</div>
+                <div class="technology-dashboard-item">
+                    <div class="technology-dashboard-text-content" style="padding: 25px 25px 25px 45px !important;">
+                        <h3 class="technology-dashboard-heading">숫자를 문장으로 읽어주는 AI <span class="development-badge" style="font-size: 0.75em !important; color: #ffffff !important; font-weight: 600 !important; background: #000000 !important; padding: 6px 16px !important; border-radius: 0 !important; margin-left: 12px !important; vertical-align: middle !important; letter-spacing: 0.02em !important; text-transform: uppercase !important;">예정</span></h3>
+                        <p class="technology-dashboard-description"><strong>'뭘 봐야 할지 모르겠어요'</strong> 이 질문은 모든 대시보드의 숙제.<br>따라서 저희는 현재 AI 기반으로 데이터 해석을 문장으로<br>전달하는 연구 진행중. <strong>대시보드는 계속 진화</strong>.</p>
+                    </div>
+                    <div class="technology-dashboard-image">
+                        <div class="terminal-display full-width" style="width: 100%; height: 450px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 0; margin: 0; position: relative; left: 0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: column;">
+                            <div class="terminal-header" style="background: #e9ecef; padding: 12px 16px; padding-left: 8px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dee2e6;">
+                                <span class="terminal-dot red" style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56;"></span>
+                                <span class="terminal-dot yellow" style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></span>
+                                <span class="terminal-dot green" style="width: 12px; height: 12px; border-radius: 50%; background: #27ca3f;"></span>
+                                <span class="terminal-title" style="color: #000000; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; margin-left: 8px;">AI Analysis Result</span>
+                                <div class="terminal-menu" style="margin-left: auto; display: flex; gap: 16px;">
+                                    <span class="menu-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Courier New', monospace; cursor: pointer;">File</span>
+                                    <span class="menu-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Courier New', monospace; cursor: pointer;">Edit</span>
+                                    <span class="menu-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Courier New', monospace; cursor: pointer;">View</span>
+                                    <span class="menu-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Courier New', monospace; cursor: pointer;">Terminal</span>
+                                </div>
+                            </div>
+                            <div class="terminal-content" style="flex: 1; display: flex; position: relative; background: #ffffff; min-height: 300px; margin-left: 0;">
+                                <div class="line-numbers" style="background: #f1f3f4; padding: 8px 4px; border-right: 1px solid #dadce0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; min-width: 40px;">
+                                    <span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">1</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">2</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">3</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">4</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">5</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">6</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">7</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">8</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">9</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">10</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">11</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">12</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">13</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">14</span><span style="color: #5f6368; font-size: 0.8rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; line-height: 1.4;">15</span>
+                                </div>
+                                <div class="code-content">
+                                    <div class="code-line comment">// 최근 8월 3주차 데이터를 8월 2주차 데이터와 비교합니다.</div>
+                                    <div class="code-line comment">// 비교 메트릭은 몰매출 주요 판매상품, 주요판매상품 매출, 매체별 광고비, CPM, CPC 광고구매값 입니다.</div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"><span class="keyword">const</span> <span class="variable">analysisConfig</span> = {</div>
+                                    <div class="code-line indent"><span class="property">"variables"</span>: <span class="string">"없음"</span>,</div>
+                                    <div class="code-line indent"><span class="property">"analysisPeriod"</span>: <span class="string">"이벤트 없음"</span>,</div>
+                                    <div class="code-line indent"><span class="property">"adBudgetChange"</span>: <span class="string">"갑작스런 변동 없음"</span></div>
+                                    <div class="code-line">};</div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"><span class="keyword">const</span> <span class="variable">roasAnalysis</span> = {</div>
+                                    <div class="code-line indent"><span class="property">"status"</span>: <span class="string">"declining"</span>,</div>
+                                    <div class="code-line indent"><span class="property">"causes"</span>: [</div>
+                                    <div class="code-line indent-2"><span class="string">"광고 CPC 상승"</span></div>
+                                </div>
+                                <div class="scrollbar" style="position: absolute; right: 0; top: 0; bottom: 0; width: 12px; background: #e8eaed; border-left: 1px solid #dadce0;"></div>
+                            </div>
+                            <div class="terminal-statusbar" style="background: #e9ecef; padding: 8px 16px; border-top: 1px solid #dee2e6; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #000000; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">
+                                <span class="status-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">AI Analysis</span>
+                                <span class="status-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">Korean</span>
+                                <span class="status-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">UTF-8</span>
+                                <span class="status-item" style="color: #000000; font-size: 0.75rem; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">Line 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 맨 아래 새로운 어두운 배경 섹션 -->
+    <div class="technology-dark-section-bottom" style="background-color: #2a2a2a !important; padding: 0 !important; margin: 0 !important; position: relative !important;">
+        <div class="technology-dark-content-container" style="max-width: 100% !important; margin: 0 auto !important; padding: 60px 20px 60px 25px !important; display: flex !important; justify-content: flex-start !important; align-items: center !important;">
+            <div class="technology-dark-text-area" style="text-align: left; max-width: 100%; position: relative;">
+                <h3 class="technology-dark-main-title-bottom" style="font-family: 'Inter Tight', sans-serif; font-size: 1.4rem; font-weight: 700; color: #EAEAEA; line-height: 0.9; margin: 0 0 5px 0; letter-spacing: -0.05em; transition: color 0.3s ease; white-space: normal;">고객이 알고 싶은 모든 정보를 한눈에.</h3>
+                <h3 class="technology-dark-main-title-bottom second-line" style="font-family: 'Inter Tight', sans-serif; font-size: 1.4rem; font-weight: 700; color: #EAEAEA; line-height: 0.9; margin: 0 0 5px 0; letter-spacing: -0.05em; transition: color 0.3s ease; white-space: normal;">당신에게 최적화된 맞춤형 데이터 대시보드.</h3>
+                <h3 class="technology-dark-main-title-bottom third-line" style="font-family: 'Inter Tight', sans-serif; font-size: 1.6rem; font-weight: 700; color: #EAEAEA; line-height: 0.9; margin: 20px 0 0 0; letter-spacing: -0.05em; transition: color 0.3s ease; white-space: normal;">
+                    지금 바로 
+                    <a href="https://board.nugoona.co.kr" class="technology-demo-button-dark-inline" style="background: #ffffff; border: none; border-radius: 4px; padding: 12px 32px; height: auto; font-family: 'Pretendard', sans-serif; font-size: 1.1rem; font-weight: 600; color: #000000; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1); display: inline-flex; align-items: center; gap: 12px; margin: 0 12px; text-decoration: none; min-width: 120px; justify-content: center;" target="_blank">
+                        <span class="button-text" style="font-weight: 600; letter-spacing: 0.5px; transition: color 0.3s ease; color: inherit; text-transform: uppercase;">CLICK</span>
+                        <span class="button-arrow" style="font-size: 1.2rem; font-weight: 700; transition: transform 0.3s ease; color: #000000;">→</span>
+                    </a>
+                    경험해 보세요.
+                </h3>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 푸터 -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section company-info">
+                <h5>누구나컴퍼니</h5>
+                <p class="company-details">
+                    <span class="info-item">대표 최우현</span>
+                    <span class="info-item">주소 : 서울시 노원구 공릉로34길 62</span>
+                </p>
+            </div>
+            <div class="footer-section business-info">
+                <h5>사업 정보</h5>
+                <p class="business-details">
+                    <span class="info-item">사업자등록번호 : 544-02-02671</span>
+                    <span class="info-item">통신판매업신고번호 : 2023-서울노원-1648</span>
+                </p>
+            </div>
+            <div class="footer-section contact-info">
+                <h5>연락처</h5>
+                <p class="contact-details">
+                    <span class="info-item">대표번호 : 010-2781-4543</span>
+                    <span class="info-item">이메일문의 : oscar@nugoona.co.kr</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 햄버거 메뉴 토글
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== 네비게이션 디버깅 시작 ===');
+            
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileOverlay = document.querySelector('.mobile-overlay');
+            
+            console.log('햄버거 메뉴 요소들:', { 
+                hamburger: hamburger, 
+                navLinks: navLinks, 
+                mobileOverlay: mobileOverlay 
+            });
+            
+            if (hamburger && navLinks) {
+                console.log('햄버거 메뉴 이벤트 리스너 추가');
+                
+                hamburger.addEventListener('click', function(e) {
+                    console.log('=== 햄버거 메뉴 클릭됨 ===');
+                    console.log('클릭 이벤트:', e);
+                    console.log('클릭 전 navLinks 클래스:', navLinks.className);
+                    console.log('클릭 전 navLinks 스타일:', navLinks.style.cssText);
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    mobileOverlay.classList.toggle('active');
+                    
+                    // SVG 아이콘 토글
+                    const hamburgerIcon = hamburger.querySelector('.hamburger-icon');
+                    const closeIcon = hamburger.querySelector('.close-icon');
+                    
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.style.display = 'flex';
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'none';
+                        if (closeIcon) closeIcon.style.display = 'block';
+                    } else {
+                        navLinks.style.display = 'none';
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                        if (closeIcon) closeIcon.style.display = 'none';
+                    }
+                    
+                    if (mobileOverlay.classList.contains('active')) {
+                        mobileOverlay.style.display = 'block';
+                    } else {
+                        mobileOverlay.style.display = 'none';
+                    }
+                    
+                    console.log('클릭 후 navLinks 클래스:', navLinks.className);
+                    console.log('클릭 후 navLinks 스타일:', navLinks.style.cssText);
+                    console.log('navLinks computed style display:', window.getComputedStyle(navLinks).display);
+                    console.log('navLinks offsetHeight:', navLinks.offsetHeight);
+                    console.log('navLinks offsetWidth:', navLinks.offsetWidth);
+                });
+            } else {
+                console.error('햄버거 메뉴 또는 nav-links 요소를 찾을 수 없음');
+                console.log('hamburger:', hamburger);
+                console.log('navLinks:', navLinks);
+            }
+            
+            // 오버레이 클릭 시 메뉴 닫기
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', function() {
+                    console.log('오버레이 클릭 - 메뉴 닫기');
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    
+                    // SVG 아이콘 복원
+                    const hamburgerIcon = hamburger.querySelector('.hamburger-icon');
+                    const closeIcon = hamburger.querySelector('.close-icon');
+                    if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                    if (closeIcon) closeIcon.style.display = 'none';
+                    navLinks.style.display = 'none';
+                    mobileOverlay.style.display = 'none';
+                });
+            }
+            
+            // 링크 클릭 시 메뉴 닫기
+            const navLinkItems = document.querySelectorAll('.nav-links a');
+            console.log('네비게이션 링크 개수:', navLinkItems.length);
+            
+            navLinkItems.forEach((link, index) => {
+                console.log(`링크 ${index + 1}:`, link.textContent, link.href);
+                link.addEventListener('click', function(e) {
+                    console.log(`링크 클릭됨: ${link.textContent} (${link.href})`);
+                    console.log('링크 클릭 이벤트:', e);
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    
+                    // SVG 아이콘 복원
+                    const hamburgerIcon = hamburger.querySelector('.hamburger-icon');
+                    const closeIcon = hamburger.querySelector('.close-icon');
+                    if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                    if (closeIcon) closeIcon.style.display = 'none';
+                    navLinks.style.display = 'none';
+                    mobileOverlay.style.display = 'none';
+                });
+            });
+            
+            console.log('=== 네비게이션 디버깅 설정 완료 ===');
+        });
+    </script>
+{% endblock %}

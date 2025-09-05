@@ -8,6 +8,12 @@
     box-sizing: border-box;
 }
 
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     line-height: 1.6;
@@ -17,6 +23,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
 }
@@ -29,8 +37,9 @@ body {
     --text-color: #333333;
 }
 
-/* ===== 모든 네비게이션 스타일 완전 제거됨 ===== */
-/* 각 페이지에서 인라인으로 처리하여 중복 방지 */
+/* 네비게이션 스타일은 각 페이지별 인라인으로 처리 */
+
+/* 네비게이션 스타일은 각 페이지별 인라인으로 처리 */
 
 /* ===== 푸터 스타일 ===== */
 .site-footer {
