@@ -4,7 +4,7 @@ import os
 app = Flask(__name__, template_folder='../', static_folder='../static')
 
 # 정적 자산 버전 및 CDN 설정 - Cloud Run 환경변수에서 읽어오기
-app.config['STATIC_VERSION'] = os.environ.get('STATIC_VERSION', '1.0.0')
+app.config['STATIC_VERSION'] = os.environ.get('STATIC_VERSION', '1.0.1')  # 캐시 갱신을 위해 버전 업
 app.config['STATIC_CDN_URL'] = os.environ.get('STATIC_CDN_URL')  # Cloud Run 환경변수 사용
 
 # 템플릿 전역 함수 등록
@@ -14,9 +14,12 @@ def asset(path):
     static_url = app.config.get('STATIC_CDN_URL') or '/static'
     version = app.config.get('STATIC_VERSION', '')
     
-    # GCS 버킷 사용시 버전 파라미터 완전 제거
+    # GCS 버킷 사용시 버전 파라미터 임시 추가 (캐시 갱신용)
     if static_url.startswith('https://storage.googleapis.com'):
-        return f"{static_url.rstrip('/')}/{path.lstrip('/')}"
+        if version and version.strip():
+            return f"{static_url.rstrip('/')}/{path.lstrip('/')}?v={version}"
+        else:
+            return f"{static_url.rstrip('/')}/{path.lstrip('/')}"
     else:
         # 로컬 개발환경에서만 버전 파라미터 사용
         if version and version.strip():
