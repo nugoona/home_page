@@ -17,28 +17,24 @@
                 </a>
             </div>
             <div class="hamburger-menu" id="hamburger">
+                <!-- 햄버거 아이콘 SVG -->
                 <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <!-- X 아이콘 SVG (숨김) -->
+                <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <div class="nav-center" style="display: flex; justify-content: center; align-items: center; flex: 1;">
+            <div class="nav-links">
+                <a href="/" class="nav-link" data-page="home">홈</a>
+                <a href="/services" class="nav-link" data-page="services">SNS광고</a>
+                <a href="/technology" class="nav-link" data-page="technology">대시보드</a>
+                <a href="/portfolio" class="nav-link" data-page="portfolio">콘텐츠</a>
+                <a href="/about" class="nav-link" data-page="about">소개</a>
+                <a href="/proposal" class="nav-link" data-page="proposal">요금 및 서비스</a>
             </div>
-            <div class="nav-links" style="background: #000000 !important; align-items: stretch !important; gap: 0 !important; height: 100vh !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; width: 100vw !important; max-width: 100vw !important; flex-direction: column !important; justify-content: center !important; z-index: 9999 !important; display: none !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;">
-                <a href="/" class="nav-link" data-page="home" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">홈</a>
-                <a href="/services" class="nav-link" data-page="services" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">SNS광고</a>
-                <a href="/technology" class="nav-link" data-page="technology" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">대시보드</a>
-                <a href="/portfolio" class="nav-link" data-page="portfolio" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">콘텐츠</a>
-                <a href="/about" class="nav-link" data-page="about" style="background-color: #0f0f0f !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">소개</a>
-                <a href="/proposal" class="nav-link" data-page="proposal" style="background-color: #1a1a1a !important; color: #ffffff !important; padding: 1.2rem 2rem !important; width: 100% !important; display: block !important; font-size: 1.5rem !important; font-weight: 700 !important; text-decoration: none !important; transition: all 0.3s ease !important; line-height: 1.2 !important; border: none !important;">요금 및 서비스</a>
-            </div>
-            <div class="nav-right">
-                <a href="/proposal" class="pricing-btn">요금 및 서비스</a>
-                <img src="{{ asset('videos/ui/ngn_title.gif') }}" alt="NGN" style="height: 50px; width: auto; max-width: 400px; display: block; margin: 2px 0;">
-            </div>
-            <div class="mobile-overlay" style="position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100vh !important; background: rgba(0, 0, 0, 0.5) !important; z-index: 9998 !important; display: none !important;"></div>
+            <div class="mobile-overlay"></div>
         </div>
     </nav>
 
@@ -273,50 +269,52 @@
     <script src="{{ asset('js/main.js') }}"></script>
     
     <script>
-        // 햄버거 메뉴 토글
+        // 햄버거 메뉴 기능
         document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.getElementById('hamburger');
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
             const navLinks = document.querySelector('.nav-links');
-            const overlay = document.querySelector('.mobile-overlay');
-            const hamburgerIcon = document.querySelector('.hamburger-icon');
-            const closeIcon = document.querySelector('.close-icon');
-
-            if (hamburger && navLinks && overlay) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    overlay.classList.toggle('active');
+            const mobileOverlay = document.querySelector('.mobile-overlay');
+            
+            if (hamburgerMenu && navLinks && mobileOverlay) {
+                hamburgerMenu.addEventListener('click', function() {
+                    const hamburgerIcon = document.querySelector('.hamburger-icon');
+                    const closeIcon = document.querySelector('.close-icon');
+                    const isActive = navLinks.classList.contains('active');
                     
-                    if (hamburger.classList.contains('active')) {
-                        hamburgerIcon.style.display = 'none';
-                        closeIcon.style.display = 'block';
-                        navLinks.style.display = 'flex';
+                    if (isActive) {
+                        // 메뉴 닫기
+                        navLinks.classList.remove('active');
+                        mobileOverlay.classList.remove('active');
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                        if (closeIcon) closeIcon.style.display = 'none';
                     } else {
-                        hamburgerIcon.style.display = 'block';
-                        closeIcon.style.display = 'none';
-                        navLinks.style.display = 'none';
+                        // 메뉴 열기
+                        navLinks.classList.add('active');
+                        mobileOverlay.classList.add('active');
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'none';
+                        if (closeIcon) closeIcon.style.display = 'block';
                     }
                 });
-
-                overlay.addEventListener('click', function() {
-                    hamburger.classList.remove('active');
+                
+                mobileOverlay.addEventListener('click', function() {
+                    const hamburgerIcon = document.querySelector('.hamburger-icon');
+                    const closeIcon = document.querySelector('.close-icon');
                     navLinks.classList.remove('active');
-                    overlay.classList.remove('active');
-                    hamburgerIcon.style.display = 'block';
-                    closeIcon.style.display = 'none';
-                    navLinks.style.display = 'none';
+                    mobileOverlay.classList.remove('active');
+                    if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                    if (closeIcon) closeIcon.style.display = 'none';
                 });
-
+                
                 // 네비게이션 링크 클릭 시 메뉴 닫기
                 const navLinkItems = document.querySelectorAll('.nav-links a');
                 navLinkItems.forEach(link => {
                     link.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
+                        const hamburgerIcon = document.querySelector('.hamburger-icon');
+                        const closeIcon = document.querySelector('.close-icon');
                         navLinks.classList.remove('active');
-                        overlay.classList.remove('active');
-                        hamburgerIcon.style.display = 'block';
-                        closeIcon.style.display = 'none';
-                        navLinks.style.display = 'none';
+                        mobileOverlay.classList.remove('active');
+                        if (hamburgerIcon) hamburgerIcon.style.display = 'block';
+                        if (closeIcon) closeIcon.style.display = 'none';
                     });
                 });
             }
