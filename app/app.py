@@ -148,22 +148,40 @@ def contact_html_redirect():
 @app.route('/sitemap.xml')
 def sitemap():
     try:
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        sitemap_path = os.path.join(base_dir, 'sitemap.xml')
-        with open(sitemap_path, 'r', encoding='utf-8') as f:
-            return f.read(), 200, {'Content-Type': 'application/xml'}
-    except FileNotFoundError:
+        # 여러 경로에서 시도
+        possible_paths = [
+            os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'sitemap.xml'),
+            os.path.join(os.getcwd(), 'sitemap.xml'),
+            'sitemap.xml'
+        ]
+        
+        for path in possible_paths:
+            if os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    return f.read(), 200, {'Content-Type': 'application/xml'}
+        
         return "Sitemap not found", 404
+    except Exception as e:
+        return f"Error loading sitemap: {str(e)}", 500
 
 @app.route('/robots.txt')
 def robots():
     try:
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        robots_path = os.path.join(base_dir, 'robots.txt')
-        with open(robots_path, 'r', encoding='utf-8') as f:
-            return f.read(), 200, {'Content-Type': 'text/plain'}
-    except FileNotFoundError:
+        # 여러 경로에서 시도
+        possible_paths = [
+            os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'robots.txt'),
+            os.path.join(os.getcwd(), 'robots.txt'),
+            'robots.txt'
+        ]
+        
+        for path in possible_paths:
+            if os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    return f.read(), 200, {'Content-Type': 'text/plain'}
+        
         return "Robots.txt not found", 404
+    except Exception as e:
+        return f"Error loading robots.txt: {str(e)}", 500
 
 # 건강 체크 엔드포인트 (Cloud Run용)
 @app.route('/health')
