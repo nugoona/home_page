@@ -147,13 +147,23 @@ def contact_html_redirect():
 # SEO 관련 파일들
 @app.route('/sitemap.xml')
 def sitemap():
-    with open('sitemap.xml', 'r', encoding='utf-8') as f:
-        return f.read(), 200, {'Content-Type': 'application/xml'}
+    try:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sitemap_path = os.path.join(base_dir, 'sitemap.xml')
+        with open(sitemap_path, 'r', encoding='utf-8') as f:
+            return f.read(), 200, {'Content-Type': 'application/xml'}
+    except FileNotFoundError:
+        return "Sitemap not found", 404
 
 @app.route('/robots.txt')
 def robots():
-    with open('robots.txt', 'r', encoding='utf-8') as f:
-        return f.read(), 200, {'Content-Type': 'text/plain'}
+    try:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        robots_path = os.path.join(base_dir, 'robots.txt')
+        with open(robots_path, 'r', encoding='utf-8') as f:
+            return f.read(), 200, {'Content-Type': 'text/plain'}
+    except FileNotFoundError:
+        return "Robots.txt not found", 404
 
 # 건강 체크 엔드포인트 (Cloud Run용)
 @app.route('/health')
