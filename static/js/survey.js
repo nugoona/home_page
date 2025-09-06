@@ -269,9 +269,9 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         messageBox.innerHTML = `
-            <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.5rem;">⚠️ 모든 항목을 채우지 않았습니다</h2>
+            <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.5rem;">이대로 제출하시겠습니까?</h2>
             <p style="color: #666; margin-bottom: 30px; line-height: 1.5;">
-                아직 답변하지 않은 항목이 있습니다. 그래도 제출하시겠습니까?
+                
             </p>
             <div style="display: flex; gap: 15px; justify-content: center;">
                 <button id="continueEditing" style="
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 소중한 의견 감사합니다.<br>
                 빠른 시일 내에 연락드리겠습니다.
             </p>
-            <button onclick="window.location.href='index.html'" style="
+            <button onclick="window.location.href='/'" style="
                 background: #2c3e50;
                 color: white;
                 border: none;
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 3초 후 자동으로 홈페이지로 이동
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = '/';
         }, 3000);
     }
 
@@ -677,7 +677,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.getElementById('leavePage').addEventListener('click', () => {
             document.body.removeChild(modal);
-            window.location.href = 'index.html';
+            window.location.href = '/';
         });
         
         return modal;
