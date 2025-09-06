@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# 사이트맵 위치
+Sitemap: https://www.nugoona.co.kr/sitemap.xml
+
+# 크롤링 제외할 디렉토리
+Disallow: /backup_*/
+Disallow: /static_src/
+Disallow: /tools/
+Disallow: /*.bat
+Disallow: /*.py
+Disallow: /*.sh
+Disallow: /app/
+Disallow: /css/
+Disallow: /js/
+
+# 허용할 정적 파일들
+Allow: /static/
+Allow: *.css
+Allow: *.js
+Allow: *.webp
+Allow: *.jpg
+Allow: *.png
+Allow: *.mp4
+Allow: *.webm
+Allow: *.gif
+
+# 크롤링 딜레이 (선택사항)
+Crawl-delay: 1

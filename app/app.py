@@ -144,6 +144,17 @@ def survey_html_redirect():
 def contact_html_redirect():
     return redirect('/contact')
 
+# SEO 관련 파일들
+@app.route('/sitemap.xml')
+def sitemap():
+    with open('sitemap.xml', 'r', encoding='utf-8') as f:
+        return f.read(), 200, {'Content-Type': 'application/xml'}
+
+@app.route('/robots.txt')
+def robots():
+    with open('robots.txt', 'r', encoding='utf-8') as f:
+        return f.read(), 200, {'Content-Type': 'text/plain'}
+
 # 건강 체크 엔드포인트 (Cloud Run용)
 @app.route('/health')
 def health():
