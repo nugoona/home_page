@@ -460,30 +460,31 @@
     border-radius: 16px;
 }
 
-/* CASE 1 라벨 - 더 세련되고 모던하게 */
-.showcase-item:first-child::after {
-    content: "# CASE 1";
-    position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    min-width: 80px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(17, 17, 17, 0.9);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 16px;
-    text-align: center;
-    box-sizing: border-box;
-    z-index: 10;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(17, 17, 17, 0.08);
+/* CASE 1 라벨 - 더 세련되고 모던하게 (웹 전용) */
+body .showcase-item:first-child::after {
+    content: "# CASE 1" !important;
+    position: absolute !important;
+    bottom: -2.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    min-width: 110px !important;
+    font-family: 'Inter Tight', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: rgba(17, 17, 17, 0.9) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(17, 17, 17, 0.08) !important;
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.03);
+        0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    white-space: nowrap !important;
 }
 
 /* 두 번째 아이템 - 중간 사이즈 (320px × 213px - 3:2 비율, 더 크게) */
@@ -620,29 +621,30 @@
 }
 
 /* CASE 2 라벨 - 더 세련되고 모던하게 */
-.showcase-item-2:first-child::after {
-    content: "# CASE 2";
-    position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    min-width: 80px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(17, 17, 17, 0.9);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 16px;
-    text-align: center;
-    box-sizing: border-box;
-    z-index: 10;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(17, 17, 17, 0.08);
+body .showcase-item-2:first-child::after {
+    content: "# CASE 2" !important;
+    position: absolute !important;
+    bottom: -2.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    min-width: 110px !important;
+    font-family: 'Inter Tight', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: rgba(17, 17, 17, 0.9) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(17, 17, 17, 0.08) !important;
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.03);
+        0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    white-space: nowrap !important;
 }
 
 /* 두 번째 쇼케이스 두 번째, 세 번째 아이템 */
@@ -773,29 +775,30 @@
 }
 
 /* CASE 3 라벨 - 더 세련되고 모던하게 */
-.showcase-item-3:first-child::after {
-    content: "# CASE 3";
-    position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    min-width: 80px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(17, 17, 17, 0.9);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 16px;
-    text-align: center;
-    box-sizing: border-box;
-    z-index: 10;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(17, 17, 17, 0.08);
+body .showcase-item-3:first-child::after {
+    content: "# CASE 3" !important;
+    position: absolute !important;
+    bottom: -2.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    min-width: 110px !important;
+    font-family: 'Inter Tight', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: rgba(17, 17, 17, 0.9) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(17, 17, 17, 0.08) !important;
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.03);
+        0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    white-space: nowrap !important;
 }
 
 /* 세 번째 쇼케이스 두 번째, 세 번째 아이템 */
@@ -925,29 +928,30 @@
 }
 
 /* CASE 4 라벨 - 더 세련되고 모던하게 */
-.showcase-item-4:first-child::after {
-    content: "# CASE 4";
-    position: absolute;
-    bottom: -2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    min-width: 80px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(17, 17, 17, 0.9);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 16px;
-    text-align: center;
-    box-sizing: border-box;
-    z-index: 10;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(17, 17, 17, 0.08);
+body .showcase-item-4:first-child::after {
+    content: "# CASE 4" !important;
+    position: absolute !important;
+    bottom: -2.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    min-width: 110px !important;
+    font-family: 'Inter Tight', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: rgba(17, 17, 17, 0.9) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(17, 17, 17, 0.08) !important;
     box-shadow: 
         0 4px 20px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.03);
+        0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    white-space: nowrap !important;
 }
 
 /* 네 번째 쇼케이스 두 번째, 세 번째 아이템 */
