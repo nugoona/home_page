@@ -17,30 +17,7 @@
 .nav-inner {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-brand {
-    /* order 제거 - 기본 순서 유지 */
-}
-
-.hamburger-menu {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 10001;
-}
-
-.nav-center {
-    display: none !important; /* 모바일에서는 완전히 숨김 */
-    width: 0;
-    height: 0;
-    overflow: hidden;
+    padding: 0 20px;또 ㅇㅇ
 }
 
 .nav-right {
