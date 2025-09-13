@@ -17,7 +17,15 @@
 .nav-inner {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;또 ㅇㅇ
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-center {
+    display: none !important; /* 모바일에서는 숨김 */
 }
 
 .nav-right {
@@ -46,6 +54,14 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.hamburger-menu {
+    display: flex !important;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000000;
 }
 
 
