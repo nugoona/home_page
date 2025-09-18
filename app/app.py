@@ -7,9 +7,6 @@ app = Flask(__name__, template_folder='../', static_folder='../static')
 app.config['STATIC_VERSION'] = os.environ.get('STATIC_VERSION', '2.0.0')  # 강제 캐시 갱신
 app.config['STATIC_CDN_URL'] = os.environ.get('STATIC_CDN_URL')  # Cloud Run 환경변수 사용
 
-# GTM 및 GA4 설정 - 환경변수에서 읽어오기
-app.config['GTM_ID'] = os.environ.get('GTM_ID', '')  # Google Tag Manager 컨테이너 ID
-app.config['GA4_MEASUREMENT_ID'] = os.environ.get('GA4_MEASUREMENT_ID', 'G-HT6W18388H')  # GA4 측정 ID
 
 # 템플릿 전역 함수 등록
 @app.template_global()
@@ -54,57 +51,57 @@ def is_mobile():
 def index():
     if is_mobile():
         print("Rendering mobile template: index_mobile.html")
-        return render_template('index_mobile.html', gtm_id=app.config['GTM_ID'])
+        return render_template('index_mobile.html')
     print("Rendering desktop template: index.html")
-    return render_template('index.html', gtm_id=app.config['GTM_ID'])
+    return render_template('index.html')
 
 @app.route('/home')
 def home():
     if is_mobile():
-        return render_template('index_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('index.html', gtm_id=app.config['GTM_ID'])
+        return render_template('index_mobile.html')
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
     if is_mobile():
-        return render_template('about_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('about.html', gtm_id=app.config['GTM_ID'])
+        return render_template('about_mobile.html')
+    return render_template('about.html')
 
 @app.route('/ads')
 def ads():
     if is_mobile():
-        return render_template('services_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('services.html', gtm_id=app.config['GTM_ID'])
+        return render_template('services_mobile.html')
+    return render_template('services.html')
 
 @app.route('/contents')
 def contents():
     if is_mobile():
-        return render_template('portfolio_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('portfolio.html', gtm_id=app.config['GTM_ID'])
+        return render_template('portfolio_mobile.html')
+    return render_template('portfolio.html')
 
 @app.route('/dashboard')
 def dashboard():
     if is_mobile():
-        return render_template('technology_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('technology.html', gtm_id=app.config['GTM_ID'])
+        return render_template('technology_mobile.html')
+    return render_template('technology.html')
 
 @app.route('/proposal')
 def proposal():
     if is_mobile():
-        return render_template('proposal_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('proposal.html', gtm_id=app.config['GTM_ID'])
+        return render_template('proposal_mobile.html')
+    return render_template('proposal.html')
 
 @app.route('/survey')
 def survey():
     if is_mobile():
-        return render_template('survey_mobile.html', gtm_id=app.config['GTM_ID'])
-    return render_template('survey.html', gtm_id=app.config['GTM_ID'])
+        return render_template('survey_mobile.html')
+    return render_template('survey.html')
 
 @app.route('/contact')
 def contact():
     if is_mobile():
-        return render_template('survey_mobile.html', gtm_id=app.config['GTM_ID'])  # 모바일에서는 설문 페이지로 리다이렉트
-    return render_template('contact.html', gtm_id=app.config['GTM_ID'])
+        return render_template('survey_mobile.html')  # 모바일에서는 설문 페이지로 리다이렉트
+    return render_template('contact.html')
 
 # 기존 URL들도 리다이렉트로 유지 (SEO 친화적)
 @app.route('/services')
