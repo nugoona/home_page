@@ -44,6 +44,15 @@
     
     <!-- 페이지별 CSS -->
     {% block css %}{% endblock %}
+    
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HT6W18388H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HT6W18388H');
+    </script>
 </head>
     <body>
         <!-- 네비게이션은 각 페이지에서 개별적으로 처리 -->
