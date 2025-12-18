@@ -487,6 +487,93 @@
         
 
         
+        /* 유튜브 썸네일 스타일 */
+        .youtube-thumbnail {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .youtube-thumbnail:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .youtube-thumbnail img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .youtube-thumbnail .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.9;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .youtube-thumbnail:hover .play-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        /* 유튜브 모달 스타일 */
+        .youtube-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .youtube-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+        }
+        
+        .youtube-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+        
+        .youtube-modal-close:hover {
+            color: #ff0000;
+        }
+        
+        .youtube-video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 비율 */
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .youtube-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
         /* 반응형 */
         @media (max-width: 768px) {
             .nav-container { padding: 0 15px; }
@@ -528,7 +615,15 @@
                 align-self: center;
             }
             
-
+            /* 모달 반응형 */
+            .youtube-modal-content {
+                width: 95%;
+            }
+            
+            .youtube-modal-close {
+                top: -35px;
+                font-size: 30px;
+            }
         }
     </style>
     <style>
@@ -576,10 +671,15 @@
                 </div>
             </div>
             <div class="index-right-video">
-                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/net.webp') }}">
-                    <source src="{{ asset('videos/hero/net.webm') }}" type="video/webm">
-                    <source src="{{ asset('videos/hero/net.mp4') }}" type="video/mp4">
-                </video>
+                <div class="youtube-thumbnail" onclick="openYoutubeModal()">
+                    <img src="{{ asset('img/portfolio/90s.webp') }}" alt="90s 스타일 비주얼" width="600" height="400" loading="lazy" decoding="async">
+                    <div class="play-button">
+                        <svg viewBox="0 0 68 48" width="68" height="48">
+                            <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#FF0000"/>
+                            <path d="M 45,24 27,14 27,34" fill="#fff"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -847,8 +947,50 @@
             <p>&copy; 2023 누구나컴퍼니. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- 유튜브 모달 -->
+    <div id="youtubeModal" class="youtube-modal" onclick="closeYoutubeModal(event)">
+        <div class="youtube-modal-content">
+            <span class="youtube-modal-close" onclick="closeYoutubeModal(event)">&times;</span>
+            <div class="youtube-video-container">
+                <iframe id="youtubeIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
     
     <script>
+        // 유튜브 모달 기능
+        function openYoutubeModal() {
+            const modal = document.getElementById('youtubeModal');
+            const iframe = document.getElementById('youtubeIframe');
+            iframe.src = 'https://www.youtube.com/embed/l-fh3-R74fk?autoplay=1';
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeYoutubeModal(event) {
+            if (event.target.id === 'youtubeModal' || event.target.classList.contains('youtube-modal-close')) {
+                const modal = document.getElementById('youtubeModal');
+                const iframe = document.getElementById('youtubeIframe');
+                iframe.src = '';
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('youtubeModal');
+                if (modal.style.display === 'flex') {
+                    const iframe = document.getElementById('youtubeIframe');
+                    iframe.src = '';
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
         // 키워드 박스 애니메이션 트리거
         document.addEventListener('DOMContentLoaded', function() {
             const keywordBoxes = document.querySelectorAll('.index-keyword-box');
