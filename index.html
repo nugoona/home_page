@@ -495,6 +495,9 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 600px;
+            min-width: 500px;
         }
         
         .youtube-embed-container:hover {
@@ -513,6 +516,14 @@
             aspect-ratio: 16 / 9;
             border: none;
             border-radius: 12px;
+        }
+        
+        /* index-right-video 크기 조정 */
+        .index-right-video {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         /* 반응형 */
