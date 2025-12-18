@@ -187,10 +187,9 @@
                 </div>
             </div>
             <div class="index-right-video">
-                <video autoplay muted loop playsinline preload="metadata" poster="{{ asset('thumbs/net.jpg') }}">
-                    <source src="{{ asset('videos/hero/net.webm') }}" type="video/webm">
-                    <source src="{{ asset('videos/hero/net.mp4') }}" type="video/mp4">
-                </video>
+                <div id="youtubeEmbed" class="youtube-embed-container" onclick="playYoutubeEmbed()">
+                    <img id="youtubeThumbnail" src="{{ asset('img/portfolio/90s.webp') }}" alt="회사소개 90초 영상" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
     </section>
@@ -432,7 +431,59 @@
         </div>
     </footer>
     
+    <style>
+        /* 유튜브 임베드 컨테이너 스타일 */
+        .youtube-embed-container {
+            position: relative;
+            cursor: pointer;
+            overflow: visible;
+            border-radius: 0;
+            border: 1px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+        
+        .youtube-embed-container:hover {
+            transform: scale(1.01);
+        }
+        
+        .youtube-embed-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        
+        .youtube-embed-container iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            border-radius: 0;
+        }
+    </style>
+    
     <script>
+        // 유튜브 임베드 재생 기능
+        function playYoutubeEmbed() {
+            const container = document.getElementById('youtubeEmbed');
+            const thumbnail = document.getElementById('youtubeThumbnail');
+            
+            // 이미 iframe이 있으면 무시
+            if (container.querySelector('iframe')) return;
+            
+            // 썸네일 숨기고 iframe 삽입
+            thumbnail.style.display = 'none';
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/l-fh3-R74fk?autoplay=1';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            
+            container.appendChild(iframe);
+            container.style.cursor = 'default';
+        }
+
         // 키워드 박스 애니메이션 트리거
         document.addEventListener('DOMContentLoaded', function() {
             const keywordBoxes = document.querySelectorAll('.index-keyword-box');
