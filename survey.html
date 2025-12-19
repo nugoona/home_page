@@ -393,4 +393,21 @@
     </div>
 
     <script src="{{ asset('js/survey.js') }}"></script>
+    
+    <!-- Google Ads 전환 이벤트 -->
+    <script>
+        // URL 파라미터로 성공 여부 확인 (formspree 리디렉션)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            gtag('event', 'conversion', {
+                'send_to': 'AW-16899595486/ao3GCKPK3NEbEN65rfo-'
+            });
+        }
+        
+        // Form 제출 성공 감지 (AJAX 방식)
+        document.querySelector('.survey-form')?.addEventListener('submit', function(e) {
+            // formspree가 자동으로 처리하므로, 제출 후 리디렉션에서 처리됨
+            // 또는 formspree의 리디렉션 URL에 ?success=true 추가 필요
+        });
+    </script>
 {% endblock %}
