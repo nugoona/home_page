@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 각 질문별로 답변 정리
         Object.keys(surveyData).forEach(key => {
-            if (key.startsWith('_') || key === 'message') return; // Formspree 내부 필드 제외
+            if (key.startsWith('_') || key === 'message') return; // 내부 필드 제외
             
             // HTML에서 실제 질문 텍스트 가져오기
             const questionElement = document.querySelector(`input[name="${key}"]`)?.closest('.question-card')?.querySelector('.question-title');

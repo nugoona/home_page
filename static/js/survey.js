@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('설문 데이터:', surveyData);
                 
-                // Formspree로 제출 (AJAX 방식)
-                submitToFormspree(form, surveyData);
+                // 백엔드 API를 통해 슬랙으로 제출
+                submitToBackend(form, surveyData);
                 
                 // 폼 초기화 (선택사항)
                 // form.reset();
@@ -338,8 +338,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('설문 데이터:', surveyData);
         
-        // 이메일 전송
-        submitToFormspree(form, surveyData);
+        // 백엔드 API를 통해 슬랙으로 제출
+        submitToBackend(form, surveyData);
     }
 
     // 설문 데이터를 이메일용으로 포맷팅하는 함수
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 각 질문별로 답변 정리
         Object.keys(surveyData).forEach(key => {
-            if (key.startsWith('_') || key === 'message') return; // Formspree 내부 필드 제외
+            if (key.startsWith('_') || key === 'message') return; // 내부 필드 제외
             
             // HTML에서 실제 질문 텍스트 가져오기
             const questionElement = document.querySelector(`input[name="${key}"]`)?.closest('.question-card')?.querySelector('.question-title');
@@ -378,36 +378,35 @@ document.addEventListener('DOMContentLoaded', function() {
         return emailContent;
     }
 
-    // Formspree로 제출하는 함수
-    function submitToFormspree(form, surveyData) {
-        // 이메일 내용을 읽기 쉽게 포맷팅
-        const formattedData = formatSurveyDataForEmail(surveyData);
+    // 백엔드 API를 통해 슬랙으로 제출하는 함수
+    function submitToBackend(form, surveyData) {
+        console.log('백엔드로 설문 데이터 전송 시작:', surveyData);
         
-        const formData = new FormData(form);
-        
-        // 이메일 제목과 내용 추가
-        formData.append('_subject', '📋 새로운 설문지 제출 - 누구나 마케팅');
-        formData.append('_replyto', 'noreply@nugoona.co.kr');
-        formData.append('message', formattedData);
-        
-        fetch('https://formspree.io/f/mpwjwqdr', {
+        // JSON 형식으로 데이터 전송
+        fetch('/api/submit-survey', {
             method: 'POST',
-            body: formData,
             headers: {
+                'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify(surveyData)
         })
         .then(response => {
-            if (response.ok) {
+            console.log('서버 응답 상태:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('서버 응답 데이터:', data);
+            if (data.success) {
                 // 성공 시 커스텀 메시지 표시 후 홈페이지로 이동
                 showCustomSuccessMessage();
             } else {
-                throw new Error('제출에 실패했습니다.');
+                throw new Error(data.error || '제출에 실패했습니다.');
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+            console.error('제출 오류:', error);
+            alert('제출 중 오류가 발생했습니다: ' + error.message);
         });
     }
 

@@ -202,22 +202,32 @@ def submit_survey():
     설문 제출을 받아 슬랙으로 전송하는 API 엔드포인트
     """
     try:
+        print("=== 설문 제출 요청 받음 ===")
+        
         # JSON 데이터 받기
         data = request.get_json()
+        print(f"받은 데이터: {data}")
         
         if not data:
+            print("오류: 데이터가 없습니다.")
             return jsonify({'success': False, 'error': '데이터가 없습니다.'}), 400
         
         # 슬랙으로 알림 전송
+        print("슬랙으로 알림 전송 시도...")
         success = send_survey_notification(data)
+        print(f"슬랙 전송 결과: {success}")
         
         if success:
+            print("설문 제출 성공!")
             return jsonify({'success': True, 'message': '설문이 성공적으로 제출되었습니다.'}), 200
         else:
+            print("슬랙 알림 전송 실패")
             return jsonify({'success': False, 'error': '슬랙 알림 전송에 실패했습니다.'}), 500
             
     except Exception as e:
         print(f"설문 제출 처리 중 오류: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return jsonify({'success': False, 'error': f'서버 오류: {str(e)}'}), 500
 
 if __name__ == '__main__':
