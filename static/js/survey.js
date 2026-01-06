@@ -139,19 +139,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // 폼 제출 처리
     function handleFormSubmission() {
         const form = document.querySelector('.survey-form');
+        console.log('폼 요소 찾기:', form);
         
         if (form) {
+            console.log('폼 제출 이벤트 리스너 등록');
             form.addEventListener('submit', function(event) {
+                console.log('폼 제출 이벤트 발생!');
                 event.preventDefault();
+                console.log('기본 제출 동작 방지 완료');
                 
                 // 모든 항목이 채워졌는지 확인
                 const allFieldsFilled = checkAllFieldsFilled(form);
+                console.log('모든 필드 채워짐:', allFieldsFilled);
                 
                 if (!allFieldsFilled) {
+                    console.log('필드가 모두 채워지지 않음 - 경고 표시');
                     showIncompleteFormWarning();
                     return;
                 }
                 
+                console.log('폼 데이터 수집 시작');
                 // 폼 데이터 수집
                 const formData = new FormData(form);
                 const surveyData = {};
@@ -168,14 +175,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                console.log('설문 데이터:', surveyData);
+                console.log('수집된 설문 데이터:', surveyData);
                 
                 // 백엔드 API를 통해 슬랙으로 제출
+                console.log('백엔드로 전송 시작');
                 submitToBackend(form, surveyData);
                 
                 // 폼 초기화 (선택사항)
                 // form.reset();
             });
+        } else {
+            console.error('폼 요소를 찾을 수 없습니다!');
         }
     }
 
@@ -392,21 +402,38 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(surveyData)
         })
         .then(response => {
-            console.log('서버 응답 상태:', response.status);
-            return response.json();
+            console.log('서버 응답 상태:', response.status, response.statusText);
+            
+            // 응답이 JSON인지 확인
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                return response.text().then(text => {
+                    console.error('JSON이 아닌 응답:', text);
+                    throw new Error('서버가 JSON을 반환하지 않았습니다: ' + text);
+                });
+            }
+            
+            return response.json().catch(error => {
+                console.error('JSON 파싱 오류:', error);
+                return response.text().then(text => {
+                    console.error('응답 본문:', text);
+                    throw new Error('응답을 파싱할 수 없습니다: ' + text);
+                });
+            });
         })
         .then(data => {
             console.log('서버 응답 데이터:', data);
-            if (data.success) {
+            if (data && data.success) {
                 // 성공 시 커스텀 메시지 표시 후 홈페이지로 이동
                 showCustomSuccessMessage();
             } else {
-                throw new Error(data.error || '제출에 실패했습니다.');
+                const errorMsg = data ? (data.error || '제출에 실패했습니다.') : '알 수 없는 오류가 발생했습니다.';
+                throw new Error(errorMsg);
             }
         })
         .catch(error => {
-            console.error('제출 오류:', error);
-            alert('제출 중 오류가 발생했습니다: ' + error.message);
+            console.error('제출 오류 상세:', error);
+            alert('제출 중 오류가 발생했습니다: ' + (error.message || error));
         });
     }
 
@@ -683,6 +710,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 초기화 함수들 실행
+    console.log('=== 설문 페이지 초기화 시작 ===');
     handleQuestion10Conditional();
     handleOtherInputs();
     handleMatrixQuestions();
@@ -693,4 +721,6 @@ document.addEventListener('DOMContentLoaded', function() {
     preventRefresh();
     
     console.log('설문 페이지 초기화 완료!');
+    console.log('폼 요소:', document.querySelector('.survey-form'));
+    console.log('제출 버튼:', document.querySelector('.submit-button'));
 });

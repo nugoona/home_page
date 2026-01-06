@@ -195,22 +195,58 @@ def robots():
 def health():
     return {'status': 'healthy'}, 200
 
+# 테스트 엔드포인트 - 슬랙 설정 확인
+@app.route('/api/test-slack', methods=['GET'])
+def test_slack():
+    """슬랙 웹훅 설정을 테스트하는 엔드포인트"""
+    from slack_utils import get_slack_webhook_url
+    webhook_url = get_slack_webhook_url()
+    
+    if webhook_url:
+        return jsonify({
+            'success': True,
+            'message': '슬랙 웹훅 URL이 설정되어 있습니다.',
+            'url_preview': webhook_url[:50] + '...' if len(webhook_url) > 50 else webhook_url
+        }), 200
+    else:
+        return jsonify({
+            'success': False,
+            'message': '슬랙 웹훅 URL이 설정되지 않았습니다. .env 파일을 확인하세요.'
+        }), 500
+
 # 설문 제출 엔드포인트
-@app.route('/api/submit-survey', methods=['POST'])
+@app.route('/api/submit-survey', methods=['POST', 'OPTIONS'])
 def submit_survey():
     """
     설문 제출을 받아 슬랙으로 전송하는 API 엔드포인트
     """
+    # CORS preflight 요청 처리
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'ok'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+    
     try:
         print("=== 설문 제출 요청 받음 ===")
+        print(f"요청 메서드: {request.method}")
+        print(f"Content-Type: {request.content_type}")
+        print(f"요청 데이터 (raw): {request.data}")
         
         # JSON 데이터 받기
-        data = request.get_json()
-        print(f"받은 데이터: {data}")
+        data = request.get_json(force=True)  # force=True로 content-type 무시하고 파싱 시도
         
         if not data:
-            print("오류: 데이터가 없습니다.")
-            return jsonify({'success': False, 'error': '데이터가 없습니다.'}), 400
+            # FormData로 전송된 경우 처리
+            if request.form:
+                data = dict(request.form)
+                print(f"FormData로 받은 데이터: {data}")
+            else:
+                print("오류: 데이터가 없습니다.")
+                return jsonify({'success': False, 'error': '데이터가 없습니다.'}), 400
+        
+        print(f"처리할 데이터: {data}")
         
         # 슬랙으로 알림 전송
         print("슬랙으로 알림 전송 시도...")
@@ -219,16 +255,22 @@ def submit_survey():
         
         if success:
             print("설문 제출 성공!")
-            return jsonify({'success': True, 'message': '설문이 성공적으로 제출되었습니다.'}), 200
+            response = jsonify({'success': True, 'message': '설문이 성공적으로 제출되었습니다.'})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response, 200
         else:
             print("슬랙 알림 전송 실패")
-            return jsonify({'success': False, 'error': '슬랙 알림 전송에 실패했습니다.'}), 500
+            response = jsonify({'success': False, 'error': '슬랙 알림 전송에 실패했습니다.'})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response, 500
             
     except Exception as e:
         print(f"설문 제출 처리 중 오류: {str(e)}")
         import traceback
         traceback.print_exc()
-        return jsonify({'success': False, 'error': f'서버 오류: {str(e)}'}), 500
+        response = jsonify({'success': False, 'error': f'서버 오류: {str(e)}'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

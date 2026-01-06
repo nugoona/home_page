@@ -239,8 +239,15 @@ def send_slack_message(message_data: Dict[str, Any]) -> bool:
     webhook_url = get_slack_webhook_url()
     
     if not webhook_url:
-        print("경고: SLACK_WEBHOOK_URL 환경 변수가 설정되지 않았습니다.")
+        print("ERROR: SLACK_WEBHOOK_URL 환경 변수가 설정되지 않았습니다.")
+        print("환경 변수 확인:")
+        print(f"  - SLACK_WEBHOOK_URL in os.environ: {'SLACK_WEBHOOK_URL' in os.environ}")
+        if 'SLACK_WEBHOOK_URL' in os.environ:
+            print(f"  - 값: {os.environ['SLACK_WEBHOOK_URL'][:50]}...")
         return False
+    
+    print(f"슬랙 웹훅 URL: {webhook_url[:50]}...")
+    print(f"전송할 메시지 데이터: {message_data}")
     
     try:
         response = requests.post(
@@ -250,14 +257,20 @@ def send_slack_message(message_data: Dict[str, Any]) -> bool:
             timeout=10
         )
         
+        print(f"슬랙 응답 상태 코드: {response.status_code}")
+        print(f"슬랙 응답 본문: {response.text}")
+        
         if response.status_code == 200:
+            print("슬랙 메시지 전송 성공!")
             return True
         else:
             print(f"슬랙 메시지 전송 실패: {response.status_code} - {response.text}")
             return False
             
     except requests.exceptions.RequestException as e:
-        print(f"슬랙 메시지 전송 중 오류 발생: {str(e)}")
+        print(f"슬랙 메시지 전송 중 오류 발생: {type(e).__name__}: {str(e)}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
