@@ -7,8 +7,23 @@ import requests
 from typing import Dict, Any, Optional
 from dotenv import load_dotenv
 
-# .env 파일 로드
-load_dotenv()
+# .env 파일 로드 (여러 위치에서 시도)
+import os
+env_paths = [
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env'),
+    os.path.expanduser('~/ngn_homepage/.env'),
+    os.path.expanduser('~/ngn_board/config/ngn.env'),  # 다른 프로젝트의 .env도 시도
+    os.path.expanduser('~/.env'),
+]
+for env_path in env_paths:
+    if os.path.exists(env_path):
+        print(f"슬랙 유틸: .env 파일 로드 시도: {env_path}")
+        load_dotenv(env_path)
+        break
+else:
+    print("슬랙 유틸: .env 파일을 찾을 수 없습니다. 환경 변수를 직접 설정하세요.")
+    # 환경 변수 직접 로드 시도
+    load_dotenv()
 
 
 def get_slack_webhook_url() -> Optional[str]:

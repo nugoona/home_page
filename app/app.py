@@ -1,9 +1,26 @@
 from flask import Flask, render_template, url_for, redirect, request, jsonify
 import os
 import sys
+from pathlib import Path
 
 # 프로젝트 루트 경로를 Python 경로에 추가
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
+# .env 파일 로드 (여러 위치에서 시도)
+from dotenv import load_dotenv
+env_paths = [
+    os.path.join(project_root, '.env'),
+    os.path.expanduser('~/ngn_homepage/.env'),
+    os.path.expanduser('~/.env'),
+]
+for env_path in env_paths:
+    if os.path.exists(env_path):
+        print(f".env 파일 로드: {env_path}")
+        load_dotenv(env_path)
+        break
+else:
+    print("경고: .env 파일을 찾을 수 없습니다. 환경 변수를 직접 설정하세요.")
 
 from slack_utils import send_survey_notification
 

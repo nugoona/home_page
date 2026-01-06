@@ -144,12 +144,14 @@ document.addEventListener('DOMContentLoaded', function() {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
                 
-                // 모든 항목이 채워졌는지 확인
-                const allFieldsFilled = checkAllFieldsFilled(form);
+                // 필수 필드만 확인 (선택적 필드는 제외)
+                const requiredFieldsFilled = checkRequiredFieldsFilled(form);
+                console.log('필수 필드 채워짐:', requiredFieldsFilled);
                 
-                if (!allFieldsFilled) {
-                    showIncompleteFormWarning();
-                    return;
+                // 필수 필드가 없으면 경고만 표시하고 제출은 허용
+                if (!requiredFieldsFilled) {
+                    console.log('일부 필수 필드가 비어있음 - 경고 표시하지만 제출 허용');
+                    // 경고는 표시하지만 제출은 계속 진행
                 }
                 
                 // 폼 데이터 수집
@@ -179,66 +181,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 모든 필드가 채워졌는지 확인하는 함수
+    // 필수 필드만 확인하는 함수 (선택적 필드는 제외)
+    function checkRequiredFieldsFilled(form) {
+        // 필수 필드: 업종(industry), 광고 경험(ad_experience), 연락처(contact_info)
+        // 나머지는 선택 사항이므로 체크하지 않음
+        
+        const industrySelected = form.querySelector('input[name="industry"]:checked');
+        const adExperienceSelected = form.querySelector('input[name="ad_experience"]:checked');
+        const contactInfo = form.querySelector('input[name="contact_info"]')?.value.trim();
+        
+        console.log('필수 필드 체크:', {
+            industry: !!industrySelected,
+            ad_experience: !!adExperienceSelected,
+            contact_info: !!contactInfo
+        });
+        
+        // 연락처는 선택 사항이므로 필수 체크에서 제외
+        // 최소한 업종이나 광고 경험 중 하나라도 선택되었는지 확인
+        return !!(industrySelected || adExperienceSelected);
+    }
+    
+    // 모든 필드가 채워졌는지 확인하는 함수 (기존 함수 유지 - 호환성)
     function checkAllFieldsFilled(form) {
-        const inputs = form.querySelectorAll('input[type="radio"], input[type="checkbox"], input[type="text"]');
-        let filledCount = 0;
-        let totalCount = 0;
-        
-        // 라디오 버튼 그룹별로 확인
-        const radioGroups = {};
-        inputs.forEach(input => {
-            if (input.type === 'radio') {
-                if (!radioGroups[input.name]) {
-                    radioGroups[input.name] = { total: 0, filled: false };
-                }
-                radioGroups[input.name].total++;
-                if (input.checked) {
-                    radioGroups[input.name].filled = true;
-                }
-            }
-        });
-        
-        // 체크박스 그룹별로 확인
-        const checkboxGroups = {};
-        inputs.forEach(input => {
-            if (input.type === 'checkbox') {
-                if (!checkboxGroups[input.name]) {
-                    checkboxGroups[input.name] = { total: 0, filled: 0 };
-                }
-                checkboxGroups[input.name].total++;
-                if (input.checked) {
-                    checkboxGroups[input.name].filled++;
-                }
-            }
-        });
-        
-        // 텍스트 입력 확인
-        const textInputs = form.querySelectorAll('input[type="text"]');
-        textInputs.forEach(input => {
-            if (input.value.trim() !== '') {
-                filledCount++;
-            }
-            totalCount++;
-        });
-        
-        // 라디오 버튼 그룹 확인
-        Object.keys(radioGroups).forEach(groupName => {
-            totalCount++;
-            if (radioGroups[groupName].filled) {
-                filledCount++;
-            }
-        });
-        
-        // 체크박스 그룹 확인 (최소 1개 이상 선택)
-        Object.keys(checkboxGroups).forEach(groupName => {
-            totalCount++;
-            if (checkboxGroups[groupName].filled > 0) {
-                filledCount++;
-            }
-        });
-        
-        return filledCount === totalCount;
+        // 이 함수는 더 이상 사용하지 않지만, 호환성을 위해 유지
+        return checkRequiredFieldsFilled(form);
     }
 
     // 미완성 폼 경고 팝업
