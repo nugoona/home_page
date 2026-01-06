@@ -55,3 +55,8 @@ logs/
 backup_*/
 *.backup
 *.bak
+
+# Environment variables
+.env
+.env.local
+.env.*.local

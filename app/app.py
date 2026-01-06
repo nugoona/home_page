@@ -1,5 +1,11 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 import os
+import sys
+
+# 프로젝트 루트 경로를 Python 경로에 추가
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from slack_utils import send_survey_notification
 
 app = Flask(__name__, template_folder='../', static_folder='../static')
 
@@ -188,6 +194,31 @@ def robots():
 @app.route('/health')
 def health():
     return {'status': 'healthy'}, 200
+
+# 설문 제출 엔드포인트
+@app.route('/api/submit-survey', methods=['POST'])
+def submit_survey():
+    """
+    설문 제출을 받아 슬랙으로 전송하는 API 엔드포인트
+    """
+    try:
+        # JSON 데이터 받기
+        data = request.get_json()
+        
+        if not data:
+            return jsonify({'success': False, 'error': '데이터가 없습니다.'}), 400
+        
+        # 슬랙으로 알림 전송
+        success = send_survey_notification(data)
+        
+        if success:
+            return jsonify({'success': True, 'message': '설문이 성공적으로 제출되었습니다.'}), 200
+        else:
+            return jsonify({'success': False, 'error': '슬랙 알림 전송에 실패했습니다.'}), 500
+            
+    except Exception as e:
+        print(f"설문 제출 처리 중 오류: {str(e)}")
+        return jsonify({'success': False, 'error': f'서버 오류: {str(e)}'}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
