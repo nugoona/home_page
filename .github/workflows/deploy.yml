@@ -75,7 +75,7 @@ jobs:
             --min-instances 1 \
             --max-instances 5 \
             --concurrency 80 \
-            --set-env-vars STATIC_CDN_URL=https://static.${{ secrets.DOMAIN }},STATIC_VERSION=${{ env.STATIC_VERSION }}
+            --set-env-vars STATIC_CDN_URL=https://static.${{ secrets.DOMAIN }},STATIC_VERSION=${{ env.STATIC_VERSION }},SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Health check
         run: |
