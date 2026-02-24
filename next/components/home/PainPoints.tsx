@@ -12,7 +12,7 @@ const SF = 'var(--font-en)';
    ════════════════════════════════════════════════════════════ */
 function Skeleton1() {
   return (
-    <div className="absolute inset-0 bg-[#f3f4f6] flex items-center justify-center p-4">
+    <div className="absolute inset-0 bg-white flex items-center justify-center p-6">
       <svg viewBox="0 0 380 260" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         {/* 곡선 연결선 */}
         <path d="M 100 55 C 138 55, 148 100, 172 108" fill="none" stroke="#0081FB" strokeWidth="2.5" />
@@ -54,7 +54,7 @@ function Skeleton1() {
 function Skeleton2() {
   return (
     <div className="absolute inset-0 flex flex-col">
-      <div className="w-full h-full bg-white overflow-hidden">
+      <div className="w-full h-full bg-white overflow-hidden flex flex-col">
         {/* Top bar */}
         <div className="flex items-center gap-2 px-3 py-2.5 bg-[#0081FB]">
           <div className="w-4 h-4 bg-white/30 rounded-full" />
@@ -96,7 +96,7 @@ function Skeleton2() {
         </div>
 
         {/* Content: sidebar + main */}
-        <div className="flex" style={{ height: '150px' }}>
+        <div className="flex flex-1 overflow-hidden">
           {/* Sidebar */}
           <div className="w-[72px] border-r border-[#ddd] py-2 px-2 flex flex-col gap-1">
             {[
@@ -137,6 +137,13 @@ function Skeleton2() {
               { status: '#ef4444' },
               { status: '#22c55e' },
               { status: '#999' },
+              { status: '#22c55e' },
+              { status: '#f59e0b' },
+              { status: '#22c55e' },
+              { status: '#ef4444' },
+              { status: '#999' },
+              { status: '#22c55e' },
+              { status: '#f59e0b' },
             ].map((row, i) => (
               <div key={i} className="flex items-center px-2 py-[7px] border-b border-[#eee]">
                 <div className="w-3 h-3 border border-[#ccc] rounded-sm mr-2" />
@@ -160,8 +167,8 @@ function Skeleton2() {
    ════════════════════════════════════════════════════════════ */
 function Skeleton3() {
   return (
-    <div className="absolute inset-0 bg-[#f3f4f6] flex items-center justify-center p-3">
-      <svg viewBox="-1 -1 302 252" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+    <div className="absolute inset-0 bg-white flex items-center justify-center p-6">
+      <svg viewBox="-24 -20 348 292" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         {/* 이미지 플레이스홀더 아이콘 (산+해) */}
         <defs>
           <symbol id="img-icon" viewBox="0 0 24 24">
@@ -172,16 +179,16 @@ function Skeleton3() {
         </defs>
 
         {/* Row 1: Feed (1:1) + Story (9:16) */}
-        <rect x="0" y="0" width="168" height="168" rx="8" fill="white" stroke="#aaa" strokeWidth="1.2" strokeDasharray="6 3" />
+        <rect x="0" y="0" width="168" height="168" rx="8" fill="white" stroke="#222" strokeWidth="0.3" strokeDasharray="6 3" />
         <use href="#img-icon" x="60" y="60" width="48" height="48" color="#ccc" />
         <text x="84" y="155" textAnchor="middle" fill="#999" fontSize="9" fontWeight="600" style={{ fontFamily: SF }}>1080 × 1080</text>
 
-        <rect x="184" y="0" width="116" height="168" rx="8" fill="white" stroke="#aaa" strokeWidth="1.2" strokeDasharray="6 3" />
+        <rect x="184" y="0" width="116" height="168" rx="8" fill="white" stroke="#222" strokeWidth="0.3" strokeDasharray="6 3" />
         <use href="#img-icon" x="222" y="60" width="40" height="40" color="#ccc" />
         <text x="242" y="155" textAnchor="middle" fill="#999" fontSize="9" fontWeight="600" style={{ fontFamily: SF }}>1080 × 1920</text>
 
         {/* Row 2: Display banner */}
-        <rect x="0" y="186" width="300" height="52" rx="8" fill="white" stroke="#aaa" strokeWidth="1.2" strokeDasharray="6 3" />
+        <rect x="0" y="186" width="300" height="52" rx="8" fill="white" stroke="#222" strokeWidth="0.3" strokeDasharray="6 3" />
         <use href="#img-icon" x="138" y="196" width="24" height="24" color="#ccc" />
         <text x="260" y="218" textAnchor="middle" fill="#999" fontSize="9" fontWeight="600" style={{ fontFamily: SF }}>1200 × 628</text>
 
@@ -214,7 +221,7 @@ export default function PainPoints() {
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-1.5">
             {painPoints.title}
           </h2>
-          <p className="text-[18px] text-text-primary font-light leading-[1.6] max-w-[520px] mx-auto">
+          <p className="text-[16px] text-text-primary font-light leading-[1.6] max-w-[520px] mx-auto tracking-[-0.025em]">
             {painPoints.subtitle}
           </p>
         </FadeUp>
@@ -241,32 +248,32 @@ export default function PainPoints() {
                     <h3 className="text-[17px] font-bold tracking-[-0.01em] leading-[1.3] text-text-primary mb-2">
                       {cell.title}
                     </h3>
-                    <p className="text-[12px] text-text-primary font-light leading-[1.5]">
-                      {cell.bullets[0]}
-                    </p>
+                    <p className="text-[12px] text-text-primary font-light leading-[1.5]"
+                      dangerouslySetInnerHTML={{ __html: cell.bullets[0] }}
+                    />
                   </div>
-                  <div className="relative w-[50%] shrink-0 border-l border-border-default bg-[#f3f4f6]">
+                  <div className="relative w-[50%] shrink-0 border-l border-border-default bg-white">
                     <Skeleton />
                   </div>
                 </div>
 
                 {/* Desktop: 텍스트 위 */}
-                <div className="hidden md:block px-6 pt-6 pb-5">
+                <div className="hidden md:block px-8 pt-8 pb-6">
                   <p className="text-[11px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
                     {cell.num}
                   </p>
                   <h3 className="text-[20px] font-bold tracking-[-0.01em] leading-[1.3] text-text-primary mb-2">
                     {cell.title}
                   </h3>
-                  <p className="text-[14px] text-text-primary font-light leading-[1.5]">
-                    {cell.bullets[0]}
-                  </p>
+                  <p className="text-[14px] text-text-primary font-light leading-[1.5]"
+                    dangerouslySetInnerHTML={{ __html: cell.bullets[0] }}
+                  />
                 </div>
               </FadeUp>
 
               {/* Desktop: 비주얼 아래 */}
               <FadeUp delay={i * 0.08 + 0.05}>
-                <div className="relative h-[260px] border-t border-border-default hidden md:block">
+                <div className="relative h-[340px] border-t border-border-default hidden md:block">
                   <Skeleton />
                 </div>
               </FadeUp>

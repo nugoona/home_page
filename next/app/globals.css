@@ -85,13 +85,13 @@
 
 /* iPhone mockup exception — modern thin bezel */
 .iphone-frame {
-  border-radius: 44px !important;
+  border-radius: 38px !important;
 }
 .iphone-screen {
-  border-radius: 40px !important;
+  border-radius: 6px !important;
 }
 .iphone-notch {
-  border-radius: 0 0 16px 16px !important;
+  border-radius: 0 0 12px 12px !important;
 }
 .iphone-home {
   border-radius: 999px !important;
@@ -114,6 +114,8 @@ html {
 body {
   font-family: var(--font-kr);
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--color-text-secondary);
   background: var(--color-bg);
   word-break: keep-all;
@@ -126,6 +128,12 @@ body.has-promo {
 
 body.menu-open {
   overflow: hidden;
+}
+
+/* 카드 내 strong: 굵기 대신 색으로 강조 (소형 한글 700 weight 뭉개짐 방지) */
+.ai-card strong {
+  font-weight: 500;
+  color: #171717;
 }
 
 a {
@@ -320,6 +328,16 @@ a {
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(200%); }
+}
+
+/* ===== Phone Glass Glare Sweep ===== */
+@keyframes glassGlare {
+  0%, 20%  { transform: translateX(-160%) rotate(20deg); }
+  55%, 100% { transform: translateX(380%) rotate(20deg); }
+}
+.animate-glass-glare {
+  animation: glassGlare 5s ease-in-out infinite;
+  animation-delay: 0.8s;
 }
 
 /* ===== Skeleton Pulse ===== */
