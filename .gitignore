@@ -1,2 +1,19 @@
-# NGN Workspace session memory
+# Dependencies
+node_modules/
+
+# Next.js build
+.next/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Session
 .ngn-session.md
+
+# Local config
+CLAUDE.local.md

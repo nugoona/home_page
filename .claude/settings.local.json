@@ -1,0 +1,20 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node scripts/update-ctx.js",
+            "timeout": 10,
+            "statusMessage": "ctx 파일 최신화 중..."
+          },
+          {
+            "type": "prompt",
+            "prompt": "세션 시작이다. docs/ctx/ 폴더의 md 파일들을 Read 도구로 읽고, .ngn-session.md도 읽어라. 미커밋 변경이 있으면 알려라."
+          }
+        ]
+      }
+    ]
+  }
+}
