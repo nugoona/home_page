@@ -30,7 +30,7 @@ const products: Product[] = [
     review: '리뷰 2,100개 · 재구매율 34%',
     title: '캐시미어 블렌드 코트',
     landingUrl: 'levian.cafe24.com/product/detail?product_no=12345',
-    image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=500&fit=crop',
+    image: '/img/unsplash/webp/photo-1539533018447-63fcce2678e3.webp',
   },
   {
     brand: '모드하우스',
@@ -41,7 +41,7 @@ const products: Product[] = [
     review: '리뷰 890개 · 재구매율 28%',
     title: '플리츠 미디스커트',
     landingUrl: 'modehouse.cafe24.com/product/detail?product_no=67890',
-    image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=400&h=500&fit=crop',
+    image: '/img/unsplash/webp/photo-1583496661160-fb5886a0aaaa.webp',
   },
   {
     brand: '어반시크',
@@ -52,7 +52,7 @@ const products: Product[] = [
     review: '리뷰 1,340개 · 재구매율 41%',
     title: '오버사이즈 니트 가디건',
     landingUrl: 'urbanchic.cafe24.com/product/detail?product_no=24680',
-    image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop',
+    image: '/img/unsplash/webp/photo-1576566588028-4147f3842f27.webp',
   },
   {
     brand: '블랑코',
@@ -63,7 +63,7 @@ const products: Product[] = [
     review: '리뷰 760개 · 재구매율 22%',
     title: '미니 크로스백',
     landingUrl: 'blanco.cafe24.com/product/detail?product_no=13579',
-    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=500&fit=crop',
+    image: '/img/unsplash/webp/photo-1584917865442-de89df76afd3.webp',
   },
 ];
 

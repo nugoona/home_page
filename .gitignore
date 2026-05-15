@@ -17,3 +17,41 @@ Thumbs.db
 
 # Local config
 CLAUDE.local.md
+
+# Aurum — 별도 레포 (Cloudflare Pages)
+aurum/
+
+
+# === 시크릿 (절대 commit 금지, 마이그레이션 2026-04-29 추가) ===
+service-account.json
+service-account*.json
+*.service-account.json
+.env
+.env.*
+!.env.example
+!.env.shared
+tokens.json
+*.tokens.json
+*-session.json
+*-tokens.json
+linear-tokens.json
+naver-session.json
+chatbot_sim.db
+*.db
+
+# === 런타임 상태 / 캐시 ===
+.playwright-mcp/
+__pycache__/
+*.pyc
+node_modules/
+.next/
+.vercel/
+dist/
+build/
+*.log
+logs/
+daemon.pid
+daemon_state.json
+
+# === ngn_homepage 임시 ===
+homepage-full.png

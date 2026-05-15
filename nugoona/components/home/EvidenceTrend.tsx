@@ -32,30 +32,30 @@ const tabStates: TabState[] = [
     categoryIdx: 0, // 전체
     subTabIdx: 0,    // 급상승
     items: [
-      { rank: '전체 9위', brand: '에르블랑', product: '소프트 울 블렌드 니트', change: 61, gradient: 'linear-gradient(135deg, #fde2d4, #f5cac3)', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=160&h=208&fit=crop' },
-      { rank: '전체 40위', brand: '하루클로젯', product: '러플 셔링 블라우스', change: 54, gradient: 'linear-gradient(135deg, #d5e5d5, #c1d5c1)', image: 'https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=160&h=208&fit=crop' },
-      { rank: '전체 18위', brand: '포레스트블룸', product: '비건 레더 크롭 자켓', change: 49, gradient: 'linear-gradient(135deg, #ddd5e5, #c5b8d5)', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=160&h=208&fit=crop' },
-      { rank: '전체 16위', brand: '어반시크', product: '클래식 트렌치 코트', change: 49, gradient: 'linear-gradient(135deg, #d5dde5, #b8c8d5)', image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=160&h=208&fit=crop' },
+      { rank: '전체 9위', brand: '에르블랑', product: '소프트 울 블렌드 니트', change: 61, gradient: 'linear-gradient(135deg, #fde2d4, #f5cac3)', image: '/img/unsplash/webp/photo-1576566588028-4147f3842f27.webp' },
+      { rank: '전체 40위', brand: '하루클로젯', product: '러플 셔링 블라우스', change: 54, gradient: 'linear-gradient(135deg, #d5e5d5, #c1d5c1)', image: '/img/unsplash/webp/photo-1564257631407-4deb1f99d992.webp' },
+      { rank: '전체 18위', brand: '포레스트블룸', product: '비건 레더 크롭 자켓', change: 49, gradient: 'linear-gradient(135deg, #ddd5e5, #c5b8d5)', image: '/img/unsplash/webp/photo-1551028719-00167b16eac5.webp' },
+      { rank: '전체 16위', brand: '어반시크', product: '클래식 트렌치 코트', change: 49, gradient: 'linear-gradient(135deg, #d5dde5, #b8c8d5)', image: '/img/unsplash/webp/photo-1591047139829-d91aecb6caea.webp' },
     ],
   },
   {
     categoryIdx: 0, // 전체
     subTabIdx: 1,    // 신규 진입
     items: [
-      { rank: '전체 23위', brand: '로엘', product: '오버사이즈 린넨 블레이저', change: 'NEW', gradient: 'linear-gradient(135deg, #e5ddd5, #d5c8b8)', image: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=160&h=208&fit=crop' },
-      { rank: '전체 51위', brand: '밀로아', product: '핀턱 와이드 팬츠', change: 'NEW', gradient: 'linear-gradient(135deg, #d5e0e5, #b8d0d5)', image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=160&h=208&fit=crop' },
-      { rank: '전체 67위', brand: '소이런던', product: '플리츠 미디스커트', change: 'NEW', gradient: 'linear-gradient(135deg, #e5d5dd, #d5b8c8)', image: 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=160&h=208&fit=crop' },
-      { rank: '전체 82위', brand: '라센토', product: '스퀘어토 스트랩 뮬', change: 'NEW', gradient: 'linear-gradient(135deg, #dde5d5, #c8d5b8)', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=160&h=208&fit=crop' },
+      { rank: '전체 23위', brand: '로엘', product: '오버사이즈 린넨 블레이저', change: 'NEW', gradient: 'linear-gradient(135deg, #e5ddd5, #d5c8b8)', image: '/img/unsplash/webp/photo-1591369822096-ffd140ec948f.webp' },
+      { rank: '전체 51위', brand: '밀로아', product: '핀턱 와이드 팬츠', change: 'NEW', gradient: 'linear-gradient(135deg, #d5e0e5, #b8d0d5)', image: '/img/unsplash/webp/photo-1594938298603-c8148c4dae35.webp' },
+      { rank: '전체 67위', brand: '소이런던', product: '플리츠 미디스커트', change: 'NEW', gradient: 'linear-gradient(135deg, #e5d5dd, #d5b8c8)', image: '/img/unsplash/webp/photo-1583496661160-fb5886a0aaaa.webp' },
+      { rank: '전체 82위', brand: '라센토', product: '스퀘어토 스트랩 뮬', change: 'NEW', gradient: 'linear-gradient(135deg, #dde5d5, #c8d5b8)', image: '/img/unsplash/webp/photo-1543163521-1bf539c55dd2.webp' },
     ],
   },
   {
     categoryIdx: 6, // 원피스
     subTabIdx: 0,    // 급상승
     items: [
-      { rank: '원피스 3위', brand: '메르시블룸', product: '플라워 패턴 쉬폰 원피스', change: 38, gradient: 'linear-gradient(135deg, #f5e0d0, #e8d0c0)', image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=160&h=208&fit=crop' },
-      { rank: '원피스 11위', brand: '달리에뜨', product: '셔링 미디 원피스', change: 27, gradient: 'linear-gradient(135deg, #d0e5d8, #c0d5c8)', image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=160&h=208&fit=crop' },
-      { rank: '원피스 8위', brand: '비앙카', product: '슬리브리스 A라인 원피스', change: 22, gradient: 'linear-gradient(135deg, #e0d5e8, #d0c5d8)', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=160&h=208&fit=crop' },
-      { rank: '원피스 15위', brand: '르안느', product: '카라 버튼 셔츠 원피스', change: 19, gradient: 'linear-gradient(135deg, #d8dde5, #c0c8d5)', image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=160&h=208&fit=crop' },
+      { rank: '원피스 3위', brand: '메르시블룸', product: '플라워 패턴 쉬폰 원피스', change: 38, gradient: 'linear-gradient(135deg, #f5e0d0, #e8d0c0)', image: '/img/unsplash/webp/photo-1572804013309-59a88b7e92f1.webp' },
+      { rank: '원피스 11위', brand: '달리에뜨', product: '셔링 미디 원피스', change: 27, gradient: 'linear-gradient(135deg, #d0e5d8, #c0d5c8)', image: '/img/unsplash/webp/photo-1595777457583-95e059d581b8.webp' },
+      { rank: '원피스 8위', brand: '비앙카', product: '슬리브리스 A라인 원피스', change: 22, gradient: 'linear-gradient(135deg, #e0d5e8, #d0c5d8)', image: '/img/unsplash/webp/photo-1515886657613-9f3515b0c78f.webp' },
+      { rank: '원피스 15위', brand: '르안느', product: '카라 버튼 셔츠 원피스', change: 19, gradient: 'linear-gradient(135deg, #d8dde5, #c0c8d5)', image: '/img/unsplash/webp/photo-1539533018447-63fcce2678e3.webp' },
     ],
   },
 ];
@@ -358,12 +358,12 @@ const benchmarkStates: BenchmarkState[] = [
     ],
     searchScope: '29CM·Ably 니트 카테고리 상위 100',
     cards: [
-      { platform: 'Ably', rank: '니트 12위', score: 29, gradient: 'linear-gradient(135deg, #2a2025, #1a1520)', brand: '모먼트앤', image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '니트 34위', score: 24, gradient: 'linear-gradient(135deg, #1a2025, #15202a)', brand: '레이첼룸', image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '니트 58위', score: 19, gradient: 'linear-gradient(135deg, #252020, #201a1a)', brand: '블룸데이', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '니트 8위', score: 27, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '하루클로젯', image: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '니트 21위', score: 23, gradient: 'linear-gradient(135deg, #25202a, #1a1525)', brand: '달리에뜨', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '니트 45위', score: 18, gradient: 'linear-gradient(135deg, #201a25, #15202a)', brand: '소이런던', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=700&h=700&fit=crop' },
+      { platform: 'Ably', rank: '니트 12위', score: 29, gradient: 'linear-gradient(135deg, #2a2025, #1a1520)', brand: '모먼트앤', image: '/img/unsplash/webp/photo-1551488831-00ddcb6c6bd3.webp' },
+      { platform: 'Ably', rank: '니트 34위', score: 24, gradient: 'linear-gradient(135deg, #1a2025, #15202a)', brand: '레이첼룸', image: '/img/unsplash/webp/photo-1562157873-818bc0726f68.webp' },
+      { platform: 'Ably', rank: '니트 58위', score: 19, gradient: 'linear-gradient(135deg, #252020, #201a1a)', brand: '블룸데이', image: '/img/unsplash/webp/photo-1490481651871-ab68de25d43d.webp' },
+      { platform: '29CM', rank: '니트 8위', score: 27, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '하루클로젯', image: '/img/unsplash/webp/photo-1525507119028-ed4c629a60a3.webp' },
+      { platform: '29CM', rank: '니트 21위', score: 23, gradient: 'linear-gradient(135deg, #25202a, #1a1525)', brand: '달리에뜨', image: '/img/unsplash/webp/photo-1469334031218-e382a71b716b.webp' },
+      { platform: '29CM', rank: '니트 45위', score: 18, gradient: 'linear-gradient(135deg, #201a25, #15202a)', brand: '소이런던', image: '/img/unsplash/webp/photo-1487222477894-8943e31ef7b2.webp' },
     ],
   },
   /* Tab 1 — 셔링 퍼프 블라우스 */
@@ -378,12 +378,12 @@ const benchmarkStates: BenchmarkState[] = [
     ],
     searchScope: '29CM·Ably 상의 카테고리 상위 100',
     cards: [
-      { platform: 'Ably', rank: '상의 19위', score: 28, gradient: 'linear-gradient(135deg, #2a2520, #201a15)', brand: '밀로아', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '상의 41위', score: 23, gradient: 'linear-gradient(135deg, #202520, #1a201a)', brand: '에르블랑', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '상의 67위', score: 18, gradient: 'linear-gradient(135deg, #252020, #201a1a)', brand: '포레스트블룸', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '상의 14위', score: 26, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '어반시크', image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '상의 38위', score: 21, gradient: 'linear-gradient(135deg, #1a2025, #15202a)', brand: '로엘', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '상의 55위', score: 16, gradient: 'linear-gradient(135deg, #251a20, #201520)', brand: '라센토', image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=700&h=700&fit=crop' },
+      { platform: 'Ably', rank: '상의 19위', score: 28, gradient: 'linear-gradient(135deg, #2a2520, #201a15)', brand: '밀로아', image: '/img/unsplash/webp/photo-1496747611176-843222e1e57c.webp' },
+      { platform: 'Ably', rank: '상의 41위', score: 23, gradient: 'linear-gradient(135deg, #202520, #1a201a)', brand: '에르블랑', image: '/img/unsplash/webp/photo-1558171813-4c088753af8f.webp' },
+      { platform: 'Ably', rank: '상의 67위', score: 18, gradient: 'linear-gradient(135deg, #252020, #201a1a)', brand: '포레스트블룸', image: '/img/unsplash/webp/photo-1509631179647-0177331693ae.webp' },
+      { platform: '29CM', rank: '상의 14위', score: 26, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '어반시크', image: '/img/unsplash/webp/photo-1566174053879-31528523f8ae.webp' },
+      { platform: '29CM', rank: '상의 38위', score: 21, gradient: 'linear-gradient(135deg, #1a2025, #15202a)', brand: '로엘', image: '/img/unsplash/webp/photo-1529139574466-a303027c1d8b.webp' },
+      { platform: '29CM', rank: '상의 55위', score: 16, gradient: 'linear-gradient(135deg, #251a20, #201520)', brand: '라센토', image: '/img/unsplash/webp/photo-1556905055-8f358a7a47b2.webp' },
     ],
   },
   /* Tab 2 — 린넨 와이드 슬랙스 */
@@ -398,12 +398,12 @@ const benchmarkStates: BenchmarkState[] = [
     ],
     searchScope: '29CM·Ably 바지 카테고리 상위 100',
     cards: [
-      { platform: 'Ably', rank: '바지 22위', score: 29, gradient: 'linear-gradient(135deg, #202a25, #152520)', brand: '메르시블룸', image: 'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '바지 47위', score: 24, gradient: 'linear-gradient(135deg, #2a201a, #201a15)', brand: '비앙카', image: 'https://images.unsplash.com/photo-1551803091-e20673f15770?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '바지 71위', score: 18, gradient: 'linear-gradient(135deg, #1a2520, #15201a)', brand: '르안느', image: 'https://images.unsplash.com/photo-1612722432474-b971cdcea546?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '바지 13위', score: 27, gradient: 'linear-gradient(135deg, #201a2a, #1a1525)', brand: '코지랩', image: 'https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '바지 36위', score: 22, gradient: 'linear-gradient(135deg, #252025, #201a20)', brand: '하루클로젯', image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '바지 59위', score: 15, gradient: 'linear-gradient(135deg, #20201a, #1a1a15)', brand: '블룸데이', image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=700&h=700&fit=crop' },
+      { platform: 'Ably', rank: '바지 22위', score: 29, gradient: 'linear-gradient(135deg, #202a25, #152520)', brand: '메르시블룸', image: '/img/unsplash/webp/photo-1604176354204-9268737828e4.webp' },
+      { platform: 'Ably', rank: '바지 47위', score: 24, gradient: 'linear-gradient(135deg, #2a201a, #201a15)', brand: '비앙카', image: '/img/unsplash/webp/photo-1551803091-e20673f15770.webp' },
+      { platform: 'Ably', rank: '바지 71위', score: 18, gradient: 'linear-gradient(135deg, #1a2520, #15201a)', brand: '르안느', image: '/img/unsplash/webp/photo-1612722432474-b971cdcea546.webp' },
+      { platform: '29CM', rank: '바지 13위', score: 27, gradient: 'linear-gradient(135deg, #201a2a, #1a1525)', brand: '코지랩', image: '/img/unsplash/webp/photo-1612336307429-8a898d10e223.webp' },
+      { platform: '29CM', rank: '바지 36위', score: 22, gradient: 'linear-gradient(135deg, #252025, #201a20)', brand: '하루클로젯', image: '/img/unsplash/webp/photo-1441984904996-e0b6ba687e04.webp' },
+      { platform: '29CM', rank: '바지 59위', score: 15, gradient: 'linear-gradient(135deg, #20201a, #1a1a15)', brand: '블룸데이', image: '/img/unsplash/webp/photo-1485968579580-b6d095142e6e.webp' },
     ],
   },
   /* Tab 3 — 플로럴 플리츠 미디스커트 */
@@ -418,12 +418,12 @@ const benchmarkStates: BenchmarkState[] = [
     ],
     searchScope: '29CM·Ably 스커트 카테고리 상위 100',
     cards: [
-      { platform: 'Ably', rank: '스커트 31위', score: 29, gradient: 'linear-gradient(135deg, #2a2025, #1a1520)', brand: '모먼트앤', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '스커트 55위', score: 23, gradient: 'linear-gradient(135deg, #1a2520, #15201a)', brand: '달리에뜨', image: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=700&h=700&fit=crop' },
-      { platform: 'Ably', rank: '스커트 78위', score: 17, gradient: 'linear-gradient(135deg, #202a25, #152520)', brand: '밀로아', image: 'https://images.unsplash.com/photo-1603344797033-f0f4f587ab60?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '스커트 18위', score: 28, gradient: 'linear-gradient(135deg, #201a2a, #1a1525)', brand: '에르블랑', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '스커트 42위', score: 21, gradient: 'linear-gradient(135deg, #252025, #201a20)', brand: '포레스트블룸', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=700&h=700&fit=crop' },
-      { platform: '29CM', rank: '스커트 63위', score: 14, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '소이런던', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=700&h=700&fit=crop' },
+      { platform: 'Ably', rank: '스커트 31위', score: 29, gradient: 'linear-gradient(135deg, #2a2025, #1a1520)', brand: '모먼트앤', image: '/img/unsplash/webp/photo-1549298916-b41d501d3772.webp' },
+      { platform: 'Ably', rank: '스커트 55위', score: 23, gradient: 'linear-gradient(135deg, #1a2520, #15201a)', brand: '달리에뜨', image: '/img/unsplash/webp/photo-1578587018452-892bacefd3f2.webp' },
+      { platform: 'Ably', rank: '스커트 78위', score: 17, gradient: 'linear-gradient(135deg, #202a25, #152520)', brand: '밀로아', image: '/img/unsplash/webp/photo-1603344797033-f0f4f587ab60.webp' },
+      { platform: '29CM', rank: '스커트 18위', score: 28, gradient: 'linear-gradient(135deg, #201a2a, #1a1525)', brand: '에르블랑', image: '/img/unsplash/webp/photo-1548624313-0396c75e4b1a.webp' },
+      { platform: '29CM', rank: '스커트 42위', score: 21, gradient: 'linear-gradient(135deg, #252025, #201a20)', brand: '포레스트블룸', image: '/img/unsplash/webp/photo-1445205170230-053b83016050.webp' },
+      { platform: '29CM', rank: '스커트 63위', score: 14, gradient: 'linear-gradient(135deg, #20251a, #1a2015)', brand: '소이런던', image: '/img/unsplash/webp/photo-1523381210434-271e8be1f52b.webp' },
     ],
   },
 ];

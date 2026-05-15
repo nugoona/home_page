@@ -11,33 +11,30 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 /* ══════════════════════════════════════════════════════════════
    IMAGE HELPERS
    ══════════════════════════════════════════════════════════════ */
-const SQ = (id: string, w = 300) =>
-  `https://images.unsplash.com/${id}?w=${w}&h=${w}&fit=crop&crop=top`;
-const PT = (id: string) =>
-  `https://images.unsplash.com/${id}?w=240&h=300&fit=crop&crop=top`;
+const U = (id: string) => `/img/unsplash/webp/${id}.webp`;
 
 const SQ_IMGS = {
-  knit:    SQ('photo-1434389677669-e08b4cac3105'),
-  jacket:  SQ('photo-1539109136881-3be0616acf4b'),
-  blouse:  SQ('photo-1525507119028-ed4c629a60a3'),
-  denim:   SQ('photo-1541099649105-f69ad21f3246'),
-  stripe:  SQ('photo-1516762689617-e1cffcef479d'),
-  sweater: SQ('photo-1551232864-3f0890e580d9'),
-  casual:  SQ('photo-1529139574466-a303027c1d8b'),
-  model:   SQ('photo-1515886657613-9f3515b0c78f'),
+  knit:    U('photo-1434389677669-e08b4cac3105'),
+  jacket:  U('photo-1539109136881-3be0616acf4b'),
+  blouse:  U('photo-1525507119028-ed4c629a60a3'),
+  denim:   U('photo-1541099649105-f69ad21f3246'),
+  stripe:  U('photo-1516762689617-e1cffcef479d'),
+  sweater: U('photo-1551232864-3f0890e580d9'),
+  casual:  U('photo-1529139574466-a303027c1d8b'),
+  model:   U('photo-1515886657613-9f3515b0c78f'),
 };
 
 const PT_IMGS = [
-  PT('photo-1515886657613-9f3515b0c78f'),
-  PT('photo-1529139574466-a303027c1d8b'),
-  PT('photo-1539109136881-3be0616acf4b'),
-  PT('photo-1551232864-3f0890e580d9'),
-  PT('photo-1525507119028-ed4c629a60a3'),
-  PT('photo-1485968579580-b6d095142e6e'),
-  PT('photo-1509631179647-0177331693ae'),
-  PT('photo-1469334031218-e382a71b716b'),
-  PT('photo-1516762689617-e1cffcef479d'),
-  PT('photo-1541099649105-f69ad21f3246'),
+  U('photo-1515886657613-9f3515b0c78f'),
+  U('photo-1529139574466-a303027c1d8b'),
+  U('photo-1539109136881-3be0616acf4b'),
+  U('photo-1551232864-3f0890e580d9'),
+  U('photo-1525507119028-ed4c629a60a3'),
+  U('photo-1485968579580-b6d095142e6e'),
+  U('photo-1509631179647-0177331693ae'),
+  U('photo-1469334031218-e382a71b716b'),
+  U('photo-1516762689617-e1cffcef479d'),
+  U('photo-1541099649105-f69ad21f3246'),
 ];
 
 /* ══════════════════════════════════════════════════════════════

@@ -799,8 +799,8 @@ function Section03() {
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 8 }}>
                       {[
-                        { tag: 'META', color: '#1877f2', img: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=300&h=160&fit=crop&crop=top', campaign: 'Spring Sale', roas: '1,024%' },
-                        { tag: 'GOOGLE', color: '#34a853', img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=300&h=160&fit=crop&crop=top', campaign: 'Brand KW', roas: '412%' },
+                        { tag: 'META', color: '#1877f2', img: '/img/unsplash/webp/photo-1515886657613-9f3515b0c78f.webp', campaign: 'Spring Sale', roas: '1,024%' },
+                        { tag: 'GOOGLE', color: '#34a853', img: '/img/unsplash/webp/photo-1539109136881-3be0616acf4b.webp', campaign: 'Brand KW', roas: '412%' },
                       ].map((r) => (
                         <div key={r.tag} style={{ border: '1px solid #eaeaea', overflow: 'hidden' }}>
                           <div style={{ height: 64, backgroundImage: `url(${r.img})`, backgroundSize: 'cover', backgroundPosition: 'center top', position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', padding: 4 }}>
