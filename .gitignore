@@ -52,6 +52,7 @@ build/
 logs/
 daemon.pid
 daemon_state.json
+.claude/*.lock
 
 # === ngn_homepage 임시 ===
 homepage-full.png
