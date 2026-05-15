@@ -444,17 +444,62 @@ ngn_homepage/
 
 // ─── main ───
 
-fs.mkdirSync(CTX, { recursive: true });
+const useJson = process.argv.includes('--json');
 
-const nugoonaContent = generateNugoona();
-const aurumContent = generateAurum();
-const structureContent = generateStructure();
+let success = false;
+let errorMsg = null;
+let stats = null;
 
-fs.writeFileSync(path.join(CTX, 'nugoona.md'), nugoonaContent);
-fs.writeFileSync(path.join(CTX, 'aurum.md'), aurumContent);
-fs.writeFileSync(path.join(CTX, 'structure.md'), structureContent);
+try {
+  fs.mkdirSync(CTX, { recursive: true });
 
-console.log('docs/ctx/ updated:');
-console.log(`  nugoona.md   (${nugoonaContent.length} bytes)`);
-console.log(`  aurum.md     (${aurumContent.length} bytes)`);
-console.log(`  structure.md (${structureContent.length} bytes)`);
+  const nugoonaContent = generateNugoona();
+  const aurumContent = generateAurum();
+  const structureContent = generateStructure();
+
+  fs.writeFileSync(path.join(CTX, 'nugoona.md'), nugoonaContent);
+  fs.writeFileSync(path.join(CTX, 'aurum.md'), aurumContent);
+  fs.writeFileSync(path.join(CTX, 'structure.md'), structureContent);
+
+  stats = {
+    nugoona: nugoonaContent.length,
+    aurum: aurumContent.length,
+    structure: structureContent.length,
+  };
+  success = true;
+} catch (err) {
+  errorMsg = err && err.stack ? err.stack.split('\n')[0] : String(err);
+}
+
+if (useJson) {
+  const output = success
+    ? {
+        continue: true,
+        systemMessage:
+          `[ctx] 갱신 OK · nugoona.md (${stats.nugoona}b) · aurum.md (${stats.aurum}b) · structure.md (${stats.structure}b)`,
+        hookSpecificOutput: {
+          hookEventName: 'SessionStart',
+          additionalContext: `docs/ctx/ 3개 파일 자동 갱신됨 (nugoona/aurum/structure)`,
+        },
+      }
+    : {
+        continue: true,
+        systemMessage: `[ctx] 갱신 실패 — ${errorMsg}`,
+        hookSpecificOutput: {
+          hookEventName: 'SessionStart',
+          additionalContext: `WARNING: docs/ctx/ 자동 갱신 실패 — ${errorMsg}. 파일이 stale 상태일 수 있음.`,
+        },
+      };
+  process.stdout.write(JSON.stringify(output));
+  process.exit(0);
+}
+
+if (success) {
+  console.log('docs/ctx/ updated:');
+  console.log(`  nugoona.md   (${stats.nugoona} bytes)`);
+  console.log(`  aurum.md     (${stats.aurum} bytes)`);
+  console.log(`  structure.md (${stats.structure} bytes)`);
+} else {
+  console.error('ERROR:', errorMsg);
+  process.exit(1);
+}

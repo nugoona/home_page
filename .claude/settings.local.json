@@ -1,11 +1,14 @@
 {
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "node scripts/update-ctx.js",
+            "command": "node scripts/update-ctx.js --json",
             "timeout": 10,
             "statusMessage": "ctx 파일 최신화 중..."
           },
