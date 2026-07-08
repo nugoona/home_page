@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { promoBanner } from '@/lib/content/global';
 
 export default function PromoBanner() {
   const [visible, setVisible] = useState(false);
@@ -24,9 +25,9 @@ export default function PromoBanner() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] bg-black text-white text-[13px] h-10 flex items-center justify-center">
       <div className="flex items-center gap-4 px-6">
-        <span>지금 시작하면 첫 달 무료</span>
-        <Link href="/start" className="text-white/70 hover:text-white transition-colors">
-          자세히 보기 &rarr;
+        <span>{promoBanner.text}</span>
+        <Link href={promoBanner.link.href} className="text-white/70 hover:text-white transition-colors">
+          {promoBanner.link.text} &rarr;
         </Link>
         <button
           onClick={close}

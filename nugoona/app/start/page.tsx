@@ -4,173 +4,174 @@ import { useState } from 'react';
 import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
+import { hero, form, steps, faq } from '@/lib/content/start';
+
+const EN = { fontFamily: 'var(--font-en)' } as const;
 
 export default function StartPage() {
-  const [form, setForm] = useState({
-    name: '',
-    company: '',
-    phone: '',
-    email: '',
-    platform: '',
-    budget: '',
-    message: '',
-  });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [interest, setInterest] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('loading');
-    try {
-      const res = await fetch('/api/submit-survey', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        setStatus('success');
-        if (typeof window !== 'undefined') {
-          window.gtag?.('event', 'generate_lead', { event_category: 'form' });
-          window.fbq?.('track', 'Lead');
-        }
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
-    }
+    // 스팸 방어(honeypot)·실제 알림 전송(Telegram)·rate limit = E3-8에서 API 연결.
+    const data = new FormData(e.currentTarget);
+    if (data.get('company_website')) return; // honeypot: 봇이 채우면 무시
+    setSubmitted(true);
   }
 
   return (
     <main>
       <OuterContainer>
-        <Section crossMarks>
-          <div className="py-20 px-12 text-center max-md:py-14 max-md:px-6">
+        {/* 헤더 */}
+        <Section noBorder>
+          <div className="pt-40 pb-12 px-6 text-center max-md:pt-28 max-md:pb-8">
             <FadeUp>
-              <h1 className="text-[clamp(32px,5vw,48px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
-                무료로 시작하기
+              <h1 className="text-[clamp(30px,5vw,52px)] font-extrabold text-text-primary tracking-[-0.035em] leading-[1.12]">
+                {hero.h1}
               </h1>
-              <p className="text-[17px] text-text-body max-w-[480px] mx-auto leading-[1.6]">
-                아래 정보를 남겨주시면 담당자가 연락드려 세팅을 도와드립니다.
-              </p>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <p className="text-[16px] text-text-body leading-[1.7] max-w-[520px] mx-auto mt-6">{hero.sub}</p>
             </FadeUp>
           </div>
         </Section>
 
-        <Section alt>
-          <div className="py-16 px-12 max-md:py-12 max-md:px-6">
-            <FadeUp>
-              <div className="max-w-[560px] mx-auto">
-                {status === 'success' ? (
-                  <div className="text-center py-12">
-                    <h2 className="text-[24px] font-semibold text-text-primary mb-4">문의가 접수되었습니다</h2>
-                    <p className="text-[15px] text-text-body">영업일 기준 1일 이내에 연락드리겠습니다.</p>
+        {/* 폼 + 3스텝 (2열) */}
+        <Section>
+          <div className="py-12 px-12 max-md:px-6 max-md:py-8">
+            <div className="grid grid-cols-[1.2fr_1fr] gap-12 max-w-[1000px] mx-auto max-md:grid-cols-1 max-md:gap-10">
+              {/* 폼 */}
+              <FadeUp>
+                <div className="border border-border-default p-8 max-md:p-6">
+                  {submitted ? (
+                    <div className="py-16 text-center">
+                      <span className="rounded-dot inline-flex w-12 h-12 items-center justify-center bg-accent-bg text-accent text-[22px] mb-5">✓</span>
+                      <h2 className="text-[20px] font-semibold text-text-primary mb-2">신청이 접수되었습니다</h2>
+                      <p className="text-[14px] text-text-body leading-[1.7]">
+                        남겨 주신 연락처로 곧 안내드리겠습니다.<br />상호명으로 미리 세팅해 두겠습니다.
+                      </p>
+                    </div>
+                  ) : (
+                    <form onSubmit={onSubmit} className="flex flex-col gap-6">
+                      <h2 className="text-[18px] font-semibold text-text-primary">{form.heading}</h2>
+
+                      {/* 관심 제품 */}
+                      <div>
+                        <label className="block text-[13px] font-medium text-text-secondary mb-2.5">{form.interest.label}</label>
+                        <div className="grid grid-cols-1 gap-2">
+                          {form.interest.options.map((o) => (
+                            <label
+                              key={o.value}
+                              className={`flex items-center gap-3 px-4 py-3 border cursor-pointer transition-colors text-[14px] ${
+                                interest === o.value
+                                  ? 'border-accent bg-accent-bg text-text-primary'
+                                  : 'border-border-default text-text-body hover:border-border-hover'
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name="interest"
+                                value={o.value}
+                                checked={interest === o.value}
+                                onChange={() => setInterest(o.value)}
+                                className="accent-[#0070f3]"
+                                required
+                              />
+                              {o.text}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      <Field label={form.business.label} name="business" placeholder={form.business.placeholder} required />
+                      <Field label={form.contact.label} name="contact" placeholder={form.contact.placeholder} required />
+                      <Field label={form.memo.label} name="memo" placeholder={form.memo.placeholder} />
+
+                      {/* honeypot (봇 트랩 — 화면 숨김) */}
+                      <input
+                        type="text"
+                        name="company_website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        className="absolute w-px h-px opacity-0 -left-[9999px]"
+                      />
+
+                      <button
+                        type="submit"
+                        className="h-[50px] px-6 text-[15px] font-semibold bg-[#171717] text-white border border-[#171717] hover:bg-[#333] transition-colors"
+                      >
+                        {form.submit}
+                      </button>
+                      <p className="text-[12px] text-text-muted text-center">{form.note}</p>
+                    </form>
+                  )}
+                </div>
+              </FadeUp>
+
+              {/* 3스텝 기대관리 */}
+              <FadeUp delay={0.1}>
+                <div>
+                  <h2 className="text-[18px] font-semibold text-text-primary mb-6">{steps.heading}</h2>
+                  <div className="flex flex-col">
+                    {steps.items.map((s, i) => (
+                      <div key={i} className="flex gap-4 pb-6 last:pb-0 relative">
+                        {i < steps.items.length - 1 && (
+                          <span className="absolute left-[15px] top-8 bottom-0 w-px bg-border-default" />
+                        )}
+                        <span className="shrink-0 w-8 h-8 flex items-center justify-center border border-border-default text-[13px] font-semibold text-accent bg-white z-[1]" style={EN}>
+                          {s.num}
+                        </span>
+                        <div className="pt-1">
+                          <h3 className="text-[15px] font-semibold text-text-primary mb-1">{s.title}</h3>
+                          <p className="text-[13px] text-text-body leading-[1.6]">{s.desc}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ) : (
-                  <form onSubmit={onSubmit} className="flex flex-col gap-5">
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">이름 *</label>
-                      <input
-                        name="name"
-                        value={form.name}
-                        onChange={onChange}
-                        required
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">회사/브랜드명 *</label>
-                      <input
-                        name="company"
-                        value={form.company}
-                        onChange={onChange}
-                        required
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">연락처 *</label>
-                      <input
-                        name="phone"
-                        value={form.phone}
-                        onChange={onChange}
-                        required
-                        type="tel"
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">이메일</label>
-                      <input
-                        name="email"
-                        value={form.email}
-                        onChange={onChange}
-                        type="email"
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">쇼핑몰 플랫폼</label>
-                      <select
-                        name="platform"
-                        value={form.platform}
-                        onChange={onChange}
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      >
-                        <option value="">선택해주세요</option>
-                        <option value="cafe24">카페24</option>
-                        <option value="makeshop">메이크샵</option>
-                        <option value="godomall">고도몰</option>
-                        <option value="imweb">아임웹</option>
-                        <option value="other">기타</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">월 광고비 예산</label>
-                      <select
-                        name="budget"
-                        value={form.budget}
-                        onChange={onChange}
-                        className="w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors"
-                      >
-                        <option value="">선택해주세요</option>
-                        <option value="under200">200만원 이하</option>
-                        <option value="200-500">200~500만원</option>
-                        <option value="500-1000">500~1,000만원</option>
-                        <option value="over1000">1,000만원 이상</option>
-                        <option value="undecided">미정</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">문의사항</label>
-                      <textarea
-                        name="message"
-                        value={form.message}
-                        onChange={onChange}
-                        rows={4}
-                        className="w-full px-4 py-3 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors resize-y"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      className="h-12 btn-gradient-dark text-white text-[15px] font-semibold border border-[#333] cursor-pointer disabled:opacity-50 transition-all"
-                    >
-                      {status === 'loading' ? '전송 중...' : '무료 상담 신청'}
-                    </button>
-                    {status === 'error' && (
-                      <p className="text-[13px] text-red-500 text-center">전송에 실패했습니다. 다시 시도해주세요.</p>
-                    )}
-                  </form>
-                )}
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </Section>
+
+        {/* FAQ 3 */}
+        <Section alt>
+          <div className="py-16 px-12 max-md:py-12 max-md:px-6 max-w-[720px] mx-auto">
+            <FadeUp>
+              <h2 className="text-[clamp(24px,3.4vw,34px)] font-semibold text-text-primary tracking-[-0.02em] text-center mb-10">
+                자주 묻는 질문
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.1}>
+              <div className="border-t border-border-default">
+                {faq.map((f, i) => (
+                  <div key={i} className="py-6 border-b border-border-default">
+                    <h3 className="text-[16px] font-semibold text-text-primary mb-2">{f.q}</h3>
+                    <p className="text-[14px] text-text-body leading-[1.7]">{f.a}</p>
+                  </div>
+                ))}
               </div>
             </FadeUp>
           </div>
         </Section>
       </OuterContainer>
     </main>
+  );
+}
+
+function Field({ label, name, placeholder, required }: { label: string; name: string; placeholder?: string; required?: boolean }) {
+  return (
+    <div>
+      <label className="block text-[13px] font-medium text-text-secondary mb-2">{label}</label>
+      <input
+        type="text"
+        name={name}
+        placeholder={placeholder}
+        required={required}
+        className="w-full h-[46px] px-4 text-[14px] text-text-primary border border-border-default bg-white placeholder:text-text-muted focus:border-accent focus:outline-none transition-colors"
+      />
+    </div>
   );
 }

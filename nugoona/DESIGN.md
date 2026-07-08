@@ -97,6 +97,83 @@
 
 > ⚠ 대부분 콘텐츠가 하드코딩(광고·대시보드·리포트) → **리빌드 시 카피·목업만 교체**. 범용(props)만 그대로. 상세 렌더/모션/범용성 원본 요약은 이 세션 산출(필요 시 재생성).
 
+## 8.6 원래 홈 디자인 해부 — 재건 보존 규칙 (설계도, 2026-07-08 · 사장님 지시 "하나도 빼지 마라")
+
+> **원칙**: 원래 홈(갈아엎기 전, `git b1d9b0f~1`)의 디자인 요소를 **하나도 임의 제거하지 않는다.** 새 카피·포지셔닝을 입히되, 아래 점·선·면·그리드·타이포·줄바꿈·모션 규칙은 **원래대로 보존·재활용**한다. "추억은 아름다워야 한다"(사장님). 근원 코드 = `globals.css` + `Section` + `HeroAurora` + `SectionHeader` + 목업 컴포넌트.
+> ⚠ **이번 리빌드(신 lib/content 카피)가 평범해진 근본 원인**: 아래 B(줄바꿈·`.comma`·accent 스팬)·목업(제품 화면)을 통째로 뺐기 때문. 재건 = 이 규칙 복원.
+
+### A. 점·선·면·그리드 (전부 의도 설계 — 임의 제거 금지)
+- **직각 전역**(`* { border-radius:0 !important }`). 예외 4개만: `.rounded-dot`(점 50%)·`.rounded-pill`(히어로 CTA 999px)·`.iphone-*`·slider thumb.
+- **선·면(Section)**: 섹션 경계 = `border-b border-border-default`(1px #eaeaea). `alt`=#fafafa 면 / `dark`=#0a0a0a 면. `crossMarks`=상단 좌·우 `CrossMark`(교차 +표식). 이 1px 격자가 페이지 골격 — 없애면 밋밋해짐.
+- **HeroAurora 그리드(정수)**: 데스크 **12열×8행** / 모바일 **6열×10행**, 셀마다 우측 `1px rgba(255,255,255,0.12)` + 하단 `0.5px` 선. **콘텐츠 영역(데스크 2-5행·2-9열)만 선을 비워** 글이 격자 구멍에 앉음. + 4모서리 `.grid-crosshair`(0.5px 흰 십자, opacity .35) + `.hero-bracket`(코너 20px 브래킷) + `.aurora-noise`/필름노이즈(fractalNoise opacity .035) + `BeamCanvas` 회로빔 + `radial-gradient(#0d1525→#000)`.
+- **다크 섹션 패턴**: `.dark-grid-pattern`(32px 격자)·`.dark-dot-pattern`(20px 도트). 다크 공식 = `linear-gradient(180deg,#0a0a0a,#151515)` + white/white80.
+- **모션 자산(globals.css — 전부 보존)**: 오로라 float, 회로빔(데스크 3200/14s·모바일 2400/12s), 폰 오토스크롤 18s, 마퀴 30s, 글래스 글레어, shimmer, badge pulse, pipeline flow, skeleton, float.
+
+### B. 타이포 & 줄바꿈 (홈페이지용 — 재건 최우선 복원 대상)
+- **`word-break: keep-all`(전역)** — 한글 단어 단위로만 줄바꿈(어절 중간 안 끊김).
+- **헤딩 = `dangerouslySetInnerHTML`로 렌더** → 카피 문자열 안에 직접:
+  - **수동 `<br>`로 두 줄 너비를 비슷하게 균형** 맞춘다(예 원래: `광고, 누구나 쉽게.<br>가격은 가볍게.` / `URL 하나로<br>Instagram·Google 광고까지`). ⛔한 줄이 길고 한 줄이 짧은 어색한 auto-wrap 금지.
+  - **`.comma`** = 콤마를 세리프체(Georgia .75em, translateY .05em)로. 헤딩의 쉼표는 이걸로.
+  - **`<span class="text-accent">…</span>`** = 강조 단어만 블루(#0070f3).
+- **leading(줄 간격) 촘촘**: 히어로 h1 `leading-[1.12]` / 섹션 h2 `leading-[1.15]` / 본문 `leading-[1.6~1.65]`. tracking 헤딩 `-0.02~-0.04em`.
+- **clamp 스케일(고정px 헤딩 금지)**: 히어로 `clamp(26px,5vw,56px)`(features/pricing 72px) · 섹션 `clamp(28px,4vw,40px)` · 본문 15~18px · eyebrow `13px 600 tracking-[0.1em] uppercase` + Inter Tight.
+- **숫자·영문 = `var(--font-en)`(Inter Tight)**, 쉼표 `.comma`. 한글 = Pretendard.
+- ⚠ **현 신 카피(content/ads/home.ts)엔 `<br>`·`.comma`·accent 스팬 0** → 재건 시 헤딩마다 **균형 `<br>`+`.comma`+accent** 삽입하고 `dangerouslySetInnerHTML` 렌더로 전환.
+
+### C. 여백·간격
+- `OuterContainer` max-w **1200px** → `Section`. 텍스트 폭 `max-w-[520~720px] mx-auto`. 섹션 패딩 데스크 `px-12 py-16~20` / 모바일 `px-6 py-12~14`. SectionHeader `mb-12`.
+
+### D. 원래 섹션 인벤토리 (홈 10블록 — 재활용 대상, 하나도 안 뺌)
+> 각 블록 = 보존/재활용. 새 IA(2갈래)로 재배치하되 **디자인 요소·목업 밀도는 원래대로**.
+1. **HeroAurora** — 그리드+크로스헤어+브래킷+노이즈+회로빔 다크 히어로 (홈 전용, 빔).
+2. **PainPoints** — 3문제 셀 + 각 미니 목업(파이프라인 다이어그램·대시보드·광고생성).
+3. **SolutionSection** — accent 강조 선언.
+4. **EvidenceInsight** — 다크 + **통합 대시보드 목업**(KPI·ROAS·채널 매출 막대, 3데이터셋 순환).
+5. **EvidenceSpeed** — 다크 + **광고생성 제품 목업**(상품 이미지 + 실제 폼 필드).
+6. **EvidenceTrend** — 다크 + **트렌드 랭킹표 + 이미지 벤치마크 그리드(실상품 사진) + 검색량 차트**.
+7. **ROIComparison** — 큰 `0%` 타이포 + 광고비 구간별 대행 vs NGN 비교표(스크롤 진행).
+8. **Reviews** — 3열 후기 카드.
+9. **FAQ** — 좌 제목 + 우 아코디언.
+10. **CTA** — 다크 마감 버튼2.
+> 그 외 쇼케이스(`AdCanvasShowcase` 4스텝 토글·`DashboardShowcase` 4탭·`TrendShowcase` 3탭)·`DataPipeline`(SVG 점 흐름)·`DashboardGlimpse`(6KPI)·`MobileDashboardMockup`·`BrowserFrame`·`bento-grid` = §8.5 자산. **재건은 이들을 재활용**(카피·목업 데이터만 교체).
+
+### E. 재건 매핑 원칙 (원래 컴포넌트 → 새 페이지, 밀도 유지)
+- **/ads(대시보드 제품)** = 원래 목업이 광고/대시보드용이라 **거의 직접 재활용**: 히어로=`HeroAurora`류 다크(빔) · 통합=`EvidenceInsight`/`DashboardShowcase` · 리포트=`ReportDark`/`DashboardShowcase §2` · 트렌드=`EvidenceTrend`/`TrendShowcase` · 광고생성=`EvidenceSpeed`/`AdCanvasShowcase` · 챗봇=`ReportDark`셸+대화. 카피만 새 포지셔닝(‘이해’).
+- **/content(검색·콘텐츠 제품)** = 광고 목업이 안 맞음 → **같은 밀도의 콘텐츠용 목업 신규**(검색결과·블로그 에디터·플레이스 지도·순위추적 대시보드 화면). BrowserFrame 셸·점선면·줄바꿈 규칙 동일 적용.
+- **홈** = `HeroAurora`(빔) 재활용 + 미리보기 목업 리치.
+- 전 페이지: 위 A(점선면)·B(줄바꿈·comma·accent)·C(간격) 규칙 **무조건 적용**. 목업은 텍스트 카드 금지 = **실제 제품 화면 재현**.
+
+### F. 페이지별 원래 디자인 인벤토리 (홈 외 — 하나도 안 뺌, 2026-07-08 코드 전수)
+- **/features** (`app/features/page.tsx`): `Features`(EN 72px, crossMarks) 히어로 + 3 쇼케이스(AdCanvas·Dashboard·Trend) + 다크 CTA(버튼2). **시그니처=FeatureRow**(`AdCanvasShowcase`): 좌 `BrowserFrame`(3점+url+그림자 `0 2px 40px`)에 **애니 제품 목업** / 우 [번호칩 `32×32 #171717 흰숫자` + `flex-1 h-px` 디바이더 + h3 `clamp(22,3vw,30) 700 -0.02em 1.25` + desc 15/1.7 + sub 14/#999] · alt 교차 · `springPop`+`staggerContainer`, 진입후 450ms 트리거.
+- **/about** (`app/about/page.tsx`): crossMarks 히어로(eyebrow "About NGN" + h1 수동 `<br>` "대행사 없이도,<br>…") · **통계 4카드**(`border p-8` + **`CounterUp`** 대형 EN 숫자 + 라벨) · Vision 3항목 · 회사정보(사업자번호 376-05-02792 ⚠footer 544-02-02671과 불일치, 확인 필요) · 다크 CTA "선착순 10개 업체 한정".
+- **/pricing(원래, HEAD)**: `Pricing`(EN) 히어로 + 3플랜(`border-r` 분할·상단 흡착 badge·`48px` 가격 EN·VAT·체크리스트·note) + **비교표**(bg-alt 헤더·`✓`=accent·hover) + **dashed border 콜아웃** + FAQ `Accordion` + 다크 CTA. (→E3-4에서 신 `PricingCards`로 교체했으나 **분할선·흡착 badge·체크·다크CTA 디테일은 계승**.)
+- **/start(원래, HEAD)**: crossMarks 히어로 + 폼(라벨 13/500 + input `h-11 px-4 border focus:border-accent` · **select 드롭다운**[쇼핑몰 플랫폼·월 광고비 예산] · textarea) + **`btn-gradient-dark` 제출**(그라디언트) + 에러 `red-500` + 성공 상태. ⚠신 /start는 이걸 flat 검정으로 바꿔 디테일 손실 → gradient·select 계승.
+
+### G. 쇼케이스 리치 패턴 (★★/ads 재건의 금광 — 거의 그대로 재스킨) — 코드: `components/features/*Showcase.tsx`
+- **쇼케이스 다크 히어로**: `grid-cols-[7fr_5fr]` + 라디얼 그라디언트(대시보드=네이비 `#0a2050`, 트렌드=그린 `#0d2a18`) + 대형 EN 워드(`clamp(44,6vw,72) 800`) + **데모 pill**(흰 `rounded-pill`, 텍스트 + `rounded-dot 36px #171717` 화살표) + eyebrow + h2 `<br>` + 흰 태그칩. 세로 구분 `[box-shadow:1px_0_0_rgba(255,255,255,0.12)]`.
+- **AdCanvas 4스텝(BrowserFrame 내부 애니)**: ①URL 타이핑+커서 → AI 스피너(SVG spin) → done(4:5 이미지·`AI Copywriting`·`Targeting` 태그 x-슬라이드·`광고 게시하기`) ②Meta 카탈로그 제품카드 + 배지(NEW/TOP/AUTO 컬러·`badgePulse`) + 동기화 스피너 ③Google `Sponsored` + `skeletonPulse`→reveal + **Ad Strength 게이지**(4막대 scaleX 채움) ④캠페인 행(초록/회색 pulse 점) + ROAS **CountUp** + **토글 스위치**(rounded-pill 슬라이드) + 통계카드 CountUp.
+- **Dashboard 쇼케이스**: ①**애니 SVG 데이터 파이프라인**(5소스[Cafe24/Meta/Google/GA4/Market 컬러점]→NGN 도트박스→대시보드 목업[매출 막대·방문자 폴리라인·₩·ROAS 785%], elbow 경로 + `animateMotion` 흐르는 점, 데스크/모바일 2벌) ②**매거진 AI 리포트**(타이틀 패널 `#f0f0f0 minHeight96`·**`AIAnalysis` 카드**[`border-left:2px #0070f3`]·KPI행 delta·퍼널바·비교표[`#1e3a5f` 헤더]·시나리오 카드[보수/도전 accent], 다크 그라디언트 패널 `#0a1e3d→#0a0a0a`) ③**iPhone 목업**(`iphone-frame`·dynamic island·볼륨/전원 버튼·`animate-glass-glare`·`animate-phone-scroll` 요요·풀 앱화면[KPI·막대·상품랭킹·광고 이미지카드·GA4·AI Insight]).
+- **Trend 쇼케이스**: ①**Briefing 테이블**(카테고리 탭 9개 + 필터 탭[급상승/신규/하락] + 썸네일·`▲▼순위변화`·이번주/지난주·`AnimatePresence`·더보기) ②**AI Insight**(다크 헤더 + `MY BRAND` 카드 + `KEYWORD`[Material🌍/Mood✨ 이모지] + `TRENDS` 탭 + 상품카드[랭킹배지 `#1e3a5f`·🔥변화배지·₩가격]) ③**Compare**(브랜드 탭 + 5열 상품 그리드[랭킹번호 text-shadow·베스트배지 보라 그라디언트·하트 likes·바로가기/리뷰 버튼]) ④**Search Volume**(다크 패널 + **애니 SVG 라인차트**[내 브랜드 vs 경쟁 `dashed`·`pathLength` draw·그라디언트 area] + GSC 테이블[검색어/노출/CTR/순위/클릭·행 x-슬라이드]).
+
+### H. 공통 마이크로 요소 (전 페이지 — 하나라도 제거 금지)
+- **번호 칩** `w-8 h-8 #171717 흰숫자`(다크 섹션=흰바탕 검정) + `w-10 h-px #eaeaea` 디바이더.
+- **세로 디바이더** = `[box-shadow:1px_0_0_var(--color-border-default)]`(라이트) / `rgba(255,255,255,0.12)`(다크).
+- **타이틀 패널** `#f0f0f0` bg `minHeight 96` + uppercase EN eyebrow(`10px .06em #555`) + bold 타이틀(`clamp` 20↔16 `-0.03em`).
+- **AIAnalysis 카드** `border-left:2px #0070f3` + title(13/600) + body(12/1.7 #555). 전역 `.ai-card strong{font-weight:500;color:#171717}`(작은 한글 700 뭉갬 방지).
+- **데모 pill** / **eyebrow**(12~13px 600 accent `.1em` uppercase EN) / **태그칩**(흰 bg 또는 1px 보더).
+- **KPI 카드**(label + 대형 EN value + delta ▲초록/▼빨강) · **퍼널 바** · **비교표**(`#1e3a5f` 헤더·2색 컬럼) · **시나리오 카드**(보수 흑/도전 accent).
+- **탭**(active `#111` bg 흰텍스트 or 밑줄 `2px accent`) + **`AnimatePresence`** 전환(`opacity/y`).
+- **모션 변주**(globals + 컴포넌트): `springPop`(y20→0, EASE `[0.16,1,0.3,1]`) · `staggerContainer`(0.12) · 진입후 400~450ms 지연 트리거 · `CountUp/CounterUp`(0→목표) · `badgePulse` · `skeletonPulse` · spin · `glass-glare` · `phone-scroll` · SVG `animateMotion`/`pathLength`.
+- **`.comma` 세리프 콤마** · **이모지 악센트**(🌍✨🔥) · **실상품 이미지**(`/img/unsplash/webp/*.webp`).
+- **`btn-gradient-dark`**(그라디언트 CTA/제출 — 플랫 검정 대체 금지) · CTA 화살표 아이콘 hover 이동.
+
+### I. 재건 필수 규칙 (요약 — 이거 어기면 다시 평범해짐)
+1. **헤딩** = 수동 `<br>` 균형 + `.comma` + `text-accent` 스팬 (`dangerouslySetInnerHTML`). leading 촘촘.
+2. **목업 = 텍스트 카드 금지 → 실제 제품 화면**(BrowserFrame·SVG 파이프라인/차트·iPhone·데이터 테이블·상품 그리드).
+3. **/ads** = Dashboard·Trend·AdCanvas 쇼케이스를 **직접 재스킨**(구조·모션 유지, 카피만 '이해' 포지셔닝). **/content** = 같은 밀도의 콘텐츠 목업 신규(네이버 검색결과·블로그 에디터·플레이스 지도·순위추적·GSC류 — 쇼케이스 패턴 차용).
+4. **점·선·면·그리드·모션·마이크로(A~H) 하나도 제거 금지.** 없앨 땐 이유를 사장님께 먼저.
+
 ## 9. 변경 이력
 - 2026-07-07: 초안 작성(현행 5페이지·토큰·모션·규칙 파악, 리빌드 방향은 미정 자리만 마련).
 - 2026-07-07: **재사용 자산 인벤토리(§8.5)** 추가 — 컴포넌트 50개 전수 분류(범용/목업/하드코딩). 설계 시 매핑 우선.
+- 2026-07-08: **§8.6 원래 홈 디자인 해부(재건 설계도)** 추가 — 사장님 지시("하나도 빼지 마라"). 점·선·면·그리드(HeroAurora 12×8 격자·크로스헤어·브래킷·노이즈·빔)·타이포/줄바꿈(수동 `<br>` 균형·`.comma`·accent 스팬·leading 촘촘)·목업 밀도(텍스트카드 금지=실제 제품화면)·원래 10블록 인벤토리·재건 매핑 명문화. 리빌드가 평범해진 원인=이 규칙 누락으로 진단. **+ F~I 확장**(사장님 2차 지적 "홈 외 섹션도 하나도 빼지 마라"): /features(FeatureRow·4스텝 애니목업)·/about(CounterUp 통계)·/pricing·/start(gradient·select) 전수 + G 쇼케이스 리치패턴(SVG 파이프라인·매거진 AI리포트·iPhone·데이터테이블·라인차트) + H 공통 마이크로(번호칩·AIAnalysis·타이틀패널·탭·springPop 등) + I 재건규칙.
