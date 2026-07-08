@@ -100,7 +100,7 @@ export default function StartPage() {
 
                       <button
                         type="submit"
-                        className="h-[50px] px-6 text-[15px] font-semibold bg-[#171717] text-white border border-[#171717] hover:bg-[#333] transition-colors"
+                        className="h-[50px] px-6 text-[15px] font-semibold btn-gradient-dark text-white transition-all"
                       >
                         {form.submit}
                       </button>
