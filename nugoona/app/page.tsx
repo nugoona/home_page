@@ -2,6 +2,9 @@ import Link from 'next/link';
 import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
+import BeamCanvas from '@/components/home/BeamCanvas';
+import DashboardGlimpse from '@/components/home/DashboardGlimpse';
+import SearchResultMock from '@/components/content/SearchResultMock';
 import { hero, structure, preview, story, closing } from '@/lib/content/home';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
@@ -28,6 +31,8 @@ export default function Home() {
               className="absolute inset-0 pointer-events-none opacity-[0.035]"
               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }}
             />
+            {/* 실제 회로빔 (원본 HeroAurora 재활용) */}
+            <BeamCanvas />
 
             <div className="relative z-[1] text-center max-w-[860px] mx-auto">
               <FadeUp>
@@ -72,28 +77,37 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* H3 · 두 제품 미리보기 ×2 + 브리지 */}
+        {/* H3 · 두 제품 미리보기 ×2 (실제 목업 재활용) + 브리지 */}
         <Section alt>
-          <div className="py-20 px-12 max-md:py-14 max-md:px-6 max-w-[1000px] mx-auto">
-            <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-              {[preview.content, preview.ads].map((p, i) => (
-                <FadeUp key={i} delay={i * 0.08}>
-                  <div className="bg-white border border-border-default p-9 h-full flex flex-col max-md:p-7">
-                    <span className="text-[12px] font-semibold text-accent tracking-[0.05em] uppercase" style={EN}>
-                      {p.label}
-                    </span>
-                    <h3 className="text-[20px] font-semibold text-text-primary mt-3 mb-3">{p.heading}</h3>
-                    <p className="text-[15px] text-text-body leading-[1.7] flex-1">{p.body}</p>
-                    <span className="mt-6">
-                      <ArrowLink href={i === 0 ? '/content' : '/ads'} text="자세히 보기" />
-                    </span>
-                  </div>
-                </FadeUp>
-              ))}
+          <div className="py-20 px-12 max-md:py-14 max-md:px-6 max-w-[1080px] mx-auto flex flex-col gap-16 max-md:gap-12">
+            {/* 미리보기 1: 누구나 컨텐츠 — 검색 목업 */}
+            <div className="grid grid-cols-2 gap-14 items-center max-md:grid-cols-1 max-md:gap-8">
+              <FadeUp>
+                <div>
+                  <span className="text-[12px] font-semibold text-accent tracking-[0.05em] uppercase" style={EN}>{preview.content.label}</span>
+                  <h3 className="text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] mt-3 mb-3">{preview.content.heading}</h3>
+                  <p className="text-[15px] text-text-body leading-[1.7]">{preview.content.body}</p>
+                  <span className="inline-block mt-6"><ArrowLink href="/content" text="자세히 보기" /></span>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.1}><SearchResultMock /></FadeUp>
             </div>
-            <FadeUp delay={0.16}>
-              <p className="text-center text-[15px] text-text-body mt-8">{preview.bridge}</p>
-            </FadeUp>
+
+            {/* 브리지 */}
+            <FadeUp><p className="text-center text-[15px] text-text-muted">{preview.bridge}</p></FadeUp>
+
+            {/* 미리보기 2: NGN 대시보드 — 실제 대시보드 목업(DashboardGlimpse 재활용) */}
+            <div className="grid grid-cols-2 gap-14 items-center max-md:grid-cols-1 max-md:gap-8">
+              <FadeUp>
+                <div>
+                  <span className="text-[12px] font-semibold text-accent tracking-[0.05em] uppercase" style={EN}>{preview.ads.label}</span>
+                  <h3 className="text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] mt-3 mb-3">{preview.ads.heading}</h3>
+                  <p className="text-[15px] text-text-body leading-[1.7]">{preview.ads.body}</p>
+                  <span className="inline-block mt-6"><ArrowLink href="/ads" text="자세히 보기" /></span>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.1}><DashboardGlimpse /></FadeUp>
+            </div>
           </div>
         </Section>
 

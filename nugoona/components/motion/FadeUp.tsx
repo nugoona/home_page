@@ -1,7 +1,3 @@
-'use client';
-
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface FadeUpProps {
@@ -11,25 +7,19 @@ interface FadeUpProps {
   as?: 'div' | 'section' | 'p' | 'span';
 }
 
-export default function FadeUp({
-  children,
-  delay = 0,
-  className,
-  as = 'div',
-}: FadeUpProps) {
-  const Component = useMemo(() => motion.create(as), [as]);
-
+/**
+ * 진입 페이드업 — CSS 애니메이션 기반(framer-motion 의존 제거).
+ * framer-motion 마운트 애니메이션이 일부 모바일 브라우저(삼성 인터넷 등)에서
+ * 불발해 콘텐츠가 opacity:0에 갇히던 문제 방지. CSS 애니메이션은 엔진 레벨이라
+ * JS 하이컵과 무관하게 실행되고, 애니메이션이 없어도 콘텐츠는 기본 표시된다.
+ */
+export default function FadeUp({ children, delay = 0, className, as: As = 'div' }: FadeUpProps) {
   return (
-    <Component
-      // 마운트 즉시 등장(animate) — whileInView가 일부 모바일 브라우저(삼성 인터넷 등)에서
-      // 초기 로드 시 불발해 콘텐츠가 opacity:0에 갇히던 문제 방지. 스크롤 감지 의존 제거.
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay }}
-      className={cn(className)}
-      style={{ backfaceVisibility: 'hidden', willChange: 'transform, opacity' }}
+    <As
+      className={cn('fade-up-css', className)}
+      style={delay ? { animationDelay: `${delay}s` } : undefined}
     >
       {children}
-    </Component>
+    </As>
   );
 }

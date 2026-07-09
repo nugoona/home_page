@@ -303,6 +303,18 @@ a {
 .fade-up-delay-2 { transition-delay: 0.2s; }
 .fade-up-delay-3 { transition-delay: 0.3s; }
 
+/* CSS-only fade-up (framer-motion 비의존 — 모바일에서 콘텐츠가 opacity:0에 갇히지 않음) */
+@keyframes fadeUpIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.fade-up-css {
+  animation: fadeUpIn 0.55s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up-css { animation: none; }
+}
+
 /* ===== Utility Keyframes ===== */
 @keyframes spin {
   to { transform: rotate(360deg); }
