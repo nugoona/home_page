@@ -93,7 +93,7 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
         >
           <rect x={DASH_L} y="10" width="280" height="180" fill="#fff" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
           <rect x={DASH_L} y="10" width="280" height="24" fill="#fafafa" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="26" fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">NGN Dashboard</text>
+          <text x={DASH_L + 14} y="26" fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">누구나 광고</text>
           <circle cx={DASH_L + 264} cy="22" r="3" fill="#22c55e" />
 
           <rect x={DASH_L + 8} y="42" width="128" height="68" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
@@ -203,7 +203,7 @@ function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
       <motion.g initial={{ opacity: 0, y: 10 }} animate={isActive ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}>
         <rect x={DL} y={DASH_TOP} width={DW} height={DH} fill="#fff" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
         <rect x={DL} y={DASH_TOP} width={DW} height="24" fill="#fafafa" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 12} y={DASH_TOP + 16} fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">NGN Dashboard</text>
+        <text x={DL + 12} y={DASH_TOP + 16} fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">누구나 광고</text>
         <circle cx={DL + DW - 14} cy={DASH_TOP + 12} r="3" fill="#22c55e" />
 
         <rect x={DL + 8} y={DASH_TOP + 32} width="136" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
@@ -661,7 +661,7 @@ export function PhoneMockup() {
                   <div style={{ padding: '0 12px' }}>
                     {/* App header */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                      <p style={{ fontSize: 14, fontWeight: 700, color: '#171717', ...EN }}>Dashboard</p>
+                      <p style={{ fontSize: 14, fontWeight: 700, color: '#171717' }}>누구나 광고</p>
                       <div style={{ display: 'flex', gap: 6 }}>
                         {['이번 달', 'demo'].map((t) => (
                           <span key={t} style={{ fontSize: 8, padding: '3px 8px', border: '1px solid #eaeaea', color: '#666' }}>{t}</span>
