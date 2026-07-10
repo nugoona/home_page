@@ -25,7 +25,7 @@ const staggerContainer: Variants = {
 /* ================================================================
    CountUp — animate from 0 to target
    ================================================================ */
-function CountUp({
+export function CountUp({
   target, prefix = '', suffix = '', duration = 1.2, active,
 }: {
   target: number; prefix?: string; suffix?: string; duration?: number; active: boolean;
@@ -166,7 +166,7 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
           transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
           style={{ width: '50%', display: 'flex', flexDirection: 'column' }}
         >
-          <div style={{ flex: 1, background: 'linear-gradient(135deg, #dbeafe, #ede9fe)', border: '1px solid #eaeaea', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ flex: 1, background: 'rgba(0,112,243,0.06)', border: '1px solid #eaeaea', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
             <span style={{ fontSize: 32, fontWeight: 700, color: 'rgba(0,112,243,0.15)', ...EN }}>4:5</span>
             <motion.div
               animate={status === 'done' ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
@@ -418,7 +418,7 @@ function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
    STEP 04 — Campaign Management
    Slide-in Rows + CountUp + Toggle Spring
    ================================================================ */
-function Step04_Management({ isActive }: { isActive: boolean }) {
+export function Step04_Management({ isActive }: { isActive: boolean }) {
   const campaigns = [
     { name: 'Summer Sale 2026', roas: 350, on: true },
     { name: 'Brand Awareness', roas: 220, on: false },
@@ -608,7 +608,22 @@ export default function AdCanvasShowcase() {
       <FeatureRow step={STEPS[0]} url={URLS[0]} isAlt={false} Media={Step01_UrlInput} />
       <FeatureRow step={STEPS[1]} url={URLS[1]} isAlt={true} Media={Step02_Catalog} />
       <FeatureRow step={STEPS[2]} url={URLS[2]} isAlt={false} Media={Step03_GoogleAds} />
-      <FeatureRow step={STEPS[3]} url={URLS[3]} isAlt={true} Media={Step04_Management} />
+
+      {/* 브리지 — Step04(광고운영)는 Dashboard·Chatbot 섹션에 위임(사장님 확정, 중복 제거) */}
+      <Section alt>
+        <div className="py-16 px-12 max-md:py-10 max-md:px-6">
+          <FadeUp>
+            <div style={{ maxWidth: 1080, margin: '0 auto', textAlign: 'center' }}>
+              <h3 style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: '#171717', letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 8 }}>
+                만들고 끝이 아닙니다
+              </h3>
+              <p style={{ fontSize: 15, color: '#666' }}>
+                운영과 성과는, 아래 대시보드에서 이어집니다.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </Section>
     </>
   );
 }

@@ -82,62 +82,8 @@ export default function ChatbotShowcase() {
 
   return (
     <>
-      {/* ── 섹션 히어로 (다크) ── */}
-      <Section id="chatbot" dark>
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 25% 0%, #1a1040 0%, #0a0a0a 60%)' }}
-        />
-        <div className="relative grid grid-cols-[7fr_5fr] max-md:grid-cols-1">
-          {/* 좌: 대형 워드 + 데모 */}
-          <div className="relative flex flex-col [box-shadow:1px_0_0_rgba(255,255,255,0.12)] max-md:[box-shadow:none] max-md:border-b max-md:border-[rgba(255,255,255,0.12)]">
-            <FadeUp className="flex-1 flex flex-col">
-              <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center items-center text-center gap-7 max-md:px-6 max-md:py-10">
-                <p
-                  className="text-white select-none"
-                  style={{ fontSize: 'clamp(44px, 6vw, 72px)', fontFamily: "'Inter Tight', sans-serif", fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 0.9 }}
-                >
-                  Chatbot
-                </p>
-                <a
-                  href="https://board.nugoona.co.kr/demo/dashboard"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-pill inline-flex items-center justify-between gap-4 bg-white pl-6 pr-2 py-2 hover:bg-[#f0f0f0] transition-colors duration-200 max-w-[280px] w-full"
-                >
-                  <span className="text-[14px] font-bold text-[#171717] tracking-[-0.01em]">직접 데모 경험하기</span>
-                  <span className="rounded-dot w-9 h-9 bg-[#171717] flex items-center justify-center shrink-0">
-                    <svg className="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M9 5l3 3-3 3" /></svg>
-                  </span>
-                </a>
-              </div>
-            </FadeUp>
-          </div>
-
-          {/* 우: 카피 */}
-          <div className="flex flex-col">
-            <FadeUp delay={0.1} className="flex-1 flex flex-col">
-              <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center max-md:px-6 max-md:py-10">
-                <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-4" style={EN}>Chatbot</p>
-                <h2 className="text-[clamp(24px,3vw,36px)] font-semibold text-white tracking-[-0.03em] leading-[1.15] mb-4">
-                  복잡한 화면 대신<br />말로 묻고 운영하세요
-                </h2>
-                <p className="text-[15px] leading-[1.6] mb-6 font-light tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  매출·광고·용어, 무엇이든 쉬운 말로 답합니다. 광고도 대화로 켜고 끄고 예산을 바꿉니다.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['AI', '광고 말로 제어', 'AI 진단', '자유 질문'].map((tag) => (
-                    <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#111', ...EN }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </Section>
-
       {/* ── 대화 쇼케이스 ── */}
-      <Section>
+      <Section id="chatbot">
         <div ref={ref} className="py-20 px-12 max-w-[1080px] mx-auto max-md:py-12 max-md:px-6">
           <div className="grid grid-cols-[5fr_6fr] gap-14 items-center max-md:grid-cols-1 max-md:gap-10">
             {/* 좌 텍스트 */}
@@ -147,12 +93,17 @@ export default function ChatbotShowcase() {
                 <div className="flex-1 h-px bg-border-default" />
               </div>
               <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-4">
-                묻고, 말로 운영합니다
+                복잡한 화면 대신<br />말로 묻고 운영하세요
               </h3>
               <p className="text-[15px] text-text-body leading-[1.7] mb-5">
                 &quot;이번 달 광고 어때?&quot;부터 &quot;예산 올려줘&quot;까지. 복잡한 관리자 화면을 몰라도 대화로 확인하고 조정합니다.
                 광고 제어는 위저드에서 확인한 뒤 안전하게 실행됩니다.
               </p>
+              <div className="flex flex-wrap gap-2 mb-5">
+                {['AI', '광고 말로 제어', 'AI 진단', '자유 질문'].map((tag) => (
+                  <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ border: '1px solid #e0e0e0', color: '#333', ...EN }}>{tag}</span>
+                ))}
+              </div>
               <p className="text-[14px] text-text-weak" style={EN}>Meta · Google · 안전 게이트</p>
             </FadeUp>
 

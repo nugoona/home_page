@@ -107,12 +107,12 @@ function BriefingSection() {
     : ['랭킹', '썸네일', '브랜드', '상품명', '순위변화', '이번주 순위', '지난주 순위'];
 
   return (
-    <Section>
+    <Section id="trend">
       {/* Intro */}
       <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
         <FadeUp>
           <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-3" style={EN}>
-            Weekly Briefing
+            Trend · Weekly Briefing
           </p>
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
             매주 월요일, MD 회의 전에<br />이미 알고 있습니다.
@@ -129,16 +129,27 @@ function BriefingSection() {
           <div className="max-w-[1080px] mx-auto">
 
             {/* Header row */}
-            <div className="flex items-center justify-between px-8 pt-6 pb-0 max-md:px-4">
+            <div className="flex items-center justify-between px-8 pt-6 pb-0 max-md:px-4 max-md:flex-col max-md:items-start max-md:gap-2">
               <h3 className="text-[15px] font-bold text-[#111] tracking-[-0.02em]">
                 29CM 2026년 2월 4주차 트렌드
               </h3>
-              <span className="text-[11px] text-[#888] flex items-center gap-1.5" style={EN}>
-                <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M8 1v4l2.5 2.5" /><circle cx="8" cy="8" r="7" />
-                </svg>
-                매주 월요일 오전 9시 업데이트
-              </span>
+              <div className="flex items-center gap-4">
+                <span className="text-[11px] text-[#888] flex items-center gap-1.5" style={EN}>
+                  <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    <path d="M8 1v4l2.5 2.5" /><circle cx="8" cy="8" r="7" />
+                  </svg>
+                  매주 월요일 오전 9시 업데이트
+                </span>
+                <a
+                  href="https://board.nugoona.co.kr/demo/trend"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] font-semibold hover:underline"
+                  style={{ color: '#0070f3' }}
+                >
+                  직접 데모 경험하기 →
+                </a>
+              </div>
             </div>
 
             {/* Category tabs */}
@@ -309,18 +320,20 @@ function InsightSection() {
 
   return (
     <Section alt>
-      {/* Intro */}
-      <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
+      {/* Intro — 컴팩트 좌측 정렬(브리핑 표 아래 이어지는 해설 느낌) */}
+      <div className="pt-10 pb-6 px-12 max-md:pt-8 max-md:px-6">
         <FadeUp>
-          <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-3" style={EN}>
-            AI Insight
-          </p>
-          <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
-            수백 개 상품을 직접 볼 수 없을 때,<br />AI가 대신 읽어줍니다.
-          </h2>
-          <p className="text-[16px] text-text-primary font-light leading-[1.6] max-w-[520px] mx-auto tracking-[-0.025em]">
-            10년차 패션 MD 페르소나의 AI가 카테고리별 트렌드 키워드와 패턴을 매주 보고서로 작성합니다.
-          </p>
+          <div className="max-w-[1080px] mx-auto">
+            <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-2" style={EN}>
+              AI Insight
+            </p>
+            <h2 className="text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] leading-[1.25] text-text-primary mb-2">
+              수백 개 상품을 직접 볼 수 없을 때, AI가 대신 읽어줍니다.
+            </h2>
+            <p className="text-[15px] text-text-primary font-light leading-[1.6] tracking-[-0.025em]">
+              10년차 패션 MD 페르소나의 AI가 카테고리별 트렌드 키워드와 패턴을 매주 보고서로 작성합니다.
+            </p>
+          </div>
         </FadeUp>
       </div>
 
@@ -453,7 +466,7 @@ function InsightSection() {
                     <div className="border border-border-default p-5 bg-white">
                       {/* Category badge + keywords */}
                       <div className="flex items-start gap-3 mb-5">
-                        <span className="shrink-0 px-3 py-1 text-[11px] font-bold text-white" style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}>
+                        <span className="shrink-0 px-3 py-1 text-[11px] font-bold text-white" style={{ background: '#171717' }}>
                           니트웨어
                         </span>
                         <p className="text-[12px] text-text-primary leading-[1.6]">
@@ -652,7 +665,7 @@ function CompareSection() {
                         {p.bestRank && (
                           <span
                             className="absolute top-2 right-2 text-[9px] font-bold text-white px-1.5 py-0.5"
-                            style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', ...EN }}
+                            style={{ background: '#171717', ...EN }}
                           >
                             베스트 {p.bestRank}위
                           </span>
@@ -855,56 +868,6 @@ function GSCQueryTable() {
 export default function TrendShowcase() {
   return (
     <>
-      {/* Hero */}
-      <Section id="trend" dark>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 75% 0%, #0d2a18 0%, #0a0a0a 60%)' }} />
-        <div className="relative grid grid-cols-[7fr_5fr] max-md:grid-cols-1">
-          {/* LEFT */}
-          <div className="relative flex flex-col [box-shadow:1px_0_0_rgba(255,255,255,0.12)] max-md:[box-shadow:none] max-md:border-b max-md:border-[rgba(255,255,255,0.12)]">
-            <FadeUp className="flex-1 flex flex-col">
-              <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center items-center text-center gap-7 max-md:px-6 max-md:py-10">
-                <p
-                  className="leading-[0.9] tracking-[-0.01em] text-white select-none"
-                  style={{ fontSize: 'clamp(44px, 6vw, 72px)', fontFamily: "'Inter Tight', sans-serif", fontWeight: 800 }}
-                >
-                  Trend
-                </p>
-                <a
-                  href="https://board.nugoona.co.kr/demo/trend"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-pill inline-flex items-center justify-between gap-4 bg-white pl-6 pr-2 py-2 hover:bg-[#f0f0f0] transition-colors duration-200 max-w-[280px] w-full"
-                >
-                  <span className="text-[14px] font-bold text-[#171717] tracking-[-0.01em]">직접 데모 경험하기</span>
-                  <span className="rounded-dot w-9 h-9 bg-[#171717] flex items-center justify-center shrink-0">
-                    <svg className="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M9 5l3 3-3 3" /></svg>
-                  </span>
-                </a>
-              </div>
-            </FadeUp>
-          </div>
-          {/* RIGHT */}
-          <div className="flex flex-col">
-            <FadeUp delay={0.1} className="flex-1 flex flex-col">
-              <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center max-md:px-6 max-md:py-10">
-                <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-4" style={EN}>Trend</p>
-                <h2 className="text-[clamp(24px,3vw,36px)] font-semibold text-white tracking-[-0.03em] leading-[1.15] mb-4">
-                  경쟁사 베스트셀러를<br />매주 자동으로 추적합니다
-                </h2>
-                <p className="text-[15px] leading-[1.6] mb-6 font-light tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  29CM, Ably의 카테고리별 베스트 상품 순위 변동. 급상승·신규진입 상품을 자동 감지합니다.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['AI', 'Naver Datalab API', 'Google Search Console', 'Cloud Run Jobs', 'BigQuery'].map((tag) => (
-                    <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#111', ...EN }}>{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </Section>
-
       <BriefingSection />
       <InsightSection />
       <CompareSection />

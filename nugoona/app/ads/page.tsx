@@ -4,7 +4,7 @@ import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 import AdCanvasShowcase from '@/components/features/AdCanvasShowcase';
-import DashboardShowcase from '@/components/features/DashboardShowcase';
+import DashboardShowcase, { PhoneMockup } from '@/components/features/DashboardShowcase';
 import ChatbotShowcase from '@/components/features/ChatbotShowcase';
 import TrendShowcase from '@/components/features/TrendShowcase';
 import { hero, identity } from '@/lib/content/ads';
@@ -79,32 +79,38 @@ export default function AdsPage() {
         <ChatbotShowcase />
         <TrendShowcase />
 
-        {/* ── 마감 CTA ── */}
+        {/* ── 마감 CTA + 폰 목업 (구 모바일 섹션의 iPhone을 여기로 이식 — 주장 텍스트 없이 시각 자산만) ── */}
         <Section alt noBorder>
           <div
-            className="py-20 px-12 text-center max-md:py-16 max-md:px-6"
+            className="px-12 max-md:px-6"
             style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #151515 100%)' }}
           >
-            <FadeUp>
-              <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">
-                한 달, 카드 없이 먼저 써 보세요
-              </h2>
-              <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.</p>
-              <div className="flex justify-center gap-3 max-sm:flex-col max-sm:items-center">
-                <Link
-                  href="/start"
-                  className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#e0e0e0] transition-all"
-                >
-                  무료로 시작하기
-                </Link>
-                <Link
-                  href="/content"
-                  className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white/75 border border-white/20 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
-                >
-                  노출이 먼저라면 →
-                </Link>
-              </div>
-            </FadeUp>
+            <div className="max-w-[1080px] mx-auto grid grid-cols-[6fr_5fr] gap-12 items-center py-20 max-md:grid-cols-1 max-md:py-16 max-md:gap-10">
+              <FadeUp>
+                <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">
+                  한 달, 카드 없이 먼저 써 보세요
+                </h2>
+                <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.</p>
+                <div className="flex gap-3 max-sm:flex-col">
+                  <Link
+                    href="/start"
+                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#e0e0e0] transition-all"
+                  >
+                    무료로 시작하기
+                  </Link>
+                  <Link
+                    href="/content"
+                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white/75 border border-white/20 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
+                  >
+                    노출이 먼저라면 →
+                  </Link>
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.15} className="flex flex-col items-center gap-5 max-md:order-first">
+                <PhoneMockup />
+                <p className="text-[13px] text-white/40">외근 중에도, 이동 중에도 — 모바일에서 그대로.</p>
+              </FadeUp>
+            </div>
           </div>
         </Section>
       </OuterContainer>

@@ -56,8 +56,8 @@
 rg -n "검색 1위|상위\s*노출|1페이지 보장|상단 고정|사진 한 장|굴리[다고려]|소상공인" nugoona/ docs/ --glob '!docs/app-specs/**' --glob '!_backup_*'
 # ② 폐기 구조가 살아있는지
 rg -n "홈 5블록|H1~H5|11/11/5" docs/
-# ③ 파스텔·AI 냄새 (DESIGN §7-7)
-rg -n "pastel|보라 그라디언트|from-purple|bg-purple" nugoona/components nugoona/app
+# ③ 파스텔·AI 냄새 (DESIGN §7-7) — Tailwind 클래스 + 인라인 hex 둘 다(2026-07-11 인라인 보라 그라디언트가 구 패턴을 통과한 실증)
+rg -in "pastel|보라 그라디언트|from-purple|bg-purple|#7c3aed|#4f46e5|#ede9fe|GEMINI" nugoona/components nugoona/app
 ```
 - 세 검사의 **잔존 건수와 무해 판정 이유**를 보고한다("0건"이라 단정하기 전에 실제로 돌린다).
 - **기준선(2026-07-10 실행 결과 — 이보다 늘면 신규 오염)**:

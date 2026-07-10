@@ -549,7 +549,7 @@ function Section02() {
   return (
     <Section alt>
 
-      {/* ━━━ ROW 1: 5fr 텍스트 + 7fr Market07 ━━━ */}
+      {/* ━━━ ROW 1: 5fr 텍스트 + 7fr Action Plan ━━━ */}
       <div className="grid grid-cols-[5fr_7fr] max-md:grid-cols-1 border-b border-border-default">
         {/* LEFT — 다크 그라데이션 (헤더 네이비와 연결) */}
         <div
@@ -566,73 +566,30 @@ function Section02() {
             </h3>
             <p className="text-[15px] leading-[1.6] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
               단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로<br className="max-md:hidden" />
-              GEMINI가 데이터를 해석하고 다음 달 전략을 제시합니다.
+              AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
           </FadeUp>
         </div>
-        {/* RIGHT */}
-        <div className="border-l border-border-default">
-          <FadeUp delay={0.1} className="px-10 py-10 max-md:px-6 max-md:py-8">
-            <Market07Card />
-          </FadeUp>
-        </div>
-      </div>
-
-      {/* ━━━ ROW 2: Funnel03 전체 너비 ━━━
-          border-b 는 plain wrapper div 에 → FadeUp willChange 오프셋 방지 */}
-      <div className="border-b border-border-default">
-        <FadeUp className="px-10 py-10 max-md:px-6 max-md:py-8">
-          <Funnel03Card />
-        </FadeUp>
-      </div>
-
-      {/* ━━━ ROW 3: 3열 그리드
-          DOM 순서: 타이틀1→콘텐츠1→타이틀2→콘텐츠2→타이틀3→콘텐츠3 (모바일 자연 흐름)
-          데스크톱: md:col/row-start 로 2행 배치 */}
-      <div className="grid grid-cols-3 max-md:grid-cols-1">
-
-        {/* ── Col 1: Sales Analysis ── */}
-        <div
-          className="md:col-start-1 md:row-start-1 px-8 flex flex-col justify-center border-b border-border-default"
-          style={{ minHeight: 96, background: '#f0f0f0' }}
-        >
-          <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Sales Analysis</p>
-          <p className="text-[20px] md:text-[16px]" style={{ fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>지난달 매출 성과를 분해하고 원인을 진단합니다.</p>
-        </div>
-        <div className="flex flex-col md:col-start-1 md:row-start-2 max-md:border-b max-md:border-border-default">
-          <FadeUp className="flex-1 px-8 pt-5 pb-10 flex flex-col">
-            <Sales01Card />
-          </FadeUp>
-        </div>
-
-        {/* ── Col 2: Ad Performance (세로선: border-l) ── */}
-        <div
-          className="md:col-start-2 md:row-start-1 px-8 flex flex-col justify-center border-b border-border-default md:border-l"
-          style={{ minHeight: 96, background: '#f0f0f0' }}
-        >
-          <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Ad Performance</p>
-          <p className="text-[20px] md:text-[16px]" style={{ fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>Meta·Google 광고 효율을 진단합니다.</p>
-        </div>
-        <div className="flex flex-col md:col-start-2 md:row-start-2 md:border-l md:border-border-default max-md:border-b max-md:border-border-default">
-          <FadeUp delay={0.08} className="flex-1 px-8 pt-5 pb-10 flex flex-col">
-            <Ads06Card />
-          </FadeUp>
-        </div>
-
-        {/* ── Col 3: Action Plan (세로선: border-l) ── */}
-        <div
-          className="md:col-start-3 md:row-start-1 px-8 flex flex-col justify-center border-b border-border-default md:border-l"
-          style={{ minHeight: 96, background: '#f0f0f0' }}
-        >
-          <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Action Plan</p>
-          <p className="text-[20px] md:text-[16px]" style={{ fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>다음 달을 위한 핵심 실행 전략을 제안합니다.</p>
-        </div>
-        <div className="flex flex-col md:col-start-3 md:row-start-2 md:border-l md:border-border-default">
-          <FadeUp delay={0.16} className="flex-1 px-8 pt-5 pb-10 flex flex-col">
+        {/* RIGHT — Action Plan 타이틀 띠 + ActionPlan09Card */}
+        <div className="border-l border-border-default flex flex-col max-md:border-l-0">
+          <div
+            className="px-10 flex flex-col justify-center border-b border-border-default max-md:px-6"
+            style={{ minHeight: 96, background: '#f0f0f0' }}
+          >
+            <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Action Plan</p>
+            <p className="text-[20px] md:text-[16px]" style={{ fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>다음 달을 위한 핵심 실행 전략을 제안합니다.</p>
+          </div>
+          <FadeUp delay={0.1} className="flex-1 px-10 pt-5 pb-10 flex flex-col max-md:px-6">
             <ActionPlan09Card />
           </FadeUp>
         </div>
+      </div>
 
+      {/* ━━━ ROW 2: Funnel03 전체 너비 (현행 유지) ━━━ */}
+      <div>
+        <FadeUp className="px-10 py-10 max-md:px-6 max-md:py-8">
+          <Funnel03Card />
+        </FadeUp>
       </div>
 
     </Section>
@@ -642,51 +599,11 @@ function Section02() {
 /* ================================================================
    SECTION 03 — Mobile: Modern iPhone + Auto-Scroll Yoyo
    ================================================================ */
-function Section03() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
+/* ================================================================
+   PHONE MOCKUP — extracted iPhone frame (used by Section03)
+   ================================================================ */
+export function PhoneMockup() {
   return (
-    <Section>
-      <div ref={ref} className="pt-20 px-12 pb-12 max-w-[1080px] mx-auto max-md:pt-10 max-md:px-6 max-md:pb-6">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate={inView ? 'show' : 'hidden'}
-          className="grid grid-cols-[2fr_3fr] gap-12 items-center max-md:grid-cols-1 max-md:gap-8"
-        >
-          {/* LEFT: Text */}
-          <motion.div variants={staggerContainer} className="max-md:order-first">
-            <motion.div variants={springPop} className="flex items-center gap-3 mb-5">
-              <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717] shrink-0" style={EN}>03</span>
-              <div className="flex-1 h-px bg-[#eaeaea]" />
-            </motion.div>
-            <motion.h3 variants={springPop} className="text-[clamp(22px,3vw,30px)] font-bold text-[#171717] tracking-[-0.02em] leading-[1.25] mb-4">
-              언제 어디서든 관리
-            </motion.h3>
-            <motion.p variants={springPop} className="text-[15px] text-[#333] leading-[1.7] mb-5">
-              외근 중에도, 이동 중에도. 매출과 광고 성과를 확인하고, 트렌드를 파악하고, 예산을 바로 조정합니다.
-            </motion.p>
-            {[
-              '매출·광고 핵심 성과 확인',
-              '시장 트렌드 리포트',
-              '광고 예산 실시간 변경',
-            ].map((item) => (
-              <motion.div key={item} variants={springPop} className="flex items-center gap-2 mb-2">
-                <span className="w-1.5 h-1.5 bg-accent shrink-0" />
-                <span className="text-[14px] text-[#444]">{item}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* RIGHT: Modern iPhone Mockup with Auto-Scroll */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
-            className="flex justify-center"
-          >
-            {/* iPhone frame */}
             <div
               className="iphone-frame relative max-md:max-w-[280px]"
               style={{
@@ -841,6 +758,54 @@ function Section03() {
                 <div className="iphone-home" style={{ width: 80, height: 4, background: 'rgba(255,255,255,0.25)' }} />
               </div>
             </div>
+  );
+}
+
+export function Section03() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  return (
+    <Section>
+      <div ref={ref} className="pt-20 px-12 pb-12 max-w-[1080px] mx-auto max-md:pt-10 max-md:px-6 max-md:pb-6">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate={inView ? 'show' : 'hidden'}
+          className="grid grid-cols-[2fr_3fr] gap-12 items-center max-md:grid-cols-1 max-md:gap-8"
+        >
+          {/* LEFT: Text */}
+          <motion.div variants={staggerContainer} className="max-md:order-first">
+            <motion.div variants={springPop} className="flex items-center gap-3 mb-5">
+              <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717] shrink-0" style={EN}>03</span>
+              <div className="flex-1 h-px bg-[#eaeaea]" />
+            </motion.div>
+            <motion.h3 variants={springPop} className="text-[clamp(22px,3vw,30px)] font-bold text-[#171717] tracking-[-0.02em] leading-[1.25] mb-4">
+              언제 어디서든 관리
+            </motion.h3>
+            <motion.p variants={springPop} className="text-[15px] text-[#333] leading-[1.7] mb-5">
+              외근 중에도, 이동 중에도. 매출과 광고 성과를 확인하고, 트렌드를 파악하고, 예산을 바로 조정합니다.
+            </motion.p>
+            {[
+              '매출·광고 핵심 성과 확인',
+              '시장 트렌드 리포트',
+              '광고 예산 실시간 변경',
+            ].map((item) => (
+              <motion.div key={item} variants={springPop} className="flex items-center gap-2 mb-2">
+                <span className="w-1.5 h-1.5 bg-accent shrink-0" />
+                <span className="text-[14px] text-[#444]">{item}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* RIGHT: Modern iPhone Mockup with Auto-Scroll */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+            className="flex justify-center"
+          >
+            <PhoneMockup />
           </motion.div>
         </motion.div>
       </div>
@@ -908,7 +873,6 @@ export default function DashboardShowcase() {
 
       <Section01 />
       <Section02 />
-      <Section03 />
     </>
   );
 }
