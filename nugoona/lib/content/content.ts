@@ -113,7 +113,7 @@ export const pricingIntro = {
   // 가격 하단 훅 = 크로스셀 (CONTENT §0 동선: [가격]→/ads, 랜딩당 1~2곳 중 하나)
   hook: {
     text: '네이버·구글 광고 세팅은 무료로 도와드립니다.',
-    cta: { text: 'NGN 대시보드에서 직접 운영', href: '/ads' },
+    cta: { text: '누구나 광고에서 직접 운영', href: '/ads' },
   } satisfies CrossSell,
 };
 
@@ -129,6 +129,6 @@ export const closing = {
   cta: { text: '1개월 무료로 시작', href: '/start', sub: '카드 필요 없음' },
   crossSell: {
     text: '광고까지 직접 하고 싶으세요?',
-    cta: { text: 'NGN 대시보드 보기', href: '/ads' },
+    cta: { text: '누구나 광고 보기', href: '/ads' },
   } satisfies CrossSell,
 };

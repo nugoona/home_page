@@ -6,7 +6,8 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex flex-col gap-1">
-            <p className="text-[13px] font-semibold text-text-primary mb-1">누구나컴퍼니</p>
+            {/* "(NGN)" 병기 = 로고 NGN과 회사명의 관계를 푸터에서 풀어줌 (콜드 리드 "NGN이 뭔지 설명 없음" + GPT 표기안, 2026-07-11) */}
+            <p className="text-[13px] font-semibold text-text-primary mb-1">누구나컴퍼니(NGN)</p>
             <p className="text-[12px] text-text-weak">대표 최우현</p>
             <p className="text-[12px] text-text-weak">주소 : 서울시 노원구 공릉로34길 62</p>
           </div>

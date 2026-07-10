@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-// 라벨 = 확정 제품명(E0-1: "누구나 콘텐츠 / NGN 대시보드") — 기능명으로 바꾸지 말 것(사장님 지적 2026-07-11)
+// 라벨 = 확정 제품명 "누구나 콘텐츠 / 누구나 광고"(사장님+GPT 개명 확정 2026-07-11 — 구 "NGN 대시보드" 폐기,
+// NGN은 로고·영문 표기 전용 강등). 기능명으로 바꾸지 말 것(사장님 지적 2026-07-11).
 const links = [
   { href: '/content', label: '누구나 콘텐츠' },
-  { href: '/ads', label: 'NGN 대시보드' },
+  { href: '/ads', label: '누구나 광고' },
 ];
 
 export default function Nav() {

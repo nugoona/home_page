@@ -18,7 +18,7 @@ export const form = {
     label: '관심 있는 제품',
     options: [
       { value: 'content', text: '누구나 콘텐츠 — 검색에 노출' },
-      { value: 'ads', text: 'NGN 대시보드 — 광고를 직접' },
+      { value: 'ads', text: '누구나 광고 — 광고를 직접' },
       { value: 'both', text: '둘 다 — 노출부터 광고까지' },
     ],
   },

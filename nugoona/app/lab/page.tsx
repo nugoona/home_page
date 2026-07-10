@@ -18,7 +18,7 @@ export default function Lab() {
           <div className="py-24 px-12 max-md:py-14 max-md:px-6">
             <div className="max-w-[1080px] mx-auto">
               <p className="text-[12px] font-semibold text-accent tracking-[0.12em] uppercase mb-3" style={EN}>
-                NGN 대시보드
+                누구나 광고
               </p>
               <h2 className="text-[clamp(30px,4.5vw,46px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.12] mb-5">
                 광고를 한 화면에서<br />이해하며 운영하세요

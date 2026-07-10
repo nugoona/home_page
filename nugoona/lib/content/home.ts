@@ -23,7 +23,7 @@ export const branch = {
       mock: 'search',
     },
     {
-      eyebrow: 'NGN 대시보드',
+      eyebrow: '누구나 광고',
       title: '광고를 <span class="text-accent">직접</span> 하고 싶습니다',
       desc: '메타와 구글 광고를 만들고, 성과까지 한 화면에서 확인합니다.',
       cta: '광고 살펴보기',

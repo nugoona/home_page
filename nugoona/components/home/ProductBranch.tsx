@@ -10,7 +10,7 @@ const EN = { fontFamily: 'var(--font-en)' } as const;
 
 /**
  * S3 두 제품 분기 — 홈의 심장 (신규 조립)
- * 2열 카드: 노출(누구나 콘텐츠) / 광고(NGN 대시보드). 각 카드 상단 = 실제 제품 미니목업 재활용.
+ * 2열 카드: 노출(누구나 콘텐츠) / 광고(누구나 광고). 각 카드 상단 = 실제 제품 미니목업 재활용.
  */
 export default function ProductBranch() {
   return (

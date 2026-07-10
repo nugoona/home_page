@@ -12,13 +12,13 @@ import { hero, identity } from '@/lib/content/ads';
 const EN = { fontFamily: 'var(--font-en)' } as const;
 
 export const metadata: Metadata = {
-  title: 'NGN 대시보드 — 광고를 이해하며 직접',
+  title: '누구나 광고 — AI 시대의 온라인 광고',
   description:
     '매출·광고·유입을 한 화면에 모아 사람 말로 읽어 줍니다. 광고 생성부터 성과 분석, 트렌드 추적까지 대행 없이 직접.',
 };
 
 /**
- * /ads — NGN 대시보드 랜딩.
+ * /ads — 누구나 광고 랜딩.
  * features의 3개 쇼케이스(AdCanvas·Dashboard·Trend)를 그대로 재활용 + '이해' 히어로/CTA.
  */
 export default function AdsPage() {
@@ -33,7 +33,7 @@ export default function AdsPage() {
           >
             <FadeUp>
               <p className="text-[13px] font-semibold text-accent tracking-[0.12em] uppercase mb-5" style={EN}>
-                NGN 대시보드
+                누구나 광고
               </p>
               <h1
                 className="text-[clamp(34px,6vw,60px)] font-semibold text-white tracking-[-0.04em] leading-[1.08] mb-6"
