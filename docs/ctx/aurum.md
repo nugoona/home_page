@@ -78,6 +78,7 @@
 ## Pages
 - `/b2b`
 - `/class`
+- `/media`
 - `/`
 - `/therapy`
 
@@ -90,7 +91,7 @@
 | MobileBookingBar | — |
 | ScrollToTop | — |
 
-### sections/ (35)
+### sections/ (36)
 | 컴포넌트 | 설명 |
 |----------|------|
 | BrandManifestoV2 | — |
@@ -109,6 +110,7 @@
 | FacilityGallery | — |
 | FeaturedEvents | — |
 | Features | — |
+| FilmSection | — |
 | FounderStoryV2 | — |
 | Hero | — |
 | InstructorSection | — |
@@ -129,17 +131,18 @@
 | Timeline | — |
 | TrustEvidenceV2 | — |
 
-### ui/ (6)
+### ui/ (7)
 | 컴포넌트 | 설명 |
 |----------|------|
 | ClassPromoPopup | — |
 | ClassStickyBar | — |
+| CourseFilm | — |
 | MagneticButton | — |
 | ScrollReveal | — |
 | SlotMachineDigit | — |
 | WordReveal | — |
 
-> 총 45개 컴포넌트
+> 총 47개 컴포넌트
 
 ## Design Rules
 

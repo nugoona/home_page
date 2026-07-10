@@ -895,7 +895,7 @@ export default function TrendShowcase() {
                   29CM, Ably의 카테고리별 베스트 상품 순위 변동. 급상승·신규진입 상품을 자동 감지합니다.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['Gemini Vision', 'Naver Datalab API', 'Google Search Console', 'Cloud Run Jobs', 'BigQuery'].map((tag) => (
+                  {['AI', 'Naver Datalab API', 'Google Search Console', 'Cloud Run Jobs', 'BigQuery'].map((tag) => (
                     <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#111', ...EN }}>{tag}</span>
                   ))}
                 </div>

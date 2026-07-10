@@ -895,7 +895,7 @@ export default function DashboardShowcase() {
                   카페24 매출, 메타·구글 광고, GA4 방문자 — 하나의 대시보드에서 실시간 확인.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {['Cafe24 API', 'Google GA4', 'Meta Ads API', 'Gemini 2.0 Pro'].map((tag) => (
+                  {['Cafe24 API', 'Google GA4', 'Meta Ads API', 'AI'].map((tag) => (
                     <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#111', ...EN }}>{tag}</span>
                   ))}
                 </div>

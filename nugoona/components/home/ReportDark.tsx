@@ -195,7 +195,7 @@ export default function ReportDark() {
                   <path d="M6 4v2l1.5 1" strokeLinecap="round" />
                 </svg>
                 <span className="text-[10px] text-white/20" style={EN}>
-                  Powered by Gemini AI · 매월 1일 자동 생성
+                  Powered by Claude AI · 매월 1일 자동 생성
                 </span>
               </div>
             </motion.div>

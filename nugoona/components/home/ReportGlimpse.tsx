@@ -88,7 +88,7 @@ export default function ReportGlimpse() {
             }}
           >
             <p style={{ fontSize: 14, color: '#444', lineHeight: 1.8 }}>
-              {inView ? <TypeWriter text={text} active={inView} delay={600 + i * 2400} /> : ''}
+              {text}
             </p>
           </div>
         ))}
@@ -100,7 +100,7 @@ export default function ReportGlimpse() {
           <circle cx="6" cy="6" r="3" />
           <path d="M6 4v2l1.5 1" strokeLinecap="round" />
         </svg>
-        <span style={{ fontSize: 10, color: '#bbb', ...EN }}>Powered by Gemini AI · 매월 1일 자동 생성</span>
+        <span style={{ fontSize: 10, color: '#bbb', ...EN }}>Powered by Claude · 매월 1일 자동 생성</span>
       </div>
     </div>
   );

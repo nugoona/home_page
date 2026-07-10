@@ -9,9 +9,10 @@ export default function CTA() {
     >
 
       <FadeUp>
-        <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] mb-10 relative z-[1]">
-          {cta.title}
-        </h2>
+        <h2
+          className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-10 relative z-[1]"
+          dangerouslySetInnerHTML={{ __html: cta.title }}
+        />
       </FadeUp>
       {cta.sub && (
         <FadeUp delay={0.1}>

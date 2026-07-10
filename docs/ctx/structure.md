@@ -8,8 +8,8 @@
 |---|---------|-------|
 | 경로 | nugoona/ | aurum/ |
 | 포트 | :3101 | :3100 |
-| 페이지 | 5개 (/about, /features, /, /pricing, /start) | 4개 (/b2b, /class, /, /therapy) |
-| 컴포넌트 | 50개 | 45개 |
+| 페이지 | 9개 (/about, /ads, /content, /features, /lab, /, /pricing, /start, /styles) | 5개 (/b2b, /class, /media, /, /therapy) |
+| 컴포넌트 | 82개 | 47개 |
 | CSS | Tailwind v4 | CSS Modules |
 | 애니메이션 | Framer Motion | GSAP + ScrollTrigger |
 | 폰트 | 산세리프 (Pretendard) | 세리프 (Arita Buri) |

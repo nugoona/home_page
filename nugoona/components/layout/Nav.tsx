@@ -3,9 +3,12 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { nav } from '@/lib/content/global';
 
-const links = nav.links;
+// 라벨 = 확정 제품명(E0-1: "누구나 콘텐츠 / NGN 대시보드") — 기능명으로 바꾸지 말 것(사장님 지적 2026-07-11)
+const links = [
+  { href: '/content', label: '누구나 콘텐츠' },
+  { href: '/ads', label: 'NGN 대시보드' },
+];
 
 export default function Nav() {
   const pathname = usePathname();
@@ -58,8 +61,8 @@ export default function Nav() {
         style={{ top: hasPromo ? '40px' : '0px' }}
       >
         <div className="max-w-[1200px] mx-auto h-full flex items-center justify-between px-6">
-          <Link href={nav.brand.href} className="text-[20px] font-semibold text-text-primary tracking-[-0.02em]" style={{ fontFamily: 'var(--font-en)' }}>
-            {nav.brand.text}
+          <Link href="/" className="text-[20px] font-semibold text-text-primary tracking-[-0.02em]" style={{ fontFamily: 'var(--font-en)' }}>
+            NGN
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -73,17 +76,17 @@ export default function Nav() {
                     : 'text-text-secondary hover:text-black'
                 }`}
               >
-                {l.text}
+                {l.label}
               </Link>
             ))}
           </div>
 
           <Link
-            href={nav.cta.href}
+            href="/start"
             className="hidden md:inline-flex items-center h-9 px-5 text-[13px] font-semibold"
             style={{ backgroundColor: '#171717', color: '#ffffff', border: '1px solid #333' }}
           >
-            {nav.cta.text}
+            무료로 시작하기
           </Link>
 
           {/* Mobile toggle */}
@@ -126,15 +129,15 @@ export default function Nav() {
               className="text-[18px] font-medium text-text-primary"
               onClick={() => setMenuOpen(false)}
             >
-              {l.text}
+              {l.label}
             </Link>
           ))}
           <Link
-            href={nav.cta.href}
+            href="/start"
             className="flex items-center justify-center h-12 text-[15px] font-semibold text-white btn-gradient-dark w-full mt-4"
             onClick={() => setMenuOpen(false)}
           >
-            {nav.cta.text}
+            무료로 시작하기
           </Link>
         </div>
       </div>

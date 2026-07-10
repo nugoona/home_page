@@ -57,7 +57,7 @@ export default function NewsReflectMock() {
             <p className="text-[11px] font-semibold text-white/40 tracking-[0.08em] uppercase" style={EN}>
               내 스토어 노출
             </p>
-            <span className="text-[11px] font-semibold text-[#22c55e]" style={EN}>▲ 상위 노출 유지</span>
+            <span className="text-[11px] font-semibold text-[#22c55e]" style={EN}>▲ 꾸준히 노출 중</span>
           </div>
           <div className="flex items-end gap-1.5 h-[92px]">
             {rankBars.map((h, i) => (

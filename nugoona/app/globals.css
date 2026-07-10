@@ -97,6 +97,13 @@
   border-radius: 999px !important;
 }
 
+/* 명조 — 목업 안에서 '앱이 만든 글'이 아니라 '실제 발행된 글'을 인용할 때만 (본문 UI 사용 금지).
+   ⚠️ @theme 안에 두면 Tailwind v4가 "참조되지 않는 테마 변수"로 보고 CSS에서 제거한다
+   (인라인 style의 var()는 스캔 대상이 아님). 그래서 :root에 직접 선언한다. */
+:root {
+  --font-quote: 'Nanum Myeongjo', 'Batang', Georgia, 'Times New Roman', serif;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -302,18 +309,6 @@ a {
 .fade-up-delay-1 { transition-delay: 0.1s; }
 .fade-up-delay-2 { transition-delay: 0.2s; }
 .fade-up-delay-3 { transition-delay: 0.3s; }
-
-/* CSS-only fade-up (framer-motion 비의존 — 모바일에서 콘텐츠가 opacity:0에 갇히지 않음) */
-@keyframes fadeUpIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
-}
-.fade-up-css {
-  animation: fadeUpIn 0.55s ease-out both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .fade-up-css { animation: none; }
-}
 
 /* ===== Utility Keyframes ===== */
 @keyframes spin {

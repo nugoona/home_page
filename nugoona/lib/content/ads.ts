@@ -5,11 +5,19 @@
 import type { Card, CrossSell } from './types';
 
 // S1 · 히어로 = 카테고리·시대 선언 (질문 → 하위가 답)
+// h1은 DESIGN §8.6-B 규칙(균형 <br>+accent 스팬)을 담아 dangerouslySetInnerHTML로 렌더한다. 단어는 원문 그대로.
 export const hero = {
-  h1: 'AI 시대의 온라인 광고',
+  h1: 'AI 시대의<br /><span class="text-accent">온라인 광고</span>',
   sub: '어려운 광고, 이제 이해하며 운영합니다.', // ✅사장님+GPT 확정 2026-07-08(A안). 문제인정→이해→운영. '이해'=하위 챗봇·통합뷰·리포트가 답 / '운영'=애드캔버스. 브랜드 축 '이해'.
   cta: { text: '한 달 무료로 시작', href: '/start', sub: '카드 필요 없음' },
   ctaSecondary: { text: '연동 전 데모로 보기', href: '#demo' },
+};
+
+// 정체 선언 (콜드 리드 게이트 대응 — "툴이냐 대행이냐" 질문에 히어로 바로 아래서 답한다)
+// 문구는 사장님 육성 B(랜딩-아이디어로그.md 63행 근방) 발췌 범위 내로만 구성. 새 주장 추가 금지.
+export const identity = {
+  heading: '대행사가 하던 세 가지<br />여기서 <span class="text-accent">직접</span> 합니다',
+  body: '소재 제작은 애드캔버스가, 질문 답변은 AI 챗봇이, 예산 관리는 효율 리포트가 대신합니다. 직접 하되, 어렵지 않게.',
 };
 
 // S3 · "내 손안의 마케터" (콘셉트 인트로 — 아래 S4·S5·S7이 상세)
@@ -96,6 +104,6 @@ export const closing = {
   ctaSecondary: { text: '데모 둘러보기', href: '#demo' },
   crossSell: {
     text: '검색 노출부터 먼저 만들고 싶다면,',
-    cta: { text: '누구나 컨텐츠와 함께', href: '/content' },
+    cta: { text: '누구나 콘텐츠와 함께', href: '/content' },
   } satisfies CrossSell,
 };

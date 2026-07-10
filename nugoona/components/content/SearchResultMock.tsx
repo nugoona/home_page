@@ -6,7 +6,7 @@ import BrowserFrame from '@/components/ui/BrowserFrame';
 const EN = { fontFamily: 'var(--font-en)' } as const;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** 히어로 목업 — 네이버 검색 결과 최상단에 '내 스토어'가 잡힌 화면 (열망 시각화) */
+/** 히어로 목업 — 네이버 검색 결과에 '내 스토어'가 잡힌 화면 (열망 시각화) */
 export default function SearchResultMock() {
   return (
     <BrowserFrame url="search.naver.com" alt>

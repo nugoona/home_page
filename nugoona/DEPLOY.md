@@ -50,6 +50,11 @@
 
 > 위 항목들은 "배포를 해봐야 알 수 있다". 지금은 방법만 문서화하고 **배포는 보류**한다.
 
+### 4-1. ⚠⚠ 영구 리다이렉트(308) 캐시 함정 — 실제로 밟은 사고 (2026-07-11 발견)
+- **사고**: 옛 커밋(`18a0ac7`)의 `next.config.mjs`에 `{ source:'/ads', destination:'/features', permanent:true }`가 있었고, `3f59b4c`에서 /ads 페이지를 만들며 제거했다. 그러나 **`permanent:true` = HTTP 308은 브라우저가 영구 캐시**한다 — 그 사이에 /ads를 열었던 브라우저는 서버에 묻지도 않고 지금도 /features로 튄다(로컬에서 실측 재현: `localhost:3131/ads` → `/features` 착지). **새 /ads가 멀쩡히 있어도 그 브라우저에선 영원히 안 보인다.**
+- **로컬 해제법**: 강력 새로고침으론 안 풀릴 수 있음 → 시크릿 창 또는 `chrome://net-internals/#dns`+캐시 삭제, 임시 우회는 쿼리(`/ads?x=1`).
+- **재발 방지 규칙**: ①**살릴 가능성이 있는 경로에 `permanent:true`를 걸지 않는다**(기본값 = `permanent:false`(307). 308은 "그 경로를 영원히 버린다"가 확정일 때만) ②경로를 부활시킬 땐 과거 redirects 이력을 `git log -S`로 확인 ③배포 전 체크리스트에 "redirects 변경분과 과거 308 충돌 검토" 포함.
+
 ## 5. 배포 체크리스트 (실제 배포 착수 시)
 - [ ] 경로 A/B/C 중 결정 (GCP 상태 `gcloud config list`로 먼저 확인)
 - [ ] `SLACK_WEBHOOK_URL`(또는 Telegram 이전값) 시크릿 준비

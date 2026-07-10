@@ -3,11 +3,11 @@
 // Footer 회사 정보 = 기존 Footer.tsx 실데이터 정본화(사실, 지어내기 아님).
 import type { Cta } from './types';
 
-// Nav — 로고→/ · 누구나 컨텐츠→/content · NGN 대시보드→/ads · [무료로 시작하기]→/start
+// Nav — 로고→/ · 누구나 콘텐츠→/content · NGN 대시보드→/ads · [무료로 시작하기]→/start
 export const nav = {
   brand: { text: 'NGN', href: '/' } satisfies Cta,
   links: [
-    { text: '누구나 컨텐츠', href: '/content' },
+    { text: '누구나 콘텐츠', href: '/content' },
     { text: 'NGN 대시보드', href: '/ads' },
   ] satisfies Cta[],
   cta: { text: '무료로 시작하기', href: '/start' } satisfies Cta,

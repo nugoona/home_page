@@ -16,30 +16,30 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   title: {
-    default: 'NGN - 온라인 광고, 이제 직접 하세요',
+    default: 'NGN — 누구나 마케팅하는 시대',
     template: '%s | NGN',
   },
   description:
-    '상품 URL 하나면 메타·구글 광고가 만들어집니다. 매출·광고·방문자 데이터를 한 화면에서. 대행사 수수료 대신 월 9.9만원.',
+    '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이 스스로 이해하고 운영하세요.',
   keywords: [
-    'AI광고', '온라인광고', '메타광고', '구글광고', '인스타광고',
-    '광고자동화', '이커머스마케팅', '대시보드', 'NGN', '누구나컴퍼니',
+    '온라인광고', '검색노출', '콘텐츠자동화', '광고대시보드', '메타광고',
+    '구글광고', '네이버노출', '이커머스마케팅', 'NGN', '누구나컴퍼니',
   ],
   authors: [{ name: '누구나컴퍼니' }],
   metadataBase: new URL('https://www.nugoona.co.kr'),
   openGraph: {
-    title: 'NGN - 온라인 광고, 이제 직접 하세요',
+    title: 'NGN — 누구나 마케팅하는 시대',
     description:
-      '상품 URL 하나면 메타·구글 광고가 만들어집니다. 매출·광고·방문자 데이터를 한 화면에서. 대행사 수수료 대신 월 9.9만원.',
+      '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이.',
     type: 'website',
     siteName: 'NGN',
     images: ['/img/icons/logo2.webp'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NGN - 온라인 광고, 이제 직접 하세요',
+    title: 'NGN — 누구나 마케팅하는 시대',
     description:
-      '상품 URL 하나면 메타·구글 광고가 만들어집니다. 매출·광고·방문자 데이터를 한 화면에서. 대행사 수수료 대신 월 9.9만원.',
+      '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이.',
     images: ['/img/icons/logo2.webp'],
   },
   icons: {
@@ -61,6 +61,13 @@ export default function RootLayout({
           as="style"
           crossOrigin="anonymous"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+        />
+        {/* 명조(--font-quote) — 목업 안 '실제 발행된 글' 인용 전용 */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap"
         />
       </head>
       <body>

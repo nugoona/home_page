@@ -70,7 +70,7 @@ export default function DashboardGlimpse() {
 
       {/* KPI Grid */}
       <div
-        className="max-sm:!grid-cols-2"
+        className="max-sm:!grid-cols-2 max-sm:!gap-x-3 max-sm:!p-5"
         style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '28px 24px', padding: '32px 28px' }}
       >
         {kpis.map((kpi) => (
@@ -78,7 +78,7 @@ export default function DashboardGlimpse() {
             <p style={{ fontSize: 10, color: '#bbb', marginBottom: 6, letterSpacing: '0.06em', ...EN }}>
               {kpi.label}
             </p>
-            <p style={{ fontSize: 24, fontWeight: 700, color: '#171717', letterSpacing: '-0.01em', ...EN }}>
+            <p className="max-sm:!text-[16px] whitespace-nowrap" style={{ fontSize: 24, fontWeight: 700, color: '#171717', letterSpacing: '-0.01em', ...EN }}>
               <CountUp target={kpi.value} prefix={kpi.prefix} suffix={kpi.suffix} decimals={kpi.decimals ?? 0} />
             </p>
             {kpi.change !== 0 && (

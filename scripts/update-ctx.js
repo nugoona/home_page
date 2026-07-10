@@ -479,6 +479,7 @@ if (useJson) {
           `[ctx] 갱신 OK · nugoona.md (${stats.nugoona}b) · aurum.md (${stats.aurum}b) · structure.md (${stats.structure}b)`,
         hookSpecificOutput: {
           hookEventName: 'SessionStart',
+          sessionTitle: 'Homepage — Aurum/Nugoona',
           additionalContext: `docs/ctx/ 3개 파일 자동 갱신됨 (nugoona/aurum/structure)`,
         },
       }
@@ -487,6 +488,7 @@ if (useJson) {
         systemMessage: `[ctx] 갱신 실패 — ${errorMsg}`,
         hookSpecificOutput: {
           hookEventName: 'SessionStart',
+          sessionTitle: 'Homepage ⚠ ctx stale',
           additionalContext: `WARNING: docs/ctx/ 자동 갱신 실패 — ${errorMsg}. 파일이 stale 상태일 수 있음.`,
         },
       };

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  // 개발 서버를 폰(LAN/Tailscale IP)에서 접속 허용 — 없으면 HMR 웹소켓이 403 차단돼 하이드레이션이 멈춤
+  allowedDevOrigins: ['100.117.180.66'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'picsum.photos' },

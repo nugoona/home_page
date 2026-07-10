@@ -106,7 +106,7 @@ function DashboardMockup() {
         </div>
         <div className="flex items-center gap-2">
           <div className="w-[5px] h-[5px] bg-[#22c55e] rounded-dot" />
-          <span className="text-[9px] text-[rgba(255,255,255,0.4)]" style={EN}>Live</span>
+          <span className="text-[9px] text-[rgba(255,255,255,0.4)]">매일 갱신</span>
         </div>
       </div>
 
@@ -278,9 +278,9 @@ export default function EvidenceInsight() {
                   Insight
                 </p>
                 <p className="text-[clamp(24px,3.5vw,32px)] font-semibold text-white leading-[1.4] tracking-[-0.02em]">
-                  보고서 기다리지 마세요.
+                  매출도 광고도,
                   <br />
-                  매출·광고·ROAS, <span className="font-semibold text-accent">지금 바로 확인</span>하세요.
+                  한 화면에서 <span className="font-semibold text-accent">이해</span>합니다.
                 </p>
               </div>
             </FadeUp>
@@ -290,10 +290,10 @@ export default function EvidenceInsight() {
             <FadeUp delay={0.15} className="w-full">
             <div>
               <p className="text-[19px] font-semibold text-[rgba(255,255,255,0.9)] leading-[1.4] tracking-[-0.01em] mb-1">
-                흩어진 데이터를 한 화면에.
+                쇼핑몰·광고·유입을 한 곳에.
               </p>
               <p className="text-[15px] text-[rgba(255,255,255,0.85)] font-light leading-[1.4]">
-                Cafe24·Meta·Google·GA4를 하나의 대시보드에서 실시간으로.
+                광고가 매출로 이어졌는지, 한 화면에서 보여줍니다.
               </p>
             </div>
           </FadeUp>

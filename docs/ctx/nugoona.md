@@ -43,22 +43,45 @@
 
 ## Pages
 - `/about`
+- `/ads`
+- `/content`
 - `/features`
+- `/lab`
 - `/`
 - `/pricing`
 - `/start`
+- `/styles`
 
 ## Components
-### features/ (5)
+### ads/ (1)
+| 컴포넌트 | 설명 |
+|----------|------|
+| HeroDashboardMock | — |
+
+### content/ (9)
+| 컴포넌트 | 설명 |
+|----------|------|
+| MapMock | — |
+| MultiChannelMock | — |
+| NewsFlowGraphic | NewsFlowGraphic — 콘텐츠 /content S5 킬러 상징 그래픽 |
+| NewsReflectMock | 노출 순위 상승(값이 클수록 상위) 스파크라인용 |
+| PrefillMock | — |
+| ProofMock | — |
+| PublishFlowGraphic | PublishFlowGraphic — 콘텐츠 /content S4 "발행" 상징 그래픽 |
+| RankTrackMock | S5 콘텐츠(노출) 제품 목업 — 대안 A (신규, 원본 마이크로 자산 재스킨) |
+| SearchResultMock | — |
+
+### features/ (6)
 | 컴포넌트 | 설명 |
 |----------|------|
 | AdCanvasShowcase | — |
 | BudgetSimulator | — |
+| ChatbotShowcase | — |
 | DashboardShowcase | — |
 | MobileDashboardMockup | — |
 | TrendShowcase | — |
 
-### home/ (27)
+### home/ (31)
 | 컴포넌트 | 설명 |
 |----------|------|
 | AdCanvasMagic | — |
@@ -80,10 +103,14 @@
 | HeroMinimal | — |
 | ManageGlimpse | — |
 | PainPoints | — |
+| Philosophy | S3 · 왜 만들었나 (라이트, 텍스트 전용 — 목업 없음) |
+| ProductBranch | S3 두 제품 분기 — 홈의 심장 (신규 조립) |
 | ROIComparison | — |
 | ReportDark | — |
 | ReportGlimpse | — |
 | Reviews | — |
+| ShowcaseHeader | — |
+| ShowcaseRow | FeatureRow — 목업/텍스트를 세로선으로 구획한 박스. |
 | SolutionSection | — |
 | StepDone | — |
 | StoryStep | — |
@@ -95,7 +122,7 @@
 | Analytics | — |
 | CommaStyler | — |
 | Footer | — |
-| Nav | — |
+| Nav | 라벨 = 확정 제품명(E0-1: "누구나 콘텐츠 / NGN 대시보드") — 기능명으로 바꾸지 말 것(사장님 지적 2026-07-11) |
 | OuterContainer | — |
 | PromoBanner | — |
 | Section | — |
@@ -107,7 +134,26 @@
 | FadeUp | — |
 | StaggerGrid | — |
 
-### ui/ (8)
+### styles/ (15)
+| 컴포넌트 | 설명 |
+|----------|------|
+| Draft_CoreSet | Draft_CoreSet — 코어 6종 "거친 목업" 시안 세트 v2 + O/X 제출 (DESIGN §8.7-0 프로세스) |
+| S10_RankTrack | S10_RankTrack — [/content ⑤ 순위 증명, 정본 A13] 시안 D5(Draft_CoreSet.tsx) 뼈대를 실컴포넌트로 번역 + 브랜드 모션. |
+| S11_NewsEngine | S11_NewsEngine — [/content ⑤ 노출 소식 엔진, 정본 A14] |
+| S12_MapExposure | S12_MapExposure — [/content ⑥ 지도 노출, 정본 A9] |
+| S13_Onboarding | S13_Onboarding — [/content ⑥ 온보딩, 정본 A15] |
+| S14_Generate | S14_Generate — [/content ② 목표 키워드 — D2(v3) 구조를 실컴포넌트로 번역] |
+| S1_IllustrationHero | S1_IllustrationHero — 재사용 스타일 라이브러리 [스타일①: 큰 일러스트 1컷 은유] |
+| S2_IconSteps | S2_IconSteps — 랜딩용 개념 그래픽 [스타일②: 아이콘 3~4단계 초단순 스텝] |
+| S3_BeforeAfterSlider | — |
+| S4_MiniDemo | S4_MiniDemo — 랜딩용 개념 그래픽 "스타일④: 미니 인터랙티브 데모" |
+| S5Mascot | S5_Mascot — 랜딩용 개념 그래픽 목업 · 스타일⑤ 캐릭터 마스코트(Duolingo형) |
+| S6KineticType | S6_KineticType — 랜딩 개념 그래픽 "스타일⑥: 거대 타이포 그래픽(키네틱)" |
+| S7_ScrollAssemble | 스타일⑦ — 스크롤 스크럽 조립 애니 (Apple형) |
+| S8RealPhoto | — |
+| S9_ChannelFanout | S9_ChannelFanout — [/content ① 다채널 발행, 정본 A1] |
+
+### ui/ (10)
 | 컴포넌트 | 설명 |
 |----------|------|
 | Accordion | — |
@@ -116,10 +162,12 @@
 | Button | — |
 | CrossMark | — |
 | GridDivider | — |
+| PricingCards | 가격 티어 카드 (재사용) — /content 2티어·/ads 4티어 공용. (E3-4) |
 | SectionHeader | — |
+| ShotFrame | 실제 앱 스크린샷을 랜딩에 얹는 프레임 — 라운드 없이(브랜드 직각) + 드롭섀도로 깊이. |
 | bento-grid | — |
 
-> 총 50개 컴포넌트
+> 총 82개 컴포넌트
 
 ## Design Rules
 
