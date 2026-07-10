@@ -868,6 +868,18 @@ function GSCQueryTable() {
 export default function TrendShowcase() {
   return (
     <>
+      {/* 브리지 — 콜드 리드 지적("광고 페이지에 왜 트렌드?" 정체성 이탈) 대응: 광고→시장 인텔리전스 전환 안내.
+          ⚠문구는 임시(페이블 작성) — GPT 확정 문구로 교체 예정(2026-07-11) */}
+      <Section alt>
+        <div className="py-16 px-12 text-center max-md:py-12 max-md:px-6">
+          <FadeUp>
+            <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-3">
+              광고 다음은, 시장입니다
+            </h3>
+            <p className="text-[15px] text-[#666]">내 성과만 보지 않습니다 — 경쟁사와 시장 흐름까지, 대시보드가 매주 대신 봅니다.</p>
+          </FadeUp>
+        </div>
+      </Section>
       <BriefingSection />
       <InsightSection />
       <CompareSection />

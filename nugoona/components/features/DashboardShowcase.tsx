@@ -307,6 +307,8 @@ function Section01() {
           <div className="block md:hidden">
             <DataPipelineVisualMobile isActive={isActive} />
           </div>
+          {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
+          <p className="text-[10px] text-text-weak text-right mt-2 pr-2">예시 화면</p>
         </FadeUp>
       </div>
     </Section>
@@ -568,6 +570,8 @@ function Section02() {
               단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로<br className="max-md:hidden" />
               AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
+            {/* "예시 화면" 라벨 — 콜드 리드 지적("도전적 시나리오 +15~25%" 과장 의심) 대응 */}
+            <p className="mt-4 text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>리포트 내용은 예시 화면입니다.</p>
           </FadeUp>
         </div>
         {/* RIGHT — Action Plan 타이틀 띠 + ActionPlan09Card */}

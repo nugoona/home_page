@@ -25,7 +25,8 @@ function ChatMock({ active }: { active: boolean }) {
       <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06]">
         <span className="rounded-dot w-2 h-2 bg-[#22c55e]" />
         <span className="text-[12px] font-semibold text-white/80">NGN Assistant</span>
-        <span className="text-[10px] text-white/30 ml-auto" style={EN}>AI</span>
+        {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
+        <span className="text-[10px] text-white/30 ml-auto">예시 화면</span>
       </div>
 
       {/* 대화 */}

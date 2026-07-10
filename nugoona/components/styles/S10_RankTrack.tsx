@@ -29,7 +29,8 @@ export default function S10_RankTrack() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: EASE }}
       >
-        <span className="font-bold text-accent">&ldquo;홍대 미용실&rdquo;</span>로 검색하면, <span className="font-bold text-text-primary">결헤어 홍대점</span>은 지금
+        {/* 가상 상호 "결헤어"는 콜드 리드 2회 연속 오독(오타로 보임) → "소담헤어"로 교체 (2026-07-11) */}
+        <span className="font-bold text-accent">&ldquo;홍대 미용실&rdquo;</span>로 검색하면, <span className="font-bold text-text-primary">소담헤어 홍대점</span>은 지금
       </motion.p>
 
       {/* 초대형 측정값 + 계단 변화 */}
