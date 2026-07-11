@@ -648,8 +648,9 @@ function CompareSection() {
                 transition={{ duration: 0.2 }}
                 className="px-8 pt-5 pb-8 max-md:px-4"
               >
+                {/* 10→5개(1행) 감량 — 재측정 콜드 리드 "카드 나열 반복감·중반 늘어짐" 지적(2026-07-11) */}
                 <div className="grid grid-cols-5 gap-3 max-md:grid-cols-2">
-                  {products.slice(0, 10).map((p, i) => (
+                  {products.slice(0, 5).map((p, i) => (
                     <div key={i} className="border border-border-default bg-white overflow-hidden">
                       {/* Image */}
                       <div className="relative aspect-[3/4] bg-[#f5f5f5] overflow-hidden">

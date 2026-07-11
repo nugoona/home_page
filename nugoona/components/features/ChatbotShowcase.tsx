@@ -26,7 +26,7 @@ function ChatMock({ active }: { active: boolean }) {
         <span className="rounded-dot w-2 h-2 bg-[#22c55e]" />
         <span className="text-[12px] font-semibold text-white/80">NGN Assistant</span>
         {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
-        <span className="text-[10px] text-white/30 ml-auto">데모 화면</span>
+        <span className="text-[11px] text-white/50 ml-auto">데모 화면</span>
       </div>
 
       {/* 대화 */}
@@ -36,7 +36,7 @@ function ChatMock({ active }: { active: boolean }) {
         </motion.div>
 
         <motion.div {...bubble(1)} className="self-start max-w-[82%] bg-white/[0.06] text-[#ddd] text-[13px] leading-[1.7] px-4 py-3">
-          이번 달 종합 ROAS는 <b className="text-white">785%</b>예요. Meta가 1,024%로 가장 효율이 좋고, 검색 유입도 전월 대비 <b className="text-white">+15%</b> 올랐어요.
+          이번 달 종합 ROAS는 <b className="text-white">452%</b>예요. Meta가 583%로 가장 효율이 좋고, 검색 유입도 전월 대비 <b className="text-white">+15%</b> 올랐어요.
         </motion.div>
 
         <motion.div {...bubble(2)} className="self-end max-w-[78%] bg-accent text-white text-[13px] leading-[1.6] px-4 py-2.5">

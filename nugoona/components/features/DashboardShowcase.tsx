@@ -116,8 +116,8 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
 
           <rect x={DASH_L + 144} y="118" width="128" height="64" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
           <text x={DASH_L + 150} y="131" fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">ROAS</text>
-          <text x={DASH_L + 150} y="152" fontSize="17" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">785%</text>
-          <text x={DASH_L + 150} y="166" fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 1,024% · Google 412%</text>
+          <text x={DASH_L + 150} y="152" fontSize="17" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
+          <text x={DASH_L + 150} y="166" fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
         </motion.g>
 
         {isActive && srcYs.map((_, i) => (
@@ -225,8 +225,8 @@ function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
 
         <rect x={DL + 152} y={DASH_TOP + 105} width="140" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
         <text x={DL + 158} y={DASH_TOP + 118} fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">ROAS</text>
-        <text x={DL + 158} y={DASH_TOP + 148} fontSize="18" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">785%</text>
-        <text x={DL + 158} y={DASH_TOP + 163} fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 1,024% · Google 412%</text>
+        <text x={DL + 158} y={DASH_TOP + 148} fontSize="18" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
+        <text x={DL + 158} y={DASH_TOP + 163} fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
       </motion.g>
 
       {/* 애니메이션 도트 */}
@@ -308,7 +308,7 @@ function Section01() {
             <DataPipelineVisualMobile isActive={isActive} />
           </div>
           {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
-          <p className="text-[10px] text-text-weak text-right mt-2 pr-2">데모 화면</p>
+          <p className="text-[11px] text-text-weak text-right mt-2 pr-2">데모 화면 · 예시 데이터</p>
         </FadeUp>
       </div>
     </Section>
@@ -571,7 +571,7 @@ function Section02() {
               AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
             {/* "예시 화면" 라벨 — 콜드 리드 지적("도전적 시나리오 +15~25%" 과장 의심) 대응 */}
-            <p className="mt-4 text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>리포트 내용은 데모 화면입니다.</p>
+            <p className="mt-4 text-[11px]" style={{ color: 'rgba(255,255,255,0.5)' }}>리포트 내용은 데모 화면입니다.</p>
           </FadeUp>
         </div>
         {/* RIGHT — Action Plan 타이틀 띠 + ActionPlan09Card */}
@@ -663,7 +663,7 @@ export function PhoneMockup() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
                       <p style={{ fontSize: 14, fontWeight: 700, color: '#171717' }}>누구나 광고</p>
                       <div style={{ display: 'flex', gap: 6 }}>
-                        {['이번 달', 'demo'].map((t) => (
+                        {['이번 달', '데모 화면'].map((t) => (
                           <span key={t} style={{ fontSize: 8, padding: '3px 8px', border: '1px solid #eaeaea', color: '#666' }}>{t}</span>
                         ))}
                       </div>
@@ -715,12 +715,12 @@ export function PhoneMockup() {
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9 }}>
                         <span style={{ color: '#999' }}>종합 ROAS</span>
-                        <span style={{ fontWeight: 700, color: '#22c55e', ...EN }}>785%</span>
+                        <span style={{ fontWeight: 700, color: '#22c55e', ...EN }}>523%</span>
                       </div>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 8 }}>
                       {[
-                        { tag: 'META', color: '#1877f2', img: '/img/unsplash/webp/photo-1515886657613-9f3515b0c78f.webp', campaign: 'Spring Sale', roas: '1,024%' },
+                        { tag: 'META', color: '#1877f2', img: '/img/unsplash/webp/photo-1515886657613-9f3515b0c78f.webp', campaign: 'Spring Sale', roas: '618%' },
                         { tag: 'GOOGLE', color: '#34a853', img: '/img/unsplash/webp/photo-1539109136881-3be0616acf4b.webp', campaign: 'Brand KW', roas: '412%' },
                       ].map((r) => (
                         <div key={r.tag} style={{ border: '1px solid #eaeaea', overflow: 'hidden' }}>
