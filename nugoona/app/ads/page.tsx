@@ -106,9 +106,11 @@ export default function AdsPage() {
                   >
                     무료로 시작하기
                   </Link>
+                  {/* 인라인 색 고정 — text-white 클래스가 이 a에서만 미적용되는 렌더 이슈(감독관 3차 실측 #333) 방어 */}
                   <Link
                     href="/content"
-                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white border border-white/35 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
+                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
+                    style={{ color: '#ffffff', border: '1px solid rgba(255,255,255,0.35)' }}
                   >
                     노출이 먼저라면 →
                   </Link>

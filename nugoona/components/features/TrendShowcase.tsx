@@ -63,7 +63,8 @@ type BriefingItem = {
 };
 
 const RISING_ALL: BriefingItem[] = [
-  { rank: '전체 17위', img: IMG.jacketBomberRust,    brand: '에르블랑',   name: '오버핏 봄버 재킷_Rust Brown',          change: 75, thisWeek: 17, lastWeek: 92 },
+  /* 감독관 2·3차 연속 "썸네일이 니트로 읽힘"(76px 축소 시) → 상품명 역맞춤 */
+  { rank: '전체 17위', img: IMG.jacketBomberRust,    brand: '에르블랑',   name: '집업 니트 블루종_Rust Brown',          change: 75, thisWeek: 17, lastWeek: 92 },
   { rank: '전체 12위', img: IMG.jacketLeatherBrown,  brand: '라빈느',     name: '레더 블루종 재킷_Brown',               change: 61, thisWeek: 12, lastWeek: 73 },
   { rank: '전체 38위', img: IMG.knitPoncho,          brand: '소울리브',   name: '프린지 크로셰 니트 가디건_Ivory',       change: 57, thisWeek: 38, lastWeek: 95 },
   { rank: '전체 25위', img: IMG.blouseFloral,        brand: '데이브리즈', name: '플로럴 레이스 블라우스_White',          change: 41, thisWeek: 25, lastWeek: 66 },
@@ -682,15 +683,7 @@ function CompareSection() {
                         >
                           {i + 1}
                         </span>
-                        {/* Best rank badge */}
-                        {p.bestRank && (
-                          <span
-                            className="absolute top-2 right-2 text-[9px] font-bold text-white px-1.5 py-0.5"
-                            style={{ background: '#171717', ...EN }}
-                          >
-                            베스트 {p.bestRank}위
-                          </span>
-                        )}
+                        {/* 감독관 3차: 좌측 판매순 번호와 "베스트 N위" 배지가 두 순위 체계로 읽혀 정보 충돌 → 배지 제거 */}
                       </div>
 
                       {/* Info */}

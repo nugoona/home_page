@@ -286,7 +286,8 @@ export default function ContentPage() {
               <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 가게 이름만 입력하면 세팅해 드립니다.</p>
               <div className="flex justify-center gap-3 max-sm:flex-col max-sm:items-center">
                 <Link href="/start" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all">무료로 시작하기</Link>
-                <Link href="/ads" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white border border-white/35 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]">광고까지 직접 운영하려면 →</Link>
+                {/* 인라인 색 고정 — text-white 클래스가 이 a에서만 미적용되는 렌더 이슈(감독관 3차 실측 #333) 방어 */}
+                <Link href="/ads" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]" style={{ color: '#ffffff', border: '1px solid rgba(255,255,255,0.35)' }}>광고까지 직접 운영하려면 →</Link>
               </div>
             </FadeUp>
           </div>
