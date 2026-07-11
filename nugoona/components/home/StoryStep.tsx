@@ -66,6 +66,7 @@ export default function StoryStep({
           transition={{ duration: 0.6, ease: EASE }}
         >
           <span
+            className="max-md:!text-[14px]"
             style={{
               fontSize: 13,
               fontWeight: 700,

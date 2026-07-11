@@ -35,7 +35,7 @@ export default function S14_Generate() {
 
   return (
     <div ref={ref} className="w-full">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-4" style={{ ...EN, color: '#a9aeb5' }}>
+      <p className="text-[11px] max-md:text-[12px] font-semibold uppercase tracking-[0.08em] mb-4" style={{ ...EN, color: '#a9aeb5' }}>
         가게 이름: 해도담 횟집 (속초)
       </p>
 
@@ -60,7 +60,7 @@ export default function S14_Generate() {
                 {c.n}
               </span>
               <div>
-                <p className={`text-[13px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
+                <p className={`text-[13px] max-md:text-[14px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
                   {c.t}
                   {i === 1 && (
                     <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke={ACCENT} strokeWidth="1.8" className="shrink-0" aria-hidden>
@@ -68,7 +68,7 @@ export default function S14_Generate() {
                     </svg>
                   )}
                 </p>
-                <p className="text-[11px] text-text-weak mt-0.5">{c.s}</p>
+                <p className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak mt-0.5">{c.s}</p>
               </div>
             </motion.div>
           ))}
@@ -105,7 +105,7 @@ export default function S14_Generate() {
 
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 1.3 }}
-        className="text-[11px] text-text-weak mt-6 max-w-[920px]"
+        className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak mt-6 max-w-[920px]"
       >
         남긴 검색어는 글 제목·태그·해시태그에 자동으로 실리고, 매일 순위를 잽니다.
       </motion.p>

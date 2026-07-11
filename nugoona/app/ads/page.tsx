@@ -39,14 +39,14 @@ export default function AdsPage() {
               }}
             />
             <FadeUp className="relative z-10">
-              <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>
+              <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>
                 누구나 광고
               </p>
               <h1
                 className="text-[clamp(34px,6vw,60px)] font-semibold text-white tracking-[-0.04em] leading-[1.08] mb-6"
                 dangerouslySetInnerHTML={{ __html: hero.h1 }}
               />
-              <p className="text-[clamp(15px,1.8vw,18px)] text-white/55 leading-[1.65] max-w-[540px] mx-auto mb-10">
+              <p className="text-[clamp(15px,1.8vw,18px)] max-md:text-[16px] text-white/55 leading-[1.65] max-w-[540px] mx-auto mb-10">
                 {hero.sub}
               </p>
               <Link
@@ -59,7 +59,7 @@ export default function AdsPage() {
                 </svg>
               </Link>
               {hero.cta.sub && (
-                <p className="text-[13px] text-white/40 mt-4">{hero.cta.sub}</p>
+                <p className="text-[13px] max-md:text-[14px] text-white/40 mt-4">{hero.cta.sub}</p>
               )}
             </FadeUp>
           </div>
@@ -73,7 +73,7 @@ export default function AdsPage() {
                 className="text-[clamp(24px,3.4vw,36px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.2] max-w-[640px] mx-auto mb-4"
                 dangerouslySetInnerHTML={{ __html: identity.heading }}
               />
-              <p className="text-[15px] text-text-body leading-[1.65] max-w-[560px] mx-auto">
+              <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65] max-w-[560px] mx-auto">
                 {identity.body}
               </p>
             </FadeUp>
@@ -98,7 +98,7 @@ export default function AdsPage() {
                 <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">
                   한 달, 카드 없이 먼저 써 보세요
                 </h2>
-                <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.</p>
+                <p className="text-[15px] max-md:text-[16px] text-white/50 mb-10">약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.</p>
                 <div className="flex gap-3 max-sm:flex-col">
                   <Link
                     href="/start"
@@ -118,7 +118,7 @@ export default function AdsPage() {
               </FadeUp>
               <FadeUp delay={0.15} className="flex flex-col items-center gap-5 max-md:order-first">
                 <PhoneMockup />
-                <p className="text-[13px] text-white/40">외근 중에도, 이동 중에도 — 모바일에서 그대로.</p>
+                <p className="text-[13px] max-md:text-[14px] text-white/40">외근 중에도, 이동 중에도 — 모바일에서 그대로.</p>
               </FadeUp>
             </div>
           </div>

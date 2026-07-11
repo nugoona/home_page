@@ -124,13 +124,13 @@ function BriefingSection() {
       {/* Intro */}
       <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
         <FadeUp>
-          <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
+          <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
             Trend · Weekly Briefing
           </p>
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
             매주 월요일, MD 회의 전에<br />이미 알고 있습니다.
           </h2>
-          <p className="text-[16px] text-text-primary font-light leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
+          <p className="text-[16px] text-text-primary font-light max-md:font-medium leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
             29CM과 Ably의 급상승·신규진입·순위하락 상품을 카테고리별로 자동 정리합니다.
           </p>
         </FadeUp>
@@ -338,13 +338,13 @@ function InsightSection() {
         <FadeUp>
           {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
           <div className="max-w-[984px] mx-auto">
-            <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-2" style={EN}>
+            <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-2" style={EN}>
               AI Insight
             </p>
-            <h2 className="text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] leading-[1.25] text-text-primary mb-2">
+            <h2 className="text-[clamp(20px,2.6vw,28px)] max-md:text-[clamp(24px,7vw,28px)] font-semibold tracking-[-0.02em] leading-[1.25] text-text-primary mb-2">
               수백 개 상품을 직접 볼 수 없을 때, AI가 대신 읽어줍니다.
             </h2>
-            <p className="text-[15px] text-text-primary font-light leading-[1.65] tracking-[-0.02em]">
+            <p className="text-[15px] max-md:text-[16px] text-text-primary font-light max-md:font-medium leading-[1.65] tracking-[-0.02em]">
               10년차 패션 MD 페르소나의 AI가 카테고리별 트렌드 키워드와 패턴을 매주 보고서로 작성합니다.
             </p>
           </div>
@@ -611,13 +611,13 @@ function CompareSection() {
       {/* Intro */}
       <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
         <FadeUp>
-          <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
+          <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
             Competitor Compare
           </p>
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
             오늘 경쟁사가 29CM에서<br />뭘 팔고 있는지 압니다.
           </h2>
-          <p className="text-[16px] text-text-primary font-light leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
+          <p className="text-[16px] text-text-primary font-light max-md:font-medium leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
             경쟁사를 등록하면 그 브랜드의 29CM 추천순 TOP 20 상품을 매일 자동 수집합니다.
           </p>
         </FadeUp>
@@ -889,7 +889,7 @@ export default function TrendShowcase() {
             <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-3">
               광고를 이해하려면, 시장도 함께 봐야 합니다
             </h3>
-            <p className="text-[15px] text-text-weak max-w-[560px] mx-auto leading-[1.65]">
+            <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-weak max-w-[560px] mx-auto leading-[1.65]">
               광고 성과만으로는 다음 선택을 결정하기 어렵습니다. 함께 팔리는 상품과 경쟁사의 흐름까지 함께 봐야 운영의 기준이 생깁니다.
             </p>
           </FadeUp>
@@ -907,14 +907,14 @@ export default function TrendShowcase() {
             {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
             <div className="max-w-[984px] mx-auto grid grid-cols-2 gap-12 items-end max-md:grid-cols-1 max-md:gap-6">
               <div>
-                <p className="text-[13px] font-semibold tracking-[0.08em] uppercase mb-3 text-white/40" style={EN}>
+                <p className="text-[13px] max-md:text-[14px] font-semibold tracking-[0.08em] uppercase mb-3 text-white/40" style={EN}>
                   Search Volume
                 </p>
                 <h3 className="text-[clamp(22px,3vw,34px)] font-semibold text-white tracking-[-0.02em] leading-[1.2]">
                   검색량도 경쟁사와<br />비교합니다.
                 </h3>
               </div>
-              <p className="text-[15px] text-white/60 leading-[1.65]">
+              <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-white/60 leading-[1.65]">
                 네이버 일간 검색량 30일 추이와 Google Search Console 유입 키워드를 한 화면에서. 내 브랜드가 얼마나 검색되는지, 어떤 키워드로 고객이 유입되는지 파악하세요.
               </p>
             </div>

@@ -567,7 +567,7 @@ function FeatureRow({
             <motion.h3 variants={springPop} style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: '#171717', letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 16 }}>
               {step.title}
             </motion.h3>
-            <motion.p variants={springPop} style={{ fontSize: 15, color: '#666', lineHeight: 1.65 }}>
+            <motion.p variants={springPop} className="max-md:!text-[16px] max-md:!font-medium" style={{ fontSize: 15, color: '#666', lineHeight: 1.65 }}>
               {step.desc}
             </motion.p>
             {step.sub && (
@@ -591,7 +591,7 @@ export default function AdCanvasShowcase() {
           <FadeUp>
             {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
             <div style={{ maxWidth: 984, margin: '0 auto' }}>
-              <p style={{ fontSize: 13, fontWeight: 600, color: '#0070f3', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12, ...EN }}>AdCanvas</p>
+              <p className="max-md:!text-[14px]" style={{ fontSize: 13, fontWeight: 600, color: '#0070f3', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12, ...EN }}>AdCanvas</p>
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
                 메타·구글 광고를<br />직접 만들고 관리하세요
               </h2>
@@ -619,7 +619,7 @@ export default function AdCanvasShowcase() {
               <h3 style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: '#171717', letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 8 }}>
                 만들고 끝이 아닙니다
               </h3>
-              <p style={{ fontSize: 15, color: '#666' }}>
+              <p className="max-md:!text-[16px] max-md:!font-medium" style={{ fontSize: 15, color: '#666' }}>
                 운영과 성과는, 아래 대시보드에서 이어집니다.
               </p>
             </div>

@@ -55,7 +55,7 @@ export default function StartPage() {
   }
 
   const inputCls =
-    'w-full h-11 px-4 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors';
+    'w-full h-11 px-4 border border-border-default bg-white text-[14px] max-md:text-[16px] text-text-primary focus:border-accent focus:outline-none transition-colors';
 
   return (
     <main>
@@ -67,7 +67,7 @@ export default function StartPage() {
               <h1 className="text-[clamp(32px,5vw,48px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
                 {hero.h1}
               </h1>
-              <p className="text-[16px] text-text-body max-w-[480px] mx-auto leading-[1.65]">{hero.sub}</p>
+              <p className="text-[16px] max-md:font-medium text-text-body max-w-[480px] mx-auto leading-[1.65]">{hero.sub}</p>
             </FadeUp>
           </div>
         </Section>
@@ -80,7 +80,7 @@ export default function StartPage() {
                 {status === 'success' ? (
                   <div className="text-center py-12">
                     <h2 className="text-[24px] font-semibold text-text-primary mb-4">신청이 접수되었습니다</h2>
-                    <p className="text-[15px] text-text-body">시작을 돕는 안내를 먼저 드리겠습니다.</p>
+                    <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body">시작을 돕는 안내를 먼저 드리겠습니다.</p>
                   </div>
                 ) : (
                   <form onSubmit={onSubmit} className="flex flex-col gap-6">
@@ -88,7 +88,7 @@ export default function StartPage() {
 
                     {/* ① 관심 제품 — 카드형 라디오 */}
                     <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-2">{formCopy.interest.label} *</label>
+                      <label className="block text-[13px] max-md:text-[14px] font-medium text-text-primary mb-2">{formCopy.interest.label} *</label>
                       <div className="flex flex-col gap-2">
                         {formCopy.interest.options.map((o) => (
                           <label
@@ -115,21 +115,21 @@ export default function StartPage() {
 
                     {/* ② 상호·브랜드명 */}
                     <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">{formCopy.business.label} *</label>
+                      <label className="block text-[13px] max-md:text-[14px] font-medium text-text-primary mb-1.5">{formCopy.business.label} *</label>
                       <input name="business" value={form.business} onChange={onChange} required placeholder={formCopy.business.placeholder} className={inputCls} />
                     </div>
 
                     {/* ③ 연락처 */}
                     <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">{formCopy.contact.label} *</label>
+                      <label className="block text-[13px] max-md:text-[14px] font-medium text-text-primary mb-1.5">{formCopy.contact.label} *</label>
                       <input name="contact" value={form.contact} onChange={onChange} required placeholder={formCopy.contact.placeholder} className={inputCls} />
                     </div>
 
                     {/* ④ 메모 (선택) */}
                     <div>
-                      <label className="block text-[13px] font-medium text-text-primary mb-1.5">{formCopy.memo.label}</label>
+                      <label className="block text-[13px] max-md:text-[14px] font-medium text-text-primary mb-1.5">{formCopy.memo.label}</label>
                       <textarea name="memo" value={form.memo} onChange={onChange} rows={4} placeholder={formCopy.memo.placeholder}
-                        className="w-full px-4 py-3 border border-border-default bg-white text-[14px] text-text-primary focus:border-accent focus:outline-none transition-colors resize-y" />
+                        className="w-full px-4 py-3 border border-border-default bg-white text-[14px] max-md:text-[16px] text-text-primary focus:border-accent focus:outline-none transition-colors resize-y" />
                     </div>
 
                     <div>
@@ -140,12 +140,12 @@ export default function StartPage() {
                       >
                         {status === 'loading' ? '전송 중...' : formCopy.submit}
                       </button>
-                      <p className="text-[13px] text-text-weak text-center mt-3">{formCopy.note}</p>
+                      <p className="text-[13px] max-md:text-[14px] max-md:font-medium text-text-weak text-center mt-3">{formCopy.note}</p>
                       {/* 안심 문구(GPT+사장님 확정 2026-07-11) — "영업 전화 경계" 이탈 지점 수리 */}
-                      <p className="text-[13px] text-text-weak text-center mt-1">{formCopy.reassure}</p>
+                      <p className="text-[13px] max-md:text-[14px] max-md:font-medium text-text-weak text-center mt-1">{formCopy.reassure}</p>
                     </div>
                     {status === 'error' && (
-                      <p className="text-[13px] text-red-500 text-center">전송에 실패했습니다. 다시 시도해주세요.</p>
+                      <p className="text-[13px] max-md:text-[14px] text-red-500 text-center">전송에 실패했습니다. 다시 시도해주세요.</p>
                     )}
                   </form>
                 )}
@@ -173,7 +173,7 @@ export default function StartPage() {
                     <div className="flex-1 h-px bg-border-default" />
                   </div>
                   <h3 className="text-[16px] font-bold text-text-primary mb-2">{s.title}</h3>
-                  <p className="text-[14px] text-text-body leading-[1.65]">{s.desc}</p>
+                  <p className="text-[14px] max-md:font-medium text-text-body leading-[1.65]">{s.desc}</p>
                 </FadeUp>
               ))}
             </div>
@@ -188,7 +188,7 @@ export default function StartPage() {
                 <FadeUp key={f.q} delay={i * 0.06}>
                   <div className={`py-6 ${i < faq.length - 1 ? 'border-b border-border-default' : ''}`}>
                     <h3 className="text-[16px] font-bold text-text-primary mb-2">{f.q}</h3>
-                    <p className="text-[14px] text-text-body leading-[1.65]">{f.a}</p>
+                    <p className="text-[14px] max-md:font-medium text-text-body leading-[1.65]">{f.a}</p>
                   </div>
                 </FadeUp>
               ))}

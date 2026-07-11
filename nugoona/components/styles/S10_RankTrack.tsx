@@ -24,7 +24,7 @@ export default function S10_RankTrack() {
     <div ref={ref} className="w-full max-w-[640px]">
       {/* 리드 문장 */}
       <motion.p
-        className="text-[13px] text-text-body mb-1"
+        className="text-[13px] max-md:text-[14px] max-md:font-medium text-text-body mb-1"
         initial={{ opacity: 0, y: 10 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: EASE }}
@@ -57,7 +57,7 @@ export default function S10_RankTrack() {
       {/* 칩 2개 */}
       <div className="flex gap-2 mt-5 flex-wrap">
         <motion.span
-          className="text-[11px] px-2 py-1 border"
+          className="text-[11px] max-md:text-[12px] px-2 py-1 border"
           style={{ borderColor: BORDER }}
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -66,7 +66,7 @@ export default function S10_RankTrack() {
           홍대 펌 — <b>1페이지</b>
         </motion.span>
         <motion.span
-          className="text-[11px] px-2 py-1 border text-text-weak"
+          className="text-[11px] max-md:text-[12px] max-md:font-medium px-2 py-1 border text-text-weak"
           style={{ borderColor: BORDER }}
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -78,7 +78,7 @@ export default function S10_RankTrack() {
 
       {/* 각주 1줄 */}
       <motion.p
-        className="mt-4 text-[11px] text-text-weak"
+        className="mt-4 text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak"
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, ease: EASE, delay: 0.85 }}

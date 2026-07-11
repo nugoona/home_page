@@ -36,9 +36,14 @@ const PHOTOS = [
   'photo-1551024506-0bccd828d307',
 ] as const;
 
+/* 데스크(44px 고정 인라인 스타일) → 모바일(그리드 셀을 꽉 채우는 정사각형)으로 전환.
+   인라인 style은 Tailwind 클래스보다 우선하므로, 모바일에서는 style 자체를 생략한다. */
 function PhotoSlot({ src, size = 44 }: { src: string; size?: number }) {
   return (
-    <span className="inline-block overflow-hidden shrink-0" style={{ width: size, height: size }}>
+    <span
+      className="block overflow-hidden shrink-0 max-md:!w-full max-md:!h-auto max-md:aspect-square"
+      style={{ width: size, height: size }}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`/img/unsplash/webp/${src}.webp`} alt="" className="w-full h-full object-cover" />
     </span>
@@ -148,9 +153,9 @@ export default function S9_ChannelFanout() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: EASE }}
-          className="shrink-0 md:self-center"
+          className="shrink-0 md:self-center max-md:w-full"
         >
-          <div className="grid grid-cols-2 gap-1 p-2 border bg-white" style={{ borderColor: BORDER }}>
+          <div className="grid grid-cols-2 gap-1 p-2 border bg-white max-md:w-full max-md:gap-2" style={{ borderColor: BORDER }}>
             {PHOTOS.map((src) => <PhotoSlot key={src} src={src} />)}
           </div>
           <p className="text-[10.5px] mt-1.5 text-text-weak text-center">오늘 올린 이야기 하나</p>
@@ -175,14 +180,14 @@ export default function S9_ChannelFanout() {
               <Dot c={row.c} />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-semibold text-text-primary">{row.ch}</span>
+                  <span className="text-[11px] max-md:text-[12px] font-semibold text-text-primary">{row.ch}</span>
                   <span className="text-[9.5px] px-1.5 py-0.5 border text-text-weak" style={{ ...EN, borderColor: '#eaeaea' }}>{row.form}</span>
                 </div>
                 <motion.p
                   initial={{ opacity: 0, x: 10 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, ease: EASE, delay: 0.55 + i * 0.1 }}
-                  className="text-[13px] text-text-body mt-0.5"
+                  className="text-[13px] max-md:text-[16px] max-md:font-medium text-text-body mt-0.5"
                 >
                   {row.body as ReactNode}
                 </motion.p>
@@ -195,7 +200,7 @@ export default function S9_ChannelFanout() {
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, ease: EASE, delay: 1.0 }}
-        className="mt-5 text-[11px] text-text-weak"
+        className="mt-5 text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak"
       >
         이야기는 하나 — 채널마다 그 채널의 형식으로 다시 씁니다.
       </motion.p>

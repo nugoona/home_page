@@ -153,7 +153,7 @@ export default function S12_MapExposure() {
           블로그에 쓴 글이,<br />
           <span className="text-accent">네이버 플레이스·구글 비즈니스</span>에도.
         </h3>
-        <p className="text-[14px] text-text-body leading-[1.65]">
+        <p className="text-[14px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65]">
           손님이 지도를 켜고 찾을 때, 우리 가게 소식이 이미 거기 올라와 있습니다.
         </p>
       </div>
@@ -218,7 +218,7 @@ export default function S12_MapExposure() {
 
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 1 }}
-        className="text-[11px] text-text-weak leading-[1.65] mt-6 max-w-[900px]"
+        className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak leading-[1.65] mt-6 max-w-[900px]"
       >
         채널은 <span className="font-medium text-text-body">처음 한 번만 연결</span>합니다. 네이버 연결은 담당자가 함께 진행해 드립니다.
       </motion.p>

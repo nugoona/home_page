@@ -90,7 +90,7 @@ export default function S11_NewsEngine() {
           className="flex items-center gap-1.5 mb-2"
         >
           <span className="rounded-dot w-1.5 h-1.5 shrink-0" style={{ background: '#03c75a' }} />
-          <span className="text-[11px] font-semibold text-text-primary">네이버 플레이스</span>
+          <span className="text-[11px] max-md:text-[12px] font-semibold text-text-primary">네이버 플레이스</span>
           <span className="text-[10px]" style={{ ...EN, color: '#a9aeb5' }}>이번 주 노출 소식</span>
         </motion.div>
 
@@ -110,14 +110,15 @@ export default function S11_NewsEngine() {
             <motion.p
               initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.45, ease: EASE, delay: 0.78 }}
-              className="text-[14px] leading-[1.65] text-text-body max-md:text-[13px]" style={QUOTE}
+              // §8.9: 모바일에서 13px로 줄어들던 버그 수정 — 데스크(14px)보다 얇아지지 않도록 15px로
+              className="text-[14px] leading-[1.65] text-text-body max-md:text-[15px]" style={QUOTE}
             >
               &ldquo;성수역 3번 출구에서 걸어서 5분입니다.&rdquo;
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 4 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.35, ease: EASE, delay: 1.15 }}
-              className="text-[13px] font-semibold mt-1.5" style={{ ...EN, color: ACCENT }}
+              className="text-[13px] max-md:text-[14px] font-semibold mt-1.5" style={{ ...EN, color: ACCENT }}
             >
               — 앞으로 쓰는 글에 자동 반영
             </motion.p>
@@ -128,7 +129,7 @@ export default function S11_NewsEngine() {
         <motion.p
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, ease: EASE, delay: 1.4 }}
-          className="mt-5 text-[11px] text-text-weak"
+          className="mt-5 text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak"
         >
           매주 일요일 밤 매체 5곳을 대신 확인합니다 — 거짓 수법은 버립니다.
         </motion.p>

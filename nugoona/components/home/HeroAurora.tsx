@@ -101,7 +101,7 @@ export default function HeroAurora() {
           className="text-[clamp(26px,5vw,56px)] font-bold tracking-[-0.04em] leading-[1.12] mb-6 text-white"
           dangerouslySetInnerHTML={{ __html: hero.h1 }}
         />
-        <p className="text-[clamp(13px,1.8vw,19px)] text-[#d4d4d4] leading-[1.65] tracking-[0.005em] max-w-[460px] mb-11">
+        <p className="text-[clamp(13px,1.8vw,19px)] max-md:text-[16px] text-[#d4d4d4] leading-[1.65] tracking-[0.005em] max-w-[460px] mb-11">
           {hero.sub}
         </p>
         <Link

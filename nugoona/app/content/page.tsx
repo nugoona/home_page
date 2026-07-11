@@ -129,11 +129,11 @@ export default function ContentPage() {
               }}
             />
             <FadeUp className="relative z-10">
-              <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>누구나 콘텐츠</p>
+              <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>누구나 콘텐츠</p>
               {/* h1·sub = GPT+사장님 확정(content.ts hero) 토씨 그대로 */}
               <h1 className="text-[clamp(30px,5.2vw,54px)] font-semibold text-white tracking-[-0.04em] leading-[1.14] mb-6"
                 dangerouslySetInnerHTML={{ __html: '누구나<span class="comma">,</span> 검색 결과에<br /><span class="text-accent">내 스토어가</span> 바로 보이길 원합니다' }} />
-              <p className="text-[clamp(15px,1.8vw,18px)] text-white/55 leading-[1.65] max-w-[600px] mx-auto mb-10">
+              <p className="text-[clamp(15px,1.8vw,18px)] max-md:text-[16px] text-white/55 leading-[1.65] max-w-[600px] mx-auto mb-10">
                 광고는 멈추면 사라지지만, 꾸준히 쌓은 글은 검색에 남아 스토어를 계속 보이게 합니다. 그 꾸준함을, 누구나 콘텐츠가 대신합니다.
               </p>
               <Link href="/start" className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors mb-16">
@@ -157,7 +157,7 @@ export default function ContentPage() {
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-5 max-w-[640px]">
                 맡긴다고 검색 결과에<br /><span className="text-accent">바로 보이는 것은 아닙니다</span>
               </h2>
-              <p className="text-[16px] text-text-body leading-[1.65] max-w-[560px] mb-12">
+              <p className="text-[16px] max-md:font-medium text-text-body leading-[1.65] max-w-[560px] mb-12">
                 대행에 매달 비용을 내도, 검색에 우리 가게가 보인다는 보장은 없습니다. 광고는 멈추면 사라지고, 남는 것도 없습니다.
               </p>
             </FadeUp>
@@ -165,7 +165,7 @@ export default function ContentPage() {
               {[['월 30만~100만+', '대행에 매달 나가는 비용'], ['계약에 묶임', '멈추면 노출도 함께 사라짐'], ['보장 없음', '내도 검색에 보인다는 확답은 없음']].map(([n, d]) => (
                 <FadeUp key={d}>
                   <p className="text-[clamp(24px,3vw,32px)] font-bold text-text-primary tracking-[-0.02em] mb-2">{n}</p>
-                  <p className="text-[14px] text-text-weak leading-[1.65]">{d}</p>
+                  <p className="text-[14px] max-md:font-medium text-text-weak leading-[1.65]">{d}</p>
                 </FadeUp>
               ))}
             </div>
@@ -178,7 +178,7 @@ export default function ContentPage() {
             <FadeUp>
               {/* 헤드라인 = GPT+사장님 확정(2026-07-11) */}
               <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-3">검색은 <span className="text-accent">꾸준함</span>이 만듭니다</h2>
-              <p className="text-[16px] text-text-body mb-12 max-md:mb-8">뿌리는 대행 대신, 검색에 보이게 하는 정공법.</p>
+              <p className="text-[16px] max-md:font-medium text-text-body mb-12 max-md:mb-8">뿌리는 대행 대신, 검색에 보이게 하는 정공법.</p>
             </FadeUp>
             <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
               {bridge.map((c, i) => (
@@ -188,7 +188,7 @@ export default function ContentPage() {
                     <c.art />
                     <span className="inline-flex w-8 h-8 items-center justify-center text-[13px] font-bold text-white bg-[#171717] mb-5" style={EN}>{c.n}</span>
                     <h3 className="text-[18px] font-bold text-text-primary mb-2">{c.t}</h3>
-                    <p className="text-[14px] text-text-body leading-[1.65]">{c.d}</p>
+                    <p className="text-[14px] max-md:font-medium text-text-body leading-[1.65]">{c.d}</p>
                   </div>
                 </FadeUp>
               ))}
@@ -239,7 +239,7 @@ export default function ContentPage() {
                       {e.g}
                     </svg>
                     <h3 className="text-[15px] font-bold text-text-primary mb-1.5">{e.t}</h3>
-                    <p className="text-[13px] text-text-body leading-[1.65]">{e.d}</p>
+                    <p className="text-[13px] max-md:text-[14px] max-md:font-medium text-text-body leading-[1.65]">{e.d}</p>
                   </div>
                 </FadeUp>
               ))}
@@ -252,15 +252,15 @@ export default function ContentPage() {
           <div className="py-24 px-12 max-w-[900px] mx-auto max-md:py-14 max-md:px-6">
             <FadeUp>
               <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] text-center mb-3">요금</h2>
-              <p className="text-[15px] text-text-body text-center mb-12">첫 달 무료. 카드 없이 시작합니다.</p>
+              <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body text-center mb-12">첫 달 무료. 카드 없이 시작합니다.</p>
             </FadeUp>
             <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">
               {[{ name: '베이직', price: '99,000', unit: '원 / 월', note: '영상 없이, 전 기능 그대로', accent: false }, { name: '프리미엄', price: '390,000~', unit: '원 / 월', note: '영상·쇼츠 제작 포함', accent: true }].map((p) => (
                 <FadeUp key={p.name}>
                   <div className={`h-full border p-8 ${p.accent ? 'border-accent bg-accent-bg' : 'border-border-default bg-white'}`}>
-                    <p className="text-[13px] font-semibold text-text-weak tracking-[0.08em] uppercase mb-4" style={EN}>{p.name}</p>
-                    <p className="mb-1"><span className="text-[clamp(30px,4vw,44px)] font-bold text-text-primary" style={EN}>{p.price}</span><span className="text-[14px] text-text-weak ml-1">{p.unit}</span></p>
-                    <p className="text-[14px] text-text-body mt-4">{p.note}</p>
+                    <p className="text-[13px] max-md:text-[14px] font-semibold text-text-weak tracking-[0.08em] uppercase mb-4" style={EN}>{p.name}</p>
+                    <p className="mb-1"><span className="text-[clamp(30px,4vw,44px)] font-bold text-text-primary" style={EN}>{p.price}</span><span className="text-[14px] max-md:font-medium text-text-weak ml-1">{p.unit}</span></p>
+                    <p className="text-[14px] max-md:font-medium text-text-body mt-4">{p.note}</p>
                   </div>
                 </FadeUp>
               ))}
@@ -272,8 +272,8 @@ export default function ContentPage() {
         <Section noBorder>
           <StoryStep dark time="∞" step={promise.step} headline={promise.title} subtitle={promise.sub}>
             <div className="flex gap-4 max-w-[520px] max-md:flex-col">
-              <div className="flex-1 border border-white/15 bg-white/[0.03] px-6 py-7"><p className="text-[13px] text-white/50 mb-2">기능</p><p className="text-[26px] font-bold text-white" style={EN}>계속 &uarr;</p></div>
-              <div className="flex-1 border border-accent/40 bg-accent/[0.07] px-6 py-7"><p className="text-[13px] text-white/50 mb-2">요금</p><p className="text-[26px] font-bold text-accent" style={EN}>그대로 &rarr;</p></div>
+              <div className="flex-1 border border-white/15 bg-white/[0.03] px-6 py-7"><p className="text-[13px] max-md:text-[14px] text-white/50 mb-2">기능</p><p className="text-[26px] font-bold text-white" style={EN}>계속 &uarr;</p></div>
+              <div className="flex-1 border border-accent/40 bg-accent/[0.07] px-6 py-7"><p className="text-[13px] max-md:text-[14px] text-white/50 mb-2">요금</p><p className="text-[26px] font-bold text-accent" style={EN}>그대로 &rarr;</p></div>
             </div>
           </StoryStep>
         </Section>
@@ -283,7 +283,7 @@ export default function ContentPage() {
           <div className="py-20 px-12 text-center max-md:py-16 max-md:px-6" style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #151515 100%)' }}>
             <FadeUp>
               <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">한 달, 카드 없이 먼저 써 보세요</h2>
-              <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 가게 이름만 입력하면 세팅해 드립니다.</p>
+              <p className="text-[15px] max-md:text-[16px] text-white/50 mb-10">약정도 카드도 없습니다. 가게 이름만 입력하면 세팅해 드립니다.</p>
               <div className="flex justify-center gap-3 max-sm:flex-col max-sm:items-center">
                 <Link href="/start" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all">무료로 시작하기</Link>
                 {/* 인라인 색 고정 — text-white 클래스가 이 a에서만 미적용되는 렌더 이슈(감독관 3차 실측 #333) 방어 */}

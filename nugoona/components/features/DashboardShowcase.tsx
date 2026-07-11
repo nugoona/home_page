@@ -278,7 +278,7 @@ function Section01() {
 
           {/* RIGHT: desc + chips */}
           <FadeUp delay={0.1} className="px-12 py-10 flex flex-col justify-center max-md:px-6 max-md:pt-0 max-md:pb-8">
-            <p className="text-[15px] text-text-body leading-[1.45] tracking-[-0.02em] mb-5">
+            <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.45] tracking-[-0.02em] mb-5">
               흩어진 데이터를 안전하게 수집하고<br />하나의 대시보드로 통합합니다.
             </p>
             {/* Connected platforms label */}
@@ -309,7 +309,7 @@ function Section01() {
             <DataPipelineVisualMobile isActive={isActive} />
           </div>
           {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
-          <p className="text-[11px] text-text-weak text-right mt-2 pr-2">데모 화면 · 예시 데이터</p>
+          <p className="text-[11px] max-md:text-[12px] text-text-weak text-right mt-2 pr-2">데모 화면 · 예시 데이터</p>
         </FadeUp>
       </div>
     </Section>
@@ -571,11 +571,11 @@ function Section02() {
             <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-white tracking-[-0.02em] leading-[1.25] mb-5">
               NGN 마케터의 기준으로<br />매월 1일, 전략 리포트
             </h3>
-            <p className="text-[15px] leading-[1.65] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <p className="text-[15px] max-md:text-[16px] max-md:font-medium leading-[1.65] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
               단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로 AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
             {/* "예시 화면" 라벨 — 콜드 리드 지적("도전적 시나리오 +15~25%" 과장 의심) 대응 */}
-            <p className="mt-4 text-[11px]" style={{ color: 'rgba(255,255,255,0.5)' }}>리포트 내용은 데모 화면입니다.</p>
+            <p className="mt-4 text-[11px] max-md:text-[12px]" style={{ color: 'rgba(255,255,255,0.5)' }}>리포트 내용은 데모 화면입니다.</p>
           </FadeUp>
         </div>
         {/* RIGHT — Action Plan 타이틀 띠 + ActionPlan09Card */}
@@ -793,7 +793,7 @@ export function Section03() {
             <motion.h3 variants={springPop} className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-4">
               언제 어디서든 관리
             </motion.h3>
-            <motion.p variants={springPop} className="text-[15px] text-text-body leading-[1.65] mb-5">
+            <motion.p variants={springPop} className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65] mb-5">
               외근 중에도, 이동 중에도. 매출과 광고 성과를 확인하고, 트렌드를 파악하고, 예산을 바로 조정합니다.
             </motion.p>
             {[
@@ -863,11 +863,11 @@ export default function DashboardShowcase() {
           <div className="flex flex-col">
             <FadeUp delay={0.1} className="flex-1 flex flex-col">
               <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center max-md:px-6 max-md:py-10">
-                <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-4" style={EN}>Dashboard</p>
+                <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-4" style={EN}>Dashboard</p>
                 <h2 className="text-[clamp(24px,3vw,36px)] font-semibold text-white tracking-[-0.03em] leading-[1.15] mb-4">
                   매출·광고·방문자 데이터를<br />한 화면에서
                 </h2>
-                <p className="text-[15px] leading-[1.65] mb-6 font-light tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                <p className="text-[15px] max-md:text-[16px] leading-[1.65] mb-6 font-light max-md:font-medium tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
                   카페24 매출, 메타·구글 광고, GA4 방문자 — 하나의 대시보드에서 실시간 확인.
                 </p>
                 <div className="flex flex-wrap gap-2">

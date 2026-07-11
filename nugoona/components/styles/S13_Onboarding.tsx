@@ -95,7 +95,7 @@ export default function S13_Onboarding() {
         >
           <div className="flex items-center gap-2 border px-3 h-10" style={{ borderColor: ACCENT }}>
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#9aa0a8" strokeWidth="1.8"><circle cx="7" cy="7" r="4.5" /><path d="M11 11l3 3" strokeLinecap="round" /></svg>
-            <span className="text-[13px] text-text-primary">오늘의 브런치</span>
+            <span className="text-[13px] max-md:text-[14px] text-text-primary">오늘의 브런치</span>
           </div>
         </motion.div>
 
@@ -113,7 +113,7 @@ export default function S13_Onboarding() {
                 className="flex items-start gap-3 px-4 py-3" style={{ borderColor: '#f2f2f2' }}
               >
                 <span className="text-[10px] font-semibold w-16 shrink-0 pt-0.5" style={{ ...EN, color: '#a9aeb5' }}>{g.label}</span>
-                <p className="text-[13px] text-text-primary leading-snug flex-1">{g.body}</p>
+                <p className="text-[13px] max-md:text-[14px] text-text-primary leading-snug flex-1">{g.body}</p>
                 <Check inView={inView} delay={delay + CHECK_LAG} />
               </motion.div>
             );
@@ -123,7 +123,7 @@ export default function S13_Onboarding() {
             transition={{ duration: 0.4, ease: EASE, delay: buttonDelay }}
             className="px-4 py-3 flex justify-end"
           >
-            <button className="w-[60%] h-9 text-[13px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
+            <button className="w-[60%] h-9 text-[13px] max-md:text-[14px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
           </motion.div>
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function S13_Onboarding() {
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, ease: EASE, delay: buttonDelay + 0.3 }}
-        className="mt-6 text-[11px] text-text-weak max-w-[880px]"
+        className="mt-6 text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak max-w-[880px]"
       >
         사장님이 한 일은 이름 입력뿐 — 나머지는 AI가 네이버 플레이스·홈페이지를 읽고 채웠습니다.
       </motion.p>

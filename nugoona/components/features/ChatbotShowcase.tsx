@@ -96,7 +96,7 @@ export default function ChatbotShowcase() {
               <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-4">
                 복잡한 화면 대신<br />말로 묻고 운영하세요
               </h3>
-              <p className="text-[15px] text-text-body leading-[1.65] mb-5">
+              <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65] mb-5">
                 &quot;이번 달 광고 어때?&quot;부터 &quot;예산 올려줘&quot;까지. 복잡한 관리자 화면을 몰라도 대화로 확인하고 조정합니다.
                 광고 제어는 위저드에서 확인한 뒤 안전하게 실행됩니다.
               </p>

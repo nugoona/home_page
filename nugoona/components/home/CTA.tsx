@@ -16,7 +16,7 @@ export default function CTA() {
       </FadeUp>
       {cta.sub && (
         <FadeUp delay={0.1}>
-          <p className="text-[15px] text-white/80 mb-10 relative z-[1]">{cta.sub}</p>
+          <p className="text-[15px] max-md:text-[16px] text-white/80 mb-10 relative z-[1]">{cta.sub}</p>
         </FadeUp>
       )}
       <FadeUp delay={0.2}>
