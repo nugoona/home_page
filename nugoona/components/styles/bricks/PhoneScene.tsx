@@ -85,7 +85,7 @@ export default function PhoneScene() {
               <img
                 src="/shots/content/app-home-mobile.jpg"
                 alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출"
-                style={{ display: 'block', width: '100%', height: 'auto', marginTop: '8%' }}
+                style={{ display: 'block', width: '93%', height: 'auto', margin: '8% auto 0' }}
               />
               {/* 화면 앞 반사(유리 글레어) */}
               <span
