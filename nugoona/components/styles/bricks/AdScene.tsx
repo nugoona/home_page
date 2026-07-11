@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 
 /* ═══════════════════════════════════════════════════════════════
    광고 "장면" — 콘텐츠(PhoneScene)와 좌우 대칭(폰 왼쪽·텍스트 오른쪽).
-   실제 아이폰 목업 PNG(phone-frame.png) + 대시보드 앱 스샷. 광고 톤 = 블루(#3e8bff).
+   실제 아이폰 목업 PNG(phone-frame.png) + 대시보드 앱 스샷. 광고 톤 = 블루(#0070f3).
    폰 목업 노하우 = DESIGN §8.7-I (프레임 z2·스샷 z1·노치회피 marginTop·93% 중앙·반사).
    카피 = branch.cards[1] 확정본.
    ═══════════════════════════════════════════════════════════════ */
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const BLUE = '#3e8bff';
+const BLUE = '#0070f3';
 const SCREEN = { left: 31.6, top: 12.4, width: 36.2, height: 73.6 };
 
 export default function AdScene() {
@@ -77,7 +77,7 @@ export default function AdScene() {
         >
           <div className="inline-flex items-center gap-2.5 mb-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/na.svg?v=4" alt="누구나 광고 로고" style={{ height: 30, width: 30, display: 'block' }} />
+            <img src="/img/logo/na.svg?v=6" alt="누구나 광고 로고" style={{ height: 30, width: 30, display: 'block' }} />
             <span className="text-[15px] font-semibold text-text-primary tracking-[-0.01em]">누구나 광고</span>
           </div>
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">

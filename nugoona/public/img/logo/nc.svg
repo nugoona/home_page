@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 콘텐츠 아이콘 — 어도비 탈피: 직각(라운드 0) + 밝은 브랜드색 배경. 2026-07-12 -->
-  <rect width="512" height="512" fill="#2fd46b"/>
-  <text x="236" y="236" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#0b2e1b">Nc</text>
+  <!-- 누구나 콘텐츠 아이콘 — 직각 + 브랜드/앱 블루(#0070f3, "1년치 글 주제" 카드색) 배경 + 흰 글자. 2026-07-12 -->
+  <rect width="512" height="512" fill="#0070f3"/>
+  <text x="236" y="236" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#ffffff">Nc</text>
 </svg>
