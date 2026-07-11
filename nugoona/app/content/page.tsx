@@ -89,9 +89,10 @@ function MiniNews() {
       <circle r="2.4" fill="#0070f3"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#mn1" /></animateMotion></circle>
       {/* 글 노드 */}
       <rect x="64" y="40" width="142" height="42" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
-      <text x="72" y="60" fontSize="16" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
-      <text x="84" y="58" fontSize="9" fill="#555">다음 글에 자동 반영</text>
-      <rect x="84" y="64" width="96" height="6" fill="#f0f0f0" />
+      {/* 실물 인용(감독관 4차 하2 — 스켈레톤 바 대신 아래 02 섹션의 실제 인용 미니어처) */}
+      <text x="72" y="58" fontSize="16" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
+      <text x="84" y="57" fontSize="9.5" fill="#333" fontFamily="var(--font-quote), serif">성수역 3번 출구에서 걸어서 5분</text>
+      <text x="84" y="72" fontSize="8" fill="#0070f3">— 다음 글에 자동 반영</text>
     </svg>
   );
 }
@@ -173,7 +174,8 @@ export default function ContentPage() {
             {/* 큰 제품 샷 (히어로 하단으로 몰입) */}
             <FadeUp delay={0.15} className="relative z-10">
               {/* pc-home-clean = 인사말을 페이지 서사(오늘의 브런치)로 교체한 버전. cropTop 3.2 = 상단 운영자 바(48px/1600) 완전 제거 */}
-              <ShotFrame src="/shots/content/pc-home-clean.png" alt="누구나 콘텐츠 대시보드 홈 화면" cropTop={3.2} className="max-w-[980px] mx-auto -mb-16" priority />
+              {/* max-md:mb-0 — 음수 마진이 모바일에서 다음 섹션 헤드라인과 8px 겹침(감독관 4차 C-1 실측) */}
+              <ShotFrame src="/shots/content/pc-home-clean.png" alt="누구나 콘텐츠 대시보드 홈 화면" cropTop={3.2} className="max-w-[980px] mx-auto -mb-16 max-md:mb-0" priority />
             </FadeUp>
           </div>
         </Section>

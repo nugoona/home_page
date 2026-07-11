@@ -165,7 +165,9 @@ function BriefingSection() {
               </div>
             </div>
 
-            {/* Category tabs */}
+            {/* Category tabs — 우측 페이드 = 가로 스크롤 힌트(감독관 4차 하5) */}
+            <div className="relative">
+            <div aria-hidden className="md:hidden pointer-events-none absolute right-0 top-0 bottom-0 w-10 z-10" style={{ background: 'linear-gradient(to left, #fff, rgba(255,255,255,0))' }} />
             <div className="flex gap-1.5 overflow-x-auto px-8 pt-5 pb-0 max-md:px-4 scrollbar-hide">
               {BRIEFING_CATS.map((c) => (
                 <button
@@ -181,6 +183,7 @@ function BriefingSection() {
                   {c}
                 </button>
               ))}
+            </div>
             </div>
 
             {/* Filter tabs */}
@@ -203,11 +206,13 @@ function BriefingSection() {
               </div>
             </div>
 
-            {/* Table */}
+            {/* Table — 감독관 4차 M-1: 모바일에서 고정 px 그리드가 압축돼 상품명이 한 글자로 소실
+                → 내부 min-w로 표를 온전히 유지하고 컨테이너 안에서만 가로 스크롤(정보 압축 금지) */}
             <div className="px-8 pb-8 max-md:px-0 overflow-x-auto">
+              <div className="max-md:min-w-[640px]">
               {/* Column headers */}
               <div
-                className="grid items-center py-2.5 px-2 mt-2 text-[10px] font-bold text-text-muted tracking-[0.08em] uppercase border-b border-[#f0f0f0] bg-[#fafafa] max-md:hidden"
+                className="grid items-center py-2.5 px-2 mt-2 text-[10px] font-bold text-text-muted tracking-[0.08em] uppercase border-b border-[#f0f0f0] bg-[#fafafa]"
                 style={{ gridTemplateColumns: COL_MAIN, ...EN }}
               >
                 {HEADERS.map((h, i) => (
@@ -258,6 +263,7 @@ function BriefingSection() {
                 <button className="px-8 py-3 bg-[#111] text-white text-[13px] font-bold hover:bg-[#333] transition-colors">
                   더보기 (16개 더)
                 </button>
+              </div>
               </div>
             </div>
           </div>
@@ -637,7 +643,9 @@ function CompareSection() {
                 2026년 02-25 오전 8시 00분 기준 — 판매순 TOP20 / 주간 베스트 상품
               </p>
 
-              {/* Brand tabs */}
+              {/* Brand tabs — 우측 페이드 = 가로 스크롤 힌트(감독관 4차 하5) */}
+              <div className="relative">
+              <div aria-hidden className="md:hidden pointer-events-none absolute right-0 top-0 bottom-0 w-10 z-10" style={{ background: 'linear-gradient(to left, #fff, rgba(255,255,255,0))' }} />
               <div className="flex gap-1.5 overflow-x-auto pb-0 scrollbar-hide">
                 {COMPARE_BRANDS.map((b) => (
                   <button
@@ -657,6 +665,7 @@ function CompareSection() {
                   </button>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* Product grid */}
@@ -669,10 +678,10 @@ function CompareSection() {
                 transition={{ duration: 0.2 }}
                 className="px-8 pt-5 pb-8 max-md:px-4"
               >
-                {/* 10→5개(1행) 감량 — 재측정 콜드 리드 "카드 나열 반복감·중반 늘어짐" 지적(2026-07-11) */}
+                {/* 10→5개(1행) 감량 — 재측정 콜드 리드 지적. 모바일 2열에선 5번째가 홀로 남아 반칸 공백(감독관 4차 하3) → 4개만 */}
                 <div className="grid grid-cols-5 gap-3 max-md:grid-cols-2">
                   {products.slice(0, 5).map((p, i) => (
-                    <div key={i} className="border border-border-default bg-white overflow-hidden">
+                    <div key={i} className={`border border-border-default bg-white overflow-hidden ${i === 4 ? 'max-md:hidden' : ''}`}>
                       {/* Image */}
                       <div className="relative aspect-[3/4] bg-[#f5f5f5] overflow-hidden">
                         <img src={p.img} alt="" className="w-full h-full object-cover" loading="lazy" />
