@@ -261,11 +261,12 @@ function Section01() {
 
   return (
     <Section>
-      <div ref={ref}>
+      {/* 1080 컨테이너 + px-12 = 텍스트 에지 984 그리드 스냅(전 페이지 세로선 통일 2026-07-11) */}
+      <div ref={ref} className="max-w-[1080px] mx-auto">
         {/* Title row — 2-column with vertical divider */}
         <div className="grid grid-cols-[7fr_5fr] max-md:grid-cols-1 border-b border-border-default">
           {/* LEFT: num + title */}
-          <FadeUp className="px-10 py-10 [box-shadow:1px_0_0_var(--color-border-default)] max-md:[box-shadow:none] max-md:px-6 max-md:pb-5">
+          <FadeUp className="px-12 py-10 [box-shadow:1px_0_0_var(--color-border-default)] max-md:[box-shadow:none] max-md:px-6 max-md:pb-5">
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717]" style={EN}>01</span>
               <div className="w-10 h-px bg-[#eaeaea]" />
@@ -276,7 +277,7 @@ function Section01() {
           </FadeUp>
 
           {/* RIGHT: desc + chips */}
-          <FadeUp delay={0.1} className="px-10 py-10 flex flex-col justify-center max-md:px-6 max-md:pt-0 max-md:pb-8">
+          <FadeUp delay={0.1} className="px-12 py-10 flex flex-col justify-center max-md:px-6 max-md:pt-0 max-md:pb-8">
             <p className="text-[15px] text-[#333] leading-[1.45] tracking-[-0.02em] mb-5">
               흩어진 데이터를 안전하게 수집하고<br />하나의 대시보드로 통합합니다.
             </p>
@@ -373,7 +374,8 @@ function Funnel03Card() {
   return (
     <div>
       {/* Title */}
-      <div className="mx-[-2.5rem] mt-[-2.5rem] px-[2.5rem] max-md:mx-[-1.5rem] max-md:mt-[-2rem] max-md:px-[1.5rem]" style={{ background: '#f0f0f0', borderBottom: '1px solid var(--color-border-default)', minHeight: 96, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 16 }}>
+      {/* 음수 마진 3rem = 부모 px-12(48px)와 동기(세로선 스냅 2026-07-11) */}
+      <div className="mx-[-3rem] mt-[-2.5rem] px-[3rem] max-md:mx-[-1.5rem] max-md:mt-[-2rem] max-md:px-[1.5rem]" style={{ background: '#f0f0f0', borderBottom: '1px solid var(--color-border-default)', minHeight: 96, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 16 }}>
         <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Customer Journey</p>
         <p style={{ fontSize: 20, fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>방문부터 구매까지 전환 흐름을 분석합니다.</p>
       </div>
@@ -550,6 +552,8 @@ function ActionPlan09Card() {
 function Section02() {
   return (
     <Section alt>
+     {/* 1080 컨테이너 = 세로선 그리드 스냅(2026-07-11). 에지 선 = box-shadow(레이아웃 비점유 — border는 콘텐츠를 1px 밀어 그리드가 어긋남) */}
+     <div className="max-w-[1080px] mx-auto [box-shadow:1px_0_0_var(--color-border-default),-1px_0_0_var(--color-border-default)] max-md:[box-shadow:none]">
 
       {/* ━━━ ROW 1: 5fr 텍스트 + 7fr Action Plan ━━━ */}
       <div className="grid grid-cols-[5fr_7fr] max-md:grid-cols-1 border-b border-border-default">
@@ -558,7 +562,7 @@ function Section02() {
           className="max-md:border-b max-md:border-border-default"
           style={{ background: 'linear-gradient(to bottom, #0a1e3d, #0a0a0a)' }}
         >
-          <FadeUp className="px-10 py-14 flex flex-col justify-center max-md:px-6 max-md:pb-8">
+          <FadeUp className="px-12 py-14 flex flex-col justify-center max-md:px-6 max-md:pb-8">
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-[#171717] bg-white" style={EN}>02</span>
               <div className="w-10 h-px bg-white/20" />
@@ -567,8 +571,7 @@ function Section02() {
               NGN 마케터의 기준으로<br />매월 1일, 전략 리포트
             </h3>
             <p className="text-[15px] leading-[1.6] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
-              단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로<br className="max-md:hidden" />
-              AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
+              단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로 AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
             {/* "예시 화면" 라벨 — 콜드 리드 지적("도전적 시나리오 +15~25%" 과장 의심) 대응 */}
             <p className="mt-4 text-[11px]" style={{ color: 'rgba(255,255,255,0.5)' }}>리포트 내용은 데모 화면입니다.</p>
@@ -591,11 +594,12 @@ function Section02() {
 
       {/* ━━━ ROW 2: Funnel03 전체 너비 (현행 유지) ━━━ */}
       <div>
-        <FadeUp className="px-10 py-10 max-md:px-6 max-md:py-8">
+        <FadeUp className="px-12 py-10 max-md:px-6 max-md:py-8">
           <Funnel03Card />
         </FadeUp>
       </div>
 
+     </div>
     </Section>
   );
 }
@@ -825,7 +829,8 @@ export default function DashboardShowcase() {
     <>
       <Section id="dashboard" dark>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 25% 0%, #0a2050 0%, #0a0a0a 60%)' }} />
-        <div className="relative grid grid-cols-[7fr_5fr] max-md:grid-cols-1">
+        {/* 1080 컨테이너 = 세로선 그리드 스냅(2026-07-11) — 배경은 전폭 유지, 콘텐츠만 그리드 안으로 */}
+        <div className="relative grid grid-cols-[7fr_5fr] max-md:grid-cols-1 max-w-[1080px] mx-auto">
 
           {/* LEFT */}
           <div className="relative flex flex-col [box-shadow:1px_0_0_rgba(255,255,255,0.12)] max-md:[box-shadow:none] max-md:border-b max-md:border-[rgba(255,255,255,0.12)]">

@@ -57,8 +57,8 @@ export default function StoryStep({
         {time}
       </motion.div>
 
-      {/* ── Content ── */}
-      <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      {/* ── Content — 984 = 표준 텍스트 그리드(1080 컨테이너 + 48 패딩 실효 폭, 전 페이지 세로선 스냅 2026-07-11) ── */}
+      <div style={{ maxWidth: 984, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         {/* Step label */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}

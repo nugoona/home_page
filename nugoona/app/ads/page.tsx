@@ -85,7 +85,8 @@ export default function AdsPage() {
             className="px-12 max-md:px-6"
             style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #151515 100%)' }}
           >
-            <div className="max-w-[1080px] mx-auto grid grid-cols-[6fr_5fr] gap-12 items-center py-20 max-md:grid-cols-1 max-md:py-16 max-md:gap-10">
+            {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
+            <div className="max-w-[984px] mx-auto grid grid-cols-[6fr_5fr] gap-12 items-center py-20 max-md:grid-cols-1 max-md:py-16 max-md:gap-10">
               <FadeUp>
                 <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">
                   한 달, 카드 없이 먼저 써 보세요

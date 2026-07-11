@@ -588,7 +588,8 @@ export default function AdCanvasShowcase() {
       <Section id="adcanvas" crossMarks>
         <div className="py-20 px-12 max-md:py-12 max-md:px-6">
           <FadeUp>
-            <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+            {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
+            <div style={{ maxWidth: 984, margin: '0 auto' }}>
               <p style={{ fontSize: 12, fontWeight: 600, color: '#0070f3', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12, ...EN }}>AdCanvas</p>
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
                 메타·구글 광고를<br />직접 만들고 관리하세요

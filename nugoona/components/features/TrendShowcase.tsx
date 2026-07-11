@@ -323,7 +323,8 @@ function InsightSection() {
       {/* Intro — 컴팩트 좌측 정렬(브리핑 표 아래 이어지는 해설 느낌) */}
       <div className="pt-10 pb-6 px-12 max-md:pt-8 max-md:px-6">
         <FadeUp>
-          <div className="max-w-[1080px] mx-auto">
+          {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
+          <div className="max-w-[984px] mx-auto">
             <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-2" style={EN}>
               AI Insight
             </p>
@@ -888,9 +889,11 @@ export default function TrendShowcase() {
 
       {/* Search Volume */}
       <Section>
-        <div className="bg-[#0a0a0a] py-14 px-12 max-md:py-10 max-md:px-6">
+        {/* py-16 = 서브 섹션 여백 리듬(64px) 통일(2026-07-11) */}
+        <div className="bg-[#0a0a0a] py-16 px-12 max-md:py-10 max-md:px-6">
           <FadeUp>
-            <div className="max-w-[1080px] mx-auto grid grid-cols-2 gap-12 items-end max-md:grid-cols-1 max-md:gap-6">
+            {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
+            <div className="max-w-[984px] mx-auto grid grid-cols-2 gap-12 items-end max-md:grid-cols-1 max-md:gap-6">
               <div>
                 <p className="text-[12px] font-semibold tracking-[0.1em] uppercase mb-3 text-white/40" style={EN}>
                   Search Volume
