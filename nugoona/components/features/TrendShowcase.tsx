@@ -17,19 +17,19 @@ const U = (id: string) => `/img/unsplash/webp/${id}.webp`;
 
 const IMG = {
   knitPoncho:         U('photo-1434389677669-e08b4cac3105'), // 크림 프린지 크로셰 니트
-  knitRibGrey:         U('photo-1556905055-8f358a7a47b2'),    // 그레이 리브 니트(플랫레이)
+  knitRibGrey:         U('photo-1556905055-8f358a7a47b2'),    // 감독관2차 M1 재확인: 실제는 러스트 니트 비니 + 그레이 리브 니트 + 데님(플랫레이) — 상품명 "니트 비니_Rust"로 역맞춤
   knitSweatshirt:      U('photo-1578587018452-892bacefd3f2'), // 오렌지 크루넥 스웨트
-  knitCableCream:      U('photo-1604176354204-9268737828e4'), // 아이보리 케이블 니트
-  knitSage:            U('photo-1516762689617-e1cffcef479d'), // 세이지 그린 라운드 니트
-  knitCardiganDenim:   U('photo-1515886657613-9f3515b0c78f'), // 아이보리 가디건 + 데님(플랫레이)
+  knitCableCream:      U('photo-1604176354204-9268737828e4'), // 감독관2차 M1 재확인: 실제는 데님 4벌 스택 + 크림 니트 소매(일부) — 니트 단독이 아니므로 상품명은 _Navy로 역맞춤
+  knitSage:            U('photo-1516762689617-e1cffcef479d'), // 감독관2차 M1 재확인: 실제는 크림 가디건 + 데님 + 머그컵(플랫레이), 그린 없음 — 상품명 _Cream으로 역맞춤
+  knitCardiganDenim:   U('photo-1515886657613-9f3515b0c78f'), // 감독관2차 M1: 실제는 옐로 크롭 후드+트랙팬츠 셋업(농구코트) — 상품명 "옐로 트랙 셋업"으로 역맞춤
   coatPlaid:           U('photo-1485968579580-b6d095142e6e'), // 네이비 체크 코트
   coatCamel:           U('photo-1539533018447-63fcce2678e3'), // 카멜 울 랩 코트
   coatPowderBlue:      U('photo-1539109136881-3be0616acf4b'), // 파우더블루 롱 코트
   jacketLeatherBrown:  U('photo-1487222477894-8943e31ef7b2'), // 브라운 레더 라이더 재킷
   jacketBomberRust:    U('photo-1591047139829-d91aecb6caea'), // 러스트 봄버 재킷
   denimRipped:         U('photo-1541099649105-f69ad21f3246'), // 디스트로이드 스키니 데님
-  denimFlatlay:        U('photo-1525351484163-7529414344d8'), // 데님 플랫레이(스트레이트)
-  pantsStripeWide:     U('photo-1529139574466-a303027c1d8b'), // 그린 스트라이프 와이드 팬츠
+  denimFlatlay:        U('photo-1541099649105-f69ad21f3246'), // 감독관2차 C1: 계란토스트 오식별 교체 → 디스트로이드 스키니 데님(denimRipped와 동일 실사, 공용)
+  pantsStripeWide:     U('photo-1509631179647-0177331693ae'), // 감독관2차 M1: 무관 인물사진(CCCP 티셔츠) 오식별 교체 → 블랙 스트라이프 와이드 팬츠(네온사인 배경)
   blouseFloral:        U('photo-1564257631407-4deb1f99d992'), // 화이트 플로럴 아일렛 블라우스
   blouseChambray:      U('photo-1558171813-4c088753af8f'),    // 라이트블루 샴브레이 셔츠
   skirtPleatBlack:      U('photo-1583496661160-fb5886a0aaaa'),// 블랙 플리츠 스커트(+스트라이프 블라우스)
@@ -69,7 +69,7 @@ const RISING_ALL: BriefingItem[] = [
   { rank: '전체 25위', img: IMG.blouseFloral,        brand: '데이브리즈', name: '플로럴 레이스 블라우스_White',          change: 41, thisWeek: 25, lastWeek: 66 },
 ];
 const NEW_ALL: BriefingItem[] = [
-  { rank: '전체 8위',  img: IMG.knitRibGrey,      brand: '코지랩',     name: '리브 크루넥 니트_Grey',           change: 0, thisWeek: 8,  lastWeek: null },
+  { rank: '전체 8위',  img: IMG.knitRibGrey,      brand: '코지랩',     name: '니트 비니 세트_Rust',             change: 0, thisWeek: 8,  lastWeek: null },
   { rank: '전체 15위', img: IMG.denimRipped,      brand: '미뉴에뜨',   name: '디스트로이드 스키니 데님_Blue',    change: 0, thisWeek: 15, lastWeek: null },
   { rank: '전체 23위', img: IMG.dressFloralWhite, brand: '하루클로젯', name: '플로럴 랩 원피스_White',           change: 0, thisWeek: 23, lastWeek: null },
   { rank: '전체 29위', img: IMG.skirtPleatBlack,  brand: '포레스트블룸', name: '플리츠 미디 스커트_Black',       change: 0, thisWeek: 29, lastWeek: null },
@@ -77,20 +77,20 @@ const NEW_ALL: BriefingItem[] = [
 const DROP_ALL: BriefingItem[] = [
   { rank: '전체 88위', img: IMG.coatCamel,       brand: '에르블랑',   name: '오버핏 울 랩 코트_Camel',        change: -25, thisWeek: 88, lastWeek: 63 },
   { rank: '전체 71위', img: IMG.coatPlaid,       brand: '블루밍샵',   name: '체크 울 코트_Navy',              change: -18, thisWeek: 71, lastWeek: 53 },
-  { rank: '전체 45위', img: IMG.knitCableCream,  brand: '르비앙',     name: '케이블 니트 가디건_Ivory',        change: -12, thisWeek: 45, lastWeek: 33 },
-  { rank: '전체 62위', img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Green',    change: -9,  thisWeek: 62, lastWeek: 53 },
+  { rank: '전체 45위', img: IMG.knitCableCream,  brand: '르비앙',     name: '케이블 니트 가디건_Navy',         change: -12, thisWeek: 45, lastWeek: 33 },
+  { rank: '전체 62위', img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Black',    change: -9,  thisWeek: 62, lastWeek: 53 },
 ];
 const RISING_KNIT: BriefingItem[] = [
   { rank: '니트웨어 36위', img: IMG.knitSweatshirt,    brand: '에르블랑', name: '브이넥 크루 니트_Orange',            change: 53, thisWeek: 36, lastWeek: 89 },
-  { rank: '니트웨어 23위', img: IMG.knitSage,          brand: '라빈느',   name: '라운드 니트_Sage Green',             change: 52, thisWeek: 23, lastWeek: 75 },
-  { rank: '니트웨어 11위', img: IMG.knitCardiganDenim, brand: '소울리브', name: '워셔블 라운드 니트 가디건_Ivory',     change: 37, thisWeek: 11, lastWeek: 48 },
+  { rank: '니트웨어 23위', img: IMG.knitSage,          brand: '라빈느',   name: '라운드 니트_Cream',                  change: 52, thisWeek: 23, lastWeek: 75 },
+  { rank: '니트웨어 11위', img: IMG.knitCardiganDenim, brand: '소울리브', name: '옐로 트랙 셋업',                     change: 37, thisWeek: 11, lastWeek: 48 },
   { rank: '니트웨어 21위', img: IMG.knitPoncho,        brand: '코지랩',   name: '캐시미어 프린지 니트_Ivory',          change: 32, thisWeek: 21, lastWeek: 53 },
 ];
 const NEW_PANTS: BriefingItem[] = [
   { rank: '바지 2위', img: IMG.denimRipped,       brand: '미뉴에뜨',   name: 'Distressed Skinny Denim Pants_Blue', change: 0, thisWeek: 2, lastWeek: null },
   { rank: '바지 3위', img: IMG.denimFlatlay,      brand: '에르블랑',   name: 'Straight Denim Pants_Blue',          change: 0, thisWeek: 3, lastWeek: null },
-  { rank: '바지 4위', img: IMG.pantsStripeWide,   brand: '하루클로젯', name: 'Stripe Wide Pants_Green',            change: 0, thisWeek: 4, lastWeek: null },
-  { rank: '바지 6위', img: IMG.knitCardiganDenim, brand: '라빈느',     name: 'Wide Denim Pants_Light Blue',        change: 0, thisWeek: 6, lastWeek: null },
+  { rank: '바지 4위', img: IMG.pantsStripeWide,   brand: '하루클로젯', name: 'Stripe Wide Pants_Black',            change: 0, thisWeek: 4, lastWeek: null },
+  { rank: '바지 6위', img: IMG.knitCardiganDenim, brand: '라빈느',     name: 'Yellow Track Set',                   change: 0, thisWeek: 6, lastWeek: null },
 ];
 
 const BRIEFING_CATS = ['전체', '니트웨어', '단독', '바지', '상의', '셋업', '스커트', '아우터', '원피스'];
@@ -281,25 +281,25 @@ type InsightProduct = {
 const INSIGHT_PRODUCTS: Record<string, InsightProduct[]> = {
   '급상승': [
     { img: IMG.knitSweatshirt,    brand: '에르블랑',   name: '올데이 브이넥 니트_Orange',       rank: 36, change: 53, price: '69,500' },
-    { img: IMG.knitCardiganDenim, brand: '라빈느',     name: '워셔블 라운드 가디건_Ivory',      rank: 23, change: 52, price: '53,870' },
-    { img: IMG.knitSage,          brand: '소울리브',   name: '워셔블 라운드 니트_Sage Green',   rank: 11, change: 37, price: '46,980' },
+    { img: IMG.knitCardiganDenim, brand: '라빈느',     name: '옐로 트랙 셋업',                  rank: 23, change: 52, price: '53,870' },
+    { img: IMG.knitSage,          brand: '소울리브',   name: '워셔블 라운드 니트_Cream',        rank: 11, change: 37, price: '46,980' },
     { img: IMG.knitPoncho,        brand: '코지랩',     name: '캐시미어 프린지 니트_Ivory',      rank: 21, change: 32, price: '49,920' },
-    { img: IMG.knitRibGrey,       brand: '미뉴에뜨',   name: '리브 포인티드 니트_Grey',         rank: 38, change: 31, price: '66,000' },
-    { img: IMG.knitCableCream,    brand: '데이브리즈', name: '케이블 가디건_Ivory',             rank: 72, change: 27, price: '33,000' },
+    { img: IMG.knitRibGrey,       brand: '미뉴에뜨',   name: '니트 비니_Rust',                  rank: 38, change: 31, price: '66,000' },
+    { img: IMG.knitCableCream,    brand: '데이브리즈', name: '케이블 가디건_Navy',              rank: 72, change: 27, price: '33,000' },
   ],
   '신규 진입': [
     { img: IMG.denimRipped,      brand: '에르블랑',   name: '디스트로이드 스키니 데님_Deep Blue', rank: 3,  change: 0, price: '55,000' },
     { img: IMG.dressFloralWhite, brand: '하루클로젯', name: '플로럴 랩 미니 원피스_White',        rank: 8,  change: 0, price: '42,000' },
-    { img: IMG.pantsStripeWide,  brand: '미뉴에뜨',   name: '스트라이프 와이드 팬츠_Green',       rank: 6,  change: 0, price: '58,900' },
+    { img: IMG.pantsStripeWide,  brand: '미뉴에뜨',   name: '스트라이프 와이드 팬츠_Black',       rank: 6,  change: 0, price: '58,900' },
     { img: IMG.skirtPleatBlack,  brand: '소울리브',   name: '플리츠 미디 스커트_Black',           rank: 12, change: 0, price: '49,500' },
-    { img: IMG.knitRibGrey,      brand: '라빈느',     name: '리브 크루넥 니트_Grey',              rank: 19, change: 0, price: '62,000' },
+    { img: IMG.knitRibGrey,      brand: '라빈느',     name: '니트 비니_Rust',                     rank: 19, change: 0, price: '62,000' },
     { img: IMG.blouseChambray,   brand: '코지랩',     name: '샴브레이 셔츠 블라우스_Blue',        rank: 15, change: 0, price: '38,500' },
   ],
   '순위 하락': [
     { img: IMG.coatCamel,       brand: '에르블랑',   name: '오버핏 울 랩 코트_Camel',        rank: 88, change: -25, price: '119,000' },
     { img: IMG.coatPlaid,       brand: '블루밍샵',   name: '체크 울 코트_Navy',              rank: 71, change: -18, price: '195,000' },
-    { img: IMG.knitCableCream,  brand: '르비앙',     name: '터틀넥 케이블 니트_Ivory',        rank: 45, change: -12, price: '67,000' },
-    { img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Green',    rank: 62, change: -9,  price: '49,500' },
+    { img: IMG.knitCableCream,  brand: '르비앙',     name: '터틀넥 케이블 니트_Navy',         rank: 45, change: -12, price: '67,000' },
+    { img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Black',    rank: 62, change: -9,  price: '49,500' },
     { img: IMG.coatPowderBlue,  brand: '하루클로젯', name: 'Classic Wool Coat_Powder Blue',  rank: 55, change: -7,  price: '188,000' },
     { img: IMG.skirtPleatBlack, brand: '미뉴에뜨',   name: '플리츠 미디 스커트_Black',        rank: 78, change: -5,  price: '72,000' },
   ],
@@ -508,7 +508,7 @@ function InsightSection() {
                               </span>
                             </div>
                             <p className="text-[10px] text-text-weak font-semibold mb-0.5">{p.brand}</p>
-                            <p className="text-[11px] text-text-primary font-medium leading-[1.4] mb-1.5 line-clamp-2">{p.name}</p>
+                            <p className="text-[11px] text-text-primary font-medium leading-[1.4] mb-1.5 line-clamp-1">{p.name}</p>
                             <span
                               className="inline-flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 mb-1.5"
                               style={{
@@ -557,23 +557,23 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
     { img: PT_IMGS[4], brand: '에르블랑', name: '오버사이즈 크루넥 후디_Orange',   likes: '1,283', bestRank: 4 },
     { img: PT_IMGS[6], brand: '에르블랑', name: '스트레이트 데님 팬츠_Blue',        likes: '392',   bestRank: 3 },
     { img: PT_IMGS[8], brand: '에르블랑', name: '울 블렌드 코트_Camel',              likes: '519',   bestRank: undefined },
-    { img: PT_IMGS[1], brand: '에르블랑', name: '와이드 데님 팬츠_워싱 Blue',        likes: '2,341', bestRank: 7 },
-    { img: PT_IMGS[3], brand: '에르블랑', name: '크루넥 니트 풀오버_4color',         likes: '1,087', bestRank: undefined },
-    { img: PT_IMGS[5], brand: '에르블랑', name: '린넨 셔츠 블라우스_Ivory',          likes: '643',   bestRank: undefined },
-    { img: PT_IMGS[7], brand: '에르블랑', name: '플리츠 미디 스커트_3color',         likes: '891',   bestRank: 9 },
-    { img: PT_IMGS[9], brand: '에르블랑', name: '캐시미어 브이넥 니트_5color',       likes: '1,524', bestRank: undefined },
+    { img: PT_IMGS[1], brand: '에르블랑', name: '레더 블루종 재킷_Brown',        likes: '2,341', bestRank: 7 },
+    { img: PT_IMGS[3], brand: '에르블랑', name: '케이블 니트 가디건_Navy',        likes: '1,087', bestRank: undefined },
+    { img: PT_IMGS[5], brand: '에르블랑', name: '디스트로이드 스키니 데님_Blue',  likes: '643',   bestRank: undefined },
+    { img: PT_IMGS[7], brand: '에르블랑', name: '플로럴 레이스 블라우스_White',   likes: '891',   bestRank: 9 },
+    { img: PT_IMGS[9], brand: '에르블랑', name: '옐로 트랙 셋업',                likes: '1,524', bestRank: undefined },
   ],
   '라빈느': [
     { img: PT_IMGS[1], brand: '라빈느', name: '레더 블루종 재킷_Brown',        likes: '3,201', bestRank: 12 },
-    { img: PT_IMGS[3], brand: '라빈느', name: '케이블 니트 가디건_Ivory',       likes: '2,891', bestRank: 23 },
+    { img: PT_IMGS[3], brand: '라빈느', name: '케이블 니트 가디건_Navy',        likes: '2,891', bestRank: 23 },
     { img: PT_IMGS[5], brand: '라빈느', name: 'Distressed Skinny Denim Pants_Blue', likes: '1,047', bestRank: undefined },
     { img: PT_IMGS[7], brand: '라빈느', name: '플로럴 레이스 블라우스_White',   likes: '892',   bestRank: undefined },
-    { img: PT_IMGS[9], brand: '라빈느', name: '와이드 데님 팬츠_Light Blue',    likes: '2,134', bestRank: 31 },
-    { img: PT_IMGS[0], brand: '라빈느', name: '코튼 크루넥 티셔츠_5color',     likes: '1,673', bestRank: undefined },
-    { img: PT_IMGS[2], brand: '라빈느', name: '린넨 와이드 팬츠_Beige',        likes: '743',   bestRank: undefined },
-    { img: PT_IMGS[4], brand: '라빈느', name: '트위드 자켓_Cream',             likes: '1,298', bestRank: 45 },
-    { img: PT_IMGS[6], brand: '라빈느', name: '플레어 미니 스커트_2color',     likes: '581',   bestRank: undefined },
-    { img: PT_IMGS[8], brand: '라빈느', name: '오버사이즈 맨투맨_Grey',        likes: '2,056', bestRank: 38 },
+    { img: PT_IMGS[9], brand: '라빈느', name: '옐로 트랙 셋업',                 likes: '2,134', bestRank: 31 },
+    { img: PT_IMGS[0], brand: '라빈느', name: '롱 트렌치 코트_Powder Blue',    likes: '1,673', bestRank: undefined },
+    { img: PT_IMGS[2], brand: '라빈느', name: '플리츠 미디 스커트_Black',      likes: '743',   bestRank: undefined },
+    { img: PT_IMGS[4], brand: '라빈느', name: '오버사이즈 크루넥 후디_Orange', likes: '1,298', bestRank: 45 },
+    { img: PT_IMGS[6], brand: '라빈느', name: '스트레이트 데님 팬츠_Blue',     likes: '581',   bestRank: undefined },
+    { img: PT_IMGS[8], brand: '라빈느', name: '울 블렌드 코트_Camel',          likes: '2,056', bestRank: 38 },
   ],
   '소울리브': [
     { img: PT_IMGS[2], brand: '소울리브', name: '플리츠 미디 스커트_Black',       likes: '1,842', bestRank: 38 },
@@ -581,11 +581,11 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
     { img: PT_IMGS[6], brand: '소울리브', name: '워싱 스트레이트 데님_Blue',      likes: '2,201', bestRank: 18 },
     { img: PT_IMGS[8], brand: '소울리브', name: '울 랩 코트_Camel',               likes: '673',   bestRank: undefined },
     { img: PT_IMGS[0], brand: '소울리브', name: '미니멀 롱 코트_Powder Blue',     likes: '1,456', bestRank: 52 },
-    { img: PT_IMGS[1], brand: '소울리브', name: '크롭 후드 집업_3color',          likes: '1,087', bestRank: undefined },
-    { img: PT_IMGS[3], brand: '소울리브', name: '플리츠 와이드 팬츠_Black',       likes: '834',   bestRank: undefined },
-    { img: PT_IMGS[5], brand: '소울리브', name: '홀터넥 미니 원피스_2color',      likes: '2,318', bestRank: 29 },
-    { img: PT_IMGS[7], brand: '소울리브', name: '모헤어 브이넥 니트_3color',      likes: '1,691', bestRank: 41 },
-    { img: PT_IMGS[9], brand: '소울리브', name: '타이업 블라우스_Cream',          likes: '547',   bestRank: undefined },
+    { img: PT_IMGS[1], brand: '소울리브', name: '레더 블루종 재킷_Brown',         likes: '1,087', bestRank: undefined },
+    { img: PT_IMGS[3], brand: '소울리브', name: '케이블 니트 가디건_Navy',        likes: '834',   bestRank: undefined },
+    { img: PT_IMGS[5], brand: '소울리브', name: '디스트로이드 스키니 데님_Blue',  likes: '2,318', bestRank: 29 },
+    { img: PT_IMGS[7], brand: '소울리브', name: '플로럴 레이스 블라우스_White',   likes: '1,691', bestRank: 41 },
+    { img: PT_IMGS[9], brand: '소울리브', name: '옐로 트랙 셋업',                 likes: '547',   bestRank: undefined },
   ],
 };
 // Fill remaining brands with shuffled data
@@ -593,8 +593,9 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
   COMPARE_PRODUCTS[brand] = PT_IMGS.map((img, i) => ({
     img,
     brand,
-    name: ['롱 트렌치 코트_Powder Blue', '레더 블루종 재킷_Brown', '플리츠 미디 스커트_Black', '케이블 니트 가디건_Ivory', '오버사이즈 크루넥 후디_Orange',
-           '울 오버코트_Camel', '크롭 스웻_Grey', '플리츠 스커트_Black', '홀터넥 탑_2color', '모헤어 카디건_Beige'][i],
+    // 감독관2차 M1 전수점검: PT_IMGS 실사 재확인 후 품목·색상 역맞춤(idx5~9는 slice(0,5)로 미노출이나 데이터 정합성 위해 함께 수정)
+    name: ['롱 트렌치 코트_Powder Blue', '레더 블루종 재킷_Brown', '플리츠 미디 스커트_Black', '케이블 니트 가디건_Navy', '오버사이즈 크루넥 후디_Orange',
+           '디스트로이드 스키니 데님_Blue', '스트레이트 데님 팬츠_Blue', '플로럴 레이스 블라우스_White', '울 블렌드 코트_Camel', '옐로 트랙 셋업'][i],
     likes: ['1,234', '892', '2,341', '547', '1,876', '3,012', '678', '1,543', '934', '2,187'][i],
     bestRank: [18, undefined, 35, undefined, 62, 7, undefined, 44, undefined, 28][i] as number | undefined,
   }));

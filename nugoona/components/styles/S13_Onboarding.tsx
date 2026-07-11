@@ -28,7 +28,7 @@ const BORDER = '#eaeaea';
 const GROUPS = [
   { label: '가게 프로필', body: <>오늘의 브런치, 성수 · 브런치 카페 <span className="text-text-weak">— 소개·메뉴·말투·썸네일까지</span></> },
   { label: '노출 검색어', body: <><b>성수동 브런치</b> 외 목표 3개 · 태그 15개</> },
-  { label: '1년치 글감', body: <>🔥 아침 오픈 준비 외 <b>52편</b> 미리 준비</> },
+  { label: '1년치 글감', body: <>아침 오픈 준비 외 <b>52편</b> 미리 준비</> },
 ] as const;
 
 const ROW_START = 0.75;

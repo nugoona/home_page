@@ -167,8 +167,9 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
           transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
           style={{ width: '50%', display: 'flex', flexDirection: 'column' }}
         >
-          <div style={{ flex: 1, background: 'rgba(0,112,243,0.06)', border: '1px solid #eaeaea', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            <span style={{ fontSize: 32, fontWeight: 700, color: 'rgba(0,112,243,0.15)', ...EN }}>4:5</span>
+          <div style={{ flex: 1, border: '1px solid #eaeaea', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            {/* L1(§감독관2차): 연블루 플레이스홀더 → 실사 크롭(4:5, object-cover). "린넨 원피스" 카피와 매칭되는 화이트 플로럴 랩 원피스 */}
+            <img src={U('photo-1496747611176-843222e1e57c')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             <motion.div
               animate={status === 'done' ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
@@ -235,8 +236,8 @@ function Step02_Catalog({ isActive }: { isActive: boolean }) {
   const products = [
     { name: '플로럴 원피스', price: '₩39,000', badge: 'NEW', color: '#0070f3', img: U('photo-1496747611176-843222e1e57c') },
     { name: '린넨 셔츠', price: '₩52,000', badge: 'TOP', color: '#22c55e', img: U('photo-1558171813-4c088753af8f') },
-    { name: '코튼 팬츠', price: '₩28,000', badge: null, color: '', img: U('photo-1525351484163-7529414344d8') },
-    { name: '스트라이프 니트', price: '₩45,000', badge: 'AUTO', color: '#666', img: U('photo-1583496661160-fb5886a0aaaa') },
+    { name: '스트레이트 데님 팬츠', price: '₩28,000', badge: null, color: '', img: U('photo-1525507119028-ed4c629a60a3') },
+    { name: '그린 크루넥 니트', price: '₩45,000', badge: 'AUTO', color: '#666', img: U('photo-1523381210434-271e8be1f52b') },
   ];
 
   return (
