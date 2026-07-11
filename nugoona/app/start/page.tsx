@@ -80,7 +80,7 @@ export default function StartPage() {
                 {status === 'success' ? (
                   <div className="text-center py-12">
                     <h2 className="text-[24px] font-semibold text-text-primary mb-4">신청이 접수되었습니다</h2>
-                    <p className="text-[15px] text-text-body">{steps.items[0].desc}</p>
+                    <p className="text-[15px] text-text-body">시작을 돕는 안내를 먼저 드리겠습니다.</p>
                   </div>
                 ) : (
                   <form onSubmit={onSubmit} className="flex flex-col gap-6">
@@ -141,6 +141,8 @@ export default function StartPage() {
                         {status === 'loading' ? '전송 중...' : formCopy.submit}
                       </button>
                       <p className="text-[13px] text-text-weak text-center mt-3">{formCopy.note}</p>
+                      {/* 안심 문구(GPT+사장님 확정 2026-07-11) — "영업 전화 경계" 이탈 지점 수리 */}
+                      <p className="text-[13px] text-text-weak text-center mt-1">{formCopy.reassure}</p>
                     </div>
                     {status === 'error' && (
                       <p className="text-[13px] text-red-500 text-center">전송에 실패했습니다. 다시 시도해주세요.</p>

@@ -85,8 +85,9 @@ export default function ContentPage() {
         <Section crossMarks>
           <div className="py-24 px-12 max-w-[1080px] mx-auto max-md:py-14 max-md:px-6">
             <FadeUp>
+              {/* 헤드라인 = GPT+사장님 확정(2026-07-11) — 구 문구는 금지어 "보장" 포함이라 폐기 */}
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-5 max-w-[640px]">
-                맡겨도 노출은<br /><span className="text-accent">보장되지 않습니다</span>
+                맡긴다고 검색 결과에<br /><span className="text-accent">바로 보이는 것은 아닙니다</span>
               </h2>
               <p className="text-[16px] text-text-body leading-[1.7] max-w-[560px] mb-12">
                 대행에 매달 비용을 내도, 검색에 우리 가게가 보인다는 보장은 없습니다. 광고는 멈추면 사라지고, 남는 것도 없습니다.
@@ -107,7 +108,8 @@ export default function ContentPage() {
         <Section alt>
           <div className="py-24 px-12 max-w-[1080px] mx-auto max-md:py-14 max-md:px-6">
             <FadeUp>
-              <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-3">그래서 세 가지를 대신합니다</h2>
+              {/* 헤드라인 = GPT+사장님 확정(2026-07-11) */}
+              <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-3">검색은 <span className="text-accent">꾸준함</span>이 만듭니다</h2>
               <p className="text-[16px] text-text-body mb-12 max-md:mb-8">뿌리는 대행 대신, 검색에 보이게 하는 정공법.</p>
             </FadeUp>
             <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
@@ -155,7 +157,8 @@ export default function ContentPage() {
         <Section alt>
           <div className="py-24 px-12 max-w-[1080px] mx-auto max-md:py-14 max-md:px-6">
             <FadeUp>
-              <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-12 max-md:mb-8">이 밖에도, 필요한 건 다 있습니다</h2>
+              {/* 헤드라인 = GPT+사장님 확정(2026-07-11, 대안 채택 — "이 밖에도" 위치 맥락 유지) */}
+              <h2 className="text-[clamp(26px,4vw,38px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-12 max-md:mb-8">이 밖에도 필요한 기능을 담았습니다</h2>
             </FadeUp>
             <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1 max-sm:gap-4">
               {extras.map((e, i) => (
