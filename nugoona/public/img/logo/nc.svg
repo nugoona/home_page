@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 콘텐츠 아이콘 — 정사각+텍스트 꽉. 어도비 표절 회피: 라운드 확 줄여 각지게(우리 직각 톤).
-       라운드는 로고 한정 예외. 2026-07-12 -->
-  <rect width="512" height="512" rx="64" fill="#0b2e1b"/>
-  <text x="236" y="236" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#2fd46b">Nc</text>
+  <!-- 누구나 콘텐츠 아이콘 — 어도비 표절 회피(색 반전 + 글자 대비).
+       밝은 브랜드색 배경 + 다크 글자, N(누구나) 크게 + c(콘텐츠) 작게. 라운드는 로고 한정 예외. 2026-07-12 -->
+  <rect width="512" height="512" rx="64" fill="#2fd46b"/>
+  <g fill="#0b2e1b" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800">
+    <text x="206" y="250" text-anchor="middle" dominant-baseline="central" font-size="368" letter-spacing="-18">N</text>
+    <text x="392" y="378" text-anchor="middle" dominant-baseline="central" font-size="176">c</text>
+  </g>
 </svg>
