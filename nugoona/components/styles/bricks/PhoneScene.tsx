@@ -42,7 +42,8 @@ export default function PhoneScene() {
           <div className="flex items-center gap-4">
             <Link
               href="/content"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#171717] text-white text-[15px] font-semibold tracking-[-0.02em] no-underline transition-all duration-250 hover:bg-[#333]"
+              style={{ color: '#ffffff' }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#171717] text-[15px] font-semibold tracking-[-0.02em] no-underline transition-all duration-250 hover:bg-[#333]"
             >
               노출 살펴보기
               <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -84,8 +85,36 @@ export default function PhoneScene() {
 
             {/* 스크린 */}
             <div style={{ position: 'relative', borderRadius: 38, overflow: 'hidden', background: '#f2f3f5' }}>
-              {/* 상태바 여백 — 다이나믹 아일랜드가 앱 콘텐츠를 가리지 않게(스샷은 상태바 제거본) */}
-              <div style={{ height: 32, background: '#f2f3f5' }} />
+              {/* 상태바 — 실제 폰처럼 시간·신호·배터리 (스샷이 상태바 제거본이라 여기서 그림) */}
+              <div
+                style={{
+                  position: 'relative',
+                  height: 38,
+                  background: '#f2f3f5',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0 22px',
+                  zIndex: 2,
+                }}
+              >
+                <span style={{ fontSize: 12, fontWeight: 800, color: '#17171c', letterSpacing: '0.01em' }}>9:41</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                  {/* 신호 */}
+                  <svg width="17" height="11" viewBox="0 0 17 11" fill="#17171c" aria-hidden>
+                    <rect x="0" y="7.5" width="3" height="3.5" rx="0.5" />
+                    <rect x="4.7" y="5" width="3" height="6" rx="0.5" />
+                    <rect x="9.3" y="2.5" width="3" height="8.5" rx="0.5" />
+                    <rect x="14" y="0" width="3" height="11" rx="0.5" />
+                  </svg>
+                  {/* 배터리 */}
+                  <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden>
+                    <rect x="0.5" y="0.5" width="20" height="11" rx="2.6" fill="none" stroke="#17171c" strokeOpacity="0.45" />
+                    <rect x="2" y="2" width="15" height="8" rx="1.3" fill="#17171c" />
+                    <rect x="21.5" y="4" width="2" height="4" rx="0.9" fill="#17171c" fillOpacity="0.45" />
+                  </svg>
+                </span>
+              </div>
               <Image
                 src="/shots/content/app-home-mobile.jpg"
                 alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출"
@@ -96,7 +125,7 @@ export default function PhoneScene() {
               />
               {/* 다이나믹 아일랜드 */}
               <span
-                style={{ position: 'absolute', top: 9, left: '50%', transform: 'translateX(-50%)', width: 86, height: 25, background: '#000', borderRadius: 999, zIndex: 3 }}
+                style={{ position: 'absolute', top: 7, left: '50%', transform: 'translateX(-50%)', width: 82, height: 24, background: '#000', borderRadius: 999, zIndex: 3 }}
               />
               {/* 화면 앞 반사(유리 글레어) — 실사 퀄리티 */}
               <span
