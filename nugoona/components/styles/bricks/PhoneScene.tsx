@@ -98,6 +98,18 @@ export default function PhoneScene() {
               <span
                 style={{ position: 'absolute', top: 9, left: '50%', transform: 'translateX(-50%)', width: 86, height: 25, background: '#000', borderRadius: 999, zIndex: 3 }}
               />
+              {/* 화면 앞 반사(유리 글레어) — 실사 퀄리티 */}
+              <span
+                aria-hidden
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  pointerEvents: 'none',
+                  zIndex: 4,
+                  background:
+                    'linear-gradient(125deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.12) 13%, rgba(255,255,255,0) 33%, rgba(255,255,255,0) 82%, rgba(255,255,255,0.05) 100%)',
+                }}
+              />
             </div>
           </div>
         </motion.div>
