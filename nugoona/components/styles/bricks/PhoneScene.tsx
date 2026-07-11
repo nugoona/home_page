@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 /* 화면 영역(프레임 PNG 대비 %) — 베젤 안쪽. 렌더로 미세조정한 값. */
-const SCREEN = { left: 31.6, top: 12.0, width: 36.3, height: 75.6 };
+const SCREEN = { left: 31.6, top: 12.4, width: 36.2, height: 73.6 };
 
 export default function PhoneScene() {
   return (
@@ -85,7 +85,7 @@ export default function PhoneScene() {
               <img
                 src="/shots/content/app-home-mobile.jpg"
                 alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출"
-                style={{ display: 'block', width: '100%', height: 'auto' }}
+                style={{ display: 'block', width: '100%', height: 'auto', marginTop: '8%' }}
               />
               {/* 화면 앞 반사(유리 글레어) */}
               <span
