@@ -38,19 +38,79 @@ export const metadata: Metadata = {
     '광고는 멈추면 사라지지만, 꾸준히 쌓은 글은 검색에 남아 스토어를 계속 보이게 합니다. 그 꾸준함을, 누구나 콘텐츠가 대신합니다.',
 };
 
+/* ── 3기둥 미니 라인아트 (§8.7-I: 텍스트-온리 카드 금지 — S9/S11/S12 문법의 미니어처, 직각선·끝 accent 점) ── */
+function MiniFanout() {
+  return (
+    <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
+      <rect x="14" y="30" width="36" height="36" fill="#e9ecef" />
+      <path d="M20 58l9-8 7 5 6-6 12 9" fill="none" stroke="#b7bec6" strokeWidth="1.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+      <circle cx="27" cy="41" r="2.5" fill="none" stroke="#b7bec6" strokeWidth="1.5" />
+      <path d="M50 48H92" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <path d="M92 48V18H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <path d="M92 48H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <path d="M92 48V78H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <circle cx="92" cy="48" r="3" fill="#0070f3" />
+      <circle cx="156" cy="18" r="4" fill="#03c75a" />
+      <rect x="168" y="14" width="38" height="8" fill="#f0f0f0" />
+      <circle cx="156" cy="48" r="4" fill="#e1306c" />
+      <rect x="168" y="44" width="30" height="8" fill="#f0f0f0" />
+      <circle cx="156" cy="78" r="4" fill="#1877f2" />
+      <rect x="168" y="74" width="34" height="8" fill="#f0f0f0" />
+    </svg>
+  );
+}
+function MiniNews() {
+  return (
+    <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
+      <circle cx="20" cy="18" r="4" fill="#03c75a" />
+      <rect x="32" y="13" width="92" height="10" fill="#171717" />
+      <rect x="132" y="15" width="44" height="6" fill="#e5e5e5" />
+      <path d="M20 26V56H44" fill="none" stroke="rgba(0,112,243,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <circle cx="47" cy="56" r="3" fill="#0070f3" />
+      <rect x="58" y="40" width="148" height="42" fill="none" stroke="#e5e5e5" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <text x="68" y="62" fontSize="20" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
+      <rect x="84" y="52" width="100" height="7" fill="#f0f0f0" />
+      <rect x="84" y="64" width="72" height="7" fill="#f0f0f0" />
+    </svg>
+  );
+}
+function MiniMap() {
+  return (
+    <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
+      <path d="M0 30H220M0 66H220M60 0V96M128 0V96M182 0V96" stroke="#ececec" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <rect x="70" y="38" width="48" height="20" fill="#f6f6f6" />
+      <rect x="138" y="38" width="34" height="20" fill="#f6f6f6" />
+      <path d="M94 48V30" stroke="#0070f3" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <rect x="87" y="16" width="14" height="14" fill="#0070f3" />
+      <circle cx="152" cy="76" r="4" fill="#03c75a" />
+      <circle cx="168" cy="76" r="4" fill="#4285f4" />
+    </svg>
+  );
+}
+
 const bridge = [
-  { n: '01', t: '전 채널 발행', d: '사진 한 번이면 블로그·플레이스·SNS까지' },
-  { n: '02', t: '노출 소식 자동 반영', d: '노출 방식이 바뀌어도 앱이 매주 따라감' },
-  { n: '03', t: '지도·플레이스 노출', d: '네이버는 함께, 구글은 대신' },
+  { n: '01', t: '전 채널 발행', d: '사진 한 번이면 블로그·플레이스·SNS까지', art: MiniFanout },
+  { n: '02', t: '노출 소식 자동 반영', d: '노출 방식이 바뀌어도 앱이 매주 따라감', art: MiniNews },
+  { n: '03', t: '지도·플레이스 노출', d: '네이버는 함께, 구글은 대신', art: MiniMap },
 ];
 
+/* ── 기능 그리드 글리프 (§8.7-I — stroke 1.5, 직각) ── */
+const GLYPH = {
+  reply: <path d="M3 4h14v9H9l-4 4v-4H3z" />,
+  video: <><rect x="3" y="4" width="14" height="12" /><path d="M9 8l4 2-4 2z" /></>,
+  voice: <><rect x="8" y="3" width="4" height="8" /><path d="M5 9v1a5 5 0 0 0 10 0V9M10 15v3M7 18h6" /></>,
+  thumb: <><rect x="3" y="4" width="14" height="12" /><circle cx="8" cy="8" r="1.4" /><path d="M3 14l5-4 4 3 2-2 3 3" /></>,
+  cal: <><rect x="3" y="4" width="14" height="13" /><path d="M3 8h14M7 3v3M13 3v3" /><circle cx="10" cy="12.5" r="1.2" fill="currentColor" stroke="none" /></>,
+  multi: <><rect x="6" y="3" width="11" height="11" /><path d="M3 7v10h10" /></>,
+} as const;
+
 const extras = [
-  { t: '리뷰 답글 초안', d: '배민·쿠팡 리뷰에 맞춘 답글을 먼저 써 둡니다' },
-  { t: '영상·쇼츠 제작', d: '사진으로 릴스·쇼츠까지 자동으로' },
-  { t: '말로 수정', d: '“더 친근하게” 한마디면 글이 바뀝니다' },
-  { t: '썸네일 자동 생성', d: '칸 편집까지, 손이 덜 갑니다' },
-  { t: '발행 스케줄', d: '채널당 하루 1건, 스팸처럼 안 보이게' },
-  { t: '여러 가게 한 계정', d: '가게가 여럿이어도 한 곳에서' },
+  { t: '리뷰 답글 초안', d: '배민·쿠팡 리뷰에 맞춘 답글을 먼저 써 둡니다', g: GLYPH.reply },
+  { t: '영상·쇼츠 제작', d: '사진으로 릴스·쇼츠까지 자동으로', g: GLYPH.video },
+  { t: '말로 수정', d: '“더 친근하게” 한마디면 글이 바뀝니다', g: GLYPH.voice },
+  { t: '썸네일 자동 생성', d: '칸 편집까지, 손이 덜 갑니다', g: GLYPH.thumb },
+  { t: '발행 스케줄', d: '채널당 하루 1건, 스팸처럼 안 보이게', g: GLYPH.cal },
+  { t: '여러 가게 한 계정', d: '가게가 여럿이어도 한 곳에서', g: GLYPH.multi },
 ];
 
 export default function ContentPage() {
@@ -115,7 +175,9 @@ export default function ContentPage() {
             <div className="grid grid-cols-3 gap-5 max-md:grid-cols-1">
               {bridge.map((c, i) => (
                 <FadeUp key={c.n} delay={i * 0.08}>
+                  {/* §8.7-I: 카드의 주인공 = 미니 라인아트(상단), 텍스트는 하단 보조 */}
                   <div className="h-full border border-border-default bg-white p-7 max-md:p-6">
+                    <c.art />
                     <span className="inline-flex w-8 h-8 items-center justify-center text-[12px] font-bold text-white bg-[#171717] mb-5" style={EN}>{c.n}</span>
                     <h3 className="text-[18px] font-bold text-text-primary mb-2">{c.t}</h3>
                     <p className="text-[14px] text-text-body leading-[1.6]">{c.d}</p>
@@ -164,6 +226,10 @@ export default function ContentPage() {
               {extras.map((e, i) => (
                 <FadeUp key={e.t} delay={(i % 3) * 0.08}>
                   <div className="h-full border border-border-default bg-white p-6">
+                    {/* §8.7-I 글리프 — stroke 1.5, 직각 */}
+                    <svg viewBox="0 0 20 20" className="w-[20px] h-[20px] mb-4 text-text-weak" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="miter" aria-hidden>
+                      {e.g}
+                    </svg>
                     <h3 className="text-[15px] font-bold text-text-primary mb-1.5">{e.t}</h3>
                     <p className="text-[13px] text-text-body leading-[1.6]">{e.d}</p>
                   </div>

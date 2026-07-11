@@ -165,9 +165,18 @@ export default function StartPage() {
             <div className="grid grid-cols-3 gap-8 max-md:grid-cols-1 max-md:gap-6">
               {steps.items.map((s, i) => (
                 <FadeUp key={s.num} delay={i * 0.08}>
-                  <span className="inline-flex w-8 h-8 items-center justify-center text-[12px] font-bold text-white bg-[#171717] mb-4" style={EN}>
-                    {s.num}
-                  </span>
+                  {/* §8.7-I: 스텝 글리프(안내/계정/한 달) — stroke 1.5, 직각 */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="inline-flex w-8 h-8 items-center justify-center text-[12px] font-bold text-white bg-[#171717]" style={EN}>
+                      {s.num}
+                    </span>
+                    <div className="flex-1 h-px bg-border-default" />
+                    <svg viewBox="0 0 20 20" className="w-[20px] h-[20px] text-text-weak" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="miter" aria-hidden>
+                      {i === 0 && <path d="M3 4h14v9H9l-4 4v-4H3z" />}
+                      {i === 1 && <><circle cx="10" cy="7" r="3" /><path d="M4 17c0-3 2.5-5 6-5s6 2 6 5" /></>}
+                      {i === 2 && <><rect x="3" y="4" width="14" height="13" /><path d="M3 8h14M7 3v3M13 3v3M7 12.5l2 2 4-4" /></>}
+                    </svg>
+                  </div>
                   <h3 className="text-[17px] font-bold text-text-primary mb-2">{s.title}</h3>
                   <p className="text-[14px] text-text-body leading-[1.6]">{s.desc}</p>
                 </FadeUp>
