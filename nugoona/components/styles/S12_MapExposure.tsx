@@ -35,23 +35,37 @@ function Chrome({ url }: { url?: string }) {
   );
 }
 
-/* 미니 지도 — 직각 도로망(브랜드 문법과 일치). 색면 칠하지 않고 핀으로만 강조. */
+/* 미니 지도 — 직각 도로망(브랜드 문법과 일치). 색면 칠하지 않고 핀으로만 강조.
+   M-8: '지도'로 읽히도록 도로 위계(간선 1개 굵게 + 지선 3개)와 도시 블록 면을 더한다. */
 function MiniMap() {
-  const road = { stroke: '#fff', strokeWidth: 4, strokeLinecap: 'butt' as const };
-  const edge = { stroke: '#e4e7ea', strokeWidth: 5.2, strokeLinecap: 'butt' as const };
+  // 간선 1개 — 아래쪽 가로 도로를 굵게(strokeWidth 6)
+  const mainRoad = { x1: 0, y1: 82, x2: 112, y2: 82 };
+  const mainRoadStyle = { stroke: '#fff', strokeWidth: 6, strokeLinecap: 'butt' as const };
+  const mainEdgeStyle = { stroke: '#e4e7ea', strokeWidth: 7.4, strokeLinecap: 'butt' as const };
+  // 지선 3개 — 나머지 도로는 얇게(strokeWidth 3)
   // 우리 가게는 (56,54) — 도로가 둘러싼 가운데 블록 안에 놓인다.
-  const lines = [
+  const localRoads = [
     { x1: 0, y1: 26, x2: 112, y2: 26 },
-    { x1: 0, y1: 82, x2: 112, y2: 82 },
     { x1: 30, y1: 0, x2: 30, y2: 108 },
     { x1: 84, y1: 0, x2: 84, y2: 108 },
+  ];
+  const localRoadStyle = { stroke: '#fff', strokeWidth: 3, strokeLinecap: 'butt' as const };
+  const localEdgeStyle = { stroke: '#e4e7ea', strokeWidth: 4.2, strokeLinecap: 'butt' as const };
+  // 도시 블록 면 — 도로가 만드는 칸 일부를 살짝 다른 톤으로 채워 '건물 블록' 느낌
+  const blocks = [
+    { x: 3, y: 3, w: 24, h: 20 },
+    { x: 87, y: 3, w: 22, h: 20 },
+    { x: 87, y: 87, w: 22, h: 18 },
   ];
   return (
     <div className="relative w-[112px] shrink-0 self-stretch overflow-hidden max-md:w-[88px]">
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 112 108" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden>
         <rect x="0" y="0" width="112" height="108" fill="#f6f7f8" />
-        {lines.map((l, i) => <line key={`e${i}`} {...l} {...edge} />)}
-        {lines.map((l, i) => <line key={`r${i}`} {...l} {...road} />)}
+        {blocks.map((b, i) => <rect key={`blk${i}`} x={b.x} y={b.y} width={b.w} height={b.h} fill="#f0f2f4" />)}
+        <line {...mainRoad} {...mainEdgeStyle} />
+        {localRoads.map((l, i) => <line key={`e${i}`} {...l} {...localEdgeStyle} />)}
+        <line {...mainRoad} {...mainRoadStyle} />
+        {localRoads.map((l, i) => <line key={`r${i}`} {...l} {...localRoadStyle} />)}
         <circle cx="14" cy="96" r="1.8" fill="#c3c8ce" />
         <circle cx="98" cy="12" r="1.8" fill="#c3c8ce" />
         <circle cx="16" cy="52" r="1.8" fill="#c3c8ce" />
@@ -66,10 +80,11 @@ function MiniMap() {
 }
 
 /* 채널 결과 창 — 왼쪽 미니 지도 + 오른쪽 가게 정보
-   minimal(구글) = 가게명만(글자 0 수준). quote 있으면(네이버) 인용 1줄 + 채널 라벨까지만. */
+   minimal(구글) = 가게명만(글자 0 수준). quote 있으면(네이버) 인용 1줄 + 채널 라벨까지만.
+   M-8: 카드 상단(Chrome 아래)에 채널 헤더(점+라벨 12px)를 두어 두 카드의 채널 구분을 명확히 한다. */
 function ResultWindow({
-  url, dot, channel, quote, inView, delay, minimal,
-}: { url?: string; dot: string; channel?: string; quote?: string; inView: boolean; delay: number; minimal?: boolean }) {
+  url, dot, headerLabel, channel, quote, inView, delay, minimal,
+}: { url?: string; dot: string; headerLabel: string; channel?: string; quote?: string; inView: boolean; delay: number; minimal?: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 14 }} animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -78,6 +93,11 @@ function ResultWindow({
       style={{ borderColor: '#eaeaea' }}
     >
       <Chrome url={minimal ? undefined : url} />
+      {/* 채널 헤더 */}
+      <div className="flex items-center gap-1.5 px-3 pt-2.5">
+        <span className="rounded-dot w-1.5 h-1.5 shrink-0" style={{ background: dot }} />
+        <span className="text-[12px] font-semibold text-text-primary">{headerLabel}</span>
+      </div>
       <div className="flex items-stretch flex-1 min-h-0">
         <MiniMap />
         <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
@@ -91,7 +111,7 @@ function ResultWindow({
           )}
 
           {!minimal && channel && (
-            <span className="block text-[9px] mt-2" style={{ ...EN, color: '#a9aeb5' }}>{channel} · 방금</span>
+            <span className="block text-[9px] mt-2 text-text-muted" style={EN}>{channel} · 방금</span>
           )}
         </div>
       </div>
@@ -186,11 +206,11 @@ export default function S12_MapExposure() {
         {/* 우: 결과 — 두 지도 채널 */}
         <div className="flex-1 md:max-w-[400px] flex flex-col gap-3 min-w-0">
           <ResultWindow
-            url="map.naver.com" dot="#03c75a" channel="네이버 플레이스 소식"
+            url="map.naver.com" dot="#03c75a" headerLabel="네이버 플레이스" channel="네이버 플레이스 소식"
             quote="제철 딸기 팬케이크를 시작했어요." inView={inView} delay={0.62}
           />
           <ResultWindow
-            dot="#ea4335" minimal
+            dot="#4285f4" headerLabel="Google 비즈니스" minimal
             inView={inView} delay={0.74}
           />
         </div>

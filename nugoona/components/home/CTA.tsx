@@ -4,8 +4,8 @@ import { cta } from '@/lib/content/home';
 
 export default function CTA() {
   return (
-    <div className="relative py-20 px-12 text-center overflow-hidden max-md:py-16 max-md:px-6"
-      style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #151515 100%)' }}
+    <div className="relative pt-24 pb-20 px-12 text-center overflow-hidden max-md:pt-20 max-md:pb-16 max-md:px-6"
+      style={{ background: 'linear-gradient(180deg, #111111 0%, #151515 100%)' }}
     >
 
       <FadeUp>

@@ -32,11 +32,11 @@ export default function Home() {
         <Section noBorder>
           <StoryStep dark time="∞" step={promise.step} headline={promise.title} subtitle={promise.sub}>
             <div className="flex gap-4 max-w-[520px] max-md:flex-col">
-              <div className="flex-1 border border-white/15 bg-white/[0.03] px-6 py-7">
+              <div className="flex-1 basis-0 border border-white/15 bg-white/[0.03] px-6 py-6">
                 <p className="text-[13px] text-white/50 mb-2">기능</p>
                 <p className="text-[26px] font-bold text-white" style={EN}>계속 &uarr;</p>
               </div>
-              <div className="flex-1 border border-accent/40 bg-accent/[0.07] px-6 py-7">
+              <div className="flex-1 basis-0 border border-accent/40 bg-accent/[0.07] px-6 py-6">
                 <p className="text-[13px] text-white/50 mb-2">요금</p>
                 <p className="text-[26px] font-bold text-accent" style={EN}>그대로 &rarr;</p>
               </div>

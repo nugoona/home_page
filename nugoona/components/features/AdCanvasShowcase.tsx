@@ -7,6 +7,7 @@ import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 
 const EN: React.CSSProperties = { fontFamily: 'var(--font-en)' };
+const U = (id: string) => `/img/unsplash/webp/${id}.webp`;
 
 /* ================================================================
    SHARED VARIANTS — visible spring physics
@@ -232,10 +233,10 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
    ================================================================ */
 function Step02_Catalog({ isActive }: { isActive: boolean }) {
   const products = [
-    { name: '플로럴 원피스', price: '₩39,000', badge: 'NEW', color: '#0070f3' },
-    { name: '린넨 셔츠', price: '₩52,000', badge: 'TOP', color: '#22c55e' },
-    { name: '코튼 팬츠', price: '₩28,000', badge: null, color: '' },
-    { name: '스트라이프 니트', price: '₩45,000', badge: 'AUTO', color: '#666' },
+    { name: '플로럴 원피스', price: '₩39,000', badge: 'NEW', color: '#0070f3', img: U('photo-1496747611176-843222e1e57c') },
+    { name: '린넨 셔츠', price: '₩52,000', badge: 'TOP', color: '#22c55e', img: U('photo-1558171813-4c088753af8f') },
+    { name: '코튼 팬츠', price: '₩28,000', badge: null, color: '', img: U('photo-1525351484163-7529414344d8') },
+    { name: '스트라이프 니트', price: '₩45,000', badge: 'AUTO', color: '#666', img: U('photo-1583496661160-fb5886a0aaaa') },
   ];
 
   return (
@@ -262,8 +263,8 @@ function Step02_Catalog({ isActive }: { isActive: boolean }) {
             transition={{ duration: 0.5, ease: EASE, delay: 0.2 + i * 0.15 }}
             style={{ border: '1px solid #eaeaea', background: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}
           >
-<div style={{ aspectRatio: '1/1', background: '#fafafa', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ width: 40, height: 40, background: 'rgba(234,234,234,0.4)' }} />
+<div style={{ aspectRatio: '1/1', background: '#fafafa', position: 'relative', overflow: 'hidden' }}>
+              <img src={p.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               {p.badge && (
                 <span style={{
                   position: 'absolute', top: 6, left: 6, fontSize: 8, fontWeight: 700, color: '#fff', padding: '2px 6px', background: p.color,
@@ -402,7 +403,7 @@ function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
           {[0, 1, 2, 3].map((i) => (
             <div key={i} style={{ flex: 1, background: 'rgba(0,112,243,0.1)', overflow: 'hidden' }}>
               <motion.div
-                animate={gaugeOn ? { scaleX: i < 3 ? 1 : 0 } : { scaleX: 0 }}
+                animate={gaugeOn ? { scaleX: 1 } : { scaleX: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 + i * 0.15 }}
                 style={{ width: '100%', height: '100%', background: '#0070f3', transformOrigin: 'left' }}
               />
@@ -449,12 +450,11 @@ export function Step04_Management({ isActive }: { isActive: boolean }) {
               </p>
             </div>
           </div>
-          {/* Toggle — smooth slide */}
-          <div className="rounded-pill" style={{ width: 40, height: 22, display: 'flex', alignItems: 'center', padding: '0 2px', position: 'relative', overflow: 'hidden' }}>
+          {/* Toggle — smooth slide (C-2: rounded-pill 제거, 직각 트랙 + 원형 thumb 유지) */}
+          <div style={{ width: 40, height: 22, display: 'flex', alignItems: 'center', padding: '0 2px', position: 'relative', overflow: 'hidden', border: '1px solid #eaeaea' }}>
             <motion.div
               animate={isActive ? { background: c.on ? '#22c55e' : '#e0e0e0' } : { background: '#e0e0e0' }}
               transition={{ duration: 0.4, delay: 0.5 + i * 0.15 }}
-              className="rounded-pill"
               style={{ position: 'absolute', inset: 0 }}
             />
             <motion.div

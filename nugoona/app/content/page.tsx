@@ -11,6 +11,7 @@ import S12_MapExposure from '@/components/styles/S12_MapExposure';
 import S14_Generate from '@/components/styles/S14_Generate';
 import S10_RankTrack from '@/components/styles/S10_RankTrack';
 import S13_Onboarding from '@/components/styles/S13_Onboarding';
+import { promise } from '@/lib/content/home';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
 
@@ -120,7 +121,14 @@ export default function ContentPage() {
         {/* ── S1 히어로 (다크 선언 + 큰 제품샷) ── */}
         <Section dark noBorder>
           <div className="relative px-12 pt-28 pb-0 text-center max-md:px-6 max-md:pt-16" style={{ background: 'radial-gradient(ellipse at 50% 0%, #0a2a18 0%, #0a0a0a 62%)' }}>
-            <FadeUp>
+            {/* 필름 노이즈 — 그린-블랙 그라데이션 밴딩 완화(§8.6, HeroAurora와 동일 fractalNoise) */}
+            <div
+              className="absolute inset-0 pointer-events-none z-0 opacity-[0.035]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              }}
+            />
+            <FadeUp className="relative z-10">
               <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>누구나 콘텐츠</p>
               {/* h1·sub = GPT+사장님 확정(content.ts hero) 토씨 그대로 */}
               <h1 className="text-[clamp(30px,5.2vw,54px)] font-semibold text-white tracking-[-0.04em] leading-[1.14] mb-6"
@@ -128,13 +136,13 @@ export default function ContentPage() {
               <p className="text-[clamp(15px,1.8vw,18px)] text-white/55 leading-[1.65] max-w-[600px] mx-auto mb-10">
                 광고는 멈추면 사라지지만, 꾸준히 쌓은 글은 검색에 남아 스토어를 계속 보이게 합니다. 그 꾸준함을, 누구나 콘텐츠가 대신합니다.
               </p>
-              <Link href="/start" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors mb-16">
+              <Link href="/start" className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors mb-16">
                 무료로 시작하기
                 <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
               </Link>
             </FadeUp>
             {/* 큰 제품 샷 (히어로 하단으로 몰입) */}
-            <FadeUp delay={0.15}>
+            <FadeUp delay={0.15} className="relative z-10">
               {/* pc-home-clean = 인사말을 페이지 서사(오늘의 브런치)로 교체한 버전. cropTop 3.2 = 상단 운영자 바(48px/1600) 완전 제거 */}
               <ShotFrame src="/shots/content/pc-home-clean.png" alt="누구나 콘텐츠 대시보드 홈 화면" cropTop={3.2} className="max-w-[980px] mx-auto -mb-16" priority />
             </FadeUp>
@@ -260,9 +268,9 @@ export default function ContentPage() {
           </div>
         </Section>
 
-        {/* ── S10 진화 선언 ── */}
+        {/* ── S10 진화 선언 — 카피 = 홈(lib/content/home.ts promise) 정본과 동일 문장 통일(M-3) ── */}
         <Section noBorder>
-          <StoryStep dark time="∞" step="OUR PROMISE" headline={'앱은 계속 자랍니다<span class="comma">,</span><br />요금은 <span class="text-accent">그대로</span>입니다'} subtitle="기능이 늘어도 쓰던 요금은 오르지 않습니다. 한번 시작하면 계속 나아지는 도구를 씁니다.">
+          <StoryStep dark time="∞" step={promise.step} headline={promise.title} subtitle={promise.sub}>
             <div className="flex gap-4 max-w-[520px] max-md:flex-col">
               <div className="flex-1 border border-white/15 bg-white/[0.03] px-6 py-7"><p className="text-[13px] text-white/50 mb-2">기능</p><p className="text-[26px] font-bold text-white" style={EN}>계속 &uarr;</p></div>
               <div className="flex-1 border border-accent/40 bg-accent/[0.07] px-6 py-7"><p className="text-[13px] text-white/50 mb-2">요금</p><p className="text-[26px] font-bold text-accent" style={EN}>그대로 &rarr;</p></div>
@@ -278,7 +286,7 @@ export default function ContentPage() {
               <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 가게 이름만 입력하면 세팅해 드립니다.</p>
               <div className="flex justify-center gap-3 max-sm:flex-col max-sm:items-center">
                 <Link href="/start" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all">무료로 시작하기</Link>
-                <Link href="/ads" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white/75 border border-white/20 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]">광고까지 직접 운영하려면 →</Link>
+                <Link href="/ads" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white border border-white/35 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]">광고까지 직접 운영하려면 →</Link>
               </div>
             </FadeUp>
           </div>

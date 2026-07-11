@@ -121,9 +121,9 @@ export default function S13_Onboarding() {
           <motion.div
             initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, ease: EASE, delay: buttonDelay }}
-            className="px-4 py-3"
+            className="px-4 py-3 flex justify-end"
           >
-            <button className="w-full h-9 text-[13px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
+            <button className="w-[60%] h-9 text-[13px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
           </motion.div>
         </div>
       </div>

@@ -9,32 +9,44 @@ const EN = { fontFamily: 'var(--font-en)' } as React.CSSProperties;
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /* ══════════════════════════════════════════════════════════════
-   IMAGE HELPERS
+   IMAGE HELPERS — 감독관 C-3 수리(2026-07-11): public/img/unsplash/webp/
+   46개 파일을 실제로 Read하여 내용(품목·색상) 확인 후 재매핑. 키 이름이
+   실제 사진 내용과 일치하도록 재설계(추측 매핑 금지 — 전수 실사 확인).
    ══════════════════════════════════════════════════════════════ */
 const U = (id: string) => `/img/unsplash/webp/${id}.webp`;
 
-const SQ_IMGS = {
-  knit:    U('photo-1434389677669-e08b4cac3105'),
-  jacket:  U('photo-1539109136881-3be0616acf4b'),
-  blouse:  U('photo-1525507119028-ed4c629a60a3'),
-  denim:   U('photo-1541099649105-f69ad21f3246'),
-  stripe:  U('photo-1516762689617-e1cffcef479d'),
-  sweater: U('photo-1551232864-3f0890e580d9'),
-  casual:  U('photo-1529139574466-a303027c1d8b'),
-  model:   U('photo-1515886657613-9f3515b0c78f'),
-};
+const IMG = {
+  knitPoncho:         U('photo-1434389677669-e08b4cac3105'), // 크림 프린지 크로셰 니트
+  knitRibGrey:         U('photo-1556905055-8f358a7a47b2'),    // 그레이 리브 니트(플랫레이)
+  knitSweatshirt:      U('photo-1578587018452-892bacefd3f2'), // 오렌지 크루넥 스웨트
+  knitCableCream:      U('photo-1604176354204-9268737828e4'), // 아이보리 케이블 니트
+  knitSage:            U('photo-1516762689617-e1cffcef479d'), // 세이지 그린 라운드 니트
+  knitCardiganDenim:   U('photo-1515886657613-9f3515b0c78f'), // 아이보리 가디건 + 데님(플랫레이)
+  coatPlaid:           U('photo-1485968579580-b6d095142e6e'), // 네이비 체크 코트
+  coatCamel:           U('photo-1539533018447-63fcce2678e3'), // 카멜 울 랩 코트
+  coatPowderBlue:      U('photo-1539109136881-3be0616acf4b'), // 파우더블루 롱 코트
+  jacketLeatherBrown:  U('photo-1487222477894-8943e31ef7b2'), // 브라운 레더 라이더 재킷
+  jacketBomberRust:    U('photo-1591047139829-d91aecb6caea'), // 러스트 봄버 재킷
+  denimRipped:         U('photo-1541099649105-f69ad21f3246'), // 디스트로이드 스키니 데님
+  denimFlatlay:        U('photo-1525351484163-7529414344d8'), // 데님 플랫레이(스트레이트)
+  pantsStripeWide:     U('photo-1529139574466-a303027c1d8b'), // 그린 스트라이프 와이드 팬츠
+  blouseFloral:        U('photo-1564257631407-4deb1f99d992'), // 화이트 플로럴 아일렛 블라우스
+  blouseChambray:      U('photo-1558171813-4c088753af8f'),    // 라이트블루 샴브레이 셔츠
+  skirtPleatBlack:      U('photo-1583496661160-fb5886a0aaaa'),// 블랙 플리츠 스커트(+스트라이프 블라우스)
+  dressFloralWhite:    U('photo-1496747611176-843222e1e57c'), // 화이트 플로럴 랩 원피스
+} as const;
 
 const PT_IMGS = [
-  U('photo-1515886657613-9f3515b0c78f'),
-  U('photo-1529139574466-a303027c1d8b'),
-  U('photo-1539109136881-3be0616acf4b'),
-  U('photo-1551232864-3f0890e580d9'),
-  U('photo-1525507119028-ed4c629a60a3'),
-  U('photo-1485968579580-b6d095142e6e'),
-  U('photo-1509631179647-0177331693ae'),
-  U('photo-1469334031218-e382a71b716b'),
-  U('photo-1516762689617-e1cffcef479d'),
-  U('photo-1541099649105-f69ad21f3246'),
+  IMG.coatPowderBlue,
+  IMG.jacketLeatherBrown,
+  IMG.skirtPleatBlack,
+  IMG.knitCableCream,
+  IMG.knitSweatshirt,
+  IMG.denimRipped,
+  IMG.denimFlatlay,
+  IMG.blouseFloral,
+  IMG.coatCamel,
+  IMG.knitCardiganDenim,
 ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -51,34 +63,34 @@ type BriefingItem = {
 };
 
 const RISING_ALL: BriefingItem[] = [
-  { rank: '전체 17위', img: SQ_IMGS.stripe,  brand: '에르블랑',   name: 'Small Wave Stripe Sweatshirt_Grey',        change: 75, thisWeek: 17, lastWeek: 92 },
-  { rank: '전체 12위', img: SQ_IMGS.jacket,  brand: '라빈느',     name: '오버핏 포켓 레더 블루종_Khaki Brown',       change: 61, thisWeek: 12, lastWeek: 73 },
-  { rank: '전체 38위', img: SQ_IMGS.knit,    brand: '소울리브',   name: 'Soft Days Knit Cardigan Yellow Stripe',   change: 57, thisWeek: 38, lastWeek: 95 },
-  { rank: '전체 25위', img: SQ_IMGS.blouse,  brand: '데이브리즈', name: 'Antique Waving Blouse_3color',            change: 41, thisWeek: 25, lastWeek: 66 },
+  { rank: '전체 17위', img: IMG.jacketBomberRust,    brand: '에르블랑',   name: '오버핏 봄버 재킷_Rust Brown',          change: 75, thisWeek: 17, lastWeek: 92 },
+  { rank: '전체 12위', img: IMG.jacketLeatherBrown,  brand: '라빈느',     name: '레더 블루종 재킷_Brown',               change: 61, thisWeek: 12, lastWeek: 73 },
+  { rank: '전체 38위', img: IMG.knitPoncho,          brand: '소울리브',   name: '프린지 크로셰 니트 가디건_Ivory',       change: 57, thisWeek: 38, lastWeek: 95 },
+  { rank: '전체 25위', img: IMG.blouseFloral,        brand: '데이브리즈', name: '플로럴 레이스 블라우스_White',          change: 41, thisWeek: 25, lastWeek: 66 },
 ];
 const NEW_ALL: BriefingItem[] = [
-  { rank: '전체 8위',  img: SQ_IMGS.sweater, brand: '코지랩',     name: '캐시미어 울 크루넥 니트_4colors',           change: 0, thisWeek: 8,  lastWeek: null },
-  { rank: '전체 15위', img: SQ_IMGS.denim,   brand: '미뉴에뜨',   name: '와이드 워싱 데님 팬츠_Blue',                change: 0, thisWeek: 15, lastWeek: null },
-  { rank: '전체 23위', img: SQ_IMGS.casual,  brand: '하루클로젯', name: '셔링 미니 원피스_3color',                   change: 0, thisWeek: 23, lastWeek: null },
-  { rank: '전체 29위', img: SQ_IMGS.model,   brand: '포레스트블룸', name: '코튼 맥시 스커트_Ivory',                  change: 0, thisWeek: 29, lastWeek: null },
+  { rank: '전체 8위',  img: IMG.knitRibGrey,      brand: '코지랩',     name: '리브 크루넥 니트_Grey',           change: 0, thisWeek: 8,  lastWeek: null },
+  { rank: '전체 15위', img: IMG.denimRipped,      brand: '미뉴에뜨',   name: '디스트로이드 스키니 데님_Blue',    change: 0, thisWeek: 15, lastWeek: null },
+  { rank: '전체 23위', img: IMG.dressFloralWhite, brand: '하루클로젯', name: '플로럴 랩 원피스_White',           change: 0, thisWeek: 23, lastWeek: null },
+  { rank: '전체 29위', img: IMG.skirtPleatBlack,  brand: '포레스트블룸', name: '플리츠 미디 스커트_Black',       change: 0, thisWeek: 29, lastWeek: null },
 ];
 const DROP_ALL: BriefingItem[] = [
-  { rank: '전체 88위', img: SQ_IMGS.jacket,  brand: '에르블랑',   name: '오버핏 린넨 블레이저_Beige',                change: -25, thisWeek: 88, lastWeek: 63 },
-  { rank: '전체 71위', img: SQ_IMGS.casual,  brand: '블루밍샵',   name: '울 오버코트_Ivory',                        change: -18, thisWeek: 71, lastWeek: 53 },
-  { rank: '전체 45위', img: SQ_IMGS.sweater, brand: '르비앙',     name: '터틀넥 케이블 니트_3colors',                change: -12, thisWeek: 45, lastWeek: 33 },
-  { rank: '전체 62위', img: SQ_IMGS.blouse,  brand: '소울리브',   name: '린넨 와이드 팬츠_Beige',                    change: -9,  thisWeek: 62, lastWeek: 53 },
+  { rank: '전체 88위', img: IMG.coatCamel,       brand: '에르블랑',   name: '오버핏 울 랩 코트_Camel',        change: -25, thisWeek: 88, lastWeek: 63 },
+  { rank: '전체 71위', img: IMG.coatPlaid,       brand: '블루밍샵',   name: '체크 울 코트_Navy',              change: -18, thisWeek: 71, lastWeek: 53 },
+  { rank: '전체 45위', img: IMG.knitCableCream,  brand: '르비앙',     name: '케이블 니트 가디건_Ivory',        change: -12, thisWeek: 45, lastWeek: 33 },
+  { rank: '전체 62위', img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Green',    change: -9,  thisWeek: 62, lastWeek: 53 },
 ];
 const RISING_KNIT: BriefingItem[] = [
-  { rank: '니트웨어 36위', img: SQ_IMGS.knit,    brand: '에르블랑', name: '울 브이넥 카디건_5colors',             change: 53, thisWeek: 36, lastWeek: 89 },
-  { rank: '니트웨어 23위', img: SQ_IMGS.sweater, brand: '라빈느',   name: '워셔블 라운드 카디건_5colors',          change: 52, thisWeek: 23, lastWeek: 75 },
-  { rank: '니트웨어 11위', img: SQ_IMGS.stripe,  brand: '소울리브', name: '워셔블 라운드 니트_4colors',            change: 37, thisWeek: 11, lastWeek: 48 },
-  { rank: '니트웨어 21위', img: SQ_IMGS.model,   brand: '코지랩',   name: '캐시미어 클래식 홀가먼트 니트',          change: 32, thisWeek: 21, lastWeek: 53 },
+  { rank: '니트웨어 36위', img: IMG.knitSweatshirt,    brand: '에르블랑', name: '브이넥 크루 니트_Orange',            change: 53, thisWeek: 36, lastWeek: 89 },
+  { rank: '니트웨어 23위', img: IMG.knitSage,          brand: '라빈느',   name: '라운드 니트_Sage Green',             change: 52, thisWeek: 23, lastWeek: 75 },
+  { rank: '니트웨어 11위', img: IMG.knitCardiganDenim, brand: '소울리브', name: '워셔블 라운드 니트 가디건_Ivory',     change: 37, thisWeek: 11, lastWeek: 48 },
+  { rank: '니트웨어 21위', img: IMG.knitPoncho,        brand: '코지랩',   name: '캐시미어 프린지 니트_Ivory',          change: 32, thisWeek: 21, lastWeek: 53 },
 ];
 const NEW_PANTS: BriefingItem[] = [
-  { rank: '바지 2위', img: SQ_IMGS.denim,   brand: '미뉴에뜨',   name: 'Washed Waffle Denim Pants_Blue',          change: 0, thisWeek: 2, lastWeek: null },
-  { rank: '바지 3위', img: SQ_IMGS.casual,  brand: '에르블랑',   name: 'Cat Washing Denim Pants_Deep Blue',       change: 0, thisWeek: 3, lastWeek: null },
-  { rank: '바지 4위', img: SQ_IMGS.model,   brand: '하루클로젯', name: 'Pose Jogger Pants_Melange Gray',          change: 0, thisWeek: 4, lastWeek: null },
-  { rank: '바지 6위', img: SQ_IMGS.blouse,  brand: '라빈느',     name: 'Herringbone Utility Work Pants_Ivory',   change: 0, thisWeek: 6, lastWeek: null },
+  { rank: '바지 2위', img: IMG.denimRipped,       brand: '미뉴에뜨',   name: 'Distressed Skinny Denim Pants_Blue', change: 0, thisWeek: 2, lastWeek: null },
+  { rank: '바지 3위', img: IMG.denimFlatlay,      brand: '에르블랑',   name: 'Straight Denim Pants_Blue',          change: 0, thisWeek: 3, lastWeek: null },
+  { rank: '바지 4위', img: IMG.pantsStripeWide,   brand: '하루클로젯', name: 'Stripe Wide Pants_Green',            change: 0, thisWeek: 4, lastWeek: null },
+  { rank: '바지 6위', img: IMG.knitCardiganDenim, brand: '라빈느',     name: 'Wide Denim Pants_Light Blue',        change: 0, thisWeek: 6, lastWeek: null },
 ];
 
 const BRIEFING_CATS = ['전체', '니트웨어', '단독', '바지', '상의', '셋업', '스커트', '아우터', '원피스'];
@@ -268,28 +280,28 @@ type InsightProduct = {
 
 const INSIGHT_PRODUCTS: Record<string, InsightProduct[]> = {
   '급상승': [
-    { img: SQ_IMGS.knit,    brand: '에르블랑',   name: 'All-Day Cotton V-neck Knit_Navy', rank: 36, change: 53, price: '69,500' },
-    { img: SQ_IMGS.sweater, brand: '라빈느',     name: 'Washable Round Cardigan_5colors', rank: 23, change: 52, price: '53,870' },
-    { img: SQ_IMGS.stripe,  brand: '소울리브',   name: 'Washable Round Knit_4colors',     rank: 11, change: 37, price: '46,980' },
-    { img: SQ_IMGS.model,   brand: '코지랩',     name: 'Cashmere Classic Knit_3colors',   rank: 21, change: 32, price: '49,920' },
-    { img: SQ_IMGS.jacket,  brand: '미뉴에뜨',   name: 'Check Shirt Pointed Knit_6col',   rank: 38, change: 31, price: '66,000' },
-    { img: SQ_IMGS.casual,  brand: '데이브리즈', name: 'WOMAN 에센션 가디건 [5COL]',       rank: 72, change: 27, price: '33,000' },
+    { img: IMG.knitSweatshirt,    brand: '에르블랑',   name: '올데이 브이넥 니트_Orange',       rank: 36, change: 53, price: '69,500' },
+    { img: IMG.knitCardiganDenim, brand: '라빈느',     name: '워셔블 라운드 가디건_Ivory',      rank: 23, change: 52, price: '53,870' },
+    { img: IMG.knitSage,          brand: '소울리브',   name: '워셔블 라운드 니트_Sage Green',   rank: 11, change: 37, price: '46,980' },
+    { img: IMG.knitPoncho,        brand: '코지랩',     name: '캐시미어 프린지 니트_Ivory',      rank: 21, change: 32, price: '49,920' },
+    { img: IMG.knitRibGrey,       brand: '미뉴에뜨',   name: '리브 포인티드 니트_Grey',         rank: 38, change: 31, price: '66,000' },
+    { img: IMG.knitCableCream,    brand: '데이브리즈', name: '케이블 가디건_Ivory',             rank: 72, change: 27, price: '33,000' },
   ],
   '신규 진입': [
-    { img: SQ_IMGS.denim,   brand: '에르블랑',   name: 'Cat Washing Denim Pants_Deep Blue', rank: 3,  change: 0, price: '55,000' },
-    { img: SQ_IMGS.blouse,  brand: '하루클로젯', name: '셔링 미니 원피스_3color',             rank: 8,  change: 0, price: '42,000' },
-    { img: SQ_IMGS.casual,  brand: '미뉴에뜨',   name: 'Herringbone Utility Pants_Ivory',   rank: 6,  change: 0, price: '58,900' },
-    { img: SQ_IMGS.model,   brand: '소울리브',   name: '린넨 와이드 팬츠_Beige',             rank: 12, change: 0, price: '49,500' },
-    { img: SQ_IMGS.knit,    brand: '라빈느',     name: '코튼 맥시 스커트_Ivory',             rank: 19, change: 0, price: '62,000' },
-    { img: SQ_IMGS.stripe,  brand: '코지랩',     name: 'Sleeveless Knit Vest_4colors',     rank: 15, change: 0, price: '38,500' },
+    { img: IMG.denimRipped,      brand: '에르블랑',   name: '디스트로이드 스키니 데님_Deep Blue', rank: 3,  change: 0, price: '55,000' },
+    { img: IMG.dressFloralWhite, brand: '하루클로젯', name: '플로럴 랩 미니 원피스_White',        rank: 8,  change: 0, price: '42,000' },
+    { img: IMG.pantsStripeWide,  brand: '미뉴에뜨',   name: '스트라이프 와이드 팬츠_Green',       rank: 6,  change: 0, price: '58,900' },
+    { img: IMG.skirtPleatBlack,  brand: '소울리브',   name: '플리츠 미디 스커트_Black',           rank: 12, change: 0, price: '49,500' },
+    { img: IMG.knitRibGrey,      brand: '라빈느',     name: '리브 크루넥 니트_Grey',              rank: 19, change: 0, price: '62,000' },
+    { img: IMG.blouseChambray,   brand: '코지랩',     name: '샴브레이 셔츠 블라우스_Blue',        rank: 15, change: 0, price: '38,500' },
   ],
   '순위 하락': [
-    { img: SQ_IMGS.jacket,  brand: '에르블랑',   name: '오버핏 린넨 블레이저_Beige',       rank: 88, change: -25, price: '119,000' },
-    { img: SQ_IMGS.casual,  brand: '블루밍샵',   name: '울 오버코트_Ivory',                rank: 71, change: -18, price: '195,000' },
-    { img: SQ_IMGS.sweater, brand: '르비앙',     name: '터틀넥 케이블 니트_3colors',        rank: 45, change: -12, price: '67,000' },
-    { img: SQ_IMGS.jacket,  brand: '소울리브',   name: '린넨 와이드 팬츠_Beige',            rank: 62, change: -9,  price: '49,500' },
-    { img: SQ_IMGS.blouse,  brand: '하루클로젯', name: 'Classic Wool Coat_Camel',          rank: 55, change: -7,  price: '188,000' },
-    { img: SQ_IMGS.knit,    brand: '미뉴에뜨',   name: '플리츠 미디 스커트_3color',          rank: 78, change: -5,  price: '72,000' },
+    { img: IMG.coatCamel,       brand: '에르블랑',   name: '오버핏 울 랩 코트_Camel',        rank: 88, change: -25, price: '119,000' },
+    { img: IMG.coatPlaid,       brand: '블루밍샵',   name: '체크 울 코트_Navy',              rank: 71, change: -18, price: '195,000' },
+    { img: IMG.knitCableCream,  brand: '르비앙',     name: '터틀넥 케이블 니트_Ivory',        rank: 45, change: -12, price: '67,000' },
+    { img: IMG.pantsStripeWide, brand: '소울리브',   name: '스트라이프 와이드 팬츠_Green',    rank: 62, change: -9,  price: '49,500' },
+    { img: IMG.coatPowderBlue,  brand: '하루클로젯', name: 'Classic Wool Coat_Powder Blue',  rank: 55, change: -7,  price: '188,000' },
+    { img: IMG.skirtPleatBlack, brand: '미뉴에뜨',   name: '플리츠 미디 스커트_Black',        rank: 78, change: -5,  price: '72,000' },
   ],
 };
 
@@ -360,7 +372,7 @@ function InsightSection() {
                   <p className="text-[11px] font-semibold text-text-weak mb-3">자사몰 성과</p>
                   <ul className="space-y-2">
                     <li className="text-[13px] text-text-primary leading-[1.65]">
-                      <span className="font-bold">오버핏 린넨 블레이저_Beige</span>
+                      <span className="font-bold">오버핏 울 랩 코트_Camel</span>
                       <span className="text-[#3b82f6] font-semibold ml-2">( -25위 하락 )</span>
                       <span className="text-text-weak"> → 간절기 수요를 겨냥했으나 경쟁 브랜드의 유사 스타일 신규 진입이 집중되며 상대적 노출 감소로 순위 하락.</span>
                     </li>
@@ -370,12 +382,12 @@ function InsightSection() {
                   <div className="mt-4 inline-block border border-border-default bg-white p-3">
                     <div className="flex items-start gap-3">
                       <div className="relative w-[80px] h-[80px] shrink-0 bg-[#f5f5f5] overflow-hidden">
-                        <img src={SQ_IMGS.jacket} alt="" className="w-full h-full object-cover" />
+                        <img src={IMG.coatCamel} alt="" className="w-full h-full object-cover" />
                         <span className="absolute top-1 left-1 bg-[#1e3a5f] text-white text-[9px] font-bold px-1.5 py-0.5" style={EN}>88위</span>
                       </div>
                       <div>
                         <p className="text-[10px] text-text-weak font-semibold mb-0.5">에르블랑</p>
-                        <p className="text-[13px] font-medium text-text-primary leading-[1.4] mb-2">오버핏 린넨<br />블레이저_Beige</p>
+                        <p className="text-[13px] font-medium text-text-primary leading-[1.4] mb-2">오버핏 울 랩<br />코트_Camel</p>
                         <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#3b82f6] bg-[#eff6ff] px-1.5 py-0.5">
                           ▼ 25위 하락
                         </span>
@@ -395,7 +407,10 @@ function InsightSection() {
                   {/* Material */}
                   <div className="bg-[#fafafa] border border-border-default p-5">
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-[18px]">🌍</span>
+                      <svg className="w-[18px] h-[18px] shrink-0" viewBox="0 0 16 16" fill="none" stroke="#666" strokeWidth="1.5">
+                        <rect x="2" y="2" width="8" height="8" />
+                        <rect x="6" y="6" width="8" height="8" />
+                      </svg>
                       <div>
                         <span className="text-[13px] font-bold text-text-primary" style={EN}>Material Trend</span>
                         <span className="text-[11px] text-text-weak ml-2">소재 트렌드</span>
@@ -413,7 +428,10 @@ function InsightSection() {
                   {/* Mood */}
                   <div className="bg-[#fafafa] border border-border-default p-5">
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-[18px]">✨</span>
+                      <svg className="w-[18px] h-[18px] shrink-0" viewBox="0 0 16 16" fill="none" stroke="#666" strokeWidth="1.5">
+                        <rect x="3" y="3" width="10" height="10" />
+                        <path d="M3 8h10M8 3v10" />
+                      </svg>
                       <div>
                         <span className="text-[13px] font-bold text-text-primary" style={EN}>Mood &amp; Style</span>
                         <span className="text-[11px] text-text-weak ml-2">무드 &amp; 스타일</span>
@@ -498,7 +516,7 @@ function InsightSection() {
                                 background: p.change > 0 ? '#fef2f2' : p.change < 0 ? '#eff6ff' : '#f5f3ff',
                               }}
                             >
-                              {p.change > 0 && '🔥 '}{changeLabel(p.change)}
+                              {changeLabel(p.change)}
                             </span>
                             <p className="text-[13px] font-bold text-text-primary" style={EN}>₩{p.price}</p>
                           </div>
@@ -534,10 +552,10 @@ const COMPARE_BRANDS = ['에르블랑', '라빈느', '소울리브', '코지랩'
 
 const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
   '에르블랑': [
-    { img: PT_IMGS[0], brand: '에르블랑', name: '오버핏 린넨 블레이저_Beige',       likes: '4,962', bestRank: 5 },
-    { img: PT_IMGS[2], brand: '에르블랑', name: '플레어 스커트 미디_3color',         likes: '817',   bestRank: undefined },
-    { img: PT_IMGS[4], brand: '에르블랑', name: '오버사이즈 후디_Melange 3color',   likes: '1,283', bestRank: 4 },
-    { img: PT_IMGS[6], brand: '에르블랑', name: '슬림 롱 슬리브 탑_5color',         likes: '392',   bestRank: 3 },
+    { img: PT_IMGS[0], brand: '에르블랑', name: '롱 트렌치 코트_Powder Blue',       likes: '4,962', bestRank: 5 },
+    { img: PT_IMGS[2], brand: '에르블랑', name: '플리츠 미디 스커트_Black',         likes: '817',   bestRank: undefined },
+    { img: PT_IMGS[4], brand: '에르블랑', name: '오버사이즈 크루넥 후디_Orange',   likes: '1,283', bestRank: 4 },
+    { img: PT_IMGS[6], brand: '에르블랑', name: '스트레이트 데님 팬츠_Blue',        likes: '392',   bestRank: 3 },
     { img: PT_IMGS[8], brand: '에르블랑', name: '울 블렌드 코트_Camel',              likes: '519',   bestRank: undefined },
     { img: PT_IMGS[1], brand: '에르블랑', name: '와이드 데님 팬츠_워싱 Blue',        likes: '2,341', bestRank: 7 },
     { img: PT_IMGS[3], brand: '에르블랑', name: '크루넥 니트 풀오버_4color',         likes: '1,087', bestRank: undefined },
@@ -546,11 +564,11 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
     { img: PT_IMGS[9], brand: '에르블랑', name: '캐시미어 브이넥 니트_5color',       likes: '1,524', bestRank: undefined },
   ],
   '라빈느': [
-    { img: PT_IMGS[1], brand: '라빈느', name: '오버핏 포켓 레더 블루종_Khaki',  likes: '3,201', bestRank: 12 },
-    { img: PT_IMGS[3], brand: '라빈느', name: '워셔블 라운드 카디건_5colors',   likes: '2,891', bestRank: 23 },
-    { img: PT_IMGS[5], brand: '라빈느', name: 'Herringbone Utility Pants',     likes: '1,047', bestRank: undefined },
-    { img: PT_IMGS[7], brand: '라빈느', name: '셔링 블라우스_3color',           likes: '892',   bestRank: undefined },
-    { img: PT_IMGS[9], brand: '라빈느', name: '슬림 부츠컷 팬츠_Black',        likes: '2,134', bestRank: 31 },
+    { img: PT_IMGS[1], brand: '라빈느', name: '레더 블루종 재킷_Brown',        likes: '3,201', bestRank: 12 },
+    { img: PT_IMGS[3], brand: '라빈느', name: '케이블 니트 가디건_Ivory',       likes: '2,891', bestRank: 23 },
+    { img: PT_IMGS[5], brand: '라빈느', name: 'Distressed Skinny Denim Pants_Blue', likes: '1,047', bestRank: undefined },
+    { img: PT_IMGS[7], brand: '라빈느', name: '플로럴 레이스 블라우스_White',   likes: '892',   bestRank: undefined },
+    { img: PT_IMGS[9], brand: '라빈느', name: '와이드 데님 팬츠_Light Blue',    likes: '2,134', bestRank: 31 },
     { img: PT_IMGS[0], brand: '라빈느', name: '코튼 크루넥 티셔츠_5color',     likes: '1,673', bestRank: undefined },
     { img: PT_IMGS[2], brand: '라빈느', name: '린넨 와이드 팬츠_Beige',        likes: '743',   bestRank: undefined },
     { img: PT_IMGS[4], brand: '라빈느', name: '트위드 자켓_Cream',             likes: '1,298', bestRank: 45 },
@@ -558,11 +576,11 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
     { img: PT_IMGS[8], brand: '라빈느', name: '오버사이즈 맨투맨_Grey',        likes: '2,056', bestRank: 38 },
   ],
   '소울리브': [
-    { img: PT_IMGS[2], brand: '소울리브', name: 'Soft Days Knit Cardigan',       likes: '1,842', bestRank: 38 },
-    { img: PT_IMGS[4], brand: '소울리브', name: '레이어드 니트 베스트_4color',    likes: '994',   bestRank: undefined },
-    { img: PT_IMGS[6], brand: '소울리브', name: '워싱 스트레이트 데님',            likes: '2,201', bestRank: 18 },
-    { img: PT_IMGS[8], brand: '소울리브', name: '코튼 셔츠 드레스_Ivory',         likes: '673',   bestRank: undefined },
-    { img: PT_IMGS[0], brand: '소울리브', name: '울 오버코트_Camel',              likes: '1,456', bestRank: 52 },
+    { img: PT_IMGS[2], brand: '소울리브', name: '플리츠 미디 스커트_Black',       likes: '1,842', bestRank: 38 },
+    { img: PT_IMGS[4], brand: '소울리브', name: '오버사이즈 크루넥 니트_Orange',  likes: '994',   bestRank: undefined },
+    { img: PT_IMGS[6], brand: '소울리브', name: '워싱 스트레이트 데님_Blue',      likes: '2,201', bestRank: 18 },
+    { img: PT_IMGS[8], brand: '소울리브', name: '울 랩 코트_Camel',               likes: '673',   bestRank: undefined },
+    { img: PT_IMGS[0], brand: '소울리브', name: '미니멀 롱 코트_Powder Blue',     likes: '1,456', bestRank: 52 },
     { img: PT_IMGS[1], brand: '소울리브', name: '크롭 후드 집업_3color',          likes: '1,087', bestRank: undefined },
     { img: PT_IMGS[3], brand: '소울리브', name: '플리츠 와이드 팬츠_Black',       likes: '834',   bestRank: undefined },
     { img: PT_IMGS[5], brand: '소울리브', name: '홀터넥 미니 원피스_2color',      likes: '2,318', bestRank: 29 },
@@ -575,7 +593,7 @@ const COMPARE_PRODUCTS: Record<string, CompareProduct[]> = {
   COMPARE_PRODUCTS[brand] = PT_IMGS.map((img, i) => ({
     img,
     brand,
-    name: ['캐시미어 니트_4color', '와이드 데님 팬츠_Blue', '셔링 원피스_3color', '레더 블루종_Brown', '린넨 블라우스_Ivory',
+    name: ['롱 트렌치 코트_Powder Blue', '레더 블루종 재킷_Brown', '플리츠 미디 스커트_Black', '케이블 니트 가디건_Ivory', '오버사이즈 크루넥 후디_Orange',
            '울 오버코트_Camel', '크롭 스웻_Grey', '플리츠 스커트_Black', '홀터넥 탑_2color', '모헤어 카디건_Beige'][i],
     likes: ['1,234', '892', '2,341', '547', '1,876', '3,012', '678', '1,543', '934', '2,187'][i],
     bestRank: [18, undefined, 35, undefined, 62, 7, undefined, 44, undefined, 28][i] as number | undefined,
@@ -683,7 +701,7 @@ function CompareSection() {
                           <span className="text-[10px] text-text-muted" style={EN}>{p.likes}</span>
                         </div>
                         <div className="flex gap-1">
-                          <button className="flex-1 py-1 text-[9px] font-bold text-white bg-[#22c55e] hover:bg-[#16a34a] transition-colors truncate">
+                          <button className="flex-1 py-1 text-[9px] font-bold text-[#333] border border-[#eaeaea] hover:bg-[#f5f5f5] transition-colors truncate">
                             바로가기
                           </button>
                           <button className="flex-1 py-1 text-[9px] font-bold text-text-weak border border-border-default hover:bg-[#f5f5f5] transition-colors truncate">
@@ -716,7 +734,7 @@ const NAVER_COMP = [
   700, 680, 720, 730, 710, 720, 700, 710, 690, 700,
   720, 710, 690, 700, 680, 720, 710, 700, 690, 680,
 ];
-const _NW = 500, _NH = 150, _NP = 10;
+const _NW = 500, _NH = 190, _NP = 10;
 const _NMIN = Math.min(...NAVER_MY, ...NAVER_COMP);
 const _NMAX = Math.max(...NAVER_MY, ...NAVER_COMP);
 const _NR = _NMAX - _NMIN;
@@ -750,7 +768,7 @@ function NaverLineChart() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <div ref={ref} className="border border-border-default bg-white p-5">
+    <div ref={ref} className="border border-border-default bg-white p-5 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4">
         <div>
           <p className="text-[10px] font-semibold text-accent tracking-[0.08em] uppercase mb-0.5" style={EN}>
@@ -768,7 +786,7 @@ function NaverLineChart() {
         </div>
       </div>
 
-      <svg viewBox={`0 0 ${_NW} ${_NH}`} className="w-full" style={{ height: '150px' }}>
+      <svg viewBox={`0 0 ${_NW} ${_NH}`} className="w-full" style={{ height: '190px' }}>
         <defs>
           <linearGradient id="naverGradient2" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#22c55e" stopOpacity="0.18" />
@@ -817,7 +835,7 @@ function GSCQueryTable() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <div ref={ref} className="border border-border-default bg-white overflow-hidden">
+    <div ref={ref} className="border border-border-default bg-white overflow-hidden h-full">
       <div className="px-5 py-4 border-b border-border-default bg-[#fafafa] flex items-center justify-between">
         <div>
           <p className="text-[10px] font-semibold text-accent tracking-[0.08em] uppercase mb-0.5" style={EN}>
@@ -909,7 +927,7 @@ export default function TrendShowcase() {
           </FadeUp>
         </div>
         <div className="py-14 px-12 max-md:py-10 max-md:px-6">
-          <div className="max-w-[1080px] mx-auto grid grid-cols-[5fr_7fr] gap-6 items-start max-md:grid-cols-1">
+          <div className="max-w-[1080px] mx-auto grid grid-cols-[5fr_7fr] gap-6 items-stretch max-md:grid-cols-1">
             <NaverLineChart />
             <GSCQueryTable />
           </div>

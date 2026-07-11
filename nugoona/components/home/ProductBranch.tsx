@@ -38,7 +38,7 @@ export default function ProductBranch() {
                   {c.mock === 'search' ? (
                     <SearchResultMock />
                   ) : (
-                    <div className="origin-top scale-[0.62] max-md:scale-[0.7]">
+                    <div className="origin-top scale-[0.78] -mt-2 max-md:scale-[0.8] max-md:-mt-1">
                       <DashboardGlimpse />
                     </div>
                   )}

@@ -106,7 +106,7 @@ export default function HeroAurora() {
         </p>
         <Link
           href={hero.ctaHref}
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] no-underline transition-all duration-250 hover:bg-[#eaeaea] hover:shadow-[0_0_48px_rgba(255,255,255,0.12)]"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] no-underline transition-all duration-250 hover:bg-[#eaeaea] hover:shadow-[0_0_48px_rgba(255,255,255,0.12)]"
         >
           {hero.cta}
           <svg className="w-4 h-4 opacity-50 transition-all duration-250 hover:translate-x-[3px] hover:opacity-80" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">

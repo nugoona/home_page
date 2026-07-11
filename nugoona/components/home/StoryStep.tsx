@@ -38,11 +38,11 @@ export default function StoryStep({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={inView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 1.5, ease: EASE }}
-        className="max-md:!text-[clamp(80px,28vw,120px)] max-md:!right-[-8%]"
+        className="max-md:!text-[clamp(80px,28vw,120px)] max-md:!right-[4%]"
         style={{
           position: 'absolute',
           top: '50%',
-          right: '-2%',
+          right: '3%',
           transform: 'translateY(-50%)',
           fontSize: 'clamp(180px, 26vw, 380px)',
           fontWeight: 900,

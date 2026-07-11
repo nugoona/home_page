@@ -28,12 +28,19 @@ function Dot({ c }: { c: string }) {
   return <span className="inline-block w-1.5 h-1.5 rounded-dot shrink-0" style={{ background: c }} />;
 }
 
-function PhotoSlot({ size = 44 }: { size?: number }) {
+/* 원재료 실사 4장(M-7: 빈 회색 박스 → 실사 — 팬케이크/프렌치토스트/브런치토스트/디저트) */
+const PHOTOS = [
+  'photo-1567620905732-2d1ec7ab7445',
+  'photo-1484723091739-30a097e8f929',
+  'photo-1525351484163-7529414344d8',
+  'photo-1551024506-0bccd828d307',
+] as const;
+
+function PhotoSlot({ src, size = 44 }: { src: string; size?: number }) {
   return (
-    <span className="inline-flex items-center justify-center shrink-0" style={{ width: size, height: size, background: '#e9ecef' }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b7bec6" strokeWidth="1.6" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="16" /><circle cx="8.5" cy="9" r="1.6" /><path d="M3 16l5-4 4 3 3-3 6 5" />
-      </svg>
+    <span className="inline-block overflow-hidden shrink-0" style={{ width: size, height: size }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/img/unsplash/webp/${src}.webp`} alt="" className="w-full h-full object-cover" />
     </span>
   );
 }
@@ -144,7 +151,7 @@ export default function S9_ChannelFanout() {
           className="shrink-0 md:self-center"
         >
           <div className="grid grid-cols-2 gap-1 p-2 border bg-white" style={{ borderColor: BORDER }}>
-            {[0, 1, 2, 3].map((i) => <PhotoSlot key={i} />)}
+            {PHOTOS.map((src) => <PhotoSlot key={src} src={src} />)}
           </div>
           <p className="text-[10.5px] mt-1.5 text-text-weak text-center">오늘 올린 이야기 하나</p>
         </motion.div>

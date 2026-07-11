@@ -366,10 +366,11 @@ function Sales01Card() {
 
 /* 03 — 고객 방문 및 구매 여정 */
 function Funnel03Card() {
+  {/* M-12: 퍼널 바 색상 = 모노 그라데이션(진회→연회). 빨강은 하단 "전환율 7.40%" 텍스트 1곳만 유지 */}
   const rows = [
     { label: '유입수 (GA)',        value: 40733, pct: 100,  color: '#1e3a5f', cvr: null },
-    { label: '장바구니 건수 (GA)', value: 8248,  pct: 20.2, color: '#8b5cf6', cvr: '전환율 20.25%' },
-    { label: '주문 건수',           value: 610,   pct: 7.4,  color: '#ef4444', cvr: '전환율 7.4%' },
+    { label: '장바구니 건수 (GA)', value: 8248,  pct: 20.2, color: '#64748b', cvr: '전환율 20.25%' },
+    { label: '주문 건수',           value: 610,   pct: 7.4,  color: '#94a3b8', cvr: '전환율 7.4%' },
   ];
   return (
     <div>
@@ -837,8 +838,8 @@ export default function DashboardShowcase() {
             <FadeUp className="flex-1 flex flex-col">
               <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center items-center text-center gap-7 max-md:px-6 max-md:py-10">
                 <p
-                  className="leading-[0.9] tracking-[-0.02em] text-white select-none"
-                  style={{ fontSize: 'clamp(44px, 6vw, 72px)', fontFamily: "'Inter Tight', sans-serif", fontWeight: 800 }}
+                  className="leading-[0.9] tracking-[-0.02em] select-none"
+                  style={{ fontSize: 'clamp(44px, 6vw, 72px)', fontFamily: "'Inter Tight', sans-serif", fontWeight: 800, color: 'rgba(255,255,255,0.28)' }}
                 >
                   Dashboard
                 </p>
@@ -846,7 +847,7 @@ export default function DashboardShowcase() {
                   href="https://board.nugoona.co.kr/demo/dashboard"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-pill inline-flex items-center justify-between gap-4 bg-white pl-6 pr-2 py-2 hover:bg-[#f0f0f0] transition-colors duration-200 max-w-[280px] w-full"
+                  className="inline-flex items-center justify-between gap-4 bg-white pl-6 pr-3 py-2.5 hover:bg-[#f0f0f0] transition-colors duration-200 max-w-[280px] w-full"
                 >
                   <span className="text-[14px] font-bold text-text-primary tracking-[-0.02em]">직접 데모 경험하기</span>
                   <span className="rounded-dot w-9 h-9 bg-[#171717] flex items-center justify-center shrink-0">

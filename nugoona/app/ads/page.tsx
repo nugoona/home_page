@@ -31,7 +31,14 @@ export default function AdsPage() {
             className="relative py-32 px-12 text-center max-md:py-20 max-md:px-6"
             style={{ background: 'radial-gradient(ellipse at 50% 0%, #0a2050 0%, #0a0a0a 62%)' }}
           >
-            <FadeUp>
+            {/* 필름 노이즈 — 그라데이션 밴딩 완화(§8.6, HeroAurora와 동일 fractalNoise) */}
+            <div
+              className="absolute inset-0 pointer-events-none z-0 opacity-[0.035]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              }}
+            />
+            <FadeUp className="relative z-10">
               <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>
                 누구나 광고
               </p>
@@ -44,7 +51,7 @@ export default function AdsPage() {
               </p>
               <Link
                 href={hero.cta.href}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors"
               >
                 {hero.cta.text}
                 <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -101,7 +108,7 @@ export default function AdsPage() {
                   </Link>
                   <Link
                     href="/content"
-                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white/75 border border-white/20 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
+                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white border border-white/35 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
                   >
                     노출이 먼저라면 →
                   </Link>

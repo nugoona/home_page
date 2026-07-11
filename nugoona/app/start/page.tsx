@@ -171,11 +171,6 @@ export default function StartPage() {
                       {s.num}
                     </span>
                     <div className="flex-1 h-px bg-border-default" />
-                    <svg viewBox="0 0 20 20" className="w-[20px] h-[20px] text-text-weak" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="miter" aria-hidden>
-                      {i === 0 && <path d="M3 4h14v9H9l-4 4v-4H3z" />}
-                      {i === 1 && <><circle cx="10" cy="7" r="3" /><path d="M4 17c0-3 2.5-5 6-5s6 2 6 5" /></>}
-                      {i === 2 && <><rect x="3" y="4" width="14" height="13" /><path d="M3 8h14M7 3v3M13 3v3M7 12.5l2 2 4-4" /></>}
-                    </svg>
                   </div>
                   <h3 className="text-[16px] font-bold text-text-primary mb-2">{s.title}</h3>
                   <p className="text-[14px] text-text-body leading-[1.65]">{s.desc}</p>

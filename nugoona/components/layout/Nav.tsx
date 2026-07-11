@@ -115,10 +115,10 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — 닫힘 상태 invisible: 화면 밖 대기 중 캡처·스크린리더 노출 방지(감독관 C-1, 2026-07-11) */}
       <div
         className={`fixed inset-0 z-40 bg-white transition-transform duration-300 ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
+          menuOpen ? 'translate-x-0' : 'translate-x-full invisible'
         }`}
         style={{ paddingTop: hasPromo ? '110px' : '70px' }}
       >
