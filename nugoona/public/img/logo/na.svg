@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <!-- 누구나 광고 아이콘 — 정사각+텍스트 꽉+라운드(어도비 CC식). 라운드는 로고 한정 예외. 2026-07-12 -->
   <rect width="512" height="512" rx="112" fill="#0a1f4d"/>
-  <text x="256" y="252" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#3e8bff">Na</text>
+  <text x="246" y="236" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#3e8bff">Na</text>
 </svg>
