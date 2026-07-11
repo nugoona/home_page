@@ -11,8 +11,7 @@ import { hero } from '@/lib/content/home';
    그대로 두고, 아래 4가지로 밀도·정밀도·이벤트를 강화한다.
      1) 빔 두 줄기에 제품색(콘텐츠 그린 #2fd46b · 광고 블루 #3e8bff)을 입혀
         "두 제품 회사"를 배경 자체로 암시.
-     2) 격자 교차점에 도트, 4코너에 좌표풍 라벨(시스템 표기·범례·LIVE)을 더해
-        Vercel/Linear급 정밀 인상.
+     2) 4코너 십자선(원작 crosshair — 격자 선 교차점에 얹혀 선을 관통) + 좌표풍 라벨.
      3) 빔의 머리가 크로스헤어 코너를 지날 때마다 그 지점이 제품색으로
         반짝이는 "코너 버스트" — 두 제품이 같은 시스템(격자)을 순회하며
         서로 교차하는 이벤트.
@@ -38,27 +37,28 @@ const D_BOTTOM = ((DC_R1 + 1) / D_ROWS) * 100; // 87.5
 const D_LEFT = (DC_C0 / D_COLS) * 100;         // 16.667
 const D_RIGHT = ((DC_C1 + 1) / D_COLS) * 100;  // 83.333
 
-/* ── 코너 좌표: 크로스헤어 · 빔 루프 · 코너버스트가 공유하는 단일 좌표계(half-cell inset) ── */
-const DESK_TL: Pt = { x: 1 / 24, y: 1 / 16 };
-const DESK_TR: Pt = { x: 1 - 1 / 24, y: 1 / 16 };
-const DESK_BR: Pt = { x: 1 - 1 / 24, y: 1 - 1 / 16 };
-const DESK_BL: Pt = { x: 1 / 24, y: 1 - 1 / 16 };
+/* ── 코너 좌표: 크로스헤어 · 빔 루프 · 코너버스트가 공유하는 단일 좌표계.
+   원작 HeroAurora와 동일 — 격자 '선 교차점'(1/12·1/8 계열)에 정렬해 십자선이 격자선을 관통한다. ── */
+const DESK_TL: Pt = { x: 1 / 12, y: 1 / 8 };
+const DESK_TR: Pt = { x: 11 / 12, y: 1 / 8 };
+const DESK_BR: Pt = { x: 11 / 12, y: 7 / 8 };
+const DESK_BL: Pt = { x: 1 / 12, y: 7 / 8 };
 const DESK_LOOP_A: Pt[] = [DESK_TL, DESK_TR, DESK_BR, DESK_BL];
 const DESK_LOOP_B: Pt[] = [DESK_BR, DESK_BL, DESK_TL, DESK_TR];
 
-const MOB_TL: Pt = { x: 1 / 12, y: 1 / 20 };
-const MOB_TR: Pt = { x: 1 - 1 / 12, y: 1 / 20 };
-const MOB_BR: Pt = { x: 1 - 1 / 12, y: 1 - 1 / 20 };
-const MOB_BL: Pt = { x: 1 / 12, y: 1 - 1 / 20 };
+const MOB_TL: Pt = { x: 1 / 6, y: 1 / 10 };
+const MOB_TR: Pt = { x: 5 / 6, y: 1 / 10 };
+const MOB_BR: Pt = { x: 5 / 6, y: 9 / 10 };
+const MOB_BL: Pt = { x: 1 / 6, y: 9 / 10 };
 const MOB_LOOP_A: Pt[] = [MOB_TL, MOB_TR, MOB_BR, MOB_BL];
 const MOB_LOOP_B: Pt[] = [MOB_BR, MOB_BL, MOB_TL, MOB_TR];
 
 const GREEN = '47,212,107'; // 콘텐츠
 const BLUE = '62,139,255';  // 광고
 
-/* 크로스헤어 백분율(위 코너 좌표와 동일 값 — 시각 요소끼리 정렬시키기 위해 리터럴로 재기입) */
-const DESK_CROSS = { top: 6.25, bottom: 93.75, left: 4.1667, right: 95.8333 };
-const MOB_CROSS = { top: 5, bottom: 95, left: 8.3333, right: 91.6667 };
+/* 크로스헤어 백분율(위 코너 좌표와 동일 값 — 원작과 같은 격자 선 교차점) */
+const DESK_CROSS = { top: 12.5, bottom: 87.5, left: 8.3333, right: 91.6667 };
+const MOB_CROSS = { top: 10, bottom: 90, left: 16.6667, right: 83.3333 };
 
 /** 폐곡선 위 파라미터 t(0~1)에 대응하는 좌표 */
 function ptOnLoop(t: number, c: Pt[]): Pt {
@@ -100,31 +100,6 @@ function GridLines({
           />
         );
       })}
-    </div>
-  );
-}
-
-/* ── 교차점 도트: content rect 내부(텍스트 아래)는 생략 — 정밀 인상 강화 ── */
-function GridDots({
-  cols, rows, r0, r1, c0, c1, mobile,
-}: { cols: number; rows: number; r0: number; r1: number; c0: number; c1: number; mobile?: boolean }) {
-  const pts: { top: number; left: number }[] = [];
-  for (let row = 0; row <= rows; row++) {
-    for (let col = 0; col <= cols; col++) {
-      const interior = row > r0 && row < r1 + 1 && col > c0 && col < c1 + 1;
-      if (interior) continue;
-      pts.push({ top: (row / rows) * 100, left: (col / cols) * 100 });
-    }
-  }
-  return (
-    <div className={`absolute inset-0 z-0 pointer-events-none ${mobile ? 'md:hidden' : 'hidden md:block'}`}>
-      {pts.map((p, i) => (
-        <span
-          key={i}
-          className="rounded-dot absolute bg-white/[0.14]"
-          style={{ top: `${p.top}%`, left: `${p.left}%`, width: 3, height: 3, marginTop: -1.5, marginLeft: -1.5 }}
-        />
-      ))}
     </div>
   );
 }
@@ -267,10 +242,6 @@ export default function HeroB() {
       {/* ── 격자 — 모바일 6×10 / 데스크톱 12×8 (원작 계승) ── */}
       <GridLines cols={M_COLS} rows={M_ROWS} r0={MC_R0} r1={MC_R1} c0={MC_C0} c1={MC_C1} mobile />
       <GridLines cols={D_COLS} rows={D_ROWS} r0={DC_R0} r1={DC_R1} c0={DC_C0} c1={DC_C1} />
-
-      {/* ── 교차점 도트 (강화 포인트 ②) ── */}
-      <GridDots cols={M_COLS} rows={M_ROWS} r0={MC_R0} r1={MC_R1} c0={MC_C0} c1={MC_C1} mobile />
-      <GridDots cols={D_COLS} rows={D_ROWS} r0={DC_R0} r1={DC_R1} c0={DC_C0} c1={DC_C1} />
 
       {/* ── 크로스헤어 — 빔 루프 코너와 동일 좌표(코너버스트가 여기서 터짐) ── */}
       <div className="absolute inset-0 z-[3] pointer-events-none md:hidden">

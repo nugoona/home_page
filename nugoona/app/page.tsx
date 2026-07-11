@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
-import HeroAurora from '@/components/home/HeroAurora';
+// 벽돌1 당선 = HeroB(빔 캔버스 진화 — 사장님 택1 2026-07-11). 구 HeroAurora는 원작 보존.
+import HeroB from '@/components/styles/bricks/HeroB';
 import ProductBranch from '@/components/home/ProductBranch';
 import Philosophy from '@/components/home/Philosophy';
 import StoryStep from '@/components/home/StoryStep';
@@ -42,7 +43,7 @@ export default function Home() {
       <OuterContainer>
         {/* S1 · 히어로 (사장님 작품 — 유지) */}
         <Section noBorder>
-          <HeroAurora />
+          <HeroB />
         </Section>
 
         {/* S2 · 두 제품 분기 (홈의 심장) */}
