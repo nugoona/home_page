@@ -1,16 +1,18 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 /* ═══════════════════════════════════════════════════════════════
-   콘텐츠 "장면" — 히어로 다음. 실제 앱 홈 스샷을 '그대로' 모바일폰 목업에 담고,
-   옆에 로고·카피·바로가기. 라이트 배경(히어로가 다크라 대비).
-   사장님 방향 2026-07-12: "다크 빼고 라이트 · 폰 캡 씌워 · PC버전 멘트 작게 옆에 · 바로가기 버튼".
+   콘텐츠 "장면" — 실제 아이폰 목업 PNG(Vecteezy, 화면·배경 투명)에 앱 홈 스샷을 끼움.
+   프레임은 위 레이어, 스샷은 화면 영역(측정: 4000px 기준 폰 bbox L1216 T442 R2761 B3539)에 배치.
+   사장님 방향 2026-07-12: "모바일 캡은 다운받아" → 실사 목업 사용.
    ═══════════════════════════════════════════════════════════════ */
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+/* 화면 영역(프레임 PNG 대비 %) — 베젤 안쪽. 렌더로 미세조정한 값. */
+const SCREEN = { left: 31.6, top: 12.0, width: 36.3, height: 75.6 };
 
 export default function PhoneScene() {
   return (
@@ -56,7 +58,7 @@ export default function PhoneScene() {
           </div>
         </motion.div>
 
-        {/* 우: 실제 앱 홈 스샷 — 모바일폰 목업(캡)에 담음, 페이드 없음 */}
+        {/* 우: 실제 아이폰 목업(프레임 PNG) + 화면에 앱 스샷 */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,82 +66,47 @@ export default function PhoneScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-end"
         >
-          {/* 폰 캡 — 아이폰 스타일 목업(다이나믹 아일랜드·사이드 버튼·티타늄 베젤). 실물이라 라운딩 예외 */}
-          <div
-            style={{
-              position: 'relative',
-              width: 272,
-              maxWidth: '100%',
-              padding: 11,
-              background: 'linear-gradient(145deg, #43434a 0%, #1c1c1f 42%, #101013 100%)',
-              borderRadius: 48,
-              boxShadow:
-                '0 44px 84px -26px rgba(0,0,0,0.42), 0 10px 24px rgba(0,0,0,0.14), inset 0 0 0 2px rgba(255,255,255,0.07), inset 0 1px 1px rgba(255,255,255,0.14)',
-            }}
-          >
-            {/* 사이드 버튼 — 좌: 무음/볼륨, 우: 전원 */}
-            <span style={{ position: 'absolute', left: -2.5, top: 96, width: 3, height: 26, background: '#26262a', borderRadius: 3 }} />
-            <span style={{ position: 'absolute', left: -2.5, top: 138, width: 3, height: 46, background: '#26262a', borderRadius: 3 }} />
-            <span style={{ position: 'absolute', left: -2.5, top: 196, width: 3, height: 46, background: '#26262a', borderRadius: 3 }} />
-            <span style={{ position: 'absolute', right: -2.5, top: 166, width: 3, height: 66, background: '#26262a', borderRadius: 3 }} />
-
-            {/* 스크린 */}
-            <div style={{ position: 'relative', borderRadius: 38, overflow: 'hidden', background: '#f2f3f5' }}>
-              {/* 상태바 — 실제 폰처럼 시간·신호·배터리 (스샷이 상태바 제거본이라 여기서 그림) */}
-              <div
-                style={{
-                  position: 'relative',
-                  height: 38,
-                  background: '#f2f3f5',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0 22px',
-                  zIndex: 2,
-                }}
-              >
-                <span style={{ fontSize: 12, fontWeight: 800, color: '#17171c', letterSpacing: '0.01em' }}>9:41</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-                  {/* 신호 */}
-                  <svg width="17" height="11" viewBox="0 0 17 11" fill="#17171c" aria-hidden>
-                    <rect x="0" y="7.5" width="3" height="3.5" rx="0.5" />
-                    <rect x="4.7" y="5" width="3" height="6" rx="0.5" />
-                    <rect x="9.3" y="2.5" width="3" height="8.5" rx="0.5" />
-                    <rect x="14" y="0" width="3" height="11" rx="0.5" />
-                  </svg>
-                  {/* 배터리 */}
-                  <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden>
-                    <rect x="0.5" y="0.5" width="20" height="11" rx="2.6" fill="none" stroke="#17171c" strokeOpacity="0.45" />
-                    <rect x="2" y="2" width="15" height="8" rx="1.3" fill="#17171c" />
-                    <rect x="21.5" y="4" width="2" height="4" rx="0.9" fill="#17171c" fillOpacity="0.45" />
-                  </svg>
-                </span>
-              </div>
-              <Image
+          <div style={{ position: 'relative', width: 300, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
+            {/* 화면 영역 = 앱 스샷 (프레임 아래 레이어) */}
+            <div
+              style={{
+                position: 'absolute',
+                left: `${SCREEN.left}%`,
+                top: `${SCREEN.top}%`,
+                width: `${SCREEN.width}%`,
+                height: `${SCREEN.height}%`,
+                overflow: 'hidden',
+                borderRadius: 22,
+                background: '#f2f3f5',
+                zIndex: 1,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/shots/content/app-home-mobile.jpg"
                 alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출"
-                width={1080}
-                height={2113}
                 style={{ display: 'block', width: '100%', height: 'auto' }}
-                priority
               />
-              {/* 다이나믹 아일랜드 */}
-              <span
-                style={{ position: 'absolute', top: 7, left: '50%', transform: 'translateX(-50%)', width: 82, height: 24, background: '#000', borderRadius: 999, zIndex: 3 }}
-              />
-              {/* 화면 앞 반사(유리 글레어) — 실사 퀄리티 */}
+              {/* 화면 앞 반사(유리 글레어) */}
               <span
                 aria-hidden
                 style={{
                   position: 'absolute',
                   inset: 0,
                   pointerEvents: 'none',
-                  zIndex: 4,
                   background:
-                    'linear-gradient(125deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.12) 13%, rgba(255,255,255,0) 33%, rgba(255,255,255,0) 82%, rgba(255,255,255,0.05) 100%)',
+                    'linear-gradient(125deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.10) 12%, rgba(255,255,255,0) 32%)',
                 }}
               />
             </div>
+            {/* 프레임 (위 레이어, 화면·배경 투명) */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/shots/content/phone-frame.png"
+              alt=""
+              aria-hidden
+              style={{ position: 'relative', display: 'block', width: '100%', height: 'auto', zIndex: 2 }}
+            />
           </div>
         </motion.div>
       </div>
