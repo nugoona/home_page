@@ -39,39 +39,59 @@ export const metadata: Metadata = {
     '광고는 멈추면 사라지지만, 꾸준히 쌓은 글은 검색에 남아 스토어를 계속 보이게 합니다. 그 꾸준함을, 누구나 콘텐츠가 대신합니다.',
 };
 
-/* ── 3기둥 미니 라인아트 (§8.7-I: 텍스트-온리 카드 금지 — S9/S11/S12 문법의 미니어처, 직각선·끝 accent 점) ── */
+/* ── 3기둥 미니 다이어그램 (§8.7-I + 사내 목업 기준 = /ads DataPipelineVisual 문법:
+      노드 = 보더 박스+컬러 점+실제 라벨 / 엣지 = 직각 엘보+흐르는 도트(SMIL — 서버 컴포넌트에서도 동작) ── */
 function MiniFanout() {
+  const edges = ['M56 48H92', 'M92 48V18H128', 'M92 48H128', 'M92 48V78H128'];
   return (
     <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
-      <rect x="14" y="30" width="36" height="36" fill="#e9ecef" />
-      <path d="M20 58l9-8 7 5 6-6 12 9" fill="none" stroke="#b7bec6" strokeWidth="1.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
-      <circle cx="27" cy="41" r="2.5" fill="none" stroke="#b7bec6" strokeWidth="1.5" />
-      <path d="M50 48H92" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <path d="M92 48V18H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <path d="M92 48H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <path d="M92 48V78H150" fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <defs>
+        <path id="mf1" d="M56 48H92V18H128" />
+        <path id="mf2" d="M56 48H128" />
+        <path id="mf3" d="M56 48H92V78H128" />
+      </defs>
+      {/* 소스 노드: 사진 */}
+      <rect x="14" y="32" width="42" height="32" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+      <path d="M20 56l8-7 6 4 5-5 11 8" fill="none" stroke="#b7bec6" strokeWidth="1.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" />
+      <circle cx="26" cy="41" r="2.2" fill="none" stroke="#b7bec6" strokeWidth="1.5" />
+      {edges.map((d) => <path key={d} d={d} fill="none" stroke="#c9c9c9" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />)}
       <circle cx="92" cy="48" r="3" fill="#0070f3" />
-      <circle cx="156" cy="18" r="4" fill="#03c75a" />
-      <rect x="168" y="14" width="38" height="8" fill="#f0f0f0" />
-      <circle cx="156" cy="48" r="4" fill="#e1306c" />
-      <rect x="168" y="44" width="30" height="8" fill="#f0f0f0" />
-      <circle cx="156" cy="78" r="4" fill="#1877f2" />
-      <rect x="168" y="74" width="34" height="8" fill="#f0f0f0" />
+      {/* 채널 노드: 보더 박스 + 컬러 점 + 라벨 */}
+      {[["#03c75a", '블로그', 18], ['#e1306c', '인스타그램', 48], ['#1877f2', '페이스북', 78]].map(([c, label, y]) => (
+        <g key={label as string}>
+          <rect x={128} y={(y as number) - 11} width="78" height="22" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          <circle cx={140} cy={y as number} r="3.2" fill={c as string} />
+          <text x={149} y={(y as number) + 3.5} fontSize="10" fontWeight="600" fill="#333">{label}</text>
+        </g>
+      ))}
+      {/* 흐르는 도트 (파이프라인 문법) */}
+      {['mf1', 'mf2', 'mf3'].map((id, i) => (
+        <circle key={id} r="2.4" fill="#0070f3">
+          <animateMotion dur={`${2.2 + i * 0.3}s`} repeatCount="indefinite" begin={`${i * 0.4}s`}>
+            <mpath href={`#${id}`} />
+          </animateMotion>
+        </circle>
+      ))}
     </svg>
   );
 }
 function MiniNews() {
   return (
     <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
-      <circle cx="20" cy="18" r="4" fill="#03c75a" />
-      <rect x="32" y="13" width="92" height="10" fill="#171717" />
-      <rect x="132" y="15" width="44" height="6" fill="#eaeaea" />
-      <path d="M20 26V56H44" fill="none" stroke="rgba(0,112,243,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <circle cx="47" cy="56" r="3" fill="#0070f3" />
-      <rect x="58" y="40" width="148" height="42" fill="none" stroke="#eaeaea" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <text x="68" y="62" fontSize="20" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
-      <rect x="84" y="52" width="100" height="7" fill="#f0f0f0" />
-      <rect x="84" y="64" width="72" height="7" fill="#f0f0f0" />
+      <defs><path id="mn1" d="M24 30V56H56" /></defs>
+      {/* 소식 노드 */}
+      <rect x="12" y="8" width="122" height="22" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+      <circle cx="24" cy="19" r="3.2" fill="#03c75a" />
+      <text x="33" y="22.5" fontSize="10" fontWeight="600" fill="#333">플레이스 노출 소식</text>
+      {/* 엣지 + 도트 */}
+      <path d="M24 30V56H56" fill="none" stroke="rgba(0,112,243,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <circle cx="56" cy="56" r="3" fill="#0070f3" />
+      <circle r="2.4" fill="#0070f3"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#mn1" /></animateMotion></circle>
+      {/* 글 노드 */}
+      <rect x="64" y="40" width="142" height="42" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+      <text x="72" y="60" fontSize="16" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
+      <text x="84" y="58" fontSize="9" fill="#555">다음 글에 자동 반영</text>
+      <rect x="84" y="64" width="96" height="6" fill="#f0f0f0" />
     </svg>
   );
 }
@@ -83,8 +103,17 @@ function MiniMap() {
       <rect x="138" y="38" width="34" height="20" fill="#f6f6f6" />
       <path d="M94 48V30" stroke="#0070f3" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       <rect x="87" y="16" width="14" height="14" fill="#0070f3" />
-      <circle cx="152" cy="76" r="4" fill="#03c75a" />
-      <circle cx="168" cy="76" r="4" fill="#4285f4" />
+      {/* 채널 노드: 점+라벨 (파이프라인 문법 — 라벨 없는 점 금지) */}
+      <g>
+        <rect x="108" y="70" width="52" height="18" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        <circle cx="118" cy="79" r="3" fill="#03c75a" />
+        <text x="125" y="82.5" fontSize="9" fontWeight="600" fill="#333">네이버</text>
+      </g>
+      <g>
+        <rect x="164" y="70" width="46" height="18" fill="#fff" stroke="#c9cdd2" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        <circle cx="174" cy="79" r="3" fill="#4285f4" />
+        <text x="181" y="82.5" fontSize="9" fontWeight="600" fill="#333">구글</text>
+      </g>
     </svg>
   );
 }

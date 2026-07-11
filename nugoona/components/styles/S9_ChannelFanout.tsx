@@ -24,8 +24,18 @@ const BORDER = '#eaeaea';
 // SSR에서 useLayoutEffect 경고를 피한다 (클라이언트 전용 측정 훅)
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
-function Dot({ c }: { c: string }) {
-  return <span className="inline-block w-1.5 h-1.5 rounded-dot shrink-0" style={{ background: c }} />;
+/* pulse=true면 도착 순간 badgePulse 1회(무한반복 아님) — 3막, 발행 완료 느낌 */
+function Dot({ c, pulse, delay = 0 }: { c: string; pulse?: boolean; delay?: number }) {
+  return (
+    <span
+      className="inline-block w-1.5 h-1.5 rounded-dot shrink-0"
+      style={{
+        background: c,
+        color: `${c}66`,
+        animation: pulse ? `badgePulse 0.6s ease-in-out ${delay}s 1` : undefined,
+      }}
+    />
+  );
 }
 
 /* 원재료 실사 4장(M-7: 빈 회색 박스 → 실사 — 팬케이크/프렌치토스트/브런치토스트/디저트) */
@@ -60,15 +70,21 @@ function MobileTick() {
   );
 }
 
-/* 데스크 직각 fan-out — 실측 y좌표(ys)로 그린다. 굵기 균일(non-scaling-stroke), 화살표 없이 끝 점 */
+/* 데스크 직각 fan-out — 실측 y좌표(ys)로 그린다. 굵기 균일(non-scaling-stroke), 화살표 없이 끝 점
+   2막 연출: 선이 그려진 뒤, 소스→각 채널 경로를 accent 도트가 한 번 흘러가며(animateMotion) 발행을 체감시킨다. */
 function FanOutSVG({ inView, h, w, ys }: { inView: boolean; h: number; w: number; ys: number[] }) {
   const stem = { duration: 0.35, ease: EASE } as const;
   const S = { stroke: ACCENT, strokeWidth: 1.5, strokeOpacity: 0.5, vectorEffect: 'non-scaling-stroke' as const };
   const branchX = w * 0.46;
   const midY = h / 2;
+  // 도트가 흐를 전체 경로(소스 → 분배점 → 각 채널). 라인 드로잉이 끝나갈 무렵부터 흐르기 시작.
+  const flowPath = (y: number) => `M0,${midY}H${branchX}V${y}H${w}`;
   return (
     <>
       <svg className="absolute inset-0 w-full h-full" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" fill="none">
+        <defs>
+          {ys.map((y, i) => <path key={i} id={`s9-flow-${i}`} d={flowPath(y)} />)}
+        </defs>
         {/* 줄기: 좌 업로드 박스 → 분배점 */}
         <motion.line x1={0} y1={midY} x2={branchX} y2={midY} {...S}
           initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ ...stem, delay: 0.3 }} />
@@ -79,6 +95,14 @@ function FanOutSVG({ inView, h, w, ys }: { inView: boolean; h: number; w: number
         {ys.map((y, i) => (
           <motion.line key={i} x1={branchX} y1={y} x2={w} y2={y} {...S}
             initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ ...stem, delay: 0.62 + i * 0.08 }} />
+        ))}
+        {/* 흐르는 도트 — 소스에서 각 채널로, 라인이 그려진 직후 순차적으로 1회 흐름 */}
+        {inView && ys.map((_, i) => (
+          <circle key={`flow${i}`} r="3" fill={ACCENT}>
+            <animateMotion dur="0.55s" begin={`${0.85 + i * 0.1}s`} fill="freeze" repeatCount="1">
+              <mpath href={`#s9-flow-${i}`} />
+            </animateMotion>
+          </circle>
         ))}
       </svg>
       {/* 가지 끝 accent 점 — CSS 원(왜곡 없음), 실측 y(px) 그대로 사용 */}
@@ -148,18 +172,29 @@ export default function S9_ChannelFanout() {
 
       {/* 시각화 */}
       <div className="flex flex-col md:flex-row md:items-stretch gap-0">
-        {/* 좌: 업로드 사진 4칸 */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="shrink-0 md:self-center max-md:w-full"
-        >
+        {/* 좌: 업로드 사진 4칸 — 1막, 개별 스태거 팝 */}
+        <div className="shrink-0 md:self-center max-md:w-full">
           <div className="grid grid-cols-2 gap-1 p-2 border bg-white max-md:w-full max-md:gap-2" style={{ borderColor: BORDER }}>
-            {PHOTOS.map((src) => <PhotoSlot key={src} src={src} />)}
+            {PHOTOS.map((src, i) => (
+              <motion.div
+                key={src}
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, ease: EASE, delay: i * 0.08 }}
+              >
+                <PhotoSlot src={src} />
+              </motion.div>
+            ))}
           </div>
-          <p className="text-[10.5px] mt-1.5 text-text-weak text-center">오늘 올린 이야기 하나</p>
-        </motion.div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, ease: EASE, delay: 0.4 }}
+            className="text-[10.5px] mt-1.5 text-text-weak text-center"
+          >
+            오늘 올린 이야기 하나
+          </motion.p>
+        </div>
 
         {/* 데스크 커넥터 트랙 — fan-out 선(실측 좌표) */}
         <div ref={trackRef} className="hidden md:block relative w-20 shrink-0 self-stretch">
@@ -170,36 +205,45 @@ export default function S9_ChannelFanout() {
         <div className="flex flex-col gap-3 min-w-0 max-md:relative max-md:pl-7 max-md:mt-4">
           {/* 모바일 세로 축(spine) */}
           <span aria-hidden className="md:hidden absolute w-[1.5px]" style={{ left: '6px', top: '4px', bottom: '20px', background: 'rgba(0,112,243,0.5)' }} />
-          {ROWS.map((row, i) => (
-            <div
-              key={row.ch}
-              ref={(el) => { rowRefs.current[i] = el; }}
-              className="relative flex items-start gap-2"
-            >
-              <MobileTick />
-              <Dot c={row.c} />
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] max-md:text-[12px] font-semibold text-text-primary">{row.ch}</span>
-                  <span className="text-[9.5px] px-1.5 py-0.5 border text-text-weak" style={{ ...EN, borderColor: '#eaeaea' }}>{row.form}</span>
-                </div>
-                <motion.p
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, ease: EASE, delay: 0.55 + i * 0.1 }}
-                  className="text-[13px] max-md:text-[16px] max-md:font-medium text-text-body mt-0.5"
+          {ROWS.map((row, i) => {
+            // 3막: 채널 행 순차 등장(스태거 0.15) — 도트가 해당 채널에 도착하는 타이밍(0.85+i*0.1+0.55)에 맞춰 점이 badgePulse
+            // ⚠ 이 div는 fan-out 선의 실측 기준(rowRefs)이다 — transform(y)을 걸면 측정 시점에 위치가 어긋난다.
+            //   그래서 정적 컨테이너는 그대로 두고, 안쪽 콘텐츠만 opacity로 순차 등장시킨다(레이아웃에 영향 없음).
+            const rowDelay = 1.1 + i * 0.15;
+            const dotArrival = 0.85 + i * 0.1 + 0.55;
+            return (
+              <div
+                key={row.ch}
+                ref={(el) => { rowRefs.current[i] = el; }}
+                className="relative flex items-start gap-2"
+              >
+                <MobileTick />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.4, ease: EASE, delay: rowDelay }}
+                  className="flex items-start gap-2"
                 >
-                  {row.body as ReactNode}
-                </motion.p>
+                  <Dot c={row.c} pulse={inView} delay={dotArrival} />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] max-md:text-[12px] font-semibold text-text-primary">{row.ch}</span>
+                      <span className="text-[9.5px] px-1.5 py-0.5 border text-text-weak" style={{ ...EN, borderColor: '#eaeaea' }}>{row.form}</span>
+                    </div>
+                    <p className="text-[13px] max-md:text-[16px] max-md:font-medium text-text-body mt-0.5">
+                      {row.body as ReactNode}
+                    </p>
+                  </div>
+                </motion.div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, ease: EASE, delay: 1.0 }}
+        transition={{ duration: 0.4, ease: EASE, delay: 1.7 }}
         className="mt-5 text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak"
       >
         이야기는 하나 — 채널마다 그 채널의 형식으로 다시 씁니다.

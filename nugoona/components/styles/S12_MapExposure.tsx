@@ -37,7 +37,7 @@ function Chrome({ url }: { url?: string }) {
 
 /* 미니 지도 — 직각 도로망(브랜드 문법과 일치). 색면 칠하지 않고 핀으로만 강조.
    M-8: '지도'로 읽히도록 도로 위계(간선 1개 굵게 + 지선 3개)와 도시 블록 면을 더한다. */
-function MiniMap() {
+function MiniMap({ inView, delay }: { inView: boolean; delay: number }) {
   // 간선 1개 — 아래쪽 가로 도로를 굵게(strokeWidth 6)
   const mainRoad = { x1: 0, y1: 82, x2: 112, y2: 82 };
   const mainRoadStyle = { stroke: '#fff', strokeWidth: 6, strokeLinecap: 'butt' as const };
@@ -70,11 +70,16 @@ function MiniMap() {
         <circle cx="98" cy="12" r="1.8" fill="#c3c8ce" />
         <circle cx="16" cy="52" r="1.8" fill="#c3c8ce" />
       </svg>
-      {/* 우리 가게 핀 */}
-      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+      {/* 우리 가게 핀 — 도착 순간 드롭(y -8→0 + 스케일) */}
+      <motion.span
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center"
+        initial={{ opacity: 0, y: -8, scale: 0.6 }}
+        animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+        transition={{ duration: 0.32, ease: EASE, delay }}
+      >
         <span className="absolute w-5 h-5 rounded-dot" style={{ background: ACCENT, opacity: 0.14 }} />
         <span className="relative w-2.5 h-2.5 rounded-dot" style={{ background: ACCENT, boxShadow: '0 0 0 2px #fff' }} />
-      </span>
+      </motion.span>
     </div>
   );
 }
@@ -83,8 +88,8 @@ function MiniMap() {
    minimal(구글) = 가게명만(글자 0 수준). quote 있으면(네이버) 인용 1줄 + 채널 라벨까지만.
    M-8: 카드 상단(Chrome 아래)에 채널 헤더(점+라벨 12px)를 두어 두 카드의 채널 구분을 명확히 한다. */
 function ResultWindow({
-  url, dot, headerLabel, channel, quote, inView, delay, minimal,
-}: { url?: string; dot: string; headerLabel: string; channel?: string; quote?: string; inView: boolean; delay: number; minimal?: boolean }) {
+  url, dot, headerLabel, channel, quote, inView, delay, arrivalDelay, minimal,
+}: { url?: string; dot: string; headerLabel: string; channel?: string; quote?: string; inView: boolean; delay: number; arrivalDelay: number; minimal?: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 14 }} animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -93,13 +98,16 @@ function ResultWindow({
       style={{ borderColor: '#eaeaea' }}
     >
       <Chrome url={minimal ? undefined : url} />
-      {/* 채널 헤더 */}
+      {/* 채널 헤더 — 도트 흐름 도착 순간 badgePulse 1회 */}
       <div className="flex items-center gap-1.5 px-3 pt-2.5">
-        <span className="rounded-dot w-1.5 h-1.5 shrink-0" style={{ background: dot }} />
+        <span
+          className="rounded-dot w-1.5 h-1.5 shrink-0"
+          style={{ background: dot, color: `${dot}66`, animation: inView ? `badgePulse 0.6s ease-in-out ${arrivalDelay}s 1` : undefined }}
+        />
         <span className="text-[12px] font-semibold text-text-primary">{headerLabel}</span>
       </div>
       <div className="flex items-stretch flex-1 min-h-0">
-        <MiniMap />
+        <MiniMap inView={inView} delay={arrivalDelay + 0.1} />
         <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
           <div className="flex items-center gap-1.5">
             <span className="rounded-dot w-1.5 h-1.5 shrink-0" style={{ background: dot }} />
@@ -124,12 +132,20 @@ function ResultWindow({
    창 중심 비율은 25%/75%가 아니라 (h/2)/(2h+g), (h+g+h/2)/(2h+g) = 24%/76%다(실측 확인).
    그래서 두 창 높이를 md:h-[140px]로 고정해 이 비율을 안정시킨다. */
 const BRANCH_Y = [48, 152] as const; // = 200 × 24% / 76%
+// 도트 흐름(도착 시각) — 선이 다 그려진 뒤 시작해 각 창에 순차 도착. ResultWindow의 badgePulse·MiniMap 핀드롭과 동기.
+const FLOW_BEGIN = [1.0, 1.1] as const;
+const FLOW_DUR = 0.4;
+const FLOW_ARRIVAL = FLOW_BEGIN.map((b) => b + FLOW_DUR); // [1.4, 1.5]
 
 function Fork({ inView }: { inView: boolean }) {
   const S = { stroke: ACCENT, strokeWidth: 1.5, strokeOpacity: 0.5, vectorEffect: 'non-scaling-stroke' as const };
   const stem = { duration: 0.32, ease: EASE } as const;
+  const flowPath = (y: number) => `M0,100H30V${y}H64`;
   return (
     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 64 200" preserveAspectRatio="none" fill="none">
+      <defs>
+        {BRANCH_Y.map((y, i) => <path key={i} id={`s12-flow-${i}`} d={flowPath(y)} />)}
+      </defs>
       <motion.line x1="0" y1="100" x2="30" y2="100" {...S}
         initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ ...stem, delay: 0.3 }} />
       <motion.line x1="30" y1={BRANCH_Y[0]} x2="30" y2={BRANCH_Y[1]} {...S}
@@ -137,6 +153,14 @@ function Fork({ inView }: { inView: boolean }) {
       {BRANCH_Y.map((y, i) => (
         <motion.line key={y} x1="30" y1={y} x2="64" y2={y} {...S}
           initial={{ pathLength: 0 }} animate={inView ? { pathLength: 1 } : {}} transition={{ ...stem, delay: 0.58 + i * 0.07 }} />
+      ))}
+      {/* 흐르는 도트 — 글 하나가 두 채널로 각각 도착하는 순간 */}
+      {inView && BRANCH_Y.map((_, i) => (
+        <circle key={`flow${i}`} r="3" fill={ACCENT}>
+          <animateMotion dur={`${FLOW_DUR}s`} begin={`${FLOW_BEGIN[i]}s`} fill="freeze" repeatCount="1">
+            <mpath href={`#s12-flow-${i}`} />
+          </animateMotion>
+        </circle>
       ))}
     </svg>
   );
@@ -171,7 +195,12 @@ export default function S12_MapExposure() {
               성수동 골목에서 제철 딸기로 여는 아침
             </div>
             <div className="flex items-center gap-1.5 pt-2 border-t" style={{ borderColor: '#f2f2f2' }}>
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={ACCENT} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 6.5l2.5 2.5 4.5-5.5" /></svg>
+              <motion.svg
+                width="11" height="11" viewBox="0 0 12 12" fill="none" stroke={ACCENT} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+                initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 0.25, ease: EASE, delay: 0.55 }}
+              >
+                <path d="M2.5 6.5l2.5 2.5 4.5-5.5" />
+              </motion.svg>
               <span className="text-[10px] font-semibold" style={{ ...EN, color: ACCENT }}>발행됨</span>
             </div>
           </div>
@@ -186,7 +215,7 @@ export default function S12_MapExposure() {
               className="absolute right-0 translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-dot"
               style={{ top: `${(y / 200) * 100}%`, background: ACCENT }}
               initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}}
-              transition={{ duration: 0.22, ease: EASE, delay: 0.76 + i * 0.07 }}
+              transition={{ duration: 0.22, ease: EASE, delay: FLOW_ARRIVAL[i] }}
             />
           ))}
         </div>
@@ -207,17 +236,17 @@ export default function S12_MapExposure() {
         <div className="flex-1 md:max-w-[400px] flex flex-col gap-3 min-w-0">
           <ResultWindow
             url="map.naver.com" dot="#03c75a" headerLabel="네이버 플레이스" channel="네이버 플레이스 소식"
-            quote="제철 딸기 팬케이크를 시작했어요." inView={inView} delay={0.62}
+            quote="제철 딸기 팬케이크를 시작했어요." inView={inView} delay={0.62} arrivalDelay={FLOW_ARRIVAL[0]}
           />
           <ResultWindow
             dot="#4285f4" headerLabel="Google 비즈니스" minimal
-            inView={inView} delay={0.74}
+            inView={inView} delay={0.74} arrivalDelay={FLOW_ARRIVAL[1]}
           />
         </div>
       </div>
 
       <motion.p
-        initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 1 }}
+        initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.4, ease: EASE, delay: 1.7 }}
         className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak leading-[1.65] mt-6 max-w-[900px]"
       >
         채널은 <span className="font-medium text-text-body">처음 한 번만 연결</span>합니다. 네이버 연결은 담당자가 함께 진행해 드립니다.

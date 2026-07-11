@@ -30,11 +30,11 @@ export default function ProductBranch() {
           <FadeUp key={c.href} delay={i * 0.1}>
             <Link
               href={c.href}
-              className="group flex flex-col h-full border border-border-default bg-white overflow-hidden transition-all duration-300 hover:border-border-hover hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]"
+              className="group flex flex-col h-full border border-border-default bg-white overflow-hidden transition-all duration-300 hover:border-border-hover hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)]"
             >
               {/* 미니 목업 (상단 크롭) */}
               <div className="relative h-[248px] overflow-hidden bg-bg-alt border-b border-border-default max-md:h-[220px]">
-                <div className="absolute left-6 right-6 top-7 transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="absolute left-6 right-6 top-7 transition-transform duration-300 ease-out group-hover:-translate-y-2">
                   {c.mock === 'search' ? (
                     <SearchResultMock />
                   ) : (

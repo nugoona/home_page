@@ -119,11 +119,20 @@ export default function S13_Onboarding() {
             );
           })}
           <motion.div
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            initial={{ opacity: 0, y: 8 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, ease: EASE, delay: buttonDelay }}
             className="px-4 py-3 flex justify-end"
           >
-            <button className="w-[60%] h-9 text-[13px] max-md:text-[14px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
+            {/* 채워지는 판이 눈앞에서 완성된 뒤 마지막 확인 — hover/tap에 눌리는 느낌 */}
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.15, ease: EASE }}
+              className="w-[60%] h-9 text-[13px] max-md:text-[14px] font-semibold text-white"
+              style={{ background: ACCENT }}
+            >
+              네, 맞아요
+            </motion.button>
           </motion.div>
         </div>
       </div>

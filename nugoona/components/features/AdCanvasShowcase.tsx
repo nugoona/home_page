@@ -93,6 +93,7 @@ const URLS = [
 function Step01_UrlInput({ isActive }: { isActive: boolean }) {
   const [status, setStatus] = useState<'idle' | 'typing' | 'analyzing' | 'done'>('idle');
   const [typed, setTyped] = useState('');
+  const [checkIdx, setCheckIdx] = useState(0);
   const url = 'https://myshop.cafe24.com/product/12345';
   const started = useRef(false);
 
@@ -111,10 +112,20 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
     return () => { clearInterval(typeId); clearTimeout(t1); clearTimeout(t2); };
   }, [isActive]);
 
+  // 분석 단계 체크리스트 — "일이 되어가는 과정"이 눈에 보이도록 500ms 간격 순차 체크
+  useEffect(() => {
+    if (status !== 'analyzing') { setCheckIdx(0); return; }
+    const s1 = setTimeout(() => setCheckIdx(1), 500);
+    const s2 = setTimeout(() => setCheckIdx(2), 1000);
+    const s3 = setTimeout(() => setCheckIdx(3), 1500);
+    return () => { clearTimeout(s1); clearTimeout(s2); clearTimeout(s3); };
+  }, [status]);
+
+  const checklist = ['이미지 추출', '광고 문구 작성', '타깃 설정'];
   const tags = ['2030 여성', '휴양지룩', '패션', '시즌'];
 
   return (
-    <div style={{ width: '100%', position: 'relative', minHeight: 340 }}>
+    <div style={{ width: '100%', position: 'relative', minHeight: 400 }}>
       {/* === Typing Phase === */}
       <motion.div
         animate={{ opacity: status === 'typing' ? 1 : 0, scale: status === 'typing' ? 1 : 0.95 }}
@@ -139,20 +150,34 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
         </div>
       </motion.div>
 
-      {/* === Analyzing Phase — SVG circular spinner (immune to border-radius reset) === */}
+      {/* === Analyzing Phase — 체크리스트로 "일이 되어가는 과정"을 눈에 보이게 (스피너 단독 → progress) === */}
       <motion.div
         animate={{ opacity: status === 'analyzing' ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', pointerEvents: status === 'analyzing' ? 'auto' : 'none' }}
       >
-        <svg width="40" height="40" viewBox="0 0 40 40" style={{ animation: 'spin 0.9s linear infinite', marginBottom: 20 }}>
-          <circle cx="20" cy="20" r="17" fill="none" stroke="#eaeaea" strokeWidth="2.5" />
-          <circle cx="20" cy="20" r="17" fill="none" stroke="#0070f3" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="80" strokeDashoffset="60" />
-        </svg>
-        <p style={{ fontSize: 14, fontWeight: 600, color: '#171717', marginBottom: 4 }}>AI Analyzing...</p>
-        <p style={{ fontSize: 13, color: '#999', textAlign: 'center' }}>
-          이미지 추출 및 카피 작성 중
-        </p>
+        <p style={{ fontSize: 14, fontWeight: 600, color: '#171717', marginBottom: 20 }}>AI가 광고를 만들고 있어요</p>
+        <div style={{ width: '100%', maxWidth: 240 }}>
+          {checklist.map((label, i) => {
+            const checked = checkIdx > i;
+            return (
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: i < checklist.length - 1 ? 12 : 0 }}>
+                <motion.div
+                  animate={checked ? { scale: [1, 1.2, 1], backgroundColor: '#0070f3', borderColor: '#0070f3' } : { scale: 1, backgroundColor: '#fff', borderColor: '#eaeaea' }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  style={{ width: 18, height: 18, border: '1px solid #eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+                >
+                  {checked && (
+                    <svg style={{ width: 10, height: 10 }} viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="2.5">
+                      <path d="M3 8l4 4 6-7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </motion.div>
+                <span style={{ fontSize: 13, fontWeight: checked ? 600 : 400, color: checked ? '#171717' : '#999', transition: 'color 0.3s' }}>{label}</span>
+              </div>
+            );
+          })}
+        </div>
       </motion.div>
 
       {/* === Done Phase — Pop + Slide Tags === */}
@@ -161,40 +186,49 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
         transition={{ duration: 0.3 }}
         style={{ position: 'absolute', inset: 0, display: 'flex', gap: 20, padding: 24, pointerEvents: status === 'done' ? 'auto' : 'none' }}
       >
-        {/* Image card — spring pop from below */}
+        {/* Instagram 피드 포스트 실물 미니어처 — "4:5 이미지+카피 카드"였던 결말을 타깃이 매일 보는 실물 화면으로 교체.
+            스케일 팝으로 "게시되는" 순간을 연출 (§8.7-I 재설계) */}
         <motion.div
-          animate={status === 'done' ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          animate={status === 'done' ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.92 }}
           transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
-          style={{ width: '50%', display: 'flex', flexDirection: 'column' }}
+          style={{ width: '54%', flexShrink: 0, border: '1px solid #eaeaea', background: '#fff', display: 'flex', flexDirection: 'column' }}
         >
-          <div style={{ flex: 1, border: '1px solid #eaeaea', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-            {/* L1(§감독관2차): 연블루 플레이스홀더 → 실사 크롭(4:5, object-cover). "린넨 원피스" 카피와 매칭되는 화이트 플로럴 랩 원피스 */}
+          {/* 프로필 행 — 아바타 + 상호 + Sponsored */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px' }}>
+            <span className="rounded-dot" style={{ width: 24, height: 24, background: '#0070f3', color: '#fff', fontSize: 11, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, ...EN }}>M</span>
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#171717', ...EN }}>myshop_official</span>
+              <span style={{ fontSize: 9, color: '#999', ...EN }}>Sponsored</span>
+            </div>
+            <span style={{ fontSize: 12, color: '#999', letterSpacing: 1 }}>···</span>
+          </div>
+
+          {/* 정사각 상품 실사 — L1(§감독관2차): "린넨 원피스" 카피와 매칭되는 화이트 플로럴 랩 원피스 */}
+          <div style={{ aspectRatio: '1/1', position: 'relative', overflow: 'hidden', background: '#fafafa' }}>
             <img src={U('photo-1496747611176-843222e1e57c')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-            <motion.div
-              animate={status === 'done' ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.5 }}
-              style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', background: '#22c55e', color: '#fff', fontSize: 11, padding: '6px 12px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}
-            >
-              <svg style={{ width: 14, height: 14 }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 8l4 4 6-7" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              생성 완료
-            </motion.div>
           </div>
-          <div style={{ marginTop: 8 }}>
-            <div style={{ height: 8, background: '#f5f5f5', width: '75%', marginBottom: 4 }} />
-            <div style={{ height: 8, background: '#f5f5f5', width: '50%' }} />
+
+          {/* 좋아요·댓글·공유 아이콘 행 (직각 이음선 문법 — 곡선 라운드 없음) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '8px 10px 2px' }}>
+            <svg style={{ width: 16, height: 16 }} viewBox="0 0 16 16" fill="none" stroke="#171717" strokeWidth="1.4">
+              <path d="M8 13.5S2.5 10.2 2.5 6.3A3.3 3.3 0 018 4.2a3.3 3.3 0 015.5 2.1c0 3.9-5.5 7.2-5.5 7.2z" strokeLinejoin="round" strokeLinecap="round" />
+            </svg>
+            <svg style={{ width: 16, height: 16 }} viewBox="0 0 16 16" fill="none" stroke="#171717" strokeWidth="1.4">
+              <path d="M2 3h12v7H6l-3 3V10H2V3z" strokeLinejoin="round" strokeLinecap="round" />
+            </svg>
+            <svg style={{ width: 16, height: 16 }} viewBox="0 0 16 16" fill="none" stroke="#171717" strokeWidth="1.4">
+              <path d="M2 8l12-5-4 12-2.5-5L2 8z" strokeLinejoin="round" strokeLinecap="round" />
+            </svg>
           </div>
+          <p style={{ fontSize: 11, fontWeight: 700, color: '#171717', padding: '2px 10px 0', ...EN }}>좋아요 1,248개</p>
+          <p style={{ fontSize: 11, color: '#171717', padding: '4px 10px 10px', lineHeight: 1.4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            <span style={{ fontWeight: 700, marginRight: 4, ...EN }}>myshop_official</span>
+            올여름 가장 시원한 선택. 린넨 원피스 얼리버드 30% 할인
+          </p>
         </motion.div>
 
-        {/* Right info — staggered spring pop */}
-        <div style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <motion.div
-            animate={status === 'done' ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-            style={{ border: '1px solid #eaeaea', padding: 16 }}
-          >
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#0070f3', marginBottom: 6, ...EN }}>AI Copywriting</p>
-            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.65 }}>&quot;올여름 가장 시원한 선택. 린넨 원피스 얼리버드 30% 할인&quot;</p>
-          </motion.div>
+        {/* Right info — staggered spring pop (Targeting + 게시 버튼) */}
+        <div style={{ width: '46%', display: 'flex', flexDirection: 'column', gap: 12 }}>
           <motion.div
             animate={status === 'done' ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.5, ease: EASE, delay: 0.45 }}
@@ -232,13 +266,31 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
    STEP 02 — Meta Catalog
    Stagger Cards + Pulse Badges + Shimmer
    ================================================================ */
+/* 마이샵(여성의류) 4개 상품 — 상품명·서사는 Read로 확인한 실사 내용에 맞춤(TrendShowcase.tsx 감독관2차 확인분과 동일 사진 재사용) */
+const CATALOG_PRODUCTS = {
+  shirt: { name: '샴브레이 셔츠', price: '₩52,000', img: U('photo-1558171813-4c088753af8f') },
+  dress: { name: '플로럴 랩 원피스', price: '₩39,000', img: U('photo-1496747611176-843222e1e57c') },
+  denim: { name: '디스트로이드 스키니 데님', price: '₩58,000', img: U('photo-1541099649105-f69ad21f3246') },
+  knit: { name: '크림 프린지 니트', price: '₩45,000', img: U('photo-1434389677669-e08b4cac3105') },
+} as const;
+type CatalogId = keyof typeof CATALOG_PRODUCTS;
+
 function Step02_Catalog({ isActive }: { isActive: boolean }) {
-  const products = [
-    { name: '플로럴 원피스', price: '₩39,000', badge: 'NEW', color: '#0070f3', img: U('photo-1496747611176-843222e1e57c') },
-    { name: '린넨 셔츠', price: '₩52,000', badge: 'TOP', color: '#22c55e', img: U('photo-1558171813-4c088753af8f') },
-    { name: '스트레이트 데님 팬츠', price: '₩28,000', badge: null, color: '', img: U('photo-1525507119028-ed4c629a60a3') },
-    { name: '그린 크루넥 니트', price: '₩45,000', badge: 'AUTO', color: '#666', img: U('photo-1523381210434-271e8be1f52b') },
-  ];
+  const [swapped, setSwapped] = useState(false);
+  const [postId, setPostId] = useState<CatalogId>('shirt');
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!isActive || started.current) return;
+    started.current = true;
+    // 2위(dress)가 1위(shirt)로 스왑되는 순위 변동 → 그 직후 광고 소재 이미지가 새 1위로 크로스페이드
+    const t1 = setTimeout(() => setSwapped(true), 2000);
+    const t2 = setTimeout(() => setPostId('dress'), 2350);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [isActive]);
+
+  // rank1(swapped 전=shirt) ↔ rank2(dress) 자리만 바뀜, 나머지는 고정
+  const order: CatalogId[] = swapped ? ['dress', 'shirt', 'denim', 'knit'] : ['shirt', 'dress', 'denim', 'knit'];
 
   return (
     <div style={{ width: '100%', padding: 24, display: 'flex', flexDirection: 'column' }}>
@@ -255,45 +307,68 @@ function Step02_Catalog({ isActive }: { isActive: boolean }) {
         <span style={{ fontSize: 10, color: '#999', ...EN }}>Connected</span>
       </motion.div>
 
-      {/* Product Grid — stagger pop */}
+      {/* Product Grid — stagger pop 진입 후, 2초 뒤 1·2위가 layout 애니메이션으로 자리를 바꾼다(순위 변동 연출) */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-        {products.map((p, i) => (
-          <motion.div
-            key={i}
-            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.2 + i * 0.15 }}
-            style={{ border: '1px solid #eaeaea', background: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}
-          >
-<div style={{ aspectRatio: '1/1', background: '#fafafa', position: 'relative', overflow: 'hidden' }}>
-              <img src={p.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              {p.badge && (
-                <span style={{
-                  position: 'absolute', top: 6, left: 6, fontSize: 8, fontWeight: 700, color: '#fff', padding: '2px 6px', background: p.color,
-                  animation: p.badge === 'AUTO' ? 'badgePulse 2s ease-in-out infinite' : undefined,
-                  ...EN,
-                }}>
-                  {p.badge}
-                </span>
-              )}
-            </div>
-            <div style={{ padding: 8 }}>
-              <p style={{ fontSize: 10, color: '#666' }}>{p.name}</p>
-              <p style={{ fontSize: 11, fontWeight: 600, color: '#171717', ...EN }}>{p.price}</p>
-            </div>
-          </motion.div>
-        ))}
+        {order.map((id, i) => {
+          const p = CATALOG_PRODUCTS[id];
+          const isBest = i === 0;
+          return (
+            <motion.div
+              key={id}
+              layout
+              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.2 + i * 0.15, layout: { duration: 0.6, ease: EASE } }}
+              style={{ border: '1px solid #eaeaea', background: '#fff', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}
+            >
+              <div style={{ aspectRatio: '1/1', background: '#fafafa', position: 'relative', overflow: 'hidden' }}>
+                <img src={p.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                {isBest && (
+                  <motion.span
+                    key="best-badge"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.4, ease: EASE }}
+                    style={{ position: 'absolute', top: 6, left: 6, fontSize: 8, fontWeight: 700, color: '#fff', padding: '2px 6px', background: '#0070f3', ...EN }}
+                  >
+                    BEST
+                  </motion.span>
+                )}
+              </div>
+              <div style={{ padding: 8 }}>
+                <p style={{ fontSize: 10, color: '#666' }}>{p.name}</p>
+                <p style={{ fontSize: 11, fontWeight: 600, color: '#171717', ...EN }}>{p.price}</p>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Sync bar */}
+      {/* 미니 인스타 포스트 — Step01 실물 문법(아바타·상호·Sponsored) 재사용, 컴팩트 가로형.
+          이미지가 새 1위 상품으로 크로스페이드 → 순위 변동→광고 교체의 인과가 한 화면에서 보인다 */}
       <motion.div
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5, ease: EASE, delay: 0.85 }}
-        style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '10px 0', background: '#fafafa', color: '#171717', fontSize: 11, fontWeight: 500, border: '1px solid #eaeaea' }}
+        style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 10, padding: 10, border: '1px solid #eaeaea', background: '#fff' }}
       >
-        <svg style={{ width: 14, height: 14, animation: 'spin 1s linear infinite' }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M14 8a6 6 0 01-6 6M2 8a6 6 0 016-6" strokeLinecap="round" />
-        </svg>
-        Meta 카탈로그 실시간 동기화 중...
+        <span className="rounded-dot" style={{ width: 22, height: 22, background: '#0070f3', color: '#fff', fontSize: 10, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, ...EN }}>M</span>
+        <div style={{ width: 44, height: 44, position: 'relative', overflow: 'hidden', flexShrink: 0, background: '#fafafa' }}>
+          {(['shirt', 'dress'] as CatalogId[]).map((id) => (
+            <motion.img
+              key={id}
+              src={CATALOG_PRODUCTS[id].img}
+              alt=""
+              animate={{ opacity: postId === id ? 1 : 0 }}
+              transition={{ duration: 0.5, ease: EASE }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          ))}
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontSize: 10, color: '#999', marginBottom: 2, ...EN }}>myshop_official · Sponsored</p>
+          <p style={{ fontSize: 12, fontWeight: 600, color: '#171717', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            베스트가 바뀌면, 광고 소재도 따라 바뀝니다
+          </p>
+        </div>
       </motion.div>
     </div>
   );
@@ -319,10 +394,22 @@ function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
 
   return (
     <div style={{ width: '100%', padding: 24, display: 'flex', flexDirection: 'column' }}>
+      {/* 검색창 — "검색했더니 내 광고가 나온" 맥락을 명확히 (감독관 보강 지시) */}
+      <motion.div
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+        transition={{ duration: 0.4, ease: EASE }}
+        style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 14px', border: '1px solid #eaeaea', marginBottom: 20 }}
+      >
+        <svg style={{ width: 14, height: 14, color: '#999', flexShrink: 0 }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <circle cx="7" cy="7" r="4" /><path d="M10 10l3.5 3.5" strokeLinecap="round" />
+        </svg>
+        <span style={{ fontSize: 13, color: '#171717', ...EN }}>여름 원피스</span>
+      </motion.div>
+
       {/* Ad Block 1 */}
       <motion.div
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.2 }}
         style={{ marginBottom: 20 }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>

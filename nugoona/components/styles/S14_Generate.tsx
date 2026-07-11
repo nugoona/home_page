@@ -47,54 +47,63 @@ export default function S14_Generate() {
       </motion.h3>
 
       <div className="flex flex-col md:flex-row gap-6 md:gap-10 max-w-[920px]">
-        {/* 좌: 기준 3단 — 과정(작게) */}
+        {/* 좌: 기준 3단 — 과정(작게), 0.3 간격으로 순차 점등 */}
         <div className="flex flex-col gap-3 shrink-0 max-w-[340px]">
-          {CRITERIA.map((c, i) => (
-            <motion.div
-              key={c.n}
-              initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, ease: EASE, delay: 0.25 + i * 0.15 }}
-              className="flex items-start gap-2.5"
-            >
-              <span className="inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white shrink-0" style={{ ...EN, background: '#171717' }}>
-                {c.n}
-              </span>
-              <div>
-                <p className={`text-[13px] max-md:text-[14px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
-                  {c.t}
-                  {i === 1 && (
-                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke={ACCENT} strokeWidth="1.8" className="shrink-0" aria-hidden>
-                      <circle cx="7" cy="7" r="4.5" /><path d="M11 11l3 3" strokeLinecap="round" />
-                    </svg>
-                  )}
-                </p>
-                <p className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak mt-0.5">{c.s}</p>
+          {CRITERIA.map((c, i) => {
+            const delay = 0.2 + i * 0.3;
+            return (
+              <div key={c.n} className="flex items-start gap-2.5">
+                <motion.span
+                  initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}}
+                  transition={{ duration: 0.25, ease: EASE, delay }}
+                  className="inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white shrink-0" style={{ ...EN, background: '#171717' }}
+                >
+                  {c.n}
+                </motion.span>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, ease: EASE, delay: delay + 0.05 }}
+                >
+                  <p className={`text-[13px] max-md:text-[14px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
+                    {c.t}
+                    {i === 1 && (
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke={ACCENT} strokeWidth="1.8" className="shrink-0" aria-hidden>
+                        <circle cx="7" cy="7" r="4.5" /><path d="M11 11l3 3" strokeLinecap="round" />
+                      </svg>
+                    )}
+                  </p>
+                  <p className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak mt-0.5">{c.s}</p>
+                </motion.div>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* 우: 결과 — 채택 키워드(주인공, 크게) */}
+        {/* 우: 결과 — 채택 키워드(주인공, 크게) — 기준 3단이 끝난 뒤 스케일 팝으로 채택 */}
         <div className="min-w-0">
           <div className="flex flex-col gap-1">
-            {KEYWORDS.map((k, i) => (
-              <motion.div
-                key={k}
-                initial={{ opacity: 0, x: 10 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.45, ease: EASE, delay: 0.75 + i * 0.14 }}
-                className="flex items-center gap-2.5"
-              >
-                <span className={`text-[clamp(20px,2.6vw,30px)] font-bold tracking-[-0.02em] ${i === 0 ? 'text-accent' : 'text-text-primary'}`}>{k}</span>
-                <motion.svg
-                  width="14" height="14" viewBox="0 0 12 12" fill="none" stroke={ACCENT} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
-                  initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 0.3, ease: EASE, delay: 0.9 + i * 0.14 }}
-                >
-                  <path d="M2.5 6.5l2.5 2.5 4.5-5.5" />
-                </motion.svg>
-              </motion.div>
-            ))}
+            {KEYWORDS.map((k, i) => {
+              const delay = 1.3 + i * 0.18;
+              return (
+                <div key={k} className="flex items-center gap-2.5">
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.9 }} animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.4, ease: EASE, delay }}
+                    className={`text-[clamp(20px,2.6vw,30px)] font-bold tracking-[-0.02em] ${i === 0 ? 'text-accent' : 'text-text-primary'}`}
+                  >
+                    {k}
+                  </motion.span>
+                  <motion.svg
+                    width="14" height="14" viewBox="0 0 12 12" fill="none" stroke={ACCENT} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+                    initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 0.25, ease: EASE, delay: delay + 0.15 }}
+                  >
+                    <path d="M2.5 6.5l2.5 2.5 4.5-5.5" />
+                  </motion.svg>
+                </div>
+              );
+            })}
             <motion.span
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.4, ease: EASE, delay: 1.1 }}
+              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.4, ease: EASE, delay: 1.9 }}
               className="text-[10px] mt-1" style={{ ...EN, color: '#a9aeb5' }}
             >
               네이버 검색 데이터 확인됨
@@ -104,7 +113,7 @@ export default function S14_Generate() {
       </div>
 
       <motion.p
-        initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 1.3 }}
+        initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.3, ease: EASE, delay: 2.15 }}
         className="text-[11px] max-md:text-[12px] max-md:font-medium text-text-weak mt-6 max-w-[920px]"
       >
         남긴 검색어는 글 제목·태그·해시태그에 자동으로 실리고, 매일 순위를 잽니다.
