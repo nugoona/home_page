@@ -26,7 +26,7 @@ export default function AdScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-start order-2 md:order-1"
         >
-          <div style={{ position: 'relative', width: 360, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
+          <div style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
             <div
               style={{
                 position: 'absolute',

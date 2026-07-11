@@ -62,7 +62,7 @@ export default function PhoneScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-end"
         >
-          <div style={{ position: 'relative', width: 360, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
+          <div style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
             {/* 화면 영역 = 앱 스샷 (프레임 아래 레이어) */}
             <div
               style={{
