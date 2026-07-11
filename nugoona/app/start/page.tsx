@@ -67,7 +67,7 @@ export default function StartPage() {
               <h1 className="text-[clamp(32px,5vw,48px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
                 {hero.h1}
               </h1>
-              <p className="text-[17px] text-text-body max-w-[480px] mx-auto leading-[1.6]">{hero.sub}</p>
+              <p className="text-[16px] text-text-body max-w-[480px] mx-auto leading-[1.65]">{hero.sub}</p>
             </FadeUp>
           </div>
         </Section>
@@ -167,7 +167,7 @@ export default function StartPage() {
                 <FadeUp key={s.num} delay={i * 0.08}>
                   {/* §8.7-I: 스텝 글리프(안내/계정/한 달) — stroke 1.5, 직각 */}
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="inline-flex w-8 h-8 items-center justify-center text-[12px] font-bold text-white bg-[#171717]" style={EN}>
+                    <span className="inline-flex w-8 h-8 items-center justify-center text-[13px] font-bold text-white bg-[#171717]" style={EN}>
                       {s.num}
                     </span>
                     <div className="flex-1 h-px bg-border-default" />
@@ -177,8 +177,8 @@ export default function StartPage() {
                       {i === 2 && <><rect x="3" y="4" width="14" height="13" /><path d="M3 8h14M7 3v3M13 3v3M7 12.5l2 2 4-4" /></>}
                     </svg>
                   </div>
-                  <h3 className="text-[17px] font-bold text-text-primary mb-2">{s.title}</h3>
-                  <p className="text-[14px] text-text-body leading-[1.6]">{s.desc}</p>
+                  <h3 className="text-[16px] font-bold text-text-primary mb-2">{s.title}</h3>
+                  <p className="text-[14px] text-text-body leading-[1.65]">{s.desc}</p>
                 </FadeUp>
               ))}
             </div>

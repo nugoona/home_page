@@ -169,7 +169,7 @@ export default function S9_ChannelFanout() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-[11px] font-semibold text-text-primary">{row.ch}</span>
-                  <span className="text-[9.5px] px-1.5 py-0.5 border text-text-weak" style={{ ...EN, borderColor: '#e5e5e5' }}>{row.form}</span>
+                  <span className="text-[9.5px] px-1.5 py-0.5 border text-text-weak" style={{ ...EN, borderColor: '#eaeaea' }}>{row.form}</span>
                 </div>
                 <motion.p
                   initial={{ opacity: 0, x: 10 }}

@@ -58,7 +58,7 @@ export default function DashboardGlimpse() {
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-        <span style={{ fontSize: 11, fontWeight: 600, color: '#999', letterSpacing: '0.08em', ...EN }}>
+        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-muted)', letterSpacing: '0.08em', ...EN }}>
           PERFORMANCE SUMMARY
         </span>
         <div style={{ display: 'flex', gap: 14 }}>
@@ -75,10 +75,10 @@ export default function DashboardGlimpse() {
       >
         {kpis.map((kpi) => (
           <div key={kpi.label}>
-            <p style={{ fontSize: 10, color: '#bbb', marginBottom: 6, letterSpacing: '0.06em', ...EN }}>
+            <p style={{ fontSize: 10, color: 'var(--color-text-muted)', marginBottom: 6, letterSpacing: '0.08em', ...EN }}>
               {kpi.label}
             </p>
-            <p className="max-sm:!text-[16px] whitespace-nowrap" style={{ fontSize: 24, fontWeight: 700, color: '#171717', letterSpacing: '-0.01em', ...EN }}>
+            <p className="max-sm:!text-[16px] whitespace-nowrap" style={{ fontSize: 24, fontWeight: 700, color: 'var(--color-text-primary)', letterSpacing: '-0.02em', ...EN }}>
               <CountUp target={kpi.value} prefix={kpi.prefix} suffix={kpi.suffix} decimals={kpi.decimals ?? 0} />
             </p>
             {kpi.change !== 0 && (

@@ -15,8 +15,8 @@
   --color-text-primary: #171717;
   --color-text-secondary: #333333;
   --color-text-body: #333333;
-  --color-text-muted: #444444;
-  --color-text-weak: #555555;
+  --color-text-muted: #999999; /* §8.9: #444→#999 재정의(위계 역전 해소 — 라벨·미세 캡션) */
+  --color-text-weak: #666666; /* §8.9: #555→#666 통합(보조 설명·캡션) */
   --color-text-disabled: #666666;
 
   --color-border-default: #eaeaea;

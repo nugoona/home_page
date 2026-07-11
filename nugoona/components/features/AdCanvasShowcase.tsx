@@ -123,7 +123,7 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
         <p style={{ fontSize: 15, fontWeight: 600, color: '#171717', marginBottom: 8 }}>
           상품 URL을 입력하세요
         </p>
-        <p style={{ fontSize: 12, color: '#666', marginBottom: 24 }}>
+        <p style={{ fontSize: 13, color: '#666', marginBottom: 24 }}>
           AI가 상세페이지를 분석하여 광고를 만듭니다
         </p>
         {/* Input — clean static border */}
@@ -132,7 +132,7 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
             <svg style={{ width: 16, height: 16, color: '#0070f3', marginRight: 8, flexShrink: 0 }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
               <circle cx="7" cy="7" r="4" /><path d="M10 10l3.5 3.5" strokeLinecap="round" />
             </svg>
-            <span style={{ fontSize: 12, color: '#666', ...EN }}>{typed}</span>
+            <span style={{ fontSize: 13, color: '#666', ...EN }}>{typed}</span>
             <span style={{ width: 1, height: 16, background: '#0070f3', marginLeft: 2, animation: 'pulse 1s infinite' }} />
           </div>
         </div>
@@ -149,7 +149,7 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
           <circle cx="20" cy="20" r="17" fill="none" stroke="#0070f3" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="80" strokeDashoffset="60" />
         </svg>
         <p style={{ fontSize: 14, fontWeight: 600, color: '#171717', marginBottom: 4 }}>AI Analyzing...</p>
-        <p style={{ fontSize: 12, color: '#999', textAlign: 'center' }}>
+        <p style={{ fontSize: 13, color: '#999', textAlign: 'center' }}>
           이미지 추출 및 카피 작성 중
         </p>
       </motion.div>
@@ -191,14 +191,14 @@ function Step01_UrlInput({ isActive }: { isActive: boolean }) {
             style={{ border: '1px solid #eaeaea', padding: 16 }}
           >
             <p style={{ fontSize: 10, fontWeight: 700, color: '#0070f3', marginBottom: 6, ...EN }}>AI Copywriting</p>
-            <p style={{ fontSize: 12, color: '#666', lineHeight: 1.6 }}>&quot;올여름 가장 시원한 선택. 린넨 원피스 얼리버드 30% 할인&quot;</p>
+            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.65 }}>&quot;올여름 가장 시원한 선택. 린넨 원피스 얼리버드 30% 할인&quot;</p>
           </motion.div>
           <motion.div
             animate={status === 'done' ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.5, ease: EASE, delay: 0.45 }}
             style={{ border: '1px solid #eaeaea', padding: 16 }}
           >
-            <p style={{ fontSize: 10, fontWeight: 700, color: '#8b5cf6', marginBottom: 6, ...EN }}>Targeting</p>
+            <p style={{ fontSize: 10, fontWeight: 700, color: '#666', marginBottom: 6, ...EN }}>Targeting</p>
             {/* Tags slide in from x */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {tags.map((t, i) => (
@@ -235,7 +235,7 @@ function Step02_Catalog({ isActive }: { isActive: boolean }) {
     { name: '플로럴 원피스', price: '₩39,000', badge: 'NEW', color: '#0070f3' },
     { name: '린넨 셔츠', price: '₩52,000', badge: 'TOP', color: '#22c55e' },
     { name: '코튼 팬츠', price: '₩28,000', badge: null, color: '' },
-    { name: '스트라이프 니트', price: '₩45,000', badge: 'AUTO', color: '#8b5cf6' },
+    { name: '스트라이프 니트', price: '₩45,000', badge: 'AUTO', color: '#666' },
   ];
 
   return (
@@ -351,7 +351,7 @@ function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
             <p style={{ fontSize: 16, fontWeight: 600, color: '#1a0dab', lineHeight: 1.3, marginBottom: 8 }}>
               여름 바캉스 룩 1위 | 지금 가입하면 3천원 할인
             </p>
-            <p style={{ fontSize: 12, color: '#666', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.65 }}>
               트렌디한 스타일과 시원한 소재. 오늘 출발, 내일 도착. 첫 구매 무료 반품 혜택까지 놓치지 마세요.
             </p>
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
@@ -558,7 +558,7 @@ function FeatureRow({
           {/* RIGHT: Text — staggered spring children */}
           <motion.div variants={staggerContainer}>
             <motion.div variants={springPop} style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-              <span style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700, color: '#fff', background: '#171717', flexShrink: 0, ...EN }}>
+              <span style={{ width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700, color: '#fff', background: '#171717', flexShrink: 0, ...EN }}>
                 {step.num}
               </span>
               <div style={{ flex: 1, height: 1, background: '#eaeaea' }} />
@@ -566,7 +566,7 @@ function FeatureRow({
             <motion.h3 variants={springPop} style={{ fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, color: '#171717', letterSpacing: '-0.02em', lineHeight: 1.25, marginBottom: 16 }}>
               {step.title}
             </motion.h3>
-            <motion.p variants={springPop} style={{ fontSize: 15, color: '#666', lineHeight: 1.7 }}>
+            <motion.p variants={springPop} style={{ fontSize: 15, color: '#666', lineHeight: 1.65 }}>
               {step.desc}
             </motion.p>
             {step.sub && (
@@ -590,11 +590,11 @@ export default function AdCanvasShowcase() {
           <FadeUp>
             {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
             <div style={{ maxWidth: 984, margin: '0 auto' }}>
-              <p style={{ fontSize: 12, fontWeight: 600, color: '#0070f3', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12, ...EN }}>AdCanvas</p>
+              <p style={{ fontSize: 13, fontWeight: 600, color: '#0070f3', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 12, ...EN }}>AdCanvas</p>
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.15] mb-4">
                 메타·구글 광고를<br />직접 만들고 관리하세요
               </h2>
-              <p style={{ fontSize: 17, color: '#666', lineHeight: 1.6, marginBottom: 24 }}>
+              <p style={{ fontSize: 16, color: '#666', lineHeight: 1.65, marginBottom: 24 }}>
                 복잡한 광고 관리자는 잊으세요. 몇 번의 클릭으로 광고 생성, 성과 확인, 예산 조정까지.
               </p>
               <Link href="/start" className="inline-flex items-center gap-2 text-[14px] text-accent font-medium hover:gap-3 transition-[gap] duration-150">

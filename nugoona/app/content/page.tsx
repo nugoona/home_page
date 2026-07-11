@@ -22,7 +22,7 @@ function FeatureBlock({
     <Section alt={alt}>
       <div className={`max-w-[1080px] mx-auto px-12 max-md:px-6 ${emphasis ? 'py-28 max-md:py-16' : 'py-20 max-md:py-14'}`}>
         <FadeUp className="flex items-center gap-3 mb-10">
-          <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717] shrink-0" style={EN}>{num}</span>
+          <span className="w-8 h-8 flex items-center justify-center text-[13px] font-bold text-white bg-[#171717] shrink-0" style={EN}>{num}</span>
           <div className="flex-1 h-px bg-border-default" />
         </FadeUp>
         {children}
@@ -64,10 +64,10 @@ function MiniNews() {
     <svg viewBox="0 0 220 96" className="w-full h-[88px] mb-6" aria-hidden>
       <circle cx="20" cy="18" r="4" fill="#03c75a" />
       <rect x="32" y="13" width="92" height="10" fill="#171717" />
-      <rect x="132" y="15" width="44" height="6" fill="#e5e5e5" />
+      <rect x="132" y="15" width="44" height="6" fill="#eaeaea" />
       <path d="M20 26V56H44" fill="none" stroke="rgba(0,112,243,0.5)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       <circle cx="47" cy="56" r="3" fill="#0070f3" />
-      <rect x="58" y="40" width="148" height="42" fill="none" stroke="#e5e5e5" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <rect x="58" y="40" width="148" height="42" fill="none" stroke="#eaeaea" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       <text x="68" y="62" fontSize="20" fill="#171717" fontFamily="var(--font-quote), serif">&ldquo;</text>
       <rect x="84" y="52" width="100" height="7" fill="#f0f0f0" />
       <rect x="84" y="64" width="72" height="7" fill="#f0f0f0" />
@@ -121,14 +121,14 @@ export default function ContentPage() {
         <Section dark noBorder>
           <div className="relative px-12 pt-28 pb-0 text-center max-md:px-6 max-md:pt-16" style={{ background: 'radial-gradient(ellipse at 50% 0%, #0a2a18 0%, #0a0a0a 62%)' }}>
             <FadeUp>
-              <p className="text-[13px] font-semibold text-accent tracking-[0.12em] uppercase mb-5" style={EN}>누구나 콘텐츠</p>
+              <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>누구나 콘텐츠</p>
               {/* h1·sub = GPT+사장님 확정(content.ts hero) 토씨 그대로 */}
               <h1 className="text-[clamp(30px,5.2vw,54px)] font-semibold text-white tracking-[-0.04em] leading-[1.14] mb-6"
                 dangerouslySetInnerHTML={{ __html: '누구나<span class="comma">,</span> 검색 결과에<br /><span class="text-accent">내 스토어가</span> 바로 보이길 원합니다' }} />
               <p className="text-[clamp(15px,1.8vw,18px)] text-white/55 leading-[1.65] max-w-[600px] mx-auto mb-10">
                 광고는 멈추면 사라지지만, 꾸준히 쌓은 글은 검색에 남아 스토어를 계속 보이게 합니다. 그 꾸준함을, 누구나 콘텐츠가 대신합니다.
               </p>
-              <Link href="/start" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.01em] hover:bg-[#e5e5e5] transition-colors mb-16">
+              <Link href="/start" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors mb-16">
                 무료로 시작하기
                 <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
               </Link>
@@ -149,7 +149,7 @@ export default function ContentPage() {
               <h2 className="text-[clamp(28px,4vw,40px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-5 max-w-[640px]">
                 맡긴다고 검색 결과에<br /><span className="text-accent">바로 보이는 것은 아닙니다</span>
               </h2>
-              <p className="text-[16px] text-text-body leading-[1.7] max-w-[560px] mb-12">
+              <p className="text-[16px] text-text-body leading-[1.65] max-w-[560px] mb-12">
                 대행에 매달 비용을 내도, 검색에 우리 가게가 보인다는 보장은 없습니다. 광고는 멈추면 사라지고, 남는 것도 없습니다.
               </p>
             </FadeUp>
@@ -157,7 +157,7 @@ export default function ContentPage() {
               {[['월 30만~100만+', '대행에 매달 나가는 비용'], ['계약에 묶임', '멈추면 노출도 함께 사라짐'], ['보장 없음', '내도 검색에 보인다는 확답은 없음']].map(([n, d]) => (
                 <FadeUp key={d}>
                   <p className="text-[clamp(24px,3vw,32px)] font-bold text-text-primary tracking-[-0.02em] mb-2">{n}</p>
-                  <p className="text-[14px] text-text-weak leading-[1.6]">{d}</p>
+                  <p className="text-[14px] text-text-weak leading-[1.65]">{d}</p>
                 </FadeUp>
               ))}
             </div>
@@ -178,9 +178,9 @@ export default function ContentPage() {
                   {/* §8.7-I: 카드의 주인공 = 미니 라인아트(상단), 텍스트는 하단 보조 */}
                   <div className="h-full border border-border-default bg-white p-7 max-md:p-6">
                     <c.art />
-                    <span className="inline-flex w-8 h-8 items-center justify-center text-[12px] font-bold text-white bg-[#171717] mb-5" style={EN}>{c.n}</span>
+                    <span className="inline-flex w-8 h-8 items-center justify-center text-[13px] font-bold text-white bg-[#171717] mb-5" style={EN}>{c.n}</span>
                     <h3 className="text-[18px] font-bold text-text-primary mb-2">{c.t}</h3>
-                    <p className="text-[14px] text-text-body leading-[1.6]">{c.d}</p>
+                    <p className="text-[14px] text-text-body leading-[1.65]">{c.d}</p>
                   </div>
                 </FadeUp>
               ))}
@@ -231,7 +231,7 @@ export default function ContentPage() {
                       {e.g}
                     </svg>
                     <h3 className="text-[15px] font-bold text-text-primary mb-1.5">{e.t}</h3>
-                    <p className="text-[13px] text-text-body leading-[1.6]">{e.d}</p>
+                    <p className="text-[13px] text-text-body leading-[1.65]">{e.d}</p>
                   </div>
                 </FadeUp>
               ))}
@@ -277,7 +277,7 @@ export default function ContentPage() {
               <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">한 달, 카드 없이 먼저 써 보세요</h2>
               <p className="text-[15px] text-white/50 mb-10">약정도 카드도 없습니다. 가게 이름만 입력하면 세팅해 드립니다.</p>
               <div className="flex justify-center gap-3 max-sm:flex-col max-sm:items-center">
-                <Link href="/start" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#e0e0e0] transition-all">무료로 시작하기</Link>
+                <Link href="/start" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all">무료로 시작하기</Link>
                 <Link href="/ads" className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent text-white/75 border border-white/20 hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]">광고까지 직접 운영하려면 →</Link>
               </div>
             </FadeUp>

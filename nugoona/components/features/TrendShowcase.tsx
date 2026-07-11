@@ -111,13 +111,13 @@ function BriefingSection() {
       {/* Intro */}
       <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
         <FadeUp>
-          <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-3" style={EN}>
+          <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
             Trend · Weekly Briefing
           </p>
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
             매주 월요일, MD 회의 전에<br />이미 알고 있습니다.
           </h2>
-          <p className="text-[16px] text-text-primary font-light leading-[1.6] max-w-[520px] mx-auto tracking-[-0.025em]">
+          <p className="text-[16px] text-text-primary font-light leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
             29CM과 Ably의 급상승·신규진입·순위하락 상품을 카테고리별로 자동 정리합니다.
           </p>
         </FadeUp>
@@ -130,11 +130,11 @@ function BriefingSection() {
 
             {/* Header row */}
             <div className="flex items-center justify-between px-8 pt-6 pb-0 max-md:px-4 max-md:flex-col max-md:items-start max-md:gap-2">
-              <h3 className="text-[15px] font-bold text-[#111] tracking-[-0.02em]">
+              <h3 className="text-[15px] font-bold text-text-primary tracking-[-0.02em]">
                 29CM 2026년 2월 4주차 트렌드
               </h3>
               <div className="flex items-center gap-4">
-                <span className="text-[11px] text-[#888] flex items-center gap-1.5" style={EN}>
+                <span className="text-[11px] text-text-muted flex items-center gap-1.5" style={EN}>
                   <svg className="w-3 h-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                     <path d="M8 1v4l2.5 2.5" /><circle cx="8" cy="8" r="7" />
                   </svg>
@@ -162,7 +162,7 @@ function BriefingSection() {
                   style={{
                     background: cat === c ? '#111' : 'transparent',
                     color:      cat === c ? '#fff' : '#666',
-                    border:     cat === c ? '1px solid #111' : '1px solid #e0e0e0',
+                    border:     cat === c ? '1px solid #111' : '1px solid #eaeaea',
                   }}
                 >
                   {c}
@@ -172,7 +172,7 @@ function BriefingSection() {
 
             {/* Filter tabs */}
             <div className="px-8 pt-4 max-md:px-4">
-              <div className="grid grid-cols-3 border border-[#e5e5e5]">
+              <div className="grid grid-cols-3 border border-border-default">
                 {B_FILTERS.map((f) => (
                   <button
                     key={f}
@@ -180,7 +180,7 @@ function BriefingSection() {
                     className="py-3 text-[13px] font-semibold transition-colors duration-150"
                     style={{
                       background:   filter === f ? '#fff' : '#f5f5f5',
-                      color:        filter === f ? '#111' : '#aaa',
+                      color:        filter === f ? '#111' : '#999',
                       borderBottom: filter === f ? '2px solid #111' : '2px solid transparent',
                     }}
                   >
@@ -194,7 +194,7 @@ function BriefingSection() {
             <div className="px-8 pb-8 max-md:px-0 overflow-x-auto">
               {/* Column headers */}
               <div
-                className="grid items-center py-2.5 px-2 mt-2 text-[10px] font-bold text-[#aaa] tracking-[0.06em] uppercase border-b border-[#f0f0f0] bg-[#fafafa] max-md:hidden"
+                className="grid items-center py-2.5 px-2 mt-2 text-[10px] font-bold text-text-muted tracking-[0.08em] uppercase border-b border-[#f0f0f0] bg-[#fafafa] max-md:hidden"
                 style={{ gridTemplateColumns: COL_MAIN, ...EN }}
               >
                 {HEADERS.map((h, i) => (
@@ -217,21 +217,21 @@ function BriefingSection() {
                       className="grid items-center px-2 py-3 border-b border-[#f5f5f5] hover:bg-[#fafafa] transition-colors"
                       style={{ gridTemplateColumns: COL_MAIN }}
                     >
-                      <span className="text-[11px] text-[#999]">{item.rank}</span>
+                      <span className="text-[11px] text-text-muted">{item.rank}</span>
                       <div className="w-[76px] h-[76px] overflow-hidden bg-[#f5f5f5] shrink-0">
                         <img src={item.img} alt="" className="w-full h-full object-cover" loading="lazy" />
                       </div>
-                      <span className="text-[12px] text-[#555] font-medium truncate pr-2">{item.brand}</span>
-                      <span className="text-[13px] text-[#111] font-medium pr-4 truncate">{item.name}</span>
+                      <span className="text-[13px] text-text-weak font-medium truncate pr-2">{item.brand}</span>
+                      <span className="text-[13px] text-text-primary font-medium pr-4 truncate">{item.name}</span>
                       {!isNew && (
                         <span
                           className="text-[14px] font-bold text-right"
-                          style={{ color: item.change > 0 ? '#ef4444' : item.change < 0 ? '#3b82f6' : '#aaa' }}
+                          style={{ color: item.change > 0 ? '#ef4444' : item.change < 0 ? '#3b82f6' : '#999' }}
                         >
                           {item.change > 0 ? `▲ ${item.change}` : item.change < 0 ? `▼ ${Math.abs(item.change)}` : '—'}
                         </span>
                       )}
-                      <span className="text-[15px] font-bold text-[#111] text-right" style={EN}>{item.thisWeek}</span>
+                      <span className="text-[15px] font-bold text-text-primary text-right" style={EN}>{item.thisWeek}</span>
                       <span className="text-[13px] text-right" style={{ color: item.lastWeek === null ? '#333' : '#999', fontWeight: item.lastWeek === null ? 700 : 400, ...EN }}>
                         {item.lastWeek === null ? '순위없음' : item.lastWeek}
                       </span>
@@ -314,7 +314,7 @@ function InsightSection() {
   const products = INSIGHT_PRODUCTS[tab];
 
   const changeColor = (c: number) =>
-    c > 0 ? '#ef4444' : c < 0 ? '#3b82f6' : '#6366f1';
+    c > 0 ? '#ef4444' : c < 0 ? '#3b82f6' : '#666';
   const changeLabel = (c: number) =>
     c > 0 ? `▲+${c}위 급상승` : c < 0 ? `▼${Math.abs(c)}위 하락` : 'NEW';
 
@@ -325,13 +325,13 @@ function InsightSection() {
         <FadeUp>
           {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
           <div className="max-w-[984px] mx-auto">
-            <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-2" style={EN}>
+            <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-2" style={EN}>
               AI Insight
             </p>
             <h2 className="text-[clamp(20px,2.6vw,28px)] font-semibold tracking-[-0.02em] leading-[1.25] text-text-primary mb-2">
               수백 개 상품을 직접 볼 수 없을 때, AI가 대신 읽어줍니다.
             </h2>
-            <p className="text-[15px] text-text-primary font-light leading-[1.6] tracking-[-0.025em]">
+            <p className="text-[15px] text-text-primary font-light leading-[1.65] tracking-[-0.02em]">
               10년차 패션 MD 페르소나의 AI가 카테고리별 트렌드 키워드와 패턴을 매주 보고서로 작성합니다.
             </p>
           </div>
@@ -345,13 +345,13 @@ function InsightSection() {
 
             {/* Dark header */}
             <div className="bg-[#111] px-8 py-4 max-md:px-4">
-              <p className="text-white text-[14px] font-bold tracking-[-0.01em]">트렌드 데이터 분석</p>
+              <p className="text-white text-[14px] font-bold tracking-[-0.02em]">트렌드 데이터 분석</p>
             </div>
 
             <div className="bg-white border-l border-r border-border-default">
               {/* MY BRAND */}
               <div className="px-8 pt-8 pb-6 border-b border-border-default max-md:px-4">
-                <p className="text-[11px] font-bold text-[#888] tracking-[0.08em] uppercase mb-5" style={EN}>
+                <p className="text-[11px] font-bold text-text-muted tracking-[0.08em] uppercase mb-5" style={EN}>
                   | MY BRAND
                 </p>
 
@@ -359,7 +359,7 @@ function InsightSection() {
                 <div className="bg-[#fafafa] border border-border-default p-5 mb-0">
                   <p className="text-[11px] font-semibold text-text-weak mb-3">자사몰 성과</p>
                   <ul className="space-y-2">
-                    <li className="text-[13px] text-text-primary leading-[1.6]">
+                    <li className="text-[13px] text-text-primary leading-[1.65]">
                       <span className="font-bold">오버핏 린넨 블레이저_Beige</span>
                       <span className="text-[#3b82f6] font-semibold ml-2">( -25위 하락 )</span>
                       <span className="text-text-weak"> → 간절기 수요를 겨냥했으나 경쟁 브랜드의 유사 스타일 신규 진입이 집중되며 상대적 노출 감소로 순위 하락.</span>
@@ -374,12 +374,12 @@ function InsightSection() {
                         <span className="absolute top-1 left-1 bg-[#1e3a5f] text-white text-[9px] font-bold px-1.5 py-0.5" style={EN}>88위</span>
                       </div>
                       <div>
-                        <p className="text-[10px] text-[#8b5cf6] font-semibold mb-0.5">에르블랑</p>
-                        <p className="text-[12px] font-medium text-text-primary leading-[1.4] mb-2">오버핏 린넨<br />블레이저_Beige</p>
+                        <p className="text-[10px] text-text-weak font-semibold mb-0.5">에르블랑</p>
+                        <p className="text-[13px] font-medium text-text-primary leading-[1.4] mb-2">오버핏 린넨<br />블레이저_Beige</p>
                         <span className="inline-flex items-center gap-1 text-[9px] font-bold text-[#3b82f6] bg-[#eff6ff] px-1.5 py-0.5">
                           ▼ 25위 하락
                         </span>
-                        <p className="text-[12px] font-bold text-text-primary mt-1.5" style={EN}>₩119,000</p>
+                        <p className="text-[13px] font-bold text-text-primary mt-1.5" style={EN}>₩119,000</p>
                       </div>
                     </div>
                   </div>
@@ -388,7 +388,7 @@ function InsightSection() {
 
               {/* KEYWORD */}
               <div className="px-8 pt-6 pb-6 border-b border-border-default max-md:px-4">
-                <p className="text-[11px] font-bold text-[#888] tracking-[0.08em] uppercase mb-5" style={EN}>
+                <p className="text-[11px] font-bold text-text-muted tracking-[0.08em] uppercase mb-5" style={EN}>
                   KEYWORD
                 </p>
                 <div className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
@@ -403,7 +403,7 @@ function InsightSection() {
                     </div>
                     <ul className="space-y-2.5">
                       {MATERIAL_KEYWORDS.map((k, i) => (
-                        <li key={i} className="text-[12px] text-text-primary leading-[1.6]">
+                        <li key={i} className="text-[13px] text-text-primary leading-[1.65]">
                           <span className="font-bold">{k.keys}</span>
                           <span className="text-text-weak"> — {k.desc}</span>
                         </li>
@@ -421,7 +421,7 @@ function InsightSection() {
                     </div>
                     <ul className="space-y-2.5">
                       {MOOD_KEYWORDS.map((k, i) => (
-                        <li key={i} className="text-[12px] text-text-primary leading-[1.6]">
+                        <li key={i} className="text-[13px] text-text-primary leading-[1.65]">
                           <span className="font-bold">{k.keys}</span>
                           <span className="text-text-weak"> — {k.desc}</span>
                         </li>
@@ -433,7 +433,7 @@ function InsightSection() {
 
               {/* TRENDS */}
               <div className="px-8 pt-6 pb-8 max-md:px-4">
-                <p className="text-[11px] font-bold text-[#888] tracking-[0.08em] uppercase mb-5" style={EN}>
+                <p className="text-[11px] font-bold text-text-muted tracking-[0.08em] uppercase mb-5" style={EN}>
                   TRENDS
                 </p>
 
@@ -445,7 +445,7 @@ function InsightSection() {
                       onClick={() => setTab(f)}
                       className="px-5 py-2.5 text-[13px] font-semibold transition-colors"
                       style={{
-                        color:        tab === f ? '#0070f3' : '#aaa',
+                        color:        tab === f ? '#0070f3' : '#999',
                         borderBottom: tab === f ? '2px solid #0070f3' : '2px solid transparent',
                         marginBottom: '-1px',
                       }}
@@ -470,7 +470,7 @@ function InsightSection() {
                         <span className="shrink-0 px-3 py-1 text-[11px] font-bold text-white" style={{ background: '#171717' }}>
                           니트웨어
                         </span>
-                        <p className="text-[12px] text-text-primary leading-[1.6]">
+                        <p className="text-[13px] text-text-primary leading-[1.65]">
                           <span className="font-bold">공통 키워드(V넥, 라운드넥, 워셔블, 코튼, 캐시미어, 레이어드, 홀터넥)</span>
                           {' '}— 간절기에 가볍게 착용하고 레이어링하기 좋은 실용적인 니트웨어와 트렌디한 홀터넥 디자인이 강세.
                         </p>
@@ -489,7 +489,7 @@ function InsightSection() {
                                 {p.rank}위
                               </span>
                             </div>
-                            <p className="text-[10px] text-[#8b5cf6] font-semibold mb-0.5">{p.brand}</p>
+                            <p className="text-[10px] text-text-weak font-semibold mb-0.5">{p.brand}</p>
                             <p className="text-[11px] text-text-primary font-medium leading-[1.4] mb-1.5 line-clamp-2">{p.name}</p>
                             <span
                               className="inline-flex items-center gap-0.5 text-[9px] font-bold px-1.5 py-0.5 mb-1.5"
@@ -500,7 +500,7 @@ function InsightSection() {
                             >
                               {p.change > 0 && '🔥 '}{changeLabel(p.change)}
                             </span>
-                            <p className="text-[12px] font-bold text-text-primary" style={EN}>₩{p.price}</p>
+                            <p className="text-[13px] font-bold text-text-primary" style={EN}>₩{p.price}</p>
                           </div>
                         ))}
                       </div>
@@ -591,13 +591,13 @@ function CompareSection() {
       {/* Intro */}
       <div className="pt-16 pb-10 px-12 max-md:pt-12 max-md:px-6 text-center">
         <FadeUp>
-          <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-3" style={EN}>
+          <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-3" style={EN}>
             Competitor Compare
           </p>
           <h2 className="text-[clamp(28px,4vw,40px)] font-semibold tracking-[-0.02em] leading-[1.15] text-text-primary mb-3">
             오늘 경쟁사가 29CM에서<br />뭘 팔고 있는지 압니다.
           </h2>
-          <p className="text-[16px] text-text-primary font-light leading-[1.6] max-w-[520px] mx-auto tracking-[-0.025em]">
+          <p className="text-[16px] text-text-primary font-light leading-[1.65] max-w-[520px] mx-auto tracking-[-0.02em]">
             경쟁사를 등록하면 그 브랜드의 29CM 추천순 TOP 20 상품을 매일 자동 수집합니다.
           </p>
         </FadeUp>
@@ -610,10 +610,10 @@ function CompareSection() {
 
             {/* Header */}
             <div className="px-8 pt-6 pb-0 max-md:px-4">
-              <h3 className="text-[15px] font-bold text-[#111] tracking-[-0.02em] mb-1">
+              <h3 className="text-[15px] font-bold text-text-primary tracking-[-0.02em] mb-1">
                 29CM 경쟁사 판매순 TOP 20
               </h3>
-              <p className="text-[11px] text-[#999] mb-5" style={EN}>
+              <p className="text-[11px] text-text-muted mb-5" style={EN}>
                 2026년 02-25 오전 8시 00분 기준 — 판매순 TOP20 / 주간 베스트 상품
               </p>
 
@@ -623,16 +623,16 @@ function CompareSection() {
                   <button
                     key={b}
                     onClick={() => setActiveBrand(b)}
-                    className="shrink-0 px-4 py-1.5 text-[12px] font-semibold transition-colors duration-150"
+                    className="shrink-0 px-4 py-1.5 text-[13px] font-semibold transition-colors duration-150"
                     style={{
                       background: activeBrand === b ? '#111' : '#f5f5f5',
-                      color:      activeBrand === b ? '#fff' : '#555',
-                      border:     activeBrand === b ? '1px solid #111' : '1px solid #e5e5e5',
+                      color:      activeBrand === b ? '#fff' : '#666',
+                      border:     activeBrand === b ? '1px solid #111' : '1px solid #eaeaea',
                     }}
                   >
                     {b}
                     {b === '에르블랑' && (
-                      <span className="ml-1.5 text-[9px] font-bold text-[#8b5cf6] bg-[#f5f3ff] px-1 py-0.5">자사</span>
+                      <span className="ml-1.5 text-[9px] font-bold text-text-weak bg-[#f5f3ff] px-1 py-0.5">자사</span>
                     )}
                   </button>
                 ))}
@@ -676,17 +676,17 @@ function CompareSection() {
 
                       {/* Info */}
                       <div className="p-2.5">
-                        <p className="text-[9px] text-[#8b5cf6] font-semibold mb-0.5">{p.brand}</p>
+                        <p className="text-[9px] text-text-weak font-semibold mb-0.5">{p.brand}</p>
                         <p className="text-[11px] text-text-primary font-medium leading-[1.4] mb-2 line-clamp-2">{p.name}</p>
                         <div className="flex items-center gap-1 mb-2.5">
                           <svg className="w-3 h-3" viewBox="0 0 16 16" fill="#ef4444"><path d="M8 14s-6-3.5-6-8a4 4 0 0 1 8 0 4 4 0 0 1 8 0c0 4.5-6 8-6 8" /></svg>
-                          <span className="text-[10px] text-[#888]" style={EN}>{p.likes}</span>
+                          <span className="text-[10px] text-text-muted" style={EN}>{p.likes}</span>
                         </div>
                         <div className="flex gap-1">
                           <button className="flex-1 py-1 text-[9px] font-bold text-white bg-[#22c55e] hover:bg-[#16a34a] transition-colors truncate">
                             바로가기
                           </button>
-                          <button className="flex-1 py-1 text-[9px] font-bold text-[#555] border border-[#e5e5e5] hover:bg-[#f5f5f5] transition-colors truncate">
+                          <button className="flex-1 py-1 text-[9px] font-bold text-text-weak border border-border-default hover:bg-[#f5f5f5] transition-colors truncate">
                             최신 리뷰 10
                           </button>
                         </div>
@@ -762,8 +762,8 @@ function NaverLineChart() {
           <span className="flex items-center gap-1.5 text-[10px] text-[#22c55e] font-medium">
             <span className="w-4 h-0.5 bg-[#22c55e] inline-block" />내 브랜드
           </span>
-          <span className="flex items-center gap-1.5 text-[10px] text-[#6366f1] font-medium">
-            <span className="w-4 h-0 inline-block" style={{ borderTop: '2px dashed #6366f1' }} />경쟁사
+          <span className="flex items-center gap-1.5 text-[10px] text-text-weak font-medium">
+            <span className="w-4 h-0 inline-block" style={{ borderTop: '2px dashed #999' }} />경쟁사
           </span>
         </div>
       </div>
@@ -779,7 +779,7 @@ function NaverLineChart() {
           const y = (_NP + t * (_NH - _NP * 2)).toFixed(1);
           return <line key={t} x1="0" y1={y} x2={_NW} y2={y} stroke="#f0f0f0" strokeWidth="1" />;
         })}
-        <motion.path d={COMP_LINE} fill="none" stroke="#6366f1" strokeWidth="1.5" strokeDasharray="5 4"
+        <motion.path d={COMP_LINE} fill="none" stroke="#999" strokeWidth="1.5" strokeDasharray="5 4"
           initial={{ pathLength: 0 }} animate={isInView ? { pathLength: 1 } : {}}
           transition={{ duration: 2, ease: 'easeInOut', delay: 0.4 }} />
         <motion.path d={MY_AREA} fill="url(#naverGradient2)"
@@ -828,7 +828,7 @@ function GSCQueryTable() {
         <span className="text-[9px] text-text-weak border border-border-default px-2 py-0.5" style={EN}>Top 10</span>
       </div>
       <div
-        className="grid px-5 py-2 text-[9px] font-semibold text-text-weak tracking-[0.06em] uppercase border-b border-border-default bg-[#fafafa]"
+        className="grid px-5 py-2 text-[9px] font-semibold text-text-weak tracking-[0.08em] uppercase border-b border-border-default bg-[#fafafa]"
         style={{ gridTemplateColumns: '1fr 52px 44px 44px 52px', ...EN }}
       >
         <span>검색어</span>
@@ -848,7 +848,7 @@ function GSCQueryTable() {
         >
           <div className="flex items-center gap-2 min-w-0">
             <span className="text-[9px] text-text-weak shrink-0 w-4" style={EN}>{i + 1}</span>
-            <span className="text-[12px] text-text-primary truncate">{row.query}</span>
+            <span className="text-[13px] text-text-primary truncate">{row.query}</span>
           </div>
           <span className="text-[11px] text-text-muted text-right" style={EN}>
             {row.impressions >= 1000 ? `${(row.impressions / 1000).toFixed(1)}K` : row.impressions}
@@ -877,7 +877,7 @@ export default function TrendShowcase() {
             <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-3">
               광고를 이해하려면, 시장도 함께 봐야 합니다
             </h3>
-            <p className="text-[15px] text-[#666] max-w-[560px] mx-auto leading-[1.7]">
+            <p className="text-[15px] text-text-weak max-w-[560px] mx-auto leading-[1.65]">
               광고 성과만으로는 다음 선택을 결정하기 어렵습니다. 함께 팔리는 상품과 경쟁사의 흐름까지 함께 봐야 운영의 기준이 생깁니다.
             </p>
           </FadeUp>
@@ -895,14 +895,14 @@ export default function TrendShowcase() {
             {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
             <div className="max-w-[984px] mx-auto grid grid-cols-2 gap-12 items-end max-md:grid-cols-1 max-md:gap-6">
               <div>
-                <p className="text-[12px] font-semibold tracking-[0.1em] uppercase mb-3 text-white/40" style={EN}>
+                <p className="text-[13px] font-semibold tracking-[0.08em] uppercase mb-3 text-white/40" style={EN}>
                   Search Volume
                 </p>
                 <h3 className="text-[clamp(22px,3vw,34px)] font-semibold text-white tracking-[-0.02em] leading-[1.2]">
                   검색량도 경쟁사와<br />비교합니다.
                 </h3>
               </div>
-              <p className="text-[15px] text-white/60 leading-[1.7]">
+              <p className="text-[15px] text-white/60 leading-[1.65]">
                 네이버 일간 검색량 30일 추이와 Google Search Console 유입 키워드를 한 화면에서. 내 브랜드가 얼마나 검색되는지, 어떤 키워드로 고객이 유입되는지 파악하세요.
               </p>
             </div>

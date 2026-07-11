@@ -70,7 +70,7 @@ export default function S11_NewsEngine() {
       <motion.p
         initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
-        className="text-[clamp(18px,2.2vw,24px)] font-bold text-text-primary tracking-[-0.015em] leading-[1.35] mb-4"
+        className="text-[clamp(18px,2.2vw,24px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.35] mb-4"
       >
         찾아오는 길이 적힌 글을<br />더 오래 보여주기 시작했습니다.
       </motion.p>
@@ -82,14 +82,14 @@ export default function S11_NewsEngine() {
           <motion.p
             initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.45, ease: EASE, delay: 0.78 }}
-            className="text-[14px] leading-[1.7] text-text-body max-md:text-[13px]" style={QUOTE}
+            className="text-[14px] leading-[1.65] text-text-body max-md:text-[13px]" style={QUOTE}
           >
             &ldquo;성수역 3번 출구에서 걸어서 5분입니다.&rdquo;
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 4 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.35, ease: EASE, delay: 1.15 }}
-            className="text-[12px] font-semibold mt-1.5" style={{ ...EN, color: ACCENT }}
+            className="text-[13px] font-semibold mt-1.5" style={{ ...EN, color: ACCENT }}
           >
             — 앞으로 쓰는 글에 자동 반영
           </motion.p>

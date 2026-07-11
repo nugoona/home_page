@@ -113,7 +113,7 @@ export default function S13_Onboarding() {
                 className="flex items-start gap-3 px-4 py-3" style={{ borderColor: '#f2f2f2' }}
               >
                 <span className="text-[10px] font-semibold w-16 shrink-0 pt-0.5" style={{ ...EN, color: '#a9aeb5' }}>{g.label}</span>
-                <p className="text-[12.5px] text-text-primary leading-snug flex-1">{g.body}</p>
+                <p className="text-[13px] text-text-primary leading-snug flex-1">{g.body}</p>
                 <Check inView={inView} delay={delay + CHECK_LAG} />
               </motion.div>
             );
@@ -123,7 +123,7 @@ export default function S13_Onboarding() {
             transition={{ duration: 0.4, ease: EASE, delay: buttonDelay }}
             className="px-4 py-3"
           >
-            <button className="w-full h-9 text-[12.5px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
+            <button className="w-full h-9 text-[13px] font-semibold text-white" style={{ background: ACCENT }}>네, 맞아요</button>
           </motion.div>
         </div>
       </div>

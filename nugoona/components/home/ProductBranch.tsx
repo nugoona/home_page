@@ -49,14 +49,14 @@ export default function ProductBranch() {
 
               {/* 텍스트 */}
               <div className="p-7 flex flex-col flex-1 max-md:p-6">
-                <p className="text-[11px] font-semibold text-text-weak tracking-[0.1em] uppercase mb-3" style={EN}>
+                <p className="text-[11px] font-semibold text-text-weak tracking-[0.08em] uppercase mb-3" style={EN}>
                   {c.eyebrow}
                 </p>
                 <h3
                   className="text-[clamp(20px,2.4vw,26px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.25] mb-3"
                   dangerouslySetInnerHTML={{ __html: c.title }}
                 />
-                <p className="text-[14px] text-text-body leading-[1.6] mb-6 flex-1">{c.desc}</p>
+                <p className="text-[14px] text-text-body leading-[1.65] mb-6 flex-1">{c.desc}</p>
                 <span className="inline-flex items-center gap-1.5 text-[14px] text-accent font-medium group-hover:gap-2.5 transition-[gap] duration-150">
                   {c.cta}
                   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">

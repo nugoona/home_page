@@ -32,7 +32,7 @@ export default function AdsPage() {
             style={{ background: 'radial-gradient(ellipse at 50% 0%, #0a2050 0%, #0a0a0a 62%)' }}
           >
             <FadeUp>
-              <p className="text-[13px] font-semibold text-accent tracking-[0.12em] uppercase mb-5" style={EN}>
+              <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>
                 누구나 광고
               </p>
               <h1
@@ -44,7 +44,7 @@ export default function AdsPage() {
               </p>
               <Link
                 href={hero.cta.href}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.01em] hover:bg-[#e5e5e5] transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-pill bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors"
               >
                 {hero.cta.text}
                 <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -66,7 +66,7 @@ export default function AdsPage() {
                 className="text-[clamp(24px,3.4vw,36px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.2] max-w-[640px] mx-auto mb-4"
                 dangerouslySetInnerHTML={{ __html: identity.heading }}
               />
-              <p className="text-[15px] text-text-body leading-[1.7] max-w-[560px] mx-auto">
+              <p className="text-[15px] text-text-body leading-[1.65] max-w-[560px] mx-auto">
                 {identity.body}
               </p>
             </FadeUp>
@@ -95,7 +95,7 @@ export default function AdsPage() {
                 <div className="flex gap-3 max-sm:flex-col">
                   <Link
                     href="/start"
-                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#e0e0e0] transition-all"
+                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all"
                   >
                     무료로 시작하기
                   </Link>

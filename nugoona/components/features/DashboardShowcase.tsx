@@ -83,7 +83,7 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
             <circle key={`${ddx}_${dy}`} cx={NGN_CX + ddx} cy={NGN_CY + dy} r="1.5" fill="#555" opacity="0.6" />
           ))
         )}
-        <text x={NGN_CX} y={NGN_CY + 40} textAnchor="middle" fontSize="9" fontWeight="600" fill="#555" fontFamily="var(--font-en)">NGN</text>
+        <text x={NGN_CX} y={NGN_CY + 40} textAnchor="middle" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-en)">NGN</text>
       </motion.g>
 
         <motion.g
@@ -97,27 +97,27 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
           <circle cx={DASH_L + 264} cy="22" r="3" fill="#22c55e" />
 
           <rect x={DASH_L + 8} y="42" width="128" height="68" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="54" fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">매출</text>
+          <text x={DASH_L + 14} y="54" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
           {[12, 20, 28, 38, 34].map((h, i) => (
             <rect key={i} x={DASH_L + 20 + i * 18} y={102 - h} width="13" height={h} fill="#0070f3" opacity={0.3 + i * 0.15} />
           ))}
-          <text x={DASH_L + 112} y="100" fontSize="7" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
+          <text x={DASH_L + 112} y="100" fontSize="8" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
 
           <rect x={DASH_L + 144} y="42" width="128" height="68" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 150} y="54" fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">방문자</text>
+          <text x={DASH_L + 150} y="54" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">방문자</text>
           <polyline points={`${DASH_L + 154},100 ${DASH_L + 170},94 ${DASH_L + 186},97 ${DASH_L + 202},86 ${DASH_L + 218},78 ${DASH_L + 234},70 ${DASH_L + 250},62`} fill="none" stroke="#22c55e" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
           <circle cx={DASH_L + 250} cy="62" r="2.5" fill="#22c55e" />
 
           <rect x={DASH_L + 8} y="118" width="128" height="64" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="131" fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">매출</text>
+          <text x={DASH_L + 14} y="131" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
           <text x={DASH_L + 14} y="148" fontSize="11" fontWeight="700" fill="#171717" fontFamily="var(--font-en)">₩12,800,000</text>
-          <text x={DASH_L + 14} y="161" fontSize="7" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
-          <text x={DASH_L + 14} y="173" fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Orders: 127 | CVR: 2.8%</text>
+          <text x={DASH_L + 14} y="161" fontSize="8" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
+          <text x={DASH_L + 14} y="173" fontSize="8" fill="#666" fontFamily="var(--font-en)">Orders: 127 | CVR: 2.8%</text>
 
           <rect x={DASH_L + 144} y="118" width="128" height="64" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 150} y="131" fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">ROAS</text>
-          <text x={DASH_L + 150} y="152" fontSize="17" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
-          <text x={DASH_L + 150} y="166" fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
+          <text x={DASH_L + 150} y="131" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">ROAS</text>
+          <text x={DASH_L + 150} y="152" fontSize="16" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
+          <text x={DASH_L + 150} y="166" fontSize="8" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
         </motion.g>
 
         {isActive && srcYs.map((_, i) => (
@@ -196,7 +196,7 @@ function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
         {[-6, 0, 6].map(dy => [-6, 0, 6].map(dx => (
           <circle key={`${dx}_${dy}`} cx={MX + dx} cy={NGN_CY + dy} r="1.5" fill="#555" opacity="0.6" />
         )))}
-        <text x={NGN_L + NGN_W + 6} y={NGN_CY + 4} textAnchor="start" fontSize="9" fontWeight="600" fill="#555" fontFamily="var(--font-en)">NGN</text>
+        <text x={NGN_L + NGN_W + 6} y={NGN_CY + 4} textAnchor="start" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-en)">NGN</text>
       </motion.g>
 
       {/* 대시보드 */}
@@ -207,26 +207,26 @@ function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
         <circle cx={DL + DW - 14} cy={DASH_TOP + 12} r="3" fill="#22c55e" />
 
         <rect x={DL + 8} y={DASH_TOP + 32} width="136" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 14} y={DASH_TOP + 44} fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">매출</text>
+        <text x={DL + 14} y={DASH_TOP + 44} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
         {[12, 20, 28, 38, 34].map((h, i) => (
           <rect key={i} x={DL + 18 + i * 20} y={DASH_TOP + 90 - h} width="16" height={h} fill="#0070f3" opacity={0.3 + i * 0.15} />
         ))}
-        <text x={DL + 120} y={DASH_TOP + 89} fontSize="7" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
+        <text x={DL + 120} y={DASH_TOP + 89} fontSize="8" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
 
         <rect x={DL + 152} y={DASH_TOP + 32} width="140" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 158} y={DASH_TOP + 44} fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">방문자</text>
+        <text x={DL + 158} y={DASH_TOP + 44} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">방문자</text>
         <polyline points={`${DL+162},${DASH_TOP+88} ${DL+178},${DASH_TOP+82} ${DL+194},${DASH_TOP+85} ${DL+210},${DASH_TOP+74} ${DL+226},${DASH_TOP+66} ${DL+242},${DASH_TOP+58} ${DL+258},${DASH_TOP+50}`} fill="none" stroke="#22c55e" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
         <circle cx={DL + 258} cy={DASH_TOP + 50} r="2.5" fill="#22c55e" />
 
         <rect x={DL + 8} y={DASH_TOP + 105} width="136" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 14} y={DASH_TOP + 118} fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">매출</text>
+        <text x={DL + 14} y={DASH_TOP + 118} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
         <text x={DL + 14} y={DASH_TOP + 136} fontSize="10" fontWeight="700" fill="#171717" fontFamily="var(--font-en)">₩12,800,000</text>
-        <text x={DL + 14} y={DASH_TOP + 150} fontSize="7" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
+        <text x={DL + 14} y={DASH_TOP + 150} fontSize="8" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
 
         <rect x={DL + 152} y={DASH_TOP + 105} width="140" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 158} y={DASH_TOP + 118} fontSize="7" fontWeight="500" fill="#444" fontFamily="var(--font-en)">ROAS</text>
+        <text x={DL + 158} y={DASH_TOP + 118} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">ROAS</text>
         <text x={DL + 158} y={DASH_TOP + 148} fontSize="18" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
-        <text x={DL + 158} y={DASH_TOP + 163} fontSize="6.5" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
+        <text x={DL + 158} y={DASH_TOP + 163} fontSize="8" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
       </motion.g>
 
       {/* 애니메이션 도트 */}
@@ -268,21 +268,21 @@ function Section01() {
           {/* LEFT: num + title */}
           <FadeUp className="px-12 py-10 [box-shadow:1px_0_0_var(--color-border-default)] max-md:[box-shadow:none] max-md:px-6 max-md:pb-5">
             <div className="inline-flex items-center gap-3 mb-5">
-              <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717]" style={EN}>01</span>
+              <span className="w-8 h-8 flex items-center justify-center text-[13px] font-bold text-white bg-[#171717]" style={EN}>01</span>
               <div className="w-10 h-px bg-[#eaeaea]" />
             </div>
-            <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-[#171717] tracking-[-0.02em] leading-[1.25]">
+            <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25]">
               모든 채널<span className="comma">,</span> 화면은 하나
             </h3>
           </FadeUp>
 
           {/* RIGHT: desc + chips */}
           <FadeUp delay={0.1} className="px-12 py-10 flex flex-col justify-center max-md:px-6 max-md:pt-0 max-md:pb-8">
-            <p className="text-[15px] text-[#333] leading-[1.45] tracking-[-0.02em] mb-5">
+            <p className="text-[15px] text-text-body leading-[1.45] tracking-[-0.02em] mb-5">
               흩어진 데이터를 안전하게 수집하고<br />하나의 대시보드로 통합합니다.
             </p>
             {/* Connected platforms label */}
-            <p className="text-[10px] font-semibold text-[#999] tracking-[0.08em] uppercase mb-2 max-md:hidden" style={{ fontFamily: 'var(--font-en)' }}>
+            <p className="text-[10px] font-semibold text-text-muted tracking-[0.08em] uppercase mb-2 max-md:hidden" style={{ fontFamily: 'var(--font-en)' }}>
               Connected Platforms
             </p>
             {/* Platform chips */}
@@ -291,7 +291,7 @@ function Section01() {
                 <span
                   key={name}
                   className="text-[11px] font-medium px-2.5 py-1"
-                  style={{ border: '1px solid #e0e0e0', color: '#333', fontFamily: 'var(--font-en)' }}
+                  style={{ border: '1px solid #eaeaea', color: '#333', fontFamily: 'var(--font-en)' }}
                 >
                   {name}
                 </span>
@@ -326,7 +326,7 @@ function AIAnalysis({ title, children }: { title: string; children: ReactNode })
   return (
     <div className="ai-card" style={{ borderLeft: '2px solid #0070f3', paddingLeft: 10, marginBottom: 12 }}>
       <p style={{ fontSize: 13, fontWeight: 600, color: '#171717', marginBottom: 4 }}>{title}</p>
-      <div style={{ fontSize: 12, fontWeight: 400, color: '#555', lineHeight: 1.7 }}>{children}</div>
+      <div style={{ fontSize: 13, fontWeight: 400, color: '#666', lineHeight: 1.65 }}>{children}</div>
     </div>
   );
 }
@@ -343,12 +343,12 @@ function Sales01Card() {
       <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 14 }}>
         {kpis.map((k) => (
           <div key={k.label} style={{ padding: '10px 0', borderBottom: '1px solid #f0f0f0' }}>
-            <p style={{ fontSize: 10, color: '#888', marginBottom: 3 }}>{k.label}</p>
+            <p style={{ fontSize: 10, color: '#999', marginBottom: 3 }}>{k.label}</p>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 3 }}>
               <p style={{ fontSize: 14, fontWeight: 700, color: '#171717', lineHeight: 1, ...EN }}>{k.value}</p>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#ef4444', ...EN }}>{k.delta}</span>
             </div>
-            <p style={{ fontSize: 10, color: '#bbb' }}>{k.sub}</p>
+            <p style={{ fontSize: 10, color: '#999' }}>{k.sub}</p>
           </div>
         ))}
       </div>
@@ -376,7 +376,7 @@ function Funnel03Card() {
       {/* Title */}
       {/* 음수 마진 3rem = 부모 px-12(48px)와 동기(세로선 스냅 2026-07-11) */}
       <div className="mx-[-3rem] mt-[-2.5rem] px-[3rem] max-md:mx-[-1.5rem] max-md:mt-[-2rem] max-md:px-[1.5rem]" style={{ background: '#f0f0f0', borderBottom: '1px solid var(--color-border-default)', minHeight: 96, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 16 }}>
-        <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Customer Journey</p>
+        <p style={{ fontSize: 10, fontWeight: 400, color: '#666', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Customer Journey</p>
         <p style={{ fontSize: 20, fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>방문부터 구매까지 전환 흐름을 분석합니다.</p>
       </div>
       <div className="grid grid-cols-2 max-md:grid-cols-1 items-center">
@@ -386,8 +386,8 @@ function Funnel03Card() {
             {rows.map((r) => (
               <div key={r.label}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                  <span style={{ fontSize: 9, color: '#555' }}>{r.label}</span>
-                  {r.cvr && <span style={{ fontSize: 8, color: '#888', ...EN }}>{r.cvr}</span>}
+                  <span style={{ fontSize: 9, color: '#666' }}>{r.label}</span>
+                  {r.cvr && <span style={{ fontSize: 8, color: '#999', ...EN }}>{r.cvr}</span>}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <div style={{ flex: 1, height: 20, background: '#f0f0f0', overflow: 'hidden' }}>
@@ -408,7 +408,7 @@ function Funnel03Card() {
                 { label: '전체 구매전환율', value: '1.50%', red: false },
               ].map((s) => (
                 <div key={s.label}>
-                  <p style={{ fontSize: 7, color: '#999', marginBottom: 1 }}>{s.label}</p>
+                  <p style={{ fontSize: 8, color: '#999', marginBottom: 1 }}>{s.label}</p>
                   <p style={{ fontSize: 11, fontWeight: 700, color: s.red ? '#ef4444' : '#171717', ...EN }}>{s.value}</p>
                 </div>
               ))}
@@ -481,7 +481,7 @@ function Market07Card() {
     <div>
       {/* Title */}
       <div className="mx-[-2.5rem] mt-[-2.5rem] px-[2.5rem] max-md:mx-[-1.5rem] max-md:mt-[-2rem] max-md:px-[1.5rem]" style={{ background: '#f0f0f0', borderBottom: '1px solid var(--color-border-default)', minHeight: 96, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 16 }}>
-        <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Market Trend</p>
+        <p style={{ fontSize: 10, fontWeight: 400, color: '#666', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Market Trend</p>
         <p style={{ fontSize: 20, fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>전월 시장 트렌드와 자사몰 판매상품을 비교 분석합니다.</p>
       </div>
       {/* Top: comparison table */}
@@ -531,7 +531,7 @@ function ActionPlan09Card() {
         ].map((card, i) => (
           <div key={i} style={{ flex: 1, padding: '12px 0', borderBottom: '1px solid #eaeaea' }}>
             <p style={{ fontSize: 13, fontWeight: 600, color: '#171717', marginBottom: 5 }}>{card.title}</p>
-            <p style={{ fontSize: 12, fontWeight: 400, color: '#555', lineHeight: 1.7, margin: 0 }}>{card.body}</p>
+            <p style={{ fontSize: 13, fontWeight: 400, color: '#666', lineHeight: 1.65, margin: 0 }}>{card.body}</p>
           </div>
         ))}
       </div>
@@ -564,13 +564,13 @@ function Section02() {
         >
           <FadeUp className="px-12 py-14 flex flex-col justify-center max-md:px-6 max-md:pb-8">
             <div className="inline-flex items-center gap-3 mb-5">
-              <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-[#171717] bg-white" style={EN}>02</span>
+              <span className="w-8 h-8 flex items-center justify-center text-[13px] font-bold text-text-primary bg-white" style={EN}>02</span>
               <div className="w-10 h-px bg-white/20" />
             </div>
             <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-white tracking-[-0.02em] leading-[1.25] mb-5">
               NGN 마케터의 기준으로<br />매월 1일, 전략 리포트
             </h3>
-            <p className="text-[15px] leading-[1.6] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <p className="text-[15px] leading-[1.65] tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.55)' }}>
               단순 성과 집계가 아닙니다. NGN 마케터가 설계한 분석 기준으로 AI가 데이터를 해석하고 다음 달 전략을 제시합니다.
             </p>
             {/* "예시 화면" 라벨 — 콜드 리드 지적("도전적 시나리오 +15~25%" 과장 의심) 대응 */}
@@ -583,7 +583,7 @@ function Section02() {
             className="px-10 flex flex-col justify-center border-b border-border-default max-md:px-6"
             style={{ minHeight: 96, background: '#f0f0f0' }}
           >
-            <p style={{ fontSize: 10, fontWeight: 400, color: '#555', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Action Plan</p>
+            <p style={{ fontSize: 10, fontWeight: 400, color: '#666', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-en)', marginBottom: 3 }}>Action Plan</p>
             <p className="text-[20px] md:text-[16px]" style={{ fontWeight: 700, color: '#171717', letterSpacing: '-0.03em', lineHeight: 1.25 }}>다음 달을 위한 핵심 실행 전략을 제안합니다.</p>
           </div>
           <FadeUp delay={0.1} className="flex-1 px-10 pt-5 pb-10 flex flex-col max-md:px-6">
@@ -729,11 +729,11 @@ export function PhoneMockup() {
                       ].map((r) => (
                         <div key={r.tag} style={{ border: '1px solid #eaeaea', overflow: 'hidden' }}>
                           <div style={{ height: 64, backgroundImage: `url(${r.img})`, backgroundSize: 'cover', backgroundPosition: 'center top', position: 'relative', display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end', padding: 4 }}>
-                            <span style={{ fontSize: 6, fontWeight: 600, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '1px 4px', ...EN }}>Sponsored</span>
+                            <span style={{ fontSize: 8, fontWeight: 600, color: '#fff', background: 'rgba(0,0,0,0.45)', padding: '1px 4px', ...EN }}>Sponsored</span>
                           </div>
                           <div style={{ padding: '6px 8px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 3 }}>
-                              <span style={{ fontSize: 6, fontWeight: 700, color: '#fff', background: r.color, padding: '1px 3px', ...EN }}>{r.tag}</span>
+                              <span style={{ fontSize: 8, fontWeight: 700, color: '#fff', background: r.color, padding: '1px 3px', ...EN }}>{r.tag}</span>
                               <span style={{ fontSize: 8, fontWeight: 600, color: '#171717' }}>{r.campaign}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 8 }}>
@@ -785,13 +785,13 @@ export function Section03() {
           {/* LEFT: Text */}
           <motion.div variants={staggerContainer} className="max-md:order-first">
             <motion.div variants={springPop} className="flex items-center gap-3 mb-5">
-              <span className="w-8 h-8 flex items-center justify-center text-[12px] font-bold text-white bg-[#171717] shrink-0" style={EN}>03</span>
+              <span className="w-8 h-8 flex items-center justify-center text-[13px] font-bold text-white bg-[#171717] shrink-0" style={EN}>03</span>
               <div className="flex-1 h-px bg-[#eaeaea]" />
             </motion.div>
-            <motion.h3 variants={springPop} className="text-[clamp(22px,3vw,30px)] font-bold text-[#171717] tracking-[-0.02em] leading-[1.25] mb-4">
+            <motion.h3 variants={springPop} className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-4">
               언제 어디서든 관리
             </motion.h3>
-            <motion.p variants={springPop} className="text-[15px] text-[#333] leading-[1.7] mb-5">
+            <motion.p variants={springPop} className="text-[15px] text-text-body leading-[1.65] mb-5">
               외근 중에도, 이동 중에도. 매출과 광고 성과를 확인하고, 트렌드를 파악하고, 예산을 바로 조정합니다.
             </motion.p>
             {[
@@ -801,7 +801,7 @@ export function Section03() {
             ].map((item) => (
               <motion.div key={item} variants={springPop} className="flex items-center gap-2 mb-2">
                 <span className="w-1.5 h-1.5 bg-accent shrink-0" />
-                <span className="text-[14px] text-[#444]">{item}</span>
+                <span className="text-[14px] text-text-body">{item}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -837,7 +837,7 @@ export default function DashboardShowcase() {
             <FadeUp className="flex-1 flex flex-col">
               <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center items-center text-center gap-7 max-md:px-6 max-md:py-10">
                 <p
-                  className="leading-[0.9] tracking-[-0.01em] text-white select-none"
+                  className="leading-[0.9] tracking-[-0.02em] text-white select-none"
                   style={{ fontSize: 'clamp(44px, 6vw, 72px)', fontFamily: "'Inter Tight', sans-serif", fontWeight: 800 }}
                 >
                   Dashboard
@@ -848,7 +848,7 @@ export default function DashboardShowcase() {
                   rel="noopener noreferrer"
                   className="rounded-pill inline-flex items-center justify-between gap-4 bg-white pl-6 pr-2 py-2 hover:bg-[#f0f0f0] transition-colors duration-200 max-w-[280px] w-full"
                 >
-                  <span className="text-[14px] font-bold text-[#171717] tracking-[-0.01em]">직접 데모 경험하기</span>
+                  <span className="text-[14px] font-bold text-text-primary tracking-[-0.02em]">직접 데모 경험하기</span>
                   <span className="rounded-dot w-9 h-9 bg-[#171717] flex items-center justify-center shrink-0">
                     <svg className="w-4 h-4 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 8h8M9 5l3 3-3 3" /></svg>
                   </span>
@@ -861,16 +861,16 @@ export default function DashboardShowcase() {
           <div className="flex flex-col">
             <FadeUp delay={0.1} className="flex-1 flex flex-col">
               <div className="flex-1 px-12 py-12 md:py-20 flex flex-col justify-center max-md:px-6 max-md:py-10">
-                <p className="text-[13px] font-semibold text-accent tracking-[0.1em] uppercase mb-4" style={EN}>Dashboard</p>
+                <p className="text-[13px] font-semibold text-accent tracking-[0.08em] uppercase mb-4" style={EN}>Dashboard</p>
                 <h2 className="text-[clamp(24px,3vw,36px)] font-semibold text-white tracking-[-0.03em] leading-[1.15] mb-4">
                   매출·광고·방문자 데이터를<br />한 화면에서
                 </h2>
-                <p className="text-[15px] leading-[1.6] mb-6 font-light tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                <p className="text-[15px] leading-[1.65] mb-6 font-light tracking-[-0.02em]" style={{ color: 'rgba(255,255,255,0.5)' }}>
                   카페24 매출, 메타·구글 광고, GA4 방문자 — 하나의 대시보드에서 실시간 확인.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {['Cafe24 API', 'Google GA4', 'Meta Ads API', 'AI'].map((tag) => (
-                    <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#111', ...EN }}>{tag}</span>
+                    <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ background: '#fff', color: '#171717', ...EN }}>{tag}</span>
                   ))}
                 </div>
               </div>

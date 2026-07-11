@@ -23,7 +23,7 @@ export default function CTA() {
         <div className="flex justify-center gap-3 mb-5 relative z-[1] max-sm:flex-col max-sm:items-center">
           <Link
             href={cta.primaryHref}
-            className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#e0e0e0] hover:border-[#e0e0e0] transition-all"
+            className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] hover:border-[#eaeaea] transition-all"
           >
             {cta.primaryText}
           </Link>

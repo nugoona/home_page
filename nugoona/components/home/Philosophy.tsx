@@ -19,7 +19,7 @@ export default function Philosophy() {
           />
         </FadeUp>
         <FadeUp delay={0.12}>
-          <p className="text-[17px] text-text-body leading-[1.7]">{philosophy.body}</p>
+          <p className="text-[16px] text-text-body leading-[1.65]">{philosophy.body}</p>
         </FadeUp>
       </div>
     </div>

@@ -83,11 +83,11 @@ function ResultWindow({
         <div className="flex-1 min-w-0 p-3 flex flex-col justify-center">
           <div className="flex items-center gap-1.5">
             <span className="rounded-dot w-1.5 h-1.5 shrink-0" style={{ background: dot }} />
-            <span className="text-[12px] font-bold text-text-primary truncate">오늘의 브런치, 성수</span>
+            <span className="text-[13px] font-bold text-text-primary truncate">오늘의 브런치, 성수</span>
           </div>
 
           {!minimal && quote && (
-            <p className="text-[11px] leading-[1.6] mt-2 text-text-body" style={QUOTE}>&ldquo;{quote}&rdquo;</p>
+            <p className="text-[11px] leading-[1.5] mt-2 text-text-body" style={QUOTE}>&ldquo;{quote}&rdquo;</p>
           )}
 
           {!minimal && channel && (
@@ -147,7 +147,7 @@ export default function S12_MapExposure() {
         >
           <Chrome url="blog.naver.com" />
           <div className="p-3.5">
-            <div className="text-[13px] font-bold text-text-primary tracking-[-0.01em] leading-snug mb-2.5 truncate">
+            <div className="text-[13px] font-bold text-text-primary tracking-[-0.02em] leading-snug mb-2.5 truncate">
               성수동 골목에서 제철 딸기로 여는 아침
             </div>
             <div className="flex items-center gap-1.5 pt-2 border-t" style={{ borderColor: '#f2f2f2' }}>
@@ -198,9 +198,9 @@ export default function S12_MapExposure() {
 
       <motion.p
         initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 1 }}
-        className="text-[11px] text-text-weak leading-[1.7] mt-6 max-w-[900px]"
+        className="text-[11px] text-text-weak leading-[1.65] mt-6 max-w-[900px]"
       >
-        채널은 <span className="font-medium text-text-muted">처음 한 번만 연결</span>합니다. 네이버 연결은 담당자가 함께 진행해 드립니다.
+        채널은 <span className="font-medium text-text-body">처음 한 번만 연결</span>합니다. 네이버 연결은 담당자가 함께 진행해 드립니다.
       </motion.p>
     </div>
   );

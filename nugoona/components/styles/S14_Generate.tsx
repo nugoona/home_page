@@ -35,7 +35,7 @@ export default function S14_Generate() {
 
   return (
     <div ref={ref} className="w-full">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.1em] mb-4" style={{ ...EN, color: '#a9aeb5' }}>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] mb-4" style={{ ...EN, color: '#a9aeb5' }}>
         가게 이름: 해도담 횟집 (속초)
       </p>
 
@@ -60,7 +60,7 @@ export default function S14_Generate() {
                 {c.n}
               </span>
               <div>
-                <p className={`text-[13.5px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
+                <p className={`text-[13px] text-text-primary leading-tight flex items-center gap-1.5 ${i === 1 ? 'font-extrabold' : 'font-bold'}`}>
                   {c.t}
                   {i === 1 && (
                     <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke={ACCENT} strokeWidth="1.8" className="shrink-0" aria-hidden>

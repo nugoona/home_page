@@ -69,7 +69,7 @@ export default function StoryStep({
             style={{
               fontSize: 13,
               fontWeight: 700,
-              letterSpacing: '0.12em',
+              letterSpacing: '0.08em',
               color: dark ? '#0070f3' : '#0070f3',
               ...EN,
             }}
@@ -87,7 +87,7 @@ export default function StoryStep({
           style={{
             fontSize: 'clamp(36px, 5vw, 56px)',
             fontWeight: 800,
-            letterSpacing: '-0.035em',
+            letterSpacing: '-0.03em',
             lineHeight: 1.12,
             color: dark ? '#ffffff' : '#171717',
             margin: '24px 0 24px',
@@ -103,7 +103,7 @@ export default function StoryStep({
           style={{
             fontSize: 18,
             color: dark ? 'rgba(255,255,255,0.5)' : '#666',
-            lineHeight: 1.7,
+            lineHeight: 1.65,
             maxWidth: 540,
             marginBottom: 72,
           }}
