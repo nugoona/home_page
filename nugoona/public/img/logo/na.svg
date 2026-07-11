@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 광고 제품 아이콘 — 로고 시스템(직각·톤온톤) 2026-07-11 확정. 최종 벡터(패스화)는 외주 마감 예정 -->
-  <rect width="512" height="512" fill="#0a1f4d"/>
-  <text x="256" y="256" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="302" letter-spacing="-13" fill="#3e8bff">Na</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 512">
+  <!-- 누구나 광고 제품 아이콘 — 로고 시스템(직각·톤온톤·세로 직사각 어도비 CC방식) 2026-07-12 -->
+  <rect width="440" height="512" fill="#0a1f4d"/>
+  <text x="220" y="262" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="258" letter-spacing="-11" fill="#3e8bff">Na</text>
 </svg>

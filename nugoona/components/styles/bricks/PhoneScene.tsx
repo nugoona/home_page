@@ -25,13 +25,9 @@ export default function PhoneScene() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, ease: EASE }}
         >
-          <div className="inline-flex items-center gap-2 mb-6">
-            <span
-              className="inline-flex items-center justify-center w-7 h-7 text-[15px] font-bold text-white"
-              style={{ background: '#2fd46b', fontFamily: 'var(--font-en)' }}
-            >
-              N
-            </span>
+          <div className="inline-flex items-center gap-2.5 mb-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/logo/nc.svg" alt="누구나 콘텐츠 로고" style={{ height: 34, width: 'auto', display: 'block' }} />
             <span className="text-[15px] font-semibold text-text-primary tracking-[-0.01em]">누구나 콘텐츠</span>
           </div>
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
@@ -66,7 +62,7 @@ export default function PhoneScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-end"
         >
-          <div style={{ position: 'relative', width: 300, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
+          <div style={{ position: 'relative', width: 360, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
             {/* 화면 영역 = 앱 스샷 (프레임 아래 레이어) */}
             <div
               style={{
