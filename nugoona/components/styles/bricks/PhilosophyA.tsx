@@ -4,32 +4,37 @@ import FadeUp from '@/components/motion/FadeUp';
 import { philosophy } from '@/lib/content/home';
 
 /**
- * 벽돌3 · 철학 시안 A — 절제 중앙형(현행 정제)
- * 목업 없음(§8.7-H). 상단 연도 오버라인으로 "15년의 축적"을 사실로 거든다(순위·보장 아님).
- * 톤: 라이트 · 브랜드 블루 accent · 직각 · 미니멀.
+ * 벽돌3 · 철학 롱폼 시안 A — 중앙 세로 서사 (글이 주인공, 미니멀)
+ * 여는 문장 → 3막 세로. 각 막 = 번호 + 제목 + 본문. 목업 없음.
+ * 톤: 라이트 · 브랜드 블루 accent · 직각 · 담백.
  */
 export default function PhilosophyA() {
   return (
-    <div className="py-[120px] px-12 max-md:py-16 max-md:px-6 flex justify-center bg-white">
-      <div className="max-w-[660px] text-center">
+    <div className="bg-white py-[120px] px-6 max-md:py-16 flex justify-center">
+      <div className="w-full max-w-[720px]">
         <FadeUp>
-          <div className="mb-7 flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-[#d5dae1]" />
-            <span className="text-[13px] font-semibold tracking-[0.14em] text-[#0070f3]">2011 — 2026</span>
-            <span className="h-px w-8 bg-[#d5dae1]" />
-          </div>
-        </FadeUp>
-        <FadeUp delay={0.08}>
-          <h2
-            className="text-[clamp(30px,4.4vw,46px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.15] mb-7"
-            dangerouslySetInnerHTML={{ __html: philosophy.heading }}
-          />
-        </FadeUp>
-        <FadeUp delay={0.16}>
-          <p className="text-[17px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.7]">
-            {philosophy.body}
+          <p className="text-center text-[15px] max-md:text-[14px] text-text-weak mb-16 max-md:mb-12">
+            {philosophy.opening}
           </p>
         </FadeUp>
+
+        <div className="flex flex-col gap-14 max-md:gap-11">
+          {philosophy.acts.map((act, i) => (
+            <FadeUp key={i} delay={0.08 * i}>
+              <div className="text-center">
+                <span className="mb-4 inline-block text-[13px] font-bold tracking-[0.1em] text-[#0070f3]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mb-4 text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.3]">
+                  {act.title}
+                </h3>
+                <p className="mx-auto max-w-[600px] text-[17px] max-md:text-[16px] text-text-body leading-[1.85]">
+                  {act.body}
+                </p>
+              </div>
+            </FadeUp>
+          ))}
+        </div>
       </div>
     </div>
   );

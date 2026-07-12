@@ -26,17 +26,17 @@ export default function LabPhilosophy() {
     <main className="bg-white min-h-screen">
       <div className="border-b border-border-default px-6 py-5">
         <p className="text-[12px] font-semibold text-accent tracking-[0.08em] uppercase mb-1" style={EN}>Brick 03 · Philosophy</p>
-        <h1 className="text-[20px] max-md:text-[18px] font-bold text-text-primary">철학 섹션 시안 3종 (텍스트 주인공 · 목업 없음)</h1>
-        <p className="text-[14px] text-text-weak mt-1">헤드 “15년 동안 같은 고민을 만났습니다” — 조판·분위기만 변주. 순위·파스텔·IT도식 없음.</p>
+        <h1 className="text-[20px] max-md:text-[18px] font-bold text-text-primary">철학 롱폼 3막 시안 3종 (글이 주인공 · A안 확정 카피)</h1>
+        <p className="text-[14px] text-text-weak mt-1">“마케팅은 늘 남의 일 → 규칙이 바뀜 → 직접 할 수 있게” 3막. 레이아웃만 변주. 순위·파스텔·IT도식 없음.</p>
       </div>
 
-      <Label tag="Option A" title="절제 중앙형" note="현행 정제 + 연도 오버라인(2011—2026). 가장 안전·미니멀." />
+      <Label tag="Option A" title="중앙 세로 서사 (글만)" note="여는 문장 → 3막 세로 중앙정렬. 가장 담백·미니멀. 현 홈 본편 잠정안." />
       <div id="opt-a"><PhilosophyA /></div>
 
-      <Label tag="Option B" title="좌우 2단 + 시간축" note="좌 헤딩 / 우 본문 + 세로 연도 축. ‘축적’을 사실로 거든다." />
+      <Label tag="Option B" title="좌 제목 / 우 본문 2단" note="에디토리얼. 막마다 좌측 제목·우측 본문 + 얇은 구분선." />
       <div id="opt-b"><PhilosophyB /></div>
 
-      <Label tag="Option C" title="창업자 편지형" note="좌측 accent 바 + 왼쪽정렬 + 회사 서명. 목소리·진정성." />
+      <Label tag="Option C" title="글 + 실물 지그재그" note="2막에 정직 측정 실물, 3막에 앱 실물을 곁들임(‘내용과 함께 보여주고’)." />
       <div id="opt-c"><PhilosophyC /></div>
     </main>
   );
