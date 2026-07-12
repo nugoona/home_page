@@ -129,7 +129,7 @@ const HEAD: Record<HeaderTone, { bar: string; name: string; icon: string; av: st
 };
 
 /* ── 누구나 광고 · AI 챗봇(카카오톡 톤 메신저 — 파란 배경/무대 제거, 원형 프로필·이름·시간) ── */
-export function AdChatMock({ header = 'white' }: { header?: HeaderTone }) {
+export function AdChatMock({ header = 'slate' }: { header?: HeaderTone }) {
   const h = HEAD[header];
   return (
     <div className="w-[340px] max-md:w-[300px] rounded-[18px] overflow-hidden shadow-[var(--shadow-mock)] bg-[#eef1f4]">
