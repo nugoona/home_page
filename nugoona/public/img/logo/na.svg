@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 광고 아이콘 — 직각 + 브랜드/앱 블루(#0070f3) 배경 + 흰 글자. 콘텐츠/광고 구분은 글자(Nc/Na). 2026-07-12 -->
-  <rect width="512" height="512" fill="#0070f3"/>
-  <text x="236" y="236" text-anchor="middle" dominant-baseline="central" font-family="'Inter Tight','Segoe UI',Arial,sans-serif" font-weight="800" font-size="384" letter-spacing="-34" fill="#ffffff">Na</text>
+  <!-- 누구나 광고 아이콘 — 5번(system-ui) 폰트. 어두운 네이비 배경 + 밝은 블루 글자 + 정중앙. 2026-07-12 -->
+  <rect width="512" height="512" fill="#0a1f4d"/>
+  <text x="266" y="262" text-anchor="middle" dominant-baseline="central" font-family="system-ui, 'Segoe UI', -apple-system, Roboto, sans-serif" font-weight="800" font-size="300" letter-spacing="-18" fill="#4d9fff">Na</text>
 </svg>

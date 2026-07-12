@@ -27,7 +27,7 @@ export default function PhoneScene() {
         >
           <div className="inline-flex items-center gap-2.5 mb-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/nc.svg?v=6" alt="누구나 콘텐츠 로고" style={{ height: 30, width: 30, display: 'block' }} />
+            <img src="/img/logo/nc.svg?v=8" alt="누구나 콘텐츠 로고" style={{ height: 30, width: 30, display: 'block' }} />
             <span className="text-[15px] font-semibold text-text-primary tracking-[-0.01em]">누구나 콘텐츠</span>
           </div>
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
