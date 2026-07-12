@@ -54,10 +54,6 @@ export default function PromiseTimeline() {
                     <span className="text-[11px] font-semibold" style={{ color: TAG[item.product] }}>
                       {item.product}
                     </span>
-                    {/* 반복 각인 — 매 업데이트가 무료였음 */}
-                    <span className="ml-auto text-[10px] font-bold tracking-[0.03em] text-white/75 px-1.5 py-[3px] rounded-[3px] border border-white/25 bg-white/[0.04]">
-                      무료
-                    </span>
                   </div>
                   <p className="mt-1 text-[15px] leading-[1.5] text-white/85">{item.text}</p>
                 </div>
@@ -72,12 +68,7 @@ export default function PromiseTimeline() {
                   className="absolute -left-7 top-[6px] w-[9px] h-[9px] rounded-full bg-accent animate-pulse"
                   style={{ boxShadow: '0 0 0 3px rgba(0,112,243,0.25)' }}
                 />
-                <div className="flex items-center gap-2.5">
-                  <span className="text-[13px] tabular-nums text-accent" style={EN}>NOW</span>
-                  <span className="ml-auto text-[10px] font-semibold tracking-[0.02em] text-accent px-1.5 py-[3px] rounded-[3px] border border-accent/40">
-                    무료
-                  </span>
-                </div>
+                <span className="text-[13px] tabular-nums text-accent" style={EN}>NOW</span>
                 <p className="mt-1 text-[15px] leading-[1.5] font-semibold text-white">지금도 계속 업데이트됩니다.</p>
               </div>
             </FadeUp>
