@@ -9,7 +9,7 @@ import { hero } from '@/lib/content/home';
    컨셉: "빔 캔버스 진화" — 사장님 원작(HeroAurora/BeamCanvas) 계승·강화
    경쟁 시안 4개 중 하나. 원작 문법(12×8/6×10 격자·크로스헤어·필름노이즈·순회 빔)은
    그대로 두고, 아래 4가지로 밀도·정밀도·이벤트를 강화한다.
-     1) 빔 두 줄기에 제품색(콘텐츠 그린 #2fd46b · 광고 블루 #3e8bff)을 입혀
+     1) 빔 두 줄기에 로고색(콘텐츠 NC #4d9fff · 광고 NA #29d5ff)을 입혀
         "두 제품 회사"를 배경 자체로 암시.
      2) 4코너 십자선(원작 crosshair — 격자 선 교차점에 얹혀 선을 관통) + 좌표풍 라벨.
      3) 빔의 머리가 크로스헤어 코너를 지날 때마다 그 지점이 제품색으로
@@ -53,8 +53,8 @@ const MOB_BL: Pt = { x: 1 / 6, y: 9 / 10 };
 const MOB_LOOP_A: Pt[] = [MOB_TL, MOB_TR, MOB_BR, MOB_BL];
 const MOB_LOOP_B: Pt[] = [MOB_BR, MOB_BL, MOB_TL, MOB_TR];
 
-const GREEN = '47,212,107'; // 콘텐츠
-const BLUE = '62,139,255';  // 광고
+const BEAM_NC = '77,159,255'; // 콘텐츠 빔 = NC 로고색 밝은블루 #4d9fff (옛 그린 #2fd46b 폐기 2026-07-12)
+const BEAM_NA = '41,213,255'; // 광고 빔 = NA 로고색 시안 #29d5ff (옛 임의블루 #3e8bff 폐기)
 
 /* 크로스헤어 백분율(위 코너 좌표와 동일 값 — 원작과 같은 격자 선 교차점) */
 const DESK_CROSS = { top: 12.5, bottom: 87.5, left: 8.3333, right: 91.6667 };
@@ -104,7 +104,7 @@ function GridLines({
   );
 }
 
-/* ── 빔 캔버스: 그린/블루 두 줄기 + 헤드 글로우 + 코너 버스트 ── */
+/* ── 빔 캔버스: 두 줄기(NC 블루·NA 시안) + 헤드 글로우 + 코너 버스트 ── */
 function HeroBeams() {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -199,11 +199,11 @@ function HeroBeams() {
       const tNorm = (elapsed % dur) / dur;
 
       if (isDesk) {
-        drawBeam(tNorm, DESK_LOOP_A, GREEN);
-        drawBeam((tNorm + 0.5) % 1, DESK_LOOP_B, BLUE);
+        drawBeam(tNorm, DESK_LOOP_A, BEAM_NC);
+        drawBeam((tNorm + 0.5) % 1, DESK_LOOP_B, BEAM_NA);
       } else {
-        drawBeam(tNorm, MOB_LOOP_A, GREEN);
-        drawBeam((tNorm + 0.5) % 1, MOB_LOOP_B, BLUE);
+        drawBeam(tNorm, MOB_LOOP_A, BEAM_NC);
+        drawBeam((tNorm + 0.5) % 1, MOB_LOOP_B, BEAM_NA);
       }
 
       raf = requestAnimationFrame(frame);
@@ -265,7 +265,7 @@ export default function HeroB() {
         }}
       />
 
-      {/* ── 빔: 그린(콘텐츠) + 블루(광고) 순회 + 코너 버스트 (강화 포인트 ①③) ── */}
+      {/* ── 빔: NC 블루(콘텐츠) + NA 시안(광고) 순회 + 코너 버스트 (강화 포인트 ①③) ── */}
       <HeroBeams />
 
       {/* ── 코너 브래킷 — 데스크톱만 (content rect 경계 표시) ── */}
@@ -283,11 +283,11 @@ export default function HeroB() {
       <CornerLabel className="bottom-4 left-4 md:bottom-6 md:left-6">
         <span className="inline-flex items-center gap-3">
           <span className="inline-flex items-center gap-1.5">
-            <span className="rounded-dot inline-block" style={{ width: 6, height: 6, background: '#2fd46b' }} />
+            <span className="rounded-dot inline-block" style={{ width: 6, height: 6, background: '#4d9fff' }} />
             콘텐츠
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="rounded-dot inline-block" style={{ width: 6, height: 6, background: '#3e8bff' }} />
+            <span className="rounded-dot inline-block" style={{ width: 6, height: 6, background: '#29d5ff' }} />
             광고
           </span>
         </span>
