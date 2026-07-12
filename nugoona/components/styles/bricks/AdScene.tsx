@@ -24,7 +24,7 @@ export default function AdScene() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-          className="flex justify-center md:justify-start order-2 md:order-1"
+          className="flex justify-center md:justify-start order-2 md:order-1 min-w-0"
         >
           <div style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
             <div
