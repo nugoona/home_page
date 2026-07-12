@@ -7,8 +7,10 @@
  */
 
 import { philosophy } from '@/lib/content/home';
+import { AdChatMock } from '@/components/styles/bricks/PhilosophyMocks';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
+const act3 = philosophy.acts[2]; // 3막 "그래서, 직접 할 수 있게"
 const IMG = '/shots/content/mock-rank-detail.png'; // 검정 배경 폰 통짜(대조군)
 const CROP = '/shots/content/rank-crop.png'; // 화면 카드만 크롭(깨끗)
 const act = philosophy.acts[1]; // 2막 "그런데 규칙이 바뀌었습니다"
@@ -110,6 +112,20 @@ export default function LabPhilosophyMock() {
       <Row tag="Form 3 ★" title="앱 창 프레임 (홈페이지용 새 목업)" note="요식업 지역 키워드 + 노출 위치(1페이지/27위/안 보임)를 배지로 강조. 정직 측정.">
         <Text />
         <RankMock />
+      </Row>
+
+      {/* ★ 3막 = 누구나 광고 AI 챗봇 (콘텐츠·광고 균형) */}
+      <Row tag="3막 · 광고 ★" title="3막 = 누구나 광고 AI 챗봇" note="‘직접 할 수 있게’ 막에 광고 목업. 어려운 광고를 쉬운 말로 답 = 두 제품 균형.">
+        <div className="max-w-[440px]">
+          <span className="mb-4 inline-block text-[13px] font-bold tracking-[0.12em] text-[#0070f3]">03</span>
+          <h3 className="mb-5 text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.25]">{act3.title}</h3>
+          <div className="space-y-2">
+            {act3.lines.map((l, i) => (
+              <p key={i} className="text-[16px] text-text-body leading-[1.55]">{l}</p>
+            ))}
+          </div>
+        </div>
+        <AdChatMock />
       </Row>
 
       {/* ④ 글만 — 목업 없음 */}

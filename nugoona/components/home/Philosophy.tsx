@@ -2,27 +2,18 @@
 
 import FadeUp from '@/components/motion/FadeUp';
 import { philosophy } from '@/lib/content/home';
+import { RankMock, AdChatMock } from '@/components/styles/bricks/PhilosophyMocks';
 
 /**
- * S3 · 왜 만들었나 (라이트, 롱폼 3막 — 글 주인공 + 실물 지그재그 = 벽돌3 C안 확정)
+ * S3 · 왜 만들었나 (라이트, 롱폼 3막 — 글 주인공 + 목업 지그재그 = 벽돌3 C안 확정)
  * 카피 = home.ts philosophy(축약안 v1). lines[] = 문장 단위 줄바꿈.
- * 2막에 정직 측정 실물, 3막에 앱 실물을 곁들임(§8.7-I: 시각물은 각 막을 거듦).
+ * 2막=콘텐츠 노출 측정(RankMock) · 3막=광고 AI 챗봇(AdChatMock) — 두 제품 균형(§8.7-I 거듦).
  */
-const SHOTS: Record<number, { src: string; alt: string; side: 'left' | 'right' } | null> = {
+const MOCKS: Record<number, { node: React.ReactNode; side: 'left' | 'right' } | null> = {
   0: null,
-  1: { src: '/shots/content/mock-rank-detail.png', alt: '내 가게 노출 현황 — 있는 그대로 측정', side: 'right' },
-  2: { src: '/shots/content/app-home-mobile.jpg', alt: '직접 운영하는 앱 화면', side: 'left' },
+  1: { node: <RankMock />, side: 'right' },
+  2: { node: <AdChatMock />, side: 'left' },
 };
-
-function Shot({ src, alt }: { src: string; alt: string }) {
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className="w-[244px] max-md:w-[208px] shrink-0 max-md:mx-auto rounded-[14px] border border-border-default shadow-[0_18px_50px_-20px_rgba(15,23,42,0.35)]"
-    />
-  );
-}
 
 function Body({ title, lines, index }: { title: string; lines: string[]; index: number }) {
   return (
@@ -56,15 +47,13 @@ export default function Philosophy() {
 
         <div className="flex flex-col gap-24 max-md:gap-16">
           {philosophy.acts.map((act, i) => {
-            const shot = SHOTS[i];
+            const mock = MOCKS[i];
             const body = <Body title={act.title} lines={act.lines} index={i} />;
 
-            if (!shot) {
+            if (!mock) {
               return (
                 <FadeUp key={i}>
-                  <div className="mx-auto max-w-[560px] text-center max-md:text-left [&_.space-y-2]:inline-block">
-                    {body}
-                  </div>
+                  <div className="mx-auto max-w-[560px] text-center max-md:text-left">{body}</div>
                 </FadeUp>
               );
             }
@@ -72,15 +61,15 @@ export default function Philosophy() {
             return (
               <FadeUp key={i} delay={0.06}>
                 <div className="flex items-center justify-center gap-16 max-md:flex-col max-md:gap-8">
-                  {shot.side === 'left' ? (
+                  {mock.side === 'left' ? (
                     <>
-                      <Shot src={shot.src} alt={shot.alt} />
+                      {mock.node}
                       {body}
                     </>
                   ) : (
                     <>
                       {body}
-                      <Shot src={shot.src} alt={shot.alt} />
+                      {mock.node}
                     </>
                   )}
                 </div>
