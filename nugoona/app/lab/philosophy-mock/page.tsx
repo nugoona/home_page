@@ -7,54 +7,13 @@
  */
 
 import { philosophy } from '@/lib/content/home';
-import { AdChatMock } from '@/components/styles/bricks/PhilosophyMocks';
+import { RankMock, AdChatMock } from '@/components/styles/bricks/PhilosophyMocks';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
 const act3 = philosophy.acts[2]; // 3막 "그래서, 직접 할 수 있게"
 const IMG = '/shots/content/mock-rank-detail.png'; // 검정 배경 폰 통짜(대조군)
 const CROP = '/shots/content/rank-crop.png'; // 화면 카드만 크롭(깨끗)
 const act = philosophy.acts[1]; // 2막 "그런데 규칙이 바뀌었습니다"
-
-/* 홈페이지용 노출 측정 목업 — 요식업 지역 키워드 + 노출 위치 강조(정직 측정, A13). 짝퉁 아님(우리 앱 화면). */
-const ROWS = [
-  { kw: '공릉동 맛집', sub: '내 블로그 · 플레이스', badge: '1페이지', tone: 'good' as const },
-  { kw: '노원구 고깃집', sub: '글이 매일 발행되고 있어요', badge: '3페이지 · 27위', tone: 'mid' as const },
-  { kw: '공릉역 삼겹살', sub: '이제 막 시작했어요', badge: '아직 안 보임', tone: 'none' as const },
-];
-const TONE = {
-  good: 'bg-[#0070f3] text-white',
-  mid: 'bg-[#f59e0b] text-white',
-  none: 'bg-[#eef1f4] text-[#8b95a1]',
-};
-function RankMock() {
-  return (
-    <div id="rankmock" className="w-[300px] shrink-0 rounded-[14px] border border-border-default shadow-[0_16px_44px_-20px_rgba(15,23,42,0.3)] overflow-hidden bg-white">
-      <div className="flex items-center gap-1.5 px-3 h-8 bg-[#f1f4f8] border-b border-border-default">
-        <span className="w-2 h-2 rounded-full bg-[#cdd5df]" />
-        <span className="w-2 h-2 rounded-full bg-[#cdd5df]" />
-        <span className="w-2 h-2 rounded-full bg-[#cdd5df]" />
-        <span className="ml-2 text-[11px] text-text-weak" style={EN}>app.ngn.co.kr</span>
-      </div>
-      <div className="p-5">
-        <p className="text-[16px] font-bold text-text-primary">내 가게 노출</p>
-        <p className="text-[12px] text-text-weak mt-1 mb-4">검색하면 내 가게가 보이는지 매일 확인해요</p>
-        <div className="flex flex-col gap-2.5">
-          {ROWS.map((r) => (
-            <div key={r.kw} className="flex items-center justify-between rounded-[10px] border border-border-default px-3.5 py-3">
-              <div className="min-w-0">
-                <p className="text-[15px] font-semibold text-text-primary truncate">{r.kw}</p>
-                <p className="text-[11.5px] text-text-weak mt-0.5">{r.sub}</p>
-              </div>
-              <span className={`ml-3 shrink-0 rounded-full px-2.5 py-1 text-[12px] font-bold ${TONE[r.tone]}`}>
-                {r.badge}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Text() {
   return (
