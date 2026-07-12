@@ -29,7 +29,7 @@ export default function PromiseTimeline() {
           />
         </FadeUp>
         <FadeUp delay={0.12}>
-          <p className="mb-16 max-w-[600px] text-[16px] leading-[1.65] text-white/55">{promise.sub}</p>
+          <p className="mb-16 max-w-[600px] text-[16px] leading-[1.45] text-white/55">{promise.sub}</p>
         </FadeUp>
 
         {/* 세로 타임라인 */}
@@ -87,7 +87,7 @@ export default function PromiseTimeline() {
               </span>
               .
             </p>
-            <p className="mt-4 text-[15px] leading-[1.65] text-white/55 max-w-[520px]">
+            <p className="mt-4 text-[15px] leading-[1.45] text-white/55 max-w-[520px]">
               한 번 시작한 요금 그대로, 새로 더해지는 기능을 계속 받습니다. 오래 쓸수록 더 좋아집니다.
             </p>
           </div>

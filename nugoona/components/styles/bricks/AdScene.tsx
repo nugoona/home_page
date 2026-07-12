@@ -26,7 +26,13 @@ export default function AdScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-start order-2 md:order-1 min-w-0"
         >
-          <div style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
+          {/* 모바일: 앱 스샷을 1px 검은 박스로 크게(하단 크롭) — 사장님 2026-07-12 */}
+          <div className="md:hidden w-full max-w-[400px] rounded-[26px] border border-[#111] overflow-hidden bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)]" style={{ maxHeight: 560 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/shots/content/app-dashboard-mobile.jpg" alt="누구나 광고 앱 대시보드 — 순매출·주문·방문자·광고 성과(ROAS)" className="block w-full" />
+          </div>
+          {/* PC: 실사 아이폰 목업 */}
+          <div className="max-md:hidden" style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
             <div
               style={{
                 position: 'absolute',
@@ -83,7 +89,7 @@ export default function AdScene() {
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
             광고를 <span style={{ color: BLUE }}>직접</span> 하고 싶습니다
           </h2>
-          <p className="text-text-body text-[16px] leading-[1.65] max-w-[420px] mb-8">
+          <p className="text-text-body text-[16px] leading-[1.45] max-w-[420px] mb-8">
             메타와 구글 광고를 만들고, 성과까지 한 화면에서 확인합니다.
           </p>
           <div className="flex items-center gap-4">

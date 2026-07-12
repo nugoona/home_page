@@ -26,7 +26,7 @@ function Body({ title, lines, index }: { title: string; lines: string[]; index: 
       </h3>
       <div className="space-y-1">
         {lines.map((l, i) => (
-          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.55]">
+          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.45]">
             {l}
           </p>
         ))}
