@@ -40,7 +40,7 @@ export default function Philosophy() {
     <div className="py-[120px] px-6 max-md:py-16 flex justify-center">
       <div className="w-full max-w-[960px]">
         <FadeUp>
-          <p className="text-[15px] max-md:text-[14px] text-text-weak mb-20 max-md:mb-14">
+          <p className="mx-auto max-w-[560px] text-[15px] max-md:text-[14px] text-text-weak mb-20 max-md:mb-14">
             {philosophy.opening}
           </p>
         </FadeUp>
@@ -53,7 +53,7 @@ export default function Philosophy() {
             if (!mock) {
               return (
                 <FadeUp key={i}>
-                  <div className="max-w-[560px]">{body}</div>
+                  <div className="mx-auto max-w-[560px]">{body}</div>
                 </FadeUp>
               );
             }
@@ -61,7 +61,7 @@ export default function Philosophy() {
             if (mock.side === 'below') {
               return (
                 <FadeUp key={i} delay={0.06}>
-                  <div className="flex flex-col items-start gap-10 max-md:gap-8">
+                  <div className="flex flex-col items-center gap-10 max-md:gap-8">
                     {body}
                     {mock.node}
                   </div>
@@ -71,7 +71,7 @@ export default function Philosophy() {
 
             return (
               <FadeUp key={i} delay={0.06}>
-                <div className="flex items-center justify-start gap-16 max-md:flex-col max-md:items-start max-md:gap-8">
+                <div className="flex items-center justify-center gap-16 max-md:flex-col max-md:gap-8">
                   {mock.side === 'left' ? (
                     <>
                       {mock.node}
