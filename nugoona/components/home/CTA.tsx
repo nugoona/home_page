@@ -4,23 +4,23 @@ import { cta } from '@/lib/content/home';
 
 export default function CTA() {
   return (
-    <div className="relative pt-24 pb-20 px-12 text-center overflow-hidden max-md:pt-20 max-md:pb-16 max-md:px-6"
+    <div className="relative pt-24 pb-20 px-12 overflow-hidden max-md:pt-20 max-md:pb-16 max-md:px-6"
       style={{ background: 'linear-gradient(180deg, #111111 0%, #151515 100%)' }}
     >
-
+     <div className="max-w-[720px] mx-auto">
       <FadeUp>
         <h2
-          className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-10 relative z-[1]"
+          className="max-w-[600px] text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-8 relative z-[1]"
           dangerouslySetInnerHTML={{ __html: cta.title }}
         />
       </FadeUp>
       {cta.sub && (
         <FadeUp delay={0.1}>
-          <p className="text-[15px] max-md:text-[16px] text-white/80 mb-10 relative z-[1]">{cta.sub}</p>
+          <p className="max-w-[480px] text-[15px] max-md:text-[16px] text-white/80 mb-10 relative z-[1]">{cta.sub}</p>
         </FadeUp>
       )}
       <FadeUp delay={0.2}>
-        <div className="flex justify-center gap-3 mb-5 relative z-[1] max-sm:flex-col max-sm:items-center">
+        <div className="flex justify-start gap-3 mb-5 relative z-[1] max-sm:flex-col max-sm:items-stretch">
           <Link
             href={cta.primaryHref}
             className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] hover:border-[#eaeaea] transition-all"
@@ -36,6 +36,7 @@ export default function CTA() {
           </Link>
         </div>
       </FadeUp>
+     </div>
     </div>
   );
 }

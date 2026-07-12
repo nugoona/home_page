@@ -24,9 +24,9 @@ function Body({ title, lines, index }: { title: string; lines: string[]; index: 
       <h3 className="mb-5 text-[clamp(23px,3vw,31px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.25]">
         {title}
       </h3>
-      <div className="space-y-2">
+      <div className="space-y-1">
         {lines.map((l, i) => (
-          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.6]">
+          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.55]">
             {l}
           </p>
         ))}
@@ -40,7 +40,7 @@ export default function Philosophy() {
     <div className="py-[120px] px-6 max-md:py-16 flex justify-center">
       <div className="w-full max-w-[960px]">
         <FadeUp>
-          <p className="text-center text-[15px] max-md:text-[14px] text-text-weak mb-20 max-md:mb-14">
+          <p className="text-[15px] max-md:text-[14px] text-text-weak mb-20 max-md:mb-14">
             {philosophy.opening}
           </p>
         </FadeUp>
@@ -53,7 +53,7 @@ export default function Philosophy() {
             if (!mock) {
               return (
                 <FadeUp key={i}>
-                  <div className="mx-auto max-w-[560px] text-center max-md:text-left">{body}</div>
+                  <div className="max-w-[560px]">{body}</div>
                 </FadeUp>
               );
             }
@@ -61,7 +61,7 @@ export default function Philosophy() {
             if (mock.side === 'below') {
               return (
                 <FadeUp key={i} delay={0.06}>
-                  <div className="flex flex-col items-center gap-10 max-md:gap-8 text-center">
+                  <div className="flex flex-col items-start gap-10 max-md:gap-8">
                     {body}
                     {mock.node}
                   </div>
@@ -71,7 +71,7 @@ export default function Philosophy() {
 
             return (
               <FadeUp key={i} delay={0.06}>
-                <div className="flex items-center justify-center gap-16 max-md:flex-col max-md:gap-8">
+                <div className="flex items-center justify-start gap-16 max-md:flex-col max-md:items-start max-md:gap-8">
                   {mock.side === 'left' ? (
                     <>
                       {mock.node}
