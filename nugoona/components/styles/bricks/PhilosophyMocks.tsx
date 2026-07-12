@@ -118,20 +118,31 @@ function BotIcon({ size = 20, color = '#5b6572' }: { size?: number; color?: stri
   );
 }
 
+/* 헤더 색 후보 — 파랑 제외 채도색(사장님 2026-07-12 "헤더 채도 높은 색 · 아이콘 배경 파랑 금지") */
+type HeaderTone = 'white' | 'slate' | 'teal' | 'orange' | 'rose';
+const HEAD: Record<HeaderTone, { bar: string; name: string; icon: string; av: string; ui: string }> = {
+  white: { bar: 'bg-white border-b border-border-light', name: 'text-text-primary', icon: '#5b6572', av: 'bg-[#dfe4ea]', ui: 'text-text-muted' },
+  slate: { bar: 'bg-[#1e293b]', name: 'text-white', icon: '#1e293b', av: 'bg-white', ui: 'text-white/70' },
+  teal: { bar: 'bg-[#0d9488]', name: 'text-white', icon: '#0d9488', av: 'bg-white', ui: 'text-white/75' },
+  orange: { bar: 'bg-[#ea580c]', name: 'text-white', icon: '#ea580c', av: 'bg-white', ui: 'text-white/80' },
+  rose: { bar: 'bg-[#e11d48]', name: 'text-white', icon: '#e11d48', av: 'bg-white', ui: 'text-white/80' },
+};
+
 /* ── 누구나 광고 · AI 챗봇(카카오톡 톤 메신저 — 파란 배경/무대 제거, 원형 프로필·이름·시간) ── */
-export function AdChatMock() {
+export function AdChatMock({ header = 'white' }: { header?: HeaderTone }) {
+  const h = HEAD[header];
   return (
     <div className="w-[340px] max-md:w-[300px] rounded-[18px] overflow-hidden shadow-[var(--shadow-mock)] bg-[#eef1f4]">
-      {/* 헤더 (흰색) */}
-      <div className="flex items-center gap-3 px-4 h-[52px] bg-white border-b border-border-light">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-muted" aria-hidden>
+      {/* 헤더 (채도색 선택) */}
+      <div className={`flex items-center gap-3 px-4 h-[52px] ${h.bar}`}>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={h.ui} aria-hidden>
           <path d="M15 5l-7 7 7 7" />
         </svg>
-        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#dfe4ea]">
-          <BotIcon size={17} />
+        <span className={`flex items-center justify-center w-8 h-8 rounded-full ${h.av}`}>
+          <BotIcon size={17} color={h.icon} />
         </span>
-        <p className="flex-1 text-[15px] font-semibold text-text-primary tracking-[-0.01em]">광고 도우미</p>
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-text-muted" aria-hidden>
+        <p className={`flex-1 text-[15px] font-semibold tracking-[-0.01em] ${h.name}`}>광고 도우미</p>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={h.ui} aria-hidden>
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </div>
