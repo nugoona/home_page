@@ -80,7 +80,7 @@ function Badge({ tone, children }: { tone: 'good' | 'mid' | 'none'; children: Re
 export function RankMock() {
   return (
     <Stage>
-      <div className="w-[300px] max-md:w-[280px] rounded-[12px] overflow-hidden bg-white shadow-[var(--shadow-mock)]">
+      <div className="w-[300px] max-md:w-full rounded-[12px] overflow-hidden bg-white shadow-[var(--shadow-mock)]">
         <WinBar />
         <div className="p-5">
           <div className="flex items-center gap-2">
@@ -132,7 +132,7 @@ const HEAD: Record<HeaderTone, { bar: string; name: string; icon: string; av: st
 export function AdChatMock({ header = 'slate' }: { header?: HeaderTone }) {
   const h = HEAD[header];
   return (
-    <div className="w-[340px] max-md:w-[300px] rounded-[18px] overflow-hidden shadow-[var(--shadow-mock)] bg-[#eef1f4]">
+    <div className="w-[340px] max-md:w-full rounded-[18px] overflow-hidden shadow-[var(--shadow-mock)] bg-[#eef1f4]">
       {/* 헤더 (채도색 선택) */}
       <div className={`flex items-center gap-3 px-4 h-[52px] ${h.bar}`}>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={h.ui} aria-hidden>
