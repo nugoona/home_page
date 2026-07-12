@@ -505,4 +505,12 @@ a {
   * {
     @apply outline-ring/50;
   }
+  /* ── 줄바꿈 기준 (사장님 2026-07-12 "고퀄 사이트는 윗줄/아랫줄이 비슷하게 나뉘는 기준이 있다") ──
+     헤드라인 = balance(줄 길이 균형) · 본문 = pretty(고아행 방지). 수동 <br>는 그대로 존중됨. */
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
 }

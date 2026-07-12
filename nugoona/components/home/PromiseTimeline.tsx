@@ -29,7 +29,7 @@ export default function PromiseTimeline() {
           />
         </FadeUp>
         <FadeUp delay={0.12}>
-          <p className="mb-16 max-w-[560px] text-[16px] leading-[1.75] text-white/55">{promise.sub}</p>
+          <p className="mb-16 max-w-[600px] text-[16px] leading-[1.65] text-white/55">{promise.sub}</p>
         </FadeUp>
 
         {/* 세로 타임라인 */}

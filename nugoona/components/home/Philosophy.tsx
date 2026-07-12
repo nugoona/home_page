@@ -18,7 +18,7 @@ const MOCKS: Record<number, { node: React.ReactNode; side: 'left' | 'right' | 'b
 function Body({ title, lines, index }: { title: string; lines: string[]; index: number }) {
   return (
     <div className="max-w-[540px]">
-      <span className="mb-4 inline-block text-[13px] font-bold tracking-[0.12em] text-[#0070f3]">
+      <span className="mb-4 inline-block text-[13px] font-bold tracking-[0.08em] text-[#0070f3]">
         {String(index + 1).padStart(2, '0')}
       </span>
       <h3 className="mb-5 text-[clamp(23px,3vw,31px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.25]">
@@ -26,7 +26,7 @@ function Body({ title, lines, index }: { title: string; lines: string[]; index: 
       </h3>
       <div className="space-y-2">
         {lines.map((l, i) => (
-          <p key={i} className="text-[17px] max-md:text-[15px] text-text-body leading-[1.55]">
+          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.6]">
             {l}
           </p>
         ))}
