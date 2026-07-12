@@ -9,10 +9,10 @@ import { RankMock, AdChatMock } from '@/components/styles/bricks/PhilosophyMocks
  * 카피 = home.ts philosophy(축약안 v1). lines[] = 문장 단위 줄바꿈.
  * 2막=콘텐츠 노출 측정(RankMock) · 3막=광고 AI 챗봇(AdChatMock) — 두 제품 균형(§8.7-I 거듦).
  */
-const MOCKS: Record<number, { node: React.ReactNode; side: 'left' | 'right' } | null> = {
+const MOCKS: Record<number, { node: React.ReactNode; side: 'left' | 'right' | 'below' } | null> = {
   0: null,
   1: { node: <RankMock />, side: 'right' },
-  2: { node: <AdChatMock />, side: 'left' },
+  2: { node: <AdChatMock />, side: 'below' }, // 채팅 UI는 세로로 길어 글 아래 중앙(사장님 2026-07-12)
 };
 
 function Body({ title, lines, index }: { title: string; lines: string[]; index: number }) {
@@ -54,6 +54,17 @@ export default function Philosophy() {
               return (
                 <FadeUp key={i}>
                   <div className="mx-auto max-w-[560px] text-center max-md:text-left">{body}</div>
+                </FadeUp>
+              );
+            }
+
+            if (mock.side === 'below') {
+              return (
+                <FadeUp key={i} delay={0.06}>
+                  <div className="flex flex-col items-center gap-10 max-md:gap-8 text-center">
+                    {body}
+                    {mock.node}
+                  </div>
                 </FadeUp>
               );
             }

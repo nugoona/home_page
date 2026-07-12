@@ -105,44 +105,63 @@ export function RankMock() {
   );
 }
 
-/* ── 누구나 광고 · AI 챗봇(어려운 광고를 쉬운 말로) ── */
+/* ── 누구나 광고 · AI 챗봇(채팅 앱 UI — 브라우저 창 아님, 헤더·말풍선·입력창) ── */
 export function AdChatMock() {
   return (
     <Stage>
-      <div className="w-[300px] max-md:w-[280px] rounded-[12px] overflow-hidden bg-white shadow-[var(--shadow-mock)]">
-        <WinBar />
-        <div className="p-5">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="flex items-center justify-center w-4 h-4 rounded-[4px] bg-white shadow-[0_0_0_1px_rgba(15,23,42,0.08)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            </span>
-            <p className="text-[16px] font-bold text-text-primary">광고 도우미</p>
+      <div className="w-[330px] max-md:w-[300px] rounded-[14px] overflow-hidden bg-white shadow-[var(--shadow-mock)]">
+        {/* 채팅 헤더 — 아바타 + 이름 + 실시간 상태 */}
+        <div className="flex items-center gap-2.5 px-4 h-14 border-b border-border-light">
+          <span className="flex items-center justify-center gap-[3px] w-9 h-9 rounded-[9px] [background:linear-gradient(180deg,#1a82ff,#0070f3)] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,112,243,0.30)]">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="w-1 h-1 rounded-full bg-white" />
+            ))}
+          </span>
+          <div className="min-w-0 leading-tight">
+            <p className="text-[14px] font-bold text-text-primary">광고 도우미</p>
+            <p className="flex items-center gap-1 text-[11px] text-text-muted mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              실시간 답변
+            </p>
           </div>
-          <p className="text-[13px] text-text-muted mb-4">어려운 광고, 물어보면 쉬운 말로 답해요</p>
-          <div className="flex flex-col gap-3">
-            {/* 사용자 질문 */}
-            <div className="self-end max-w-[80%] rounded-[14px] rounded-br-[4px] px-3.5 py-2.5 [background:linear-gradient(180deg,#1a82ff,#0070f3)] shadow-[0_1px_2px_rgba(0,112,243,0.30)]">
-              <p className="text-[14px] leading-[1.45] text-white">이 광고 지금 잘 되고 있나요?</p>
-            </div>
-            {/* AI 답 */}
-            <div className="self-start max-w-[86%] rounded-[14px] rounded-bl-[4px] bg-bg-alt px-3.5 py-2.5 shadow-[0_0_0_1px_rgba(15,23,42,0.05)]">
-              <p className="text-[14px] leading-[1.5] text-text-primary">
-                네, 지난주보다 주문이 늘었어요.
-                <br />
-                광고비 <b className="text-accent" style={EN}>1만 원당 3.2명</b>이 장바구니에 담았어요.
-              </p>
-            </div>
-            {/* 살아있는 신호 1개 — typing 도트 */}
-            <div className="self-start flex items-center gap-1 pl-1">
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-border-mid animate-pulse"
-                  style={{ animationDelay: `${i * 0.2}s` }}
-                />
-              ))}
-            </div>
+        </div>
+
+        {/* 대화 영역 — 살짝 회색 배경(메신저 느낌) */}
+        <div className="flex flex-col gap-2.5 px-4 py-4 bg-[#fbfcfd]">
+          <div className="self-end max-w-[78%] rounded-[16px] rounded-br-[5px] px-3.5 py-2.5 [background:linear-gradient(180deg,#1a82ff,#0070f3)] shadow-[0_1px_2px_rgba(0,112,243,0.30)]">
+            <p className="text-[14px] leading-[1.45] text-white">이 광고 지금 잘 되고 있나요?</p>
           </div>
+          <div className="self-start max-w-[88%] rounded-[16px] rounded-bl-[5px] bg-white px-3.5 py-2.5 shadow-[0_0_0_1px_rgba(15,23,42,0.05)]">
+            <p className="text-[14px] leading-[1.5] text-text-primary">
+              네, 지난주보다 주문이 늘었어요.
+              <br />
+              광고비 <b className="text-accent" style={EN}>1만 원당 3.2명</b>이 장바구니에 담았어요.
+            </p>
+          </div>
+          <div className="self-start flex items-center gap-1 pl-1">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="w-1.5 h-1.5 rounded-full bg-border-mid animate-pulse"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* 입력창 — 채팅봇 신호 */}
+        <div className="flex items-center gap-2 px-3 py-3 border-t border-border-light">
+          <div className="flex-1 flex items-center h-9 px-3 rounded-[9px] bg-bg-alt text-[13px] text-text-muted">
+            무엇이든 물어보세요
+          </div>
+          <button
+            aria-label="전송"
+            className="flex items-center justify-center w-9 h-9 rounded-[9px] [background:linear-gradient(180deg,#1a82ff,#0070f3)] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,112,243,0.35)]"
+          >
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="white" aria-hidden>
+              <path d="M3 20.5l18-8.5L3 3.5V10l12 2-12 2v6.5z" />
+            </svg>
+          </button>
         </div>
       </div>
     </Stage>
