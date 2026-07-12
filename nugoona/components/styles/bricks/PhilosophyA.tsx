@@ -25,12 +25,16 @@ export default function PhilosophyA() {
                 <span className="mb-4 inline-block text-[13px] font-bold tracking-[0.1em] text-[#0070f3]">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mb-4 text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.3]">
+                <h3 className="mb-5 text-[clamp(22px,3vw,30px)] font-semibold text-text-primary tracking-[-0.02em] leading-[1.3]">
                   {act.title}
                 </h3>
-                <p className="mx-auto max-w-[600px] text-[17px] max-md:text-[16px] text-text-body leading-[1.85]">
-                  {act.body}
-                </p>
+                <div className="space-y-2">
+                  {act.lines.map((l, j) => (
+                    <p key={j} className="text-[17px] max-md:text-[15px] text-text-body leading-[1.55]">
+                      {l}
+                    </p>
+                  ))}
+                </div>
               </div>
             </FadeUp>
           ))}

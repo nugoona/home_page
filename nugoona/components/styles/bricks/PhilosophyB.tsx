@@ -25,9 +25,13 @@ export default function PhilosophyB() {
                   <span className="mr-2 text-[#0070f3]">{String(i + 1).padStart(2, '0')}</span>
                   {act.title}
                 </h3>
-                <p className="text-[17px] max-md:text-[16px] text-text-body leading-[1.85]">
-                  {act.body}
-                </p>
+                <div className="space-y-2">
+                  {act.lines.map((l, j) => (
+                    <p key={j} className="text-[17px] max-md:text-[15px] text-text-body leading-[1.55]">
+                      {l}
+                    </p>
+                  ))}
+                </div>
               </div>
             </FadeUp>
           ))}
