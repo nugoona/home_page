@@ -1,90 +1,50 @@
 'use client';
 
 /**
- * /lab/logos = 로고 시안 갤러리 10종 (사장님 "10개 목업, 2개 고를게" 2026-07-12)
- * 브랜드 블루(#0070f3) 기반. 형태·배경·글자 배치 변주. Nc(콘텐츠) 기준 — 확정 후 Na 적용.
+ * /lab/logos = 로고 폰트 시안 갤러리 (사장님 "배경 좋아, 폰트가 어도비 비슷" 2026-07-12)
+ * 배경 = 블루 솔리드 고정. 폰트만 변주 10종 + 커스텀 벡터 1종. Nc 기준. 최대 2개 택.
+ * 확정 폰트는 최종 로고에서 벡터 패스로 고정(폰트 의존 제거).
  */
 
 import { useState } from 'react';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
 const BLUE = '#0070f3';
-const NAVY = '#0a1f4d';
-const DARK = '#171717';
-const F = "'Inter Tight','Segoe UI',Arial,sans-serif";
 
-/* 각 시안: 100x100 svg. 기본 Nc 중앙 정렬(x46 y53 central). */
+/* 배경 블루 솔리드 + 흰 Nc, 폰트만 다름 */
+function Sq({ font, size = 62, ls = -6, weight = 800 }: { font: string; size?: number; ls?: number; weight?: number }) {
+  return (
+    <svg viewBox="0 0 100 100">
+      <rect width="100" height="100" fill={BLUE} />
+      <text x="47" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={font} fontWeight={weight} fontSize={size} letterSpacing={ls} fill="#fff">Nc</text>
+    </svg>
+  );
+}
+
+/* 커스텀 벡터 N (기하학·각진, 폰트 무관) + 작은 c */
+function Custom() {
+  return (
+    <svg viewBox="0 0 100 100">
+      <rect width="100" height="100" fill={BLUE} />
+      {/* N: 두꺼운 각진 획 (좌기둥·대각·우기둥) */}
+      <path d="M26 74 V30 h11 l16 26 V30 h11 v44 h-11 L37 48 v26 z" fill="#fff" />
+      {/* c: 작은 라운드 */}
+      <path d="M70 58 a11 11 0 1 0 0 12 h-7 a5 5 0 1 1 0-12 z" fill="#fff" />
+    </svg>
+  );
+}
+
 const LOGOS: { n: number; label: string; el: React.ReactNode }[] = [
-  {
-    n: 1,
-    label: '블루 솔리드 · 직각',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill={BLUE} /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="62" letterSpacing="-6" fill="#fff">Nc</text></svg>
-    ),
-  },
-  {
-    n: 2,
-    label: '흰 배경 · 블루 보더 · 블루 글자',
-    el: (
-      <svg viewBox="0 0 100 100"><rect x="3" y="3" width="94" height="94" fill="#fff" stroke={BLUE} strokeWidth="5" /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="60" letterSpacing="-6" fill={BLUE}>Nc</text></svg>
-    ),
-  },
-  {
-    n: 3,
-    label: '블루 · 라운드(살짝)',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" rx="16" fill={BLUE} /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="62" letterSpacing="-6" fill="#fff">Nc</text></svg>
-    ),
-  },
-  {
-    n: 4,
-    label: '다크 뉴트럴 · 블루 글자',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill={DARK} /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="62" letterSpacing="-6" fill={BLUE}>Nc</text></svg>
-    ),
-  },
-  {
-    n: 5,
-    label: 'N 모노그램 (c 생략)',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill={BLUE} /><text x="50" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="74" fill="#fff">N</text></svg>
-    ),
-  },
-  {
-    n: 6,
-    label: 'N 크게 + c 작게(우하단)',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill={BLUE} /><text x="40" y="50" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="72" fill="#fff">N</text><text x="76" y="74" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="34" fill="#fff">c</text></svg>
-    ),
-  },
-  {
-    n: 7,
-    label: '흰 배경 · 블루 N + 블루 c작게',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#f4f6f8" /><text x="40" y="50" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="72" fill={BLUE}>N</text><text x="76" y="74" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="34" fill={NAVY}>c</text></svg>
-    ),
-  },
-  {
-    n: 8,
-    label: '네이비 배경 · 블루 글자',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill={NAVY} /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="62" letterSpacing="-6" fill={BLUE}>Nc</text></svg>
-    ),
-  },
-  {
-    n: 9,
-    label: '블루→네이비 그라디언트',
-    el: (
-      <svg viewBox="0 0 100 100"><defs><linearGradient id="g9" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={BLUE} /><stop offset="1" stopColor={NAVY} /></linearGradient></defs><rect width="100" height="100" fill="url(#g9)" /><text x="46" y="55" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="62" letterSpacing="-6" fill="#fff">Nc</text></svg>
-    ),
-  },
-  {
-    n: 10,
-    label: '블루 · 하단 액센트 바',
-    el: (
-      <svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#fff" /><rect width="100" height="100" fill={BLUE} opacity="0.08" /><text x="46" y="52" textAnchor="middle" dominantBaseline="central" fontFamily={F} fontWeight="800" fontSize="60" letterSpacing="-6" fill={NAVY}>Nc</text><rect x="0" y="88" width="100" height="12" fill={BLUE} /></svg>
-    ),
-  },
+  { n: 1, label: 'Inter Tight (현재·어도비풍)', el: <Sq font="var(--font-en)" /> },
+  { n: 2, label: 'Pretendard', el: <Sq font="'Pretendard Variable', Pretendard, sans-serif" size={60} ls={-5} weight={900} /> },
+  { n: 3, label: '세리프 (Georgia)', el: <Sq font="Georgia, 'Times New Roman', serif" size={58} ls={-3} weight={700} /> },
+  { n: 4, label: '모노스페이스', el: <Sq font="'Courier New', monospace" size={52} ls={-2} weight={700} /> },
+  { n: 5, label: 'system-ui', el: <Sq font="system-ui, sans-serif" size={60} ls={-4} /> },
+  { n: 6, label: 'Impact (압축·굵음)', el: <Sq font="Impact, 'Haettenschweiler', sans-serif" size={64} ls={-3} weight={400} /> },
+  { n: 7, label: 'Arial Narrow (콘덴스드)', el: <Sq font="'Arial Narrow', sans-serif" size={64} ls={-2} weight={700} /> },
+  { n: 8, label: 'Trebuchet (라운드 산세)', el: <Sq font="'Trebuchet MS', sans-serif" size={58} ls={-4} weight={700} /> },
+  { n: 9, label: 'Verdana (넓은 산세)', el: <Sq font="Verdana, sans-serif" size={52} ls={-4} weight={700} /> },
+  { n: 10, label: '커스텀 벡터 N (폰트 무관)', el: <Custom /> },
 ];
 
 export default function LabLogos() {
@@ -102,7 +62,7 @@ export default function LabLogos() {
       const res = await fetch('/api/draft-feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ brick: 'logo', picks, memo, at: new Date().toISOString() }),
+        body: JSON.stringify({ brick: 'logo-font', picks, memo, at: new Date().toISOString() }),
       });
       setStatus(res.ok ? 'done' : 'error');
     } catch {
@@ -113,9 +73,9 @@ export default function LabLogos() {
   return (
     <main className="bg-white min-h-screen">
       <div className="border-b border-border-default px-6 py-5">
-        <p className="text-[12px] font-semibold text-accent tracking-[0.08em] uppercase mb-1" style={EN}>Brick 02 · Logo Gallery</p>
-        <h1 className="text-[20px] max-md:text-[18px] font-bold text-text-primary">로고 시안 10종 — 최대 2개 골라주세요</h1>
-        <p className="text-[14px] text-text-weak mt-1">브랜드 블루(#0070f3) 기반. Nc(콘텐츠) 기준이고, 고르시면 그 스타일로 Na(광고)도 만듭니다. 각 로고는 실제 크기(작게)와 확대를 함께 봅니다.</p>
+        <p className="text-[12px] font-semibold text-accent tracking-[0.08em] uppercase mb-1" style={EN}>Brick 02 · Logo Font</p>
+        <h1 className="text-[20px] max-md:text-[18px] font-bold text-text-primary">로고 폰트 시안 10종 — 최대 2개 골라주세요</h1>
+        <p className="text-[14px] text-text-weak mt-1">배경(블루 솔리드)은 고정, 폰트만 바꿨습니다. 1번이 지금 어도비풍이고, 10번은 폰트 대신 커스텀 벡터입니다. 고르시면 그 글자를 벡터로 고정해 확정합니다.</p>
       </div>
 
       <div className="max-w-[1080px] mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -125,19 +85,17 @@ export default function LabLogos() {
             <button
               key={n}
               onClick={() => toggle(n)}
-              className="flex flex-col items-center border p-5 transition-colors text-left"
+              className="flex flex-col items-center border p-5 transition-colors"
               style={{ borderColor: on ? BLUE : '#eaeaea', background: on ? 'rgba(0,112,243,0.05)' : '#fff', borderWidth: on ? 2 : 1 }}
             >
               <div className="flex items-end gap-4 mb-4">
-                {/* 확대 */}
                 <div style={{ width: 96, height: 96 }}>{el}</div>
-                {/* 실제 크기 + 워드마크(장면 재현) */}
                 <div className="flex items-center gap-2 pb-1">
                   <div style={{ width: 30, height: 30 }}>{el}</div>
                   <span className="text-[13px] font-semibold text-text-primary">누구나 콘텐츠</span>
                 </div>
               </div>
-              <span className="text-[13px] font-semibold text-text-primary">
+              <span className="text-[12px] font-semibold text-text-primary text-center">
                 {n}. {label} {on && <span style={{ color: BLUE }}>✓</span>}
               </span>
             </button>
@@ -147,7 +105,7 @@ export default function LabLogos() {
 
       <div className="border-t-4 border-[#171717] px-6 py-12 max-w-[720px] mx-auto">
         {status === 'done' ? (
-          <p className="text-[18px] font-bold text-text-primary text-center py-8">제출됐습니다. 고르신 걸로 다듬겠습니다.</p>
+          <p className="text-[18px] font-bold text-text-primary text-center py-8">제출됐습니다. 고르신 폰트로 벡터 고정해 확정하겠습니다.</p>
         ) : (
           <>
             <h2 className="text-[18px] font-bold text-text-primary mb-2">고른 시안: {picks.length ? picks.join(', ') : '없음'} (최대 2개)</h2>
@@ -156,7 +114,7 @@ export default function LabLogos() {
               value={memo}
               onChange={(e) => setMemo(e.target.value)}
               rows={3}
-              placeholder="메모 (선택) — 예: 3번인데 라운드 더 작게 / 1번 글자 살짝 아래로"
+              placeholder="메모 (선택) — 예: 3번 세리프 좋은데 더 굵게 / 10번 c를 더 크게"
               className="w-full px-4 py-3 border border-border-default text-[15px] text-text-primary focus:border-accent focus:outline-none resize-y mb-3"
             />
             <button
