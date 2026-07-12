@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 콘텐츠 — 네이비 배경 + 밝은블루 글자. 대문자 NC 동일크기. 정중앙(baseline 계산). 2026-07-12 -->
-  <rect width="512" height="512" fill="#0a1f4d"/>
+  <!-- 누구나 콘텐츠 — 네이비 배경 + 밝은블루 글자. 대문자 NC 정중앙. 라운드 살짝(rx40). 2026-07-12 -->
+  <rect width="512" height="512" rx="40" fill="#0a1f4d"/>
   <text x="257" y="340" text-anchor="middle" font-family="system-ui,'Segoe UI',-apple-system,Roboto,sans-serif" font-weight="900" font-size="236" letter-spacing="3" fill="#4d9fff">NC</text>
 </svg>
