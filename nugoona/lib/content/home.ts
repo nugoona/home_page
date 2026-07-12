@@ -3,28 +3,28 @@
 export const hero = {
   /* H1 = GPT+사장님 확정(2026-07-08, b1d9b0f) 토씨 그대로 — 임의 변형 금지(2026-07-11 사장님 재지적으로 복원) */
   h1: '<span class="text-accent">누구나</span> 마케팅하는 시대',
-  sub: '광고도 노출도, 한 화면에서 이해하고 직접 운영합니다.',
+  sub: '광고도 검색 노출도, 직접 운영하는 마케팅 앱입니다.',
   cta: '무료로 시작하기',
   ctaHref: '/start',
 };
 
 /* ── S3 두 제품 분기 (홈의 심장) — components/home/ProductBranch ── */
 export const branch = {
-  title: '필요한 곳부터<br><span class="text-accent">이해</span>해 보세요.',
-  sub: '노출과 광고, 둘 다 직접 다룹니다.',
+  title: '어떤 <span class="text-accent">마케팅</span>이<br>필요하신가요?',
+  sub: '필요한 기능부터 시작해 보세요.',
   cards: [
     /* 카드 title·desc = GPT+사장님 확정(2026-07-08, b1d9b0f) 토씨 그대로 — "맡기려던 일"로 분기 */
     {
       eyebrow: '누구나 콘텐츠',
-      title: '검색에 <span class="text-accent">보이고</span> 싶습니다',
-      desc: '블로그와 플레이스, SNS까지. 검색에서 고객이 내 가게를 먼저 만나는 시작.',
+      title: '검색하면 우리 가게가<br><span class="text-accent">먼저</span> 보였으면 좋겠습니다.',
+      desc: '블로그와 플레이스, SNS를 꾸준히 발행해 고객이 검색에서 먼저 만날 수 있도록 돕습니다.',
       cta: '노출 살펴보기',
       href: '/content',
       mock: 'search',
     },
     {
       eyebrow: '누구나 광고',
-      title: '광고를 <span class="text-accent">직접</span> 하고 싶습니다',
+      title: '광고를 <span class="text-accent">직접</span> 운영하고 싶습니다.',
       desc: '메타와 구글 광고를 만들고, 성과까지 한 화면에서 확인합니다.',
       cta: '광고 살펴보기',
       href: '/ads',
@@ -37,8 +37,8 @@ export const branch = {
    문구 = GPT+사장님 확정(2026-07-11) 토씨 그대로 — 콜드 리드 "대행사 소개처럼 읽힘" 지적을
    "맡기는 서비스가 아니라 ~ 앱" 문장으로 해소(육성 F의 뜻 유지). 임의 변형 금지. */
 export const philosophy = {
-  heading: '15년 광고 현업에서<br><span class="text-accent">봤습니다</span>.',
-  body: '예산이 적으면 맡기기 어렵고, 직접 하려면 배울 것이 많았습니다. 그래서 맡기는 서비스가 아니라, 이해하며 직접 운영하는 앱을 만들었습니다.',
+  heading: '15년 동안 <span class="text-accent">같은 고민</span>을<br>만났습니다.',
+  body: '예산이 적으면 맡기기 어렵고, 직접 하려면 배울 것이 많았습니다. 그래서 맡기는 서비스가 아니라, 스스로 운영할 수 있는 앱을 만들었습니다.',
 };
 
 /* ── S5 콘텐츠(노출) 미리보기 — 노출 킬러 ── */
@@ -55,8 +55,8 @@ export const exposure = {
 export const promise = {
   step: 'OUR PROMISE',
   /* 육성 E 원문 그대로(D7 H4) — "앱은 생물처럼 계속 자랍니다. 그동안 요금은 그대로." 창작 금지 */
-  title: '앱은 생물처럼 계속 자랍니다.<br>그동안 요금은 <span class="text-accent">그대로</span>.',
-  sub: '기능이 늘어도, 쓰던 요금은 오르지 않습니다. 한번 시작하면 계속 나아지는 도구를 씁니다.',
+  title: '기능은 계속 늘어나고,<br>요금은 <span class="text-accent">그대로</span>.',
+  sub: '새로운 기능이 추가되어도 기존 고객의 요금은 올리지 않습니다. 한 번 시작하면 오래 사용할수록 더 좋아지는 제품을 만듭니다.',
 };
 
 export const painPoints = {
@@ -284,8 +284,8 @@ export const faqItems = [
 ];
 
 export const cta = {
-  title: '한 달<span class="comma">,</span> 카드 없이<span class="comma">,</span><br>먼저 <span class="text-accent">써 보세요</span>.',
-  sub: '약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.',
+  title: '한 달 <span class="text-accent">먼저 써보세요</span>.<br>카드 등록은 필요 없습니다.',
+  sub: '약정도 카드도 없습니다. 스토어 이름만 알려주시면 바로 시작할 수 있도록 준비해 드립니다.',
   primaryText: '무료로 시작하기',
   primaryHref: '/start',
   secondaryText: '노출·광고 둘 다 필요해요',
