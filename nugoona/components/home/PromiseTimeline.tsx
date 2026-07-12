@@ -54,6 +54,10 @@ export default function PromiseTimeline() {
                     <span className="text-[11px] font-semibold" style={{ color: TAG[item.product] }}>
                       {item.product}
                     </span>
+                    {/* 반복 각인 — 매 업데이트가 무료였음 */}
+                    <span className="ml-auto text-[10px] font-bold tracking-[0.03em] text-white/75 px-1.5 py-[3px] rounded-[3px] border border-white/25 bg-white/[0.04]">
+                      무료
+                    </span>
                   </div>
                   <p className="mt-1 text-[15px] leading-[1.5] text-white/85">{item.text}</p>
                 </div>
@@ -68,11 +72,35 @@ export default function PromiseTimeline() {
                   className="absolute -left-7 top-[6px] w-[9px] h-[9px] rounded-full bg-accent animate-pulse"
                   style={{ boxShadow: '0 0 0 3px rgba(0,112,243,0.25)' }}
                 />
-                <p className="text-[16px] font-semibold text-white">지금도 계속 업데이트됩니다.</p>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[13px] tabular-nums text-accent" style={EN}>NOW</span>
+                  <span className="ml-auto text-[10px] font-semibold tracking-[0.02em] text-accent px-1.5 py-[3px] rounded-[3px] border border-accent/40">
+                    무료
+                  </span>
+                </div>
+                <p className="mt-1 text-[15px] leading-[1.5] font-semibold text-white">지금도 계속 업데이트됩니다.</p>
               </div>
             </FadeUp>
           </div>
         </div>
+
+        {/* ── 강조 마무리 — "추가 요금 없이"를 정면으로(섹션 심장) ── */}
+        <FadeUp delay={0.66}>
+          <div className="mt-14 pt-10 border-t border-white/10">
+            <p className="text-[13px] tracking-[0.04em] text-white/45 mb-3">여기까지, 그리고 앞으로도</p>
+            <p className="text-[clamp(24px,3.4vw,36px)] font-bold text-white tracking-[-0.02em] leading-[1.3]">
+              기존 고객은{' '}
+              <span className="relative whitespace-nowrap text-accent">
+                추가 요금이 없습니다
+                <span aria-hidden className="absolute left-0 -bottom-1 h-[3px] w-full rounded-full bg-accent/35" />
+              </span>
+              .
+            </p>
+            <p className="mt-4 text-[15px] leading-[1.65] text-white/55 max-w-[520px]">
+              한 번 시작한 요금 그대로, 새로 더해지는 기능을 계속 받습니다. 오래 쓸수록 더 좋아집니다.
+            </p>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
