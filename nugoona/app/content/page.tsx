@@ -301,7 +301,7 @@ export default function ContentPage() {
 
         {/* ── S10 진화 선언 — 카피 = 홈(lib/content/home.ts promise) 정본과 동일 문장 통일(M-3) ── */}
         <Section noBorder>
-          <StoryStep dark time="∞" step={promise.step} headline={promise.title} subtitle={promise.sub}>
+          <StoryStep dark time="∞" step={promise.step} headline={promise.title} subtitle={promise.sub.join(' ').replace(/<br\s*\/?>/g, ' ')}>
             <div className="flex gap-4 max-w-[520px] max-md:flex-col">
               <div className="flex-1 border border-white/15 bg-white/[0.03] px-6 py-7"><p className="text-[13px] max-md:text-[14px] text-white/50 mb-2">기능</p><p className="text-[26px] font-bold text-white" style={EN}>계속 &uarr;</p></div>
               <div className="flex-1 border border-accent/40 bg-accent/[0.07] px-6 py-7"><p className="text-[13px] max-md:text-[14px] text-white/50 mb-2">요금</p><p className="text-[26px] font-bold text-accent" style={EN}>그대로 &rarr;</p></div>

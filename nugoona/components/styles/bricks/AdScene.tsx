@@ -89,9 +89,10 @@ export default function AdScene() {
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
             광고를 <span style={{ color: BLUE }}>직접</span> 하고 싶습니다
           </h2>
-          <p className="text-text-body text-[16px] leading-[1.45] max-w-[420px] mb-8">
-            메타와 구글 광고를 만들고, 성과까지 한 화면에서 확인합니다.
-          </p>
+          <p
+            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-8"
+            dangerouslySetInnerHTML={{ __html: '메타와 구글 광고를 만들고<br>성과까지 한 화면에서 확인합니다.' }}
+          />
           <div className="flex items-center gap-4">
             <Link
               href="/ads"

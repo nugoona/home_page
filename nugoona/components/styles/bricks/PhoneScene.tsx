@@ -33,10 +33,10 @@ export default function PhoneScene() {
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
             검색에 <span style={{ color: '#0070f3' }}>보이고</span> 싶습니다
           </h2>
-          <p className="text-text-body text-[16px] leading-[1.45] max-w-[420px] mb-8">
-            블로그와 플레이스, SNS까지. 사진·메모만 올리면 글이 되고,
-            검색에서 고객이 내 가게를 먼저 만납니다.
-          </p>
+          <p
+            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-8"
+            dangerouslySetInnerHTML={{ __html: '블로그와 플레이스, SNS까지.<br>사진·메모만 올리면 글이 되고,<br>검색에서 고객이 내 가게를 먼저 만납니다.' }}
+          />
           <div className="flex items-center gap-4">
             <Link
               href="/content"

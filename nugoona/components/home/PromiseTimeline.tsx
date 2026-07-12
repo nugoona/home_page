@@ -29,7 +29,15 @@ export default function PromiseTimeline() {
           />
         </FadeUp>
         <FadeUp delay={0.12}>
-          <p className="mb-16 max-w-[600px] text-[16px] leading-[1.45] text-white/55">{promise.sub}</p>
+          <div className="mb-16 max-w-[600px] space-y-4">
+            {promise.sub.map((para, i) => (
+              <p
+                key={i}
+                className="text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-white/55"
+                dangerouslySetInnerHTML={{ __html: para }}
+              />
+            ))}
+          </div>
         </FadeUp>
 
         {/* 세로 타임라인 */}
@@ -87,9 +95,10 @@ export default function PromiseTimeline() {
               </span>
               .
             </p>
-            <p className="mt-4 text-[15px] leading-[1.45] text-white/55 max-w-[520px]">
-              한 번 시작한 요금 그대로, 새로 더해지는 기능을 계속 받습니다. 오래 쓸수록 더 좋아집니다.
-            </p>
+            <p
+              className="mt-4 text-[15px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-white/55 max-w-[520px]"
+              dangerouslySetInnerHTML={{ __html: '한 번 시작한 요금 그대로<br>끝까지 무료 업데이트를 진행합니다.<br>매체가 변하면 콘텐츠도 변해야 합니다.' }}
+            />
           </div>
         </FadeUp>
       </div>

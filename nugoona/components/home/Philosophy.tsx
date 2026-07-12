@@ -26,9 +26,11 @@ function Body({ title, lines, index }: { title: string; lines: string[]; index: 
       </h3>
       <div className="space-y-1">
         {lines.map((l, i) => (
-          <p key={i} className="text-[16px] max-md:text-[15px] text-text-body leading-[1.45]">
-            {l}
-          </p>
+          <p
+            key={i}
+            className="text-[16px] max-md:text-[14px] text-text-body leading-[1.5] tracking-[-0.01em]"
+            dangerouslySetInnerHTML={{ __html: l }}
+          />
         ))}
       </div>
     </div>
@@ -40,9 +42,10 @@ export default function Philosophy() {
     <div className="py-[120px] px-6 max-md:py-16 flex justify-center">
       <div className="w-full max-w-[960px]">
         <FadeUp>
-          <p className="mx-auto max-w-[560px] text-[15px] max-md:text-[14px] text-text-weak mb-20 max-md:mb-14">
-            {philosophy.opening}
-          </p>
+          <h2
+            className="mx-auto max-w-[680px] text-center text-[clamp(26px,4.5vw,42px)] font-bold text-text-primary tracking-[-0.03em] leading-[1.3] text-balance mb-20 max-md:mb-14"
+            dangerouslySetInnerHTML={{ __html: philosophy.opening }}
+          />
         </FadeUp>
 
         <div className="flex flex-col gap-24 max-md:gap-16">

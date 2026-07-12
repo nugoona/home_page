@@ -321,10 +321,9 @@ export default function HeroB() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-          className="text-[16px] font-medium md:text-[clamp(14px,1.8vw,18px)] md:font-normal text-[#d4d4d4] leading-[1.45] tracking-[0.005em] text-balance max-w-[300px] md:max-w-[460px] mx-auto mb-11"
-        >
-          {hero.sub}
-        </motion.p>
+          className="text-[14px] font-medium md:text-[clamp(14px,1.8vw,18px)] md:font-normal text-[#d4d4d4] leading-[1.5] tracking-[-0.01em] text-balance max-w-[300px] md:max-w-[460px] mx-auto mb-11"
+          dangerouslySetInnerHTML={{ __html: hero.sub }}
+        />
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
