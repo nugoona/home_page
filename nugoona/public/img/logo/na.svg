@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 광고 — 로열블루 세로 그라데이션(위→아래 점점 어둡게) + 밝은하늘 글자. 대문자 NA 정중앙. rx40. 2026-07-12 -->
+  <!-- 누구나 광고 — 로열블루 그라데이션 + 밝은하늘 글자(stroke로 더 두껍게). 대문자 NA 정중앙. rx40. 2026-07-12 -->
   <defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c6fd6"/><stop offset="1" stop-color="#0a2e63"/></linearGradient></defs>
   <rect width="512" height="512" rx="40" fill="url(#ga)"/>
-  <text x="257" y="340" text-anchor="middle" font-family="system-ui,'Segoe UI',-apple-system,Roboto,sans-serif" font-weight="900" font-size="236" letter-spacing="3" fill="#9ecbff">NA</text>
+  <text x="257" y="340" text-anchor="middle" font-family="system-ui,'Segoe UI',-apple-system,Roboto,sans-serif" font-weight="900" font-size="236" letter-spacing="3" fill="#9ecbff" stroke="#9ecbff" stroke-width="12" paint-order="stroke" stroke-linejoin="round">NA</text>
 </svg>

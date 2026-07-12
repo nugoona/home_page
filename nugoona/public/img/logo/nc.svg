@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- 누구나 콘텐츠 — 네이비 세로 그라데이션(위→아래 점점 어둡게) + 밝은블루 글자. 대문자 NC 정중앙. rx40. 2026-07-12 -->
+  <!-- 누구나 콘텐츠 — 네이비 그라데이션 + 밝은블루 글자(stroke로 더 두껍게). 대문자 NC 정중앙. rx40. 2026-07-12 -->
   <defs><linearGradient id="gc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13387a"/><stop offset="1" stop-color="#06122c"/></linearGradient></defs>
   <rect width="512" height="512" rx="40" fill="url(#gc)"/>
-  <text x="257" y="340" text-anchor="middle" font-family="system-ui,'Segoe UI',-apple-system,Roboto,sans-serif" font-weight="900" font-size="236" letter-spacing="3" fill="#4d9fff">NC</text>
+  <text x="257" y="340" text-anchor="middle" font-family="system-ui,'Segoe UI',-apple-system,Roboto,sans-serif" font-weight="900" font-size="236" letter-spacing="3" fill="#4d9fff" stroke="#4d9fff" stroke-width="12" paint-order="stroke" stroke-linejoin="round">NC</text>
 </svg>
