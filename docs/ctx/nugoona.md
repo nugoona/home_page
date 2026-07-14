@@ -16,8 +16,8 @@
 --color-text-primary: #171717;
 --color-text-secondary: #333333;
 --color-text-body: #333333;
---color-text-muted: #444444;
---color-text-weak: #555555;
+--color-text-muted: #999999; /* §8.9: #444→#999 재정의(위계 역전 해소 — 라벨·미세 캡션) */;
+--color-text-weak: #666666; /* §8.9: #555→#666 통합(보조 설명·캡션) */;
 --color-text-disabled: #666666;
 --color-border-default: #eaeaea;
 --color-border-hover: #999999;
@@ -46,7 +46,24 @@
 - `/ads`
 - `/content`
 - `/features`
+- `/lab/a`
+- `/lab/b`
+- `/lab/c`
+- `/lab/chat-icons`
+- `/lab/exposure`
+- `/lab/logos`
 - `/lab`
+- `/lab/philosophy`
+- `/lab/philosophy-mock`
+- `/lab/promise`
+- `/lab/s2`
+- `/lab/s3`
+- `/lab/s41`
+- `/lab/s42`
+- `/lab/s6`
+- `/lab/s7`
+- `/lab/s8`
+- `/lab/vercel`
 - `/`
 - `/pricing`
 - `/start`
@@ -69,7 +86,7 @@
 | ProofMock | — |
 | PublishFlowGraphic | PublishFlowGraphic — 콘텐츠 /content S4 "발행" 상징 그래픽 |
 | RankTrackMock | S5 콘텐츠(노출) 제품 목업 — 대안 A (신규, 원본 마이크로 자산 재스킨) |
-| SearchResultMock | — |
+| SearchResultMock | 뷰포트 진입(once) → 검색어 타이핑 → 완료 후 MY STORE 결과 팝. */ |
 
 ### features/ (6)
 | 컴포넌트 | 설명 |
@@ -81,12 +98,14 @@
 | MobileDashboardMockup | — |
 | TrendShowcase | — |
 
-### home/ (31)
+### home/ (41)
 | 컴포넌트 | 설명 |
 |----------|------|
 | AdCanvasMagic | — |
 | AdFlowGlimpse | — |
+| AssetSection | S6 · 자산 "남는 것은 사장님의 것이어야 합니다" — 2칸(콘텐츠 자산 / 광고 자산) 그리드. |
 | BeamCanvas | — |
+| BrandPhilosophySection | S5 · 회사 철학 "좋은 가게는 발견될 기회가 있어야 합니다" — 다크 감성 섹션. |
 | CTA | — |
 | Comparison | — |
 | ComparisonNew | — |
@@ -102,19 +121,27 @@
 | HeroAurora | — |
 | HeroMinimal | — |
 | ManageGlimpse | — |
+| OurWayFlow | S3 · 우리의 방식 "어려운 건 앱이 맡고, 결정은 사람이 합니다" — 플로우 다이어그램. |
+| OurWaySection | S3 · 우리의 방식 "어려운 건 앱이 맡고, 결정은 사람이 합니다" — 2칸 대비 그리드. |
 | PainPoints | — |
-| Philosophy | S3 · 왜 만들었나 (라이트, 텍스트 전용 — 목업 없음) |
+| Philosophy | S3 · 왜 만들었나 (라이트, 롱폼 3막 — 글 주인공 + 목업 지그재그 = 벽돌3 C안 확정) |
 | ProductBranch | S3 두 제품 분기 — 홈의 심장 (신규 조립) |
+| PromiseTimeline | S4 · 회사 약속 = 변화대응·무료 업데이트 (사장님 확정 2026-07-12) |
 | ROIComparison | — |
 | ReportDark | — |
 | ReportGlimpse | — |
 | Reviews | — |
+| S2Philosophy | S2 · 공통 철학 (홈 개편 확정 구조) — 5블록 독립 스캐폴드. |
 | ShowcaseHeader | — |
 | ShowcaseRow | FeatureRow — 목업/텍스트를 세로선으로 구획한 박스. |
 | SolutionSection | — |
 | StepDone | — |
 | StoryStep | — |
+| TextSection | 홈 V2 범용 텍스트 섹션 (WHY·우리의 방식·회사 철학·자산·업데이트 공용). |
 | TrendGlimpse | — |
+| TwoAppsHeader | S4 · 두 앱 도입 헤더 "하는 일이 다르니까, 앱도 달라야 합니다". |
+| UpdateSection | S7 · 업데이트 "매체가 바뀌면, 앱도 바뀝니다" — 다크 + 변화 흐름 라인. |
+| WhyGridSection | S2 · WHY "복잡한 시작" — Vercel식 칸 그리드(내용에 맞춘 셀 레이아웃). |
 
 ### layout/ (7)
 | 컴포넌트 | 설명 |
@@ -122,7 +149,7 @@
 | Analytics | — |
 | CommaStyler | — |
 | Footer | — |
-| Nav | 라벨 = 확정 제품명(E0-1: "누구나 콘텐츠 / NGN 대시보드") — 기능명으로 바꾸지 말 것(사장님 지적 2026-07-11) |
+| Nav | 라벨 = 확정 제품명 "누구나 콘텐츠 / 누구나 광고"(사장님+GPT 개명 확정 2026-07-11 — 구 "NGN 대시보드" 폐기, |
 | OuterContainer | — |
 | PromoBanner | — |
 | Section | — |
@@ -167,7 +194,7 @@
 | ShotFrame | 실제 앱 스크린샷을 랜딩에 얹는 프레임 — 라운드 없이(브랜드 직각) + 드롭섀도로 깊이. |
 | bento-grid | — |
 
-> 총 82개 컴포넌트
+> 총 92개 컴포넌트
 
 ## Design Rules
 

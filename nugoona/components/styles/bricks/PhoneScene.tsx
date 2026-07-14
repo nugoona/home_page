@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import S41SearchScene from '@/components/home/s4/S41SearchScene';
 
 /* ═══════════════════════════════════════════════════════════════
    콘텐츠 "장면" — 실제 아이폰 목업 PNG(Vecteezy, 화면·배경 투명)에 앱 홈 스샷을 끼움.
@@ -10,9 +11,6 @@ import { motion } from 'framer-motion';
    ═══════════════════════════════════════════════════════════════ */
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-/* 화면 영역(프레임 PNG 대비 %) — 베젤 안쪽. 렌더로 미세조정한 값. */
-const SCREEN = { left: 31.6, top: 12.4, width: 36.2, height: 73.6 };
 
 export default function PhoneScene() {
   return (
@@ -30,13 +28,17 @@ export default function PhoneScene() {
             <img src="/img/logo/nc.svg?v=14" alt="누구나 콘텐츠 로고" style={{ height: 30, width: 30, display: 'block' }} />
             <span className="text-[15px] font-semibold text-text-primary tracking-[-0.01em]">누구나 콘텐츠</span>
           </div>
+          {/* S4 콘텐츠 = 메인페이지 V2 최종원고(2026-07-13 사장님 확정) */}
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
-            검색에 <span style={{ color: '#0070f3' }}>보이고</span> 싶습니다
+            검색할 때 우리 가게를 찾을 수 있도록
           </h2>
           <p
-            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-8"
-            dangerouslySetInnerHTML={{ __html: '블로그와 플레이스, SNS까지.<br>사진·메모만 올리면 글이 되고,<br>검색에서 고객이 내 가게를 먼저 만납니다.' }}
+            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-4"
+            dangerouslySetInnerHTML={{ __html: '사진과 짧은 메모를 남기면<br>이야기할 내용을 찾고, 채널에 맞게 정리합니다.' }}
           />
+          <p className="text-text-weak text-[14px] max-md:text-[13px] leading-[1.5] tracking-[-0.01em] max-w-[420px] mb-8">
+            발행한 콘텐츠는 사장님의 계정에 차곡차곡 남습니다.
+          </p>
           <div className="flex items-center gap-4">
             <Link
               href="/content"
@@ -62,53 +64,10 @@ export default function PhoneScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-end min-w-0"
         >
-          {/* 모바일: 앱 스샷을 1px 검은 박스로 크게(하단 채팅바 크롭) — 사장님 2026-07-12 */}
-          <div className="md:hidden w-full max-w-[400px] rounded-[26px] border border-[#111] overflow-hidden bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)]" style={{ maxHeight: 560 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/shots/content/app-home-mobile.jpg" alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출" className="block w-full" />
-          </div>
-          {/* PC: 실사 아이폰 목업 */}
-          <div className="max-md:hidden" style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
-            {/* 화면 영역 = 앱 스샷 (프레임 아래 레이어) */}
-            <div
-              style={{
-                position: 'absolute',
-                left: `${SCREEN.left}%`,
-                top: `${SCREEN.top}%`,
-                width: `${SCREEN.width}%`,
-                height: `${SCREEN.height}%`,
-                overflow: 'hidden',
-                borderRadius: 22,
-                background: '#f2f3f5',
-                zIndex: 1,
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/shots/content/app-home-mobile.jpg"
-                alt="누구나 콘텐츠 앱 홈 — 1년치 글 주제·블로그·인스타·내 가게 노출"
-                style={{ display: 'block', width: '93%', height: 'auto', margin: '8% auto 0' }}
-              />
-              {/* 화면 앞 반사(유리 글레어) */}
-              <span
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  pointerEvents: 'none',
-                  background:
-                    'linear-gradient(125deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.10) 12%, rgba(255,255,255,0) 32%)',
-                }}
-              />
-            </div>
-            {/* 프레임 (위 레이어, 화면·배경 투명) */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/shots/content/phone-frame.png"
-              alt=""
-              aria-hidden
-              style={{ position: 'relative', display: 'block', width: '100%', height: 'auto', zIndex: 2 }}
-            />
+          {/* "앱 → 검색 발견" 3단 합성 장면 — 사장님 2026-07-14 시안 D 확정, PC에도 동일 노출(사장님 지시).
+              (구 PC 실사 아이폰 스샷 목업은 git 이력 fe318cf 참조 — 실사 통짜 = 이해를 못 시켜 폐기) */}
+          <div className="w-full">
+            <S41SearchScene />
           </div>
         </motion.div>
       </div>

@@ -122,15 +122,16 @@ function BotIcon({ size = 20, color = '#5b6572' }: { size?: number; color?: stri
 type HeaderTone = 'white' | 'slate' | 'teal' | 'orange' | 'rose';
 const HEAD: Record<HeaderTone, { bar: string; name: string; icon: string; av: string; ui: string }> = {
   white: { bar: 'bg-white border-b border-border-light', name: 'text-text-primary', icon: '#5b6572', av: 'bg-[#dfe4ea]', ui: 'text-text-muted' },
-  slate: { bar: 'bg-[#1e293b]', name: 'text-white', icon: '#1e293b', av: 'bg-white', ui: 'text-white/70' },
+  slate: { bar: 'bg-[#1e293b]', name: 'text-white', icon: '#ffffff', av: 'bg-[#334155]', ui: 'text-white/70' },
   teal: { bar: 'bg-[#0d9488]', name: 'text-white', icon: '#0d9488', av: 'bg-white', ui: 'text-white/75' },
   orange: { bar: 'bg-[#ea580c]', name: 'text-white', icon: '#ea580c', av: 'bg-white', ui: 'text-white/80' },
   rose: { bar: 'bg-[#e11d48]', name: 'text-white', icon: '#e11d48', av: 'bg-white', ui: 'text-white/80' },
 };
 
 /* ── 누구나 광고 · AI 챗봇(카카오톡 톤 메신저 — 파란 배경/무대 제거, 원형 프로필·이름·시간) ── */
-export function AdChatMock({ header = 'slate' }: { header?: HeaderTone }) {
+export function AdChatMock({ header = 'slate', variant = 'perf' }: { header?: HeaderTone; variant?: 'perf' | 'creative' }) {
   const h = HEAD[header];
+  const isCreative = variant === 'creative';
   return (
     <div className="w-[340px] max-md:w-full rounded-[18px] overflow-hidden shadow-[var(--shadow-mock)] bg-[#eef1f4]">
       {/* 헤더 (채도색 선택) */}
@@ -138,8 +139,8 @@ export function AdChatMock({ header = 'slate' }: { header?: HeaderTone }) {
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={h.ui} aria-hidden>
           <path d="M15 5l-7 7 7 7" />
         </svg>
-        <span className={`flex items-center justify-center w-8 h-8 rounded-full ${h.av}`}>
-          <BotIcon size={17} color={h.icon} />
+        <span className={`flex items-center justify-center w-9 h-9 rounded-full ${h.av}`}>
+          <BotIcon size={22} color={h.icon} />
         </span>
         <p className={`flex-1 text-[15px] font-semibold tracking-[-0.01em] ${h.name}`}>광고 도우미</p>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={h.ui} aria-hidden>
@@ -153,24 +154,40 @@ export function AdChatMock({ header = 'slate' }: { header?: HeaderTone }) {
         <div className="flex items-end justify-end gap-1.5">
           <span className="text-[11px] text-text-muted mb-0.5" style={EN}>오후 2:14</span>
           <div className="max-w-[76%] rounded-[18px] rounded-br-[6px] bg-accent px-3.5 py-2.5">
-            <p className="text-[14px] leading-[1.45] text-white tracking-[-0.01em]">이 광고 지금 잘 되고 있나요?</p>
+            <p className="text-[14px] leading-[1.45] text-white tracking-[-0.01em]">
+              {isCreative ? '이번 광고 소재 뭐야?' : '이 광고 지금 잘 되고 있나요?'}
+            </p>
           </div>
         </div>
 
         {/* AI — 좌측, 원형 프로필 + 이름 + 흰 말풍선 + 시간 */}
         <div className="flex items-start gap-2">
-          <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-[#dfe4ea]">
-            <BotIcon size={16} />
+          <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-[#334155]">
+            <BotIcon size={20} color="#ffffff" />
           </span>
           <div className="min-w-0">
             <p className="mb-1 pl-1 text-[12px] text-text-muted tracking-[-0.01em]">광고 도우미</p>
             <div className="flex items-end gap-1.5">
               <div className="max-w-[230px] rounded-[18px] rounded-tl-[6px] bg-white px-3.5 py-2.5 shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
-                <p className="text-[14px] leading-[1.55] text-text-primary tracking-[-0.01em]">
-                  네, 지난주보다 주문이 늘었어요.
-                  <br />
-                  광고비 <b className="text-accent" style={EN}>1만 원당 3.2명</b>이 장바구니에 담았어요.
-                </p>
+                {isCreative ? (
+                  <>
+                    <p className="text-[14px] leading-[1.55] text-text-primary tracking-[-0.01em]">
+                      이번 주 대표 소재예요.
+                    </p>
+                    <img
+                      src="/img/unsplash/webp/photo-1572804013309-59a88b7e92f1.webp"
+                      alt="광고 소재 예시 — 플라워 원피스"
+                      className="mt-2 block h-[150px] w-[190px] rounded-[10px] object-cover"
+                      loading="lazy"
+                    />
+                  </>
+                ) : (
+                  <p className="text-[14px] leading-[1.55] text-text-primary tracking-[-0.01em]">
+                    네, 지난주보다 주문이 늘었어요.
+                    <br />
+                    광고비 <b className="text-accent" style={EN}>1만 원당 3.2명</b>이 장바구니에 담았어요.
+                  </p>
+                )}
               </div>
               <span className="text-[11px] text-text-muted mb-0.5 shrink-0" style={EN}>오후 2:14</span>
             </div>

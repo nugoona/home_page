@@ -30,13 +30,15 @@ export default function CTA() {
           >
             {cta.primaryText}
           </Link>
-          <Link
-            href={cta.secondaryHref}
-            className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold hover:bg-black/[0.04] transition-all max-sm:w-full max-sm:max-w-[320px]"
-            style={{ color: '#171717', border: '1px solid #d0d0d0', backgroundColor: 'transparent' }}
-          >
-            {cta.secondaryText}
-          </Link>
+          {cta.secondaryText && (
+            <Link
+              href={cta.secondaryHref}
+              className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold hover:bg-black/[0.04] transition-all max-sm:w-full max-sm:max-w-[320px]"
+              style={{ color: '#171717', border: '1px solid #d0d0d0', backgroundColor: 'transparent' }}
+            >
+              {cta.secondaryText}
+            </Link>
+          )}
         </div>
       </FadeUp>
      </div>

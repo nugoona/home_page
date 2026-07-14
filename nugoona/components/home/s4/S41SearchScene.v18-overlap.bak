@@ -1,0 +1,382 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+/**
+ * S4-1 모바일 목업 — "앱 → 검색 발견" 겹침 장면 (사장님 확정 2026-07-14, 5차 개정)
+ * 메시지: "검색할 때 우리 가게를 찾을 수 있도록"
+ *
+ * ▣ 5차 개정 — 앱 화면 재현 = ★실사 원본 좌표(1080px 폭 기준) 그대로 만들고 통째로 scale★
+ *   (픽셀 개별 환산이 여백·라운드 비율을 계속 깨뜨림 → 실사 스샷과 동일 비율 보장 방식으로 전환).
+ *   측정 원본 = 사장님 제공 실사 스샷(1080×2113) + ngn_upload 실제 소스 토큰.
+ * ▣ 구도: 폰(중앙·기기 온전) 뒤 + 검색 브라우저(중앙) 앞 겹침 — 선·화살표 금지(Clone03 문법).
+ *   검색 결과 = 네이버 블로그 미리보기 문법(내용·이미지는 우리 것, N 로고 등 브랜드 마크 미사용).
+ * ⛔ 내 가게 글 = 결과 "중간"(순위 보장 회피, A13).
+ */
+
+/* 화면 개구부 = 캔버스 알파 스캔 실측(31.4/12.05/36.52/75.38)에서 살짝 인셋 */
+const SCREEN = { left: 31.7, top: 12.35, width: 35.9, height: 74.7 };
+/* ★폰 크기(6차): 비율이 맞아도 절대값이 작으면 radius·여백이 안 보임 → 폰 실폭 260px로 확대.
+   프레임 렌더 폭 673 기준(폰 bbox 38.6% → 260). 화면 실폭 = 673×35.9% ≈ 241.6px. */
+const FRAME_W = 673;
+const PHONE_W = Math.round(FRAME_W * 0.386); // ≈ 260
+const PHONE_LEFT = -Math.round(FRAME_W * 0.304); // ≈ -205
+const PHONE_TOP = -Math.round(FRAME_W * 0.1105); // ≈ -74
+const APP_SCALE = (FRAME_W * 0.359) / 1080; // ≈ 0.2237
+
+const BORDER = '#ECECEC';
+const LINK = '#2f6fd8';
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+/* 단계 마커 — Clone01 엣지 라벨 문법(흰 pill + EN 숫자). 화살표 없이 순서를 읽히는 장치. */
+function StepPill({ n, label }: { n: string; label: string }) {
+  return (
+    <span
+      className="absolute z-30 flex items-center gap-1.5 rounded-full bg-white py-[3px] pl-2 pr-2.5"
+      style={{ border: `1px solid ${BORDER}`, boxShadow: '0 1px 3px rgba(0,0,0,0.06)', left: -4, top: -11 }}
+    >
+      <span className="text-[10px] font-semibold tracking-[0.06em] text-accent" style={{ fontFamily: 'var(--font-en)' }}>
+        {n}
+      </span>
+      <span className="whitespace-nowrap text-[11px] font-medium tracking-[-0.01em] text-text-body">{label}</span>
+    </span>
+  );
+}
+
+export default function S41SearchScene() {
+  return (
+    <div className="mx-auto w-full max-w-[380px]" role="img" aria-label="앱이 발행한 블로그 글이 검색 결과에서 발견되는 장면">
+      <div className="relative" style={{ minHeight: 872 }}>
+        {/* ── 01 뒤: 앱 실물 — 기기 온전(중앙), 화면 내부 = 실사 좌표 1080 기준 × scale ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55, ease: EASE }}
+          className="absolute top-3"
+          style={{ left: '50%', x: '-50%', width: PHONE_W }}
+          aria-hidden
+        >
+          <StepPill n="01" label="사진·메모만 올리면" />
+          <div className="overflow-hidden" style={{ width: PHONE_W, height: 408 }}>
+          <div style={{ position: 'relative', width: FRAME_W, left: PHONE_LEFT, top: PHONE_TOP, filter: 'drop-shadow(0 18px 28px rgba(0,0,0,0.14))' }}>
+            <div
+              style={{
+                position: 'absolute',
+                left: `${SCREEN.left}%`,
+                top: `${SCREEN.top}%`,
+                width: `${SCREEN.width}%`,
+                height: `${SCREEN.height}%`,
+                overflow: 'hidden',
+                borderRadius: 22,
+                background: '#f4f4f7',
+                zIndex: 1,
+              }}
+            >
+              {/* ── 앱 홈 — 실사 1080px 좌표 그대로 + scale(비율 완전 동일) ── */}
+              <div
+                style={{
+                  width: 1080,
+                  transformOrigin: '0 0',
+                  transform: `scale(${APP_SCALE})`,
+                  fontFamily: 'var(--font-kr)',
+                  padding: '150px 55px 0',
+                  boxSizing: 'border-box',
+                }}
+              >
+                {/* 헤더 */}
+                <p style={{ fontSize: 30, color: '#7a7a82', margin: 0 }}>2026년 7월 14일 화요일</p>
+                <p style={{ fontSize: 58, fontWeight: 800, color: '#16161a', letterSpacing: '-0.02em', margin: '8px 0 0' }}>
+                  공릉파스타<span style={{ color: '#0070f3' }}>님</span>
+                </p>
+                {/* 상태 pill + 설정·알림 */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 26 }}>
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 14,
+                      padding: '16px 28px',
+                      borderRadius: 999,
+                      background: '#ffffff',
+                      boxShadow: '0 2px 8px rgba(20,20,30,0.06)',
+                      fontSize: 29,
+                      color: '#4a4a52',
+                    }}
+                  >
+                    <span style={{ width: 16, height: 16, borderRadius: 999, background: '#22c55e' }} />
+                    올리면 글을 자동으로 만들어 드려요
+                  </span>
+                  <span style={{ display: 'flex', gap: 18 }}>
+                    <span style={{ width: 88, height: 88, borderRadius: 999, background: '#ffffff', boxShadow: '0 4px 14px rgba(20,20,30,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#4a4a52" strokeWidth="2">
+                        <circle cx="12" cy="12" r="3.2" />
+                        <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                    <span style={{ position: 'relative', width: 88, height: 88, borderRadius: 999, background: '#ffffff', boxShadow: '0 4px 14px rgba(20,20,30,0.10)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#4a4a52" strokeWidth="2">
+                        <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6" strokeLinejoin="round" />
+                        <path d="M10.5 20a1.7 1.7 0 0 0 3 0" strokeLinecap="round" />
+                      </svg>
+                      <span style={{ position: 'absolute', top: -8, right: -8, width: 42, height: 42, borderRadius: 999, background: '#ef4444', color: '#fff', fontSize: 26, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>8</span>
+                    </span>
+                  </span>
+                </div>
+
+                {/* 파란 카드 — 1년치 글 주제 */}
+                <div
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    marginTop: 40,
+                    padding: '46px 50px 50px',
+                    borderRadius: 60,
+                    background: 'linear-gradient(135deg, #0070f3 0%, #0058c0 100%)',
+                    boxShadow: '0 10px 28px rgba(0,88,192,0.22)',
+                    color: '#fff',
+                  }}
+                >
+                  <span aria-hidden style={{ position: 'absolute', right: -140, top: -180, width: 620, height: 620, borderRadius: 999, background: 'radial-gradient(circle, rgba(255,255,255,0.13), rgba(255,255,255,0) 68%)' }} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                    <div>
+                      <p style={{ fontSize: 28, opacity: 0.85, margin: 0 }}>준비됐어요 · 확인해 주세요</p>
+                      <p style={{ fontSize: 72, fontWeight: 800, letterSpacing: '-0.02em', margin: '10px 0 0' }}>1년치 글 주제</p>
+                    </div>
+                    <span style={{ width: 76, height: 76, borderRadius: 999, background: 'rgba(255,255,255,0.20)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 44, lineHeight: 1, flexShrink: 0 }}>›</span>
+                  </div>
+                  <p style={{ fontSize: 32, opacity: 0.8, margin: '60px 0 0', lineHeight: 1.5 }}>
+                    매주 한 편씩 올릴 글 주제를 만들어 뒀어요. 한 번 보고 시작해 주세요
+                  </p>
+                </div>
+
+                {/* 다크 카드 — 블로그·인스타 */}
+                <div
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    marginTop: 28,
+                    padding: '42px 50px 46px',
+                    borderRadius: 60,
+                    background: 'linear-gradient(135deg, #1f1f24 0%, #3a3a45 100%)',
+                    boxShadow: '0 10px 24px rgba(20,20,30,0.16)',
+                    color: '#fff',
+                  }}
+                >
+                  <span aria-hidden style={{ position: 'absolute', right: -130, top: -90, width: 520, height: 520, borderRadius: 999, background: 'rgba(255,255,255,0.035)' }} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                    <div>
+                      <p style={{ fontSize: 28, opacity: 0.6, margin: 0 }}>사진·메모</p>
+                      <p style={{ fontSize: 64, fontWeight: 800, letterSpacing: '-0.02em', margin: '10px 0 0' }}>블로그·인스타</p>
+                    </div>
+                    <span style={{ width: 76, height: 76, borderRadius: 999, background: 'rgba(255,255,255,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 44, lineHeight: 1, flexShrink: 0 }}>›</span>
+                  </div>
+                  <p style={{ fontSize: 31, opacity: 0.6, margin: '34px 0 0' }}>주제 없이 사진·메모만 올려도 글이 돼요</p>
+                </div>
+
+                {/* 다크 카드 — 쇼츠·릴스 */}
+                <div
+                  style={{
+                    position: 'relative',
+                    overflow: 'hidden',
+                    marginTop: 28,
+                    padding: '42px 50px 46px',
+                    borderRadius: 60,
+                    background: 'linear-gradient(135deg, #2a2a30 0%, #44444e 100%)',
+                    boxShadow: '0 10px 24px rgba(20,20,30,0.14)',
+                    color: '#fff',
+                  }}
+                >
+                  <span aria-hidden style={{ position: 'absolute', right: -130, top: -90, width: 520, height: 520, borderRadius: 999, background: 'rgba(255,255,255,0.03)' }} />
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                    <div>
+                      <p style={{ fontSize: 28, opacity: 0.6, margin: 0 }}>영상</p>
+                      <p style={{ fontSize: 64, fontWeight: 800, letterSpacing: '-0.02em', margin: '10px 0 0' }}>쇼츠·릴스</p>
+                    </div>
+                    <span style={{ width: 76, height: 76, borderRadius: 999, background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.2">
+                        <rect x="5" y="10.5" width="14" height="9.5" rx="2.2" />
+                        <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+                      </svg>
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 31, opacity: 0.6, margin: '34px 0 0' }}>유튜브를 연결하면 열려요 · 연결은 저희가 도와드려요</p>
+                </div>
+
+                {/* 흰 카드 — 내 가게 노출 (하단은 검색 브라우저가 덮음) */}
+                <div style={{ marginTop: 28, padding: '46px 50px 50px', borderRadius: '60px 60px 0 0', background: '#ffffff', boxShadow: '0 4px 14px rgba(20,20,30,0.05)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <p style={{ fontSize: 46, fontWeight: 800, color: '#16161a', letterSpacing: '-0.02em', margin: 0 }}>내 가게 노출</p>
+                    <p style={{ fontSize: 30, color: '#7a7a82', margin: 0 }}>매일 아침 확인</p>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 44 }}>
+                    <p style={{ fontSize: 40, fontWeight: 800, color: '#16161a', margin: 0 }}>AI기반</p>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '14px 28px', borderRadius: 999, border: '2px solid #e6e6ec', background: '#fff', fontSize: 32, fontWeight: 700, color: '#16161a' }}>
+                      <span style={{ width: 40, height: 40, borderRadius: 999, background: '#03c75a', color: '#fff', fontSize: 24, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1 }}>N</span>
+                      네이버
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 유리 글레어 */}
+              <span
+                aria-hidden
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  pointerEvents: 'none',
+                  background:
+                    'linear-gradient(125deg, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.08) 12%, rgba(255,255,255,0) 32%)',
+                }}
+              />
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/shots/content/phone-frame.png" alt="" aria-hidden style={{ position: 'relative', display: 'block', width: '100%', zIndex: 2 }} />
+          </div>
+          </div>
+        </motion.div>
+
+        {/* ── 02 중간: 완성된 글 문서 카드 — "누구나 콘텐츠가 글을 써줌"(같은 제목이 03 검색 결과에 재등장 = 서사 연결) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55, ease: EASE, delay: 0.22 }}
+          className="absolute right-0 top-[332px] z-10 w-[76%] max-w-[290px]"
+        >
+          <StepPill n="02" label="글이 완성되고" />
+          <div
+            className="overflow-hidden rounded-[12px] bg-white px-4 pb-3.5 pt-4"
+            style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 14px 30px rgba(0,0,0,0.09)' }}
+          >
+            <div className="flex items-center gap-1.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/img/logo/nc.svg?v=14" alt="" className="h-[15px] w-[15px]" />
+              <span className="text-[10.5px] font-semibold tracking-[-0.01em] text-text-body">누구나 콘텐츠</span>
+              <span className="ml-auto text-[10px] text-text-muted" style={{ fontFamily: 'var(--font-en)' }}>
+                DRAFT → DONE
+              </span>
+            </div>
+            <p className="mt-2 text-[13px] font-bold leading-[1.4] tracking-[-0.01em] text-text-primary">
+              공릉동 파스타 봄 신메뉴 3종,
+              <br />
+              이렇게 준비했습니다
+            </p>
+            <p className="mt-1.5 line-clamp-2 text-[11.5px] leading-[1.55] text-text-body">
+              직접 뽑은 생면으로 만든 파스타 세 가지를 소개합니다. 재료 손질부터 플레이팅까지, 매장에서 준비한 과정을 담았어요.
+            </p>
+            <div className="mt-2.5 h-[7px] w-2/5 rounded-full bg-[#F0F0F2]" aria-hidden />
+          </div>
+        </motion.div>
+
+        {/* ── 03 앞: 검색 발견 (네이버 블로그 미리보기 문법 유사 — 내용은 우리 것) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55, ease: EASE, delay: 0.44 }}
+          className="absolute top-[470px] z-20 w-[92%] max-w-[340px] overflow-visible"
+          style={{ left: '50%', x: '-50%' }}
+        >
+          <StepPill n="03" label="검색에서 찾아져요" />
+          <div
+            className="overflow-hidden rounded-[12px] bg-white"
+            style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 18px 40px rgba(0,0,0,0.10)' }}
+          >
+          {/* 크롬: 신호등 + 검색 pill */}
+          <div className="flex h-10 items-center gap-3 border-b px-3.5" style={{ borderColor: BORDER }}>
+            <span className="flex items-center gap-1">
+              <span className="h-[9px] w-[9px] rounded-full bg-[#ec6a5e]" />
+              <span className="h-[9px] w-[9px] rounded-full bg-[#f4bf4f]" />
+              <span className="h-[9px] w-[9px] rounded-full bg-[#61c454]" />
+            </span>
+            <span className="flex h-[22px] flex-1 items-center gap-1.5 rounded-full bg-[#f2f3f5] px-3 text-[12px] font-medium text-text-primary">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#7d7d7d" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="m15.5 15.5 4.5 4.5" />
+              </svg>
+              공릉동 파스타
+            </span>
+          </div>
+
+          {/* 위: 다른 블로그 결과(dimmed) */}
+          <div className="px-4 pb-3 pt-3">
+            <div className="flex items-center gap-1.5">
+              <span aria-hidden className="h-4 w-4 rounded-full bg-[#E7E9EC]" />
+              <span className="text-[11px] text-text-muted">동네 산책 기록</span>
+              <span className="text-[11px] text-text-muted/70">· 1주 전</span>
+            </div>
+            <p className="mt-1 truncate text-[13.5px] font-semibold" style={{ color: '#7fa3dc' }}>
+              공릉동 골목 산책하며 들른 곳들
+            </p>
+            <p className="mt-0.5 truncate text-[12px] leading-[1.5] text-text-muted">
+              주말 오후에 천천히 걸으며 골목 구경을 했어요. 날씨가 좋아서...
+            </p>
+          </div>
+
+          <div aria-hidden className="h-[6px] w-full bg-[#f4f5f7]" />
+
+          {/* ★ 내 가게 블로그 글(메인) */}
+          <div className="px-4 pb-4 pt-3">
+            <div className="flex items-center gap-1.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/img/unsplash/webp/photo-1551218808-94e220e084d2.webp"
+                alt=""
+                className="h-[18px] w-[18px] rounded-full object-cover"
+                loading="lazy"
+              />
+              <span className="min-w-0 truncate text-[11.5px] font-medium text-text-body">사장님의 파스타 일기</span>
+              <span className="whitespace-nowrap text-[11.5px] text-text-muted/80">· 2일 전</span>
+              <span className="ml-auto whitespace-nowrap text-[10.5px] font-semibold text-accent">내 가게</span>
+            </div>
+            <p className="mt-1.5 text-[14.5px] font-bold leading-[1.4] tracking-[-0.01em]" style={{ color: LINK }}>
+              <span style={{ color: '#1f5bd0' }}>공릉동 파스타</span> 봄 신메뉴 3종,
+              <br />
+              이렇게 준비했습니다
+            </p>
+            <div className="mt-2 flex gap-3">
+              <p className="min-w-0 flex-1 text-[12.5px] leading-[1.55] tracking-[-0.01em] text-text-body">
+                직접 뽑은 생면으로 만든 <b>파스타</b> 세 가지를 소개합니다. 재료 손질부터 플레이팅까지, 매장에서 준비한 과정을 담았어요. 이번 주부터...
+              </p>
+              <span className="relative h-[76px] w-[76px] shrink-0 overflow-hidden rounded-[10px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/img/unsplash/webp/photo-1504674900247-0877df9cc836.webp"
+                  alt=""
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <span className="absolute bottom-1 right-1 rounded-[4px] bg-black/55 px-1 text-[10px] font-medium leading-[14px] text-white">
+                  8
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div aria-hidden className="h-[6px] w-full bg-[#f4f5f7]" />
+
+          {/* 아래: 다른 결과(짧게 + fade) */}
+          <div
+            className="px-4 pb-4 pt-3"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 35%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, #000 35%, transparent 100%)',
+            }}
+          >
+            <div className="flex items-center gap-1.5">
+              <span aria-hidden className="h-4 w-4 rounded-full bg-[#E7E9EC]" />
+              <span className="text-[11px] text-text-muted">오늘 뭐 먹지</span>
+              <span className="text-[11px] text-text-muted/70">· 3주 전</span>
+            </div>
+            <p className="mt-1 truncate text-[13.5px] font-semibold" style={{ color: '#7fa3dc' }}>
+              면 요리 좋아하는 사람 모여요
+            </p>
+          </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

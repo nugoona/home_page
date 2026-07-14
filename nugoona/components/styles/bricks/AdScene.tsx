@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import S42AdScene from '@/components/home/s4/S42AdScene';
 
 /* ═══════════════════════════════════════════════════════════════
    광고 "장면" — 콘텐츠(PhoneScene)와 좌우 대칭(폰 왼쪽·텍스트 오른쪽).
@@ -11,8 +12,6 @@ import { motion } from 'framer-motion';
    ═══════════════════════════════════════════════════════════════ */
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const BLUE = '#0070f3';
-const SCREEN = { left: 31.6, top: 12.4, width: 36.2, height: 73.6 };
 
 export default function AdScene() {
   return (
@@ -26,50 +25,10 @@ export default function AdScene() {
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
           className="flex justify-center md:justify-start order-2 md:order-1 min-w-0"
         >
-          {/* 모바일: 앱 스샷을 1px 검은 박스로 크게(하단 크롭) — 사장님 2026-07-12 */}
-          <div className="md:hidden w-full max-w-[400px] rounded-[26px] border border-[#111] overflow-hidden bg-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.3)]" style={{ maxHeight: 560 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/shots/content/app-dashboard-mobile.jpg" alt="누구나 광고 앱 대시보드 — 순매출·주문·방문자·광고 성과(ROAS)" className="block w-full" />
-          </div>
-          {/* PC: 실사 아이폰 목업 */}
-          <div className="max-md:hidden" style={{ position: 'relative', width: 440, maxWidth: '100%', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.22))' }}>
-            <div
-              style={{
-                position: 'absolute',
-                left: `${SCREEN.left}%`,
-                top: `${SCREEN.top}%`,
-                width: `${SCREEN.width}%`,
-                height: `${SCREEN.height}%`,
-                overflow: 'hidden',
-                borderRadius: 22,
-                background: '#f2f3f5',
-                zIndex: 1,
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/shots/content/app-dashboard-mobile.jpg"
-                alt="누구나 광고 앱 대시보드 — 순매출·주문·방문자·광고 성과(ROAS)"
-                style={{ display: 'block', width: '93%', height: 'auto', margin: '8% auto 0' }}
-              />
-              <span
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  pointerEvents: 'none',
-                  background:
-                    'linear-gradient(125deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.10) 12%, rgba(255,255,255,0) 32%)',
-                }}
-              />
-            </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/shots/content/phone-frame.png"
-              alt=""
-              aria-hidden
-              style={{ position: 'relative', display: 'block', width: '100%', height: 'auto', zIndex: 2 }}
-            />
+          {/* "광고 만들기 → 성과 → 챗봇" 3단 장면 — 사장님 2026-07-14 S4-2 확정, PC에도 동일 노출(사장님 지시).
+              (구 PC 실사 아이폰 스샷 목업은 git 이력 fe318cf 참조) */}
+          <div className="w-full">
+            <S42AdScene />
           </div>
         </motion.div>
 
@@ -86,13 +45,17 @@ export default function AdScene() {
             <img src="/img/logo/na.svg?v=16" alt="누구나 광고 로고" style={{ height: 30, width: 30, display: 'block' }} />
             <span className="text-[15px] font-semibold text-text-primary tracking-[-0.01em]">누구나 광고</span>
           </div>
+          {/* S4 광고 = 메인페이지 V2 최종원고(2026-07-13 사장님 확정) */}
           <h2 className="text-text-primary font-bold tracking-[-0.03em] leading-[1.2] text-[clamp(28px,3.6vw,40px)] mb-5">
-            광고를 <span style={{ color: BLUE }}>직접</span> 하고 싶습니다
+            광고를 만들고 운영하는 일을<br />누구나 할 수 있도록
           </h2>
           <p
-            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-8"
-            dangerouslySetInnerHTML={{ __html: '메타와 구글 광고를 만들고<br>성과까지 한 화면에서 확인합니다.' }}
+            className="text-text-body text-[16px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] max-w-[420px] mb-4"
+            dangerouslySetInnerHTML={{ __html: '광고 만들기부터 운영, 성과 확인까지 한 화면에서<br>궁금한 것은 AI 챗봇에게 바로 물어봅니다.' }}
           />
+          <p className="text-text-weak text-[14px] max-md:text-[13px] leading-[1.5] tracking-[-0.01em] max-w-[420px] mb-8">
+            어려운 숫자는 쉬운 말로 설명하고<br />마지막 판단은 사장님이 직접 할 수 있도록.
+          </p>
           <div className="flex items-center gap-4">
             <Link
               href="/ads"
