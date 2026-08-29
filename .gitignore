@@ -14,6 +14,7 @@ Thumbs.db
 
 # Session
 .ngn-session.md
+.ngn-session.codex.md
 
 # Local config
 CLAUDE.local.md
@@ -57,3 +58,9 @@ daemon_state.json
 # === ngn_homepage 임시 ===
 homepage-full.png
 nugoona/tsconfig.tsbuildinfo
+
+# === 화면 촬영기(scripts/ui-shots.mjs) 결과물 ===
+# 🛑 촬영본은 커밋하지 않는다. 저장소 루트가 pricing-pc-v2~v6.png 로 어질러진 원인이었다.
+nugoona/public/ui-shots/
+nugoona/public/ui-shots.html
+_old-shots/
