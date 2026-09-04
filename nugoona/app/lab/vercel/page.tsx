@@ -9,7 +9,8 @@ import Clone08 from '@/components/styles/vercel/Clone08';
 import Clone09 from '@/components/styles/vercel/Clone09';
 import Clone10 from '@/components/styles/vercel/Clone10';
 
-/* Vercel 디자인 소스 복제 갤러리 — 렌더 검수·변형 실험용(디자인 소스). */
+/* Vercel 디자인 소스 복제 갤러리 — 렌더 검수·변형 실험용(디자인 소스).
+   ⛔ 삭제 금지 = 재사용 자산(사장님 지시 2026-07-16). /lab/sources(애니 33종)와 함께 영구 소스. DESIGN §8.13 등록. */
 const CLONES = [
   { n: '01', C: Clone01, label: 'Provider fallback (플로우)' },
   { n: '02', C: Clone02, label: 'Routing/billing (3분할 카드)' },
@@ -29,7 +30,12 @@ export default function Page() {
       {CLONES.map(({ n, C, label }) => (
         <section key={n} className="border-b border-neutral-200">
           <div className="px-6 py-3 font-mono text-[13px] text-neutral-500">#{n} · {label}</div>
-          <C />
+          {/* 모바일: PC 레이아웃 유지 + 가로 스크롤로 열람 */}
+          <div className="overflow-x-auto">
+            <div className="min-w-[1280px]">
+              <C />
+            </div>
+          </div>
         </section>
       ))}
     </main>

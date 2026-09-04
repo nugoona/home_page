@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
+import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
+import { RevealLine } from '@/components/motion/Reveal';
+import MobileOurWay from './MobileOurWay';
 
 /**
  * 홈 S3 — "말풍선(사장님 확인) + 궤도 자동 처리(앱)" (Clone05 분해·재조립, §8.15)
@@ -41,9 +44,9 @@ const STEP_MS = 950;
 const HOLD_MS = 3200;
 const REST_MS = 700;
 
-/* 칩 라인 아이콘 (잉크 획 1.7) */
+/* 칩 라인 아이콘 (다크 칩 위 흰 획 — 사장님 2026-07-15 "태그 다크로") */
 function NodeIcon({ i }: { i: number }) {
-  const s = { stroke: INK, strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
+  const s = { stroke: '#ffffff', strokeWidth: 1.7, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden className="shrink-0">
       {i === 0 && (
@@ -62,7 +65,7 @@ function NodeIcon({ i }: { i: number }) {
         <>
           <circle cx="12" cy="12" r="7.5" {...s} />
           <circle cx="12" cy="12" r="3.2" {...s} />
-          <circle cx="12" cy="12" r="0.5" fill={INK} stroke="none" />
+          <circle cx="12" cy="12" r="0.5" fill="#ffffff" stroke="none" />
         </>
       )}
       {i === 3 && (
@@ -88,7 +91,7 @@ function DoneBadge({ done, reduce }: { done: boolean; reduce: boolean }) {
   return (
     <motion.span
       className="absolute -right-2.5 -top-2.5 flex h-[22px] w-[22px] items-center justify-center rounded-full bg-white"
-      style={{ border: '1px solid #e0e0e0', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}
+      style={{ border: '1px solid #171717' }}
       initial={false}
       animate={done ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.4 }}
       transition={done && !reduce ? { type: 'spring', stiffness: 500, damping: 22 } : { duration: 0.25 }}
@@ -102,12 +105,14 @@ function DoneBadge({ done, reduce }: { done: boolean; reduce: boolean }) {
 }
 
 /* ═══════════ 궤도 장면 — 빔이 칩에 닿으면 체크 (루프) ═══════════ */
-function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) {
+function OrbitScene({ started, reduce, uid }: { started: boolean; reduce: boolean; uid: string }) {
   /* step: -1 리셋 / 0~5 처리 중 / 6 완료 유지 */
-  const [step, setStep] = useState(reduce ? 6 : -1);
+  const [step, setStep] = useState(-1);
 
+  /* ⛔ reduce 예외 없음 — 절전 폰에서 궤도 애니가 아예 안 돌던 문제(사장님 2026-07-15) → 항상 순회.
+     (§8.18-D: reduce로 애니 죽이면 사장님 폰에서 안 보임. 궤도는 순회가 핵심이라 정지=의미 상실.) */
   useEffect(() => {
-    if (!started || reduce) return;
+    if (!started) return;
     let alive = true;
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
     (async () => {
@@ -127,7 +132,7 @@ function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) 
     return () => {
       alive = false;
     };
-  }, [started, reduce]);
+  }, [started]);
 
   return (
     /* viewBox 상단 44 크롭(칩 위 여백 제거) + 배경 카드 없는 오픈 궤도(사장님 2026-07-14) */
@@ -135,16 +140,16 @@ function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) 
       {/* 궤도 + 빔 + 중앙 원 (SVG, 320×300 좌표계) */}
       <svg className="absolute left-0 top-0 h-auto w-full" viewBox="0 44 320 246" aria-hidden>
         <defs>
-          <linearGradient id="s3-ring-fade" gradientUnits="userSpaceOnUse" x1="160" y1="60" x2="160" y2="290">
+          <linearGradient id={`${uid}-ring-fade`} gradientUnits="userSpaceOnUse" x1="160" y1="60" x2="160" y2="290">
             <stop offset="0" stopColor="#d9d9d9" />
             <stop offset="0.75" stopColor="#d9d9d9" />
             <stop offset="1" stopColor="#d9d9d9" stopOpacity="0.15" />
           </linearGradient>
         </defs>
         {/* 동심 궤도 3 (Clone05: dashed / solid / dashed) */}
-        <circle cx={CX} cy={CY} r="117" fill="none" stroke="url(#s3-ring-fade)" strokeWidth="1" strokeDasharray="4 6" />
-        <circle cx={CX} cy={CY} r="145" fill="none" stroke="url(#s3-ring-fade)" strokeWidth="1" />
-        <circle cx={CX} cy={CY} r="176" fill="none" stroke="url(#s3-ring-fade)" strokeWidth="1" strokeDasharray="4 6" />
+        <circle cx={CX} cy={CY} r="117" fill="none" stroke={`url(#${uid}-ring-fade)`} strokeWidth="1" strokeDasharray="4 6" />
+        <circle cx={CX} cy={CY} r="145" fill="none" stroke={`url(#${uid}-ring-fade)`} strokeWidth="1" />
+        <circle cx={CX} cy={CY} r="176" fill="none" stroke={`url(#${uid}-ring-fade)`} strokeWidth="1" strokeDasharray="4 6" />
         {/* 빔 — 중앙 원 가장자리 → 칩. 처리 중 = 드로잉, 완료 = 옅은 잔광 */}
         {NODES.map((n, i) => {
           const dx = n.x - CX;
@@ -177,8 +182,8 @@ function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) 
           );
         })}
         {/* 중앙 잔물결 링 + 다크 원(우리 앱) — 잔물결도 하단 fade(오픈 배경에서 잘림 무마) */}
-        <circle cx={CX} cy={CY} r="42" fill="none" stroke="url(#s3-ring-fade)" strokeWidth="1" />
-        <circle cx={CX} cy={CY} r="54" fill="none" stroke="url(#s3-ring-fade)" strokeWidth="1" />
+        <circle cx={CX} cy={CY} r="42" fill="none" stroke={`url(#${uid}-ring-fade)`} strokeWidth="1" />
+        <circle cx={CX} cy={CY} r="54" fill="none" stroke={`url(#${uid}-ring-fade)`} strokeWidth="1" />
         <circle cx={CX} cy={CY} r="28" fill={INK} />
         {/* ✦ 스파클 (앱 = 일하는 주체) */}
         <path
@@ -198,17 +203,15 @@ function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) 
             className="absolute z-10 block -translate-x-1/2 -translate-y-1/2"
             style={{ left: `${(n.x / 320) * 100}%`, top: `${((n.y - 44) / 246) * 100}%` }}
           >
+            {/* 칩 = 다크 필(Clone01 검정 필 문법) + 무그림자. active = accent 배경(사장님 2026-07-15 "태그 다크로") */}
             <motion.span
-              className="relative flex items-center gap-1.5 rounded-[10px] border bg-white px-2.5 py-[7px]"
+              className="relative flex items-center gap-1.5 rounded-[10px] px-2.5 py-[7px]"
               initial={false}
-              animate={{
-                borderColor: active ? ACCENT : '#e5e5e5',
-                boxShadow: active ? '0 4px 14px rgba(0,112,243,0.18)' : '0 2px 6px rgba(0,0,0,0.05)',
-              }}
+              animate={{ backgroundColor: active ? ACCENT : '#171717' }}
               transition={{ duration: 0.25 }}
             >
               <NodeIcon i={i} />
-              <span className="whitespace-nowrap text-[11.5px] font-semibold leading-none tracking-[-0.01em] text-text-primary" style={KR}>
+              <span className="whitespace-nowrap text-[11.5px] font-semibold leading-none tracking-[-0.01em] text-white" style={KR}>
                 {n.label}
               </span>
               <DoneBadge done={done} reduce={reduce} />
@@ -226,7 +229,7 @@ function OrbitScene({ started, reduce }: { started: boolean; reduce: boolean }) 
 function DarkTail() {
   return (
     <svg className="absolute -bottom-[13px] right-4" width="34" height="29" viewBox="0 0 80 68" aria-hidden>
-      <path d="M8 0h24c0 26 14 46 42 64-30 2-52-10-66-32L8 20Z" fill={INK} />
+      <path d="M8 0h24c0 26 14 46 42 64-30 2-52-10-66-32L8 20Z" fill={ACCENT} />
     </svg>
   );
 }
@@ -251,18 +254,21 @@ function SpeechScene({ reduce }: { reduce: boolean }) {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="mb-1.5 block text-right text-[11px] font-medium text-text-weak" style={KR}>
-          사장님
+        <span className="mb-1.5 block text-right text-[11px] font-medium text-[#b7bcc4]" style={KR}>
+          고객님
         </span>
-        <div className="relative rounded-[22px] px-5 py-3.5" style={{ backgroundColor: INK }}>
+        <div className="relative rounded-[22px] px-5 py-3.5" style={{ backgroundColor: ACCENT }}>
           <DarkTail />
           <p className="text-[15px] font-semibold leading-[1.45] tracking-[-0.01em] text-white" style={KR}>
-            이 광고 지금 잘 되고 있나요?
-            {!reduce && (
+            설정은 이제 다 끝난 거야?
+            <br />
+            소재만 고르면 돼?
+            {/* ⚠항상 렌더(조건부 렌더 = reduce-motion 기기에서 hydration 에러 — 2026-07-18 /ads 실증) */}
+            {(
               <motion.span
-                className="ml-1.5 inline-block h-[14px] w-[8px] translate-y-[2px] rounded-[2px] bg-[#4a4a4a]"
-                animate={{ opacity: [1, 0.15, 1] }}
-                transition={{ repeat: Infinity, duration: 1.1, ease: 'easeInOut' }}
+                className="ml-1.5 inline-block h-[14px] w-[8px] translate-y-[2px] rounded-[2px] bg-white/45"
+                animate={reduce ? { opacity: 0.45 } : { opacity: [1, 0.15, 1] }}
+                transition={reduce ? undefined : { repeat: Infinity, duration: 1.1, ease: 'easeInOut' }}
                 aria-hidden
               />
             )}
@@ -278,15 +284,27 @@ function SpeechScene({ reduce }: { reduce: boolean }) {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: reduce ? 0 : 0.25 }}
       >
-        <span className="mb-1.5 block text-[11px] font-medium text-text-weak" style={KR}>
-          광고 도우미
+        {/* AI 답변 표식 — 봇 아이콘(S42 챗 목업과 동일 문법, "카톡 오해" 방지 — 사장님 2026-07-15) */}
+        <span className="mb-1.5 flex items-center gap-1.5">
+          <span className="rounded-dot flex h-[24px] w-[24px] shrink-0 items-center justify-center bg-[#334155]">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="4" y="8" width="16" height="11" rx="3" />
+              <path d="M12 5v3" />
+              <circle cx="12" cy="4" r="1" fill="#ffffff" stroke="none" />
+              <circle cx="9.5" cy="13" r="1" fill="#ffffff" stroke="none" />
+              <circle cx="14.5" cy="13" r="1" fill="#ffffff" stroke="none" />
+            </svg>
+          </span>
+          <span className="text-[11px] font-medium text-[#b7bcc4]" style={KR}>
+            광고 도우미
+          </span>
         </span>
         <div className="relative rounded-[22px] bg-white px-5 py-3.5" style={{ border: '1px solid #ececec', boxShadow: '0 1px 2px rgba(0,0,0,0.03)' }}>
           <WhiteTail />
           <p className="text-[14px] font-medium leading-[1.55] tracking-[-0.01em] text-text-body" style={KR}>
-            네, 지난주보다 주문이 늘었어요.
+            네. 광고 준비는 모두 끝났습니다.
             <br />
-            광고비 <span className="font-bold" style={{ color: ACCENT }}>1만 원당 3.2명</span>이 장바구니에 담았어요.
+            소재를 고르면 바로 시작할 수 있어요.
           </p>
         </div>
       </motion.div>
@@ -295,13 +313,17 @@ function SpeechScene({ reduce }: { reduce: boolean }) {
 }
 
 export default function S3GraphicA() {
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const inView = useInView(panelRef, { once: true, margin: '-15% 0px' });
-  const reduce = !!useReducedMotion();
+  /* ⚠️ useReducedMotion은 서버 false / 절전 모드 폰 true → hydration mismatch(실기기 "1 Issue" 실증 2026-07-15).
+     마운트 후에만 반영해 서버·클라 첫 렌더를 일치시킨다. */
+  const reduceRaw = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const reduce = mounted && !!reduceRaw;
   const started = inView || reduce;
 
-  /* 패널 공통 스킨 (라운드 카드 + 절제된 도트, edge mask §8.14-6) */
-  const panelCls = 'relative w-full overflow-hidden rounded-2xl border border-[#ECECEC] bg-[#FAFAFA]';
+  /* 채팅 카드 배경 도트 레이어(§8.14-6 edge mask) */
   const dotLayer = (
     <div
       className="pointer-events-none absolute inset-0"
@@ -315,55 +337,83 @@ export default function S3GraphicA() {
     />
   );
 
-  return (
-    <section className="w-full bg-bg py-20 sm:py-28">
-      <div className="mx-auto max-w-[1060px] px-5">
-        {/* ── 블록 1: 텍스트(좌) + 궤도(우) — PC 지그재그, 모바일 세로 ── */}
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <div className="text-center md:text-left">
-            <span className="mb-5 inline-block text-xs font-medium tracking-[0.18em] text-text-muted" style={EN}>
-              OUR WAY
-            </span>
-            <h2
-              className="text-[clamp(1.3rem,6.3vw,2.5rem)] font-semibold leading-[1.3] tracking-[-0.02em] text-text-primary [text-wrap:balance]"
-              style={KR}
-            >
-              어려운 건 앱이 합니다
-            </h2>
-            <p className="mt-4 text-[15px] font-medium leading-[1.55] tracking-[-0.01em] text-text-body" style={KR}>
-              앱은 준비하고, 설명하고, 다음 일을 알려드립니다.
-            </p>
-          </div>
-          {/* 궤도 (앱이 자동 처리 — Clone05 궤도) — 배경 카드 없이 오픈(사장님 2026-07-14) */}
-          <div ref={panelRef} className="relative">
-            <OrbitScene started={started} reduce={reduce} />
-          </div>
-        </div>
+  /* Grid Occupancy 편입(2026-07-15, §8.16): 지그재그 유지 — 블록1(레일+궤도) / 블록2(말풍선+레일) */
+  const rail1 = (
+    <div className="px-8 py-10 lg:px-12">
+      <span className="mb-6 flex items-center gap-2">
+        <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden>
+          <path d="M13 8c.7 3.4 2.6 5.3 6 6-3.4.7-5.3 2.6-6 6-.7-3.4-2.6-5.3-6-6 3.4-.7 5.3-2.6 6-6Z" fill="#333333" />
+        </svg>
+        <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#555555]" style={EN}>
+          Our Way
+        </span>
+      </span>
+      <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold leading-[1.28] tracking-[-0.04em] text-text-primary" style={KR}>
+        <RevealLine>어려운 건 앱이 합니다</RevealLine>
+      </h2>
+      <p className="mt-5 text-[17px] font-medium leading-[1.55] tracking-[-0.01em] text-[#4f4f4f] md:leading-[1.35]" style={KR}>
+        광고를 시작하기 위한 복잡한 준비를 앱이 먼저 처리합니다
+      </p>
+      {/* 처리 항목 체크 리스트 삭제 — 우측 궤도 칩과 중복(사장님 2026-07-15 "텍스트 일괄 없애줘 체크 표시도") */}
+    </div>
+  );
 
-        {/* ── 블록 2: 말풍선(좌) + 텍스트(우) — 지그재그 반전 ── */}
-        <div className="mt-16 grid items-center gap-10 md:mt-24 md:grid-cols-2 md:gap-14">
-          <div className="order-1 text-center md:order-2 md:text-left">
-            <h2
-              className="text-[clamp(1.3rem,6.3vw,2.5rem)] font-semibold leading-[1.3] tracking-[-0.02em] text-text-primary [text-wrap:balance]"
-              style={KR}
-            >
-              확인은 사장님이 합니다
-            </h2>
-            <p className="mt-4 text-[15px] font-medium leading-[1.55] tracking-[-0.01em] text-text-body" style={KR}>
-              사장님은 마지막 확인만 하시면 됩니다.
-            </p>
-          </div>
-          {/* 말풍선 패널 (사장님 확인 — Clone05 말풍선) */}
-          <div className="order-2 md:order-1">
-            <div className={panelCls}>
-              {dotLayer}
-              <div className="relative px-5 py-8 sm:px-8">
-                <SpeechScene reduce={reduce} />
-              </div>
-            </div>
-          </div>
+  /* rail2("사장님은…")·speechBlock(다크 패널) 폐기(2026-07-16): 모바일 = MobileOurWay(§8.18-F) / PC 채팅 = 아래 chatCell 밝은 카드. 호칭도 "고객님"으로 이관. */
+
+  const orbitBlock = (
+    <div className="relative w-full px-6 py-6">
+      <OrbitScene started={started} reduce={reduce} uid="s3d" />
+    </div>
+  );
+
+  /* PC 하단 = 히어로 문법 v2(사장님 2026-07-15 "목업은 칸칸이 사이에 쏙 / 화살표 네모 없애고 칸에 / 텍스트도"):
+     각 요소가 칸 정수 개를 개별 점유. 채팅 = 회색 면이 칸을 꽉 채움(필요시 키움), 화살표 = 아이콘만, 주변 = checker */
+  /* 채팅 칸 = 위 궤도와 동일 디자인 언어(밝은 dotLayer 카드) — 검은 배너 제거로 'AI 대화'가 먼저 읽힘(GPT PM 2026-07-16).
+     말풍선(사용자 accent·도우미 흰)이 주인공, 배경은 제품 UI 카드처럼 떠 있는 밝은 면 */
+  const chatCell = (
+    <div className="flex h-full w-full items-center px-8 py-8">
+      <div className="relative w-full overflow-hidden rounded-2xl border border-[#ECECEC] bg-[#FAFAFA] px-7 py-8 shadow-[0_6px_20px_rgba(15,23,42,0.05)]">
+        {dotLayer}
+        <div className="relative">
+          <SpeechScene reduce={reduce} />
         </div>
       </div>
+    </div>
+  );
+  const arrowCell = (
+    <svg aria-hidden width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#171717" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  );
+  const textCell = (
+    <h2 className="px-6 text-center text-[clamp(1.5rem,2.5vw,2.1rem)] font-bold leading-[1.3] tracking-[-0.04em] text-text-primary" style={KR}>
+      확인은 고객님이 합니다
+    </h2>
+  );
+
+  /* 블록2 경계 = line 8(위 블록 line 6과 확실히 다르게 — "1칸 차이는 오차로 보임" 검수) */
+  /* 하단 = 히어로 문법 v2: 채팅 5열×4행 / 화살표 1열×2행(채팅 세로 중심 공유) / 텍스트 4열×2행.
+     미점유(r7 여백 행·c1·c12 열·화살표/텍스트 위아래) = 1×1 checker 바둑판 */
+  const D_AREAS: GridArea[] = [
+    { key: 'rail1', c: [1, 6], r: [1, 7], className: 'flex items-center' },
+    { key: 'orbit', c: [6, 13], r: [1, 7], className: 'flex items-center justify-center' },
+    { key: 'chat', c: [2, 7], r: [8, 12], className: 'block' },
+    { key: 'arrow', c: [7, 8], r: [9, 11], className: 'flex items-center justify-center' },
+    { key: 'text2', c: [8, 12], r: [9, 11], className: 'flex items-center justify-center' },
+  ];
+  const renderD = (key: string) =>
+    key === 'rail1' ? rail1 : key === 'orbit' ? orbitBlock : key === 'chat' ? chatCell : key === 'arrow' ? arrowCell : textCell;
+
+  return (
+    <section ref={panelRef} className="w-full bg-bg">
+      {/* 모바일 — /lab/ourway에서 확정된 한 흐름(2026-07-15). PC와 별개(md:hidden).
+           배경 = Vercel Surface2 #fafafa(스샷 실측) → 흰 카드(텍스트바·채팅창) 대비로 가독성↑ */}
+      <div className="bg-[#fafafa] px-6 py-20 md:hidden">
+        <MobileOurWay />
+      </div>
+
+      {/* PC — 칸 지그재그 + 하단 히어로식 checker */}
+      <OccupancyGrid cols={12} rows={12} areas={D_AREAS} checker mobile={false} render={renderD} />
     </section>
   );
 }

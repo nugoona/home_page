@@ -1,32 +1,38 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 
 const EN: React.CSSProperties = { fontFamily: 'var(--font-en)' };
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/* 대화 목업 — 다크 챗 UI (질문 답변 + 광고 말로 제어) */
-function ChatMock({ active }: { active: boolean }) {
+/* 대화 목업 — 다크 챗 UI (질문 답변 + 광고 말로 제어)
+   export = /ads 재사용(사장님 2026-07-18 "예전 다크버전 그대로 갖고 와" — 원작 렌더 불변) */
+export function ChatMock({ active }: { active: boolean }) {
+  const reduce = useReducedMotion();
   const bubble = (i: number) => ({
     initial: { opacity: 0, y: 10 },
     animate: active ? { opacity: 1, y: 0 } : {},
     transition: { duration: 0.5, ease: EASE, delay: 0.2 + i * 0.45 },
   });
+  /* 타이핑 과정(사장님 2026-07-18 "입력창에서 치는 과정이 나와야 채팅 느낌") —
+     말풍선 4개가 다 뜬 뒤(≈2.1s) 한 글자씩. ⚠조건부 렌더 금지(hydration 교훈) — 항상 렌더, reduce면 즉시 표시 */
+  const TYPED = '요즘 뭐가 잘 팔려?';
 
   return (
     <div
       className="border border-white/10 bg-[#111] overflow-hidden"
-      style={{ boxShadow: '0 24px 80px rgba(0,0,0,0.5), 0 0 60px rgba(0,112,243,0.05)' }}
+      /* 그림자 = 선명 2겹(사장님 2026-07-20 "너무 뿌옇게" — 구 24/80 블러 폐기, §8.14 블러 최소 문법) */
+      style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.28), 0 10px 24px rgba(0,0,0,0.22)' }}
     >
       {/* 헤더 */}
       <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06]">
         <span className="rounded-dot w-2 h-2 bg-[#22c55e]" />
         <span className="text-[13px] font-semibold text-white/80">NGN Assistant</span>
         {/* "예시 화면" = 콜드 리드 지적(데모 숫자 출처 표시 없음 → 과장 의심) 대응 — 전 목업 공통 라벨 */}
-        <span className="text-[11px] text-white/50 ml-auto">데모 화면</span>
+        <span className="text-[11px] text-white/65 ml-auto">데모 화면</span>
       </div>
 
       {/* 대화 */}
@@ -49,29 +55,51 @@ function ChatMock({ active }: { active: boolean }) {
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-3.5">
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[11px] text-white/50">Summer Sale · Meta</span>
-              <span className="text-[10px] text-white/30" style={EN}>Budget</span>
+              <span className="text-[11px] text-white/70">Summer Sale · Meta</span>
+              <span className="text-[10px] text-white/50" style={EN}>Budget</span>
             </div>
             <div className="flex items-center gap-2.5 mb-3">
-              <span className="text-[14px] text-white/40 line-through" style={EN}>₩500,000</span>
-              <span className="text-white/40">→</span>
+              <span className="text-[14px] text-white/55 line-through" style={EN}>₩500,000</span>
+              <span className="text-white/55">→</span>
               <span className="text-[16px] font-bold text-accent" style={EN}>₩600,000</span>
             </div>
             <div className="w-full h-9 bg-accent text-white text-[13px] font-semibold flex items-center justify-center gap-1.5">
               위저드에서 확인
               <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
             </div>
-            <p className="text-[10px] text-white/30 mt-2 leading-[1.5]">안전을 위해 위저드에서 확인해야 실행됩니다 (자동 집행 아님)</p>
+            <p className="text-[10px] text-white/60 mt-2 leading-[1.5]">안전을 위해 위저드에서 확인해야 실행됩니다 (자동 집행 아님)</p>
           </div>
         </motion.div>
       </div>
 
-      {/* 입력창 */}
-      <div className="flex items-center gap-2 px-5 py-3.5 border-t border-white/[0.06]">
-        <span className="flex-1 text-[13px] text-white/30">매출·광고·트렌드, 무엇이든 물어보세요</span>
-        <span className="rounded-dot w-7 h-7 bg-accent flex items-center justify-center shrink-0">
-          <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8h9M8 4l4 4-4 4" /></svg>
-        </span>
+      {/* 입력창 — 입력창답게 박스 분리 + 타이핑 과정(사장님 2026-07-18 "다크에 묻혀 안 보임") */}
+      <div className="px-4 py-3.5 border-t border-white/[0.06]">
+        <div className="flex h-11 items-center gap-2 border border-white/15 bg-white/[0.07] px-3.5">
+          <span className="flex min-w-0 flex-1 items-center text-[13px] text-white/90">
+            <span className="truncate">
+              {TYPED.split('').map((ch, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  animate={active ? { opacity: 1 } : {}}
+                  transition={reduce ? { duration: 0 } : { duration: 0, delay: 2.3 + i * 0.09 }}
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
+            {/* 커서 — 항상 렌더(reduce면 정지) */}
+            <motion.span
+              aria-hidden
+              className="ml-[2px] inline-block h-[15px] w-[1.5px] shrink-0 bg-white/80"
+              animate={reduce ? { opacity: 0.6 } : { opacity: [1, 0, 1] }}
+              transition={reduce ? undefined : { repeat: Infinity, duration: 1.1, ease: 'linear' }}
+            />
+          </span>
+          <span className="rounded-dot w-7 h-7 bg-accent flex items-center justify-center shrink-0">
+            <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8h9M8 4l4 4-4 4" /></svg>
+          </span>
+        </div>
       </div>
     </div>
   );

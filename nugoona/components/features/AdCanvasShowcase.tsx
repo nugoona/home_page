@@ -90,7 +90,7 @@ const URLS = [
    STEP 01 — URL → Analyze → Done
    Gradient Border Spin + Pop + Slide Tags
    ================================================================ */
-function Step01_UrlInput({ isActive }: { isActive: boolean }) {
+export function Step01_UrlInput({ isActive }: { isActive: boolean }) {
   const [status, setStatus] = useState<'idle' | 'typing' | 'analyzing' | 'done'>('idle');
   const [typed, setTyped] = useState('');
   const [checkIdx, setCheckIdx] = useState(0);
@@ -378,7 +378,7 @@ function Step02_Catalog({ isActive }: { isActive: boolean }) {
    STEP 03 — Google Ads
    Skeleton → Reveal + Ad Strength Gauge Fill
    ================================================================ */
-function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
+export function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
   const [phase, setPhase] = useState<'idle' | 'skeleton' | 'reveal'>('idle');
   const [gaugeOn, setGaugeOn] = useState(false);
   const started = useRef(false);
@@ -438,7 +438,7 @@ function Step03_GoogleAds({ isActive }: { isActive: boolean }) {
             transition={{ duration: 0.5, ease: EASE }}
           >
             <p style={{ fontSize: 16, fontWeight: 600, color: '#1a0dab', lineHeight: 1.3, marginBottom: 8 }}>
-              여름 바캉스 룩 1위 | 지금 가입하면 3천원 할인
+              여름 바캉스 룩 추천 | 지금 가입하면 3천원 할인
             </p>
             <p style={{ fontSize: 13, color: '#666', lineHeight: 1.65 }}>
               트렌디한 스타일과 시원한 소재. 오늘 출발, 내일 도착. 첫 구매 무료 반품 혜택까지 놓치지 마세요.

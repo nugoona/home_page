@@ -22,7 +22,22 @@ export default function Footer() {
             <p className="text-[13px] text-text-weak">이메일문의 : oscar@nugoona.co.kr</p>
           </div>
         </div>
-        <div className="mt-8 flex items-center justify-center relative">
+        {/* 방침·약관 링크 — API 심사 요건(로그인 없는 공개 URL, docs/_handoff-review-requirements.md) */}
+        <div className="mt-8 flex items-center justify-center gap-5">
+          <a href="https://upload.nugoona.co.kr/login" className="text-[13px] text-text-weak hover:text-text-primary hover:underline">
+            앱 로그인
+          </a>
+          <a href="/privacy" className="text-[13px] font-semibold text-text-primary hover:underline">
+            개인정보처리방침
+          </a>
+          <a href="/terms" className="text-[13px] text-text-weak hover:text-text-primary hover:underline">
+            이용약관
+          </a>
+          <a href="/privacy#account-deletion" className="text-[13px] text-text-weak hover:text-text-primary hover:underline">
+            계정 삭제 안내
+          </a>
+        </div>
+        <div className="mt-4 flex items-center justify-center relative">
           <p className="text-[13px] text-text-weak">&copy; 2025 누구나컴퍼니. All rights reserved.</p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

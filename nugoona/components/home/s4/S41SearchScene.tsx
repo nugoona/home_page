@@ -35,13 +35,33 @@ const PHOTOS = [
 ];
 
 /* 단계 헤더 — Vercel StoryStep 문법: 큰 EN 숫자(옅게) + 한글 라벨. 왼쪽 축 고정 = 순서. */
-function StepHead({ n, label }: { n: string; label: string }) {
+/* 단계 헤드 = 다크 필 뱃지 + 굵은 라벨, 단계 사이 hairline 구획(사장님 2026-07-15 "구획·뱃지로 가독") */
+function StepHead({ n, label, first }: { n: string; label: string; first?: boolean }) {
+  /* 구획선 = 직전 목업 잘린 단면에 밀착 + 중앙 도톰·양끝 fade(사장님 2026-07-15 "중간은 조금 굵고 양옆 얇아지게") */
   return (
-    <div className="mb-2.5 flex items-baseline gap-2.5">
-      <span className="text-[24px] font-bold leading-none tracking-[-0.02em] text-[#c8c8cf]" style={{ fontFamily: 'var(--font-en)' }}>
-        {n}
-      </span>
-      <span className="text-[14.5px] font-semibold leading-none tracking-[-0.01em] text-text-primary">{label}</span>
+    /* 구획선(top-0)은 모바일에서도 잘린 이미지에 밀착 — 숨은 선 아래 pt로(사장님 2026-07-15 "떨어져서 싹둑 잘린 느낌") */
+    <div className={first ? 'mb-3.5' : 'relative mb-3.5 pt-8 max-md:pt-12'}>
+      {!first && (
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[3px]"
+          style={{ background: 'radial-gradient(ellipse 52% 100% at 50% 0%, #8f8f8f 0%, rgba(143,143,143,0.35) 60%, transparent 100%)' }}
+        />
+      )}
+      <div className="flex items-center gap-3">
+        <span
+          className="flex h-[26px] items-center bg-[#171717] px-2.5 text-[13px] font-bold leading-none tracking-[0.04em] text-white"
+          style={{ fontFamily: 'var(--font-en)' }}
+        >
+          {n}
+        </span>
+        <span className="text-[16.5px] font-bold leading-none tracking-[-0.02em] text-text-primary">{label}</span>
+        {/* 제품 표식 반복(Toss 문법) — 모바일 컨텍스트 재공급("이 단계가 어느 제품 것인지"). PC 숨김 */}
+        <span className="ml-auto flex items-center gap-1.5 md:hidden">
+          <span aria-hidden className="rounded-dot h-[6px] w-[6px] bg-[#0070f3]" />
+          <span className="text-[11px] font-medium tracking-[-0.01em] text-[#6b7280]">누구나 콘텐츠</span>
+        </span>
+      </div>
     </div>
   );
 }
@@ -53,19 +73,21 @@ const STEP_MOTION = (delay: number) => ({
   transition: { duration: 0.55, ease: EASE, delay },
 });
 
-export default function S41SearchScene() {
+/* part 지정 시 해당 단계만 렌더. hideHead = StepHead 생략(모바일 스텝 탭이 라벨을 대신 — 2026-07-15).
+   part 모드 = h-full flex-col: StepHead는 칸 상단 Y 통일, 목업은 남은 공간 세로 중앙(my-auto) */
+export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {
   return (
-    <div className="mx-auto w-full max-w-[380px]" role="img" aria-label="사진 네 장을 올리면 글이 자동으로 완성되고, 검색 결과에서 발견되는 3단계 장면">
+    <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="사진 네 장을 올리면 글이 자동으로 완성되고, 검색 결과에서 발견되는 3단계 장면">
       {/* ── 01 사진 4장만 올리면 — 폰 업로드 화면(상단 크롭) ── */}
-      <motion.div {...STEP_MOTION(0)} className="relative z-10">
-        <StepHead n="01" label="사진 4장만 올리면" />
+      {(part === undefined || part === 1) && (
+      <motion.div {...STEP_MOTION(0)} className={part ? 'relative flex flex-col' : 'relative z-10'}>
+        {!hideHead && <StepHead n="01" label="사진 4장만 올리면" first />}
         <div
-          className="mx-auto overflow-hidden"
+          className={part ? 'mx-auto overflow-hidden' : 'mx-auto overflow-hidden'}
           style={{
+            /* 페이드 대신 하드 컷 — 마감은 다음 StepHead의 밀착 구획선이 담당(이중선 방지, 2026-07-15) */
             width: PHONE_W,
             height: 300,
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 91%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 91%, transparent 100%)',
           }}
           aria-hidden
         >
@@ -169,16 +191,20 @@ export default function S41SearchScene() {
         </div>
       </motion.div>
 
+      )}
+
       {/* ── 02 글이 자동으로 완성되고 — NC 문서 카드(같은 사진·같은 제목) ── */}
-      <motion.div {...STEP_MOTION(0.22)} className="relative z-20 mt-3">
-        <StepHead n="02" label="글이 자동으로 완성되고" />
+      {(part === undefined || part === 2) && (
+      <motion.div {...STEP_MOTION(0.22)} className={part ? 'relative flex flex-col' : 'relative z-20'}>
+        {/* 3열(part) 배치 = 칸 경계가 구획이므로 first 스타일(세로 스택에서만 border-t 구획) */}
+        {!hideHead && <StepHead n="02" label="글이 자동으로 완성되고" first={part !== undefined} />}
         <div
-          className="overflow-hidden rounded-[12px] bg-white px-4 pb-4 pt-3.5"
+          className={part ? 'w-full overflow-hidden rounded-[12px] bg-white px-4 pb-4 pt-3.5' : 'overflow-hidden rounded-[12px] bg-white px-4 pb-4 pt-3.5'}
           style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 14px 30px rgba(0,0,0,0.09)' }}
         >
           <div className="flex items-center gap-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/nc.svg?v=14" alt="" className="h-[15px] w-[15px]" />
+            <img src="/img/logo/nc.svg?v=16" alt="" className="h-[15px] w-[15px]" />
             <span className="text-[11px] font-semibold tracking-[-0.01em] text-text-body">누구나 콘텐츠</span>
             <span className="ml-auto text-[10px] tracking-[0.04em] text-text-muted" style={{ fontFamily: 'var(--font-en)' }}>
               DRAFT → DONE
@@ -204,11 +230,14 @@ export default function S41SearchScene() {
         </div>
       </motion.div>
 
+      )}
+
       {/* ── 03 검색에서 찾아져요 — 검색 브라우저(같은 제목·같은 사진 발견) ── */}
-      <motion.div {...STEP_MOTION(0.44)} className="relative z-30 mt-5">
-        <StepHead n="03" label="검색에서 찾아져요" />
+      {(part === undefined || part === 3) && (
+      <motion.div {...STEP_MOTION(0.44)} className={part ? 'relative flex flex-col' : 'relative z-30'}>
+        {!hideHead && <StepHead n="03" label="검색에서 찾아져요" first={part !== undefined} />}
         <div
-          className="overflow-hidden rounded-[12px] bg-white"
+          className={part ? 'w-full overflow-hidden rounded-[12px] bg-white' : 'overflow-hidden rounded-[12px] bg-white'}
           style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 18px 40px rgba(0,0,0,0.10)' }}
         >
           {/* 크롬: 신호등 + 검색 pill */}
@@ -227,19 +256,15 @@ export default function S41SearchScene() {
             </span>
           </div>
 
-          {/* 위: 다른 블로그 결과(dimmed) */}
+          {/* 위: 다른 블로그 결과 = 스켈레톤(사장님 2026-07-15 "페이드 말고 스켈레톤, PC도 바꿔 페이드 뭐든 다 싫어").
+              내 가게 글만 실제, 나머지는 스켈레톤 = "다른 결과들 사이에서 내 가게가 보인다" */}
           <div className="px-4 pb-3 pt-3">
             <div className="flex items-center gap-1.5">
-              <span aria-hidden className="h-4 w-4 rounded-full bg-[#E7E9EC]" />
-              <span className="text-[11px] text-text-muted">동네 산책 기록</span>
-              <span className="text-[11px] text-text-muted/70">· 1주 전</span>
+              <span aria-hidden className="rounded-dot h-4 w-4 bg-[#EBECEF]" />
+              <span aria-hidden className="block h-[9px] w-[88px] bg-[#EBECEF]" />
             </div>
-            <p className="mt-1 truncate text-[13.5px] font-semibold" style={{ color: '#7fa3dc' }}>
-              공릉동 골목 산책하며 들른 곳들
-            </p>
-            <p className="mt-0.5 truncate text-[12px] leading-[1.5] text-text-muted">
-              주말 오후에 천천히 걸으며 골목 구경을 했어요. 날씨가 좋아서...
-            </p>
+            <span aria-hidden className="mt-2 block h-[11px] w-[62%] bg-[#E4E6E9]" />
+            <span aria-hidden className="mt-1.5 block h-[9px] w-[82%] bg-[#EDEEF0]" />
           </div>
 
           <div aria-hidden className="h-[6px] w-full bg-[#f4f5f7]" />
@@ -249,7 +274,7 @@ export default function S41SearchScene() {
             <div className="flex items-center gap-1.5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/unsplash/webp/photo-1551218808-94e220e084d2.webp" alt="" className="h-[18px] w-[18px] rounded-full object-cover" loading="lazy" />
-              <span className="min-w-0 truncate text-[11.5px] font-medium text-text-body">사장님의 파스타 일기</span>
+              <span className="min-w-0 truncate text-[11.5px] font-medium text-text-body">고객님의 파스타 일기</span>
               <span className="whitespace-nowrap text-[11.5px] text-text-muted/80">· 2일 전</span>
               <span className="ml-auto whitespace-nowrap text-[10.5px] font-semibold text-accent">내 가게</span>
             </div>
@@ -272,25 +297,18 @@ export default function S41SearchScene() {
 
           <div aria-hidden className="h-[6px] w-full bg-[#f4f5f7]" />
 
-          {/* 아래: 다른 결과(짧게 + fade) */}
-          <div
-            className="px-4 pb-4 pt-3"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to bottom, #000 35%, transparent 100%)',
-              maskImage: 'linear-gradient(to bottom, #000 35%, transparent 100%)',
-            }}
-          >
+          {/* 아래: 다른 결과 = 스켈레톤(페이드 전면 제거 — 사장님 "페이드 뭐든 다 싫어") */}
+          <div className="px-4 pb-4 pt-3">
             <div className="flex items-center gap-1.5">
-              <span aria-hidden className="h-4 w-4 rounded-full bg-[#E7E9EC]" />
-              <span className="text-[11px] text-text-muted">오늘 뭐 먹지</span>
-              <span className="text-[11px] text-text-muted/70">· 3주 전</span>
+              <span aria-hidden className="rounded-dot h-4 w-4 bg-[#EBECEF]" />
+              <span aria-hidden className="block h-[9px] w-[76px] bg-[#EBECEF]" />
             </div>
-            <p className="mt-1 truncate text-[13.5px] font-semibold" style={{ color: '#7fa3dc' }}>
-              면 요리 좋아하는 사람 모여요
-            </p>
+            <span aria-hidden className="mt-2 block h-[11px] w-[58%] bg-[#E4E6E9]" />
+            <span aria-hidden className="mt-1.5 block h-[9px] w-[70%] bg-[#EDEEF0]" />
           </div>
         </div>
       </motion.div>
+      )}
     </div>
   );
 }

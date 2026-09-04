@@ -35,13 +35,33 @@ const MEDIA_LIST = [
   '/img/unsplash/webp/photo-1529626455594-4ff0802cfb7e.webp', // 청록 프레임 벽 + 흰 티(바스트)
 ];
 
-function StepHead({ n, label }: { n: string; label: string }) {
+/* 단계 헤드 = 다크 필 뱃지 + 굵은 라벨, 단계 사이 hairline 구획(사장님 2026-07-15 "구획·뱃지로 가독") */
+function StepHead({ n, label, first }: { n: string; label: string; first?: boolean }) {
+  /* 구획선 = 직전 목업 잘린 단면에 밀착 + 중앙 도톰·양끝 fade(사장님 2026-07-15 "중간은 조금 굵고 양옆 얇아지게") */
   return (
-    <div className="mb-2.5 flex items-baseline gap-2.5">
-      <span className="text-[24px] font-bold leading-none tracking-[-0.02em] text-[#c8c8cf]" style={{ fontFamily: 'var(--font-en)' }}>
-        {n}
-      </span>
-      <span className="text-[14.5px] font-semibold leading-none tracking-[-0.01em] text-text-primary">{label}</span>
+    /* 구획선(top-0)은 모바일에서도 잘린 이미지에 밀착 — 숨은 선 아래 pt로(사장님 2026-07-15 "떨어져서 싹둑 잘린 느낌") */
+    <div className={first ? 'mb-3.5' : 'relative mb-3.5 pt-8 max-md:pt-12'}>
+      {!first && (
+        <span
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[3px]"
+          style={{ background: 'radial-gradient(ellipse 52% 100% at 50% 0%, #8f8f8f 0%, rgba(143,143,143,0.35) 60%, transparent 100%)' }}
+        />
+      )}
+      <div className="flex items-center gap-3">
+        <span
+          className="flex h-[26px] items-center bg-[#171717] px-2.5 text-[13px] font-bold leading-none tracking-[0.04em] text-white"
+          style={{ fontFamily: 'var(--font-en)' }}
+        >
+          {n}
+        </span>
+        <span className="text-[16.5px] font-bold leading-none tracking-[-0.02em] text-text-primary">{label}</span>
+        {/* 제품 표식 반복(Toss 문법) — 모바일 컨텍스트 재공급. PC 숨김 */}
+        <span className="ml-auto flex items-center gap-1.5 md:hidden">
+          <span aria-hidden className="rounded-dot h-[6px] w-[6px] bg-[#0aa5c9]" />
+          <span className="text-[11px] font-medium tracking-[-0.01em] text-[#6b7280]">누구나 광고</span>
+        </span>
+      </div>
     </div>
   );
 }
@@ -53,21 +73,23 @@ const STEP_MOTION = (delay: number) => ({
   transition: { duration: 0.55, ease: EASE, delay },
 });
 
-export default function S42AdScene() {
+/* part 지정 시 해당 단계만 렌더. hideHead = StepHead 생략(모바일 스텝 탭이 라벨을 대신 — 2026-07-15).
+   part 모드 = h-full flex-col: StepHead는 칸 상단 Y 통일, 목업은 남은 공간 세로 중앙(my-auto) */
+export default function S42AdScene({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {
   return (
-    <div className="mx-auto w-full max-w-[380px]" role="img" aria-label="광고 소재를 만들고, 성과를 한 화면에서 보고, 궁금한 것은 챗봇에게 묻는 3단계 장면">
+    <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="광고 소재를 만들고, 성과를 한 화면에서 보고, 궁금한 것은 챗봇에게 묻는 3단계 장면">
       {/* ── 01 광고를 만들고 — AdCanvas 실제 편집 UI 재현(ngn_dashboard ImageCropper.tsx 실측 구조:
            비율 선택 → 크롭 캔버스(드래그·줌) → 줌 슬라이더 → 크롭 적용. "여기서 광고를 만든다"는 도구감) ── */}
-      <motion.div {...STEP_MOTION(0)} className="relative z-10">
-        <StepHead n="01" label="광고를 만들고" />
+      {(part === undefined || part === 1) && (
+      <motion.div {...STEP_MOTION(0)} className={part ? 'relative flex flex-col' : 'relative z-10'}>
+        {!hideHead && <StepHead n="01" label="광고를 만들고" first />}
         {/* 폰 프레임 안 크롭 화면 — 모바일에서도 실제로 크롭함(사장님). 실사 1080 좌표 × scale, 패딩 90 = 내부 여백 */}
         <div
-          className="mx-auto overflow-hidden"
+          className={part ? 'mx-auto overflow-hidden' : 'mx-auto overflow-hidden'}
           style={{
+            /* 페이드 대신 하드 컷 — 마감은 다음 StepHead의 밀착 구획선이 담당(이중선 방지, 2026-07-15) */
             width: PHONE_W,
             height: 272,
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
           }}
           aria-hidden
         >
@@ -213,16 +235,19 @@ export default function S42AdScene() {
         </div>
       </motion.div>
 
+      )}
+
       {/* ── 02 성과를 한 화면에서 보고 — 폰 대시보드(실사 좌표·수치 재현) ── */}
-      <motion.div {...STEP_MOTION(0.22)} className="relative z-20 mt-5">
-        <StepHead n="02" label="성과를 한 화면에서 보고" />
+      {(part === undefined || part === 2) && (
+      <motion.div {...STEP_MOTION(0.22)} className={part ? 'relative flex flex-col' : 'relative z-20'}>
+        {/* 3열(part) 배치 = 칸 경계가 구획이므로 first 스타일(세로 스택에서만 border-t 구획) */}
+        {!hideHead && <StepHead n="02" label="성과를 한 화면에서 보고" first={part !== undefined} />}
         <div
-          className="mx-auto overflow-hidden"
+          className={part ? 'mx-auto overflow-hidden' : 'mx-auto overflow-hidden'}
           style={{
+            /* 페이드 대신 하드 컷 — 마감은 다음 StepHead의 밀착 구획선이 담당(이중선 방지, 2026-07-15) */
             width: PHONE_W,
             height: 258,
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 90%, transparent 100%)',
           }}
           aria-hidden
         >
@@ -328,11 +353,14 @@ export default function S42AdScene() {
         </div>
       </motion.div>
 
+      )}
+
       {/* ── 03 궁금한 건 바로 물어보면 — AI 챗봇 문답(AdChatMock perf 대화 재사용) ── */}
-      <motion.div {...STEP_MOTION(0.44)} className="relative z-30 mt-3">
-        <StepHead n="03" label="궁금한 건 바로 물어봐요" />
+      {(part === undefined || part === 3) && (
+      <motion.div {...STEP_MOTION(0.44)} className={part ? 'relative flex flex-col' : 'relative z-30'}>
+        {!hideHead && <StepHead n="03" label="궁금한 건 바로 물어봐요" first={part !== undefined} />}
         <div
-          className="overflow-hidden rounded-[14px]"
+          className={part ? 'w-full overflow-hidden rounded-[14px]' : 'overflow-hidden rounded-[14px]'}
           style={{ background: '#eef1f4', border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 14px 30px rgba(0,0,0,0.09)' }}
         >
           <div className="flex flex-col gap-3 px-4 py-4">
@@ -375,6 +403,7 @@ export default function S42AdScene() {
           </div>
         </div>
       </motion.div>
+      )}
     </div>
   );
 }

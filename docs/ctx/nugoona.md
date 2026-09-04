@@ -9,7 +9,7 @@
 ## Design Tokens (globals.css @theme)
 ```css
 /* Colors */
---color-bg: #ffffff;
+--color-bg: #ffffff; /* 배경=흰색 확정(2026-07-15 전면 회색·목업 칸 회색 시험 모두 반려) */;
 --color-bg-alt: #fafafa;
 --color-bg-dark: #111111;
 --color-bg-input: #f5f5f5;
@@ -47,37 +47,52 @@
 - `/content`
 - `/features`
 - `/lab/a`
+- `/lab/assets`
 - `/lab/b`
 - `/lab/c`
+- `/lab/carousel`
 - `/lab/chat-icons`
+- `/lab/content`
 - `/lab/exposure`
+- `/lab/hero`
 - `/lab/logos`
+- `/lab/ourway`
 - `/lab`
 - `/lab/philosophy`
 - `/lab/philosophy-mock`
 - `/lab/promise`
 - `/lab/s2`
+- `/lab/s2visual`
 - `/lab/s3`
 - `/lab/s41`
 - `/lab/s42`
 - `/lab/s6`
 - `/lab/s7`
 - `/lab/s8`
+- `/lab/searchpill`
+- `/lab/sources`
 - `/lab/vercel`
 - `/`
 - `/pricing`
+- `/privacy`
 - `/start`
 - `/styles`
+- `/terms`
 
 ## Components
-### ads/ (1)
+### ads/ (4)
 | 컴포넌트 | 설명 |
 |----------|------|
+| AdsHero | — |
+| AdsHeroOrbit | — |
+| AdsSections | — |
 | HeroDashboardMock | — |
 
-### content/ (9)
+### content/ (11)
 | 컴포넌트 | 설명 |
 |----------|------|
+| ContentHero | — |
+| ContentSections | — |
 | MapMock | — |
 | MultiChannelMock | — |
 | NewsFlowGraphic | NewsFlowGraphic — 콘텐츠 /content S5 킬러 상징 그래픽 |
@@ -105,7 +120,7 @@
 | AdFlowGlimpse | — |
 | AssetSection | S6 · 자산 "남는 것은 사장님의 것이어야 합니다" — 2칸(콘텐츠 자산 / 광고 자산) 그리드. |
 | BeamCanvas | — |
-| BrandPhilosophySection | S5 · 회사 철학 "좋은 가게는 발견될 기회가 있어야 합니다" — 다크 감성 섹션. |
+| BrandPhilosophySection | 회사 철학 — 다크 감성 섹션. Grid Occupancy 편입(2026-07-15, §8.16): |
 | CTA | — |
 | Comparison | — |
 | ComparisonNew | — |
@@ -143,22 +158,24 @@
 | UpdateSection | S7 · 업데이트 "매체가 바뀌면, 앱도 바뀝니다" — 다크 + 변화 흐름 라인. |
 | WhyGridSection | S2 · WHY "복잡한 시작" — Vercel식 칸 그리드(내용에 맞춘 셀 레이아웃). |
 
-### layout/ (7)
+### layout/ (8)
 | 컴포넌트 | 설명 |
 |----------|------|
 | Analytics | — |
 | CommaStyler | — |
 | Footer | — |
 | Nav | 라벨 = 확정 제품명 "누구나 콘텐츠 / 누구나 광고"(사장님+GPT 개명 확정 2026-07-11 — 구 "NGN 대시보드" 폐기, |
+| OccupancyGrid | OccupancyGrid — NGN Grid Occupancy 시스템 공용 컴포넌트 (2026-07-14 사장님 확정, 히어로 기준). |
 | OuterContainer | — |
 | PromoBanner | — |
 | Section | — |
 
-### motion/ (3)
+### motion/ (4)
 | 컴포넌트 | 설명 |
 |----------|------|
 | CounterUp | — |
 | FadeUp | — |
+| Reveal | 라인 마스크 리빌(이노션 이식 2026-07-15) 공용 유틸 — ★모바일 전용. |
 | StaggerGrid | — |
 
 ### styles/ (15)
@@ -189,12 +206,12 @@
 | Button | — |
 | CrossMark | — |
 | GridDivider | — |
-| PricingCards | 가격 티어 카드 (재사용) — /content 2티어·/ads 4티어 공용. (E3-4) |
+| PricingCards | — |
 | SectionHeader | — |
 | ShotFrame | 실제 앱 스크린샷을 랜딩에 얹는 프레임 — 라운드 없이(브랜드 직각) + 드롭섀도로 깊이. |
 | bento-grid | — |
 
-> 총 92개 컴포넌트
+> 총 99개 컴포넌트
 
 ## Design Rules
 

@@ -1,7 +1,6 @@
 'use client';
 
 import FadeUp from '@/components/motion/FadeUp';
-import { homeV2 } from '@/lib/content/home';
 
 /**
  * S6 · 자산 "남는 것은 사장님의 것이어야 합니다" — 2칸(콘텐츠 자산 / 광고 자산) 그리드.
@@ -21,9 +20,11 @@ function PlusMark({ className }: { className: string }) {
 }
 
 export default function AssetSection() {
-  const { head, body } = homeV2.asset;
-  const cells = body[0].split(/<br\s*\/?>/);
-  const conclusion = body[1];
+  /* 원작 보존 스냅샷 — 정본(homeV2.asset)이 2026-07-15 재설계로 구조 변경되어 구 카피를 동결.
+     홈 미장착(현행 = S6AssetStacks). */
+  const head = '남는 것은<br>사장님의 것이어야 합니다';
+  const cells = ['꾸준히 쌓인 콘텐츠와 사장님의 채널이 남습니다.', '설정된 광고 계정과 운영 기록, 성과 데이터가 남습니다.'];
+  const conclusion = '처음으로 돌아가지 않도록';
   const labels = ['콘텐츠', '광고'];
   return (
     <section className="relative bg-[#fbfbfc] px-6 py-[100px] max-md:py-16 flex justify-center">

@@ -9,6 +9,7 @@ import Link from 'next/link';
 const links = [
   { href: '/content', label: '누구나 콘텐츠' },
   { href: '/ads', label: '누구나 광고' },
+  { href: '/pricing', label: '요금' }, // 신 요금 페이지 연결 (CEO 지시 2026-07-20)
 ];
 
 export default function Nav() {

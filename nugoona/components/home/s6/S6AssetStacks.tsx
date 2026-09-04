@@ -1,7 +1,9 @@
 'use client';
 
-import FadeUp from '@/components/motion/FadeUp';
+import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
+import { useRevealOnView, RevealHtmlLines } from '@/components/motion/Reveal';
 import { homeV2 } from '@/lib/content/home';
+import MobileAssetTimeline from './MobileAssetTimeline';
 
 /**
  * S6 · 자산 "남는 것은 사장님의 것이어야 합니다" — 두 자산 스택 (사장님 택1 2026-07-14, 구성①).
@@ -80,7 +82,7 @@ function ContentStack() {
             <rect x="2.2" y="5.6" width="8.6" height="6" rx="1.2" stroke="#7d7d7d" strokeWidth="1.1" />
             <path d="M4.1 5.4V4a2.4 2.4 0 0 1 4.8 0v1.4" stroke="#7d7d7d" strokeWidth="1.1" />
           </svg>
-          사장님의 블로그
+          고객님의 블로그
         </span>
       </div>
 
@@ -95,13 +97,8 @@ function ContentStack() {
               'linear-gradient(to right, transparent calc(50% - 0.5px), rgba(15,23,42,0.07) calc(50% - 0.5px), rgba(15,23,42,0.07) calc(50% + 0.5px), transparent calc(50% + 0.5px))',
           }}
         />
-        <div
-          className="relative grid grid-cols-2 gap-2.5 px-3.5 pb-2 pt-3.5"
-          style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, #000 58%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, #000 58%, transparent 100%)',
-          }}
-        >
+        {/* 하단 페이드 제거(사장님 2026-07-15 "아래 페이드 넣지마") — 카드가 창 하단에서 그대로 끝남 */}
+        <div className="relative grid grid-cols-2 gap-2.5 px-3.5 pb-2 pt-3.5">
           {POSTS.map((p) => (
             <PostCard key={p.title} title={p.title} date={p.date} img={p.img} />
           ))}
@@ -215,67 +212,125 @@ function ReportStack() {
   );
 }
 
+/* Grid Occupancy 편입(2026-07-15, §8.16): 자체 보더 박스 폐지 → 페이지 좌표계 칸으로.
+   head 풀폭 / 자산 셀 2열 / 결론 풀폭. 모바일 = 풀폭 세로 스택. */
+const D_AREAS: GridArea[] = [
+  { key: 'head', c: [1, 13], r: [1, 3], className: 'flex items-center' },
+  { key: 'cell0', c: [1, 7], r: [3, 10] },
+  { key: 'cell1', c: [7, 13], r: [3, 10] },
+  { key: 'conclusion', c: [1, 13], r: [10, 12], className: 'flex items-center justify-center' }, // 결론 2줄(재설계 2026-07-15)
+];
+
 export default function S6AssetStacks() {
-  const { head, body } = homeV2.asset;
-  const cells = body[0].split(/<br\s*\/?>/);
-  const conclusion = body[1];
-  /* ★ 정식 제품명 + 로고 (표기 규칙: "누구나 콘텐츠"/"누구나 광고" — 임의 축약 금지, PhoneScene·AdScene과 동일 조합) */
+  /* 위계 재설계(2026-07-15 사장님 지시서): 헤드 → 두 제품 핵심 메시지(크게, 목업보다 먼저) → 목업(증명) → 결론.
+     목업이 주인공이고 카피가 주석이던 구조 폐기. */
+  const { head, cells, conclusion } = homeV2.asset;
+  /* ★ 정식 제품명 + 로고 (표기 규칙: "누구나 콘텐츠"/"누구나 광고" — 임의 축약 금지) */
   const products = [
-    { logo: '/img/logo/nc.svg?v=14', name: '누구나 콘텐츠' },
-    { logo: '/img/logo/na.svg?v=16', name: '누구나 광고' },
+    { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠' },
+    { logo: '/img/logo/na.svg?v=20', name: '누구나 광고' },
   ];
   const mocks = [<ContentStack key="c" />, <ReportStack key="r" />];
+  const headRevealRef = useRevealOnView<HTMLDivElement>();
+
+  const headBlock = (
+    <div className="px-8 py-8 lg:px-12">
+      <span className="mb-5 flex items-center gap-2">
+        <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden>
+          <path d="M13 8c.7 3.4 2.6 5.3 6 6-3.4.7-5.3 2.6-6 6-.7-3.4-2.6-5.3-6-6 3.4-.7 5.3-2.6 6-6Z" fill="#333333" />
+        </svg>
+        <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-[#555555]" style={{ fontFamily: 'var(--font-en)' }}>
+          Asset
+        </span>
+      </span>
+      <h2 className="text-[clamp(26px,3.4vw,40px)] font-bold text-text-primary tracking-[-0.04em] leading-[1.26] text-balance">
+        <RevealHtmlLines html={head} />
+      </h2>
+    </div>
+  );
+
+  const cellBlock = (i: number) => (
+    <div className="flex h-full flex-col px-8 py-8 lg:px-10">
+      {/* 로고 확대(사장님 2026-07-15 "에셋 목업 위 로고도 너무 작아") */}
+      <span className="inline-flex items-center gap-3.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={products[i].logo} alt={`${products[i].name} 로고`} style={{ height: 56, width: 56, display: 'block' }} />
+        <span className="text-[16px] font-bold tracking-[-0.01em] text-text-primary">{products[i].name}</span>
+      </span>
+      {/* 핵심 메시지 — 목업보다 먼저 읽히는 주인공(사장님 지시서 2026-07-15) */}
+      <h3
+        className="mt-4 text-[clamp(19px,1.9vw,25px)] font-bold leading-[1.35] tracking-[-0.03em] text-text-primary"
+        dangerouslySetInnerHTML={{ __html: cells[i].msg }}
+      />
+      {/* 목업 = 메시지의 증명(아래) */}
+      <div className="mt-7 flex flex-1 flex-col justify-start">{mocks[i]}</div>
+    </div>
+  );
+
+  /* 결론 칸 = 설계된 배너(도트 배경+투톤 한 줄 + Clone05 하드웨어 — 사장님 2026-07-15 "썰렁한 박스 디자인 추가").
+     Clone05 문법 이식: ①십자(+)는 그리드 선이 맞물리는 칸 코너 교차점 2개(대각, #a3a3a3 1.5px)
+     ②상단 경계 위 "잘린 다크 요소" 짧은 바(h2 잉크) ③그리드 라인에 스냅한 세로선 1개(2/12 지점). */
+  const conclusionBlock = (
+    <div className="relative flex h-full w-full items-center justify-center">
+      {/* 세로선 시안 제거(사장님 2026-07-15 "쓸데없이 세로 구획") — 십자·다크 바만 유지 */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.06) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, #000 40%, transparent 100%)',
+          maskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, #000 40%, transparent 100%)',
+        }}
+      />
+      {/* 십자 마커 — 칸 코너 교차점(그리드 선 맞물림) 대각 2개 */}
+      <svg aria-hidden className="pointer-events-none absolute" style={{ left: -16, top: -16 }} width="32" height="32" viewBox="0 0 32 32">
+        <path d="M16 1v30M1 16h30" stroke="#a3a3a3" strokeWidth="1.5" />
+      </svg>
+      <svg aria-hidden className="pointer-events-none absolute" style={{ right: -16, bottom: -16 }} width="32" height="32" viewBox="0 0 32 32">
+        <path d="M16 1v30M1 16h30" stroke="#a3a3a3" strokeWidth="1.5" />
+      </svg>
+      {/* 상단 경계 위 잘린 다크 요소(Clone05 최상단 바) */}
+      <span aria-hidden className="pointer-events-none absolute top-0 h-[2px] w-[150px] bg-[#171717]" style={{ right: '12.5%' }} />
+      <p className="relative px-8 text-left text-[clamp(23px,2.8vw,33px)] leading-[1.35] tracking-[-0.035em]">
+        <span className="font-medium text-[#6b7280]">서비스 이용이 종료되어도</span><br />
+        <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정,<br />운영 기록은 그대로 남습니다</span>
+      </p>
+    </div>
+  );
+
+  const renderD = (key: string) =>
+    key === 'head' ? headBlock : key === 'cell0' ? cellBlock(0) : key === 'cell1' ? cellBlock(1) : conclusionBlock;
+
   return (
-    <section className="relative bg-[#fbfbfc] px-6 py-[100px] max-md:py-16 flex justify-center">
-      <FadeUp>
-        <div className="relative w-full max-w-[1080px] border border-border-light">
-          <PlusMark className="-left-[7px] -top-[7px]" />
-          <PlusMark className="-right-[7px] -top-[7px]" />
-          <PlusMark className="-left-[7px] -bottom-[7px]" />
-          <PlusMark className="-right-[7px] -bottom-[7px]" />
-
-          {/* 헤드 칸 */}
-          <div className="border-b border-border-light px-9 py-11 max-md:px-6 max-md:py-8">
-            <span className="text-[11px] tracking-[0.18em] text-text-muted/70" style={EN}>
-              S6 — ASSET
-            </span>
-            <h2
-              className="mt-4 text-[clamp(26px,3.6vw,40px)] font-bold text-text-primary tracking-[-0.03em] leading-[1.24] text-balance"
-              dangerouslySetInnerHTML={{ __html: head }}
-            />
-          </div>
-
-          {/* 2칸 — 콘텐츠 자산 / 광고 경험 자산 (라벨 + 목업 + 카피) */}
-          <div className="grid grid-cols-2 border-b border-border-light max-md:grid-cols-1">
-            {cells.map((c, i) => (
-              <div
-                key={i}
-                className={`flex flex-col px-9 py-10 max-md:px-6 max-md:py-8 ${
-                  i === 0 ? 'border-r border-border-light max-md:border-r-0 max-md:border-b' : ''
-                }`}
-              >
-                <span className="inline-flex items-center gap-2">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={products[i].logo} alt={`${products[i].name} 로고`} style={{ height: 22, width: 22, display: 'block' }} />
-                  <span className="text-[14px] font-semibold tracking-[-0.01em] text-text-primary">{products[i].name}</span>
-                </span>
-                {/* 목업 — 셀 높이가 남으면 세로 중앙(좌우 균형), 카피는 하단 정렬 */}
-                <div className="mt-5 flex flex-1 flex-col justify-center">{mocks[i]}</div>
-                <p className="mt-5 text-[16px] max-md:text-[15px] font-medium text-text-primary leading-[1.5] tracking-[-0.01em] [text-wrap:balance]">
-                  {c}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* 결론 칸 — 한 줄 마무리: 중앙 정렬 + 크게 */}
-          <div className="px-9 py-12 max-md:px-6 max-md:py-9 text-center">
-            <p className="text-[clamp(19px,2.4vw,26px)] font-bold tracking-[-0.02em] text-text-primary [text-wrap:balance]">
-              {conclusion}
-            </p>
-          </div>
+    <section className="relative bg-bg">
+      {/* 모바일 — 풀폭 세로 스택 */}
+      {/* 모바일 리듬 표준(사장님 2026-07-15 "따닥따닥 조잡" — 여백도 디자인) */}
+      <div className="bg-[#fafafa] md:hidden">
+        {/* 안 A 타임라인 이음선(2026-07-16 사장님 확정, /lab/assets에서 이식). 결론 배너는 아래 그대로 */}
+        <div className="px-6 pb-6 pt-20"><MobileAssetTimeline /></div>
+        {/* 결론 = PC 배너 문법 이식(도트+투톤+잘린 다크 바 — 실기기 "맨 텍스트라 깨져 보임" 반려 2026-07-15). 카피 토씨·줄바꿈 정본 그대로 */}
+        <div className="relative px-6 py-16 text-center">
+          <span aria-hidden className="pointer-events-none absolute top-0 h-[2px] w-[110px] bg-[#171717]" style={{ right: '12.5%' }} />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage: 'radial-gradient(circle, rgba(15,23,42,0.06) 1px, transparent 1px)',
+              backgroundSize: '24px 24px',
+              WebkitMaskImage: 'radial-gradient(ellipse 84% 90% at 50% 50%, #000 40%, transparent 100%)',
+              maskImage: 'radial-gradient(ellipse 84% 90% at 50% 50%, #000 40%, transparent 100%)',
+            }}
+          />
+          <p className="relative inline-block text-left text-[clamp(20px,5.4vw,25px)] leading-[1.5] tracking-[-0.03em]">
+            <span className="font-medium text-[#6b7280]">서비스 이용이 종료되어도</span><br />
+            <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정,<br />운영 기록은 그대로 남습니다</span>
+          </p>
         </div>
-      </FadeUp>
+      </div>
+
+      {/* PC — 칸: head 풀폭 / 자산 셀 2열 / 결론 풀폭 */}
+      <OccupancyGrid cols={12} rows={11} areas={D_AREAS} mobile={false} render={renderD} />
     </section>
   );
 }

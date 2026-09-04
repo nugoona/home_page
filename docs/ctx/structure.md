@@ -8,8 +8,8 @@
 |---|---------|-------|
 | 경로 | nugoona/ | aurum/ |
 | 포트 | :3101 | :3100 |
-| 페이지 | 26개 (/about, /ads, /content, /features, /lab/a, /lab/b, /lab/c, /lab/chat-icons, /lab/exposure, /lab/logos, /lab, /lab/philosophy, /lab/philosophy-mock, /lab/promise, /lab/s2, /lab/s3, /lab/s41, /lab/s42, /lab/s6, /lab/s7, /lab/s8, /lab/vercel, /, /pricing, /start, /styles) | 5개 (/b2b, /class, /media, /, /therapy) |
-| 컴포넌트 | 92개 | 47개 |
+| 페이지 | 36개 (/about, /ads, /content, /features, /lab/a, /lab/assets, /lab/b, /lab/c, /lab/carousel, /lab/chat-icons, /lab/content, /lab/exposure, /lab/hero, /lab/logos, /lab/ourway, /lab, /lab/philosophy, /lab/philosophy-mock, /lab/promise, /lab/s2, /lab/s2visual, /lab/s3, /lab/s41, /lab/s42, /lab/s6, /lab/s7, /lab/s8, /lab/searchpill, /lab/sources, /lab/vercel, /, /pricing, /privacy, /start, /styles, /terms) | 5개 (/b2b, /class, /media, /, /therapy) |
+| 컴포넌트 | 99개 | 47개 |
 | CSS | Tailwind v4 | CSS Modules |
 | 애니메이션 | Framer Motion | GSAP + ScrollTrigger |
 | 폰트 | 산세리프 (Pretendard) | 세리프 (Arita Buri) |

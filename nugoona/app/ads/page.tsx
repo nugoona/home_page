@@ -3,126 +3,274 @@ import Link from 'next/link';
 import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
-import AdCanvasShowcase from '@/components/features/AdCanvasShowcase';
-import DashboardShowcase, { PhoneMockup } from '@/components/features/DashboardShowcase';
-import ChatbotShowcase from '@/components/features/ChatbotShowcase';
-import TrendShowcase from '@/components/features/TrendShowcase';
-import { hero, identity } from '@/lib/content/ads';
-
-const EN = { fontFamily: 'var(--font-en)' } as const;
+import { SpacerRow } from '@/components/layout/OccupancyGrid';
+import { Eyebrow } from '@/components/content/ContentSections';
+import { BackgroundBeams } from '@/components/lab-sources/aceternity/background-beams';
+import AdsHero from '@/components/ads/AdsHero';
+import { AdsAnswerScene, AdsTangle, AdsTangleGrid, AdsCanvasFlow, AdsChatScene, AdsChatGrid, AdsDashScene, AdsCatalogScene, AdsReportScene, AdsReportGrid, AdsMarketScene, AdsStoresScene, AdsEvolveScene, AdsEvolveGrid } from '@/components/ads/AdsSections';
+import {
+  empathy, identity, onboarding, adcanvas, chatbot,
+  dashboard, report, market, multiStore, catalog, evolve, closing,
+} from '@/lib/content/ads';
 
 export const metadata: Metadata = {
   title: '누구나 광고 — AI 시대의 온라인 광고',
   description:
-    '매출·광고·유입을 한 화면에 모아 사람 말로 읽어 줍니다. 광고 생성부터 성과 분석, 트렌드 추적까지 대행 없이 직접.',
+    '광고를 시작하고 운영하는 과정을 한곳에 담았습니다. 광고를 만들고, 궁금한 것은 묻고, 성과와 시장 흐름까지 한곳에서. 월 정액, 한 달 무료.',
 };
 
-/**
- * /ads — 누구나 광고 랜딩.
- * features의 3개 쇼케이스(AdCanvas·Dashboard·Trend)를 그대로 재활용 + '이해' 히어로/CTA.
- */
+/* ══════════════════════════════════════════════════════════════════
+   /ads — 리빌딩 1단계: 거친 전체 조립 v0 (2026-07-18, 사장님 승인 플로우)
+   목적 = 13블록 확정 카피(ads.ts)를 /content 문법으로 세워 "전체 리듬·순서" 합의.
+   ⚠ 목업 = 자리 표시(점선 칸). 실물 목업·히어로 궤도(레퍼런스 샷)는 2단계에서 §8.15 루프.
+   구 쇼케이스 4종(AdCanvas·Dashboard·Chatbot·Trend) = 이 페이지에서 제거(순서·카피 불일치)
+   — 컴포넌트 파일은 /features가 사용하므로 보존, 2단계에서 시각물만 발췌.
+   ══════════════════════════════════════════════════════════════════ */
+
+const WRAP = 'px-12 py-20 max-w-[1200px] mx-auto max-md:px-6 max-md:py-14';
+
+/** 섹션 머리 — /content SectionHead와 동일 규격(통일성) */
+function SectionHead({ eyebrow, heading, sub, dark }: { eyebrow: string; heading: React.ReactNode; sub?: React.ReactNode; dark?: boolean }) {
+  return (
+    <FadeUp>
+      <Eyebrow label={eyebrow} dark={dark} />
+      <h2 className={`text-[clamp(26px,3.4vw,38px)] font-bold tracking-[-0.04em] leading-[1.26] text-balance ${dark ? 'text-white' : 'text-text-primary'}`}>
+        {heading}
+      </h2>
+      {sub && (
+        <p className={`mt-4 max-w-[460px] text-[clamp(15px,1.4vw,18px)] font-medium leading-[1.55] text-balance md:max-w-[680px] md:leading-[1.35] ${dark ? 'text-white/60' : 'text-[#4f4f4f]'}`}>
+          {sub}
+        </p>
+      )}
+    </FadeUp>
+  );
+}
+
+/** 거친 조립용 목업 자리 표시 — 2단계에서 실물로 교체 */
+function MockSlot({ label, h = 260 }: { label: string; h?: number }) {
+  return (
+    <div
+      className="flex w-full max-w-[560px] items-center justify-center border border-dashed border-[#c6cbd4] bg-[#fafbfc] text-[13px] font-semibold text-[#8a919c]"
+      style={{ height: h }}
+      aria-hidden
+    >
+      목업 자리 · {label}
+    </div>
+  );
+}
+
 export default function AdsPage() {
   return (
     <main>
       <OuterContainer>
-        {/* ── 히어로 (다크, '이해') ── */}
+
+        {/* ── 1 · 히어로 — 정본 좌표계(OccupancyGrid) 재구축(사장님 2026-07-18 "홈·콘텐츠 히어로 법칙대로") ── */}
         <Section dark noBorder>
-          <div
-            className="relative py-32 px-12 text-center max-md:py-20 max-md:px-6"
-            style={{ background: 'radial-gradient(ellipse at 50% 0%, #0a2050 0%, #0a0a0a 62%)' }}
-          >
-            {/* 필름 노이즈 — 그라데이션 밴딩 완화(§8.6, HeroAurora와 동일 fractalNoise) */}
-            <div
-              className="absolute inset-0 pointer-events-none z-0 opacity-[0.035]"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-              }}
-            />
-            <FadeUp className="relative z-10">
-              <p className="text-[13px] max-md:text-[14px] font-semibold text-accent tracking-[0.08em] uppercase mb-5" style={EN}>
-                누구나 광고
-              </p>
-              <h1
-                className="text-[clamp(34px,6vw,60px)] font-semibold text-white tracking-[-0.04em] leading-[1.08] mb-6"
-                dangerouslySetInnerHTML={{ __html: hero.h1 }}
-              />
-              <p className="text-[clamp(15px,1.8vw,18px)] max-md:text-[16px] text-white/55 leading-[1.65] max-w-[540px] mx-auto mb-10">
-                {hero.sub}
-              </p>
-              <Link
-                href={hero.cta.href}
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#0a0a0a] text-[15px] font-semibold tracking-[-0.02em] hover:bg-[#eaeaea] transition-colors"
-              >
-                {hero.cta.text}
-                <svg className="w-4 h-4 opacity-50" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M6 4l4 4-4 4" />
-                </svg>
-              </Link>
-              {hero.cta.sub && (
-                <p className="text-[13px] max-md:text-[14px] text-white/40 mt-4">{hero.cta.sub}</p>
-              )}
-            </FadeUp>
+          <AdsHero />
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 2 · 제품의 답(1-4-1) — 히어로 바로 밑(사장님 2026-07-18: 히어로가 연 궁금증에 제품 지도가 즉답) ── */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <SectionHead eyebrow="One place" heading={<span dangerouslySetInnerHTML={{ __html: identity.heading }} />} sub={identity.body} />
+            <FadeUp delay={0.1}><div className="mt-10"><AdsAnswerScene /></div></FadeUp>
           </div>
         </Section>
+        <SpacerRow top />
 
-        {/* ── 정체 선언 (콜드 리드 게이트 — 히어로 다음, 첫 쇼케이스 전) ── */}
-        <Section>
-          <div className="py-20 px-12 text-center max-md:py-14 max-md:px-6">
-            <FadeUp>
-              <h2
-                className="text-[clamp(24px,3.4vw,36px)] font-semibold text-text-primary tracking-[-0.03em] leading-[1.2] max-w-[640px] mx-auto mb-4"
-                dangerouslySetInnerHTML={{ __html: identity.heading }}
-              />
-              <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65] max-w-[560px] mx-auto">
-                {identity.body}
-              </p>
-            </FadeUp>
-          </div>
-        </Section>
-
-        {/* ── features 쇼케이스 재활용 ── */}
-        <AdCanvasShowcase />
-        <DashboardShowcase />
-        <ChatbotShowcase />
-        <TrendShowcase />
-
-        {/* ── 마감 CTA + 폰 목업 (구 모바일 섹션의 iPhone을 여기로 이식 — 주장 텍스트 없이 시각 자산만) ── */}
-        <Section alt noBorder>
-          <div
-            className="px-12 max-md:px-6"
-            style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #151515 100%)' }}
-          >
-            {/* 984 = 표준 텍스트 그리드(세로선 스냅 2026-07-11) */}
-            <div className="max-w-[984px] mx-auto grid grid-cols-[6fr_5fr] gap-12 items-center py-20 max-md:grid-cols-1 max-md:py-16 max-md:gap-10">
-              <FadeUp>
-                <h2 className="text-[clamp(28px,4vw,44px)] font-semibold text-white tracking-[-0.02em] leading-[1.15] mb-4">
-                  한 달, 카드 없이 먼저 써 보세요
-                </h2>
-                <p className="text-[15px] max-md:text-[16px] text-white/50 mb-10">약정도 카드도 없습니다. 스토어 이름만 입력하면 세팅해 드립니다.</p>
-                <div className="flex gap-3 max-sm:flex-col">
-                  <Link
-                    href="/start"
-                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-white text-text-primary border border-white hover:bg-[#eaeaea] transition-all"
-                  >
-                    무료로 시작하기
-                  </Link>
-                  {/* 인라인 색 고정 — text-white 클래스가 이 a에서만 미적용되는 렌더 이슈(감독관 3차 실측 #333) 방어 */}
-                  <Link
-                    href="/content"
-                    className="inline-flex items-center justify-center h-[52px] px-8 text-[15px] font-semibold bg-transparent hover:bg-white/[0.06] transition-all max-sm:w-full max-sm:max-w-[320px]"
-                    style={{ color: '#ffffff', border: '1px solid rgba(255,255,255,0.35)' }}
-                  >
-                    노출이 먼저라면 →
-                  </Link>
+        {/* ── 3 · 걱정 마세요 + 온보딩(2+4 통합 — 사장님 2026-07-18: 문제→해결 한 쌍.
+             그림 = 얽힌 연결망 리마스터(AdsTangle: 홈 보존 목업의 /ads 버전 — 칩 라벨·선 감축·Clone01 무대)
+             카피 = 긍정 프레임 헤딩 + 매니지드 온보딩 확정 문구) ── */}
+        <Section noBorder>
+          {/* PC = §8.16 2단(좌 레일 헤딩+캡션 흡수 | 우 탱글, 2026-07-20 ④). 모바일 = 기존 불변 */}
+          <AdsTangleGrid />
+          <div className="md:hidden">
+            <div className={WRAP}>
+              <SectionHead eyebrow="Onboarding" heading={empathy.heading} sub={onboarding.body} />
+              <FadeUp delay={0.1}>
+                {/* (캡션 "시작을 어렵게 만든 건…" = 삭제 — 사장님 2026-07-20, PC·모바일 공통) */}
+                <div className="relative mx-auto mt-8 aspect-[680/560] w-full max-w-[640px]">
+                  {/* pc = 강화 애니 프리셋(등장 그리기+팝인+잔물결 2겹+태그 고정) — 모바일도 적용(사장님 2026-07-20) */}
+                  <AdsTangle uid="ads-tangle" pc />
                 </div>
-              </FadeUp>
-              <FadeUp delay={0.15} className="flex flex-col items-center gap-5 max-md:order-first">
-                <PhoneMockup />
-                <p className="text-[13px] max-md:text-[14px] text-white/40">외근 중에도, 이동 중에도 — 모바일에서 그대로.</p>
               </FadeUp>
             </div>
           </div>
         </Section>
+        <SpacerRow top />
+
+        {/* ── 5 · 광고 만들기 (애드캔버스) — 회색 밴드. 안1 "변환 파이프라인"(사장님 택1 2026-07-18):
+             URL이 광고가 되는 원리를 단계별로 — 01 URL → 02 이미지 자동 수집 → 03 AI가 광고로 → 04 완성·게시
+             + 하단 보조 = 구글도 같은 원리(Ad Strength). §8.15 아이디어 기준 1호 적용 ── */}
+        <Section noBorder>
+          <div className="bg-[#eef0f3]">
+            <div className={WRAP}>
+              {/* 처방3(2026-07-19): 모바일 = 첫 문장만. PC 정본(ads.ts adcanvas.body) 불변 */}
+              <SectionHead eyebrow="AdCanvas" heading={adcanvas.heading} sub={<>상품 URL만 입력하면 메타 광고를 만들고 구글 광고도 상품에 맞게 준비합니다.<span className="max-md:hidden"> 확인과 게시는 직접 결정합니다.</span></>} />
+              <FadeUp delay={0.1}>
+                {/* 대주제 서브 ↔ 첫 매체 헤드 사이 여백 확대(사장님 2026-07-19 — 위계는 여백으로) */}
+                <div className="mt-16 flex justify-center max-md:mt-12">
+                  <AdsCanvasFlow />
+                </div>
+              </FadeUp>
+            </div>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 6 · AI 챗봇 — PC = §8.16 2단(좌 레일 | 우 다크 챗, 2026-07-20 ⑤). 모바일 = 기존 불변 ── */}
+        <Section noBorder>
+          <AdsChatGrid />
+          <div className="md:hidden">
+            <div className={WRAP}>
+              <SectionHead eyebrow="AI Chat" heading={chatbot.heading} sub={chatbot.body} />
+              <FadeUp delay={0.1}>
+                {/* 다크 챗 원작 그대로(사장님 2026-07-18) = ChatbotShowcase.ChatMock.
+                    아래 보조 2줄(control·always)은 삭제(사장님 2026-07-18 — 목업이 이미 말함) */}
+                <div className="mt-10"><AdsChatScene /></div>
+              </FadeUp>
+            </div>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 6.5 · 메타 카탈로그 자동 광고 — 챗봇 아래 신설(사장님 2026-07-19, 시안1 v8 확정).
+             PC = 위 텍스트 + 아래 목업 전폭(대시보드 문법 — 사장님 2026-07-20 "2단에 꾸역꾸역 넣지 말고".
+             구 좌 레일 2단(AdsCatalogGrid)은 폐기). 모바일 = 기존 세로 스택 그대로 ── */}
+        <Section noBorder>
+          <div className={WRAP}>
+            {/* 라벨 = Meta Catalog(사장님 2026-07-20 — 메타에서만 적용되는 기능임을 명시) */}
+            <SectionHead eyebrow="Meta Catalog" heading={catalog.heading} sub={catalog.body} />
+            <FadeUp delay={0.1}>
+              <div className="mt-10"><AdsCatalogScene uid="ctm" /></div>
+            </FadeUp>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 7 · 한 화면 + 관리 ── */}
+        <Section noBorder>
+          <div className={WRAP}>
+            {/* 처방3(2026-07-19): 모바일 = 첫 문장만. PC 정본(ads.ts dashboard.body) 불변 */}
+            {/* manage 문장 = PC 서브 흡수(2026-07-20 ⑥) + 문장당 한 줄 3줄(사장님 지정 카피·줄바꿈 2026-07-20).
+                모바일 = 기존 첫 문장만(처방3) */}
+            <SectionHead eyebrow="Dashboard" heading={dashboard.heading} sub={<>매출과 광고, 방문 데이터를 한 화면에서 함께 확인합니다.<span className="max-md:hidden"><br />광고가 실제 매출로 이어졌는지도 확인할 수 있습니다.<br />{dashboard.manage}</span></>} />
+            <FadeUp delay={0.1}>
+              {/* 기존 파이프라인 목업 원작 그대로(사장님 2026-07-18) = DashboardShowcase.DataPipelineVisual */}
+              <div className="mt-10"><AdsDashScene /></div>
+              <p className="mt-5 max-w-[460px] text-[14px] font-medium leading-[1.6] text-text-body md:hidden">{dashboard.manage}</p>
+            </FadeUp>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 8 · 월간 리포트 — PC = §8.16 2단(좌 레일+칩 세로 | 우 목업 확대, 2026-07-20 ②).
+             모바일 = 기존 원형 그대로(md:hidden 분기) ── */}
+        <Section noBorder>
+          <div className="md:hidden">
+            <div className={WRAP}>
+              <SectionHead eyebrow="Report" heading={report.heading} sub={report.body} />
+              {/* "또렷한 한 장(액션 플랜) + 페이지 스택" — 사장님 승인 2026-07-19 */}
+              <FadeUp delay={0.1}><div className="mt-10 flex justify-center"><AdsReportScene /></div></FadeUp>
+            </div>
+          </div>
+          <AdsReportGrid />
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 9 · 시장 흐름 — 회색 밴드(부가 카탈로그 묶음, /content S9 문법) ── */}
+        <Section noBorder>
+          <div className="bg-[#eef0f3]">
+            <div className={WRAP}>
+              <SectionHead eyebrow="Market" heading={market.heading} sub={market.body} />
+              {/* "시장 무드보드" — 좌 리스트 + 우 상품 이미지 마퀴 2열(사장님 총력 지시 2026-07-19) */}
+              <FadeUp delay={0.1}>
+                <div className="mt-10"><AdsMarketScene /></div>
+              </FadeUp>
+            </div>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── 10 · 여러 쇼핑몰 ── */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <SectionHead eyebrow="Stores" heading={<span dangerouslySetInnerHTML={{ __html: multiStore.heading }} />} sub={multiStore.body} />
+            {/* "시트 → 대시보드" 변환 장면(A안, 사장님 2026-07-19) */}
+            <FadeUp delay={0.1}><div className="mt-10 flex justify-center"><AdsStoresScene /></div></FadeUp>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* ── (구 11 · 가격) ⛔ 폐지(사장님 2026-07-19) — 요금은 별도 페이지로 ── */}
+
+        {/* ── 12 · 진화 선언 — PC = §8.16 2단(좌 헤딩+로그 레일 | 우 반원 460, 2026-07-20 ③).
+             모바일 = 기존 세로 흐름 그대로(md:hidden 분기) ── */}
+        <Section noBorder>
+          <AdsEvolveGrid />
+          <div className="md:hidden px-12 py-28 max-w-[1200px] mx-auto max-md:px-6 max-md:py-20">
+            <SectionHead eyebrow="Evolve" heading={evolve.heading} sub={evolve.body} />
+            {/* 세로 흐름(사장님 2026-07-19): "새로운 매체" 텍스트 바로 아래 목업(반폭·위성 확대) → 요청 항목 */}
+            <FadeUp delay={0.1}>
+              <div className="mt-10 max-w-[760px]">
+                {/* 업데이트 로그 문법(홈 S7 리듬 + 다크 필 태그 — 사장님 승인 2026-07-19) */}
+                <div className="pb-5">
+                  <p className="flex items-center gap-2.5">
+                    <span className="flex h-[20px] shrink-0 items-center bg-[#171717] px-1.5 text-[9.5px] font-bold uppercase tracking-[0.06em] text-white" style={{ fontFamily: 'var(--font-en)' }}>New Media</span>
+                    <span className="text-[15px] font-bold tracking-[-0.01em] text-text-primary">{evolve.cards[0].title}</span>
+                  </p>
+                  <p className="mt-1.5 text-[13.5px] font-medium leading-[1.6] text-text-weak">{evolve.cards[0].body}</p>
+                </div>
+                <div className="w-[400px] max-w-full"><AdsEvolveScene /></div>
+                <div className="mt-6 border-t border-[#ECECEC] pt-5">
+                  <p className="flex items-center gap-2.5">
+                    <span className="flex h-[20px] shrink-0 items-center bg-[#171717] px-1.5 text-[9.5px] font-bold uppercase tracking-[0.06em] text-white" style={{ fontFamily: 'var(--font-en)' }}>Update</span>
+                    <span className="text-[15px] font-bold tracking-[-0.01em] text-text-primary">{evolve.cards[1].title}</span>
+                  </p>
+                  <p className="mt-1.5 text-[13.5px] font-medium leading-[1.6] text-text-weak">{evolve.cards[1].body}</p>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
+        </Section>
+        <SpacerRow thin noMobileGrid />
+
+        {/* ── 13 · 데모 + 마감 CTA (다크 — /content S11 문법. 중앙 정렬은 여기만) ── */}
+        <Section noBorder>
+          <FadeUp>
+            <div className="relative overflow-hidden px-6 pb-36 pt-24 text-center max-md:px-5 max-md:pb-28 max-md:pt-16" style={{ backgroundColor: '#0a0a0a' }}>
+              <BackgroundBeams className="opacity-70" />
+              <div className="relative z-10">
+              <h2 className="text-[clamp(28px,3.8vw,44px)] font-semibold leading-[1.18] tracking-[-0.035em] text-white">
+                {closing.heading}
+              </h2>
+              <p className="mx-auto mt-5 max-w-[420px] text-[15px] font-medium leading-[1.6] text-white/60">{closing.body}</p>
+              {/* 버튼 = 히어로 CtaPair와 동일 규격(min-w 통일 — 사장님 2026-07-19 "/content와 동일하게, 너비도") */}
+              <div className="mt-9 flex items-center justify-center gap-3 max-sm:flex-col">
+                <Link href={closing.cta.href} className="rounded-pill inline-flex min-w-[196px] items-center justify-center gap-2 bg-white px-8 py-4 text-[15px] font-semibold text-[#0a0a0a] transition-colors hover:bg-[#eaeaea]">
+                  {closing.cta.text}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden><path d="M6 4l4 4-4 4" /></svg>
+                </Link>
+                <Link
+                  href={closing.ctaSecondary.href}
+                  className="rounded-pill inline-flex min-w-[196px] items-center justify-center px-8 py-4 text-[15px] font-semibold transition-all hover:bg-white/[0.06]"
+                  style={{ color: '#ffffff', border: '1px solid rgba(255,255,255,0.35)' }}
+                >
+                  {closing.ctaSecondary.text}
+                </Link>
+              </div>
+              <p className="mt-10 text-[14px] font-medium text-white/55">
+                {closing.crossSell.text}{' '}
+                <Link href={closing.crossSell.cta.href} className="font-bold text-white underline underline-offset-4">
+                  {closing.crossSell.cta.text}
+                </Link>
+              </p>
+              </div>
+            </div>
+          </FadeUp>
+        </Section>
+
       </OuterContainer>
     </main>
   );

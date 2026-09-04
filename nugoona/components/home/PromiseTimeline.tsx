@@ -96,7 +96,7 @@ export default function PromiseTimeline() {
               .
             </p>
             <p
-              className="mt-4 text-[15px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-white/55 max-w-[520px]"
+              className="mt-4 text-[15px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-white/55 max-w-[520px] md:leading-[1.35]"
               dangerouslySetInnerHTML={{ __html: '한 번 시작한 요금 그대로<br>끝까지 무료 업데이트를 진행합니다.<br>매체가 변하면 콘텐츠도 변해야 합니다.' }}
             />
           </div>

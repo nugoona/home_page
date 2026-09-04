@@ -28,7 +28,73 @@ const SOURCES = [
   { label: 'Market', color: '#8b5cf6' },
 ];
 
-function DataPipelineVisual({ isActive }: { isActive: boolean }) {
+/* ── 대시보드 미니 패널(SVG fragment) — PC·모바일 공용 리마스터(사장님 2026-07-19
+   "균형감 없고 디테일 부족, 세련되게"): 라벨 중복 해소(매출 추이/이번 달 매출)·배지 정렬·
+   카드 흰+테두리 통일·방문자 수치+area·ROAS 분할바·헤더 기간 셀렉트 ── */
+const KR = 'var(--font-kr)';
+const ENF = 'var(--font-en)';
+function DashMini({ x, y, w, h }: { x: number; y: number; w: number; h: number }) {
+  const HDR = 26, P = 10, GAP = 8;
+  const cw = (w - P * 2 - GAP) / 2;
+  const ch = (h - HDR - P * 2 - GAP) / 2;
+  const cx = (col: number) => x + P + col * (cw + GAP);
+  const cy = (row: number) => y + HDR + P + row * (ch + GAP);
+  const CARD = { fill: '#fff', stroke: '#ececec', strokeWidth: '1px' } as const;
+  /* 바차트(매출 추이) */
+  const bars = [14, 22, 30, 40, 34];
+  const barW = 13, barGap = 6.5;
+  const barsX = cx(0) + 9, baseY = cy(0) + ch - 11;
+  /* 방문자 라인 — 카드 안 여백 9 */
+  const lx = cx(1) + 9, lw = cw - 18; // 방문자 카드 = row0 col1
+  const pts = [0.86, 0.72, 0.78, 0.55, 0.44, 0.3, 0.16].map((t, i) => `${lx + (lw / 6) * i},${cy(0) + 16 + t * (ch - 26)}`);
+  const lastPt = pts[pts.length - 1].split(',').map(Number);
+  /* ROAS 분할바 812:397 */
+  const rbX = cx(1) + 9, rbW = cw - 18, metaW = rbW * (812 / (812 + 397));
+  return (
+    <g>
+      {/* 패널 + 헤더 */}
+      <rect x={x} y={y} width={w} height={h} fill="#fff" stroke="#e5e5e5" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
+      <line x1={x} y1={y + HDR} x2={x + w} y2={y + HDR} stroke="#ececec" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
+      {/* (헤더 좌측 "누구나 광고" 텍스트 제거 — 사장님 2026-07-19: 파이프라인 NGN 박스 라벨로 이동) */}
+      <circle cx={x + w - 78} cy={y + 13} r="2.5" fill="#22c55e" />
+      <text x={x + w - 71} y={y + 16} fontSize="7.5" fill="#666" fontFamily={KR}>최근 30일</text>
+      <path d={`M${x + w - 34},${y + 11.5}l2.6,3l2.6,-3`} fill="none" stroke="#bbb" strokeWidth="1" />
+      {/* 카드1 · 매출 추이(바) */}
+      <rect x={cx(0)} y={cy(0)} width={cw} height={ch} {...CARD} vectorEffect="non-scaling-stroke" />
+      <text x={cx(0) + 9} y={cy(0) + 14} fontSize="8" fontWeight="600" fill="#666" fontFamily={KR}>매출 추이</text>
+      <rect x={cx(0) + cw - 34} y={cy(0) + 6} width="26" height="11" fill="#e6f7ef" />
+      <text x={cx(0) + cw - 21} y={cy(0) + 14} textAnchor="middle" fontSize="7" fontWeight="700" fill="#16a34a" fontFamily={ENF}>+23%</text>
+      <line x1={cx(0) + 8} y1={baseY} x2={cx(0) + cw - 8} y2={baseY} stroke="#ececec" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
+      {bars.map((bh, i) => (
+        <rect key={i} x={barsX + i * (barW + barGap)} y={baseY - bh} width={barW} height={bh} fill="#0070f3" opacity={0.3 + i * 0.15} />
+      ))}
+      {/* 카드2 · 방문자(수치 + area 라인) */}
+      <rect x={cx(1)} y={cy(0)} width={cw} height={ch} {...CARD} vectorEffect="non-scaling-stroke" />
+      <text x={cx(1) + 9} y={cy(0) + 14} fontSize="8" fontWeight="600" fill="#666" fontFamily={KR}>방문자</text>
+      <text x={cx(1) + cw - 9} y={cy(0) + 15} textAnchor="end" fontSize="9" fontWeight="700" fill="#171717" fontFamily={ENF}>8,432</text>
+      <path d={`M${pts.join('L')}L${lx + lw},${baseY}L${lx},${baseY}Z`} fill="#22c55e" opacity="0.07" />
+      <polyline points={pts.join(' ')} fill="none" stroke="#22c55e" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <circle cx={lastPt[0]} cy={lastPt[1]} r="2.4" fill="#22c55e" />
+      {/* 카드3 · 이번 달 매출(KPI) */}
+      <rect x={cx(0)} y={cy(1)} width={cw} height={ch} {...CARD} vectorEffect="non-scaling-stroke" />
+      <text x={cx(0) + 9} y={cy(1) + 14} fontSize="8" fontWeight="600" fill="#666" fontFamily={KR}>이번 달 매출</text>
+      <text x={cx(0) + 9} y={cy(1) + 31} fontSize="11.5" fontWeight="700" fill="#171717" fontFamily={ENF}>₩12,800,000</text>
+      <text x={cx(0) + 9} y={cy(1) + 43} fontSize="7.5" fontWeight="600" fill="#16a34a" fontFamily={ENF}>▲ 23.4%<tspan fill="#666" fontWeight="400" fontFamily={KR}> 지난달 대비</tspan></text>
+      <line x1={cx(0) + 9} y1={cy(1) + ch - 16} x2={cx(0) + cw - 9} y2={cy(1) + ch - 16} stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
+      <text x={cx(0) + 9} y={cy(1) + ch - 6} fontSize="7.5" fill="#666" fontFamily={KR}>주문 127 · 전환율 2.8%</text>
+      {/* 카드4 · ROAS(분할바) */}
+      <rect x={cx(1)} y={cy(1)} width={cw} height={ch} {...CARD} vectorEffect="non-scaling-stroke" />
+      <text x={cx(1) + 9} y={cy(1) + 14} fontSize="8" fontWeight="600" fill="#666" fontFamily={ENF}>ROAS</text>
+      <text x={cx(1) + 9} y={cy(1) + 34} fontSize="16" fontWeight="700" fill="#0070f3" fontFamily={ENF}>641%</text>
+      <rect x={rbX} y={cy(1) + ch - 22} width={metaW} height="4" fill="#0070f3" />
+      <rect x={rbX + metaW + 1} y={cy(1) + ch - 22} width={rbW - metaW - 1} height="4" fill="#0070f3" opacity="0.3" />
+      <text x={rbX} y={cy(1) + ch - 7} fontSize="7" fill="#666" fontFamily={ENF}>Meta 812% · Google 397%</text>
+    </g>
+  );
+}
+
+/* export = /ads 재사용(사장님 2026-07-18 "대시보드 목업 기존 걸로" — 원작 렌더 불변) */
+export function DataPipelineVisual({ isActive }: { isActive: boolean }) {
   const LINE = '#555';
   const BORDER = '#eaeaea';   // dashboard only
   const BOX_BORDER = '#555';  // source + NGN boxes
@@ -83,7 +149,7 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
             <circle key={`${ddx}_${dy}`} cx={NGN_CX + ddx} cy={NGN_CY + dy} r="1.5" fill="#555" opacity="0.6" />
           ))
         )}
-        <text x={NGN_CX} y={NGN_CY + 40} textAnchor="middle" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-en)">NGN</text>
+        <text x={NGN_CX} y={NGN_CY + 40} textAnchor="middle" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-kr)">누구나 광고</text>
       </motion.g>
 
         <motion.g
@@ -91,33 +157,8 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
           animate={isActive ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}
         >
-          <rect x={DASH_L} y="10" width="280" height="180" fill="#fff" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <rect x={DASH_L} y="10" width="280" height="24" fill="#fafafa" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="26" fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">누구나 광고</text>
-          <circle cx={DASH_L + 264} cy="22" r="3" fill="#22c55e" />
-
-          <rect x={DASH_L + 8} y="42" width="128" height="68" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="54" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
-          {[12, 20, 28, 38, 34].map((h, i) => (
-            <rect key={i} x={DASH_L + 20 + i * 18} y={102 - h} width="13" height={h} fill="#0070f3" opacity={0.3 + i * 0.15} />
-          ))}
-          <text x={DASH_L + 112} y="100" fontSize="8" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
-
-          <rect x={DASH_L + 144} y="42" width="128" height="68" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 150} y="54" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">방문자</text>
-          <polyline points={`${DASH_L + 154},100 ${DASH_L + 170},94 ${DASH_L + 186},97 ${DASH_L + 202},86 ${DASH_L + 218},78 ${DASH_L + 234},70 ${DASH_L + 250},62`} fill="none" stroke="#22c55e" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-          <circle cx={DASH_L + 250} cy="62" r="2.5" fill="#22c55e" />
-
-          <rect x={DASH_L + 8} y="118" width="128" height="64" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 14} y="131" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
-          <text x={DASH_L + 14} y="148" fontSize="11" fontWeight="700" fill="#171717" fontFamily="var(--font-en)">₩12,800,000</text>
-          <text x={DASH_L + 14} y="161" fontSize="8" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
-          <text x={DASH_L + 14} y="173" fontSize="8" fill="#666" fontFamily="var(--font-en)">Orders: 127 | CVR: 2.8%</text>
-
-          <rect x={DASH_L + 144} y="118" width="128" height="64" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-          <text x={DASH_L + 150} y="131" fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">ROAS</text>
-          <text x={DASH_L + 150} y="152" fontSize="16" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
-          <text x={DASH_L + 150} y="166" fontSize="8" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
+          {/* 대시보드 미니 = 공용 리마스터(사장님 2026-07-19 디테일 교정) */}
+          <DashMini x={DASH_L} y={10} w={280} h={180} />
         </motion.g>
 
         {isActive && srcYs.map((_, i) => (
@@ -139,7 +180,7 @@ function DataPipelineVisual({ isActive }: { isActive: boolean }) {
 }
 
 /* ── 모바일 전용: 세로 파이프라인 ── */
-function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
+export function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
   const LINE = '#555';
   const BORDER = '#eaeaea';   // dashboard only
   const BOX_BORDER = '#555';  // source + NGN boxes
@@ -196,37 +237,13 @@ function DataPipelineVisualMobile({ isActive }: { isActive: boolean }) {
         {[-6, 0, 6].map(dy => [-6, 0, 6].map(dx => (
           <circle key={`${dx}_${dy}`} cx={MX + dx} cy={NGN_CY + dy} r="1.5" fill="#555" opacity="0.6" />
         )))}
-        <text x={NGN_L + NGN_W + 6} y={NGN_CY + 4} textAnchor="start" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-en)">NGN</text>
+        <text x={NGN_L + NGN_W + 6} y={NGN_CY + 4} textAnchor="start" fontSize="9" fontWeight="600" fill="#666" fontFamily="var(--font-kr)">누구나 광고</text>
       </motion.g>
 
       {/* 대시보드 */}
       <motion.g initial={{ opacity: 0, y: 10 }} animate={isActive ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease: EASE, delay: 0.6 }}>
-        <rect x={DL} y={DASH_TOP} width={DW} height={DH} fill="#fff" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <rect x={DL} y={DASH_TOP} width={DW} height="24" fill="#fafafa" stroke={BORDER} strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 12} y={DASH_TOP + 16} fontSize="9" fontWeight="600" fill="#333" fontFamily="var(--font-en)">누구나 광고</text>
-        <circle cx={DL + DW - 14} cy={DASH_TOP + 12} r="3" fill="#22c55e" />
-
-        <rect x={DL + 8} y={DASH_TOP + 32} width="136" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 14} y={DASH_TOP + 44} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
-        {[12, 20, 28, 38, 34].map((h, i) => (
-          <rect key={i} x={DL + 18 + i * 20} y={DASH_TOP + 90 - h} width="16" height={h} fill="#0070f3" opacity={0.3 + i * 0.15} />
-        ))}
-        <text x={DL + 120} y={DASH_TOP + 89} fontSize="8" fontWeight="700" fill="#22c55e" fontFamily="var(--font-en)">+23%</text>
-
-        <rect x={DL + 152} y={DASH_TOP + 32} width="140" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 158} y={DASH_TOP + 44} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">방문자</text>
-        <polyline points={`${DL+162},${DASH_TOP+88} ${DL+178},${DASH_TOP+82} ${DL+194},${DASH_TOP+85} ${DL+210},${DASH_TOP+74} ${DL+226},${DASH_TOP+66} ${DL+242},${DASH_TOP+58} ${DL+258},${DASH_TOP+50}`} fill="none" stroke="#22c55e" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-        <circle cx={DL + 258} cy={DASH_TOP + 50} r="2.5" fill="#22c55e" />
-
-        <rect x={DL + 8} y={DASH_TOP + 105} width="136" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 14} y={DASH_TOP + 118} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">매출</text>
-        <text x={DL + 14} y={DASH_TOP + 136} fontSize="10" fontWeight="700" fill="#171717" fontFamily="var(--font-en)">₩12,800,000</text>
-        <text x={DL + 14} y={DASH_TOP + 150} fontSize="8" fill="#22c55e" fontFamily="var(--font-en)">▲ 23.4% vs prev</text>
-
-        <rect x={DL + 152} y={DASH_TOP + 105} width="140" height="65" fill="#fafafa" stroke="#f0f0f0" strokeWidth="1px" vectorEffect="non-scaling-stroke" />
-        <text x={DL + 158} y={DASH_TOP + 118} fontSize="8" fontWeight="500" fill="#333" fontFamily="var(--font-en)">ROAS</text>
-        <text x={DL + 158} y={DASH_TOP + 148} fontSize="18" fontWeight="700" fill="#0070f3" fontFamily="var(--font-en)">641%</text>
-        <text x={DL + 158} y={DASH_TOP + 163} fontSize="8" fill="#666" fontFamily="var(--font-en)">Meta 812% · Google 397%</text>
+        {/* 대시보드 미니 = 공용 리마스터(사장님 2026-07-19 디테일 교정) */}
+        <DashMini x={DL} y={DASH_TOP} w={DW} h={DH} />
       </motion.g>
 
       {/* 애니메이션 도트 */}

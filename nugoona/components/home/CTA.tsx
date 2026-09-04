@@ -17,7 +17,7 @@ export default function CTA() {
       {cta.sub && (
         <FadeUp delay={0.1}>
           <p
-            className="max-w-[480px] text-[15px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-text-weak mb-10 relative z-[1]"
+            className="max-w-[480px] text-[15px] max-md:text-[14px] leading-[1.55] tracking-[-0.01em] text-text-weak mb-10 relative z-[1] md:leading-[1.35]"
             dangerouslySetInnerHTML={{ __html: cta.sub }}
           />
         </FadeUp>
