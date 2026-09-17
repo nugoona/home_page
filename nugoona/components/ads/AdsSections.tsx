@@ -1209,17 +1209,20 @@ export function AdsMarketScene() {
                   <p className="mt-0.5 truncate text-[11.5px] font-bold text-white/90">{it.name}</p>
                   {/* 변동 메타 — 실물 "N위 ← M위"의 ← 가 흐릿(사장님 2026-07-20) → 지난주 → 이번주 방향 +
                       확정 화살 문법(짧은 선+채운 삼각) 미니로 재디자인, 대비 70% */}
-                  <p className="mt-1 flex items-center justify-between">
+                  {/* ⚠ 모바일(390)에서 카드가 좁아 "₩89,000"이 "₩89 / ,000"으로 깨지던 것 수정(2026-09-18 실측).
+                      nowrap만 걸면 이번엔 순위 화살표와 겹친다 — 한 줄에 둘 다 들어갈 폭이 없다.
+                      그래서 모바일은 세로로 쌓고(순위 위 / 가격 아래), PC는 기존 좌우 배치 그대로 둔다. */}
+                  <p className="mt-1 flex items-center justify-between gap-1.5 max-md:flex-col max-md:items-start max-md:gap-0.5">
                     {it.d === 'NEW' ? (
-                      <span className="text-[9.5px] font-semibold text-white/70">신규 진입</span>
+                      <span className="min-w-0 text-[9.5px] font-semibold text-white/70">신규 진입</span>
                     ) : (
-                      <span className="flex items-center gap-[5px] text-[10px] font-semibold text-white/70" style={EN}>
+                      <span className="flex min-w-0 items-center gap-[5px] text-[10px] font-semibold text-white/70" style={EN}>
                         {it.r + (it.d.startsWith('+') ? 3 : -1)}위
-                        <svg width="13" height="8" viewBox="0 0 13 8" aria-hidden><line x1="0.5" y1="4" x2="7" y2="4" stroke="#ffffff" strokeOpacity="0.7" strokeWidth="1.2" /><path d="M7 1.2L12.4 4 7 6.8z" fill="#ffffff" fillOpacity="0.7" /></svg>
+                        <svg width="13" height="8" viewBox="0 0 13 8" aria-hidden className="shrink-0"><line x1="0.5" y1="4" x2="7" y2="4" stroke="#ffffff" strokeOpacity="0.7" strokeWidth="1.2" /><path d="M7 1.2L12.4 4 7 6.8z" fill="#ffffff" fillOpacity="0.7" /></svg>
                         <span className="text-white">{it.r}위</span>
                       </span>
                     )}
-                    <span className="text-[11px] font-bold text-white" style={EN}>{it.price}</span>
+                    <span className="shrink-0 whitespace-nowrap text-[11px] font-bold text-white" style={EN}>{it.price}</span>
                   </p>
                 </div>
               </div>
