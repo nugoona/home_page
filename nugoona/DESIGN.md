@@ -36,6 +36,8 @@
   | 위치 | 문제 | 상태 |
   |---|---|---|
   | ~~`app/ads/page.tsx`(히어로)~~ | ~~하드코딩~~ | ✅ 해소(2026-07-19 실측 — ads.ts import 사용 중) |
+  | ~~`ChatbotShowcase.ChatMock`(→/ads·/features)~~ | ~~"메타 예산 20% 올려줘 → ₩500,000→₩600,000 → 위저드에서 확인" = **닫힌 기능을 판매**~~ | ✅ 해소(2026-09-18, 사장님 낙점 "2번"). 근거 = `ngn_dashboard/.ngn-map/stage-7-chatbot.json` #541(2026-09-02 서버 차단 410)·#516. 교체 = 숫자 조회·용어 설명·화면 안내(딥링크) 3문답. 틀·색·그림자·타이핑 원작 유지. 같은 커밋에서 `ads.ts chatbot.control`·/features 좌측 카피·태그('광고 말로 제어'·'AI 진단'·'자유 질문')·"안전 게이트"도 교정 |
+  | 🔴 `AdsSections.tsx`(월간 리포트 목업) | **"매월 1일 오전 7시 5분 업데이트"**(지도 = 1일 06:00 집계·06:20 스냅샷·**16:00 완성**, 7시 5분 근거 없음) + **"아래 여덟 개 섹션"**(지도 = **6개 영역**, stage-6-report.json #460~465·#466은 7~9번 읽기·쓰기 거부) + `ads.ts report.items` 9개 | **미해소 — 다음 작업.** 챗봇과 같은 종류(앱이 바뀌었는데 홈페이지가 못 따라감) |
   | `app/content/page.tsx` | `lib/content/content.ts` 미사용·카피 하드코딩(§7-6 위반) + **"월간 노출 리포트" 문구**(정본 없음=대시보드 기능, 제거 확정) + 업종 안 맞는 예시 스크린샷(콜드 리드 지적) | 대기 |
   | `lib/content/home.ts` 폐기 잔재 / `Nav.tsx` 구 IA 링크 | §1 상단 참조 | 대기 |
   - ✅ **해소됨(2026-07-11)**: "소상공인" 5건(pricing.ts·pricing/page.tsx → '라이트'로) / NewsReflectMock "상위 노출 유지"→"꾸준히 노출 중" / SearchResultMock "최상단"(주석뿐이었음, 교체) / **Gemini→Claude 5건**(DashboardShowcase·TrendShowcase·ReportDark·home.ts·features.ts — 정본 위반 해소, /ads 실렌더 확인).

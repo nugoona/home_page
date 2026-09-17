@@ -8,8 +8,19 @@ import FadeUp from '@/components/motion/FadeUp';
 const EN: React.CSSProperties = { fontFamily: 'var(--font-en)' };
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/* 대화 목업 — 다크 챗 UI (질문 답변 + 광고 말로 제어)
-   export = /ads 재사용(사장님 2026-07-18 "예전 다크버전 그대로 갖고 와" — 원작 렌더 불변) */
+/* 대화 목업 — 다크 챗 UI (숫자 조회 · 용어 설명 · 화면 안내)
+   export = /ads 재사용(사장님 2026-07-18 "예전 다크버전 그대로 갖고 와" — 원작 틀·색·그림자 불변)
+
+   ★2026-09-18 대사 교체(사장님 낙점 "2번" = 세 가지 질문). 틀·색·그림자·타이핑은 원작 그대로.
+   【왜】구 대사 "메타 예산 20% 올려줘 → ₩500,000→₩600,000 → 위저드에서 확인"은 닫힌 기능이다.
+     근거 = ngn_dashboard/.ngn-map/stage-7-chatbot.json #541
+       "🛑 닫혔습니다. 대화창에서는 광고를 켜거나 끄거나 예산을 바꿀 수 없습니다.
+        '광고 운영 메뉴에서 직접 바꿔 주세요' 안내만 나갑니다." (2026-09-02 서버 차단 410)
+     같은 지도 #516 = "실행하거나 실행한 척하는 것" 금지가 서버에서 강제됨.
+   【대신 보여주는 것 — 지도상 실제로 되는 것】
+     · 매출·광고 숫자 조회 (#500)  · 용어·사용법 설명 (#500)
+     · 만들기/운영 화면으로 보내는 이동 안내 = 딥링크 (#541, 실행이 아니라 이동)
+   ⚠ 앱이 또 바뀌면 여기도 바뀌어야 한다. 이 주석의 지도 번호부터 다시 읽을 것. */
 export function ChatMock({ active }: { active: boolean }) {
   const reduce = useReducedMotion();
   const bubble = (i: number) => ({
@@ -18,7 +29,10 @@ export function ChatMock({ active }: { active: boolean }) {
     transition: { duration: 0.5, ease: EASE, delay: 0.2 + i * 0.45 },
   });
   /* 타이핑 과정(사장님 2026-07-18 "입력창에서 치는 과정이 나와야 채팅 느낌") —
-     말풍선 4개가 다 뜬 뒤(≈2.1s) 한 글자씩. ⚠조건부 렌더 금지(hydration 교훈) — 항상 렌더, reduce면 즉시 표시 */
+     말풍선이 다 뜬 뒤 한 글자씩. ⚠조건부 렌더 금지(hydration 교훈) — 항상 렌더, reduce면 즉시 표시
+     ★타이밍 = 말풍선 수에 종속. 지금 6개 → 마지막 등장 0.2+5*0.45=2.45s, 애니 0.5s → 2.95s 완료.
+       그래서 3.1s부터 타이핑. 말풍선을 더하거나 빼면 이 값도 같이 고칠 것(안 고치면 겹쳐 보인다). */
+  const TYPE_START = 3.1;
   const TYPED = '요즘 뭐가 잘 팔려?';
 
   return (
@@ -36,38 +50,44 @@ export function ChatMock({ active }: { active: boolean }) {
       </div>
 
       {/* 대화 */}
-      <div className="px-5 py-5 flex flex-col gap-3 min-h-[400px]">
+      <div className="px-5 py-5 flex flex-col gap-3 min-h-[440px]">
+        {/* ① 숫자 조회 — 지도 #500 */}
         <motion.div {...bubble(0)} className="self-end max-w-[78%] bg-accent text-white text-[13px] leading-[1.65] px-4 py-2.5">
-          이번 달 광고 성과 어때?
+          어제 매출 얼마야?
         </motion.div>
 
         <motion.div {...bubble(1)} className="self-start max-w-[82%] bg-white/[0.06] text-[#ddd] text-[13px] leading-[1.65] px-4 py-3">
-          이번 달 종합 ROAS는 <b className="text-white">452%</b>예요. Meta가 583%로 가장 효율이 좋고, 검색 유입도 전월 대비 <b className="text-white">+15%</b> 올랐어요.
+          어제 매출은 <b className="text-white">₩1,284,000</b>, 주문 <b className="text-white">37건</b>이에요. 지난주 같은 요일보다 <b className="text-white">+12%</b> 늘었어요.
         </motion.div>
 
+        {/* ② 용어 설명 — 지도 #500 */}
         <motion.div {...bubble(2)} className="self-end max-w-[78%] bg-accent text-white text-[13px] leading-[1.65] px-4 py-2.5">
-          메타 예산 20% 올려줘
+          ROAS가 무슨 뜻이야?
         </motion.div>
 
-        <motion.div {...bubble(3)} className="self-start max-w-[86%]">
+        <motion.div {...bubble(3)} className="self-start max-w-[86%] bg-white/[0.06] text-[#ddd] text-[13px] leading-[1.65] px-4 py-3">
+          광고비 1원으로 매출이 몇 원 나왔는지예요. <b className="text-white">452%</b>면 1만 원 써서 4만 5천 원을 벌었다는 뜻이에요.
+        </motion.div>
+
+        {/* ③ 화면 안내(딥링크) — 지도 #541. ⛔실행 카드가 아니다(실행은 닫힘) */}
+        <motion.div {...bubble(4)} className="self-end max-w-[78%] bg-accent text-white text-[13px] leading-[1.65] px-4 py-2.5">
+          메타 광고는 어디서 만들어?
+        </motion.div>
+
+        <motion.div {...bubble(5)} className="self-start max-w-[86%]">
           <div className="bg-white/[0.06] text-[#ddd] text-[13px] leading-[1.65] px-4 py-3 mb-2">
-            Summer Sale 캠페인 예산을 이렇게 바꿀게요. 확인해 주세요.
+            광고 만들기 화면에서 시작하시면 돼요.
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-3.5">
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-[11px] text-white/70">Summer Sale · Meta</span>
-              <span className="text-[10px] text-white/50" style={EN}>Budget</span>
-            </div>
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="text-[14px] text-white/55 line-through" style={EN}>₩500,000</span>
-              <span className="text-white/55">→</span>
-              <span className="text-[16px] font-bold text-accent" style={EN}>₩600,000</span>
+              <span className="text-[11px] text-white/70">광고 만들기 · Meta</span>
+              <span className="text-[10px] text-white/50" style={EN}>Shortcut</span>
             </div>
             <div className="w-full h-9 bg-accent text-white text-[13px] font-semibold flex items-center justify-center gap-1.5">
-              위저드에서 확인
+              광고 만들기 열기
               <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
             </div>
-            <p className="text-[10px] text-white/60 mt-2 leading-[1.5]">안전을 위해 위저드에서 확인해야 실행됩니다 (자동 집행 아님)</p>
+            <p className="text-[10px] text-white/60 mt-2 leading-[1.5]">눌러서 바로 그 화면으로 이동합니다</p>
           </div>
         </motion.div>
       </div>
@@ -82,7 +102,7 @@ export function ChatMock({ active }: { active: boolean }) {
                   key={i}
                   initial={{ opacity: 0 }}
                   animate={active ? { opacity: 1 } : {}}
-                  transition={reduce ? { duration: 0 } : { duration: 0, delay: 2.3 + i * 0.09 }}
+                  transition={reduce ? { duration: 0 } : { duration: 0, delay: TYPE_START + i * 0.09 }}
                 >
                   {ch}
                 </motion.span>
@@ -121,19 +141,24 @@ export default function ChatbotShowcase() {
                 <span className="w-8 h-8 flex items-center justify-center text-[13px] font-bold text-white bg-[#171717]" style={EN}>01</span>
                 <div className="flex-1 h-px bg-border-default" />
               </div>
+              {/* ★2026-09-18 사실 교정 — 구 카피("말로 묻고 운영하세요"·"대화로 확인하고 조정"·
+                  "광고 제어는 위저드에서 확인한 뒤 실행")는 전부 닫힌 기능. 근거 = ChatMock 상단 주석의 지도 번호.
+                  구 태그 '광고 말로 제어'(닫힘)·'AI 진단'(근거 없음)·'자유 질문'(지도 #500 = AI가 글을 짓지 않고
+                  준비된 카드·창고 숫자로 답함 → 과장) 교체. */}
               <h3 className="text-[clamp(22px,3vw,30px)] font-bold text-text-primary tracking-[-0.02em] leading-[1.25] mb-4">
-                복잡한 화면 대신<br />말로 묻고 운영하세요
+                복잡한 화면을 헤매지 말고<br />그냥 물어보세요
               </h3>
               <p className="text-[15px] max-md:text-[16px] max-md:font-medium text-text-body leading-[1.65] mb-5">
-                &quot;이번 달 광고 어때?&quot;부터 &quot;예산 올려줘&quot;까지. 복잡한 관리자 화면을 몰라도 대화로 확인하고 조정합니다.
-                광고 제어는 위저드에서 확인한 뒤 안전하게 실행됩니다.
+                어제 매출부터 처음 듣는 용어까지 쉬운 말로 답합니다.
+                어디서 하는 일인지도 그 화면까지 안내합니다.
               </p>
               <div className="flex flex-wrap gap-2 mb-5">
-                {['AI', '광고 말로 제어', 'AI 진단', '자유 질문'].map((tag) => (
+                {['AI', '숫자 조회', '용어 설명', '화면 안내'].map((tag) => (
                   <span key={tag} className="text-[10px] font-medium px-2.5 py-1" style={{ border: '1px solid #eaeaea', color: '#333', ...EN }}>{tag}</span>
                 ))}
               </div>
-              <p className="text-[14px] text-text-weak" style={EN}>Meta · Google · 안전 게이트</p>
+              {/* 구 "안전 게이트" = 실행 전 위저드 확인을 가리키던 말. 실행 자체가 닫혀 의미가 사라져 교체 */}
+              <p className="text-[14px] text-text-weak" style={EN}>Meta · Google · 화면 바로가기</p>
             </FadeUp>
 
             {/* 우 대화 목업 */}

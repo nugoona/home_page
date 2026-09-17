@@ -81,6 +81,8 @@ const PAGES = [
   { name: "08-스타일가이드", url: "/styles" },
   { name: "09-개인정보", url: "/privacy" },
   { name: "10-이용약관", url: "/terms" },
+  // 시안 비교용 임시 페이지 — 낙점 후 원본 반영하면 이 줄과 app/ads2/ 를 함께 지운다
+  { name: "11-광고시안-챗봇", url: "/ads2" },
 ];
 
 const LAB_PAGES = [
