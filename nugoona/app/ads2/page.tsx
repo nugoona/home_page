@@ -1,233 +1,332 @@
 'use client';
 
 /* ══════════════════════════════════════════════════════════════════
-   /ads2 — 시안 비교용 임시 페이지 (2026-09-18, 사장님 승인)
-   목적 = 원본 /ads 를 한 글자도 건드리지 않고 챗봇 섹션 대안을 나란히 비교.
-   🛑 이 페이지는 손님용이 아니다. Nav 미등록 · 낙점 후 원본 반영하고 삭제 예정.
+   /ads2 — 시안 비교용 임시 페이지 (사장님 승인 2026-09-18)
+   🛑 손님용 아님. Nav 미등록. 낙점되면 원본에 반영하고 다음 섹션 시안으로 갈아끼운다.
+   이력: 1차 = 챗봇 3안(2026-09-18, 사장님 낙점 "2번" → 원본 반영 완료, 커밋 1196e6a)
+        2차 = 월간 리포트 3안 ← 지금
 
    【왜 고치나 — 사실 근거】
-   현재 /ads 챗봇 목업은 "메타 예산 20% 올려줘 → ₩500,000 → ₩600,000 → 위저드에서 확인"
-   을 보여준다. 그러나 ngn_dashboard 기능 지도(.ngn-map/stage-7-chatbot.json #541)는:
-     "🛑 닫혔습니다. 대화창에서는 광고를 켜거나 끄거나 예산을 바꿀 수 없습니다.
-      '광고 운영 메뉴에서 직접 바꿔 주세요' 안내만 나갑니다."
-   2026-09-02 서버 차단(410). #516 = "실행하거나 실행한 척하는 것" 금지가 서버에서 강제됨.
-   → 지금 홈페이지는 닫힌 기능을 팔고 있다.
+   현재 /ads 리포트 목업은 ①헤더 "매월 1일 **오전 7시 5분** 업데이트" ②칩 "**9개의** 섹션"
+   ③각주 "아래 **여덟 개** 섹션의 숫자를 모두 읽고" 라고 말한다. 그러나 기능 지도
+   (ngn_dashboard/.ngn-map/stage-6-report.json)는:
+     · 구성 = **6개 영역**(#460~#465). #466 = 7~9번은 읽기·쓰기 모두 거부.
+       ①지난달 매출 ②손님이 어디서 와서 어떻게 샀나 ③어떤 상품이 잘됐나
+       ④광고 성과 ⑤시장에서 뭐가 팔리나(29CM) ⑥이번 달 목표와 할 일
+     · 시각 = 1일 **06:00** 숫자 합치기 → **06:20** 스냅샷(해설 없음) → **16:00** AI 해설 붙여 완성
+       (#470~#472, "업체당 약 10분 소요"). **오전 7시 5분은 어디에도 없다.**
+   → 9개를 6개로 줄이고, 없는 시각을 지운다.
 
-   【지도가 확인해 준, 실제로 되는 것】
-     · 매출·광고 숫자 조회 (#500)
-     · 용어·사용법 설명 (#500)
-     · 만들기/운영 화면으로 보내는 이동 안내 = 딥링크 (#541, 실행이 아니라 이동)
-
-   【톤앤매너 = DESIGN §8.17 준수】
-     색 3개(순백·잉크 #171717·accent #0070f3) / 선 1px / 블러 금지(그림자는 원작 선명 2겹)
-     eyebrow = ✦ + 대문자 tracking .14em / 호칭 "고객님" / 빈칸 지양
+   【디자인 계승】RptSidebar 실측값 그대로 — 카드 440px · 보더 #EDEDED ·
+     그림자 0 6px 24px rgba(0,0,0,.09) · 헤더 #171717 · AI분석 좌보더 #003366 / 배경 #F8F9FA ·
+     미니카드 보더 #f0f0f0. §8.17 색 3개·1px 선·블러 금지 준수.
    ══════════════════════════════════════════════════════════════════ */
 
 import { useRef, type ReactNode } from 'react';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import FadeUp from '@/components/motion/FadeUp';
+import { Marquee } from '@/components/lab-sources/magicui/marquee';
 
-const EN: React.CSSProperties = { fontFamily: 'var(--font-en)' };
-const EASE = [0.16, 1, 0.3, 1] as const;
+const EN = { fontFamily: 'var(--font-en)' } as const;
+const C_BORDER = '#EDEDED';
+const CARD_SHADOW = '0 6px 24px rgba(0,0,0,0.09)';
 
 /* ─────────────────────────────────────────────────────────────
-   챗 껍데기 — 원작 ChatMock의 틀 그대로 (다크 #111 · 1px white/10 ·
-   그림자 선명 2겹 · 헤더 초록점 + "데모 화면" · 하단 입력창 타이핑)
+   지도 6개 영역 — 구 9개를 합쳐 맞춘 것
+   구 '주요 유입 채널' + '고객 방문·구매 여정'  → ② 손님 유입과 구매 여정
+   구 '시장 트렌드 확인' + '시장과 자사몰 비교'  → ⑤ 시장에서 뭐가 팔리나
+   구 '익월 목표·시장 전망' + 고정컷 '전략 액션 플랜' → ⑥ 이번 달 목표와 할 일
    ───────────────────────────────────────────────────────────── */
-function ChatShell({
-  active, children, typed, minH = 400,
-}: { active: boolean; children: ReactNode; typed: string; minH?: number }) {
-  const reduce = useReducedMotion();
-
-  return (
-    <div
-      className="border border-white/10 bg-[#111] overflow-hidden"
-      style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.28), 0 10px 24px rgba(0,0,0,0.22)' }}
-    >
-      <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3.5">
-        <span className="rounded-dot h-2 w-2 bg-[#22c55e]" />
-        <span className="text-[13px] font-semibold text-white/80">NGN Assistant</span>
-        <span className="ml-auto text-[11px] text-white/65">데모 화면</span>
+const SECTIONS: { n: string; t: string; ai: string; body: ReactNode }[] = [
+  {
+    n: '01', t: '지난달 매출', ai: '매출은 줄었지만 광고 효율은 좋아졌어요.',
+    body: (
+      <div className="grid grid-cols-3 gap-[3px]">
+        {[['매출', '₩34.0M', '#dc3545', '▼6.9%'], ['주문', '610건', '#dc3545', '▼1.6%'], ['ROAS', '641%', '#28a745', '▲38%p']].map(([l, v, c, d]) => (
+          <div key={l} className="border border-[#F0F0F0] px-1 py-[3px]">
+            <p className="text-[6px] text-[#868E96]">{l}</p>
+            <p className="text-[7.5px] font-bold text-[#212529]" style={EN}>{v}</p>
+            <p className="text-[5.5px] font-bold" style={{ color: c as string, fontFamily: 'var(--font-en)' }}>{d}</p>
+          </div>
+        ))}
       </div>
-
-      <div className="flex flex-col gap-3 px-5 py-5" style={{ minHeight: minH }}>
-        {children}
+    ),
+  },
+  {
+    n: '02', t: '손님 유입과 구매 여정', ai: '인스타 유입은 늘었는데 장바구니 이탈도 늘었어요.',
+    body: (
+      <div className="space-y-[3px]">
+        <div className="flex bg-[#003366] px-1 py-[2px] text-[5.5px] font-bold text-white"><span className="flex-1">채널</span><span className="w-7 text-right">유입수</span><span className="w-6 text-right">비중</span></div>
+        {[['네이버 검색', '4,120', '33%'], ['인스타그램', '3,610', '29%']].map(([c, n, r]) => (
+          <div key={c} className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1">{c}</span><span className="w-7 text-right" style={EN}>{n}</span><span className="w-6 text-right" style={EN}>{r}</span></div>
+        ))}
+        {[['유입', '12,400', 92, '#1e293b'], ['장바구니', '980', 56, '#9fb6d4'], ['주문', '610', 30, '#0070f3']].map(([l, n, w, c]) => (
+          <div key={l as string} className="flex items-center gap-1">
+            <span className="w-[26px] shrink-0 text-[5.5px] text-[#868E96]">{l}</span>
+            <span className="h-[7px]" style={{ width: `${w}%`, background: c as string, opacity: 0.75 }} />
+            {/* nowrap = 좁은 칸에서 "12,400"이 두 줄로 깨지던 것 수정(실측) */}
+            <span className="whitespace-nowrap text-[5.5px] text-[#495057]" style={EN}>{n}</span>
+          </div>
+        ))}
       </div>
-
-      <div className="border-t border-white/[0.06] px-4 py-3.5">
-        <div className="flex h-11 items-center gap-2 border border-white/15 bg-white/[0.07] px-3.5">
-          <span className="flex min-w-0 flex-1 items-center text-[13px] text-white/90">
-            <span className="truncate">
-              {typed.split('').map((ch, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={active ? { opacity: 1 } : {}}
-                  transition={reduce ? { duration: 0 } : { duration: 0, delay: 2.3 + i * 0.09 }}
-                >
-                  {ch}
-                </motion.span>
-              ))}
+    ),
+  },
+  {
+    n: '03', t: '어떤 상품이 잘됐나', ai: '린넨 원피스가 구매·조회 모두 1위예요.',
+    body: (
+      <div className="space-y-[3px]">
+        {[['린넨 원피스', 90], ['프린지 니트', 64], ['샴브레이 셔츠', 46]].map(([n, w]) => (
+          <div key={n as string} className="flex items-center gap-1">
+            <span className="w-[34px] shrink-0 truncate text-[5.5px] text-[#495057]">{n}</span>
+            <span className="h-[6px] bg-[#9fb6d4]" style={{ width: `${w}%` }} />
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    n: '04', t: '광고 성과', ai: '영상 소재의 효율이 이미지보다 높아요.',
+    body: (
+      <div className="space-y-[2px]">
+        {[['1', '여름 신상 15초 영상', '812%'], ['2', '원피스 단품 이미지', '641%'], ['3', '룩북 캐러셀', '397%']].map(([r, n, v]) => (
+          <div key={r as string} className="flex items-center gap-1 border-b border-[#F5F5F5] py-[2px] text-[6px]">
+            <span className="flex h-[8px] w-[8px] items-center justify-center bg-[#003366]/20 text-[5px] font-bold text-[#003366]" style={EN}>{r}</span>
+            <span className="min-w-0 flex-1 truncate text-[#495057]">{n}</span>
+            <span className="font-bold text-[#0070f3]" style={EN}>{v}</span>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  {
+    n: '05', t: '시장에서 뭐가 팔리나', ai: '여름 원피스가 빠르게 오르고 있어요. 우리가 8% 저렴해요.',
+    body: (
+      <div className="space-y-[3px]">
+        <div className="grid grid-cols-5 gap-[3px]">
+          {['/img/ads/set-7.webp', '/img/ads/set-9.webp', '/img/ads/set-8.webp', '/img/ads/set-10.webp', '/img/unsplash/webp/photo-1434389677669-e08b4cac3105.webp'].map((im) => (
+            <span key={im} className="relative block aspect-square overflow-hidden bg-[#fafafa]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={im} alt="" className="h-full w-full object-cover" loading="lazy" />
             </span>
-            <motion.span
-              aria-hidden
-              className="ml-[2px] inline-block h-[15px] w-[1.5px] shrink-0 bg-white/80"
-              animate={reduce ? { opacity: 0.6 } : { opacity: [1, 0, 1] }}
-              transition={reduce ? undefined : { repeat: Infinity, duration: 1.1, ease: 'linear' }}
-            />
-          </span>
-          <span className="rounded-dot flex h-7 w-7 shrink-0 items-center justify-center bg-accent">
-            <svg className="h-3.5 w-3.5 text-white" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8h9M8 4l4 4-4 4" /></svg>
-          </span>
+          ))}
+        </div>
+        <div className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1 text-[#868E96]">평균가</span><span className="w-9 text-right" style={EN}>₩42,000</span><span className="w-9 text-right font-bold" style={EN}>₩38,600</span></div>
+      </div>
+    ),
+  },
+  {
+    n: '06', t: '이번 달 목표와 할 일', ai: '다음 달은 성수기예요. 목표를 높여도 좋아요.',
+    body: (
+      <div className="grid grid-cols-3 gap-[3px]">
+        {[['작년 7월', '₩29.8M', '#495057'], ['올해 6월', '₩34.0M', '#495057'], ['7월 목표', '+5~10%', '#0070f3']].map(([l, v, c]) => (
+          <div key={l as string} className="border border-[#F0F0F0] px-1 py-[3px] text-center">
+            <p className="text-[5.5px] text-[#868E96]">{l}</p>
+            <p className="text-[7px] font-bold" style={{ color: c as string, fontFamily: 'var(--font-en)' }}>{v}</p>
+          </div>
+        ))}
+      </div>
+    ),
+  },
+];
+
+/* 고정 컷 = ⑥ 이번 달 목표와 할 일. 구 RPT_PLAN 그대로(리포트가 내놓는 제안 = 지도 #465) */
+const PLAN = [
+  { icon: '🎯', title: '‘린넨 원피스’ 예산 집중', b1: '이번 달 ROAS가 가장 높았던 상품입니다.', b2: ' 다음 달 광고 예산을 20% 더 배정해 성수기 수요를 잡으세요.' },
+  { icon: '🛒', title: '장바구니 이탈 회복', b1: '담김은 늘었지만 주문 전환이 줄었습니다.', b2: ' 이탈 고객 리타겟팅 광고를 켜 두세요.' },
+];
+
+/* 카드 머리 — 셋이 공유. 시각 문구만 안마다 다르다 */
+function Head({ sub }: { sub: string }) {
+  return (
+    <div className="flex items-center justify-between bg-[#171717] px-4 py-3">
+      <div>
+        <p className="flex items-center gap-2 text-[12.5px] font-bold text-white">
+          2026. 6 월간 리포트
+          <span className="ads-pulse flex h-[14px] items-center bg-[#0070f3] px-1.5 text-[7.5px] font-bold text-white" style={EN}>NEW</span>
+        </p>
+        <p className="mt-0.5 text-[9px] font-medium text-white/70">{sub}</p>
+      </div>
+      <span className="text-[10px] font-medium text-white/65">데모 화면</span>
+    </div>
+  );
+}
+
+function PlanBlock({ inView, reduce }: { inView: boolean; reduce: boolean }) {
+  const typed = PLAN[0].b1 + PLAN[0].b2;
+  const b1Len = PLAN[0].b1.length;
+  return (
+    <>
+      <p className="text-[12px] font-bold tracking-[-0.01em] text-[#171717]">
+        이번 달 목표와 할 일 <span className="ml-1 text-[9.5px] font-medium text-[#666]">이것부터 하세요</span>
+      </p>
+      <div className="mt-2 grid grid-cols-2 gap-1.5">
+        {PLAN.map((c, ci) => (
+          <div key={c.title} className="border border-[#eeeeee] bg-white p-2.5">
+            <p className="flex items-center gap-1.5 border-b border-[#f0f0f0] pb-1.5">
+              <span className="text-[13px] leading-none">{c.icon}</span>
+              <span className="text-[10.5px] font-bold leading-[1.3] tracking-[-0.01em] text-[#171717]">{c.title}</span>
+            </p>
+            <p className="mt-1.5 min-h-[52px] text-[9.5px] font-medium leading-[1.6] text-[#495057] max-md:min-h-0">
+              {ci === 0 ? (
+                <>
+                  {typed.split('').map((ch, i) => (
+                    <motion.span key={i} className={i >= b1Len ? 'max-md:hidden' : undefined} initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={reduce ? { duration: 0 } : { duration: 0, delay: 0.7 + i * 0.05 }}>{ch}</motion.span>
+                  ))}
+                  <motion.span aria-hidden className="ml-[2px] inline-block h-[10px] w-[1.5px] bg-[#171717]/60 align-middle" animate={reduce ? { opacity: 0.5 } : { opacity: [1, 0, 1] }} transition={reduce ? undefined : { repeat: Infinity, duration: 1.1, ease: 'linear' }} />
+                </>
+              ) : (
+                <>{c.b1}<span className="max-md:hidden">{c.b2}</span></>
+              )}
+            </p>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   안 1 — 「정직하게 6개로」 지금 구조 그대로, 숫자만 사실에 맞춤
+   ───────────────────────────────────────────────────────────── */
+function PlanA({ inView, reduce }: { inView: boolean; reduce: boolean }) {
+  const rolling = SECTIONS.slice(0, 5); // ⑥은 고정 컷이 담당
+  return (
+    <div className="w-[440px] max-w-full bg-white" style={{ border: `1px solid ${C_BORDER}`, boxShadow: CARD_SHADOW }}>
+      <Head sub="매월 1일 업데이트" />
+      <div className="p-4">
+        <PlanBlock inView={inView} reduce={reduce} />
+        <div className="mt-2 border-l-[3px] border-[#003366] bg-[#F8F9FA] px-3 py-2">
+          <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]">
+            <b className="font-bold text-[#003366]">AI 분석</b> — 아래 다섯 개 섹션의 숫자를 모두 읽고 내린 결론입니다.
+          </p>
+        </div>
+        <div className="lab-sources-scope relative mt-2 h-[190px] overflow-hidden border-y border-[#ececec]">
+          <Marquee vertical className="h-full p-0 [--duration:24s] [--gap:0.5rem]">
+            {rolling.map((m) => (
+              <div key={m.t} className="grid grid-cols-[1fr_86px] gap-1.5">
+                <div className="border border-[#f0f0f0] bg-white p-2">
+                  <p className="mb-1.5 text-[9px] font-bold text-[#003366]">{m.t}</p>
+                  {m.body}
+                </div>
+                <div className="border-l-2 border-[#003366]/60 bg-[#F8F9FA] p-1.5">
+                  <p className="text-[7.5px] font-bold text-[#003366]/70">AI 분석</p>
+                  <p className="mt-1 text-[6.5px] font-medium leading-[1.55] text-[#495057]">{m.ai}</p>
+                </div>
+              </div>
+            ))}
+          </Marquee>
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ boxShadow: 'inset 0 5px 6px -4px rgba(0,0,0,0.16), inset 0 -5px 6px -4px rgba(0,0,0,0.16)' }} />
         </div>
       </div>
     </div>
   );
 }
 
-/* 말풍선 등장 — 원작과 동일 타이밍(0.2 + i*0.45) */
-const pop = (active: boolean, i: number) => ({
-  initial: { opacity: 0, y: 10 },
-  animate: active ? { opacity: 1, y: 0 } : {},
-  transition: { duration: 0.5, ease: EASE, delay: 0.2 + i * 0.45 },
-});
-
-function Me({ active, i, children }: { active: boolean; i: number; children: ReactNode }) {
+/* ─────────────────────────────────────────────────────────────
+   안 2 — 「여섯 개를 한눈에」 도는 것 없이 목차를 다 보여준다
+   ───────────────────────────────────────────────────────────── */
+function PlanB({ inView, reduce }: { inView: boolean; reduce: boolean }) {
   return (
-    <motion.div {...pop(active, i)} className="self-end max-w-[78%] bg-accent px-4 py-2.5 text-[13px] leading-[1.65] text-white">
-      {children}
-    </motion.div>
-  );
-}
-
-function Ai({ active, i, children, wide }: { active: boolean; i: number; children: ReactNode; wide?: boolean }) {
-  return (
-    <motion.div {...pop(active, i)} className={`self-start ${wide ? 'max-w-[86%]' : 'max-w-[82%]'} bg-white/[0.06] px-4 py-3 text-[13px] leading-[1.65] text-[#ddd]`}>
-      {children}
-    </motion.div>
-  );
-}
-
-/* 이동 안내 카드 — 원작의 "예산 변경 카드" 자리를 그대로 쓰되 성격을 바꿈.
-   실행 카드(❌ 지도상 닫힘) → 화면으로 보내는 이동 안내(✅ #541 딥링크 근거) */
-function GoCard({ active, i, label, desc, cta }: { active: boolean; i: number; label: string; desc: string; cta: string }) {
-  return (
-    <motion.div {...pop(active, i)} className="self-start w-[86%]">
-      <div className="mb-2 bg-white/[0.06] px-4 py-3 text-[13px] leading-[1.65] text-[#ddd]">{desc}</div>
-      <div className="border border-white/10 bg-white/[0.03] p-3.5">
-        <div className="mb-2.5 flex items-center justify-between">
-          <span className="text-[11px] text-white/70">{label}</span>
-          <span className="text-[10px] text-white/50" style={EN}>Shortcut</span>
+    <div className="w-[440px] max-w-full bg-white" style={{ border: `1px solid ${C_BORDER}`, boxShadow: CARD_SHADOW }}>
+      <Head sub="매월 1일 업데이트" />
+      <div className="p-4">
+        <PlanBlock inView={inView} reduce={reduce} />
+        <div className="mt-2 border-l-[3px] border-[#003366] bg-[#F8F9FA] px-3 py-2">
+          <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]">
+            <b className="font-bold text-[#003366]">AI 분석</b> — 여섯 개 섹션의 숫자를 모두 읽고 내린 결론입니다.
+          </p>
         </div>
-        <div className="flex h-9 w-full items-center justify-center gap-1.5 bg-accent text-[13px] font-semibold text-white">
-          {cta}
-          <svg className="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
+        <div className="mt-2 border-y border-[#ececec] py-1">
+          {SECTIONS.map((s, i) => (
+            <motion.div
+              key={s.t}
+              initial={{ opacity: 0, x: -6 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={reduce ? { duration: 0 } : { duration: 0.4, delay: 0.3 + i * 0.09 }}
+              className="flex items-center gap-2 border-b border-[#F5F5F5] px-1 py-[7px] last:border-b-0"
+            >
+              <span className="flex h-[15px] w-[15px] shrink-0 items-center justify-center bg-[#003366] text-[7px] font-bold text-white" style={EN}>{s.n}</span>
+              <span className="min-w-0 flex-1 truncate text-[10px] font-bold text-[#171717]">{s.t}</span>
+              <span className="min-w-0 flex-[1.3] truncate text-[8.5px] font-medium text-[#495057]">{s.ai}</span>
+            </motion.div>
+          ))}
         </div>
-        <p className="mt-2 text-[10px] leading-[1.5] text-white/60">눌러서 바로 그 화면으로 이동합니다</p>
+        <p className="mt-2 text-[8.5px] font-medium text-[#868E96]">섹션마다 숫자와 AI 해설이 함께 담깁니다</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ─────────────────────────────────────────────────────────────
-   안 1 — 「길 안내」  질문을 '어떻게'로 바꾸고, 답은 화면으로 데려다준다
+   안 3 — 「어떻게 만들어지나」 밤새 모으고 → 낮에 해설 붙고 → 완성
+   (개선안 §5.3 "완성 화면만 놓지 말고 겪는 과정을 보여라")
    ───────────────────────────────────────────────────────────── */
-function PlanA({ active }: { active: boolean }) {
-  return (
-    <ChatShell active={active} typed="요즘 뭐가 잘 팔려?">
-      <Me active={active} i={0}>이번 달 광고 성과 어때?</Me>
-      <Ai active={active} i={1}>
-        이번 달 종합 ROAS는 <b className="text-white">452%</b>예요. Meta가 583%로 가장 효율이 좋고,
-        검색 유입도 전월 대비 <b className="text-white">+15%</b> 올랐어요.
-      </Ai>
-      <Me active={active} i={2}>메타 예산은 어디서 바꿔?</Me>
-      <GoCard
-        active={active}
-        i={3}
-        desc="광고 운영 메뉴에서 바꾸실 수 있어요. 바로 열어드릴게요."
-        label="광고 운영 · Meta"
-        cta="광고 운영 메뉴 열기"
-      />
-    </ChatShell>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
-   안 2 — 「세 가지 질문」  잘하는 일 셋(숫자 조회 · 용어 설명 · 길 안내)을 한 화면에
-   ───────────────────────────────────────────────────────────── */
-function PlanB({ active }: { active: boolean }) {
-  return (
-    <ChatShell active={active} typed="요즘 뭐가 잘 팔려?" minH={440}>
-      <Me active={active} i={0}>어제 매출 얼마야?</Me>
-      <Ai active={active} i={1}>
-        어제 매출은 <b className="text-white">₩1,284,000</b>, 주문 <b className="text-white">37건</b>이에요.
-        지난주 같은 요일보다 <b className="text-white">+12%</b> 늘었어요.
-      </Ai>
-      <Me active={active} i={2}>ROAS가 무슨 뜻이야?</Me>
-      <Ai active={active} i={3} wide>
-        광고비 1원으로 매출이 몇 원 나왔는지예요. <b className="text-white">452%</b>면
-        1만 원 써서 4만 5천 원을 벌었다는 뜻이에요.
-      </Ai>
-      <Me active={active} i={4}>메타 광고는 어디서 만들어?</Me>
-      <GoCard
-        active={active}
-        i={5}
-        desc="광고 만들기 화면에서 시작하시면 돼요."
-        label="광고 만들기 · Meta"
-        cta="광고 만들기 열기"
-      />
-    </ChatShell>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
-   안 3 — 「한 가지를 깊게」  질문 하나 · 글자 크게 (모바일 가독 우선)
-   ───────────────────────────────────────────────────────────── */
-function PlanC({ active }: { active: boolean }) {
-  const stat = [
-    { k: '매출', v: '₩12,800,000', s: '지난달 대비 +23.4%' },
-    { k: 'ROAS', v: '452%', s: 'Meta 583 · Google 397' },
+function PlanC({ inView, reduce }: { inView: boolean; reduce: boolean }) {
+  const steps = [
+    { k: '새벽', t: '지난달 숫자를 모읍니다', d: '매출·유입·상품·광고·시장' },
+    { k: '낮', t: 'AI가 해설을 붙입니다', d: '여섯 개 섹션에 한 줄씩' },
+    { k: '완성', t: '할 일까지 정리해 도착', d: '이번 달 이것부터 하세요' },
   ];
   return (
-    <ChatShell active={active} typed="지난달이랑 비교해줘">
-      <Me active={active} i={0}>이번 달 광고 어때?</Me>
-      <Ai active={active} i={1} wide>
-        <span className="text-[15px] leading-[1.6]">
-          Meta가 가장 효율이 좋아요. 검색 유입도 전월보다 <b className="text-white">+15%</b> 늘었어요.
-        </span>
-      </Ai>
-      {/* 모바일 = 1열(390px에서 ₩12,800,000이 두 줄로 깨짐 — 실측 후 수정) */}
-      <motion.div {...pop(active, 2)} className="self-start grid w-[86%] grid-cols-2 gap-2 max-md:w-full max-md:grid-cols-1">
-        {stat.map((it) => (
-          <div key={it.k} className="border border-white/10 bg-white/[0.03] p-3.5">
-            <p className="text-[11px] text-white/70">{it.k}</p>
-            <p className="mt-1 whitespace-nowrap text-[18px] font-bold text-white" style={EN}>{it.v}</p>
-            <p className="mt-1.5 text-[10px] leading-[1.5] text-white/60">{it.s}</p>
+    <div className="w-[440px] max-w-full bg-white" style={{ border: `1px solid ${C_BORDER}`, boxShadow: CARD_SHADOW }}>
+      <Head sub="매월 1일 업데이트" />
+      <div className="p-4">
+        {/* 만들어지는 3단계 */}
+        <div className="grid grid-cols-3 gap-1.5">
+          {steps.map((s, i) => (
+            <motion.div
+              key={s.k}
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={reduce ? { duration: 0 } : { duration: 0.45, delay: 0.2 + i * 0.28 }}
+              className="border border-[#eeeeee] bg-white p-2.5"
+            >
+              <p className="text-[7.5px] font-bold uppercase tracking-[0.1em] text-[#003366]" style={EN}>{s.k}</p>
+              <p className="mt-1.5 text-[10px] font-bold leading-[1.35] tracking-[-0.01em] text-[#171717]">{s.t}</p>
+              <p className="mt-1 text-[8.5px] font-medium leading-[1.5] text-[#868E96]">{s.d}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* 완성물 미리보기 — 섹션 6개가 채워지는 장면 */}
+        <div className="mt-2.5 border-y border-[#ececec] py-2">
+          <p className="mb-1.5 text-[9px] font-bold text-[#003366]">완성된 리포트</p>
+          <div className="grid grid-cols-2 gap-1.5">
+            {SECTIONS.map((s, i) => (
+              <motion.div
+                key={s.t}
+                initial={{ opacity: 0 }}
+                animate={inView ? { opacity: 1 } : {}}
+                transition={reduce ? { duration: 0 } : { duration: 0.4, delay: 1.0 + i * 0.13 }}
+                className="flex items-center gap-1.5 border border-[#f0f0f0] bg-white px-2 py-[6px]"
+              >
+                <span className="flex h-[13px] w-[13px] shrink-0 items-center justify-center bg-[#003366] text-[6.5px] font-bold text-white" style={EN}>{s.n}</span>
+                <span className="min-w-0 flex-1 truncate text-[9px] font-bold text-[#171717]">{s.t}</span>
+              </motion.div>
+            ))}
           </div>
-        ))}
-      </motion.div>
-      <Ai active={active} i={3} wide>
-        더 자세한 숫자나 모르는 용어는 그대로 물어보세요. 쉬운 말로 설명해 드릴게요.
-      </Ai>
-    </ChatShell>
+        </div>
+
+        <div className="mt-2 border-l-[3px] border-[#003366] bg-[#F8F9FA] px-3 py-2">
+          <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]">
+            <b className="font-bold text-[#003366]">AI 분석</b> — 여섯 개 섹션의 숫자를 모두 읽고 이번 달 할 일을 짚어 드립니다.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   시안 한 벌 = 좌 카피 + 우 목업 (원본 /ads 챗봇 섹션과 같은 배치)
-   ───────────────────────────────────────────────────────────── */
+/* ───────────────────────── 시안 한 벌 ───────────────────────── */
 function Trial({
-  no, name, why, heading, body, control, children,
-}: {
-  no: string; name: string; why: string;
-  heading: ReactNode; body: string; control: string; children: (active: boolean) => ReactNode;
-}) {
+  no, name, why, heading, body, children,
+}: { no: string; name: string; why: string; heading: ReactNode; body: string; children: (inView: boolean, reduce: boolean) => ReactNode }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const reduce = !!useReducedMotion(); // 훅은 boolean|null 반환 — 자식 시그니처에 맞춰 좁힌다
 
   return (
     <section ref={ref} className="border-t border-[#ECECEC]">
-      {/* 시안 머리띠 — 비교용 표시(원본엔 없음) */}
       <div className="bg-[#171717] px-12 py-3 max-md:px-6">
         <div className="mx-auto flex max-w-[1080px] items-baseline gap-3">
           <span className="text-[13px] font-bold text-white" style={EN}>{no}</span>
@@ -242,17 +341,23 @@ function Trial({
           <FadeUp>
             <div className="mb-5 flex items-center gap-2">
               <span aria-hidden className="text-[13px] text-accent">✦</span>
-              <span className="text-[13px] font-semibold uppercase tracking-[0.14em] text-text-weak" style={EN}>AI Chat</span>
+              <span className="text-[13px] font-semibold uppercase tracking-[0.14em] text-text-weak" style={EN}>Report</span>
             </div>
-            <h3 className="mb-4 text-[clamp(22px,3vw,30px)] font-bold leading-[1.25] tracking-[-0.02em] text-text-primary text-balance">
-              {heading}
-            </h3>
-            <p className="mb-3 text-[15px] font-medium leading-[1.65] text-text-body max-md:text-[16px]">{body}</p>
-            <p className="text-[15px] font-medium leading-[1.65] text-text-body max-md:text-[16px]">{control}</p>
+            <h3 className="mb-4 text-[clamp(22px,3vw,30px)] font-bold leading-[1.25] tracking-[-0.02em] text-text-primary text-balance">{heading}</h3>
+            <p className="text-[15px] font-medium leading-[1.65] text-text-body max-md:text-[16px]">{body}</p>
           </FadeUp>
 
-          <div className="max-md:order-[-1]">
-            <FadeUp delay={0.12}>{children(inView)}</FadeUp>
+          {/* ⚠ w-full 필수 — 없으면 440px 카드가 모바일(390)에서 화면 밖으로 잘린다(실측).
+              원본 AdsReportScene도 `w-full max-w-[980px]` 로 감싸서 해결하고 있다. */}
+          <div className="w-full min-w-0 max-md:order-[-1]">
+            <FadeUp delay={0.12}>
+              <div
+                className="flex w-full justify-center px-8 py-12 max-md:px-4 max-md:py-8"
+                style={{ background: '#FAFAFA', backgroundImage: 'radial-gradient(circle, #EAEAEA 1px, transparent 1.4px)', backgroundSize: '14px 14px', border: `1px solid ${C_BORDER}` }}
+              >
+                {children(inView, reduce)}
+              </div>
+            </FadeUp>
           </div>
         </div>
       </div>
@@ -263,7 +368,6 @@ function Trial({
 export default function Ads2Page() {
   return (
     <main className="bg-white">
-      {/* 안내 — 이 페이지의 정체 */}
       <div className="border-b border-[#ECECEC] px-12 py-14 max-md:px-6 max-md:py-10">
         <div className="mx-auto max-w-[1080px]">
           <div className="mb-4 flex items-center gap-2">
@@ -271,64 +375,63 @@ export default function Ads2Page() {
             <span className="text-[13px] font-semibold uppercase tracking-[0.14em] text-text-weak" style={EN}>Compare</span>
           </div>
           <h1 className="text-[clamp(26px,3.4vw,38px)] font-bold leading-[1.26] tracking-[-0.04em] text-text-primary text-balance">
-            챗봇 장면 — 어느 쪽이 나으세요?
+            월간 리포트 — 어느 쪽이 나으세요?
           </h1>
           <p className="mt-4 max-w-[680px] text-[15px] font-medium leading-[1.6] text-text-body max-md:text-[16px]">
-            지금 광고 페이지에는 <b className="text-text-primary">&ldquo;메타 예산 20% 올려줘 → 예산을 바꿀게요&rdquo;</b> 장면이 있습니다.
-            그런데 앱에서는 <b className="text-text-primary">9월 2일부터 대화로 예산을 바꾸는 길이 닫혔습니다.</b>{' '}
-            지금은 &ldquo;광고 운영 메뉴에서 직접 바꿔 주세요&rdquo; 안내만 나갑니다. 그래서 세 가지로 고쳐 봤습니다.
+            지금 광고 페이지는 리포트가 <b className="text-text-primary">&ldquo;9개 섹션&rdquo;</b>이고
+            <b className="text-text-primary"> &ldquo;매월 1일 오전 7시 5분&rdquo;</b>에 온다고 말합니다.
+            그런데 실제 리포트는 <b className="text-text-primary">6개</b>이고, 완성되는 시각은
+            <b className="text-text-primary"> 오후</b>입니다. 오전 7시 5분은 근거가 없습니다.
           </p>
           <p className="mt-3 max-w-[680px] text-[14px] leading-[1.6] text-text-weak">
-            그림 틀·색·그림자·타이핑 연출은 원본 그대로입니다. <b className="text-text-body">바뀐 건 대사와 카드의 성격뿐</b>입니다.
-            왼쪽 글(카피)도 사실에 맞게 바꿔 봤는데, 이건 제안이니 문장은 고치셔도 됩니다.
+            세 안 모두 <b className="text-text-body">6개로 맞추고 시각을 뺐습니다.</b> 다른 건
+            <b className="text-text-body"> 6개를 어떻게 보여주느냐</b>입니다. 카드 틀·색·그림자는 원본 그대로입니다.
           </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {['색 3개 유지', '1px 선 유지', '블러 없음', '원본 무수정'].map((t) => (
-              <span key={t} className="bg-[#171717] px-2.5 py-1 text-[11px] font-medium text-white">{t}</span>
-            ))}
+          <div className="mt-5 border border-[#ECECEC] bg-[#FAFAFA] px-4 py-3">
+            <p className="text-[13px] font-semibold text-text-primary">실제 6개 (앱 기능 지도 기준)</p>
+            <p className="mt-1.5 text-[13px] leading-[1.6] text-text-body">
+              ① 지난달 매출 · ② 손님이 어디서 와서 어떻게 샀나 · ③ 어떤 상품이 잘됐나 ·
+              ④ 광고 성과 · ⑤ 시장에서 뭐가 팔리나 · ⑥ 이번 달 목표와 할 일
+            </p>
           </div>
         </div>
       </div>
 
       <Trial
         no="01"
-        name="길 안내"
-        why="지금 장면과 가장 가깝습니다 — 질문만 '어디서 바꿔?'로 바꾸고, 답이 그 화면으로 데려다줍니다"
-        heading={<>어려운 광고를, 쉬운 대화로.</>}
-        body="매출과 광고 수치, 어려운 용어를 물어보면 쉬운 말로 설명합니다."
-        control="바꾸고 싶은 것이 있으면 그 화면까지 바로 안내합니다."
+        name="정직하게 6개로"
+        why="지금 모양 그대로 — 도는 카드를 8개에서 5개로 줄이고 숫자만 사실에 맞췄습니다"
+        heading={<>한 달의 결과와, 다음<br />할 일을 정리합니다.</>}
+        body="매출과 유입, 상품과 광고를 함께 살펴보고 이번 달 확인할 내용을 쉬운 말로 정리합니다."
       >
-        {(a) => <PlanA active={a} />}
+        {(v, r) => <PlanA inView={v} reduce={r} />}
       </Trial>
 
       <Trial
         no="02"
-        name="세 가지 질문"
-        why="이 앱이 잘하는 일 셋을 한 화면에 — 숫자 조회 · 용어 설명 · 길 안내"
-        heading={<>모르는 건 그 자리에서<br />물어보세요.</>}
-        body="어제 매출부터 처음 듣는 용어까지, 화면을 헤매지 않고 바로 묻습니다."
-        control="어디서 하는 일인지도 알려주고, 그 화면으로 데려다줍니다."
+        name="여섯 개를 한눈에"
+        why="도는 것 없이 목차를 다 보여줍니다 — 몇 개인지가 아니라 무엇이 들었는지"
+        heading={<>무엇이 담기는지<br />먼저 보여드립니다.</>}
+        body="여섯 가지를 한 번에 정리해 드립니다. 섹션마다 숫자와 AI 해설이 함께 담깁니다."
       >
-        {(a) => <PlanB active={a} />}
+        {(v, r) => <PlanB inView={v} reduce={r} />}
       </Trial>
 
       <Trial
         no="03"
-        name="한 가지를 깊게"
-        why="질문 하나만 크게 — 휴대폰에서 글자가 가장 잘 읽힙니다"
-        heading={<>이번 달 어땠는지,<br />한마디로 물어보세요.</>}
-        body="흩어진 숫자를 모으지 않아도 한 번에 답이 옵니다."
-        control="모르는 용어는 그대로 물어보시면 쉬운 말로 설명합니다."
+        name="어떻게 만들어지나"
+        why="완성품만 놓지 않고 만들어지는 과정을 보여줍니다 — 새벽에 모으고, 낮에 해설이 붙고, 완성"
+        heading={<>매달 1일,<br />저절로 정리돼 있습니다.</>}
+        body="지난달 숫자를 모으고 해설을 붙여 이번 달 할 일까지 정리해 드립니다."
       >
-        {(a) => <PlanC active={a} />}
+        {(v, r) => <PlanC inView={v} reduce={r} />}
       </Trial>
 
-      {/* 꼬리 — 원본 확인 동선 */}
       <div className="border-t border-[#ECECEC] px-12 py-14 max-md:px-6 max-md:py-10">
         <div className="mx-auto flex max-w-[1080px] flex-wrap items-center gap-x-6 gap-y-3">
           <span className="text-[14px] font-medium text-text-body">원본과 비교하시려면</span>
           <a href="/ads" className="text-[14px] font-semibold text-accent underline underline-offset-4">지금 광고 페이지 열기 →</a>
-          <span className="text-[13px] text-text-weak">원본은 한 글자도 바뀌지 않았습니다.</span>
+          <span className="text-[13px] text-text-weak">원본은 아직 9개짜리 그대로입니다.</span>
         </div>
       </div>
     </main>

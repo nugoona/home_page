@@ -841,18 +841,32 @@ export function AdsCatalogScene({ uid = 'ct' }: { uid?: string }) {
    대시보드처럼 위 텍스트 + 아래 목업" — page.tsx가 WRAP+SectionHead 문법으로 직접 조립) */
 
 /* ═══════════ 8 · 월간 리포트 — v2(사장님 교정 2026-07-19): 헤더 = 톤앤매너 다크(#171717,
-   원본 적갈색 모사 폐기) / 좌측 9장 차례 패널 삭제(복잡 — 분량 증명은 마퀴+메타 줄) /
-   고정 컷 = 전략 액션 플랜(페이블 판단 채택: 헤딩 "다음 할 일" 정합, 매출 하락 숫자는 소구 약함.
+   원본 적갈색 모사 폐기) / 좌측 차례 패널 삭제(복잡 — 분량 증명은 마퀴+메타 줄) /
+   고정 컷 = 지도 ⑥ '이번 달 목표와 할 일'(페이블 판단 채택: 헤딩 "다음 할 일" 정합, 매출 하락 숫자는 소구 약함.
    카드 구조 = SPEC 섹션9 실물: 아이콘+제목+본문. ⚠데모 스냅샷 원문은 GCS라 레포에 없음 — 본문은 데모 결) /
-   섹션 넘버링 제거 / 나머지 8개 섹션 = 수직 마퀴(magicui, 분량 증명) ═══════════ */
+   섹션 넘버링 제거 / 나머지 5개 섹션 = 수직 마퀴(magicui) ═══════════
 
-const RPT_TOC = ['지난달 매출 분석', '주요 유입 채널', '고객 방문·구매 여정', '베스트 상품 성과', '시장 트렌드 확인', '매체 성과·효율 진단', '시장과 자사몰 비교', '익월 목표·시장 전망'];
+   ★2026-09-18 9섹션 → 6섹션 전면 교정 (사장님 낙점 "1번 = 정직하게 6개로")
+   【왜】구 값(9개 섹션 · "오전 7시 5분" · "여덟 개 섹션")은 옛 SPEC 기준이고 실제 앱과 다르다.
+     근거 = ngn_dashboard/.ngn-map/stage-6-report.json
+       · 구성 = **6개 영역** #460 지난달 매출 / #461 손님이 어디서 와서 어떻게 샀나 /
+         #462 어떤 상품이 잘됐나 / #463 광고 성과 / #464 시장에서 뭐가 팔리나(29CM) /
+         #465 이번 달 목표와 할 일. **#466 = 7~9번은 읽기·쓰기 모두 거부.**
+       · 시각 = #470 1일 06:00 숫자 합치기 → #471 06:20 스냅샷(해설 없음) →
+         #472 **16:00 AI 해설 붙여 완성**(업체당 약 10분). **오전 7시 5분은 어디에도 없다.**
+   【통합 방식】구 9개를 지도 6개에 합쳤다 — 유입채널+구매여정 → ② / 시장트렌드+시장비교 → ⑤ /
+     익월목표+액션플랜 → ⑥(고정 컷). 마퀴 = ①~⑤ 5장, 고정 컷 = ⑥.
+   ⚠ 앱이 또 바뀌면 여기도 바뀌어야 한다. 이 주석의 지도 번호부터 다시 읽을 것. */
+
+/* ★2026-09-18 6개로 갱신 — 화면 미사용(아래 `void RPT_TOC`)이지만 되살릴 때 옛 8개가 나가면 안 된다.
+   지도 stage-6-report.json #460~#465 순서 그대로. */
+const RPT_TOC = ['지난달 매출', '손님 유입과 구매 여정', '어떤 상품이 잘됐나', '광고 성과', '시장에서 뭐가 팔리나', '이번 달 목표와 할 일'];
 /* 마퀴 미니(액션 플랜 제외 8개) — 실물 시각물 실루엣 + 우측 AI 박스(전 섹션 2열 문법 반복 증명) */
 /* 마퀴 미니 8장 — 스켈레톤 폐기(사장님 2026-07-19 "정상 리포트로"): 실수치·실차트·실상품·AI 한 줄.
    수치 정합 = 매출 34,055,000·주문 610(Sales01Card)·ROAS 641%(DashMini)·시나리오(ActionPlan) */
 const RPT_MINI: { t: string; ai: string; body: React.ReactNode }[] = [
   {
-    t: '지난달 매출 분석', ai: '매출은 줄었지만 광고 효율은 좋아졌어요.',
+    t: '지난달 매출', ai: '매출은 줄었지만 광고 효율은 좋아졌어요.',
     body: (
       <div className="grid grid-cols-3 gap-[3px]">
         {[['매출', '₩34.0M', '#dc3545', '▼6.9%'], ['주문', '610건', '#dc3545', '▼1.6%'], ['ROAS', '641%', '#28a745', '▲38%p']].map(([l, v, c, d]) => (
@@ -866,32 +880,28 @@ const RPT_MINI: { t: string; ai: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    t: '주요 유입 채널', ai: '인스타그램 유입이 가장 크게 늘었어요.',
-    body: (
-      <div className="space-y-[2px]">
-        <div className="flex bg-[#003366] px-1 py-[2px] text-[5.5px] font-bold text-white"><span className="flex-1">채널</span><span className="w-7 text-right">유입수</span><span className="w-6 text-right">비중</span></div>
-        {[['네이버 검색', '4,120', '33%'], ['인스타그램', '3,610', '29%'], ['직접 유입', '2,480', '20%']].map(([c, n, r]) => (
-          <div key={c} className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1">{c}</span><span className="w-7 text-right" style={EN}>{n}</span><span className="w-6 text-right" style={EN}>{r}</span></div>
-        ))}
-      </div>
-    ),
-  },
-  {
-    t: '고객 방문·구매 여정', ai: '장바구니 이탈이 늘었어요. 리타겟팅을 권해요.',
+    /* 구 '주요 유입 채널' + '고객 방문·구매 여정' 통합 = 지도 ②(#461 손님이 어디서 와서 어떻게 샀나) */
+    t: '손님 유입과 구매 여정', ai: '인스타 유입은 늘었는데 장바구니 이탈도 늘었어요.',
     body: (
       <div className="space-y-[3px]">
-        {[['유입', '12,400', 92, '#1e293b'], ['장바구니', '980', 56, '#8b5cf6'], ['주문', '610', 30, '#ec4899']].map(([l, n, w, c]) => (
+        <div className="flex bg-[#003366] px-1 py-[2px] text-[5.5px] font-bold text-white"><span className="flex-1">채널</span><span className="w-7 text-right">유입수</span><span className="w-6 text-right">비중</span></div>
+        {[['네이버 검색', '4,120', '33%'], ['인스타그램', '3,610', '29%']].map(([c, n, r]) => (
+          <div key={c} className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1">{c}</span><span className="w-7 text-right" style={EN}>{n}</span><span className="w-6 text-right" style={EN}>{r}</span></div>
+        ))}
+        {/* 막대 색 = §8.17 팔레트로 교정(구 #8b5cf6 보라·#ec4899 핑크 = 색 3개 원칙 위반) */}
+        {[['유입', '12,400', 92, '#1e293b'], ['장바구니', '980', 56, '#9fb6d4'], ['주문', '610', 30, '#0070f3']].map(([l, n, w, c]) => (
           <div key={l as string} className="flex items-center gap-1">
             <span className="w-[26px] shrink-0 text-[5.5px] text-[#868E96]">{l}</span>
             <span className="h-[7px]" style={{ width: `${w}%`, background: c as string, opacity: 0.75 }} />
-            <span className="text-[5.5px] text-[#495057]" style={EN}>{n}</span>
+            {/* nowrap = 좁은 칸에서 "12,400"이 두 줄로 깨지던 것 수정(2026-09-18 실측) */}
+            <span className="whitespace-nowrap text-[5.5px] text-[#495057]" style={EN}>{n}</span>
           </div>
         ))}
       </div>
     ),
   },
   {
-    t: '베스트 상품 성과', ai: '린넨 원피스가 구매·조회 모두 1위예요.',
+    t: '어떤 상품이 잘됐나', ai: '린넨 원피스가 구매·조회 모두 1위예요.',
     body: (
       <div className="space-y-[3px]">
         {[['린넨 원피스', 90], ['프린지 니트', 64], ['샴브레이 셔츠', 46]].map(([n, w]) => (
@@ -904,20 +914,8 @@ const RPT_MINI: { t: string; ai: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    t: '시장 트렌드 확인', ai: '여름 원피스가 시장에서 빠르게 오르고 있어요.',
-    body: (
-      <div className="grid grid-cols-5 gap-[3px]">
-        {['/img/ads/set-7.webp', '/img/ads/set-9.webp', '/img/ads/set-8.webp', '/img/ads/set-10.webp', '/img/unsplash/webp/photo-1434389677669-e08b4cac3105.webp'].map((im) => (
-          <span key={im} className="relative block aspect-square overflow-hidden bg-[#fafafa]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={im} alt="" className="h-full w-full object-cover" loading="lazy" />
-          </span>
-        ))}
-      </div>
-    ),
-  },
-  {
-    t: '매체 성과·효율 진단', ai: '영상 소재의 효율이 이미지보다 높아요.',
+    /* 지도 ④(#463 광고 성과). 구 '시장 트렌드 확인'은 아래 '시장에서 뭐가 팔리나'로 합쳤다 */
+    t: '광고 성과', ai: '영상 소재의 효율이 이미지보다 높아요.',
     body: (
       <div className="space-y-[2px]">
         {[['1', '여름 신상 15초 영상', '812%'], ['2', '원피스 단품 이미지', '641%'], ['3', '룩북 캐러셀', '397%']].map(([r, n, v]) => (
@@ -931,29 +929,23 @@ const RPT_MINI: { t: string; ai: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    t: '시장과 자사몰 비교', ai: '시장 평균가보다 우리가 8% 낮아요.',
+    /* 구 '시장 트렌드 확인' + '시장과 자사몰 비교' 통합 = 지도 ⑤(#464 시장에서 뭐가 팔리나, 29CM) */
+    t: '시장에서 뭐가 팔리나', ai: '여름 원피스가 빠르게 오르고 있어요. 우리가 8% 저렴해요.',
     body: (
-      <div className="space-y-[2px]">
-        <div className="flex bg-[#2563eb] px-1 py-[2px] text-[5.5px] font-bold text-white"><span className="flex-1" /><span className="w-9 text-right">시장</span><span className="w-9 text-right">자사몰</span></div>
-        {[['평균가', '₩42,000', '₩38,600'], ['주력 소재', '린넨', '린넨'], ['가격대', '3~5만', '3~4만']].map(([l, a, b]) => (
-          <div key={l as string} className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1 text-[#868E96]">{l}</span><span className="w-9 text-right" style={EN}>{a}</span><span className="w-9 text-right font-bold" style={EN}>{b}</span></div>
-        ))}
+      <div className="space-y-[3px]">
+        <div className="grid grid-cols-5 gap-[3px]">
+          {['/img/ads/set-7.webp', '/img/ads/set-9.webp', '/img/ads/set-8.webp', '/img/ads/set-10.webp', '/img/unsplash/webp/photo-1434389677669-e08b4cac3105.webp'].map((im) => (
+            <span key={im} className="relative block aspect-square overflow-hidden bg-[#fafafa]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={im} alt="" className="h-full w-full object-cover" loading="lazy" />
+            </span>
+          ))}
+        </div>
+        <div className="flex border-b border-[#F5F5F5] px-1 py-[2px] text-[6px] text-[#495057]"><span className="flex-1 text-[#868E96]">평균가</span><span className="w-9 text-right" style={EN}>₩42,000</span><span className="w-9 text-right font-bold" style={EN}>₩38,600</span></div>
       </div>
     ),
   },
-  {
-    t: '익월 목표·시장 전망', ai: '다음 달은 성수기예요. 목표를 높여도 좋아요.',
-    body: (
-      <div className="grid grid-cols-3 gap-[3px]">
-        {[['작년 7월', '₩29.8M', '#495057'], ['올해 6월', '₩34.0M', '#495057'], ['7월 목표', '+5~10%', '#0070f3']].map(([l, v, c]) => (
-          <div key={l as string} className="border border-[#F0F0F0] px-1 py-[3px] text-center">
-            <p className="text-[5.5px] text-[#868E96]">{l}</p>
-            <p className="text-[7px] font-bold" style={{ color: c as string, fontFamily: 'var(--font-en)' }}>{v}</p>
-          </div>
-        ))}
-      </div>
-    ),
-  },
+  /* 구 '익월 목표·시장 전망'은 고정 컷(RPT_PLAN = 지도 ⑥ 이번 달 목표와 할 일)에 흡수해 삭제 */
 ];
 /* 텍스트 다이어트 처방2(2026-07-19): 모바일 = 첫 문장만(b2는 max-md:hidden). PC 카피 불변 */
 const RPT_PLAN = [
@@ -961,8 +953,10 @@ const RPT_PLAN = [
   { icon: '🛒', title: '장바구니 이탈 회복', b1: '담김은 늘었지만 주문 전환이 줄었습니다.', b2: ' 이탈 고객 리타겟팅 광고를 켜 두세요.' },
 ];
 
-/* 스탯 칩 3 — 모바일(가로)과 PC 레일(세로)이 공유하는 데이터 */
-const RPT_CHIPS = ['매월 1일 자동 도착', '9개의 섹션', '모든 섹션에 AI 분석']; // 용어 = "섹션"(사장님 2026-07-20 "장 아니라 섹션")
+/* 스탯 칩 3 — 모바일(가로)과 PC 레일(세로)이 공유하는 데이터
+   ★2026-09-18 "9개의 섹션" → "6개의 섹션"(사장님 낙점 1안). 근거 = stage-6-report.json
+   #460~#465 = 6개 영역 / #466 = 7~9번은 읽기·쓰기 모두 거부. 용어 = "섹션"(사장님 2026-07-20) */
+const RPT_CHIPS = ['매월 1일 자동 도착', '6개의 섹션', '모든 섹션에 AI 분석'];
 
 /** 리포트 사이드바 실물 — 모바일 원형(AdsReportScene)과 PC 2단(AdsReportGrid)이 공유(2026-07-20 ②) */
 function RptSidebar({ inView, reduce }: { inView: boolean; reduce: boolean }) {
@@ -976,13 +970,15 @@ function RptSidebar({ inView, reduce }: { inView: boolean; reduce: boolean }) {
                 2026. 6 월간 리포트
                 <span className="ads-pulse flex h-[14px] items-center bg-[#0070f3] px-1.5 text-[7.5px] font-bold text-white" style={EN}>NEW</span>
               </p>
-              <p className="mt-0.5 text-[9px] font-medium text-white/70">매월 1일 오전 7시 5분 업데이트</p>
+              {/* ★2026-09-18 "오전 7시 5분" 삭제 — 근거 없음. 지도 #470~#472 = 1일 06:00 집계 ·
+                  06:20 스냅샷(해설 없음) · 16:00 AI 해설 붙여 완성(업체당 약 10분). 시각을 약속하지 않는다 */}
+              <p className="mt-0.5 text-[9px] font-medium text-white/70">매월 1일 업데이트</p>
             </div>
             <span className="text-[10px] font-medium text-white/65">데모 화면</span>
           </div>
           <div className="p-4">
-            {/* 고정 컷 · 전략 액션 플랜(넘버링 없음) — SPEC 섹션9 실물 카드 구조 */}
-            <p className="text-[12px] font-bold tracking-[-0.01em] text-[#171717]">전략 액션 플랜 <span className="ml-1 text-[9.5px] font-medium text-[#666]">다음 달, 이것부터 하세요</span></p>
+            {/* 고정 컷 = 지도 ⑥(#465). 제목을 지도 영역명에 맞춤 — 구 "전략 액션 플랜"은 옛 SPEC 용어 */}
+            <p className="text-[12px] font-bold tracking-[-0.01em] text-[#171717]">이번 달 목표와 할 일 <span className="ml-1 text-[9.5px] font-medium text-[#666]">이것부터 하세요</span></p>
             <div className="mt-2 grid grid-cols-2 gap-1.5">
               {RPT_PLAN.map((c, ci) => (
                 <div key={c.title} className="border border-[#eeeeee] bg-white p-2.5">
@@ -1010,13 +1006,15 @@ function RptSidebar({ inView, reduce }: { inView: boolean; reduce: boolean }) {
             </div>
             {/* AI 분석 문법 각주 — 실물(#003366 좌보더) */}
             <div className="mt-2 border-l-[3px] border-[#003366] bg-[#F8F9FA] px-3 py-2">
-              <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]"><b className="font-bold text-[#003366]">AI 분석</b> — 아래 여덟 개 섹션의 숫자를 모두 읽고 내린 결론입니다.</p>
+              {/* 고정 컷 1개(이번 달 목표와 할 일) + 도는 카드 5개 = 6개. "여덟 개"는 구 9섹션 시절 값 */}
+              <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]"><b className="font-bold text-[#003366]">AI 분석</b> — 아래 다섯 개 섹션의 숫자를 모두 읽고 내린 결론입니다.</p>
             </div>
             {/* 나머지 8개 장 — 수직 마퀴(분량 증명).
                 2026-07-20 사장님 "페이드 싫음 → 선명한 그림자로": 흰 그라디언트 페이드 2개 폐기,
                 고정 컷이 마퀴 위에 드리우는 또렷한 inset 그림자 + 상하 헤어라인 경계 */}
             <div className="lab-sources-scope relative mt-2 h-[190px] overflow-hidden border-y border-[#ececec]">
-              <Marquee vertical className="h-full p-0 [--duration:32s] [--gap:0.5rem]">
+              {/* 32s → 24s : 카드가 8→5개로 줄어 같은 속도를 유지하려면 한 바퀴도 짧아져야 한다 */}
+              <Marquee vertical className="h-full p-0 [--duration:24s] [--gap:0.5rem]">
                 {RPT_MINI.map((m) => (
                   <div key={m.t} className="grid grid-cols-[1fr_86px] gap-1.5">
                     <div className="border border-[#f0f0f0] bg-white p-2">
