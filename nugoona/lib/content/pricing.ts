@@ -56,8 +56,8 @@ export const bundleNote =
  *  §8.17 니즈 원문 "로고는 작게 쓰지 말 것". 사장님이 함께 지적한 "밋밋함"도 같은 장치로 푼다
  *  (원인은 선 굵기가 아니라 눈이 걸릴 앵커의 부재 — 선은 §8.17대로 1px 그대로 뒀다). */
 export const productHeads = {
-  content: { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠', note: '가게 콘텐츠를 만들고 발행합니다. 맡기는 양에 따라 세 가지.' },
-  ads: { logo: '/img/logo/na.svg?v=20', name: '누구나 광고', note: '쇼핑몰 광고를 만들고 성과를 봅니다. 단일 요금.' },
+  content: { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠', note: '맡기는 양에 따라 세 가지' },
+  ads: { logo: '/img/logo/na.svg?v=20', name: '누구나 광고', note: '단일 요금' },
 };
 
 /** 누구나 콘텐츠 — 3단 */
