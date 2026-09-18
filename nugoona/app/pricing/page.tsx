@@ -5,12 +5,13 @@ import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 import Accordion from '@/components/ui/Accordion';
 import PricingCards from '@/components/ui/PricingCards';
-import { pricingHero, planTiers, pricingFootnote, pricingFaq, freezePromise } from '@/lib/content/pricing';
+import { pricingHero, planTiers, pricingFootnote, bundleNote, pricingFaq, freezePromise } from '@/lib/content/pricing';
 
 export const metadata: Metadata = {
   title: '요금',
+  // ★2026-09-18 §7 플랜 3단 반영에 맞춰 갱신(카피를 고치면 메타도 같이 — 개선안 §11)
   description:
-    '누구나 콘텐츠 월 9.9만원, 누구나 광고 월 19.9만원. 광고비에 붙는 수수료 없이 월 정액. 첫 달 무료, 카드 등록 없음.',
+    '누구나 콘텐츠 월 9.9만원, 콘텐츠 플러스 14.9만원, 콘텐츠 스튜디오 29.9만원부터, 누구나 광고 월 19.9만원. 광고비에 붙는 수수료 없이 월 정액. 30일 무료, 카드 등록 없음.',
 };
 
 export default function PricingPage() {
@@ -37,6 +38,9 @@ export default function PricingPage() {
           <div className="py-16 px-12 max-md:py-10 max-md:px-6">
             <FadeUp>
               <PricingCards tiers={planTiers} footnote={pricingFootnote} featuredLabel="추천" />
+              {/* ★2026-09-18 §7.4 묶음 — "요금표의 주인공으로 내세우지 않는다"는 지시에 따라
+                  카드가 아니라 각주 아래 한 줄로만 둔다(각주보다 한 단계 더 여린 톤). */}
+              <p className="mt-3 text-center text-[12.5px] leading-[1.6] text-text-muted">{bundleNote}</p>
             </FadeUp>
           </div>
         </Section>
