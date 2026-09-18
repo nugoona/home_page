@@ -1377,24 +1377,35 @@ function S8Result({ children }: { children: React.ReactNode }) {
  *  true면 위에 Chrome 창머리를 얹어 **"앱 화면"임이 눈에 드러난다.**
  *  개선안 §4.8이 지적한 "입력되지 않는데 입력창처럼 보이는" 문제를, 버튼으로 바꿔 흐름을 끊는 대신
  *  기존 목업 문법(Chrome)으로 해결한 것. 페이지 하단의 진짜 /start 버튼과 역할이 갈린다. */
-function S8SearchBox({ framed = false }: { framed?: boolean } = {}) {
-  const box = (
+/* ★2026-09-18 `cta` — 개선안 §4.8 "입력되지 않는 '가게 이름' 검색창 모양은 명확한 버튼으로 바꾼다".
+   구 화면은 검색창처럼 생겼는데 **누르거나 입력할 수 없는 그림**이었다(role="img").
+   손님이 상호를 넣어 보려다 아무 일도 안 일어나는 자리였다.
+   §4.8 문장·버튼 이름은 문서 그대로 쓴다. 요소는 늘지 않는다 — 입력칸이 사라지고 버튼이 남는다. */
+function S8SearchBox({ cta = false }: { cta?: boolean } = {}) {
+  if (cta) {
+    return (
+      /* 설명 줄은 두지 않는다 — 구간 제목이 이미 "상호명만 알려주세요"라고 말한다.
+         3차 시안에서 "같은 말 3번"을 덜어낸 자리에 다시 한 줄을 쌓지 않는다. */
+      <div className="mx-auto flex w-full max-w-[440px] flex-col items-center text-center">
+        <a
+          href="/start"
+          style={{ backgroundColor: '#0070f3', color: '#ffffff' }}
+          className="inline-flex h-11 items-center px-6 text-[14px] font-bold tracking-[-0.02em] no-underline"
+        >
+          한 달 무료로 시작하기
+        </a>
+      </div>
+    );
+  }
+  return (
     /* 테두리 = 진하게 #AEB4BE(사장님 2026-07-20 "너무 회색" — PC·모바일 공통) */
-    <div className={`mx-auto flex w-full max-w-[440px] items-center gap-2 bg-white p-2.5 ${framed ? 'border-0' : ''}`} style={framed ? undefined : { border: '1px solid #AEB4BE', boxShadow: CARD_SHADOW }} role="img" aria-label="가게 이름을 넣는 앱 시작 화면">
+    <div className="mx-auto flex w-full max-w-[440px] items-center gap-2 bg-white p-2.5" style={{ border: '1px solid #AEB4BE', boxShadow: CARD_SHADOW }} role="img" aria-label="가게 이름을 넣는 앱 시작 화면">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9297a0" strokeWidth="2" strokeLinecap="round" aria-hidden className="ml-1.5 shrink-0">
         <circle cx="10.5" cy="10.5" r="6.5" />
         <path d="m15.5 15.5 4.5 4.5" />
       </svg>
       <span className="min-w-0 flex-1 text-[13.5px] font-medium text-text-muted">상호명만 넣어주세요</span>
       <span className="flex h-9 shrink-0 items-center bg-[#0070f3] px-4 text-[13px] font-bold text-white">검색</span>
-    </div>
-  );
-  if (!framed) return box;
-  /* 앱 화면임을 드러내는 창머리 — 기존 Chrome 문법 그대로(§0.6 "기존 모듈 활용") */
-  return (
-    <div className="mx-auto w-full max-w-[440px] overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-      <Chrome title="누구나 콘텐츠 · 시작" />
-      <div className="p-2.5">{box}</div>
     </div>
   );
 }
@@ -1476,7 +1487,7 @@ export function ContentS8Visual({ enrich = false }: { enrich?: boolean } = {}) {
      ①검색창에 Chrome 창머리(앱 화면임을 드러냄) ②글감 창에 04 촬영 안내. /content2에서만 켠다 */
   return (
     <div className="py-2">
-      <S8SearchBox framed={enrich} />
+      <S8SearchBox cta={enrich} />
       <S8Connect />
       <div className="mx-auto flex max-w-[960px] items-stretch justify-center gap-10 max-md:block">
         <div className="min-w-0 flex-1">
@@ -1763,7 +1774,10 @@ export function ContentS10Visual() {
 
 /* ═══════════════ S11 · CTA 다크 — 갤러리 B1 Background Beams 원본 배경 + S8 검색 UI 다크 재수신 ═══════════════ */
 
-export function ContentS11Cta() {
+/* ★2026-09-18 `cta` — §4.8은 마지막 CTA에도 걸린다. 여기는 링크가 걸려 있어 눌리기는 하지만
+   **검색창 모양**이라 "가게 이름을 넣는 칸"으로 읽힌다(넣을 수 없다).
+   시안에서는 같은 자리·같은 문장으로 두되 생김새만 버튼으로 바꾼다. 기본값이면 원본 그대로다. */
+export function ContentS11Cta({ cta = false }: { cta?: boolean } = {}) {
   return (
     <div className="relative overflow-hidden px-6 pb-36 pt-24 text-center max-md:px-5 max-md:pb-28 max-md:pt-16" style={{ backgroundColor: '#0a0a0a' }}>
       {/* 하단 pb 확대 — GPT: 플로팅 N 버튼이 입력창을 가리지 않게 */}
@@ -1772,9 +1786,19 @@ export function ContentS11Cta() {
         <h2 className="text-[clamp(28px,3.8vw,44px)] font-semibold leading-[1.18] tracking-[-0.035em] text-white">
           오늘 가게 이름만
           <br />
-          한 번 입력해 보세요
+          {/* cta면 아래에 입력칸이 아니라 버튼이 온다 — 제목이 "입력해 보세요"면 없는 칸을 가리킨다 */}
+          {cta ? '알려주세요' : '한 번 입력해 보세요'}
         </h2>
         {/* S8 검색 UI의 다크 버전 — 페이지가 검색으로 시작한 서사를 CTA가 다시 받음 */}
+        {cta ? (
+          <a
+            href="/start"
+            style={{ backgroundColor: '#ffffff', color: '#171717' }}
+            className="mx-auto mt-9 inline-flex h-12 items-center px-7 text-[15px] font-bold tracking-[-0.02em] no-underline max-md:mt-7"
+          >
+            한 달 무료로 시작하기
+          </a>
+        ) : (
         <a href="/start" className="mx-auto mt-9 flex w-full max-w-[420px] items-center gap-2 bg-white p-2 max-md:mt-7">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9297a0" strokeWidth="2" strokeLinecap="round" aria-hidden className="ml-2 shrink-0">
             <circle cx="10.5" cy="10.5" r="6.5" />
@@ -1783,6 +1807,7 @@ export function ContentS11Cta() {
           <span className="min-w-0 flex-1 text-left text-[14px] font-medium text-text-muted">가게 이름</span>
           <span className="flex h-10 shrink-0 items-center bg-[#0070f3] px-4 text-[13.5px] font-bold text-white">한 달 무료로 시작</span>
         </a>
+        )}
         <p className="mt-4 text-[12.5px] font-medium text-white/45">카드 등록 없이 시작합니다</p>
       </div>
     </div>

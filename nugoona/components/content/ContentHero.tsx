@@ -93,6 +93,12 @@ const M_AREAS: GridArea[] = [
 const H1_HTML = <>누구나 검색 결과에<br /><span className="text-[#4d9fff]">내 가게가</span> 보이길 원합니다</>;
 /* 줄바꿈 = 사장님 지정(2026-07-16): "…쌓은 글은 / 검색에 남아…" */
 const SUB_HTML = <>광고는 멈추면 사라지지만 꾸준히 쌓은 글은<br />검색에 남아 가게를 계속 보이게 합니다</>;
+/* ★2026-09-18 시안용 설명 — 개선안 §4.1 "설명 후보" 원문 그대로.
+   【왜】구 설명은 광고와 비교하며 "검색에 남는다"까지만 말한다. §4.1이 "첫 화면은 검색 순위
+   도구보다 **콘텐츠 운영 전체**를 보여준다"고 한 지점이다. 제목(열망)은 2026-07-17 확정 카피라
+   손대지 않고, 설명 두 줄만 운영 흐름으로 바꿔 사장님이 나란히 비교하실 수 있게 했다.
+   줄 수는 그대로 둘이다. */
+const SUB_FLOW = <>무엇을 올릴지 정하고, 채널에 맞게 만들고, 예약 발행합니다.<br />발행 후에는 실제 검색 위치를 확인해 다음 콘텐츠에 반영합니다.</>;
 
 function Cta({ mobile = false }: { mobile?: boolean }) {
   /* 다크 히어로 CTA = 흰 배경 + 잉크 글자(홈 HeroB 문법). PC도 라운드(사장님 2026-07-20 "히어로 버튼 전부 라운드") */
@@ -104,14 +110,14 @@ function Cta({ mobile = false }: { mobile?: boolean }) {
   );
 }
 
-function renderCell(key: string) {
+function renderCell(key: string, sub: React.ReactNode = SUB_HTML) {
   switch (key) {
     case 'text': /* PC — 한 칸에 로고배지+h1+sub+cta (다크: 흰 타이포 + 회색 서브 = Linear 위계) */
       return (
         <FadeUp>
           {/* 미세 딥섀도(다크 위 검정 그림자 = 깊이, blur 작게 — 뿌염 금지 선) */}
           <h1 className="mb-5 text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.12] tracking-[-0.04em] text-white [text-shadow:0_1px_0_rgba(0,0,0,0.45),0_3px_8px_rgba(0,0,0,0.35)]">{H1_HTML}</h1>
-          <p className="mx-auto mb-7 text-[16px] font-medium leading-[1.5] text-white/55">{SUB_HTML}</p>
+          <p className="mx-auto mb-7 text-[16px] font-medium leading-[1.5] text-white/55">{sub}</p>
           <Cta />
         </FadeUp>
       );
@@ -122,7 +128,7 @@ function renderCell(key: string) {
         </FadeUp>
       );
     case 'm-sub':
-      return <p className="text-[14px] font-medium leading-[1.5] text-white/55">{SUB_HTML}</p>;
+      return <p className="text-[14px] font-medium leading-[1.5] text-white/55">{sub}</p>;
     case 'm-cta':
       return <Cta mobile />;
     default:
@@ -143,13 +149,15 @@ function Cross({ left, top }: { left: string; top: string }) {
   );
 }
 
-export default function ContentHero() {
+export default function ContentHero({ flow = false }: { flow?: boolean } = {}) {
+  /* flow = 설명 두 줄을 §4.1 운영 흐름으로. 기본 false면 원본 /content 출력 그대로다. */
+  const cell = (key: string) => renderCell(key, flow ? SUB_FLOW : SUB_HTML);
   /* 다크 히어로(사장님 2026-07-16, Linear 레퍼런스) = §8.17 "다크=선언부" 정본 회귀.
      checker·선 = dark 톤(rgba 0.12), 배경 = 홈 다크 계열 #0a0a0a */
   return (
     <div className="lab-sources-scope relative bg-[#0a0a0a]">
-      <OccupancyGrid cols={12} rows={8} areas={D_AREAS} tone="dark" checker mobile={false} render={renderCell} />
-      <OccupancyGrid cols={6} rows={9} areas={M_AREAS} tone="darkFaint" checker mobile render={renderCell} />
+      <OccupancyGrid cols={12} rows={8} areas={D_AREAS} tone="dark" checker mobile={false} render={cell} />
+      <OccupancyGrid cols={6} rows={9} areas={M_AREAS} tone="darkFaint" checker mobile render={cell} />
       {/* 월 상단 모서리 교차점 = (line2, line6)·(line12, line6) — PC 12×8 기준 % */}
       <Cross left="8.3333%" top="62.5%" />
       <Cross left="91.6667%" top="62.5%" />

@@ -149,7 +149,7 @@ export default function ContentPreview() {
         </div>
 
         {/* S1 히어로 — 기존 그대로 */}
-        <Section noBorder><ContentHero /></Section>
+        <Section noBorder><ContentHero flow /></Section>
         <SpacerRow top />
 
         {/* S2 쌓임 — 기존 그대로 */}
@@ -204,7 +204,7 @@ export default function ContentPreview() {
         {/* ① Start — 서브 삭제. 같은 말이 세 번 나오던 것을 한 번으로 */}
         <Section noBorder>
           <div className={WRAP}>
-            <SectionHead eyebrow="Start" heading="상호명만 넣어주세요" />
+            <SectionHead eyebrow="Start" heading="상호명만 알려주세요" />
             <FadeUp delay={0.1}>
               <div className="mt-12 max-md:mt-8"><ContentS8Visual enrich /></div>
             </FadeUp>
@@ -239,7 +239,7 @@ export default function ContentPreview() {
         <SpacerRow top />
 
         {/* S11 마감 — 기존 그대로 */}
-        <Section noBorder><ContentS11Cta /></Section>
+        <Section noBorder><ContentS11Cta cta /></Section>
       </OuterContainer>
     </main>
   );
