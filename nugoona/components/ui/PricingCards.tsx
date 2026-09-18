@@ -143,13 +143,22 @@ export default function PricingCards({
               </ul>
             </div>
 
-            {/* CTA = 맨 아래 좌측 pill (주력 = 다크 필 / 나머지 = 아웃라인) */}
+            {/* CTA = 맨 아래 좌측 pill (주력 = 다크 필 / 나머지 = 아웃라인)
+                ⚠★2026-09-18 사장님 실기기 지적 "버튼이 다크인데 글자까지 다크라 안 보인다" — 실측 결과
+                  추천 카드 버튼이 배경 rgb(23,23,23) + 글자 rgb(51,51,51)로 거의 안 보였다.
+                  className의 `text-white`가 먹지 않는다. globals.css의 `a { color: inherit }`가
+                  레이어 밖(unlayered)이라 Tailwind 유틸(@layer utilities)보다 우선하기 때문으로 보인다.
+                  ⛔ 전역 `a` 규칙을 고치면 text-white 사용처 347곳에 영향이 가므로 건드리지 않았다.
+                  → 인라인 style로 색을 못박는다(인라인은 unlayered보다 우선). 배경도 함께 인라인으로 둬
+                     "배경만 바뀌고 글자는 안 바뀌는" 어긋남이 다시 생기지 않게 한 쌍으로 묶었다.
+                  ⚠ 같은 병이 다른 다크 버튼에도 있을 수 있다(a 태그 + text-white 조합). 별도 점검 대상. */}
             <div className="mt-8">
               <Link
                 href={tier.cta.href}
+                style={tier.featured ? { backgroundColor: '#171717', color: '#ffffff' } : undefined}
                 className={`rounded-pill inline-flex items-center justify-center h-[44px] px-6 text-[14px] font-semibold transition-all ${
                   tier.featured
-                    ? 'bg-[#171717] text-white hover:bg-[#333]'
+                    ? 'hover:brightness-125'
                     : 'bg-white text-text-primary border border-border-hover hover:border-[#171717]'
                 }`}
               >
