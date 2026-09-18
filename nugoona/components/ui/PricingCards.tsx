@@ -75,11 +75,15 @@ export default function PricingCards({
   featuredLabel?: string;
 }) {
   const cols =
-    tiers.length === 2
-      ? 'md:grid-cols-2'
-      : tiers.length === 4
-        ? 'md:grid-cols-4'
-        : 'md:grid-cols-3';
+    tiers.length === 1
+      ? 'md:grid-cols-1'
+      : tiers.length === 2
+        ? 'md:grid-cols-2'
+        : tiers.length === 4
+          ? 'md:grid-cols-4'
+          : 'md:grid-cols-3';
+  /** 카드가 하나뿐이면(= 광고처럼 단일 요금) 가로로 넓게 쓰이므로 기능 목록을 2열로 편다 */
+  const solo = tiers.length === 1;
 
   return (
     <div className="max-w-[1080px] mx-auto">
@@ -87,8 +91,12 @@ export default function PricingCards({
         {tiers.map((tier, i) => (
           <div
             key={i}
+            /* ★2026-09-18 추천 카드 강조 = 1.5px 검정 테두리(§8.15 Vercel 실측 "강조는 그림자가 아니라
+               테두리 색·굵기". Clone01 active 카드 문법). outline을 쓰는 이유 = 공간을 차지하지 않아
+               옆 카드를 밀지 않는다. ⛔ 그림자·번짐으로 띄우지 않는다(§8.14-4·§8.17 블러 금지). */
+            style={tier.featured ? { outline: '1.5px solid #171717', outlineOffset: '-1.5px' } : undefined}
             className={`relative p-8 flex flex-col border-r border-border-default last:border-r-0 max-md:border-r-0 max-md:border-b max-md:last:border-b-0 max-md:px-6 ${
-              tier.featured ? 'bg-white' : 'bg-[#fafafa]'
+              tier.featured ? 'bg-white z-[1]' : 'bg-[#fafafa]'
             }`}
           >
             {/* 플랜명 + 인라인 아웃라인 배지 (Vercel "Pro [POPULAR]" 문법. 상단 액센트 바 = CEO 제거 확정 2026-07-20) */}
@@ -127,7 +135,8 @@ export default function PricingCards({
               {tier.inherits && (
                 <p className="text-[14px] text-text-body mb-4">{tier.inherits}</p>
               )}
-              <ul className="flex flex-col gap-[14px]">
+              {/* solo(카드 1개) = 가로로 넓으니 기능을 2열로 편다 — 한 줄에 하나씩이면 오른쪽이 텅 빈다 */}
+              <ul className={`flex flex-col gap-[14px] ${solo ? 'md:grid md:grid-cols-2 md:gap-x-10' : ''}`}>
                 {tier.features.map((feat, j) => {
                   const Icon = ICONS[feat.icon] ?? Layers;
                   return (
