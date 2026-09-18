@@ -1,57 +1,180 @@
+/* /content2 시안 전용 스타일 — 원본에 영향 없음(모듈 CSS, 이 페이지에서만 import)
+   색 3개(#fff · #171717 · #0070f3) · 선 1px #ECECEC · ⛔ 블러/그림자 번짐 금지 (§8.17)
+   모바일(≤900px)은 PC를 세로로 쌓은 게 아니라 별도 설계 (§8.18 대원칙) */
+
 .preview { color: var(--color-text-primary); background: var(--color-bg); }
 .preview * { box-sizing: border-box; }
-.reviewBar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 32px; border-bottom: 1px solid var(--color-border-default); font-size: 12px; color: var(--color-text-weak); }
-.reviewBar a { display: inline-flex; align-items: center; gap: 7px; text-decoration: underline; text-underline-offset: 4px; }
-.intro { padding: 56px 48px; background: var(--color-text-primary); color: var(--color-bg); }
-.brand { display: flex; align-items: center; gap: 14px; font-weight: 600; font-size: 16px; }
-.intro h1 { margin: 26px 0 20px; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.23; letter-spacing: -.045em; font-weight: 700; }
-.intro p { font-size: 16px; line-height: 1.7; color: #ccc; }
-.introLink { display: inline-flex; align-items: center; gap: 18px; margin-top: 26px; padding-bottom: 7px; border-bottom: 1px solid #888; font-size: 14px; }
-.mobileBreak { display: none; }
-.section, .planning { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); scroll-margin-top: 110px; }
-.sectionHead, .planningHead { grid-column: span 5; padding: 54px 44px; }
-.eyebrow { display: block; font-size: 13px; font-weight: 550; margin-bottom: 20px; }
-.preview h2 { font-size: clamp(27px, 3.2vw, 38px); line-height: 1.27; letter-spacing: -.04em; font-weight: 700; }
-.sectionHead p, .planningHead p, .feedbackHead p { margin-top: 20px; font-size: 16px; line-height: 1.65; color: var(--color-text-weak); }
-.method { grid-column: span 7; border-left: 1px solid var(--color-border-default); }
-.switcher { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--color-border-default); }
-.switcher button { min-height: 66px; display: flex; align-items: center; justify-content: center; gap: 10px; background: white; cursor: pointer; font-size: 16px; font-weight: 600; border-bottom: 2px solid transparent; }
-.switcher button + button { border-left: 1px solid var(--color-border-default); }
-.switcher button[aria-pressed=true] { border-bottom-color: var(--color-accent); color: var(--color-accent); }
-.switcher button:focus-visible, .preview a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -4px; }
-.methodBody { padding: 26px 28px; }
-.methodTop { display: flex; justify-content: space-between; gap: 12px; align-items: center; font-size: 14px; }
-.plan { background: var(--color-text-primary); color: white; padding: 5px 8px; font-size: 11px; white-space: nowrap; }
-.transformation { display: grid; grid-template-columns: 140px 35px 1fr; align-items: center; gap: 16px; padding: 42px 0 26px; }
-.materialStack { position: relative; width: 128px; height: 142px; }
-.backSheet, .middleSheet, .frontSheet { position: absolute; border: 1px solid var(--color-border-default); background: white; width: 112px; height: 126px; }
-.backSheet { top: 0; left: 16px; }.middleSheet { top: 8px; left: 8px; }
-.frontSheet { top: 16px; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
-.frontSheet span { font-size: 12px; }.frontSheet svg { color: var(--color-accent); }
-.resultSheets { display: grid; gap: 10px; }.resultSheets > div { display: flex; align-items: center; gap: 10px; padding: 18px 12px; border: 1px solid var(--color-border-default); font-size: 13px; }
-.resultSheets svg { flex-shrink: 0; }.blue { color: var(--color-accent); }
-.methodNote { font-size: 13px; line-height: 1.6; padding-top: 18px; }
-.caption { border-top: 1px solid var(--color-border-default); padding: 13px 28px; font-size: 11px; color: var(--color-text-weak); line-height: 1.6; }
-.planFlow { grid-column: span 7; border-left: 1px solid var(--color-border-default); padding: 40px 32px 0; }
-.store { display: flex; align-items: center; gap: 14px; border: 1px solid var(--color-border-default); padding: 20px; }
-.store > span:first-child { font-size: 12px; color: var(--color-text-weak); }.store strong { font-size: 19px; }.store > span:last-child { font-size: 11px; margin-left: auto; color: var(--color-text-weak); }
-.down { display: flex; justify-content: center; padding: 17px; }
-.planSteps { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--color-border-default); }
-.planSteps article { padding: 23px 15px; }.planSteps article + article { border-left: 1px solid var(--color-border-default); }
-.planSteps svg { color: var(--color-accent); }.planSteps h3 { margin: 19px 0 10px; font-weight: 650; font-size: 17px; }.planSteps p { color: var(--color-text-weak); font-size: 13px; line-height: 1.65; }
-.year { display: flex; gap: 12px; justify-content: center; align-items: center; padding: 26px 0; font-size: 16px; font-weight: 600; }
-.feedback { padding: 48px 44px 0; }.feedbackHead { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 0 24px; }.feedbackHead .eyebrow { grid-column: 1/-1; }.feedbackHead p { max-width: 380px; margin: 0 0 5px; }
-.feedbackGrid { display: grid; grid-template-columns: 5fr 1fr 4fr; align-items: center; padding: 36px 0; }.exposure { border: 1px solid var(--color-border-default); }
-.panelTitle { padding: 20px; display: flex; gap: 10px; align-items: center; }.panelTitle strong { font-size: 16px; }.panelTitle > span { margin-left: auto; font-size: 11px; color: var(--color-text-weak); }
-.exposureRow { border-top: 1px solid var(--color-border-default); padding: 19px 20px; display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }.exposureRow strong { font-weight: 600; }.exposureRow:nth-of-type(3) strong { color: var(--color-accent); }
-.exposure > p { border-top: 1px solid var(--color-border-default); font-size: 12px; line-height: 1.6; color: var(--color-text-weak); padding: 14px 20px; }
-.feedbackArrow { display: flex; justify-content: center; color: var(--color-accent); }.nextContent { padding: 12px 28px; border-left: 2px solid var(--color-accent); }.nextContent > svg { color: var(--color-accent); }.nextContent h3 { font-size: 32px; font-weight: 700; line-height: 1.25; letter-spacing: -.04em; margin: 20px 0 15px; }.nextContent p { font-size: 14px; color: var(--color-text-weak); line-height: 1.7; }
-.cycle { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 24px 0; border-top: 1px solid var(--color-border-default); font-size: 13px; }.cycle strong { color: var(--color-accent); font-weight: 600; }
-.closing { padding: 48px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; background: var(--color-text-primary); color: white; }.closing h2 { font-size: 28px; }.closing p { color: #ccc; margin-top: 16px; font-size: 13px; }.preview .cta { display: inline-flex; justify-content: center; align-items: center; gap: 20px; padding: 18px 24px; background: white; color: #171717; font-size: 14px; font-weight: 600; white-space: nowrap; }
-@media(max-width:899px) {
- .reviewBar { padding: 12px 20px; font-size: 10px; gap: 10px; }.intro { padding: 34px 24px 38px; }.brand img { width:32px; height:32px; }.brand { font-size:14px; }.intro h1 { font-size:32px; margin-top:24px; }.mobileBreak { display:block; }.intro p { font-size:14px; line-height:1.7; }.intro p br { display:none; }
- .sectionHead,.planningHead { grid-column:1/-1; padding:32px 24px 28px; }.sectionHead p { display:none; }.eyebrow { margin-bottom:15px; font-size:12px; }.preview h2 { font-size:29px; }.method,.planFlow { grid-column:1/-1; border-left:0; }.method { border-top:1px solid var(--color-border-default); }.switcher button { font-size:14px; min-height:60px; }.methodBody { padding:22px 24px; }.methodTop { font-size:12px; }.plan { font-size:10px; }.transformation { grid-template-columns:90px 22px 1fr; gap:10px; padding-top:32px; }.materialStack { transform:scale(.72); transform-origin:left center; width:90px; height:125px; }.transformArrow { width:20px; }.resultSheets > div { padding:14px 10px; font-size:12px; gap:7px; }.resultSheets > div > svg:first-child { display:none; }.resultSheets > div > svg:last-child { width:14px; }.methodNote { font-size:12px; }.caption { padding:12px 24px; font-size:10px; }
- .planFlow { padding:0 24px; }.store { padding:16px; flex-wrap:wrap; gap:8px 12px; }.store > span:last-child { flex-basis:100%; margin:0; font-size:10px; }.planSteps { grid-template-columns:1fr; }.planSteps article { display:grid; grid-template-columns:28px 90px 1fr; gap:12px; align-items:center; padding:20px 14px; }.planSteps article + article { border-left:0; border-top:1px solid var(--color-border-default); }.planSteps h3 { font-size:15px; margin:0; }.planSteps p { font-size:12px; }.year { font-size:14px; }
- .feedback { padding:32px 24px 0; }.feedbackHead { display:block; }.feedbackHead p { font-size:14px; margin-top:18px; }.feedbackGrid { grid-template-columns:1fr; padding:26px 0; }.panelTitle { padding:16px; }.panelTitle strong { font-size:15px; }.exposureRow { font-size:12px; padding:17px 16px; }.feedbackArrow { padding:20px 0; transform:rotate(90deg); }.nextContent { padding:4px 20px; }.nextContent > svg { width:24px; height:24px; }.nextContent h3 { font-size:28px; margin:12px 0; }.nextContent p { font-size:13px; }.cycle { display:grid; grid-template-columns:1fr 18px 1fr; font-size:11px; gap:14px 9px; }.cycle > svg:nth-of-type(2) { display:none; }.cycle strong { font-size:11px; }.closing { flex-direction:column; align-items:stretch; padding:32px 24px; }.closing h2 { font-size:25px; }.closing p { font-size:12px; }.preview .cta { margin-top:8px; }
+
+.reviewBar {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 13px 32px; border-bottom: 1px solid var(--color-border-default);
+  font-size: 12px; color: var(--color-text-weak);
 }
-@media(max-width:350px) { .intro h1 { font-size:28px; }.preview h2 { font-size:26px; }.methodBody { padding-inline:18px; }.planSteps article { grid-template-columns:22px 78px 1fr; gap:9px; }.planSteps h3 { font-size:14px; }.resultSheets > div { font-size:11px; }.transformation { gap:8px; grid-template-columns:85px 18px 1fr; } }
+.reviewBar a { display: inline-flex; align-items: center; gap: 7px; text-decoration: underline; text-underline-offset: 4px; }
+
+/* ── 머리 (다크 = 선언부. §8.17 "다크는 선언부에만") ── */
+.intro { padding: 60px 48px; background: #171717; color: #fff; }
+.brand { display: flex; align-items: center; gap: 13px; font-weight: 600; font-size: 16px; }
+.brand img { width: 40px; height: 40px; }
+.intro h1 { margin: 26px 0 18px; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.24; letter-spacing: -.045em; font-weight: 700; }
+.intro p { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,.62); }
+.mobileBreak { display: none; }
+
+/* ── 구간 공통 ──
+   ⚠ 구간마다 '다른 형태'를 준다(사진 변환 / 갈래 / 순위표+되돌아가는 화살).
+   1차 시안이 세 구간 모두 같은 회색 테두리 상자라 "비슷한 상자 반복" 지적을 받았다. */
+.block { padding: 72px 48px; border-top: 1px solid var(--color-border-default); }
+.blockHead { max-width: 760px; }
+.eyebrow { display: block; font-size: 13px; font-weight: 600; margin-bottom: 18px; letter-spacing: -.01em; }
+.preview h2 { font-size: clamp(27px, 3.2vw, 38px); line-height: 1.27; letter-spacing: -.04em; font-weight: 700; }
+.blockHead p { margin-top: 18px; font-size: 16px; line-height: 1.65; color: var(--color-text-weak); }
+.caption { margin-top: 18px; font-size: 12.5px; line-height: 1.6; color: var(--color-text-muted); }
+
+/* ── 1구간 · 두 갈래 전환 ── */
+.switcher { display: flex; gap: 0; margin-top: 30px; border: 1px solid var(--color-border-default); width: fit-content; }
+.switcher button {
+  display: inline-flex; align-items: center; gap: 9px; min-height: 52px; padding: 0 22px;
+  background: #fff; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--color-text-weak);
+}
+.switcher button + button { border-left: 1px solid var(--color-border-default); }
+/* 강조 = 배경 반전. ⛔ 그림자로 띄우지 않는다(§8.15 "강조는 그림자가 아니라 테두리·색") */
+.switcher button[aria-pressed='true'] { background: #171717; color: #fff; }
+.planTag { font-size: 11px; font-weight: 500; opacity: .62; }
+.switcher button:focus-visible, .preview a:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -3px; }
+
+.stage { margin-top: 26px; border: 1px solid var(--color-border-default); padding: 34px 32px; }
+.stageNote { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--color-border-default); font-size: 15px; line-height: 1.65; }
+
+/* 변환 장면 — 실제 사진 → 그 사진이 들어간 글 카드 */
+.scene { display: grid; grid-template-columns: 1fr 44px 1fr; align-items: start; gap: 4px; }
+.sceneSide { min-width: 0; }
+.sceneLabel { font-size: 12.5px; font-weight: 600; color: var(--color-text-weak); margin-bottom: 12px; }
+.sceneArrow { display: flex; justify-content: center; padding-top: 74px; color: var(--color-text-muted); }
+
+/* 사진 = 2열. 3열로 두면 한 장이 너무 커져 오른쪽 글 카드와 무게가 안 맞았다(실측) */
+.shotGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
+/* PC = 4:3으로 눌러 왼쪽 높이를 낮춘다(오른쪽 글 카드 3장과 무게를 맞추기 위함 — 1:1이면 왼쪽이 210px 더 길었다) */
+.shotGrid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.memo { margin-top: 11px; font-size: 12.5px; line-height: 1.55; color: var(--color-text-muted); }
+
+/* 준비된 글 카드 — 왼쪽 첫 사진이 그대로 들어간다(= 변환이 읽히는 지점) */
+.post { display: grid; grid-template-columns: 86px 1fr; gap: 14px; border: 1px solid var(--color-border-default); padding: 14px; background: #fff; }
+.post img { width: 86px; height: 86px; object-fit: cover; display: block; }
+.post h4 { font-size: 14px; font-weight: 700; line-height: 1.4; letter-spacing: -.02em; }
+.post p { margin-top: 7px; font-size: 12.5px; line-height: 1.55; color: var(--color-text-weak); }
+/* 글 카드 묶음 — 개수 자체가 "한 편 / 여러 편"의 차이를 보여준다 */
+.postList { display: grid; gap: 8px; }
+
+/* ── 2구간 · 가게 이름에서 셋으로 ── */
+.branch { margin-top: 34px; display: grid; grid-template-columns: 260px 1fr; gap: 0; align-items: start; }
+/* ⛔ 입력창처럼 보이지 않게 — 테두리·검색 버튼 없이 큰 글자로만(§0 지시) */
+.origin { padding: 26px 0; }
+.originLabel { display: block; font-size: 13px; color: var(--color-text-weak); }
+.origin strong { display: block; margin: 8px 0 6px; font-size: clamp(26px, 2.6vw, 34px); font-weight: 700; letter-spacing: -.04em; }
+.originNote { font-size: 13.5px; color: var(--color-text-weak); }
+.fork { display: none; }
+
+.branchList { border-left: 1px solid var(--color-border-default); }
+.branchList li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 22px 0 22px 30px; position: relative; }
+.branchList li + li { border-top: 1px solid var(--color-border-default); }
+/* 세로선에서 각 항목으로 뻗는 가로 잔선 — 관계를 설명 없이 보이게 */
+.branchList li::before { content: ''; position: absolute; left: 0; top: 40px; width: 18px; height: 1px; background: var(--color-border-default); }
+.branchIcon { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid var(--color-border-default); color: var(--color-accent); }
+.branchList h3 { font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
+.branchList p { margin-top: 5px; font-size: 14px; line-height: 1.6; color: var(--color-text-weak); }
+
+/* ── 3구간 · 검색 확인 → 다음 글감 ── */
+.loop { margin-top: 32px; display: grid; grid-template-columns: 1fr 300px; gap: 0; align-items: stretch; }
+.rank { border: 1px solid var(--color-border-default); }
+.rankHead { display: flex; align-items: center; gap: 9px; padding: 15px 20px; border-bottom: 1px solid var(--color-border-default); font-size: 14px; }
+.rankHead span { margin-left: auto; font-size: 11.5px; color: var(--color-text-muted); }
+.rankRow { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 20px; font-size: 15px; }
+.rankRow + .rankRow { border-top: 1px solid var(--color-border-default); }
+.rankRow strong { font-weight: 600; white-space: nowrap; }
+/* 아직 안 보이는 검색어 = 다음 글감. 여기만 accent (§8.17 "accent는 드문드문") */
+.rankMiss { background: #fff; }
+.rankMiss span, .rankMiss strong { color: var(--color-accent); }
+
+.back { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 28px; border: 1px solid #171717; border-left: 0; }
+.back svg { color: var(--color-accent); }
+.back p { font-size: 17px; line-height: 1.55; letter-spacing: -.02em; }
+.back strong { font-weight: 700; }
+
+/* ── 마감 ── */
+.closing { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 28px; padding: 66px 48px; background: #171717; color: #fff; }
+.closing h2 { color: #fff; }
+.closing p { margin-top: 14px; font-size: 15px; color: rgba(255,255,255,.6); }
+.cta { display: inline-flex; align-items: center; gap: 11px; padding: 16px 30px; background: #fff; color: #171717; font-size: 15px; font-weight: 700; white-space: nowrap; }
+
+/* ══════════════════════════════════════════════════════════════
+   모바일 (≤900px) — PC를 세로로 쌓은 게 아니라 별도 설계 (§8.18)
+   한 화면 = [주 메시지] → [장면 하나] → [보조 설명]. 장면 안 요소는 최대 3종.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .reviewBar { padding: 11px 20px; font-size: 11.5px; }
+  .intro { padding: 40px 20px 44px; }
+  .intro h1 { margin: 20px 0 16px; line-height: 1.28; }
+  .intro p { font-size: 15px; line-height: 1.66; }
+  .pcOnly { display: none; }
+
+  .block { padding: 44px 20px; }
+  .blockHead p { font-size: 15px; }
+  .caption { font-size: 12px; }
+
+  /* 전환 버튼 = 화면 꽉 채워 누르기 쉽게(터치 52px 이상 유지) */
+  .switcher { width: 100%; margin-top: 24px; }
+  .switcher button { flex: 1; justify-content: center; padding: 0 10px; font-size: 14px; gap: 7px; }
+  /* 플랜 배지는 모바일에서 뺀다 — 한 화면 요소 수를 줄이는 것이 이번 작업의 핵심 */
+  .planTag { display: none; }
+
+  .stage { margin-top: 18px; padding: 20px 16px; }
+  .stageNote { margin-top: 20px; padding-top: 16px; font-size: 14.5px; }
+
+  /* 장면 = 세로 2단. 화살표는 아래를 향하게 돌린다(옆으로 두면 폭이 모자라 셋이 낀다) */
+  .scene { grid-template-columns: 1fr; gap: 0; }
+  .sceneArrow { padding: 14px 0; transform: rotate(90deg); }
+  .sceneLabel { font-size: 12px; margin-bottom: 9px; }
+  /* 4장이면 2x2 — 3열은 3+1로 남아 어색하다 */
+  .shotGrid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .shotGrid img { aspect-ratio: 1; } /* 모바일은 세로로 쌓이니 정사각이 더 잘 보인다 */
+  .memo { font-size: 12px; }
+  .post { grid-template-columns: 72px 1fr; gap: 12px; padding: 12px; }
+  .post img { width: 72px; height: 72px; }
+  .post h4 { font-size: 13.5px; }
+  .post p { font-size: 12px; }
+
+  /* 갈래 = 위(가게 이름) → 아래(셋). 세로선이 왼쪽에서 아래로 내려오게 */
+  .branch { grid-template-columns: 1fr; margin-top: 26px; }
+  .origin { padding: 0 0 8px; }
+  .origin strong { font-size: 28px; }
+  .fork { display: block; height: 26px; position: relative; }
+  .fork span { position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: var(--color-border-default); }
+  .branchList { border-left: 1px solid var(--color-border-default); margin-left: 16px; }
+  .branchList li { padding: 18px 0 18px 22px; grid-template-columns: 32px 1fr; gap: 12px; }
+  .branchList li::before { top: 34px; width: 14px; }
+  .branchIcon { width: 32px; height: 32px; }
+  .branchList h3 { font-size: 15px; }
+  .branchList p { font-size: 13.5px; }
+
+  /* 검색 확인 → 다음 글감 = 세로. 테두리를 위로 이어 붙여 한 덩어리로 읽히게 */
+  .loop { grid-template-columns: 1fr; margin-top: 24px; }
+  .rankRow { padding: 14px 16px; font-size: 14.5px; }
+  .rankHead { padding: 13px 16px; font-size: 13.5px; }
+  .back { border-left: 1px solid #171717; border-top: 0; padding: 22px 18px; }
+  .back p { font-size: 16px; }
+
+  .closing { padding: 44px 20px; gap: 22px; }
+  .cta { width: 100%; justify-content: center; }
+}
+
+/* 아주 좁은 화면(≤360px) — 320px에서도 읽히고 누를 수 있어야 한다 */
+@media (max-width: 360px) {
+  .block, .intro, .closing { padding-left: 16px; padding-right: 16px; }
+  .switcher button { font-size: 13px; padding: 0 6px; gap: 5px; }
+  .origin strong { font-size: 25px; }
+  .rankRow { font-size: 13.5px; padding: 13px 13px; }
+  .rankHead { padding: 12px 13px; }
+  .back p { font-size: 15px; }
+  .post { grid-template-columns: 62px 1fr; }
+  .post img { width: 62px; height: 62px; }
+}
