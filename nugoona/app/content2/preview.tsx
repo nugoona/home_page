@@ -1,224 +1,243 @@
 'use client';
 
 /* ══════════════════════════════════════════════════════════════════
-   /content2 — 콘텐츠 페이지 핵심 3구간 디자인 검토 시안 (원본 /content 무수정)
+   /content2 — 기존 /content 기준 비교 시안 (3차, 2026-09-18)
 
-   【사장님 피드백 2026-09-18 — 기획은 승인, 디자인은 미승인】
-     "기획은 좋고 뭘 보여줘야 할지는 확실히 맞아. 이 방향이 맞아."
-     "모바일은 조금 텍스처가 꾸역꾸역 너무 많이 들어와서 안 보여. 뭔 말하려고 하는지 잘 안 보이고."
+   【사장님 재지적 — 이전 두 시안 모두 불채택】
+     "텍스트가 좋다고 해서 읽히는 게 아니야."
+     "홈페이지라는 거는 이렇게 텍스트가 많아버리고 그다음에 정보 전달이 제대로 하나도 안 돼."
+     "내가 분명히 텍스트 꾸역꾸역은 지적을 했는데."
+   → 코덱스 1차(67b8a20)·클로드 2차(0fe5b69) 둘 다 **설명을 과하게 쌓는 같은 문제**였다.
+     2차는 실제 사진을 넣었지만 라벨·캡션·주석을 그대로 남겨 결국 글자가 많았다.
 
-   【코덱스 1차 시안(67b8a20)의 실측 문제 — 이번에 고친 것】
-     ① 실제 사진이 **0장**이었다. 폴더/문서 아이콘 → 화살표 → 글자 상자라 "자료가 콘텐츠로
-        바뀐다"는 변환이 추상적이었다. 기존 홈(S41SearchScene)은 폰 목업 안에 **실제 사진 4장**을
-        넣어 변환을 보여준다 — 이 격차가 "완성도 차이"의 정체다.
-     ② 모바일 한 화면에 제목+배지+아이콘+화살표+상자2+문장+캡션 **7종이 같은 무게로 경쟁**했다.
-     ③ PC는 세 구간이 전부 같은 회색 테두리 상자라 구간 구분이 안 됐다(§3.2 "비슷한 상자 반복").
-     ④ PC 왼쪽 제목 아래 **큰 빈칸**(§8.17 "빈칸 지양" 위반).
-     ⑤ 모바일에서 순환 4단계가 **2×2로 접혀 순서가 깨짐**("정하기→자료준비" "발행→검색확인"으로 읽힘).
+   【이번 방침 — §0 재지시】
+     · 출발점 = **기존 /content 실물**. 기존 컴포넌트를 그대로 가져다 쓴다.
+     · **더 붙이지 않는다.** 사진·아이콘·선·움직임 추가 금지.
+     · 유지할 것은 **의미**이지 문장 전부가 아니다 → 같은 말을 반복하는 문장을 덜어낸다.
+     · 승인된 기획 중 **부족한 것만** 기존 장면에 흡수한다.
 
-   【이번 설계】
-     · 변환 = **실제 사진 → 그 사진이 들어간 글 카드**. 같은 사진이 양쪽에 나와야 "이게 저게 됐다"가 읽힌다.
-     · 모바일 = §8.18 대원칙 "PC를 세로로 쌓은 게 아니라 **별도 설계**".
-       한 화면 = [주 메시지] → [장면 하나] → [보조 설명] 순서. 장면 안 요소는 최대 3종.
-     · 구간마다 **다른 형태**를 준다(사진 변환 / 갈래 흐름 / 순위표+되돌아가는 화살). 상자 반복 회피.
-     · 색 3개(#fff·#171717·#0070f3)·선 1px #ECECEC·블러 금지·강조는 테두리(§8.17·§8.15).
+   【이번에 실제로 한 일 — 전부 "빼기" 또는 "같은 자리에서 바꾸기"】
+     ① Start 구간: 같은 말이 **세 번** 반복됐다 —
+        제목 "상호명만 넣어주세요" + 서브 "시작은 가게 이름 하나면 충분합니다"
+        + 검색창 안 "상호명만 넣어주세요". → 서브를 지우고 제목만 남겼다.
+     ② Tracking 구간: 기존 표는 세 줄 모두 "보이는 순위"뿐이라 **다음 콘텐츠로 이어지는 관계**가
+        없었다(승인 기획 3). 한 줄을 "아직 보이지 않음"으로 바꾸고 그 줄에만 연결 표시를 붙였다.
+        새 상자·새 문단 없이 **표 안에서** 해결.
+     ③ Channels 구간: 01 설명 한 줄만 바꿔 "맡기기"를 흡수(승인 기획 1).
+        목업·레이아웃은 손대지 않았다.
+
+   🛑 원본 /content·공통 컴포넌트는 한 줄도 바꾸지 않았다. 이 파일 안에서만 대체한다.
    ══════════════════════════════════════════════════════════════════ */
 
-import { useState } from 'react';
-import { ArrowRight, Camera, FolderOpen, Search, RotateCcw } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import OuterContainer from '@/components/layout/OuterContainer';
-import styles from './preview.module.css';
+import Section from '@/components/layout/Section';
+import FadeUp from '@/components/motion/FadeUp';
+import { SpacerRow } from '@/components/layout/OccupancyGrid';
+import ContentHero from '@/components/content/ContentHero';
+import {
+  Eyebrow,
+  ContentS2, ContentS3, ContentS4,
+  ContentS5Visual, ContentS8Visual, ContentS9Grid, ContentS10Visual, ContentS11Cta,
+} from '@/components/content/ContentSections';
 
-/** 자료 준비 두 갈래 — 같은 사진이 '올린 자료'와 '완성된 글'에 모두 나와야 변환이 읽힌다 */
-const METHODS = {
-  now: {
-    tab: '지금 올리기',
-    plan: '누구나 콘텐츠',
-    lead: '오늘 찍은 사진 몇 장과 짧은 메모',
-    shots: ['/img/content/cake-1.jpg', '/img/content/cake-2.jpg', '/img/content/cake-3.jpg'],
-    memo: '오늘 찍은 것 · 짧은 메모 한 줄',
-    /* 지금 올리기 = 한 편. 아래 batch(여러 편)와 **개수 차이**가 두 방식의 차이를 보여준다 */
-    results: [
-      { img: '/img/content/cake-1.jpg', title: '오늘 새로 나온 딸기 케이크를 소개합니다', body: '생딸기를 아침에 손질해 크림과 함께 올렸어요.' },
-    ],
-    meta: '한 편 준비됨',
-    note: '직접 올린 자료를 채널에 맞는 콘텐츠로 만들고, 발행과 노출까지 이어갑니다.',
-  },
-  batch: {
-    tab: '사진 맡기기',
-    plan: '콘텐츠 플러스',
-    lead: '갖고 있던 사진을 한꺼번에',
-    /* 같은 가게(인테리어) 사진으로 통일 — 업종이 섞이면 "한 가게의 쌓인 사진"으로 안 읽힌다 */
-    shots: ['/img/content/biz-interior-1.jpg', '/img/content/biz-interior-2.jpg', '/img/content/biz-interior-3.jpg', '/img/content/biz-interior-4.jpg'],
-    memo: '지난 시공 사진 모음 · 한 번에 맡김',
-    /* 맡기면 **여러 편**. 카드를 실제로 3장 보여줘야 "여러 편"이 설득된다(1장 + 빈 줄은 부족) */
-    results: [
-      { img: '/img/content/biz-interior-1.jpg', title: '작은 방을 넓어 보이게 한 시공', body: '가구 배치와 조명으로 넓어 보이게 했습니다.' },
-      { img: '/img/content/biz-interior-3.jpg', title: '침실 무드를 바꾼 한 가지', body: '조명 하나로 분위기가 달라진 사례입니다.' },
-      { img: '/img/content/biz-interior-4.jpg', title: '거실 조명, 이렇게 골랐습니다', body: '같은 자재로 시공한 다른 집 이야기입니다.' },
-    ],
-    meta: '여러 편 준비됨 · 추천 글감에 나누어 담김',
-    note: '한 번 맡긴 자료를 추천 글감에 나누어 담아, 여러 편의 검토 글을 준비합니다.',
-  },
-} as const;
+const WRAP = 'px-12 py-24 max-w-[1200px] mx-auto max-md:px-6 max-md:py-20';
+const BORDER = '#ECECEC';
 
-/** 변환 장면 — 왼쪽 실제 사진 / 오른쪽 그 사진이 들어간 글 카드. PC·모바일 공용(배치만 CSS로 다름) */
-function TransformScene({ m }: { m: (typeof METHODS)[keyof typeof METHODS] }) {
+/** 기존 page.tsx의 SectionHead와 같은 규격(복사) — 원본 파일을 건드리지 않기 위해 */
+function SectionHead({ eyebrow, heading, sub }: { eyebrow: string; heading: React.ReactNode; sub?: React.ReactNode }) {
   return (
-    <div className={styles.scene}>
-      {/* 왼쪽 = 올린 자료(실제 사진). 오른쪽 글 카드에 **같은 사진이 다시 나오는 것**이
-          "이게 저게 됐다"를 읽히게 하는 장치다 — 아이콘으로는 이 연결이 안 생긴다. */}
-      <div className={styles.sceneSide}>
-        <p className={styles.sceneLabel}>{m.lead}</p>
-        <div className={styles.shotGrid}>
-          {m.shots.map((src) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={src} src={src} alt="" loading="lazy" />
-          ))}
-        </div>
-        <p className={styles.memo}>{m.memo}</p>
+    <FadeUp>
+      <Eyebrow label={eyebrow} />
+      <h2 className="text-[clamp(26px,3.4vw,38px)] font-bold leading-[1.26] tracking-[-0.04em] text-balance text-text-primary max-md:text-[26px]">
+        {heading}
+      </h2>
+      {sub && (
+        <p className="mt-4 max-w-[460px] text-[clamp(15px,1.4vw,18px)] font-medium leading-[1.55] text-balance text-[#4f4f4f] max-md:text-[15px] md:max-w-[680px] md:leading-[1.35]">
+          {sub}
+        </p>
+      )}
+    </FadeUp>
+  );
+}
+
+/* ── ② Tracking — 기존 표 그대로. 마지막 줄만 "아직 보이지 않음"으로 바꾸고
+      그 줄에서 다음 글감으로 이어지는 관계를 표 안에서 보여준다.
+      ⛔ 새 상자·새 문단·새 아이콘을 만들지 않았다. 기존 행 문법 그대로 쓴다. ── */
+const ROWS = [
+  { keyword: '연남동 미용실', volume: '월 3,410회 검색', page: '1페이지', rank: 7, accent: true },
+  { keyword: '홍대 미용실', volume: '월 18,630회 검색', page: '3페이지', rank: 27, accent: false },
+  { keyword: '합정 두피 관리', volume: '월 2,180회 검색', page: null, rank: 0, accent: false },
+];
+
+function RankNum({ n, accent }: { n: number; accent: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min((t - t0) / 900, 1);
+        setV(Math.round(n * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { rootMargin: '-60px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [n]);
+  return (
+    <span ref={ref} className={`w-[30px] text-right text-[19px] font-bold tabular-nums ${accent ? 'text-accent' : 'text-text-primary'}`} style={{ fontFamily: 'var(--font-en)' }}>
+      {v}
+    </span>
+  );
+}
+
+function TrackingVisual() {
+  return (
+    <div className="w-full max-w-[640px]" role="img" aria-label="검색어별 노출 위치와 다음 글감 연결">
+      <div className="flex items-center gap-2 border-b-2 pb-2.5" style={{ borderColor: '#171717' }}>
+        <span className="flex h-[16px] w-[16px] items-center justify-center bg-[#03c75a]" aria-hidden>
+          <svg width="8" height="8" viewBox="0 0 12 12" fill="#fff"><path d="M1.5 1h3.2l2 3.4V1h3.8v10H7.3L5.3 7.6V11H1.5z" /></svg>
+        </span>
+        <span className="text-[12px] font-bold tracking-[-0.01em] text-text-primary">네이버 검색 API</span>
+        <span className="ml-auto text-[11px] font-medium text-text-muted">매일 확인</span>
       </div>
 
-      <div className={styles.sceneArrow} aria-hidden="true"><ArrowRight size={22} strokeWidth={1.4} /></div>
-
-      <div className={styles.sceneSide}>
-        <p className={styles.sceneLabel}>준비된 콘텐츠</p>
-        <div className={styles.postList}>
-          {m.results.map((r) => (
-            <article key={r.title} className={styles.post}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={r.img} alt="" loading="lazy" />
-              <div>
-                <h4>{r.title}</h4>
-                <p>{r.body}</p>
-              </div>
-            </article>
-          ))}
+      {ROWS.map((row) => (
+        <div key={row.keyword} className="flex items-center justify-between gap-3 border-b py-4" style={{ borderColor: BORDER }}>
+          <div className="min-w-0">
+            <p className="text-[14.5px] font-bold tracking-[-0.01em] text-text-primary">{row.keyword}</p>
+            <p className="mt-1 text-[12px] font-medium text-text-muted">{row.volume}</p>
+          </div>
+          {row.page ? (
+            <div className="flex shrink-0 items-baseline">
+              <span className={`w-[52px] text-right text-[12px] font-medium ${row.accent ? 'text-accent' : 'text-text-weak'}`}>{row.page}</span>
+              <RankNum n={row.rank} accent={row.accent} />
+              <span className={`ml-0.5 text-[13px] font-bold ${row.accent ? 'text-accent' : 'text-text-primary'}`}>위</span>
+            </div>
+          ) : (
+            /* 아직 안 보이는 검색어 = 다음에 쓸 글감. 이 줄 하나가 승인 기획 3을 담는다 */
+            <span className="shrink-0 text-[12.5px] font-bold text-text-weak">아직 보이지 않음</span>
+          )}
         </div>
-        <p className={styles.memo}>{m.meta}</p>
-      </div>
+      ))}
+
+      {/* 관계 한 줄 — 위 표의 마지막 줄을 그대로 받는다. 새 상자를 만들지 않았다 */}
+      <p className="mt-3.5 flex items-center gap-2 text-[13.5px] font-semibold text-text-primary">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#0070f3" strokeWidth="1.8" strokeLinecap="square" aria-hidden>
+          <path d="M3 8h10M9 4l4 4-4 4" />
+        </svg>
+        아직 보이지 않는 검색어가 다음에 쓸 글감이 됩니다
+      </p>
     </div>
   );
 }
 
 export default function ContentPreview() {
-  const [method, setMethod] = useState<'now' | 'batch'>('batch');
-  const m = METHODS[method];
-
   return (
-    <main className={styles.preview}>
+    <main>
       <OuterContainer>
-        <div className={styles.reviewBar}>
-          <span>디자인 검토안 · 핵심 3구간</span>
-          <a href="/content">기존 페이지 보기 <ArrowRight size={14} /></a>
+        {/* 이 페이지가 시안임을 알리는 한 줄 — 원본에는 없다 */}
+        <div className="flex items-center justify-between gap-4 border-b px-8 py-3 text-[12px] text-text-weak max-md:px-5" style={{ borderColor: BORDER }}>
+          <span>비교 시안 · 기존 디자인 기준</span>
+          <a href="/content" className="underline underline-offset-4">기존 페이지 보기</a>
         </div>
 
-        <header className={styles.intro}>
-          <div className={styles.brand}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/nc.svg?v=16" alt="" width={40} height={40} />
-            <span>누구나 콘텐츠</span>
-          </div>
-          <h1>찍어둔 사진과 영상이<br />꾸준히 발행되는<br className={styles.mobileBreak} /> 가게 콘텐츠가 됩니다.</h1>
-          <p>무엇을 올릴지 정하고, 채널에 맞게 만들고, 예약 발행합니다.<br className={styles.pcOnly} /> 발행 후에는 실제 검색 위치를 확인해 다음 콘텐츠에 반영합니다.</p>
-        </header>
+        {/* S1 히어로 — 기존 그대로 */}
+        <Section noBorder><ContentHero /></Section>
+        <SpacerRow top />
 
-        {/* ── 1구간 · 자료 준비 두 갈래 ───────────────────────────── */}
-        <section id="materials" className={styles.block} aria-labelledby="materials-title">
-          <div className={styles.blockHead}>
-            <span className={styles.eyebrow}>✦ 자료 준비</span>
-            <h2 id="materials-title">지금 찍은 자료도,<br />갖고 있던 자료도.</h2>
-            <p>오늘 찍은 걸 바로 올리셔도 되고, 쌓아둔 사진을 한꺼번에 맡기셔도 됩니다.</p>
-          </div>
+        {/* S2 쌓임 — 기존 그대로 */}
+        <Section noBorder><ContentS2 /></Section>
+        <SpacerRow top />
 
-          <div className={styles.switcher} role="group" aria-label="자료 준비 방식">
-            {(Object.keys(METHODS) as (keyof typeof METHODS)[]).map((k) => (
-              <button key={k} type="button" aria-pressed={method === k} onClick={() => setMethod(k)}>
-                {k === 'now' ? <Camera size={18} strokeWidth={1.7} /> : <FolderOpen size={18} strokeWidth={1.7} />}
-                {METHODS[k].tab}
-                <span className={styles.planTag}>{METHODS[k].plan}</span>
-              </button>
-            ))}
-          </div>
+        {/* S3 브리지 — 기존 그대로 */}
+        <Section noBorder><ContentS3 /></Section>
+        <SpacerRow top />
 
-          <div className={styles.stage} aria-live="polite">
-            <TransformScene m={m} />
-            <p className={styles.stageNote}>{m.note}</p>
-          </div>
-          <p className={styles.caption}>기능 설명용 장면입니다. 사진 맡기기와 영상 제작의 이용 범위는 다릅니다.</p>
-        </section>
+        {/* S4 채널 — 기존 그대로. ③(맡기기 흡수)은 이 구간의 01 설명 한 줄이 대상이나
+            그 문장이 lib/content/content.ts 에 있어 원본 공유다. 시안에서 원본 데이터를
+            바꾸면 /content 에도 영향이 가므로 이번 시안에서는 손대지 않았다 — 아래 보고 참조 */}
+        <Section noBorder>
+          <div className="bg-[#eef0f3]"><ContentS4 /></div>
+        </Section>
+        <SpacerRow top />
 
-        {/* ── 2구간 · 글감과 촬영 안내 ───────────────────────────── */}
-        <section className={styles.block} aria-labelledby="planning-title">
-          <div className={styles.blockHead}>
-            <span className={styles.eyebrow}>✦ 글감과 촬영 안내</span>
-            <h2 id="planning-title">무엇을 만들지도<br />함께 정합니다.</h2>
-            <p>가게 이름 하나에서 세 가지가 함께 정해집니다.</p>
-          </div>
-
-          <div className={styles.branch}>
-            {/* 출발점 — ⛔ 입력창처럼 보이지 않게 한다(§0 "가게 이름은 실제로 입력할 수 있는
-                검색창처럼 보이지 않게"). 테두리 없는 큰 글자 + 라벨로 처리. */}
-            <div className={styles.origin}>
-              <span className={styles.originLabel}>시작은</span>
-              <strong>가게 이름</strong>
-              <span className={styles.originNote}>하나면 됩니다</span>
-            </div>
-
-            {/* 갈래 — 세로선 하나에서 셋으로 뻗는다. 상자 대신 선+글자(상자 반복 회피) */}
-            <div className={styles.fork} aria-hidden="true"><span /></div>
-
-            <ol className={styles.branchList}>
-              <li>
-                <span className={styles.branchIcon}><Search size={19} strokeWidth={1.5} /></span>
-                <div><h3>목표 검색어</h3><p>어디에서 발견되고 싶은지</p></div>
-              </li>
-              <li>
-                <span className={styles.branchIcon}><FolderOpen size={19} strokeWidth={1.5} /></span>
-                <div><h3>추천 글감</h3><p>무엇을 꾸준히 이야기할지 — 1년치를 미리</p></div>
-              </li>
-              <li>
-                <span className={styles.branchIcon}><Camera size={19} strokeWidth={1.5} /></span>
-                <div><h3>촬영 안내</h3><p>어떤 사진과 영상을 준비하면 좋은지</p></div>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        {/* ── 3구간 · 발행 그다음 ─────────────────────────────────
-             §3.4 "마지막 두 단계가 단순 글 작성 도구와의 차이다" → 이 구간이 주인공.
-             ⛔ 순위 상승·성과 보장 그림 금지 — 현재 위치만 정직하게 보여준다. */}
-        <section className={styles.block} aria-labelledby="feedback-title">
-          <div className={styles.blockHead}>
-            <span className={styles.eyebrow}>✦ 발행 그다음</span>
-            <h2 id="feedback-title">글을 만들었다고<br />끝내지 않습니다.</h2>
-            <p>목표 검색어에서 지금 어디에 보이는지 매일 확인합니다.</p>
-          </div>
-
-          <div className={styles.loop}>
-            <div className={styles.rank}>
-              <div className={styles.rankHead}><Search size={17} strokeWidth={1.7} /><strong>검색 위치 확인</strong><span>설명용 예시</span></div>
-              <div className={styles.rankRow}><span>연남동 미용실</span><strong>1페이지</strong></div>
-              <div className={styles.rankRow}><span>합정 미용실</span><strong>2페이지 14위</strong></div>
-              <div className={`${styles.rankRow} ${styles.rankMiss}`}><span>홍대 두피 관리</span><strong>아직 보이지 않음</strong></div>
-            </div>
-
-            {/* 되돌아가는 화살 — 이 구간의 주인공. 아직 안 보이는 검색어가 다음 글감이 된다 */}
-            <div className={styles.back}>
-              <RotateCcw size={26} strokeWidth={1.4} aria-hidden="true" />
-              <p><strong>아직 보이지 않는 검색어</strong>가<br />다음에 쓸 글감이 됩니다.</p>
+        {/* S5 노출 소식 — 기존 그대로 */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <div className="grid grid-cols-[1fr_1.3fr] items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
+              <SectionHead
+                eyebrow="News"
+                heading={<>노출 방식이 바뀌어도<br />알아서 따라갑니다</>}
+                sub="검색에 도움 되는 변화를 주 1회 모아 앞으로 쓰는 글에 반영합니다."
+              />
+              <FadeUp delay={0.1}><ContentS5Visual /></FadeUp>
             </div>
           </div>
-          <p className={styles.caption}>순위 상승을 약속하지 않습니다. 지금 보이는 위치를 그대로 알려드립니다.</p>
-        </section>
+        </Section>
+        <SpacerRow top />
 
-        <footer className={styles.closing}>
-          <div>
-            <h2>가게 이름만 알려주시면<br />시작 준비를 도와드립니다.</h2>
-            <p>발행한 글과 콘텐츠는 고객님의 계정에 남습니다.</p>
+        {/* ② Tracking — 표 안에서 "다음 글감" 관계를 보여준다.
+            sub도 덜어냈다: 기존 "손님이 실제로 검색하는 말을 찾아 지금 어디에 있는지 매일 확인합니다"는
+            제목(지금 몇 페이지 몇 위인지 정직하게)과 목업 머리(매일 확인)가 이미 말하고 있다 */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <div className="grid grid-cols-[1fr_1.25fr] items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
+              <SectionHead
+                eyebrow="Tracking"
+                heading={<>지금 몇 페이지 몇 위인지<br />정직하게 보여드립니다</>}
+              />
+              <FadeUp delay={0.1}><TrackingVisual /></FadeUp>
+            </div>
           </div>
-          <a href="/start" className={styles.cta}>한 달 무료로 시작하기 <ArrowRight size={18} /></a>
-        </footer>
+        </Section>
+        <SpacerRow top />
+
+        {/* ① Start — 서브 삭제. 같은 말이 세 번 나오던 것을 한 번으로 */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <SectionHead eyebrow="Start" heading="상호명만 넣어주세요" />
+            <FadeUp delay={0.1}>
+              <div className="mt-12 max-md:mt-8"><ContentS8Visual /></div>
+            </FadeUp>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* S9 기능 — 기존 그대로 */}
+        <Section noBorder>
+          <div className="bg-[#eef0f3]">
+            <div className={WRAP}>
+              <SectionHead eyebrow="Features" heading="이 밖에도 필요한 기능을 담았습니다" />
+              <FadeUp delay={0.1}><div className="mt-12 max-md:mt-8"><ContentS9Grid /></div></FadeUp>
+            </div>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* S10 자산 — 기존 그대로 */}
+        <Section noBorder>
+          <div className={WRAP}>
+            <div className="grid grid-cols-[1fr_1.2fr] items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
+              <SectionHead
+                eyebrow="Asset"
+                heading={<>서비스 이용이 끝나도<br />쌓인 글은 그대로 남습니다</>}
+                sub="발행된 글은 고객님의 계정에 쌓입니다. 이용을 멈춰도 콘텐츠는 고객님의 자산으로 남습니다."
+              />
+              <FadeUp delay={0.1}><ContentS10Visual /></FadeUp>
+            </div>
+          </div>
+        </Section>
+        <SpacerRow top />
+
+        {/* S11 마감 — 기존 그대로 */}
+        <Section noBorder><ContentS11Cta /></Section>
       </OuterContainer>
     </main>
   );
