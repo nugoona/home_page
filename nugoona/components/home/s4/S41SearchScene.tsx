@@ -75,7 +75,15 @@ const STEP_MOTION = (delay: number) => ({
 
 /* part 지정 시 해당 단계만 렌더. hideHead = StepHead 생략(모바일 스텝 탭이 라벨을 대신 — 2026-07-15).
    part 모드 = h-full flex-col: StepHead는 칸 상단 Y 통일, 목업은 남은 공간 세로 중앙(my-auto) */
-export default function S41SearchScene({ part, hideHead, loop = false }: { part?: 1 | 2 | 3; hideHead?: boolean; loop?: boolean }) {
+/* ★2026-09-18 `video` = 업로드 칸 하나를 영상으로 (개선안 §3.2).
+   【왜】왼쪽 카피는 이미 "찍어둔 사진과 **영상**이 가게 콘텐츠가 됩니다"인데
+   옆 그림은 사진 4장뿐이라 글과 그림이 따로 놀았다. §3.2가 "실제 제공 범위와
+   요금 조건을 맞춰 사용한다"고 한 지점이다.
+   【무엇을 안 했나】설명 문장·캡션·새 상자를 하나도 늘리지 않았다. 기존 2×2 격자
+   네 번째 칸의 라벨이 바뀌고 재생 표시가 얹힐 뿐이다.
+   ⛔ 완성 영상 제작을 약속하는 장면이 아니다 — **올리는 화면**이다(§7.2
+   "기본 플랜의 '영상 올리기'가 완성 영상 편집 제공을 뜻하지 않도록 구분한다"). */
+export default function S41SearchScene({ part, hideHead, loop = false, video = false }: { part?: 1 | 2 | 3; hideHead?: boolean; loop?: boolean; video?: boolean }) {
   return (
     <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="사진 몇 장을 올리면 채널에 맞는 글이 되고, 검색 위치까지 확인하는 3단계 장면">
       {/* ── 01 사진 4장만 올리면 — 폰 업로드 화면(상단 크롭) ── */}
@@ -147,8 +155,16 @@ export default function S41SearchScene({ part, hideHead, loop = false }: { part?
                           <path d="M5 12.5 10 17.5 19 7.5" />
                         </svg>
                       </span>
+                      {video && i === 3 && (
+                        /* 재생 표시 — 라벨과 같은 반투명 검정. 새 색을 들이지 않는다(DESIGN §8.17) */
+                        <span aria-hidden style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <span style={{ width: 118, height: 118, borderRadius: 999, background: 'rgba(22,22,26,0.55)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 6.5 18 12l-9 5.5z" /></svg>
+                          </span>
+                        </span>
+                      )}
                       <span aria-hidden style={{ position: 'absolute', bottom: 20, left: 20, padding: '8px 18px', borderRadius: 999, background: 'rgba(22,22,26,0.55)', color: '#fff', fontSize: 24 }}>
-                        {i === 0 ? '오늘 신메뉴' : i === 1 ? '매장' : i === 2 ? '디저트' : '샐러드'}
+                        {i === 0 ? '오늘 신메뉴' : i === 1 ? '매장' : i === 2 ? '디저트' : video ? '영상 0:12' : '샐러드'}
                       </span>
                     </span>
                   ))}

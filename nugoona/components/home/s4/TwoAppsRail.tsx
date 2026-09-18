@@ -4,7 +4,7 @@ import Link from 'next/link';
 import S41SearchScene from '@/components/home/s4/S41SearchScene';
 import S42AdScene from '@/components/home/s4/S42AdScene';
 import MobileProductCarousel, { type CarouselProduct } from '@/components/home/s4/MobileProductCarousel';
-import { NcMobileMock, NaMobileMock } from '@/components/home/s4/MobileStepMocks';
+import { NcMobileMock, NcMobileMockVideo, NaMobileMock } from '@/components/home/s4/MobileStepMocks';
 import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
 import { useRevealOnView, RevealHtmlLines } from '@/components/motion/Reveal';
 import { homeV2 } from '@/lib/content/home';
@@ -298,7 +298,7 @@ const NA_MOBILE: CarouselProduct = {
   ],
 };
 
-export default function TwoAppsRail({ loop = false }: { loop?: boolean } = {}) {
+export default function TwoAppsRail({ loop = false, video = false }: { loop?: boolean; video?: boolean } = {}) {
   /* ★2026-09-18 `loop` — 기본 false면 원본 홈 출력 그대로.
      true면 콘텐츠 03 장면 아래에 "아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다" 한 줄이 붙는다
      (개선안 §3.4 콘텐츠 순환의 마지막 고리). /home2에서만 켠다 */
@@ -343,7 +343,7 @@ export default function TwoAppsRail({ loop = false }: { loop?: boolean } = {}) {
       );
     if (key === 'text1') return <ProductText {...NC} />;
     if (key === 'text2') return <ProductText {...NA} />;
-    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene loop={loop} /></div>;
+    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene loop={loop} video={video} /></div>;
     return <div className="w-full max-w-[620px] px-6 py-8"><S42AdScene /></div>;
   };
 
@@ -363,7 +363,15 @@ export default function TwoAppsRail({ loop = false }: { loop?: boolean } = {}) {
             <BranchFlow uid="s4m" />
           </div>
         </div>
-        <MobileProductCarousel p={NC_MOBILE} Mock={NcMobileMock} />
+        {/* ★2026-09-18 모바일 순환(§3.4) — PC는 03 목업 **아래**에 한 줄을 붙이는데,
+            모바일 카드는 높이 고정(452px)에 목업 하단이 일부러 잘리는 디자인("홀더에 꽂힌 느낌")이라
+            같은 자리에 넣으면 잘린다. 03 제목을 늘려 담아 보니 2~3줄이 되어 목업 영역을 침범했다
+            (390·360px 2줄 / 320px 3줄 — 실측). → **카드 밖**, 캐러셀 바로 아래 한 줄로 받는다. */}
+        <MobileProductCarousel
+          p={NC_MOBILE}
+          Mock={video ? NcMobileMockVideo : NcMobileMock}
+          loopNote={loop ? '아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다' : undefined}
+        />
         <MobileProductCarousel p={NA_MOBILE} Mock={NaMobileMock} />
       </div>
 

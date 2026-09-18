@@ -93,9 +93,15 @@ function NaChatMobile() {
   );
 }
 
-export function NcMobileMock({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {
+export function NcMobileMock({ part, hideHead, video }: { part?: 1 | 2 | 3; hideHead?: boolean; video?: boolean }) {
   if (part === 2) return <NcDocMobile />;
-  return <S41SearchScene part={part} hideHead={hideHead} />;
+  return <S41SearchScene part={part} hideHead={hideHead} video={video} />;
+}
+
+/* 시안용 래퍼 — 캐러셀이 Mock을 참조로 비교하므로 인라인 화살표를 넘기면 매 렌더 리마운트된다.
+   모듈 상수로 고정한다(개선안 §3.2 영상 칸). */
+export function NcMobileMockVideo(props: { part?: 1 | 2 | 3; hideHead?: boolean }) {
+  return <NcMobileMock {...props} video />;
 }
 
 export function NaMobileMock({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {

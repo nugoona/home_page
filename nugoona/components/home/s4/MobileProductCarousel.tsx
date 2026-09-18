@@ -36,9 +36,12 @@ const KR = { fontFamily: 'var(--font-kr)' } as const;
 export default function MobileProductCarousel({
   p,
   Mock,
+  loopNote,
 }: {
   p: CarouselProduct;
   Mock: React.ComponentType<{ part?: 1 | 2 | 3; hideHead?: boolean }>;
+  /** 카드 밖·CTA 위 한 줄. PC의 03 장면 아래 한 줄과 같은 문장·같은 모양(개선안 §3.4). */
+  loopNote?: string;
 }) {
   const [active, setActive] = useState(0);
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -137,6 +140,15 @@ export default function MobileProductCarousel({
           </div>
         ))}
       </div>
+
+      {loopNote && (
+        <p className="mt-1 flex items-start justify-center gap-2 px-6 text-[13px] font-semibold leading-[1.45] text-text-primary">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#0070f3" strokeWidth="1.8" strokeLinecap="square" aria-hidden className="mt-[3px] shrink-0">
+            <path d="M3 8h10M9 4l4 4-4 4" />
+          </svg>
+          {loopNote}
+        </p>
+      )}
 
       {/* 버튼 — 캐러셀에 붙여 '이 캐러셀에서 본 기능을 체험' 소속감(GPT PM 2026-07-16).
          가운데 정렬 + 캐러셀과 간격 축소(py-5 하단 20px + mt-1 ≈ 24px) + 낮고 길쭉한 보조 CTA */}
