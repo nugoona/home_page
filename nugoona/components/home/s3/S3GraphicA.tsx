@@ -32,10 +32,22 @@ const ACCENT = '#0070f3';
    칩 6개는 좌하 → 우하 부채꼴 스윕(레이더 순서). 좌표 = 칩 중심. */
 const CX = 160;
 const CY = 255;
-const NODES = [
+const NODES_ADS = [
   { x: 45, y: 235, label: '계정 연결' },
   { x: 58, y: 148, label: '예산 설정' },
   { x: 102, y: 82, label: '타겟 설정' },
+  { x: 218, y: 82, label: '소재 확인' },
+  { x: 262, y: 148, label: '문구 생성' },
+  { x: 275, y: 235, label: '검수' },
+];
+/* ★2026-09-18 두 앱 공통 버전(개선안 §3.3).
+   구 6개는 전부 광고 용어(계정·예산·타겟·소재·문구·검수)라 **콘텐츠 얘기가 없었다.**
+   같은 좌표·같은 개수를 쓰되 절반을 콘텐츠 준비로 바꿔 "두 앱 모두 앱이 먼저 준비한다"를 보이게 한다.
+   ⛔ 자동화 범위를 넓히지 않는다 — 전부 **준비** 단계이고 결정은 다음 칸(고객 확인)이 받는다. */
+const NODES_BOTH = [
+  { x: 45, y: 235, label: '계정 연결' },
+  { x: 58, y: 148, label: '목표 검색어' },
+  { x: 102, y: 82, label: '글감 정리' },
   { x: 218, y: 82, label: '소재 확인' },
   { x: 262, y: 148, label: '문구 생성' },
   { x: 275, y: 235, label: '검수' },
@@ -105,7 +117,9 @@ function DoneBadge({ done, reduce }: { done: boolean; reduce: boolean }) {
 }
 
 /* ═══════════ 궤도 장면 — 빔이 칩에 닿으면 체크 (루프) ═══════════ */
-function OrbitScene({ started, reduce, uid }: { started: boolean; reduce: boolean; uid: string }) {
+function OrbitScene({ started, reduce, uid, both = false }: { started: boolean; reduce: boolean; uid: string; both?: boolean }) {
+  /* ★2026-09-18 `both` — 기본 false면 원본 그대로(광고 준비 6항목). true면 콘텐츠 항목이 섞인 공통판 */
+  const NODES = both ? NODES_BOTH : NODES_ADS;
   /* step: -1 리셋 / 0~5 처리 중 / 6 완료 유지 */
   const [step, setStep] = useState(-1);
 
@@ -312,7 +326,9 @@ function SpeechScene({ reduce }: { reduce: boolean }) {
   );
 }
 
-export default function S3GraphicA() {
+export default function S3GraphicA({ both = false }: { both?: boolean } = {}) {
+  /* ★2026-09-18 `both` — 기본 false면 원본 홈 출력 그대로.
+     true면 궤도 칩 절반이 콘텐츠 준비로 바뀐다(개선안 §3.3 "두 앱 공통 흐름"). /home2에서만 켠다 */
   const panelRef = useRef<HTMLElement>(null);
   const inView = useInView(panelRef, { once: true, margin: '-15% 0px' });
   /* ⚠️ useReducedMotion은 서버 false / 절전 모드 폰 true → hydration mismatch(실기기 "1 Issue" 실증 2026-07-15).
@@ -362,7 +378,7 @@ export default function S3GraphicA() {
 
   const orbitBlock = (
     <div className="relative w-full px-6 py-6">
-      <OrbitScene started={started} reduce={reduce} uid="s3d" />
+      <OrbitScene started={started} reduce={reduce} uid="s3d" both={both} />
     </div>
   );
 
@@ -409,7 +425,7 @@ export default function S3GraphicA() {
       {/* 모바일 — /lab/ourway에서 확정된 한 흐름(2026-07-15). PC와 별개(md:hidden).
            배경 = Vercel Surface2 #fafafa(스샷 실측) → 흰 카드(텍스트바·채팅창) 대비로 가독성↑ */}
       <div className="bg-[#fafafa] px-6 py-20 md:hidden">
-        <MobileOurWay />
+        <MobileOurWay both={both} />
       </div>
 
       {/* PC — 칸 지그재그 + 하단 히어로식 checker */}

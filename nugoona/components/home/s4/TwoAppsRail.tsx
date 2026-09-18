@@ -298,7 +298,10 @@ const NA_MOBILE: CarouselProduct = {
   ],
 };
 
-export default function TwoAppsRail() {
+export default function TwoAppsRail({ loop = false }: { loop?: boolean } = {}) {
+  /* ★2026-09-18 `loop` — 기본 false면 원본 홈 출력 그대로.
+     true면 콘텐츠 03 장면 아래에 "아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다" 한 줄이 붙는다
+     (개선안 §3.4 콘텐츠 순환의 마지막 고리). /home2에서만 켠다 */
   const defRevealRef = useRevealOnView<HTMLDivElement>();
   const renderD = (key: string) => {
     if (key === 'def-text')
@@ -340,7 +343,7 @@ export default function TwoAppsRail() {
       );
     if (key === 'text1') return <ProductText {...NC} />;
     if (key === 'text2') return <ProductText {...NA} />;
-    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene /></div>;
+    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene loop={loop} /></div>;
     return <div className="w-full max-w-[620px] px-6 py-8"><S42AdScene /></div>;
   };
 

@@ -83,7 +83,10 @@ function BrowserChat() {
   );
 }
 
-export default function MobileOurWay() {
+export default function MobileOurWay({ both = false }: { both?: boolean } = {}) {
+  /* ★2026-09-18 `both` — 기본 false면 원본 홈 출력 그대로.
+     true면 설명·선언이 두 앱 공통 표현으로 바뀐다(개선안 §3.3). 구 문구는 "광고를 시작하기 위한",
+     "광고 소재와 성과만"이라 콘텐츠 고객에게는 남의 얘기였다. /home2에서만 켠다 */
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15%' });
 
@@ -96,13 +99,13 @@ export default function MobileOurWay() {
           어려운 건 앱이 합니다
         </h2>
         <p className="mx-auto mt-3 max-w-[300px] text-[14px] font-medium leading-[1.55] text-[#5b6069]" style={KR}>
-          광고를 시작하기 위한 복잡한 준비를<br />앱이 먼저 처리합니다.
+          {both ? <>콘텐츠도 광고도, 복잡한 준비를<br />앱이 먼저 처리합니다.</> : <>광고를 시작하기 위한 복잡한 준비를<br />앱이 먼저 처리합니다.</>}
         </p>
       </div>
 
       {/* ② 궤도 */}
       <div className="mt-8">
-        <MobileOrbit started={inView} />
+        <MobileOrbit started={inView} both={both} />
       </div>
 
       {/* ③ 궤도 → 선언 연결선 */}
@@ -112,7 +115,7 @@ export default function MobileOurWay() {
       <div className="flex justify-center">
         <div className="border border-[#ededed] bg-white px-7 py-5 text-center">
           <h2 className="text-[26px] font-bold leading-[1.28] tracking-[-0.035em] text-text-primary" style={KR}>
-            고객님은 광고 소재와<br />성과만 보세요.
+            {both ? <>고객님은 확인하고<br />결정만 하세요.</> : <>고객님은 광고 소재와<br />성과만 보세요.</>}
           </h2>
         </div>
       </div>

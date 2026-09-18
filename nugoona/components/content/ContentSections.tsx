@@ -714,41 +714,66 @@ export function ContentS3() {
 /* ═══════════════ S4 · "입력 하나 → 채널별 발행" — 업로드 창 → 흐름 → 채널 포스트 3형 ═══════════════ */
 
 /** 입력 = 앱 업로드 창(사장님 2026-07-17: 사진 2장 + [+ 사진 추가] 업로드 칸 / 음성 = 녹음 활성(파란 마이크+웨이브) + 받아쓴 지시문) */
-function InputCard() {
+/** 업로드 화면.
+ *  ★2026-09-18 `batch` 선택 인자 추가(기본 false = 원본 /content 출력 그대로).
+ *  true면 "갖고 있던 사진을 한꺼번에 맡긴" 상태 — 사진이 많고, 오늘 찍은 메모 대신 보관함 안내가 뜬다.
+ *  /content2 비교 시안에서만 켠다(§0.5 "기본값을 그대로 둔 선택 인자로 필요한 부분만"). */
+export function InputCard({ batch = false }: { batch?: boolean } = {}) {
+  /* 맡기기 = 한 번에 올린 것이라 장 수가 많다. 같은 업종(펜션)으로 통일해야 "한 가게의 쌓인 사진"으로 읽힌다 */
+  const shots = batch
+    ? ['/img/content/biz-pension-1.jpg', '/img/content/biz-pension-2.jpg', '/img/content/biz-interior-1.jpg', '/img/content/biz-interior-3.jpg']
+    : ['/img/content/biz-pension-1.jpg', '/img/content/biz-pension-2.jpg'];
   return (
     <div className="overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-      <Chrome title="누구나 콘텐츠 · 새 글" />
+      <Chrome title={batch ? '누구나 콘텐츠 · 사진 보관함' : '누구나 콘텐츠 · 새 글'} />
       <div className="p-4">
         <div className="mb-3 grid grid-cols-3 gap-1.5 md:grid-cols-4 md:gap-2">
           {/* 업종 = 펜션(업종당 1회 규칙 — 케이크는 S2에만). PC = 사진 3장(모바일 꺼 그대로 금지 — 2026-07-20) */}
-          {['/img/content/biz-pension-1.jpg', '/img/content/biz-pension-2.jpg'].map((src) => (
+          {shots.map((src) => (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img key={src} src={src} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
           ))}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/content/biz-pension-3.jpg" alt="" className="hidden aspect-[4/3] w-full object-cover md:block" loading="lazy" />
-          {/* 사진 추가 칸 — 업로드 UI 관례(점선 + 플러스) */}
+          {!batch && <img src="/img/content/biz-pension-3.jpg" alt="" className="hidden aspect-[4/3] w-full object-cover md:block" loading="lazy" />}
+          {/* 사진 추가 칸 — 업로드 UI 관례(점선 + 플러스). 맡기기는 "이미 다 올린" 상태라 대신 남은 장수를 센다 */}
           <span className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-0.5 border border-dashed border-[#c9ced2] bg-[#fafafa]">
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9297a0" strokeWidth="1.6" strokeLinecap="round" aria-hidden><path d="M10 4v12M4 10h12" /></svg>
-            <span className="text-[8.5px] font-medium text-text-muted md:text-[10px]">사진 추가</span>
+            {batch ? (
+              <span className="text-[10px] font-bold text-text-weak md:text-[12px]" style={EN}>+38</span>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="#9297a0" strokeWidth="1.6" strokeLinecap="round" aria-hidden><path d="M10 4v12M4 10h12" /></svg>
+            )}
+            <span className="text-[8.5px] font-medium text-text-muted md:text-[10px]">{batch ? '한꺼번에 맡김' : '사진 추가'}</span>
           </span>
         </div>
-        {/* 음성 녹음 활성 — 파란 마이크 + 웨이브 + 받아쓴 지시문("~해줘") */}
-        <div className="flex items-center gap-2.5 border border-[#0070f3]/40 bg-[#0070f3]/[0.04] py-2 pl-2.5 pr-3">
-          <span className="rounded-dot flex h-7 w-7 shrink-0 items-center justify-center bg-[#0070f3]">
-            <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.6" aria-hidden><rect x="8" y="3" width="4" height="9" rx="2" /><path d="M5 9v1a5 5 0 0 0 10 0V9M10 15v3" /></svg>
-          </span>
-          {/* 녹음 웨이브 — 살아있는 입력 중 */}
-          <span className="flex shrink-0 items-end gap-[2.5px]" aria-hidden>
-            {[7, 12, 9, 14, 6, 11, 8].map((h, i) => (
-              <span key={i} className="w-[2.5px] bg-[#0070f3]/70" style={{ height: h, animation: `s4wave 1.1s ease-in-out ${i * 0.12}s infinite alternate` }} />
-            ))}
-            <style>{`@keyframes s4wave { from { transform: scaleY(0.45); } to { transform: scaleY(1); } }`}</style>
-          </span>
-          <span className="min-w-0 flex-1 text-[12px] font-medium leading-[1.45] md:text-[13.5px] text-text-primary">
-            &ldquo;새로 단장한 객실로 소개글 써줘&rdquo;
-          </span>
-        </div>
+        {batch ? (
+          /* 맡기기 = 오늘 메모가 아니라 "맡긴 사진이 글감으로 나뉘는" 상태.
+             같은 자리, 같은 문법(파란 테두리 한 줄)을 쓰되 내용만 바꾼다 — 새 상자를 만들지 않는다 */
+          <div className="flex items-center gap-2.5 border border-[#0070f3]/40 bg-[#0070f3]/[0.04] py-2 pl-2.5 pr-3">
+            <span className="rounded-dot flex h-7 w-7 shrink-0 items-center justify-center bg-[#0070f3]">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.7" strokeLinecap="square" aria-hidden><path d="M3 5h5l1.5 2H17v9H3z" /></svg>
+            </span>
+            <span className="min-w-0 flex-1 text-[12px] font-medium leading-[1.45] text-text-primary md:text-[13.5px]">
+              추천 글감에 나누어 담는 중 · <b className="font-bold">6편 준비됨</b>
+            </span>
+          </div>
+        ) : (
+          /* 음성 녹음 활성 — 파란 마이크 + 웨이브 + 받아쓴 지시문("~해줘") */
+          <div className="flex items-center gap-2.5 border border-[#0070f3]/40 bg-[#0070f3]/[0.04] py-2 pl-2.5 pr-3">
+            <span className="rounded-dot flex h-7 w-7 shrink-0 items-center justify-center bg-[#0070f3]">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.6" aria-hidden><rect x="8" y="3" width="4" height="9" rx="2" /><path d="M5 9v1a5 5 0 0 0 10 0V9M10 15v3" /></svg>
+            </span>
+            {/* 녹음 웨이브 — 살아있는 입력 중 */}
+            <span className="flex shrink-0 items-end gap-[2.5px]" aria-hidden>
+              {[7, 12, 9, 14, 6, 11, 8].map((h, i) => (
+                <span key={i} className="w-[2.5px] bg-[#0070f3]/70" style={{ height: h, animation: `s4wave 1.1s ease-in-out ${i * 0.12}s infinite alternate` }} />
+              ))}
+              <style>{`@keyframes s4wave { from { transform: scaleY(0.45); } to { transform: scaleY(1); } }`}</style>
+            </span>
+            <span className="min-w-0 flex-1 text-[12px] font-medium leading-[1.45] md:text-[13.5px] text-text-primary">
+              &ldquo;새로 단장한 객실로 소개글 써줘&rdquo;
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -961,7 +986,13 @@ function S4FormatRowPC({ dark }: { dark?: boolean }) {
   );
 }
 
-export function ContentS4({ dark }: { dark?: boolean }) {
+export function ContentS4({ dark, choice = false }: { dark?: boolean; choice?: boolean }) {
+  /* ★2026-09-18 `choice` 선택 인자 — 기본 false면 **원본 /content 출력과 완전히 동일**하다.
+     true면 01 스텝의 업로드 화면 위에 "오늘 찍은 사진 / 갖고 있던 사진" 전환이 붙고,
+     고르면 업로드 화면 자체가 바뀐다(사진 장수·보관함 제목·하단 줄).
+     승인 기획 1(지금 올리기와 맡기기의 차이)을 **기존 장면 안에서** 보여주는 확장이며
+     /content2 비교 시안에서만 켠다(§0.5 "기본값을 그대로 둔 선택 인자"). */
+  const [batch, setBatch] = useState(false);
   /* dark = 다크 밴드(편집 리듬 매핑 2026-07-18 사장님 "채널이 핵심이라 다크로").
      텍스트·무대·십자·스텝만 반전 — 목업 창(업로드·글·3형식)은 흰 실서비스 화면 유지(다크 위 밝은 제품 창 문법) */
   /* 2026-07-20 PC 전면 개편(사장님 "좌 텍스트 옆 거대 공백" 실사): 구 [좌 텍스트|우 세로 3단] 2단 폐기 →
@@ -994,7 +1025,27 @@ export function ContentS4({ dark }: { dark?: boolean }) {
             <div className="grid grid-cols-[1fr_56px_1fr] items-start max-md:block">
               <div className="min-w-0">
                 <S4StepHead n="01" label={multiChannel.steps[0].title} desc={multiChannel.steps[0].desc} dark={dark} />
-                <InputCard />
+                {choice && (
+                  /* 전환 — 스텝 라벨 아래, 업로드 화면 위. 기존 카드 문법(1px 선 + 반전 강조)을 그대로 쓴다 */
+                  <div className="mb-2.5 flex w-fit border" style={{ borderColor: BORDER }} role="group" aria-label="자료 준비 방식">
+                    {([['now', '오늘 찍은 사진'], ['batch', '갖고 있던 사진']] as const).map(([k, label]) => {
+                      const on = (k === 'batch') === batch;
+                      return (
+                        <button
+                          key={k}
+                          type="button"
+                          aria-pressed={on}
+                          onClick={() => setBatch(k === 'batch')}
+                          className={`min-h-[40px] px-3.5 text-[12.5px] font-semibold transition-colors md:text-[13px] ${on ? 'bg-[#171717] text-white' : 'bg-white text-text-weak hover:text-text-primary'}`}
+                          style={k === 'batch' ? { borderLeft: `1px solid ${BORDER}` } : undefined}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+                <InputCard batch={choice && batch} />
               </div>
               <div className="hidden h-full items-center justify-center self-stretch md:flex" aria-hidden>
                 {/* S4 전용 강한 화살(사장님 2026-07-20 "라인 화살은 흐름이 안 와닿아 — 삼각형, 짧게") */}
@@ -1321,17 +1372,29 @@ function S8Result({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** 상호 검색 UI — 앱 시작 화면(A15: 이름 입력이 전부). 서사의 출발점 */
-function S8SearchBox() {
-  return (
+/** 상호 검색 UI — 앱 시작 화면(A15: 이름 입력이 전부). 서사의 출발점
+ *  ★2026-09-18 `framed` 선택 인자 — 기본 false면 원본 그대로.
+ *  true면 위에 Chrome 창머리를 얹어 **"앱 화면"임이 눈에 드러난다.**
+ *  개선안 §4.8이 지적한 "입력되지 않는데 입력창처럼 보이는" 문제를, 버튼으로 바꿔 흐름을 끊는 대신
+ *  기존 목업 문법(Chrome)으로 해결한 것. 페이지 하단의 진짜 /start 버튼과 역할이 갈린다. */
+function S8SearchBox({ framed = false }: { framed?: boolean } = {}) {
+  const box = (
     /* 테두리 = 진하게 #AEB4BE(사장님 2026-07-20 "너무 회색" — PC·모바일 공통) */
-    <div className="mx-auto flex w-full max-w-[440px] items-center gap-2 bg-white p-2.5" style={{ border: '1px solid #AEB4BE', boxShadow: CARD_SHADOW }} role="img" aria-label="가게 이름 검색창">
+    <div className={`mx-auto flex w-full max-w-[440px] items-center gap-2 bg-white p-2.5 ${framed ? 'border-0' : ''}`} style={framed ? undefined : { border: '1px solid #AEB4BE', boxShadow: CARD_SHADOW }} role="img" aria-label="가게 이름을 넣는 앱 시작 화면">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9297a0" strokeWidth="2" strokeLinecap="round" aria-hidden className="ml-1.5 shrink-0">
         <circle cx="10.5" cy="10.5" r="6.5" />
         <path d="m15.5 15.5 4.5 4.5" />
       </svg>
       <span className="min-w-0 flex-1 text-[13.5px] font-medium text-text-muted">상호명만 넣어주세요</span>
       <span className="flex h-9 shrink-0 items-center bg-[#0070f3] px-4 text-[13px] font-bold text-white">검색</span>
+    </div>
+  );
+  if (!framed) return box;
+  /* 앱 화면임을 드러내는 창머리 — 기존 Chrome 문법 그대로(§0.6 "기존 모듈 활용") */
+  return (
+    <div className="mx-auto w-full max-w-[440px] overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
+      <Chrome title="누구나 콘텐츠 · 시작" />
+      <div className="p-2.5">{box}</div>
     </div>
   );
 }
@@ -1382,9 +1445,9 @@ function S8KeywordSteps() {
 }
 
 /** ② 1년치 글감 = 같은 원리의 로직 스텝(사장님 확정형 복원) */
-function S8TopicSteps() {
+function S8TopicSteps({ shoot = false }: { shoot?: boolean } = {}) {
   return (
-    <div className="mx-auto flex h-full w-full max-w-[440px] flex-col overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }} role="img" aria-label="1년치 글감을 만드는 과정">
+    <div className="mx-auto flex h-full w-full max-w-[440px] flex-col overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }} role="img" aria-label={shoot ? '1년치 글감과 촬영 안내를 만드는 과정' : '1년치 글감을 만드는 과정'}>
       {/* 2026-07-19 감사 교정: "52개"는 요식업 한 곳 실증치(업종별 가변, 병원 40편) — 확정 숫자 약속 금지.
           정본(easyStart.topics) 어휘 "1년치 글감을 미리 짜 드립니다"로 복원 */}
       <S8CardTitle>어떤 글을 써야 할지 자동으로 분석해<br />1년치 글감을 미리 짭니다</S8CardTitle>
@@ -1392,21 +1455,28 @@ function S8TopicSteps() {
         <S8Step n="01" icon={S8_ICONS.grid} title="콘텐츠 글감 분석" desc="메뉴·재료·공간·계절·손님, 글이 될 재료를 전부 찾습니다" />
         <S8Step n="02" icon={S8_ICONS.docs} title="재료 하나를 여러 글로" desc="메뉴 소개로 시작해 재료 이야기, 가게 이야기까지 넓힙니다" />
         <S8Step n="03" icon={S8_ICONS.calendar} title="1년 달력에 배치" desc="계절과 시기에 맞춰 매주 쓸 글감을 미리 정해 둡니다" />
+        {/* ★2026-09-18 `shoot` = 촬영 안내(승인 기획 2의 세 번째 갈래). 기본 false면 원본 그대로 3단계.
+            글감에서 "그럼 뭘 찍지"가 이어지므로 04로 붙인다 — 별도 구간을 만들지 않는다 */}
+        {shoot && <S8Step n="04" icon={S8_ICONS.pin} title="촬영 안내" desc="글감마다 어떤 사진과 영상을 준비하면 좋은지 알려 드립니다" />}
       </S8StepGroup>
       <S8Result>
-        <span className="text-[15px] font-bold tracking-[-0.02em] text-accent">무엇을 올릴지 고민하지 않아도 됩니다</span>
+        <span className="text-[15px] font-bold tracking-[-0.02em] text-accent">
+          {shoot ? '무엇을 올릴지도, 무엇을 찍을지도 고민하지 않아도 됩니다' : '무엇을 올릴지 고민하지 않아도 됩니다'}
+        </span>
       </S8Result>
     </div>
   );
 }
 
 /** S8 비주얼 — 사장님 확정 구조 복원: [검색 UI] → [키워드 스텝 창] → [글감 스텝 창] */
-export function ContentS8Visual() {
+export function ContentS8Visual({ enrich = false }: { enrich?: boolean } = {}) {
   /* 2026-07-20 PC 개편(사장님 "중앙 440 세로 3덩이, 좌우 텅" 실사): PC = 검색창 중앙 → 화살 →
-     [키워드 창 | 글감 창] 좌우 2열(세로 반감·전폭 사용). 모바일 = 기존 세로 스택 그대로 */
+     [키워드 창 | 글감 창] 좌우 2열(세로 반감·전폭 사용). 모바일 = 기존 세로 스택 그대로
+     ★2026-09-18 `enrich` 선택 인자 — 기본 false면 원본 그대로. true면
+     ①검색창에 Chrome 창머리(앱 화면임을 드러냄) ②글감 창에 04 촬영 안내. /content2에서만 켠다 */
   return (
     <div className="py-2">
-      <S8SearchBox />
+      <S8SearchBox framed={enrich} />
       <S8Connect />
       <div className="mx-auto flex max-w-[960px] items-stretch justify-center gap-10 max-md:block">
         <div className="min-w-0 flex-1">
@@ -1414,7 +1484,7 @@ export function ContentS8Visual() {
         </div>
         <span className="md:hidden"><S8Connect /></span>
         <div className="min-w-0 flex-1">
-          <S8TopicSteps />
+          <S8TopicSteps shoot={enrich} />
         </div>
       </div>
     </div>

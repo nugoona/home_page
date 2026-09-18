@@ -15,10 +15,20 @@ const ACCENT = '#0070f3';
 const INK = '#171717';
 
 const CX = 160, CY = 255;
-const NODES = [
+const NODES_ADS = [
   { x: 56, y: 230, label: '광고 계정 연결' },
   { x: 60, y: 150, label: '픽셀·전환 추적' },
   { x: 104, y: 86, label: '캠페인 생성' },
+  { x: 216, y: 86, label: '예산·기간 설정' },
+  { x: 260, y: 150, label: '타깃 설정' },
+  { x: 264, y: 230, label: '소재 규격 확인' },
+] as const;
+/* ★2026-09-18 두 앱 공통판(개선안 §3.3) — 같은 좌표·개수, 절반을 콘텐츠 준비로.
+   ⛔ 전부 '준비' 단계다. 자동 집행·자동 승인을 뜻하지 않는다(결정은 다음 칸이 받는다) */
+const NODES_BOTH = [
+  { x: 56, y: 230, label: '계정 연결' },
+  { x: 60, y: 150, label: '목표 검색어' },
+  { x: 104, y: 86, label: '추천 글감' },
   { x: 216, y: 86, label: '예산·기간 설정' },
   { x: 260, y: 150, label: '타깃 설정' },
   { x: 264, y: 230, label: '소재 규격 확인' },
@@ -43,7 +53,9 @@ function DoneBadge({ done }: { done: boolean }) {
   );
 }
 
-export default function MobileOrbit({ started }: { started: boolean }) {
+export default function MobileOrbit({ started, both = false }: { started: boolean; both?: boolean }) {
+  /* ★2026-09-18 `both` — 기본 false면 원본 홈 출력 그대로 */
+  const NODES = both ? NODES_BOTH : NODES_ADS;
   const [step, setStep] = useState(-1); // -1 리셋 / 0~5 진행 / 6 완료
 
   useEffect(() => {

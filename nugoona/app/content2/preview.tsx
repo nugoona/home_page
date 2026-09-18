@@ -160,11 +160,13 @@ export default function ContentPreview() {
         <Section noBorder><ContentS3 /></Section>
         <SpacerRow top />
 
-        {/* S4 채널 — 기존 그대로. ③(맡기기 흡수)은 이 구간의 01 설명 한 줄이 대상이나
-            그 문장이 lib/content/content.ts 에 있어 원본 공유다. 시안에서 원본 데이터를
-            바꾸면 /content 에도 영향이 가므로 이번 시안에서는 손대지 않았다 — 아래 보고 참조 */}
+        {/* S4 채널 — 승인 기획 1(지금 올리기 / 갖고 있던 사진 맡기기의 차이).
+            기존 업로드 장면을 확장했다: 01 스텝 위 전환을 누르면 업로드 화면 자체가 바뀐다
+            (사진 장수 2→4+38 · 제목 "새 글"→"사진 보관함" · 하단 "메모 받아쓰기"→"추천 글감에 나누어 담는 중 6편").
+            ⛔ 새 구간·새 상자·설명 문단을 만들지 않았다 — 같은 화면 안에서 상태만 바뀐다.
+            `choice`는 기본 false라 원본 /content에는 나타나지 않는다(회귀 확인 완료). */}
         <Section noBorder>
-          <div className="bg-[#eef0f3]"><ContentS4 /></div>
+          <div className="bg-[#eef0f3]"><ContentS4 choice /></div>
         </Section>
         <SpacerRow top />
 
@@ -204,7 +206,7 @@ export default function ContentPreview() {
           <div className={WRAP}>
             <SectionHead eyebrow="Start" heading="상호명만 넣어주세요" />
             <FadeUp delay={0.1}>
-              <div className="mt-12 max-md:mt-8"><ContentS8Visual /></div>
+              <div className="mt-12 max-md:mt-8"><ContentS8Visual enrich /></div>
             </FadeUp>
           </div>
         </Section>

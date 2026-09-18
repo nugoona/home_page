@@ -75,7 +75,7 @@ const STEP_MOTION = (delay: number) => ({
 
 /* part 지정 시 해당 단계만 렌더. hideHead = StepHead 생략(모바일 스텝 탭이 라벨을 대신 — 2026-07-15).
    part 모드 = h-full flex-col: StepHead는 칸 상단 Y 통일, 목업은 남은 공간 세로 중앙(my-auto) */
-export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {
+export default function S41SearchScene({ part, hideHead, loop = false }: { part?: 1 | 2 | 3; hideHead?: boolean; loop?: boolean }) {
   return (
     <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="사진 몇 장을 올리면 채널에 맞는 글이 되고, 검색 위치까지 확인하는 3단계 장면">
       {/* ── 01 사진 4장만 올리면 — 폰 업로드 화면(상단 크롭) ── */}
@@ -308,6 +308,18 @@ export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; h
             <span aria-hidden className="mt-1.5 block h-[9px] w-[70%] bg-[#EDEEF0]" />
           </div>
         </div>
+        {/* ★2026-09-18 `loop` = 콘텐츠 순환의 마지막 고리(개선안 §3.4).
+            기본 false면 원본 홈 출력 그대로. 구 홈은 "검색 위치 확인"에서 끝나 §3.4가
+            "단순 글 작성 도구와의 차이"라 한 **다음 콘텐츠 반영**이 화면에 없었다.
+            → 별도 구간·새 단계를 만들지 않고 03 장면 바로 아래 한 줄로 받는다. */}
+        {loop && (
+          <p className="mt-3 flex items-center gap-2 text-[13px] font-semibold leading-[1.45] text-text-primary">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#0070f3" strokeWidth="1.8" strokeLinecap="square" aria-hidden className="shrink-0">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+            아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다
+          </p>
+        )}
       </motion.div>
       )}
     </div>
