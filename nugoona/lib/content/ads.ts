@@ -18,7 +18,10 @@ export const hero = {
   h1: 'AI 시대의 <span class="text-accent">온라인 광고</span>', // 한 줄(사장님 2026-07-19 — br 폐기)
   sub: '어려운 광고, 이제 이해하며 운영합니다.', // ✅'이해' 축 유지 — 사장님 재확정 2026-07-18(GPT 교체안 기각)
   cta: { text: '한 달 무료로 시작', href: '/start' }, // "카드 필요 없음" 보조문구 삭제(사장님 2026-07-19)
-  ctaSecondary: { text: '데모 확인하기', href: '#demo' }, // ✅데모 유지 확정 · 문구 축약(사장님 2026-07-18 "글자 줄이고 버튼 너비 비슷하게")
+  // ★2026-09-18 목적지 확정(사장님) = 누구나 광고 앱 로그인 화면. 그 화면 하단에 "데모 계정 체험" 버튼이 있다
+  //   (2026-09-18 실제 접속 확인: board.nugoona.co.kr → /login, 제목 "누구나 광고", "데모 계정 체험" 실재).
+  //   구 '#demo'는 대상 id가 페이지에 없어 눌러도 아무 일이 없었다(브라우저 클릭 실측 — scrollY 0→130, 첫 화면 그대로).
+  ctaSecondary: { text: '데모 확인하기', href: 'https://board.nugoona.co.kr/login' }, // ✅데모 유지 확정 · 문구 축약(사장님 2026-07-18)
 };
 
 // 2 · 첫 공감 (히어로 바로 아래 — 방문자의 현실. 사장님 낙점 = 2안)
@@ -185,7 +188,7 @@ export const closing = {
   heading: '직접 확인하고 시작하세요.',
   body: '데모로 먼저 둘러보고, 한 달 동안 충분히 경험해 보세요.',
   cta: { text: '한 달 무료로 시작', href: '/start', sub: '카드 필요 없음' },
-  ctaSecondary: { text: '데모 둘러보기', href: '#demo' },
+  ctaSecondary: { text: '데모 둘러보기', href: 'https://board.nugoona.co.kr/login' }, // ★2026-09-18 — 위 hero.ctaSecondary와 같은 곳
   crossSell: {
     text: '검색 노출이 먼저라면',
     cta: { text: '누구나 콘텐츠 보기', href: '/content' },

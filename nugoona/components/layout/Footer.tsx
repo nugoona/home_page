@@ -23,9 +23,17 @@ export default function Footer() {
           </div>
         </div>
         {/* 방침·약관 링크 — API 심사 요건(로그인 없는 공개 URL, docs/_handoff-review-requirements.md) */}
-        <div className="mt-8 flex items-center justify-center gap-5">
+        {/* ⚠ 링크가 4→5개가 되면서 모바일(390)에서 글자가 "콘텐츠/앱/로그인"으로 잘렸다(2026-09-18 실측).
+            wrap 허용 + 링크별 nowrap + 가로 간격 축소로 해소. 링크를 더 늘릴 때 여기를 다시 볼 것. */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 [&>a]:whitespace-nowrap max-md:gap-x-3">
+          {/* ★2026-09-18 "앱 로그인" 하나 → 제품별 둘로 분리(사장님 확정).
+              구 상태는 콘텐츠 앱으로만 가서, 광고만 쓰는 손님이 누르면 엉뚱한 앱에 도착했다.
+              광고 앱 = board.nugoona.co.kr(2026-09-18 실제 접속 확인 — 제목 "누구나 광고", 로그인 화면). */}
           <a href="https://upload.nugoona.co.kr/login" className="text-[13px] text-text-weak hover:text-text-primary hover:underline">
-            앱 로그인
+            콘텐츠 앱 로그인
+          </a>
+          <a href="https://board.nugoona.co.kr/login" className="text-[13px] text-text-weak hover:text-text-primary hover:underline">
+            광고 앱 로그인
           </a>
           <a href="/privacy" className="text-[13px] font-semibold text-text-primary hover:underline">
             개인정보처리방침
