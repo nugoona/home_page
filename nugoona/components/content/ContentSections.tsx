@@ -812,15 +812,16 @@ function S4ArticleCard() {
 /** 03 채널 3형식 비교 — 같은 글이 형식만 바뀜(가로 글 / 정사각 / 링크 공유). 높이 차이 = 형식 차이.
     2026-07-19 감사 교정: 쇼츠 열 제거 — 사진 팬아웃 채널 = 블로그·인스타·페이스북(GENERATION.md,
     "youtube/reels는 범위 밖 — 영상 파이프라인 별도"). 쇼츠는 S9에서 "영상 올리면 전문 편집자"로 정확히 다룸 */
-function S4FormatRow({ dark }: { dark?: boolean }) {
+function S4FormatRow({ dark, shorts = false }: { dark?: boolean; shorts?: boolean }) {
   /* 2026-07-20 사장님 "모바일 목업을 PC에 그대로 쓰니 개판" — 이 간이 카드는 모바일 전용으로 강등,
      PC = S4FormatRowPC(실물 게시물 밀도·동일 폭 3카드) */
   const chLabel = dark ? 'text-white/60' : 'text-text-weak';
   return (
     <>
-    <S4FormatRowPC dark={dark} />
+    <S4FormatRowPC dark={dark} shorts={shorts} />
     {/* 모바일 = 3카드 폭·높이 균일(사장님 2026-07-20 "PC처럼 폭 같게" — 이미지 4:3 통일 + items-stretch) */}
-    <div className="grid grid-cols-3 items-stretch gap-2 md:hidden">
+    {/* shorts면 2×2 — 390px에서 4칸은 카드가 88px로 좁아져 읽히지 않는다 */}
+    <div className={`grid items-stretch gap-2 md:hidden ${shorts ? 'grid-cols-2' : 'grid-cols-3'}`}>
       {/* 블로그 — 가로 글 카드 */}
       <div className="flex flex-col">
         <p className="mb-1.5 flex items-center gap-1">
@@ -871,6 +872,30 @@ function S4FormatRow({ dark }: { dark?: boolean }) {
           </div>
         </div>
       </div>
+      {/* 쇼츠·릴스 — PC와 같은 갈래(§4.4). 카드 안 "직접 확인 후 발행" = §4.5 */}
+      {shorts && (
+      <div className="flex flex-col">
+        <p className="mb-1.5 flex items-center gap-1">
+          <span className="flex h-[13px] w-[13px] items-center justify-center bg-[#171717]"><svg width="6" height="6" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>
+          <span className={`text-[9.5px] font-semibold ${chLabel}`}>쇼츠·릴스</span>
+        </p>
+        <div className="flex flex-1 flex-col overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: MINI_SHADOW }}>
+          <span className="relative block aspect-[4/3] w-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/content/biz-pension-1.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: 'center 30%' }} loading="lazy" />
+            <span aria-hidden className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full" style={{ background: 'rgba(22,22,26,0.55)' }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 6.5 18 12l-9 5.5z" /></svg>
+              </span>
+            </span>
+          </span>
+          <div className="flex-1 bg-[#FAFAFA] px-2 pb-1.5 pt-1">
+            <p className="text-[9px] font-bold leading-[1.35] text-text-primary">세로 영상</p>
+            <p className="mt-0.5 text-[8px] font-medium text-text-muted">직접 확인 후 발행</p>
+          </div>
+        </div>
+      </div>
+      )}
     </div>
     </>
   );
@@ -878,7 +903,7 @@ function S4FormatRow({ dark }: { dark?: boolean }) {
 
 /** 03 PC 전용 — 실물 게시물 3카드(사장님 2026-07-20 "카드 크기 제각각·게시물 같지도 않음" 재작업).
     문법 = /ads 인스타 실물 04(프로필·액션·좋아요·캡션 풀 구조). 카피·사진 = 기존 확정분 재사용(지어내기 없음) */
-function S4FormatRowPC({ dark }: { dark?: boolean }) {
+function S4FormatRowPC({ dark, shorts = false }: { dark?: boolean; shorts?: boolean }) {
   const chLabel = dark ? 'text-white/60' : 'text-text-weak';
   const CARD = { border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW } as const;
   return (
@@ -889,7 +914,7 @@ function S4FormatRowPC({ dark }: { dark?: boolean }) {
     <div className="mb-6 flex justify-center">
       <S4StepHead n="03" label={multiChannel.steps[2].title} desc={multiChannel.steps[2].desc} dark={dark} />
     </div>
-    <div className="grid grid-cols-3 items-stretch gap-6">
+    <div className={`grid items-stretch gap-6 ${shorts ? 'grid-cols-4' : 'grid-cols-3'}`}>
       {/* 블로그 — 네이버 블로그 게시물 결 */}
       <div className="flex flex-col">
         <p className="mb-2 flex items-center gap-1.5">
@@ -981,12 +1006,38 @@ function S4FormatRowPC({ dark }: { dark?: boolean }) {
           </div>
         </div>
       </div>
+      {/* ★2026-09-19 쇼츠·릴스 — 개선안 §4.4 "블로그·인스타그램, 쇼츠·릴스를 구분해 보여준다".
+          구 화면은 세 카드가 전부 글+이미지라 **영상 갈래가 통째로 없었다**(원본도 마찬가지였다).
+          앱 지도 1·41·54번 = 올릴 때 [블로그·인스타]와 [쇼츠·릴스]를 먼저 고르고, 영상은 별도 흐름이다.
+          카드 안 "직접 확인 후 발행" = §4.5 "영상은 자동 승인 대상이 아니므로 영상까지 자동 승인하는
+          화면이나 문구를 만들지 않는다". 목업 **밖**에 주석 줄을 달지 않으려고 카드 안에 넣었다(§7-9). */}
+      {shorts && (
+      <div className="flex flex-col">
+        <p className="mb-2 flex items-center gap-1.5">
+          <span className="flex h-[15px] w-[15px] items-center justify-center bg-[#171717]"><svg width="7" height="7" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>
+          <span className={`text-[11.5px] font-semibold ${chLabel}`}>쇼츠·릴스</span>
+        </p>
+        <div className="flex flex-1 flex-col overflow-hidden bg-white" style={CARD}>
+          <span className="relative block flex-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/content/biz-pension-1.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: 'center 30%' }} loading="lazy" />
+            <span aria-hidden className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: 'rgba(22,22,26,0.55)' }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 6.5 18 12l-9 5.5z" /></svg>
+              </span>
+            </span>
+            <span aria-hidden className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}>세로 영상</span>
+          </span>
+          <p className="px-3 py-2.5 text-[11px] font-medium text-text-muted">직접 확인 후 발행</p>
+        </div>
+      </div>
+      )}
     </div>
     </div>
   );
 }
 
-export function ContentS4({ dark, choice = false }: { dark?: boolean; choice?: boolean }) {
+export function ContentS4({ dark, choice = false, shorts = false }: { dark?: boolean; choice?: boolean; shorts?: boolean }) {
   /* ★2026-09-18 `choice` 선택 인자 — 기본 false면 **원본 /content 출력과 완전히 동일**하다.
      true면 01 스텝의 업로드 화면 위에 "오늘 찍은 사진 / 갖고 있던 사진" 전환이 붙고,
      고르면 업로드 화면 자체가 바뀐다(사진 장수·보관함 제목·하단 줄).
@@ -1040,6 +1091,13 @@ export function ContentS4({ dark, choice = false }: { dark?: boolean; choice?: b
                           style={k === 'batch' ? { borderLeft: `1px solid ${BORDER}` } : undefined}
                         >
                           {label}
+                          {/* ★2026-09-19 이용 조건 — 앱 지도 358번: "사진 맡기기 **이상 요금제**의 업체가…
+                              기본 요금제이면 선택 화면은 문의함으로 보내고, 주소를 직접 열어도 서버가 거부합니다."
+                              조건 없이 두 버튼을 나란히 두면 누구나 되는 것처럼 읽힌다(개선안 §4.2 "상위 플랜으로
+                              확정되면 해당 조건을 함께 표시한다"). 설명 줄을 밖에 달지 않고 **버튼 안**에 붙인다. */}
+                          {k === 'batch' && (
+                            <span className={`ml-1.5 align-middle text-[10.5px] font-bold ${on ? 'text-white/70' : 'text-text-muted'}`}>플러스</span>
+                          )}
                         </button>
                       );
                     })}
@@ -1067,7 +1125,7 @@ export function ContentS4({ dark, choice = false }: { dark?: boolean; choice?: b
               <div className="md:hidden">
                 <S4StepHead n="03" label={multiChannel.steps[2].title} desc={multiChannel.steps[2].desc} dark={dark} />
               </div>
-              <S4FormatRow dark={dark} />
+              <S4FormatRow dark={dark} shorts={shorts} />
             </div>
           </div>
         </div>
@@ -1372,11 +1430,7 @@ function S8Result({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** 상호 검색 UI — 앱 시작 화면(A15: 이름 입력이 전부). 서사의 출발점
- *  ★2026-09-18 `framed` 선택 인자 — 기본 false면 원본 그대로.
- *  true면 위에 Chrome 창머리를 얹어 **"앱 화면"임이 눈에 드러난다.**
- *  개선안 §4.8이 지적한 "입력되지 않는데 입력창처럼 보이는" 문제를, 버튼으로 바꿔 흐름을 끊는 대신
- *  기존 목업 문법(Chrome)으로 해결한 것. 페이지 하단의 진짜 /start 버튼과 역할이 갈린다. */
+/** 상호 검색 UI — 앱 시작 화면(A15: 이름 입력이 전부). 서사의 출발점 */
 /* ★2026-09-18 `cta` — 개선안 §4.8 "입력되지 않는 '가게 이름' 검색창 모양은 명확한 버튼으로 바꾼다".
    구 화면은 검색창처럼 생겼는데 **누르거나 입력할 수 없는 그림**이었다(role="img").
    손님이 상호를 넣어 보려다 아무 일도 안 일어나는 자리였다.
@@ -1468,7 +1522,7 @@ function S8TopicSteps({ shoot = false }: { shoot?: boolean } = {}) {
         <S8Step n="03" icon={S8_ICONS.calendar} title="1년 달력에 배치" desc="계절과 시기에 맞춰 매주 쓸 글감을 미리 정해 둡니다" />
         {/* ★2026-09-18 `shoot` = 촬영 안내(승인 기획 2의 세 번째 갈래). 기본 false면 원본 그대로 3단계.
             글감에서 "그럼 뭘 찍지"가 이어지므로 04로 붙인다 — 별도 구간을 만들지 않는다 */}
-        {shoot && <S8Step n="04" icon={S8_ICONS.pin} title="촬영 안내" desc="글감마다 어떤 사진과 영상을 준비하면 좋은지 알려 드립니다" />}
+        {shoot && <S8Step n="04" icon={S8_ICONS.pin} title="촬영 안내" desc="글감마다 어떤 사진을 준비하면 좋은지 알려 드립니다" />}
       </S8StepGroup>
       <S8Result>
         <span className="text-[15px] font-bold tracking-[-0.02em] text-accent">

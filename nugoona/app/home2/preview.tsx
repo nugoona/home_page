@@ -46,7 +46,7 @@ export default function HomePreview() {
         <SpacerRow />
 
         {/* ② 콘텐츠 순환 — 캐러셀에 04 "다음 콘텐츠에 반영" 추가 */}
-        <Section noBorder><TwoAppsRail loop video /></Section>
+        <Section noBorder><TwoAppsRail video /></Section>
         <SpacerRow />
 
         <Section noBorder><BrandPhilosophySection /></Section>

@@ -105,7 +105,10 @@ function TrackingVisual() {
           <svg width="8" height="8" viewBox="0 0 12 12" fill="#fff"><path d="M1.5 1h3.2l2 3.4V1h3.8v10H7.3L5.3 7.6V11H1.5z" /></svg>
         </span>
         <span className="text-[12px] font-bold tracking-[-0.01em] text-text-primary">네이버 검색 API</span>
-        <span className="ml-auto text-[11px] font-medium text-text-muted">매일 확인</span>
+        {/* ★2026-09-19 "데모 화면" 표시 — 아래 검색량·순위는 고정값이라 실제 자료로 읽혔다(§0.6).
+            ⛔ 목업 **아래**에 주석 줄을 달지 않는다(DESIGN §7-9 "목업 아래 단독 한 줄 금지").
+            광고 쪽이 이미 쓰는 문법 그대로 **목업 머리 안**에 넣는다(AdsSections "데모 화면" 배지). */}
+        <span className="ml-auto text-[11px] font-medium text-text-muted">매일 확인 · 데모 화면</span>
       </div>
 
       {ROWS.map((row) => (
@@ -166,7 +169,7 @@ export default function ContentPreview() {
             ⛔ 새 구간·새 상자·설명 문단을 만들지 않았다 — 같은 화면 안에서 상태만 바뀐다.
             `choice`는 기본 false라 원본 /content에는 나타나지 않는다(회귀 확인 완료). */}
         <Section noBorder>
-          <div className="bg-[#eef0f3]"><ContentS4 choice /></div>
+          <div className="bg-[#eef0f3]"><ContentS4 choice shorts /></div>
         </Section>
         <SpacerRow top />
 

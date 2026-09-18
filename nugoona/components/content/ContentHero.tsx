@@ -98,19 +98,31 @@ const SUB_HTML = <>광고는 멈추면 사라지지만 꾸준히 쌓은 글은<b
    도구보다 **콘텐츠 운영 전체**를 보여준다"고 한 지점이다. 제목(열망)은 2026-07-17 확정 카피라
    손대지 않고, 설명 두 줄만 운영 흐름으로 바꿔 사장님이 나란히 비교하실 수 있게 했다.
    줄 수는 그대로 둘이다. */
-const SUB_FLOW = <>무엇을 올릴지 정하고, 채널에 맞게 만들고, 예약 발행합니다.<br />발행 후에는 실제 검색 위치를 확인해 다음 콘텐츠에 반영합니다.</>;
+const SUB_FLOW = <>무엇을 올릴지 정하고, 채널에 맞게 만들고,<br />예약 발행합니다.</>;
+/* ⚠ §4.1 설명 후보는 두 문장이지만 **앞 문장만** 쓴다.
+   둘 다 넣었더니 모바일에서 2줄(44자) → 4줄(69자), 높이가 두 배가 됐다(390·320px 실측).
+   사장님 반복 지적이 "텍스트가 많아버리고 정보 전달이 안 된다"이므로 첫 화면에서 늘리지 않는다.
+   뒤 문장("발행 후 검색 위치를 확인해 다음 콘텐츠에 반영")이 말하는 것은
+   페이지 뒤쪽 검색 현황 구간이 **장면으로** 보여 준다 — 글로 두 번 말하지 않는다. */
 
-function Cta({ mobile = false }: { mobile?: boolean }) {
-  /* 다크 히어로 CTA = 흰 배경 + 잉크 글자(홈 HeroB 문법). PC도 라운드(사장님 2026-07-20 "히어로 버튼 전부 라운드") */
-  return (
-    <span className={`rounded-pill inline-flex items-center gap-2 bg-white font-semibold text-[#0a0a0a] transition-colors hover:bg-[#eaeaea] ${mobile ? 'px-7 py-3 text-[14px]' : 'px-8 py-4 text-[15px]'}`}>
+function Cta({ mobile = false, link = false }: { mobile?: boolean; link?: boolean }) {
+  /* 다크 히어로 CTA = 흰 배경 + 잉크 글자(홈 HeroB 문법). PC도 라운드(사장님 2026-07-20 "히어로 버튼 전부 라운드")
+     ★2026-09-19 `link` — 이 버튼은 **눌리지 않는 글자**였다(span, 감싸는 링크 없음).
+     §4.1 "첫 무료 시작 문구를 실제 /start 버튼으로 만든다"의 대상이 바로 여기다.
+     ⚠ 카피 파일(lib/content/content.ts)에는 href가 적혀 있었지만 이 화면은 그 데이터를 쓰지 않는다 —
+     파일만 보고 "연결됨"이라 판정하면 안 되는 자리다. 모양·크기·색은 그대로 두고 링크만 씌운다. */
+  const cls = `rounded-pill inline-flex items-center gap-2 bg-white font-semibold text-[#0a0a0a] transition-colors hover:bg-[#eaeaea] ${mobile ? 'px-7 py-3 text-[14px]' : 'px-8 py-4 text-[15px]'}`;
+  const inner = (
+    <>
       1개월 무료로 시작
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden><path d="M6 4l4 4-4 4" /></svg>
-    </span>
+    </>
   );
+  if (link) return <a href="/start" style={{ color: '#0a0a0a' }} className={`${cls} no-underline`}>{inner}</a>;
+  return <span className={cls}>{inner}</span>;
 }
 
-function renderCell(key: string, sub: React.ReactNode = SUB_HTML) {
+function renderCell(key: string, sub: React.ReactNode = SUB_HTML, link = false) {
   switch (key) {
     case 'text': /* PC — 한 칸에 로고배지+h1+sub+cta (다크: 흰 타이포 + 회색 서브 = Linear 위계) */
       return (
@@ -118,7 +130,7 @@ function renderCell(key: string, sub: React.ReactNode = SUB_HTML) {
           {/* 미세 딥섀도(다크 위 검정 그림자 = 깊이, blur 작게 — 뿌염 금지 선) */}
           <h1 className="mb-5 text-[clamp(30px,4.4vw,52px)] font-semibold leading-[1.12] tracking-[-0.04em] text-white [text-shadow:0_1px_0_rgba(0,0,0,0.45),0_3px_8px_rgba(0,0,0,0.35)]">{H1_HTML}</h1>
           <p className="mx-auto mb-7 text-[16px] font-medium leading-[1.5] text-white/55">{sub}</p>
-          <Cta />
+          <Cta link={link} />
         </FadeUp>
       );
     case 'm-head': /* 모바일 — 로고배지 + h1(24px·자간 -0.02em §8.18-H) */
@@ -130,7 +142,7 @@ function renderCell(key: string, sub: React.ReactNode = SUB_HTML) {
     case 'm-sub':
       return <p className="text-[14px] font-medium leading-[1.5] text-white/55">{sub}</p>;
     case 'm-cta':
-      return <Cta mobile />;
+      return <Cta mobile link={link} />;
     default:
       return <Wall mobile={key === 'wall-m'} />;
   }
@@ -151,7 +163,7 @@ function Cross({ left, top }: { left: string; top: string }) {
 
 export default function ContentHero({ flow = false }: { flow?: boolean } = {}) {
   /* flow = 설명 두 줄을 §4.1 운영 흐름으로. 기본 false면 원본 /content 출력 그대로다. */
-  const cell = (key: string) => renderCell(key, flow ? SUB_FLOW : SUB_HTML);
+  const cell = (key: string) => renderCell(key, flow ? SUB_FLOW : SUB_HTML, flow);
   /* 다크 히어로(사장님 2026-07-16, Linear 레퍼런스) = §8.17 "다크=선언부" 정본 회귀.
      checker·선 = dark 톤(rgba 0.12), 배경 = 홈 다크 계열 #0a0a0a */
   return (

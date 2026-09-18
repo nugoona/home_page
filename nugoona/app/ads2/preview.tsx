@@ -55,23 +55,15 @@ function SectionHead({ eyebrow, heading, sub, dark }: { eyebrow: string; heading
   );
 }
 
-/** 거친 조립용 목업 자리 표시 — 2단계에서 실물로 교체 */
-function MockSlot({ label, h = 260 }: { label: string; h?: number }) {
-  return (
-    <div
-      className="flex w-full max-w-[560px] items-center justify-center border border-dashed border-[#c6cbd4] bg-[#fafbfc] text-[13px] font-semibold text-[#8a919c]"
-      style={{ height: h }}
-      aria-hidden
-    >
-      목업 자리 · {label}
-    </div>
-  );
-}
-
 export default function AdsPreview() {
   return (
     <main>
       <OuterContainer>
+        {/* 시안 표시 한 줄 — 원본에는 없다 */}
+        <div className="flex items-center justify-between gap-4 border-b border-border-default px-8 py-3 text-[12px] text-text-weak max-md:px-5">
+          <span>비교 시안 · 광고(구간 순서)</span>
+          <a href="/ads" className="underline underline-offset-4">기존 페이지 보기</a>
+        </div>
 
         {/* ── 1 · 히어로 — 정본 좌표계(OccupancyGrid) 재구축(사장님 2026-07-18 "홈·콘텐츠 히어로 법칙대로") ── */}
         <Section dark noBorder>

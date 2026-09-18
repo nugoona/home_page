@@ -252,7 +252,11 @@ const NC = {
   logo: '/img/logo/nc.svg?v=16',
   name: '누구나 콘텐츠',
   headHtml: '찍어둔 사진과 영상이<br>가게 콘텐츠가 됩니다',
-  desc: '블로그 글과 짧은 영상까지 준비하고, 발행 일정과 검색 노출을 한곳에서 확인합니다',
+  /* ★2026-09-19 §3.4 콘텐츠 순환을 **이 문장에 흡수**했다(구 "발행 일정과 검색 노출을 한곳에서 확인합니다").
+     처음엔 03 목업 아래에 한 줄을 붙였는데 DESIGN §7-9가 금지한다 —
+     "목업 아래 단독 한 줄(캡션·메타·칩) 금지 · 사장님 반복 지적 '주석처럼 넣지 마, 몇 번 얘기해'".
+     같은 절이 정한 해법이 "소구 문구는 섹션 카피(서브)에 흡수"다. 글자 수도 41→38자로 줄었다. */
+  desc: '블로그 글과 짧은 영상까지 준비하고, 검색 노출을 확인해 다음 글에 반영합니다',
   href: '/content',
   cta: '노출 살펴보기',
   tint: '#0070f3', // 제품 컬러 코딩(모바일 스티키 바 라인 — S7 점 색과 동일 계열)
@@ -298,7 +302,7 @@ const NA_MOBILE: CarouselProduct = {
   ],
 };
 
-export default function TwoAppsRail({ loop = false, video = false }: { loop?: boolean; video?: boolean } = {}) {
+export default function TwoAppsRail({ video = false }: { video?: boolean } = {}) {
   /* ★2026-09-18 `loop` — 기본 false면 원본 홈 출력 그대로.
      true면 콘텐츠 03 장면 아래에 "아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다" 한 줄이 붙는다
      (개선안 §3.4 콘텐츠 순환의 마지막 고리). /home2에서만 켠다 */
@@ -343,7 +347,7 @@ export default function TwoAppsRail({ loop = false, video = false }: { loop?: bo
       );
     if (key === 'text1') return <ProductText {...NC} />;
     if (key === 'text2') return <ProductText {...NA} />;
-    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene loop={loop} video={video} /></div>;
+    if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene video={video} /></div>;
     return <div className="w-full max-w-[620px] px-6 py-8"><S42AdScene /></div>;
   };
 
@@ -363,15 +367,7 @@ export default function TwoAppsRail({ loop = false, video = false }: { loop?: bo
             <BranchFlow uid="s4m" />
           </div>
         </div>
-        {/* ★2026-09-18 모바일 순환(§3.4) — PC는 03 목업 **아래**에 한 줄을 붙이는데,
-            모바일 카드는 높이 고정(452px)에 목업 하단이 일부러 잘리는 디자인("홀더에 꽂힌 느낌")이라
-            같은 자리에 넣으면 잘린다. 03 제목을 늘려 담아 보니 2~3줄이 되어 목업 영역을 침범했다
-            (390·360px 2줄 / 320px 3줄 — 실측). → **카드 밖**, 캐러셀 바로 아래 한 줄로 받는다. */}
-        <MobileProductCarousel
-          p={NC_MOBILE}
-          Mock={video ? NcMobileMockVideo : NcMobileMock}
-          loopNote={loop ? '아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다' : undefined}
-        />
+        <MobileProductCarousel p={NC_MOBILE} Mock={video ? NcMobileMockVideo : NcMobileMock} />
         <MobileProductCarousel p={NA_MOBILE} Mock={NaMobileMock} />
       </div>
 

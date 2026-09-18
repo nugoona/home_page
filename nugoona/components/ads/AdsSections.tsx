@@ -1007,7 +1007,7 @@ function RptSidebar({ inView, reduce }: { inView: boolean; reduce: boolean }) {
             {/* AI 분석 문법 각주 — 실물(#003366 좌보더) */}
             <div className="mt-2 border-l-[3px] border-[#003366] bg-[#F8F9FA] px-3 py-2">
               {/* 고정 컷 1개(이번 달 목표와 할 일) + 도는 카드 5개 = 6개. "여덟 개"는 구 9섹션 시절 값 */}
-              <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]"><b className="font-bold text-[#003366]">AI 분석</b> — 아래 다섯 개 섹션의 숫자를 모두 읽고 내린 결론입니다.</p>
+              <p className="text-[9.5px] font-medium leading-[1.6] text-[#495057]"><b className="font-bold text-[#003366]">AI 분석</b> — 아래 섹션의 숫자를 모두 읽고 내린 결론입니다.</p>
             </div>
             {/* 나머지 8개 장 — 수직 마퀴(분량 증명).
                 2026-07-20 사장님 "페이드 싫음 → 선명한 그림자로": 흰 그라디언트 페이드 2개 폐기,
