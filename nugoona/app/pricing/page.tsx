@@ -5,7 +5,7 @@ import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 import Accordion from '@/components/ui/Accordion';
 import PricingTabs from '@/components/ui/PricingTabs';
-import { pricingHero, productHeads, contentTiers, adsTiers, pricingFootnote, bundleNote, pricingFaq, freezePromise } from '@/lib/content/pricing';
+import { pricingHero, productHeads, contentTiers, adsTiers, pricingFootnote, pricingFaq, freezePromise } from '@/lib/content/pricing';
 
 export const metadata: Metadata = {
   title: '요금',
@@ -56,7 +56,6 @@ export default function PricingPage() {
                 <p className="mt-8 text-center text-[13px] leading-[1.6] text-text-body">{pricingFootnote}</p>
                 {/* ★§7.4 묶음 — "요금표의 주인공으로 내세우지 않는다"는 지시에 따라
                     카드가 아니라 각주 아래 한 줄로만 둔다(각주보다 한 단계 더 여린 톤). */}
-                <p className="mt-3 text-center text-[12.5px] leading-[1.6] text-text-muted">{bundleNote}</p>
               </div>
             </FadeUp>
           </div>

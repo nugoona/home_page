@@ -1,6 +1,22 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 export default function Footer() {
+  /* ★2026-09-18 연락처 칸 시안 — 비교 경로(/home2·/content2·/ads2)에서만 다르게 그린다.
+     원본 경로의 출력은 한 글자도 바뀌지 않는다(아래 preview 분기 밖은 손대지 않았다).
+
+     왜: docs/_handoff-dashboard-support-escalation.md (CEO 확정 2026-07-20)
+     "전화·실시간 상담 = 안 한다. 대표번호는 화면에서 내리는 방향."
+     지금 푸터는 "연락처 / 대표번호"라 전화 상담 창구로 읽힌다.
+
+     🛑 다만 이 푸터는 전자상거래법상 **사업자 정보 표시란**이다(통신판매업 신고번호 동거).
+     표시 항목에 전화번호가 들어가므로 **완전 삭제는 하지 않았다** — 사장님·법무 확인 사항.
+     시안이 한 것: 라벨을 "연락처 → 문의"로, 전화를 상담 창구 자리에서 **사업 정보 칸으로 이동**.
+     읽는 순서가 이메일 먼저가 되고, 전화는 법정 표시로만 남는다. */
+  const pathname = usePathname();
+  const preview = /^\/(home2|content2|ads2)(\/|$)/.test(pathname ?? '');
+
   return (
     <footer className="border-t border-border-default bg-white relative">
       <div className="max-w-[1200px] mx-auto px-6 py-16">
@@ -15,10 +31,11 @@ export default function Footer() {
             <p className="text-[13px] font-semibold text-text-primary mb-1">사업 정보</p>
             <p className="text-[13px] text-text-weak">사업자등록번호 : 544-02-02671</p>
             <p className="text-[13px] text-text-weak">통신판매업신고번호 : 2023-서울노원-1648</p>
+            {preview && <p className="text-[13px] text-text-weak">전화 : 010-2781-4543</p>}
           </div>
           <div className="flex flex-col gap-1">
-            <p className="text-[13px] font-semibold text-text-primary mb-1">연락처</p>
-            <p className="text-[13px] text-text-weak">대표번호 : 010-2781-4543</p>
+            <p className="text-[13px] font-semibold text-text-primary mb-1">{preview ? '문의' : '연락처'}</p>
+            {!preview && <p className="text-[13px] text-text-weak">대표번호 : 010-2781-4543</p>}
             <p className="text-[13px] text-text-weak">이메일문의 : oscar@nugoona.co.kr</p>
           </div>
         </div>
