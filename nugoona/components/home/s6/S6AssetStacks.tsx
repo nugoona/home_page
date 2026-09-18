@@ -294,7 +294,7 @@ export default function S6AssetStacks() {
       <span aria-hidden className="pointer-events-none absolute top-0 h-[2px] w-[150px] bg-[#171717]" style={{ right: '12.5%' }} />
       <p className="relative px-8 text-left text-[clamp(23px,2.8vw,33px)] leading-[1.35] tracking-[-0.035em]">
         <span className="font-medium text-[#6b7280]">서비스 이용이 종료되어도</span><br />
-        <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정,<br />운영 기록은 그대로 남습니다</span>
+        <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정은<br />고객님의 것으로 남습니다</span>
       </p>
     </div>
   );
@@ -324,7 +324,7 @@ export default function S6AssetStacks() {
           />
           <p className="relative inline-block text-left text-[clamp(20px,5.4vw,25px)] leading-[1.5] tracking-[-0.03em]">
             <span className="font-medium text-[#6b7280]">서비스 이용이 종료되어도</span><br />
-            <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정,<br />운영 기록은 그대로 남습니다</span>
+            <span className="font-bold text-text-primary">발행한 콘텐츠와 광고 계정은<br />고객님의 것으로 남습니다</span>
           </p>
         </div>
       </div>
