@@ -77,11 +77,11 @@ const STEP_MOTION = (delay: number) => ({
    part 모드 = h-full flex-col: StepHead는 칸 상단 Y 통일, 목업은 남은 공간 세로 중앙(my-auto) */
 export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; hideHead?: boolean }) {
   return (
-    <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="사진 네 장을 올리면 글이 자동으로 완성되고, 검색 결과에서 발견되는 3단계 장면">
+    <div className={part ? 'mx-auto flex w-full max-w-[380px] flex-col' : 'mx-auto w-full max-w-[380px]'} role="img" aria-label="사진 몇 장을 올리면 채널에 맞는 글이 되고, 검색 위치까지 확인하는 3단계 장면">
       {/* ── 01 사진 4장만 올리면 — 폰 업로드 화면(상단 크롭) ── */}
       {(part === undefined || part === 1) && (
       <motion.div {...STEP_MOTION(0)} className={part ? 'relative flex flex-col' : 'relative z-10'}>
-        {!hideHead && <StepHead n="01" label="사진 4장만 올리면" first />}
+        {!hideHead && <StepHead n="01" label="사진 몇 장만 올리면" first />}
         <div
           className={part ? 'mx-auto overflow-hidden' : 'mx-auto overflow-hidden'}
           style={{
@@ -171,7 +171,8 @@ export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; h
                     letterSpacing: '-0.01em',
                   }}
                 >
-                  사진 4장 올리기
+                  {/* ★2026-09-18 "사진 4장 올리기" → 장수를 빼 라벨과 맞춤(§4.9). 그림은 4장 그대로다 */}
+                  사진 올리기
                 </div>
               </div>
               {/* 유리 글레어 */}
@@ -197,7 +198,7 @@ export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; h
       {(part === undefined || part === 2) && (
       <motion.div {...STEP_MOTION(0.22)} className={part ? 'relative flex flex-col' : 'relative z-20'}>
         {/* 3열(part) 배치 = 칸 경계가 구획이므로 first 스타일(세로 스택에서만 border-t 구획) */}
-        {!hideHead && <StepHead n="02" label="글이 자동으로 완성되고" first={part !== undefined} />}
+        {!hideHead && <StepHead n="02" label="채널에 맞는 글이 되고" first={part !== undefined} />}
         <div
           className={part ? 'w-full overflow-hidden rounded-[12px] bg-white px-4 pb-4 pt-3.5' : 'overflow-hidden rounded-[12px] bg-white px-4 pb-4 pt-3.5'}
           style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 14px 30px rgba(0,0,0,0.09)' }}
@@ -235,7 +236,7 @@ export default function S41SearchScene({ part, hideHead }: { part?: 1 | 2 | 3; h
       {/* ── 03 검색에서 찾아져요 — 검색 브라우저(같은 제목·같은 사진 발견) ── */}
       {(part === undefined || part === 3) && (
       <motion.div {...STEP_MOTION(0.44)} className={part ? 'relative flex flex-col' : 'relative z-30'}>
-        {!hideHead && <StepHead n="03" label="검색에서 찾아져요" first={part !== undefined} />}
+        {!hideHead && <StepHead n="03" label="검색 위치까지 확인합니다" first={part !== undefined} />}
         <div
           className={part ? 'w-full overflow-hidden rounded-[12px] bg-white' : 'overflow-hidden rounded-[12px] bg-white'}
           style={{ border: `1px solid ${BORDER}`, boxShadow: '0 2px 6px rgba(0,0,0,0.05), 0 18px 40px rgba(0,0,0,0.10)' }}
