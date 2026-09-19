@@ -7,7 +7,7 @@ import MobileProductCarousel, { type CarouselProduct } from '@/components/home/s
 import { NcMobileMock, NcMobileMockVideo, NaMobileMock } from '@/components/home/s4/MobileStepMocks';
 import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
 import { useRevealOnView, RevealHtmlLines } from '@/components/motion/Reveal';
-import { homeV2 } from '@/lib/content/home';
+import { homeV2, homePreview } from '@/lib/content/home';
 
 /**
  * S4 · 두 개의 앱 — Grid Occupancy 좌표계 위 제품별 지그재그 2열(2026-07-15 재구성).
@@ -302,10 +302,11 @@ const NA_MOBILE: CarouselProduct = {
   ],
 };
 
-export default function TwoAppsRail({ video = false }: { video?: boolean } = {}) {
-  /* ★2026-09-18 `loop` — 기본 false면 원본 홈 출력 그대로.
-     true면 콘텐츠 03 장면 아래에 "아직 보이지 않는 검색어는 다음에 쓸 글감이 됩니다" 한 줄이 붙는다
-     (개선안 §3.4 콘텐츠 순환의 마지막 고리). /home2에서만 켠다 */
+export default function TwoAppsRail({ video = false, refined = false }: { video?: boolean; refined?: boolean } = {}) {
+  const nc = refined ? { ...NC, ...homePreview.content } : NC;
+  const na = refined ? { ...NA, ...homePreview.ads } : NA;
+  const ncMobile = refined ? { ...NC_MOBILE, ...homePreview.content, steps: NC_MOBILE.steps.map((step, i) => ({ ...step, label: homePreview.contentSteps[i] })) } : NC_MOBILE;
+  const naMobile = refined ? { ...NA_MOBILE, ...homePreview.ads, steps: NA_MOBILE.steps.map((step, i) => ({ ...step, label: homePreview.adsSteps[i] })) } : NA_MOBILE;
   const defRevealRef = useRevealOnView<HTMLDivElement>();
   const renderD = (key: string) => {
     if (key === 'def-text')
@@ -345,8 +346,8 @@ export default function TwoAppsRail({ video = false }: { video?: boolean } = {})
           </div>
         </div>
       );
-    if (key === 'text1') return <ProductText {...NC} />;
-    if (key === 'text2') return <ProductText {...NA} />;
+    if (key === 'text1') return <ProductText {...nc} />;
+    if (key === 'text2') return <ProductText {...na} />;
     if (key === 'mock1') return <div className="w-full max-w-[620px] px-6 py-8"><S41SearchScene video={video} /></div>;
     return <div className="w-full max-w-[620px] px-6 py-8"><S42AdScene /></div>;
   };
@@ -367,8 +368,8 @@ export default function TwoAppsRail({ video = false }: { video?: boolean } = {})
             <BranchFlow uid="s4m" />
           </div>
         </div>
-        <MobileProductCarousel p={NC_MOBILE} Mock={video ? NcMobileMockVideo : NcMobileMock} />
-        <MobileProductCarousel p={NA_MOBILE} Mock={NaMobileMock} />
+        <MobileProductCarousel p={ncMobile} Mock={video ? NcMobileMockVideo : NcMobileMock} interactive={refined} />
+        <MobileProductCarousel p={naMobile} Mock={NaMobileMock} interactive={refined} />
       </div>
 
       {/* PC — 풀폭 헤딩 칸 + 제품별 좌 텍스트/우 목업 2열(원복 2026-07-15) */}

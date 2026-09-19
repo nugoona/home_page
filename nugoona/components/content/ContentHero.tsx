@@ -9,6 +9,7 @@
 import { Marquee } from '@/components/lab-sources/magicui/marquee';
 import FadeUp from '@/components/motion/FadeUp';
 import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
+import { contentPreviewCopy } from '@/lib/content/content';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
 
@@ -93,13 +94,13 @@ const M_AREAS: GridArea[] = [
 const H1_HTML = <>누구나 검색 결과에<br /><span className="text-[#4d9fff]">내 가게가</span> 보이길 원합니다</>;
 /* 줄바꿈 = 사장님 지정(2026-07-16): "…쌓은 글은 / 검색에 남아…" */
 const SUB_HTML = <>광고는 멈추면 사라지지만 꾸준히 쌓은 글은<br />검색에 남아 가게를 계속 보이게 합니다</>;
-/* ★2026-09-18 시안용 설명 — 개선안 §4.1 "설명 후보" 원문 그대로.
+/* 시안용 설명 — 개선안 §4.1 운영 흐름의 의미를 두 줄로 압축.
    【왜】구 설명은 광고와 비교하며 "검색에 남는다"까지만 말한다. §4.1이 "첫 화면은 검색 순위
    도구보다 **콘텐츠 운영 전체**를 보여준다"고 한 지점이다. 제목(열망)은 2026-07-17 확정 카피라
    손대지 않고, 설명 두 줄만 운영 흐름으로 바꿔 사장님이 나란히 비교하실 수 있게 했다.
    줄 수는 그대로 둘이다. */
-const SUB_FLOW = <>무엇을 올릴지 정하고, 채널에 맞게 만들고,<br />예약 발행합니다.</>;
-/* ⚠ §4.1 설명 후보는 두 문장이지만 **앞 문장만** 쓴다.
+const SUB_FLOW = <>{contentPreviewCopy.heroLines[0]}<br />{contentPreviewCopy.heroLines[1]}</>;
+/* ⚠ §4.1 설명 후보 전체를 옮기지 않고, 글감→발행 흐름만 남긴다.
    둘 다 넣었더니 모바일에서 2줄(44자) → 4줄(69자), 높이가 두 배가 됐다(390·320px 실측).
    사장님 반복 지적이 "텍스트가 많아버리고 정보 전달이 안 된다"이므로 첫 화면에서 늘리지 않는다.
    뒤 문장("발행 후 검색 위치를 확인해 다음 콘텐츠에 반영")이 말하는 것은

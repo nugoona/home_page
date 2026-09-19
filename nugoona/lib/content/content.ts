@@ -41,6 +41,15 @@ export const bridge = {
 
 // S4 · 소구① 전 매체 발행
 // 2026-07-17 ChatGPT 재정리 확정 토씨 반영(대시 제거 = §8.9 구두점 금지)
+// 비교 시안 전용 문구. 원본 콘텐츠 페이지에는 적용하지 않는다.
+export const contentPreviewCopy = {
+  heroLines: ['글감부터 예약 발행까지,', '가게 콘텐츠를 준비합니다.'],
+  preparation: [['now', '직접 올리기'], ['batch', '사진 맡기기']] as const,
+  trackingTitle: '검색 현황',
+  nextTopic: '다음 글감에 반영',
+  assetBody: '글과 사진은 고객님의 계정에 쌓입니다.',
+};
+
 export const multiChannel = {
   heading: '사진 몇 장과 짧은 메모<br />글이 되어 발행됩니다',
   // 2026-07-18 2줄로 축약(사장님: 서브 3줄→2줄, 줄바꿈 균형) — 쉼표는 balance가 줄 앞으로 밀어 "과"로

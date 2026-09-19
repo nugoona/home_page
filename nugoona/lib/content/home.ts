@@ -21,6 +21,15 @@ export const hero = {
 
 /* ── 홈 V2 텍스트 섹션 카피 (메인페이지 최종원고 2026-07-13 사장님 확정) ──
    범용 TextSection 컴포넌트가 렌더. head/body[]/small, <br>는 카피에 직접. 토씨 변경 금지. */
+// 비교 시안: 목적지가 드러나는 버튼과 짧은 첫 화면 설명. 원본 카피는 유지한다.
+export const homePreview = {
+  hero: { ...hero, sub: '콘텐츠부터 광고까지<br>이해하며 직접 운영하세요' },
+  content: { cta: '누구나 콘텐츠 보기', href: '/content2' },
+  ads: { cta: '누구나 광고 보기', href: '/ads2' },
+  contentSteps: ['사진·영상 올리기', '콘텐츠 준비', '검색 위치 확인'],
+  adsSteps: ['광고 만들기', '매출·성과 확인', '궁금한 점 묻기'],
+};
+
 export const homeV2 = {
   why: {
     head: '어려운 건 마케팅이 아닙니다<br>복잡한 시작입니다',

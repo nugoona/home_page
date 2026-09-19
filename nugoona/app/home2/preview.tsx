@@ -39,6 +39,7 @@ import S6AssetStacks from '@/components/home/s6/S6AssetStacks';
 import S3GraphicA from '@/components/home/s3/S3GraphicA';
 import S7UpdatePairs from '@/components/home/s7/S7UpdatePairs';
 import S8CtaDark from '@/components/home/s8/S8CtaDark';
+import { homePreview } from '@/lib/content/home';
 
 export default function HomePreview() {
   return (
@@ -50,11 +51,11 @@ export default function HomePreview() {
           <a href="/" className="underline underline-offset-4">기존 페이지 보기</a>
         </div>
 
-        <Section noBorder><HeroB /></Section>
+        <Section noBorder><HeroB content={homePreview.hero} /></Section>
         <SpacerRow />
 
         {/* ② 콘텐츠 순환 — 캐러셀에 04 "다음 콘텐츠에 반영" 추가 */}
-        <Section noBorder><TwoAppsRail video /></Section>
+        <Section noBorder><TwoAppsRail video refined /></Section>
         <SpacerRow />
 
         <Section noBorder><BrandPhilosophySection /></Section>

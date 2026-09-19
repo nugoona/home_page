@@ -35,7 +35,7 @@
      ③ Channels 구간: 01 설명 한 줄만 바꿔 "맡기기"를 흡수(승인 기획 1).
         목업·레이아웃은 손대지 않았다.
 
-   🛑 원본 /content·공통 컴포넌트는 한 줄도 바꾸지 않았다. 이 파일 안에서만 대체한다.
+   🛑 원본 /content 출력은 유지한다. 공유 컴포넌트는 시안 선택 인자에서만 달라진다.
    ══════════════════════════════════════════════════════════════════ */
 
 import { useEffect, useRef, useState } from 'react';
@@ -44,6 +44,7 @@ import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 import { SpacerRow } from '@/components/layout/OccupancyGrid';
 import ContentHero from '@/components/content/ContentHero';
+import { contentPreviewCopy } from '@/lib/content/content';
 import {
   Eyebrow,
   ContentS2, ContentS3, ContentS4,
@@ -113,11 +114,11 @@ function TrackingVisual() {
         <span className="flex h-[16px] w-[16px] items-center justify-center bg-[#03c75a]" aria-hidden>
           <svg width="8" height="8" viewBox="0 0 12 12" fill="#fff"><path d="M1.5 1h3.2l2 3.4V1h3.8v10H7.3L5.3 7.6V11H1.5z" /></svg>
         </span>
-        <span className="text-[12px] font-bold tracking-[-0.01em] text-text-primary">네이버 검색 API</span>
+        <span className="text-[12px] font-bold tracking-[-0.01em] text-text-primary">{contentPreviewCopy.trackingTitle}</span>
         {/* ★2026-09-19 "데모 화면" 표시 — 아래 검색량·순위는 고정값이라 실제 자료로 읽혔다(§0.6).
             ⛔ 목업 **아래**에 주석 줄을 달지 않는다(DESIGN §7-9 "목업 아래 단독 한 줄 금지").
             광고 쪽이 이미 쓰는 문법 그대로 **목업 머리 안**에 넣는다(AdsSections "데모 화면" 배지). */}
-        <span className="ml-auto text-[11px] font-medium text-text-muted">매일 확인 · 데모 화면</span>
+        <span className="ml-auto text-[11px] font-medium text-text-weak">매일 확인 · 데모 화면</span>
       </div>
 
       {ROWS.map((row) => (
@@ -134,18 +135,14 @@ function TrackingVisual() {
             </div>
           ) : (
             /* 아직 안 보이는 검색어 = 다음에 쓸 글감. 이 줄 하나가 승인 기획 3을 담는다 */
-            <span className="shrink-0 text-[12.5px] font-bold text-text-weak">아직 보이지 않음</span>
+            <div className="shrink-0 text-right">
+              <p className="text-[12.5px] font-bold text-text-weak">아직 보이지 않음</p>
+              <p className="mt-1 text-[12px] font-semibold text-accent">{contentPreviewCopy.nextTopic}</p>
+            </div>
           )}
         </div>
       ))}
 
-      {/* 관계 한 줄 — 위 표의 마지막 줄을 그대로 받는다. 새 상자를 만들지 않았다 */}
-      <p className="mt-3.5 flex items-center gap-2 text-[13.5px] font-semibold text-text-primary">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#0070f3" strokeWidth="1.8" strokeLinecap="square" aria-hidden>
-          <path d="M3 8h10M9 4l4 4-4 4" />
-        </svg>
-        아직 보이지 않는 검색어가 다음에 쓸 글감이 됩니다
-      </p>
     </div>
   );
 }
@@ -242,7 +239,7 @@ export default function ContentPreview() {
               <SectionHead
                 eyebrow="Asset"
                 heading={<>서비스 이용이 끝나도<br />쌓인 글은 그대로 남습니다</>}
-                sub="발행된 글은 고객님의 계정에 쌓입니다. 이용을 멈춰도 콘텐츠는 고객님의 자산으로 남습니다."
+                sub={contentPreviewCopy.assetBody}
               />
               <FadeUp delay={0.1}><ContentS10Visual /></FadeUp>
             </div>

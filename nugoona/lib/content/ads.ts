@@ -199,3 +199,13 @@ export const closing = {
     cta: { text: '누구나 콘텐츠 보기', href: '/content' },
   } satisfies CrossSell,
 };
+
+// /ads2 비교 시안 전용. 원본 /ads의 카피·출력은 유지한다.
+export const previewCopy = {
+  adcanvasHeading: '상품 주소로 광고를 준비합니다',
+  adcanvas: '메타·구글 광고를 확인 후 직접 게시하세요.',
+  dashboard: '같은 기간의 매출·방문·광고 성과를 함께 보고, 광고 관리로 이어갑니다.',
+  market: '29CM·에이블리의 공개 베스트와 검색 흐름을 모아, 우리 쇼핑몰의 참고자료로 보여줍니다.',
+  crossSell: '가게 콘텐츠도 필요하다면',
+  crossSellHref: '/content2',
+};

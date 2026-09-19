@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════════════
    /ads2 — 광고 페이지 구간 순서 비교 시안 (2026-09-18) · 원본 /ads 무수정
 
-   【무엇을 바꿨나 — 순서뿐】 개선안 §5.5가 정한 흐름으로 재배치했다:
+   【무엇을 바꿨나】 개선안 §5.5가 정한 흐름으로 재배치했다:
      누구를 위한 서비스인지 → 광고 제작 → 통합 성과 → 질문
      → 자동 상품 목록·월간 리포트 → 시장 자료·판매 분석 → 시작 지원
 
@@ -10,8 +10,8 @@
    광고를 만든 뒤 성과를 보는 흐름이 끊겼다.
    → 온보딩을 "시작 지원"으로 뒤로 보내고, 대시보드를 제작 바로 뒤로 올렸다.
 
-   ⛔ 12구간 수를 줄이지 않았다 · 장면·카피를 바꾸지 않았다 · 가격표를 신설하지 않았다(§5.5 단서).
-   블록을 통째로 옮겼을 뿐이라 각 구간 내부는 원본과 동일하다.
+   구간 수·장면·가격표 범위는 유지. 2026-09-19에는 중복 설명과 목업 아래 주석을
+   짧은 섹션 카피로 통합하고, 모바일에도 직접 게시한다는 의미를 남겼다.
    ══════════════════════════════════════════════════════════════════ */
 
 import Link from 'next/link';
@@ -24,8 +24,8 @@ import { BackgroundBeams } from '@/components/lab-sources/aceternity/background-
 import AdsHero from '@/components/ads/AdsHero';
 import { AdsAnswerScene, AdsTangle, AdsTangleGrid, AdsCanvasFlow, AdsChatScene, AdsChatGrid, AdsDashScene, AdsCatalogScene, AdsReportScene, AdsReportGrid, AdsMarketScene, AdsStoresScene, AdsEvolveScene, AdsEvolveGrid } from '@/components/ads/AdsSections';
 import {
-  empathy, identity, onboarding, adcanvas, chatbot,
-  dashboard, report, market, multiStore, catalog, evolve, closing,
+  empathy, identity, onboarding, chatbot,
+  dashboard, report, market, multiStore, catalog, evolve, closing, previewCopy,
 } from '@/lib/content/ads';
 
 /* ══════════════════════════════════════════════════════════════════
@@ -61,7 +61,7 @@ export default function AdsPreview() {
       <OuterContainer>
         {/* 시안 표시 한 줄 — 원본에는 없다 */}
         <div className="flex items-center justify-between gap-4 border-b border-border-default px-8 py-3 text-[12px] text-text-weak max-md:px-5">
-          <span>비교 시안 · 광고(구간 순서)</span>
+          <span>비교 시안 · 누구나 광고</span>
           <a href="/ads" className="underline underline-offset-4">기존 페이지 보기</a>
         </div>
 
@@ -86,8 +86,8 @@ export default function AdsPreview() {
         <Section noBorder>
           <div className="bg-[#eef0f3]">
             <div className={WRAP}>
-              {/* 처방3(2026-07-19): 모바일 = 첫 문장만. PC 정본(ads.ts adcanvas.body) 불변 */}
-              <SectionHead eyebrow="AdCanvas" heading={adcanvas.heading} sub={<>상품 URL만 입력하면 메타 광고를 만들고 구글 광고도 상품에 맞게 준비합니다.<span className="max-md:hidden"> 확인과 게시는 직접 결정합니다.</span></>} />
+              {/* 시안은 모바일에서도 확인 후 직접 게시하는 역할을 짧게 남긴다. */}
+              <SectionHead eyebrow="AdCanvas" heading={previewCopy.adcanvasHeading} sub={previewCopy.adcanvas} />
               <FadeUp delay={0.1}>
                 {/* 대주제 서브 ↔ 첫 매체 헤드 사이 여백 확대(사장님 2026-07-19 — 위계는 여백으로) */}
                 <div className="mt-16 flex justify-center max-md:mt-12">
@@ -102,17 +102,14 @@ export default function AdsPreview() {
         {/* ── 7 · 한 화면 + 관리 ── */}
         <Section noBorder>
           <div className={WRAP}>
-            {/* 처방3(2026-07-19): 모바일 = 첫 문장만. PC 정본(ads.ts dashboard.body) 불변 */}
-            {/* manage 문장 = PC 서브 흡수(2026-07-20 ⑥) + 문장당 한 줄 3줄(사장님 지정 카피·줄바꿈 2026-07-20).
-                모바일 = 기존 첫 문장만(처방3) */}
+            {/* 시안은 중복 문장과 모바일 목업 아래 캡션을 섹션 설명 하나로 통합한다. */}
             {/* ★2026-09-18 "광고가 실제 매출로 이어졌는지도 확인" → 교체(개선안 §5.4 "광고와 매출의 관계").
                 서로 다른 자료를 나란히 보여주는 것과 광고 효과의 인과관계를 입증하는 것은 다르다.
                 앱이 하는 일 = 같은 기간의 쇼핑몰 매출과 Meta·Google 성과를 한 화면에 모아 보여주는 것. */}
-            <SectionHead eyebrow="Dashboard" heading={dashboard.heading} sub={<>매출과 광고, 방문 데이터를 한 화면에서 함께 확인합니다.<span className="max-md:hidden"><br />쇼핑몰 매출과 광고 매체의 성과를 함께 살펴보세요.<br />{dashboard.manage}</span></>} />
+            <SectionHead eyebrow="Dashboard" heading={dashboard.heading} sub={previewCopy.dashboard} />
             <FadeUp delay={0.1}>
               {/* 기존 파이프라인 목업 원작 그대로(사장님 2026-07-18) = DashboardShowcase.DataPipelineVisual */}
               <div className="mt-10"><AdsDashScene /></div>
-              <p className="mt-5 max-w-[460px] text-[14px] font-medium leading-[1.6] text-text-body md:hidden">{dashboard.manage}</p>
             </FadeUp>
           </div>
         </Section>
@@ -166,7 +163,7 @@ export default function AdsPreview() {
         <Section noBorder>
           <div className="bg-[#eef0f3]">
             <div className={WRAP}>
-              <SectionHead eyebrow="Market" heading={market.heading} sub={market.body} />
+              <SectionHead eyebrow="Market" heading={market.heading} sub={previewCopy.market} />
               {/* "시장 무드보드" — 좌 리스트 + 우 상품 이미지 마퀴 2열(사장님 총력 지시 2026-07-19) */}
               <FadeUp delay={0.1}>
                 <div className="mt-10"><AdsMarketScene /></div>
@@ -265,8 +262,8 @@ export default function AdsPreview() {
                 </Link>
               </div>
               <p className="mt-10 text-[14px] font-medium text-white/55">
-                {closing.crossSell.text}{' '}
-                <Link href={closing.crossSell.cta.href} className="font-bold text-white underline underline-offset-4">
+                {previewCopy.crossSell}{' '}
+                <Link href={previewCopy.crossSellHref} className="font-bold text-white underline underline-offset-4">
                   {closing.crossSell.cta.text}
                 </Link>
               </p>

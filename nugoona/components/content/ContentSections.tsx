@@ -21,7 +21,7 @@ import { AnimatedBeam } from '@/components/lab-sources/magicui/animated-beam';
 import { BorderBeam } from '@/components/lab-sources/magicui/border-beam';
 import { BackgroundBeams } from '@/components/lab-sources/aceternity/background-beams';
 import { MinimalCard, MinimalCardImage, MinimalCardTitle, MinimalCardDescription } from '@/components/lab-sources/cultui/minimal-card';
-import { buildup, bridge, multiChannel } from '@/lib/content/content';
+import { buildup, bridge, multiChannel, contentPreviewCopy } from '@/lib/content/content';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
 const QUOTE = { fontFamily: 'var(--font-quote), serif' } as const;
@@ -890,8 +890,7 @@ function S4FormatRow({ dark, shorts = false }: { dark?: boolean; shorts?: boolea
             </span>
           </span>
           <div className="flex-1 bg-[#FAFAFA] px-2 pb-1.5 pt-1">
-            <p className="text-[9px] font-bold leading-[1.35] text-text-primary">세로 영상</p>
-            <p className="mt-0.5 text-[8px] font-medium text-text-muted">직접 확인 후 발행</p>
+            <p className="text-[11px] font-medium leading-[1.4] text-text-weak">직접 확인 후 발행</p>
           </div>
         </div>
       </div>
@@ -1028,7 +1027,7 @@ function S4FormatRowPC({ dark, shorts = false }: { dark?: boolean; shorts?: bool
             </span>
             <span aria-hidden className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}>세로 영상</span>
           </span>
-          <p className="px-3 py-2.5 text-[11px] font-medium text-text-muted">직접 확인 후 발행</p>
+          <p className="px-3 py-2.5 text-[11px] font-medium text-text-weak">직접 확인 후 발행</p>
         </div>
       </div>
       )}
@@ -1078,8 +1077,8 @@ export function ContentS4({ dark, choice = false, shorts = false }: { dark?: boo
                 <S4StepHead n="01" label={multiChannel.steps[0].title} desc={multiChannel.steps[0].desc} dark={dark} />
                 {choice && (
                   /* 전환 — 스텝 라벨 아래, 업로드 화면 위. 기존 카드 문법(1px 선 + 반전 강조)을 그대로 쓴다 */
-                  <div className="mb-2.5 flex w-fit border" style={{ borderColor: BORDER }} role="group" aria-label="자료 준비 방식">
-                    {([['now', '오늘 찍은 사진'], ['batch', '갖고 있던 사진']] as const).map(([k, label]) => {
+                  <div className="mb-2.5 grid w-full grid-cols-2 border" style={{ borderColor: BORDER }} role="group" aria-label="자료 준비 방식">
+                    {contentPreviewCopy.preparation.map(([k, label]) => {
                       const on = (k === 'batch') === batch;
                       return (
                         <button
@@ -1087,7 +1086,7 @@ export function ContentS4({ dark, choice = false, shorts = false }: { dark?: boo
                           type="button"
                           aria-pressed={on}
                           onClick={() => setBatch(k === 'batch')}
-                          className={`min-h-[40px] px-3.5 text-[12.5px] font-semibold transition-colors md:text-[13px] ${on ? 'bg-[#171717] text-white' : 'bg-white text-text-weak hover:text-text-primary'}`}
+                          className={`min-h-[44px] min-w-0 px-2 text-[12.5px] font-semibold transition-colors md:text-[13px] ${on ? 'bg-[#171717] text-white' : 'bg-white text-text-weak hover:text-text-primary'}`}
                           style={k === 'batch' ? { borderLeft: `1px solid ${BORDER}` } : undefined}
                         >
                           {label}
@@ -1096,7 +1095,7 @@ export function ContentS4({ dark, choice = false, shorts = false }: { dark?: boo
                               조건 없이 두 버튼을 나란히 두면 누구나 되는 것처럼 읽힌다(개선안 §4.2 "상위 플랜으로
                               확정되면 해당 조건을 함께 표시한다"). 설명 줄을 밖에 달지 않고 **버튼 안**에 붙인다. */}
                           {k === 'batch' && (
-                            <span className={`ml-1.5 align-middle text-[10.5px] font-bold ${on ? 'text-white/70' : 'text-text-muted'}`}>플러스</span>
+                            <span className={`ml-1 align-middle text-[10.5px] font-bold ${on ? 'text-white/70' : 'text-text-weak'}`}>플러스</span>
                           )}
                         </button>
                       );

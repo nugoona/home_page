@@ -36,9 +36,11 @@ const KR = { fontFamily: 'var(--font-kr)' } as const;
 export default function MobileProductCarousel({
   p,
   Mock,
+  interactive = false,
 }: {
   p: CarouselProduct;
   Mock: React.ComponentType<{ part?: 1 | 2 | 3; hideHead?: boolean }>;
+  interactive?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -48,12 +50,12 @@ export default function MobileProductCarousel({
   const onScroll = () => {
     const el = scrollerRef.current;
     if (!el) return;
-    const center = el.scrollLeft + el.clientWidth / 2;
+    const center = interactive ? el.getBoundingClientRect().left + el.clientWidth / 2 : el.scrollLeft + el.clientWidth / 2;
     let best = 0;
     let bestD = Infinity;
     [...el.children].forEach((c, i) => {
       const card = c as HTMLElement;
-      const d = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+      const d = Math.abs((interactive ? card.getBoundingClientRect().left : card.offsetLeft) + card.offsetWidth / 2 - center);
       if (d < bestD) { bestD = d; best = i; }
     });
     if (best !== active) setActive(best);
@@ -81,8 +83,22 @@ export default function MobileProductCarousel({
       </h2>
 
       {/* 스텝 진행 바 + 영어 카운터(라벨 중복 제거 — 라벨은 카드 헤더가 담당, 여긴 위치만) */}
-      <div className="mt-9 mb-4 flex items-center gap-2.5" aria-hidden>
+      <div className="mt-9 mb-4 flex items-center gap-2.5" aria-hidden={interactive ? undefined : true}>
         {p.steps.map((s, i) => (
+          interactive ? <button
+            key={s.n}
+            type="button"
+            aria-label={`${p.name}: ${s.label}`}
+            aria-pressed={active === i}
+            className="flex h-11 w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            onClick={() => {
+              const el = scrollerRef.current;
+              const card = el?.children[i] as HTMLElement | undefined;
+              if (el && card) el.scrollTo({ left: card.offsetLeft - (el.children[0] as HTMLElement).offsetLeft, behavior: 'smooth' });
+            }}
+          >
+            <span className="h-[6px] rounded-full transition-all duration-300" style={{ width: active === i ? 26 : 6, background: active === i ? p.dot : '#cfd2d6' }} />
+          </button> :
           <span
             key={s.n}
             className="h-[6px] rounded-full transition-all duration-300"
