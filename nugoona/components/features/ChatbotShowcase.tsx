@@ -66,7 +66,7 @@ export function ChatMock({ active }: { active: boolean }) {
         </motion.div>
 
         <motion.div {...bubble(3)} className="self-start max-w-[86%] bg-white/[0.06] text-[#ddd] text-[13px] leading-[1.65] px-4 py-3">
-          광고비 1원으로 매출이 몇 원 나왔는지예요. <b className="text-white">452%</b>면 1만 원 써서 4만 5천 원을 벌었다는 뜻이에요.
+          광고비 1원당 매출을 뜻해요. <b className="text-white">452%</b>면 광고비 1만 원에 매출 4만 5,200원이라는 뜻이에요.
         </motion.div>
 
         {/* ③ 화면 안내(딥링크) — 지도 #541. ⛔실행 카드가 아니다(실행은 닫힘) */}
@@ -87,7 +87,7 @@ export function ChatMock({ active }: { active: boolean }) {
               광고 만들기 열기
               <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M6 4l4 4-4 4" /></svg>
             </div>
-            <p className="text-[10px] text-white/60 mt-2 leading-[1.5]">눌러서 바로 그 화면으로 이동합니다</p>
+            <p className="text-[10px] text-white/60 mt-2 leading-[1.5]">앱 안의 화면 이동 안내 예시</p>
           </div>
         </motion.div>
       </div>

@@ -8,7 +8,7 @@ import type { Step } from './types';
 // 헤더 — CONTENT §0 확정 스펙("한 달 무료·카드 없이" + 약정 없음)
 export const hero = {
   h1: '한 달 무료로 시작합니다',
-  sub: '카드 등록도, 약정도 없습니다. 상호명만 알려주시면 나머지는 준비해 두겠습니다.',
+  sub: '카드 등록도, 약정도 없습니다. 콘텐츠 스튜디오는 상담 후 시작합니다.',
 };
 
 // 폼 4필드 — ①관심 제품(둘 다=크로스셀 수확) ②상호·브랜드명 ③연락처 ④메모(선택)
@@ -17,15 +17,15 @@ export const form = {
   interest: {
     label: '관심 있는 제품',
     options: [
-      { value: 'content', text: '누구나 콘텐츠 — 검색에 노출' },
-      { value: 'ads', text: '누구나 광고 — 광고를 직접' },
-      { value: 'both', text: '둘 다 — 노출부터 광고까지' },
+      { value: 'content', text: '누구나 콘텐츠' },
+      { value: 'ads', text: '누구나 광고' },
+      { value: 'both', text: '두 서비스 모두' },
     ],
   },
-  business: { label: '상호·브랜드명', placeholder: '스토어 이름' },
+  business: { label: '상호·브랜드명', placeholder: '가게 또는 쇼핑몰 이름' },
   contact: { label: '연락처', placeholder: '전화번호 또는 이메일' },
   memo: { label: '메모', placeholder: '남기실 말씀 (선택)', optional: true },
-  submit: '무료로 시작하기',
+  submit: '시작 신청하기',
   note: '카드 등록 없이 시작합니다.',
   // 안심 문구 = GPT+사장님 확정(2026-07-11) — 콜드 리드 3명 전원 "영업 전화 경계" 지적 대응
   reassure: '시작을 돕는 안내를 먼저 드립니다. 가입을 권하는 상담이 아닙니다.',
@@ -44,7 +44,7 @@ export const steps = {
 
 // FAQ 3 — 카드 / 약정 / 해지 (CONTENT §0)
 export const faq = [
-  { q: '카드를 등록해야 하나요?', a: '아니요. 카드 없이 한 달 동안 모든 기능을 써 보실 수 있습니다.' },
+  { q: '카드를 등록해야 하나요?', a: '아니요. 콘텐츠·플러스·광고는 카드 등록 없이 30일간 체험할 수 있습니다. 콘텐츠 스튜디오는 상담 후 시작합니다.' },
   { q: '약정 기간이 있나요?', a: '없습니다. 이용하는 달만큼만 내면 됩니다.' },
   { q: '언제든 그만둘 수 있나요?', a: '네. 원하실 때 해지할 수 있고, 위약금은 없습니다.' },
 ];
