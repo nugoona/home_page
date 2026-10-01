@@ -568,12 +568,31 @@
 > 이 두 갤러리는 **이번 홈피에 국한되지 않는 영구 디자인 소스**다. 시안 폴더(`/lab`)에 있지만 정리 시 **지우지 말 것**. 언제든 URL로 열어 골라서(선택) → 우리 스타일로 가공해 재사용한다.
 > - **`/lab/vercel`** — Vercel Clone **10종**(`components/styles/vercel/Clone01~10.tsx`). 레이아웃·여백·그림자·균형 문법 소스.
 > - **`/lab/sources`** — 애니메이션 컴포넌트 **53종**(`app/lab/sources/page.tsx` + `components/lab-sources/{magicui,aceternity,motion-primitives,reactbits,cultui,hextaui,animata,svg}/`). 원본 그대로 이식(가공 전). **사이드바 + 단일 프리뷰**(한 번에 1개만 재생 = 성능). 구성: **그룹 A 다이어그램·네트워크·구조형 10**(World Map·Globe·Icon Cloud·Animated Beam·Orbiting Circles·Gemini Effect·Tracing Beam + **A8 SVG Line Draw·A9 SVG Path Dot Flow(순수 SVG 자작 프리미티브, 의존성 0 — 선 좌표를 §8.16 그리드에 직접 앉힘)·A10 Gradient Beam**) / **B 배경·입자·질감 15** / **C 카드 강조·텍스트 11** / **★D 콘텐츠 카드 17**(2026-07-17 확충, 사장님 "카드+점·선 다다익선" — Magic Card·3D Card·Focus Cards·Tilt·Spotlight Card·MinimalCard·Card Stack·Comet·Glare·Wobble·Draggable·Expandable 모달/인라인·Tilted·Flip·Border Trail·Spotlight 커서추적. **카드 안에 사진·내용을 담는 컨테이너 계열**). 외부 라이브러리 = `cobe@0.6.4`·`@tsparticles v3`·`simplex-noise`·`dotted-map`·`react-use-measure`(three.js·GSAP 없음). 애니 keyframe = `globals.css`의 `.lab-sources-scope` 스코프(유틸 직접 선언 + `@source`). 정적 2종=Dot/Grid Pattern, 인터랙션(hover) 2종=Glowing/Card Hover.
-> - ~~**임시 외부 열람 URL(Cloud Run `nugoona-lab`, 2026-07-17 배포·무인증 공개 사장님 승인)**~~
->   → 🛑 **2026-10-02 정리 완료 — 그 주소는 더 이상 없다.** 사장님 지시로 서비스째 지웠다
->   (리비전 11 · 이미지 11). 애초에 "확인 끝나면 삭제"로 적어 둔 것을 두 달 반 방치한 것이었고,
->   검색 로봇에 열려 있어(`Allow: /` · noindex 없음) 미완성 화면이 색인될 위험도 있었다.
->   → **갤러리는 로컬에서 본다**: `/lab/sources`(53종) · `/lab/vercel`(10종).
->   다시 외부에서 보셔야 하면 그때 새로 올린다 — 올릴 때 **검색 차단**(noindex)을 함께 넣을 것.
+> ### 📍 어디를 보면 되나 (2026-10-02 사장님 지시로 명시 — "디자인 참고할 때 어딜 봐야 할지 모를 때를 위해")
+>
+> **보는 주소** (개발 서버 3131이 떠 있어야 한다)
+>
+> | | 애니메이션 53종 | Vercel 클론 10종 |
+> |---|---|---|
+> | PC | `http://localhost:3131/lab/sources` | `http://localhost:3131/lab/vercel` |
+> | 폰(테일스케일) | `http://100.117.180.66:3131/lab/sources` | `http://100.117.180.66:3131/lab/vercel` |
+>
+> **파일이 있는 곳**
+>
+> | 무엇 | 경로 |
+> |---|---|
+> | 애니메이션 소스 **53개 파일** | `nugoona/components/lab-sources/` — 8묶음(`aceternity` `animata` `cultui` `hextaui` `magicui` `motion-primitives` `reactbits` `svg`) |
+> | 그 갤러리 화면 | `nugoona/app/lab/sources/page.tsx` |
+> | Vercel 클론 **10개** | `nugoona/components/styles/vercel/Clone01~10.tsx` |
+> | 그 갤러리 화면 | `nugoona/app/lab/vercel/page.tsx` |
+>
+> ⚠ **폰에서는 애니메이션 쪽만 제대로 보인다.** Vercel 클론은 PC 화면을 베낀 것이라 폰 폭에서 오른쪽이 잘린다(실측 390px).
+>   폰으로 참고할 거면 애니메이션 쪽을, Vercel 레이아웃은 PC에서 볼 것.
+>
+> ~~**임시 외부 열람 URL(Cloud Run `nugoona-lab`)**~~ → 🛑 **2026-10-02 서비스째 정리됨.**
+>   밖에서 볼 일이 없다는 사장님 판단(*"밖에서는 볼 필요 없고 PC에 있으니 폰 테일스케일로 보면 된다"*).
+>   **소스·갤러리 화면은 하나도 안 지웠다** — 지운 건 바깥에서 열던 주소뿐이다.
+>   다시 외부에 올릴 일이 생기면 **검색 차단(noindex)을 함께** 넣을 것(전에는 `Allow: /`로 열려 있었다).
 > - 재사용 원칙: **골라서 우리 스타일(다크·accent 블루 절제·직각·순백·§7-7 짝퉁 금지)로 가공** 후 실제 페이지에 이식(§8.13 "소스=분해→재조립"과 동일).
 > - **★필수 참조(사장님 2026-07-16)**: 목업·디자인 작업 진입 시 이 2종을 **반드시 먼저 열어 재료를 찾는다**. 단순한 줄·선이 아니면 맨손 창작 금지 — **여러 소스 조합·변형·재가공**이 기본 경로(손목업 반려 4회 실증). 다음 세션도 이 절부터.
 - **문법 인벤토리** (→ 우리 섹션 매핑 아이디어):

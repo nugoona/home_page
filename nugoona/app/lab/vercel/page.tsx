@@ -27,12 +27,24 @@ const CLONES = [
 export default function Page() {
   return (
     <main className="bg-white">
+      <style>{`
+        @media (max-width: 899px) {
+          .vercel-clone-stage { zoom: 0.2; }
+        }
+      `}</style>
       {CLONES.map(({ n, C, label }) => (
         <section key={n} className="border-b border-neutral-200">
           <div className="px-6 py-3 font-mono text-[13px] text-neutral-500">#{n} · {label}</div>
-          {/* 모바일: PC 레이아웃 유지 + 가로 스크롤로 열람 */}
+          {/* ★2026-10-02 모바일 = **축소해서 한눈에**(사장님 "폰 테일스케일로 볼 수 있게").
+              구 방식은 "PC 폭 그대로 두고 가로 스크롤"이었는데, 실제로 재 보니
+              안쪽 폭 1948px를 390px 창으로 밀어 보는 셈이라 조각만 보이고 레이아웃을 읽을 수 없었다.
+              Vercel 클론의 참고 가치는 **배치 뼈대**이므로 글자가 작아져도 전체가 보이는 쪽이 맞다.
+              `zoom`을 쓴 이유 = `scale`은 차지하는 높이가 안 줄어 아래에 빈 공간이 생긴다.
+              0.2 = 가장 넓은 클론의 안쪽 폭 1948px를 390px 화면에 담는 값(실측). 0.3도 재 봤으나
+              584px라 오른쪽이 잘렸다. 글자는 작아지지만 **배치 뼈대는 전부 보인다** — 세부는 PC에서 본다.
+              900px = DESIGN §8.18 모바일 경계. PC는 전과 완전히 동일하다(zoom 미적용 실측). */}
           <div className="overflow-x-auto">
-            <div className="min-w-[1280px]">
+            <div className="vercel-clone-stage min-w-[1280px]">
               <C />
             </div>
           </div>
