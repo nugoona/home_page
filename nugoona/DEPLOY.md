@@ -43,8 +43,9 @@
 - 쓰려면 **선행 조건**: `package.json`의 `start`를 `node .next/standalone/server.js`로 교체하고 static/public 배치를 맞추거나, standalone을 제거. 이 정리 없이는 경로 C를 택하지 말 것.
 
 ## 4. ⚠ 실제 배포해봐야 알 수 있는 것 (지금 문서로 확정 불가)
-- **GCP 프로젝트 ID / 리전 / 서비스명** — 로컬에 gcloud 설정·인프라 파일이 없어 알 수 없음. `gcloud config list`, 콘솔 확인 필요.
-- **현재 `www.nugoona.co.kr`가 어디로 향하는지**(기존 운영 배포의 실체) — DNS·기존 서비스 확인 전엔 불명. 교체(cutover) 방식(무중단 여부)도 배포하며 정해짐.
+- ~~**GCP 프로젝트 ID / 리전 / 서비스명** — 알 수 없음~~ → ✅ **실측 확정(2026-10-02)**. 아래 §4.1 참조.
+- ~~**현재 `www.nugoona.co.kr`가 어디로 향하는지**~~ → ✅ **구 홈페이지(`home-page` 서비스)**로 확인. 아래 §4.1.
+  교체(cutover) 방식·무중단 여부는 여전히 올려 보며 정해진다.
 - **빌드가 프로덕션에서 실제로 통과하는지** — 로컬 타입/린트 통과 ≠ 프로덕션 빌드·런타임 성공. standalone 서버 구동, 이미지 최적화, API 라우트 동작은 **실제 배포/실행해봐야 확정**.
 - **env 실제값·채널**(`SLACK_WEBHOOK_URL` 또는 Telegram 이전 후 값) — 운영 시크릿 필요.
 - **도메인 SSL·리다이렉트(apex→www) 실동작** — 도메인 매핑 후 검증 필요.
@@ -55,6 +56,53 @@
 - **사고**: 옛 커밋(`18a0ac7`)의 `next.config.mjs`에 `{ source:'/ads', destination:'/features', permanent:true }`가 있었고, `3f59b4c`에서 /ads 페이지를 만들며 제거했다. 그러나 **`permanent:true` = HTTP 308은 브라우저가 영구 캐시**한다 — 그 사이에 /ads를 열었던 브라우저는 서버에 묻지도 않고 지금도 /features로 튄다(로컬에서 실측 재현: `localhost:3131/ads` → `/features` 착지). **새 /ads가 멀쩡히 있어도 그 브라우저에선 영원히 안 보인다.**
 - **로컬 해제법**: 강력 새로고침으론 안 풀릴 수 있음 → 시크릿 창 또는 `chrome://net-internals/#dns`+캐시 삭제, 임시 우회는 쿼리(`/ads?x=1`).
 - **재발 방지 규칙**: ①**살릴 가능성이 있는 경로에 `permanent:true`를 걸지 않는다**(기본값 = `permanent:false`(307). 308은 "그 경로를 영원히 버린다"가 확정일 때만) ②경로를 부활시킬 땐 과거 redirects 이력을 `git log -S`로 확인 ③배포 전 체크리스트에 "redirects 변경분과 과거 308 충돌 검토" 포함.
+
+### 4.1 ★ 실측 확정 — 지금 어디에 무엇이 떠 있나 (2026-10-02 조회, 읽기 전용)
+
+**⚠ 홈페이지는 전용 프로젝트가 아니라 대시보드와 같은 GCP 프로젝트에 섞여 있다.**
+
+| 무엇 | 서비스 이름 | 지역 | 이미지가 쌓이는 곳 |
+|---|---|---|---|
+| **구 홈페이지**(지금 `www.nugoona.co.kr`이 보는 것) | `home-page` | `asia-northeast1`(도쿄) | `gcr.io/winged-precept-443218-v8/home-page` |
+| **임시 열람본**(2026-07-17 갤러리 확인용) | `nugoona-lab` | `asia-northeast3`(서울) | `asia-northeast3-docker.pkg.dev/winged-precept-443218-v8/cloud-run-source-deploy/nugoona-lab` |
+
+- **GCP 프로젝트 = `winged-precept-443218-v8`** (대시보드와 공용. 이름만 보면 대시보드 것 같지만 홈페이지도 여기 있다)
+- 별도로 `ngn-homepage` 프로젝트가 **존재는 하나** 조회 권한이 없어 내용 미확인 — 현재 운영본은 위 프로젝트에 있다.
+- 조회 계정 = `winged-precept-443218-v8@appspot.gserviceaccount.com`(기본 활성).
+  **올릴 때는 `oscar@nugoona.co.kr` 계정이 필요한데 토큰이 만료돼 있다** → `gcloud auth login` 재인증은 사장님만 가능.
+- ⚠ **`www.nugoona.co.kr` → `home-page` 연결은 정황 근거다**(응답 제목·메뉴·헤더 일치).
+  도메인 연결 목록을 직접 여는 명령(`gcloud beta run domain-mappings list`)은 `beta` 구성요소 설치가 필요하고
+  그 설치에 관리자 권한이 걸려 **직접 확인하지 못했다.** 도메인을 건드리기 전에 콘솔에서 한 번 볼 것.
+
+**옛 리비전이 쌓이는 이유 = 이 저장소에 올리기 스크립트가 없다.** `Dockerfile` 하나뿐이고 자동 빌드 설정이 없어,
+손으로 명령을 쳐서 올린다 → "옛것 치우기" 단계가 애초에 없다.
+→ **올릴 때마다 아래 한 줄을 같이 실행한다**(최근 5개만 남김):
+
+```bash
+gcloud run revisions list --service=home-page --region=asia-northeast1 \
+  --format="value(metadata.name)" --sort-by="~metadata.creationTimestamp" \
+  | tail -n +6 | xargs -r -n1 gcloud run revisions delete --region=asia-northeast1 --quiet
+```
+
+🛑 순서는 **리비전 먼저 → 이미지 나중**이다. 이미지만 지우면 "목록엔 있는데 되돌리면 실패하는" 리비전이 남는다.
+
+**2026-10-02 정리 이력** (사장님 지시 — "구축 중인 홈페이지와 아우름만 보호하면 된다")
+
+| 대상 | 전 | 후 | 누가 |
+|---|---|---|---|
+| `home-page` 리비전 | 56 | **5** | 옆 세션(대시보드·업로드 일괄 정리)이 먼저 처리 |
+| `home-page` 이미지 | 43 | **4** | 이 세션 — 남은 리비전 5개가 쓰는 것만 남김 |
+| `nugoona-lab` 서비스 | 있음 | **없음** | 이 세션 — 서비스째 삭제 |
+| `nugoona-lab` 이미지 | 11 | **0** | 이 세션 |
+
+- 남긴 이미지 4개 = 남은 리비전 5개가 실제로 참조하는 것(00056·00055가 같은 이미지라 5→4).
+  `latest` 태그도 트래픽 리비전과 같은 이미지라 함께 보존됐다.
+- **되돌리기 가능 확인**: 남은 리비전 5개 전부 자기 이미지가 살아 있음을 하나씩 대조했다.
+- 검증 = 삭제 전후 `www.nugoona.co.kr` 응답과 제목 동일(200 · "누구나컴퍼니 - AI-Powered Marketing Agency"),
+  서비스 상태 정상, 트래픽 리비전 `home-page-00056-lrc` 그대로.
+- 아우름(`www.aurumwellness.co.kr`)은 Cloudflare Pages라 GCP와 무관 — 조회만 하고 건드리지 않았다(200 유지).
+- ⚠ `gcr.io`에서 이미지를 지워도 **Cloud Run 리비전이 이미 가져간 것은 계속 뜬다**(import 완료 상태).
+  그래도 순서는 리비전 먼저가 맞다 — 되돌릴 때 원본 이미지를 다시 받아야 하는 경우가 있다.
 
 ## 5. 배포 체크리스트 (실제 배포 착수 시)
 - [ ] 경로 A/B/C 중 결정 (GCP 상태 `gcloud config list`로 먼저 확인)
