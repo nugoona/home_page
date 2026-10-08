@@ -8,16 +8,74 @@
  * API 호환: /api/submit-survey 는 name 필수 — 새 필드를 기존 페이로드 키에 매핑(서버·Slack 알림 무수정).
  */
 
-import { useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { LayoutGroup, motion, useInView, useReducedMotion } from 'framer-motion';
+import { RadioGroup } from 'radix-ui';
+import { Dithering } from '@paper-design/shaders-react';
+import NumberFlow from '@number-flow/react';
+import TextareaAutosize from 'react-textarea-autosize';
 import { ArrowRight, Check, Store } from 'lucide-react';
 import OuterContainer from '@/components/layout/OuterContainer';
 import Section from '@/components/layout/Section';
-import FadeUp from '@/components/motion/FadeUp';
 import OccupancyGrid, { type GridArea } from '@/components/layout/OccupancyGrid';
 import { form as formCopy, steps, faq } from '@/lib/content/start';
 
 const EN = { fontFamily: 'var(--font-en)' } as const;
+
+// 2차 보수도 이 페이지 안에서만: 전송 함수·FAQ·요금·공용 부품은 원문 유지.
+// 선/숫자 반응은 한 큐에서 순서대로 실행한다. 반응 중에는 디더도 speed=0.
+function useMotionQueue() {
+  const reduced = useReducedMotion();
+  const [busy, setBusy] = useState(false);
+  const jobs = useRef<{ run: () => void; duration: number }[]>([]);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const enqueue = useCallback((run: () => void, duration = 350) => {
+    jobs.current.push({ run, duration: reduced ? 0 : duration });
+    function next() {
+      const job = jobs.current.shift();
+      if (!job) { timer.current = null; setBusy(false); return; }
+      setBusy(true);
+      job.run();
+      timer.current = setTimeout(next, job.duration);
+    }
+    if (timer.current === null) next();
+  }, [reduced]);
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); jobs.current = []; }, []);
+  return { busy, enqueue, reduced };
+}
+
+/** A8 line-draw の破線技法を標準 Check の線に適用。色・太い線・反復を引き継がない。 */
+function DrawCheck({ done }: { done: boolean }) {
+  const reduced = useReducedMotion();
+  return <svg viewBox="0 0 24 24" className="ml-auto h-4 w-4 shrink-0 text-text-primary" aria-hidden>
+    <motion.path d="m20 6-11 11-5-5" fill="none" stroke="currentColor" strokeWidth="1"
+      initial={{ pathLength: 0 }} animate={{ pathLength: done ? 1 : 0 }}
+      transition={{ duration: reduced || !done ? 0 : 0.25 }} data-start-motion="check" />
+  </svg>;
+}
+
+function FocusLine({ active }: { active: boolean }) {
+  const reduced = useReducedMotion();
+  return <motion.span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-text-primary"
+    initial={false} animate={{ scaleX: active ? 1 : 0 }}
+    transition={{ duration: active && !reduced ? 0.25 : 0 }} data-start-motion="focus" />;
+}
+
+// FAQ 원문/순서는 그대로 두고, 바깥 등장 효과만 같은 큐에 넣어 동시 실행을 막는다.
+function QueuedReveal({ children, enqueue }: { children: ReactNode; enqueue: (run: () => void, duration?: number) => void }) {
+  const frame = useRef<HTMLDivElement>(null);
+  const entered = useInView(frame, { once: true, amount: 0.15 });
+  const started = useRef(false);
+  const [shown, setShown] = useState(false);
+  const reduced = useReducedMotion();
+  useEffect(() => {
+    if (!entered || started.current) return;
+    started.current = true;
+    enqueue(() => setShown(true), 600);
+  }, [entered, enqueue]);
+  return <motion.div ref={frame} initial={false} animate={{ opacity: shown || reduced ? 1 : 0, y: shown || reduced ? 0 : 24 }}
+    transition={{ duration: reduced ? 0 : 0.5 }} data-start-motion="reveal">{children}</motion.div>;
+}
 
 // /start 전용 합의 카피. 다른 페이지와 카피 원본을 수정하지 않는 이번 작업의 범위.
 const PRODUCT_DESCRIPTIONS: Record<string, string> = {
@@ -70,20 +128,22 @@ function MeasuredGrid({ children, rail }: {
   );
 }
 
-function Progress({ complete }: { complete: boolean[] }) {
+
+function Progress({ complete, active }: { complete: boolean[]; active: number }) {
   const reduced = useReducedMotion();
   return (
     <ol className="flex w-full gap-3" aria-label="필수 입력 진행">
       {complete.map((done, i) => (
-        <li key={i} className="flex min-w-0 flex-1 flex-col gap-3" aria-label={`${formCopy[i === 0 ? 'interest' : i === 1 ? 'business' : 'contact'].label}: ${done ? '입력됨' : '입력 전'}`}>
-          <span className={`flex h-8 items-center gap-2 text-[14px] font-semibold ${done ? 'text-accent' : 'text-text-weak'}`} style={EN}>
+        <li key={i} aria-current={active === i ? 'step' : undefined}
+          className="flex min-w-0 flex-1 flex-col gap-2"
+          aria-label={`${formCopy[i === 0 ? 'interest' : i === 1 ? 'business' : 'contact'].label}: ${done ? '입력됨' : '입력 전'}`}>
+          <span className={['flex h-6 items-center text-[14px]', active === i ? 'font-bold text-text-primary' : 'font-medium text-text-weak'].join(' ')} style={EN}>
             {String(i + 1).padStart(2, '0')}
-            {done && <Check size={14} strokeWidth={1.8} aria-hidden />}
+            {done && <Check size={14} strokeWidth={1} className="ml-2 text-text-primary" aria-hidden />}
           </span>
           <span className="relative block h-px bg-border-mid" aria-hidden>
-            {/* 갤러리 A8 svg/line-draw: 선이 한 번 그려지는 동작을 입력 완료 반응으로 재가공. */}
-            <motion.span className="absolute inset-0 origin-left bg-accent"
-              initial={false} animate={{ scaleX: done ? 1 : 0 }} transition={{ duration: reduced ? 0 : 0.35 }} />
+            {active === i && <motion.span layoutId="start-step-line" className="absolute inset-0 bg-text-primary"
+              transition={{ duration: reduced ? 0 : 0.25, ease: 'easeInOut' }} data-start-motion="step" />}
           </span>
         </li>
       ))}
@@ -91,55 +151,72 @@ function Progress({ complete }: { complete: boolean[] }) {
   );
 }
 
-/** 갤러리 A9 svg/path-dot-flow + A8 svg/line-draw + Vercel Clone01 노드 연결 구성.
- * 세 입력 → 한 가게로 모이는 장면. 원본의 스켈레톤·자체 색·라운드·그림자는 버린다.
- * SVG id는 PC/모바일 각 인스턴스 고유값. 도트는 12초 저속, 선은 진입 시 한 번만.
- */
-function StartScene({ complete }: { complete: boolean[] }) {
-  const id = useId().replace(/:/g, '');
+/** A8 line-draw: 세 선을 순서대로 한 번만 그린다. 기존 A9 반복 도트는 제거. */
+function StartScene({ line, compact }: { line: number; compact: boolean }) {
   const reduced = useReducedMotion();
-  const paths = ['M120 55 C180 55 180 120 240 120', 'M120 120 H240', 'M120 185 C180 185 180 120 240 120'];
+  const paths = compact
+    ? ['M80 55 V12 H412 V35 H432', 'M184 55 H432', 'M288 55 V98 H412 V75 H432']
+    : ['M120 55 C180 55 180 120 240 120', 'M120 120 H240', 'M120 185 C180 185 180 120 240 120'];
   return (
-    <svg viewBox="0 0 360 240" className="h-full w-full" aria-hidden="true">
-      {paths.map((d, i) => (
-        <g key={d}>
-          <motion.path id={`${id}-${i}`} d={d} fill="none" pathLength={1} className="stroke-white/25" strokeWidth="1"
-            initial={{ pathLength: reduced ? 1 : 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }}
-            transition={{ duration: reduced ? 0 : 1.2, delay: reduced ? 0 : i * 0.15 }} />
-          {!reduced && <circle r="2.5" className="fill-accent">
-            <animateMotion dur="12s" begin={`${-i * 4}s`} repeatCount="indefinite"><mpath href={`#${id}-${i}`} /></animateMotion>
-          </circle>}
-          <rect x="20" y={35 + i * 65} width="100" height="40" fill="none" className={complete[i] ? 'stroke-accent' : 'stroke-white/30'} strokeWidth="1" />
-          <text x="36" y={60 + i * 65} className="fill-white/80 text-[14px] font-medium" style={EN}>{String(i + 1).padStart(2, '0')}</text>
-          {complete[i] && <Check x={86} y={47 + i * 65} width={16} height={16} className="text-accent" strokeWidth={1.5} />}
-        </g>
-      ))}
-      <rect x="240" y="72" width="96" height="96" fill="none" className="stroke-white/40" strokeWidth="1" />
-      <Store x={266} y={98} width={44} height={44} className="text-white/80" strokeWidth={1} />
-      {/* 단순 선 프리미티브: 종착 노드의 네 모서리를 구분해 장면을 마감. */}
-      <path d="M240 82 V72 H250 M326 72 H336 V82 M336 158 V168 H326 M250 168 H240 V158" fill="none" className="stroke-white/80" strokeWidth="1" />
+    <svg viewBox={compact ? '0 0 540 110' : '0 0 360 240'} className="h-full w-full" aria-hidden="true">
+      {paths.map((d, i) => <motion.path key={d} d={d} fill="none" className="stroke-white/60" strokeWidth="1"
+        initial={{ pathLength: 0 }} animate={{ pathLength: line >= i ? 1 : 0 }}
+        transition={{ duration: reduced ? 0 : 0.5, ease: 'easeInOut' }} data-start-motion="hero-line" />)}
+      {[0, 1, 2].map(i => <g key={i}>
+        <rect x={compact ? 8 + i * 104 : 20} y={compact ? 35 : 35 + i * 65}
+          width={compact ? 72 : 100} height="40" className="fill-bg-dark stroke-white/40" strokeWidth="1" />
+        <text x={compact ? 28 + i * 104 : 36} y={compact ? 60 : 60 + i * 65}
+          className="fill-white text-[14px] font-medium" style={EN}>{String(i + 1).padStart(2, '0')}</text>
+      </g>)}
+      <rect x={compact ? 432 : 240} y={compact ? 20 : 72} width={compact ? 70 : 96} height={compact ? 70 : 96}
+        fill="none" className="stroke-white/60" strokeWidth="1" />
+      <Store x={compact ? 450 : 266} y={compact ? 37 : 98} width={compact ? 34 : 44} height={compact ? 34 : 44}
+        className="text-white" strokeWidth={1} />
     </svg>
   );
 }
 
-function StartHero({ complete }: { complete: boolean[] }) {
-  const title = <FadeUp>
-    <h1 className="text-[clamp(28px,4.3vw,48px)] font-semibold tracking-[-0.04em] leading-[1.18] text-white">가게 이름 하나면 됩니다</h1>
-    <p className="mt-4 text-[15px] leading-[1.6] text-white/80">나머지는 저희가 찾아서 채워 둘게요.</p>
-  </FadeUp>;
-  const scene = <StartScene complete={complete} />;
+function StartHero({ busy, enqueue }: { busy: boolean; enqueue: (run: () => void, duration?: number) => void }) {
+  const frame = useRef<HTMLDivElement>(null);
+  const visible = useInView(frame, { amount: 0.2, once: true });
+  const inView = useInView(frame);
+  const reduced = useReducedMotion();
+  const started = useRef(false);
+  const [line, setLine] = useState(-1);
+  const [desktop, setDesktop] = useState(true);
+  const [drawn, setDrawn] = useState(false);
+  useLayoutEffect(() => {
+    const media = window.matchMedia('(min-width: 900px)');
+    const update = () => setDesktop(media.matches);
+    update(); media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  useEffect(() => {
+    if (!visible || started.current) return;
+    started.current = true;
+    [0, 1, 2].forEach(i => enqueue(() => setLine(i), 600));
+    enqueue(() => setDrawn(true), 0);
+  }, [visible, enqueue]);
   return (
-    <div className="bg-bg-dark" data-start-hero>
-      {/* §8.16: PC 12×3. 제목 6×3 + 장면 4×3, 좌우 각 한 열 checker 여백. 하단 빈 행 없음. */}
-      <OccupancyGrid cols={12} rows={3} tone="dark" checker mobile={false} areas={[
-        { key: 'title', c: [2, 8], r: [1, 4], className: 'flex items-center px-8 lg:px-12' },
-        { key: 'scene', c: [8, 12], r: [1, 4], className: 'p-6' },
-      ]} render={key => key === 'title' ? title : scene} />
-      {/* 모바일 6×5. 풀폭 제목 3행 + 장면 2행. 장면 옆 한 열씩만 checker 여백. */}
-      <OccupancyGrid cols={6} rows={5} tone="dark" checker mobile areas={[
-        { key: 'title', c: [1, 7], r: [1, 4], className: 'flex items-center px-6' },
-        { key: 'scene', c: [2, 6], r: [4, 6], className: 'flex justify-center px-2' },
-      ]} render={key => key === 'title' ? title : scene} />
+    <div ref={frame} className="relative isolate overflow-hidden bg-bg-dark" data-start-hero>
+      {/* Apache-2.0 Paper Dithering: 설치된 소스를 흑백 두 색으로만 사용. 글자 뒤 흰 점의 불투명도는 최대12%.
+          모바일은 정적 대체(speed=0). 화면 밖과 입력 반응 중에도 멈춰 부하와 움직임 중복을 줄인다. */}
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12]" aria-hidden>
+        <Dithering colorBack="#171717" colorFront="#ffffff" shape="warp" type="4x4"
+          speed={desktop && drawn && inView && !busy && !reduced ? 0.1 : 0}
+          maxPixelCount={desktop ? 240000 : 80000} minPixelRatio={1} className="h-full w-full" data-start-motion="dithering" />
+      </div>
+      {/* 기존 정사각 격자를 유지. PC12×2, 모바일6×3. 화면 크기에 맞는 한 개만 렌더. */}
+      <OccupancyGrid cols={desktop ? 12 : 6} rows={desktop ? 2 : 3} tone="dark" checker areas={desktop ? [
+        { key: 'title', c: [2, 8], r: [1, 3], className: 'flex items-center px-8 lg:px-12' },
+        { key: 'scene', c: [8, 12], r: [1, 3], className: 'p-3' },
+      ] : [
+        { key: 'title', c: [1, 7], r: [1, 3], className: 'flex items-center px-6' },
+        { key: 'scene', c: [1, 7], r: [3, 4], className: 'px-6' },
+      ]} render={key => key === 'title' ? <div>
+        <h1 className="text-[clamp(28px,4.3vw,48px)] font-semibold tracking-[-0.04em] leading-[1.18] text-white">가게 이름 하나면 됩니다</h1>
+        <p className="mt-3 text-[15px] leading-[1.6] text-white">나머지는 저희가 찾아서 채워 둘게요.</p>
+      </div> : <StartScene line={line} compact={!desktop} />} />
     </div>
   );
 }
@@ -166,9 +243,37 @@ function Expectations() {
 export default function StartPage() {
   const [form, setForm] = useState({ interest: '', business: '', contact: '', memo: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const { busy, enqueue, reduced } = useMotionQueue();
+  const [activeStep, setActiveStep] = useState(0);
+  const [numberStep, setNumberStep] = useState(0);
+  const [focusLine, setFocusLine] = useState<string | null>(null);
+  const focused = useRef<string | null>(null);
+  const [selectionLine, setSelectionLine] = useState('');
+  const [checked, setChecked] = useState([false, false, false]);
+
+  function focusField(name: string, step: number) {
+    focused.current = name;
+    setFocusLine(null);
+    if (step !== activeStep) {
+      enqueue(() => { if (focused.current === name) setNumberStep(step); });
+      enqueue(() => { if (focused.current === name) setActiveStep(step); });
+    }
+    enqueue(() => { if (focused.current === name) setFocusLine(name); });
+  }
+
+  function finishField(name: 'business' | 'contact') {
+    focused.current = null;
+    setFocusLine(null);
+    const i = name === 'business' ? 1 : 2;
+    if (form[name].trim() && !checked[i]) enqueue(() => setChecked(prev => prev.map((done, n) => n === i ? true : done)));
+  }
 
   function onChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
+    if (!e.target.value.trim() && (e.target.name === 'business' || e.target.name === 'contact')) {
+      const i = e.target.name === 'business' ? 1 : 2;
+      setChecked(prev => prev.map((done, n) => n === i ? false : done));
+    }
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -204,25 +309,32 @@ export default function StartPage() {
 
 
   const complete = [Boolean(form.interest), Boolean(form.business.trim()), Boolean(form.contact.trim())];
-  const inputCls = 'w-full h-11 px-4 border border-border-mid bg-bg text-[15px] max-md:text-[16px] text-text-primary placeholder:text-text-weak focus:border-accent focus:outline-none transition-colors';
+  const inputCls = 'w-full h-11 px-4 border border-border-mid bg-bg text-[15px] max-md:text-[16px] text-text-primary placeholder:text-text-weak focus:border-text-primary focus:outline-none';
   const heading = <h2 className="text-[clamp(24px,2.7vw,32px)] font-semibold leading-[1.3] tracking-[-0.03em] text-text-primary">세 가지만 여쭤봅니다</h2>;
+  const progressHeading = <div className="flex items-center justify-between gap-3">{heading}
+    <NumberFlow value={numberStep + 1} format={{ minimumIntegerDigits: 2 }} animated={!reduced}
+      transformTiming={{ duration: 250, easing: 'ease-in-out' }} spinTiming={{ duration: 250, easing: 'ease-in-out' }}
+      opacityTiming={{ duration: 250, easing: 'ease-in-out' }}
+      className="shrink-0 text-[14px] font-semibold text-text-primary" style={EN} aria-label={`현재 입력 단계 ${numberStep + 1}`} data-start-motion="number" />
+  </div>;
   const rail = (
-    <div className="flex flex-col gap-10 px-[15%] py-12">
-      <div className="flex flex-col gap-6">{heading}<Progress complete={complete} /></div>
+    <div className="flex flex-col gap-8 px-[15%] py-8">
+      <div className="flex flex-col gap-5">{progressHeading}<Progress complete={complete} active={activeStep} /></div>
       {/* 기존 신청 후 안내를 양식 옆으로 옮김. 새 문단을 추가하지 않는다. */}
       <Expectations />
     </div>
   );
 
   return (
-    <main>
+    <main data-start-motion-busy={busy}>
+      <LayoutGroup id="start-form">
       <OuterContainer>
-        <Section noBorder><StartHero complete={complete} /></Section>
+        <Section noBorder><StartHero busy={busy} enqueue={enqueue} /></Section>
         <Section noBorder>
           <MeasuredGrid rail={rail}>
             {desktop => (
-              <div className="px-[9%] py-9 max-md:px-6 max-md:py-8">
-                {!desktop && <div className="mb-8 flex flex-col gap-4">{heading}<Progress complete={complete} /></div>}
+              <div className="px-[9%] py-8 max-md:px-6 max-md:py-6">
+                {!desktop && <div className="mb-5 flex flex-col gap-3">{progressHeading}<Progress complete={complete} active={activeStep} /></div>}
                 {status === 'success' ? (
                   <div className="flex flex-col items-center gap-4 py-12 text-center" role="status">
                     <Check size={40} strokeWidth={1.3} className="text-accent" aria-hidden />
@@ -231,44 +343,60 @@ export default function StartPage() {
                   </div>
                 ) : (
                   <form onSubmit={onSubmit} className="flex flex-col gap-5">
-                    <fieldset className="min-w-0">
-                      <legend className="mb-3 flex items-center gap-3 text-[14px] font-semibold text-text-primary">
-                        <span className={complete[0] ? 'text-accent' : 'text-text-weak'} style={EN}>01</span>{formCopy.interest.label} *
+                    <fieldset className="min-w-0" onFocus={() => focusField('interest', 0)}>
+                      <legend id="start-interest-label" className="mb-3 flex items-center gap-3 text-[14px] font-semibold text-text-primary">
+                        <span className="text-text-weak" style={EN}>01</span>{formCopy.interest.label} *
+                        <DrawCheck done={complete[0] && checked[0]} />
                       </legend>
-                      <div className="flex flex-col gap-2">
+                      <RadioGroup.Root name="interest" required orientation="vertical" aria-labelledby="start-interest-label"
+                        value={form.interest} onValueChange={interest => {
+                          setForm(prev => ({ ...prev, interest }));
+                          enqueue(() => setSelectionLine(interest));
+                          if (!checked[0]) enqueue(() => setChecked(prev => [true, prev[1], prev[2]]));
+                        }} className="flex flex-col gap-2">
                         {formCopy.interest.options.map(o => (
-                          <label key={o.value}
-                            className={['relative flex min-w-0 cursor-pointer items-center gap-4 border bg-bg px-4 py-3 transition-colors focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-accent', form.interest === o.value ? 'border-accent' : 'border-border-mid hover:border-text-weak'].join(' ')}>
-                            <input type="radio" name="interest" value={o.value} checked={form.interest === o.value} onChange={onChange} required className="sr-only" />
-                            <span className={['flex h-4 w-4 shrink-0 items-center justify-center border', form.interest === o.value ? 'border-accent text-accent' : 'border-text-weak'].join(' ')} aria-hidden>
-                              {form.interest === o.value && <Check size={12} strokeWidth={1.8} />}
-                            </span>
+                          <RadioGroup.Item key={o.value} value={o.value}
+                            aria-labelledby={`start-${o.value}-title`} aria-describedby={`start-${o.value}-description`}
+                            className={['relative flex w-full min-w-0 cursor-pointer items-center bg-bg text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary', form.interest === o.value ? 'border-2 border-text-primary px-[15px] py-[11px]' : 'border border-border-mid px-4 py-3 hover:border-text-weak'].join(' ')}>
+                            {selectionLine === o.value && <motion.span layoutId="start-product-line" aria-hidden
+                              className="pointer-events-none absolute inset-x-[15px] bottom-[5px] h-px bg-text-primary"
+                              transition={{ duration: reduced ? 0 : 0.25, ease: 'easeInOut' }} data-start-motion="product" />}
                             <span className="flex min-w-0 flex-col gap-1.5">
-                              <span className="text-[15px] font-semibold text-text-primary">{o.text}</span>
-                              <span className="text-[14px] leading-[1.65] text-text-body">{PRODUCT_DESCRIPTIONS[o.value]}</span>
+                              <span id={`start-${o.value}-title`} className="text-[15px] font-semibold text-text-primary">{o.text}</span>
+                              <span id={`start-${o.value}-description`} className="text-[14px] leading-[1.65] text-text-body">{PRODUCT_DESCRIPTIONS[o.value]}</span>
                             </span>
-                          </label>
+                          </RadioGroup.Item>
                         ))}
-                      </div>
+                      </RadioGroup.Root>
                     </fieldset>
                     <div>
                       <label htmlFor="start-business" className="mb-2 flex items-center gap-3 text-[14px] font-semibold text-text-primary">
-                        <span className={complete[1] ? 'text-accent' : 'text-text-weak'} style={EN}>02</span>{formCopy.business.label} *
-                        {complete[1] && <Check size={14} className="ml-auto text-accent" strokeWidth={1.8} aria-hidden />}
+                        <span className="text-text-weak" style={EN}>02</span>{formCopy.business.label} *
+                        <DrawCheck done={complete[1] && checked[1]} />
                       </label>
-                      <input id="start-business" name="business" value={form.business} onChange={onChange} required placeholder={formCopy.business.placeholder} className={inputCls} />
+                      <div className="relative">
+                        <input id="start-business" name="business" value={form.business} onChange={onChange} onFocus={() => focusField('business', 1)} onBlur={() => finishField('business')} required placeholder={formCopy.business.placeholder} className={inputCls} />
+                        <FocusLine active={focusLine === 'business'} />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="start-contact" className="mb-2 flex items-center gap-3 text-[14px] font-semibold text-text-primary">
-                        <span className={complete[2] ? 'text-accent' : 'text-text-weak'} style={EN}>03</span>{formCopy.contact.label} *
-                        {complete[2] && <Check size={14} className="ml-auto text-accent" strokeWidth={1.8} aria-hidden />}
+                        <span className="text-text-weak" style={EN}>03</span>{formCopy.contact.label} *
+                        <DrawCheck done={complete[2] && checked[2]} />
                       </label>
-                      <input id="start-contact" name="contact" value={form.contact} onChange={onChange} required placeholder={formCopy.contact.placeholder} className={inputCls} />
+                      <div className="relative">
+                        <input id="start-contact" name="contact" value={form.contact} onChange={onChange} onFocus={() => focusField('contact', 2)} onBlur={() => finishField('contact')} required placeholder={formCopy.contact.placeholder} className={inputCls} />
+                        <FocusLine active={focusLine === 'contact'} />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="start-memo" className="mb-2 block text-[14px] font-medium text-text-primary">{formCopy.memo.label}</label>
-                      <textarea id="start-memo" name="memo" value={form.memo} onChange={onChange} rows={2} placeholder={formCopy.memo.placeholder}
-                        className="w-full resize-y border border-border-mid bg-bg px-4 py-3 text-[15px] max-md:text-[16px] text-text-primary placeholder:text-text-weak focus:border-accent focus:outline-none transition-colors" />
+                      <div className="relative">
+                        <TextareaAutosize id="start-memo" name="memo" value={form.memo} onChange={onChange} minRows={2} placeholder={formCopy.memo.placeholder}
+                          onFocus={() => focusField('memo', 2)} onBlur={() => { focused.current = null; setFocusLine(null); }}
+                          className="block w-full resize-none border border-border-mid bg-bg px-4 py-3 text-[15px] max-md:text-[16px] text-text-primary placeholder:text-text-weak focus:border-text-primary focus:outline-none" />
+                        <FocusLine active={focusLine === 'memo'} />
+                      </div>
                     </div>
                     <div className="flex flex-col gap-2">
                       <button type="submit" disabled={status === 'loading'}
@@ -287,19 +415,19 @@ export default function StartPage() {
             )}
           </MeasuredGrid>
         </Section>
-        {/* FAQ 문구·순서·등장 방식 유지. */}
+        {/* FAQ 문구·순서 유지. 기존 등장 반응의 실행 순서만 겹치지 않게 조정. */}
         <Section noBorder>
           <MeasuredGrid>
             {() => (
               <div className="px-12 py-9 max-w-[720px] mx-auto max-md:px-6 max-md:py-8">
                 <div className="flex flex-col">
                   {faq.map((f, i) => (
-                    <FadeUp key={f.q} delay={i * 0.06}>
+                    <QueuedReveal key={f.q} enqueue={enqueue}>
                       <div className={['py-6', i < faq.length - 1 ? 'border-b border-border-default' : ''].join(' ')}>
                         <h3 className="text-[clamp(16px,1.4vw,17px)] font-bold text-text-primary mb-2">{f.q}</h3>
                         <p className="text-[14px] max-md:font-medium text-text-body leading-[1.65]">{f.a}</p>
                       </div>
-                    </FadeUp>
+                    </QueuedReveal>
                   ))}
                 </div>
               </div>
@@ -307,6 +435,7 @@ export default function StartPage() {
           </MeasuredGrid>
         </Section>
       </OuterContainer>
+      </LayoutGroup>
     </main>
   );
 }
