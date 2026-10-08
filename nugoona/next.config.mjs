@@ -4,7 +4,7 @@ const nextConfig = {
   // 개발 서버를 폰(LAN/Tailscale IP)에서 접속 허용 — 없으면 HMR 웹소켓이 403 차단돼 하이드레이션이 멈춤
   // ★2026-10-08 테일스케일 주소가 바뀌어 교체(옛 100.117.180.66 → 100.112.202.111, `tailscale ip -4` 실측)
   //    옛 주소를 남겨 두면 폰에서 화면이 뜨고도 멈춘다. 주소가 또 바뀌면 여기부터 고칠 것.
-  allowedDevOrigins: ['100.112.202.111'],
+  allowedDevOrigins: ['100.112.202.111', '100.69.247.57'], // 사장님 PC · 직원 PC(2026-10-08)
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'picsum.photos' },
