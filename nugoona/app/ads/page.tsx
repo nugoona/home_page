@@ -159,11 +159,11 @@ export default function AdsPage() {
             {/* ★2026-09-18 "광고가 실제 매출로 이어졌는지도 확인" → 교체(개선안 §5.4 "광고와 매출의 관계").
                 서로 다른 자료를 나란히 보여주는 것과 광고 효과의 인과관계를 입증하는 것은 다르다.
                 앱이 하는 일 = 같은 기간의 쇼핑몰 매출과 Meta·Google 성과를 한 화면에 모아 보여주는 것. */}
-            <SectionHead eyebrow="Dashboard" heading={dashboard.heading} sub={<>매출과 광고, 방문 데이터를 한 화면에서 함께 확인합니다.<span className="max-md:hidden"><br />쇼핑몰 매출과 광고 매체의 성과를 함께 살펴보세요.<br />{dashboard.manage}</span></>} />
+            <SectionHead eyebrow="Dashboard" heading={dashboard.heading} sub="매출과 광고, 방문 데이터를 한 화면에서 함께 확인합니다." />
             <FadeUp delay={0.1}>
               {/* 기존 파이프라인 목업 원작 그대로(사장님 2026-07-18) = DashboardShowcase.DataPipelineVisual */}
               <div className="mt-10"><AdsDashScene /></div>
-              <p className="mt-5 max-w-[460px] text-[14px] font-medium leading-[1.6] text-text-body md:hidden">{dashboard.manage}</p>
+              <p className="mt-5 max-w-[460px] text-[14px] font-medium leading-[1.6] text-text-body">{dashboard.manage}</p>
             </FadeUp>
           </div>
         </Section>

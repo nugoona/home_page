@@ -99,7 +99,8 @@ export default function MobileOurWay({ both = false }: { both?: boolean } = {}) 
           어려운 건 앱이 합니다
         </h2>
         <p className="mx-auto mt-3 max-w-[300px] text-[14px] font-medium leading-[1.55] text-[#5b6069]" style={KR}>
-          {both ? <>콘텐츠도 광고도, 복잡한 준비를<br />앱이 먼저 처리합니다.</> : <>광고를 시작하기 위한 복잡한 준비를<br />앱이 먼저 처리합니다.</>}
+          {/* 2026-10-08 대본 합의안① — PC(S3GraphicA)와 같은 문장. 분기 폐지 */}
+          <>콘텐츠도 광고도, 복잡한 준비를<br />앱이 먼저 처리합니다.</>
         </p>
       </div>
 

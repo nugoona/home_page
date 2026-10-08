@@ -119,7 +119,7 @@ export default function ContentPage() {
             <SectionHead
               eyebrow="Start"
               heading="상호명만 넣어주세요"
-              sub={<>가게 운영만으로도 하루는 이미 벅찹니다.<br />시작은 가게 이름 하나면 충분합니다.</>}
+              sub="가게 운영만으로도 하루는 이미 벅찹니다."
             />
             <FadeUp delay={0.1}>
               <div className="mt-12 max-md:mt-8">
@@ -154,7 +154,7 @@ export default function ContentPage() {
               <SectionHead
                 eyebrow="Asset"
                 heading={<>서비스 이용이 끝나도<br />쌓인 글은 그대로 남습니다</>}
-                sub="발행된 글은 고객님의 계정에 쌓입니다. 이용을 멈춰도 콘텐츠는 고객님의 자산으로 남습니다."
+                sub="발행된 글은 고객님의 계정에 쌓입니다."
               />
               <FadeUp delay={0.1}>
                 <ContentS10Visual />

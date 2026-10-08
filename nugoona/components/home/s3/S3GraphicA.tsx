@@ -372,10 +372,10 @@ export default function S3GraphicA({ both = false }: { both?: boolean } = {}) {
         <RevealLine>어려운 건 앱이 합니다</RevealLine>
       </h2>
       <p className="mt-5 text-[17px] font-medium leading-[1.55] tracking-[-0.01em] text-[#4f4f4f] md:leading-[1.35]" style={KR}>
-        {/* ★2026-09-19 PC 문장 누락 교정 — 궤도 항목만 두 앱 공통으로 바꾸고
-            이 문장은 광고 전용("광고를 시작하기 위한")을 그대로 뒀었다. 모바일만 고쳐져
-            PC와 휴대폰이 서로 다른 말을 했다. 문구는 모바일(MobileOurWay)과 같은 것을 쓴다. */}
-        {both ? '콘텐츠도 광고도, 복잡한 준비를 앱이 먼저 처리합니다' : '광고를 시작하기 위한 복잡한 준비를 앱이 먼저 처리합니다'}
+        {/* ★2026-10-08 대본 합의안① — 홈은 콘텐츠·광고를 함께 파는 자리인데 이 문장만 광고를 말했다.
+            both 분기를 폐지해 어디서 쓰든 같은 문장을 쓴다(모바일 MobileOurWay 와도 같다).
+            both 는 궤도 항목(OrbitScene)에만 남는다. */}
+        콘텐츠도 광고도, 복잡한 준비를 앱이 먼저 처리합니다
       </p>
       {/* 처리 항목 체크 리스트 삭제 — 우측 궤도 칩과 중복(사장님 2026-07-15 "텍스트 일괄 없애줘 체크 표시도") */}
     </div>
