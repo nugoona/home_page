@@ -781,6 +781,20 @@ export function InputCard({ batch = false }: { batch?: boolean } = {}) {
 
 /* ── S4 단계별 실물(사장님 안A 확정 2026-07-17: 텍스트 리스트 중복 폐기 → 단계마다 실물 화면, 03이 주인공) ── */
 
+/** 세로 영상 자리(9:16) — ★2026-10-08 사장님 "새로 만들게 차라리. 지금은 프레임만 넣어놔".
+    실제 영상 파일은 쓰지 않는다(손님 얼굴·남의 상품 → 동의 문제). 가짜 화면·짝퉁 UI로 채우지 않는다.
+    다크 필 = 태그·칩과 같은 잉크(§8.17). 홈페이지용 영상이 생기면 이 안에 <video>만 넣으면 된다. */
+function VerticalVideoFrame({ className = '' }: { className?: string }) {
+  return (
+    <span aria-hidden className={`relative flex aspect-[9/16] items-center justify-center bg-[#171717] ${className}`}>
+      <span className="rounded-dot flex h-9 w-9 items-center justify-center border border-white/70">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M8 5.5 19 12 8 18.5z" /></svg>
+      </span>
+      <span className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white/70">세로 영상</span>
+    </span>
+  );
+}
+
 /** 단계 라벨 — 홈 S41 StepHead 문법 축소판(다크 필 번호 + 볼드 라벨 + 한 줄 설명) */
 function S4StepHead({ n, label, desc, dark }: { n: string; label: string; desc: string; dark?: boolean }) {
   return (
@@ -821,7 +835,9 @@ function S4FormatRow({ dark, shorts = false }: { dark?: boolean; shorts?: boolea
     <S4FormatRowPC dark={dark} shorts={shorts} />
     {/* 모바일 = 3카드 폭·높이 균일(사장님 2026-07-20 "PC처럼 폭 같게" — 이미지 4:3 통일 + items-stretch) */}
     {/* shorts면 2×2 — 390px에서 4칸은 카드가 88px로 좁아져 읽히지 않는다 */}
-    <div className={`grid items-stretch gap-2 md:hidden ${shorts ? 'grid-cols-2' : 'grid-cols-3'}`}>
+    {/* ★2026-10-08 쇼츠 = 세로 9:16 틀. 2×2에 넣으면 옆 카드의 두 배 길이가 된다 →
+        세 형식은 기존 3칸 그대로, 쇼츠·릴스는 아래 가로 한 줄(틀 왼쪽 + 라벨 오른쪽) */}
+    <div className="grid grid-cols-3 items-stretch gap-2 md:hidden">
       {/* 블로그 — 가로 글 카드 */}
       <div className="flex flex-col">
         <p className="mb-1.5 flex items-center gap-1">
@@ -872,30 +888,19 @@ function S4FormatRow({ dark, shorts = false }: { dark?: boolean; shorts?: boolea
           </div>
         </div>
       </div>
-      {/* 쇼츠·릴스 — PC와 같은 갈래(§4.4). 카드 안 "직접 확인 후 발행" = §4.5 */}
-      {shorts && (
-      <div className="flex flex-col">
-        <p className="mb-1.5 flex items-center gap-1">
-          <span className="flex h-[13px] w-[13px] items-center justify-center bg-[#171717]"><svg width="6" height="6" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>
-          <span className={`text-[9.5px] font-semibold ${chLabel}`}>쇼츠·릴스</span>
-        </p>
-        <div className="flex flex-1 flex-col overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: MINI_SHADOW }}>
-          <span className="relative block aspect-[4/3] w-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/content/biz-pension-1.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: 'center 30%' }} loading="lazy" />
-            <span aria-hidden className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full" style={{ background: 'rgba(22,22,26,0.55)' }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 6.5 18 12l-9 5.5z" /></svg>
-              </span>
-            </span>
-          </span>
-          <div className="flex-1 bg-[#FAFAFA] px-2 pb-1.5 pt-1">
-            <p className="text-[11px] font-medium leading-[1.4] text-text-weak">직접 확인 후 발행</p>
-          </div>
+    </div>
+    {shorts && (
+      <div className="mt-2 flex items-stretch overflow-hidden bg-white md:hidden" style={{ border: `1px solid ${BORDER}`, boxShadow: MINI_SHADOW }}>
+        <VerticalVideoFrame className="w-[68px] shrink-0" />
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5 px-4">
+          <p className="flex items-center gap-1">
+            <span className="flex h-[13px] w-[13px] items-center justify-center bg-[#171717]"><svg width="6" height="6" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>
+            <span className={`text-[12px] font-semibold ${chLabel}`}>쇼츠·릴스</span>
+          </p>
+          <p className="text-[13px] font-medium leading-[1.4] text-text-primary">직접 확인 후 발행</p>
         </div>
       </div>
-      )}
-    </div>
+    )}
     </>
   );
 }
@@ -1017,15 +1022,9 @@ function S4FormatRowPC({ dark, shorts = false }: { dark?: boolean; shorts?: bool
           <span className={`text-[11.5px] font-semibold ${chLabel}`}>쇼츠·릴스</span>
         </p>
         <div className="flex flex-1 flex-col overflow-hidden bg-white" style={CARD}>
-          <span className="relative block flex-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/content/biz-pension-1.jpg" alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: 'center 30%' }} loading="lazy" />
-            <span aria-hidden className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: 'rgba(22,22,26,0.55)' }}>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 6.5 18 12l-9 5.5z" /></svg>
-              </span>
-            </span>
-            <span aria-hidden className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.6)' }}>세로 영상</span>
+          {/* 틀이 카드 폭을 꽉 채운다(다른 카드의 사진과 같은 문법). 남는 높이도 같은 잉크로 이어진다 */}
+          <span className="flex flex-1 flex-col bg-[#171717]">
+            <VerticalVideoFrame className="w-full" />
           </span>
           <p className="px-3 py-2.5 text-[11px] font-medium text-text-weak">직접 확인 후 발행</p>
         </div>

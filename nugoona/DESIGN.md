@@ -49,6 +49,7 @@
   | `/home2` `/content2` `/ads2` | **비교 시안(2026-09-18) — 낙점 전 임시** | 개선안 반영안을 원본과 나란히 보기 위한 페이지. Nav 미등록 · metadata `robots: noindex`. **원본 파일 무수정이 원칙**: 공용 부품에는 기본값이 꺼짐인 선택 인자만 더하고 시안 경로에서만 켠다.
     실측 목록(2026-09-19) — 메인: `TwoAppsRail video` → `S41SearchScene video` / `NcMobileMock video`(+`NcMobileMockVideo` 래퍼) · `S3GraphicA both` → `OrbitScene both`·`MobileOurWay both`·`MobileOrbit both`.
     콘텐츠: `ContentHero flow`(설명 교체 + 첫 화면 시작 링크) · `ContentS4 choice·shorts` → `InputCard batch`·`S4FormatRow shorts`·`S4FormatRowPC shorts` · `ContentS8Visual enrich` → `S8TopicSteps shoot`·`S8SearchBox cta` · `ContentS11Cta cta`.
+    ★**2026-10-08 원본 승격**: `ContentS4 choice·shorts`는 이제 **원본 `/content`에서도 켠다**(리빌딩 채널 구간 — 개선안 §4.2 사진 맡기기 선택·§4.4 쇼츠·릴스). 쇼츠 칸은 사진+재생 단추(가짜 영상)를 버리고 **빈 세로 9:16 틀 `VerticalVideoFrame`**(잉크 필 + 재생 표시 + "세로 영상")으로 교체 — 사장님 "지금은 프레임만" 결정. 모바일은 세 형식 3칸 유지 + 쇼츠만 아래 가로 한 줄(2×2면 틀이 옆 카드의 두 배 길이).
     공통: `Footer`(경로 감지 — 인자가 아니라 `usePathname`).
     ⛔ 폐기된 인자 — `TwoAppsRail loop`·`S41SearchScene loop`·`MobileProductCarousel loopNote`·`S8SearchBox framed`.
     loop 계열은 §7-9(목업 아래 단독 한 줄 금지)에 걸려 걷어냈고, 그 내용은 `TwoAppsRail`의 NC `desc` 문장에 흡수했다. `/ads2`만 성격이 다르다 = 구간 **순서**만 재배치한 조립본(내용 무변경). 낙점 후 원본에 반영하고 이 세 폴더와 `scripts/ui-shots.mjs`의 등록 줄을 함께 지운다. ⛔ 한 문장 때문에 컴포넌트를 통째로 복제하지 않는다(개선안 작업요청서 §0.5). |

@@ -69,7 +69,8 @@ export default function ContentPage() {
              중간 다크 폐기 — 다크는 S1·S11 양끝만. 흰 목업 창이 회색 위에 카드로 뜸 = Ramp 문법) ── */}
         <Section noBorder>
           <div className="bg-[#eef0f3]">
-            <ContentS4 />
+            {/* ★2026-10-08 개선안 §4.2 사진 맡기기 선택 + §4.4 쇼츠·릴스(빈 세로 틀) — /content2 시안에서 승격 */}
+            <ContentS4 choice shorts />
           </div>
         </Section>
         <SpacerRow top />
