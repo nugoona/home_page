@@ -503,16 +503,16 @@ export function S4Flow({ freeze }: { freeze?: Phase }) {
               <ChannelTag icon={ICON.blog} name="블로그" />
               <BlogCard out={out} />
             </div>
-            {/* 휴대폰 = 인스타·쇼츠를 옆으로 넘겨 보는 카드(다음 카드 살짝 보임 — 홈 모바일 캐러셀 문법 §8.18-B).
-                반씩 나란히 두면 폭 145px라 실제 화면 부속이 넘치고 겹쳤다(실측). PC = 이 묶음이 사라지고(contents) 격자 칸으로 */}
-            <div className="col-span-2 -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] md:contents">
+            {/* 휴대폰 = 인스타 아래에 쇼츠를 세로로(사장님 2026-10-08 "슬라이드처럼 하지 말고 인스타 아래에").
+                반씩 나란히 두면 폭 145px라 실제 화면 부속이 넘치고 겹쳤다(실측) → 둘 다 전폭. PC = 이 묶음이 사라지고(contents) 격자 칸으로 */}
+            <div className="col-span-2 flex flex-col gap-2.5 md:contents">
               {/* 인스타그램 — 실제 피드 게시물 */}
-              <div className="flex min-w-0 shrink-0 basis-[78%] snap-start flex-col md:basis-auto">
+              <div className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.insta} name="인스타그램" />
                 <InstaPost out={out} />
               </div>
               {/* 쇼츠 — 실제 재생 화면(9:16) */}
-              <div className="flex min-w-0 shrink-0 basis-[78%] snap-start flex-col md:basis-auto">
+              <div className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.shorts} name="쇼츠·릴스" />
                 <span className="relative block aspect-[9/16] w-full" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
                   <span className={`absolute inset-0 block ${out ? 'invisible' : ''}`}><Slot className="h-full w-full" /></span>
