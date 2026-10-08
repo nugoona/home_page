@@ -17,7 +17,7 @@
     node scripts/ui-shots.mjs --only=mobile (모바일만 · pc 도 가능)
     node scripts/ui-shots.mjs 홈 --slice     (긴 페이지를 화면 단위로 잘라 여러 장 — 판정용)
   결과: nugoona/public/ui-shots/*.png  +  nugoona/public/ui-shots.html
-        폰에서 http://100.117.180.66:3131/ui-shots.html · PC에서 http://localhost:3131/ui-shots.html
+        폰에서 http://100.112.202.111:3131/ui-shots.html · PC에서 http://localhost:3131/ui-shots.html
 
   🛑 dev 서버(3131)가 떠 있어야 한다. `cd nugoona && npm run dev -- -p 3131`
 
@@ -234,7 +234,7 @@ async function main() {
   writeIndex(shots);
   console.log(`\n📸 ${shots.length}장 저장 · 실패 ${failed}건`);
   console.log(`   PC   http://localhost:3131/ui-shots.html`);
-  console.log(`   모바일 http://100.117.180.66:3131/ui-shots.html`);
+  console.log(`   모바일 http://100.112.202.111:3131/ui-shots.html`);
 }
 
 /**

@@ -575,7 +575,7 @@
 > | | 애니메이션 53종 | Vercel 클론 10종 |
 > |---|---|---|
 > | PC | `http://localhost:3131/lab/sources` | `http://localhost:3131/lab/vercel` |
-> | 폰(테일스케일) | `http://100.117.180.66:3131/lab/sources` | `http://100.117.180.66:3131/lab/vercel` |
+> | 폰(테일스케일) | `http://100.112.202.111:3131/lab/sources` | `http://100.112.202.111:3131/lab/vercel` |
 >
 > **파일이 있는 곳**
 >
