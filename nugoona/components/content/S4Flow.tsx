@@ -9,7 +9,10 @@
  *  - 완성 후에도 **채널답게 계속 산다**(사장님 2026-10-08 "무빙을 위한 무빙이 아니라 살아 움직이는 콘텐츠"):
  *      블로그 = 글이 천천히 위로 흐르며 본문·사진이 이어진다(끊김 없는 반복, 우리 카드 문법 — 사장님 "블로그는 어쩔 수 없다")
  *      인스타 = **실제 피드 게시물 재현** · 미용 후 ↔ 미용 전 넘김, 가끔 큰 하트·좋아요 증가
- *      쇼츠 = **실제 재생 화면 재현** · 사진(영상 대기)·좋아요 증가·빨간 재생 막대. 영상은 사장님이 쇼츠 프로그램으로 제작 예정
+ *      쇼츠 = **실제 재생 화면 재현** · 사장님 제작 영상(솜이 15초, 소리 없음·반복)·좋아요 증가·실제 재생 위치 막대
+ *  - 고정과 움직임(사장님 2026-10-09): 카드 틀(인스타 계정 줄·아이콘·본문, 쇼츠 세로 줄·채널, 블로그 글)은 처음부터 고정.
+ *    사진·영상만 채워진다. PC = 사진첩에서 날아감(출발·도착이 한 화면) / 휴대폰 = 카드가 화면에 들어올 때 제자리에서 0.7초
+ *    (휴대폰에서 날리면 출발점 없이 사진이 위에서 내리꽂혀 "버그 같다"고 하셨다)
  *      페이스북 = 이 시안에서 제외(실제 화면 3개가 들어갈 자리 없음 — 사장님 확인 대상)
  * 업종 = 애견미용(사장님 확정 2026-10-08, 여러 마리). 사진 = 코덱스 생성(현장 폰 사진 질감, 사람 얼굴·글자 없음).
  * ⚠ §8.7-I "짝퉁 실물 재현 금지"는 이 구간에서 사장님 지시로 해제(2026-10-08 "인스타·쇼츠 틀은 실제랑 똑같이").
@@ -34,12 +37,33 @@ const G = (n: string) => `/img/content/groom/${n}.jpg`;
 /** 날아가는 사진 2장: 0 = 보리(블로그) · 1 = 콩이(인스타). 영상(솜이)은 쇼츠로 */
 const PHOTOS = [G('dog2-after'), G('dog1-after')];
 
-/** 날아가는 사진 — 같은 layoutId가 사진첩 칸 → 채널 카드로 옮겨 가며 위치·크기·비율이 이어진다 */
-function FlyPhoto({ i, className = '' }: { i: number; className?: string }) {
+/** 사진이 채널 카드에 자리 잡는 방식.
+    fly = PC: 같은 layoutId가 사진첩 칸 → 채널 카드로 옮겨 가며 위치·크기·비율이 이어진다(출발·도착이 한 화면에 보임).
+    fly 아님 = 휴대폰: 제자리에서 0.7초에 걸쳐 살짝 커졌다 자리 잡으며 나타난다 — 사장님 2026-10-09 "스크롤 내리면 갑자기 팍 나와서 버그 같다"
+    (휴대폰은 폰이 이미 화면 위로 지나간 뒤라 출발점 없이 수백 px를 1초 안에 내려와 박혔다) */
+const SETTLE = { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] };
+function FlyPhoto({ i, className = '', fly = true }: { i: number; className?: string; fly?: boolean }) {
+  if (!fly) {
+    /* eslint-disable-next-line @next/next/no-img-element */
+    return <motion.img src={PHOTOS[i]} alt="" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} transition={SETTLE} className={`block object-cover ${className}`} />;
+  }
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
     <motion.img layoutId={`s4f-p${i}`} transition={FLY} src={PHOTOS[i]} alt="" className={`block object-cover ${className}`} />
   );
+}
+
+/** 휴대폰 판정(md 900px 미만) — 첫 렌더는 PC로 가정하고 붙은 뒤에 고친다 */
+function useIsMobile() {
+  const [m, setM] = useState(false);
+  useEffect(() => {
+    const q = window.matchMedia('(max-width: 899px)');
+    const on = () => setM(q.matches);
+    on();
+    q.addEventListener('change', on);
+    return () => q.removeEventListener('change', on);
+  }, []);
+  return m;
 }
 
 function Label({ children }: { children: React.ReactNode }) {
@@ -71,11 +95,6 @@ const ICON = {
   fb: <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="12" fill="#1877F2" /><path d="M15.6 12.9l.5-3h-2.9V8c0-.85.4-1.6 1.7-1.6h1.3V3.8s-1.2-.2-2.3-.2c-2.4 0-3.9 1.4-3.9 4v2.3H7.4v3H10v7h3.2v-7z" fill="#fff" /></svg>,
   shorts: <span className="flex h-[14px] w-[14px] items-center justify-center bg-[#171717]"><svg width="7" height="7" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>,
 };
-
-/** 채널 카드가 아직 비어 있을 때의 자리 — 같은 크기 유지(레이아웃 점프 방지) */
-function Slot({ className = '' }: { className?: string }) {
-  return <span className={`block bg-[#f4f4f5] ${className}`} />;
-}
 
 /** 화살(§8.7-A 정본: PC = 선 1.6px + 채운 삼각 / 모바일 = 가는 선 + V촉).
     칸을 꽉 채워 양쪽 요소에 밀착(사이 틈 금지 — 정본). on = 흐름이 그 화살을 지나갈 때 왼쪽부터 그려진다 */
@@ -128,7 +147,7 @@ const GALLERY: { src: string; pick?: number; fly?: number; video?: boolean; zoom
   { src: G('dog1-during'), zoom: '60% 35%' },
 ];
 
-function PhoneGallery({ phase }: { phase: Phase }) {
+function PhoneGallery({ phase, fly }: { phase: Phase; fly: boolean }) {
   const picked = phase !== 'input';
   const out = phase === 'output';
   return (
@@ -147,12 +166,12 @@ function PhoneGallery({ phase }: { phase: Phase }) {
                   <img src={g.src} alt="" className="absolute inset-0 h-full w-full object-cover" style={g.zoom ? { transform: 'scale(1.9)', transformOrigin: g.zoom } : undefined} />
                   {g.video && (
                     <>
-                      {!out && <motion.span layoutId="s4f-v" transition={FLY} className="absolute inset-0 block bg-[#171717]/0" />}
                       <span className="absolute inset-0 z-[1] flex items-center justify-center bg-black/25" aria-hidden><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5 19 12 8 18.5z" /></svg></span>
-                      <span className="absolute bottom-1 right-1.5 z-[1] text-[9px] font-semibold text-white" style={EN}>0:24</span>
+                      {/* 실제 쇼츠 영상 길이(15초)와 맞춘다 */}
+                      <span className="absolute bottom-1 right-1.5 z-[1] text-[9px] font-semibold text-white" style={EN}>0:15</span>
                     </>
                   )}
-                  {g.fly !== undefined && !out && <FlyPhoto i={g.fly} className="absolute inset-0 h-full w-full" />}
+                  {g.fly !== undefined && !out && fly && <FlyPhoto i={g.fly} className="absolute inset-0 h-full w-full" />}
                   {/* 선택 표시 — 고른 칸 = 파란 테두리 + 번호 원(순서대로), 나머지 = 빈 원 */}
                   {g.pick ? (
                     <>
@@ -207,29 +226,27 @@ const BLOG_BODY: { p?: string; img?: string }[] = [
   { p: '얼굴은 동그랗게, 다리는 가볍게. 집에서도 빗질만 해 주시면 오래 갑니다.' },
 ];
 
-function BlogArticle({ out, hero }: { out: boolean; hero: boolean }) {
+/* 블로그 = 글(제목·본문)은 처음부터 고정, 사진 자리만 비어 있다가 on 이 되면 채워진다(사장님 2026-10-09 "고정될 것과 움직일 것") */
+function BlogArticle({ on, hero, fly }: { on: boolean; hero: boolean; fly: boolean }) {
   return (
     <div>
-      <span className="relative block aspect-[4/3]">
-        {hero ? (out ? <FlyPhoto i={0} className="absolute inset-0 h-full w-full" /> : <Slot className="absolute inset-0" />) : (
+      <span className="relative block aspect-[4/3] bg-[#f4f4f5]">
+        {hero ? (on ? <FlyPhoto i={0} fly={fly} className="absolute inset-0 h-full w-full" /> : null) : (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img src={PHOTOS[0]} alt="" className="absolute inset-0 h-full w-full object-cover" />
         )}
       </span>
       <div className="px-3 pb-1 pt-2.5">
-        <motion.p initial={false} animate={{ opacity: out ? 1 : 0 }} transition={{ delay: out && hero ? 0.7 : 0, duration: 0.5 }} className="text-[13px] font-bold leading-[1.4] text-text-primary">
-          {BLOG_TITLE}
-        </motion.p>
+        <p className="text-[13px] font-bold leading-[1.4] text-text-primary">{BLOG_TITLE}</p>
       </div>
       {BLOG_BODY.map((b, i) =>
         b.p ? (
-          <motion.p key={i} initial={false} animate={{ opacity: out ? 1 : 0 }} transition={{ delay: out && hero ? 0.9 : 0, duration: 0.5 }} className="px-3 py-1.5 text-[11px] leading-[1.6] text-text-body">
-            {b.p}
-          </motion.p>
+          <p key={i} className="px-3 py-1.5 text-[11px] leading-[1.6] text-text-body">{b.p}</p>
         ) : (
-          /* 사진이 날아와 글이 생기기 전에는 본문 사진도 숨긴다(먼저 보이면 "이미 있던 글"처럼 읽힌다) */
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <motion.img key={i} src={b.img} alt="" initial={false} animate={{ opacity: out ? 1 : 0 }} transition={{ delay: out && hero ? 1.0 : 0, duration: 0.5 }} className="mx-3 my-1.5 block aspect-[4/3] w-[calc(100%-24px)] object-cover" />
+          <span key={i} className="relative mx-3 my-1.5 block aspect-[4/3] w-[calc(100%-24px)] overflow-hidden bg-[#f4f4f5]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <motion.img src={b.img} alt="" initial={false} animate={{ opacity: on ? 1 : 0, scale: on ? 1 : 1.05 }} transition={{ ...SETTLE, delay: on && hero ? 0.25 : 0 }} className="absolute inset-0 h-full w-full object-cover" />
+          </span>
         ),
       )}
       <span className="block h-4" />
@@ -237,14 +254,14 @@ function BlogArticle({ out, hero }: { out: boolean; hero: boolean }) {
   );
 }
 
-function BlogCard({ out }: { out: boolean }) {
+function BlogCard({ on, fly }: { on: boolean; fly: boolean }) {
   return (
     <Card className="relative flex-1">
-      {/* 글 두 벌을 이어 붙여 -50%까지 흘린다 = 이음매 없는 반복. 사진이 도착하고 2.4초 뒤 시작 */}
+      {/* 글 두 벌을 이어 붙여 -50%까지 흘린다 = 이음매 없는 반복. 사진이 자리 잡고 2.4초 뒤 시작 */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="s4f-blog-scroll" style={{ animationPlayState: out ? 'running' : 'paused' }}>
-          <BlogArticle out={out} hero />
-          <BlogArticle out={out} hero={false} />
+        <div className="s4f-blog-scroll" style={{ animationPlayState: on ? 'running' : 'paused' }}>
+          <BlogArticle on={on} fly={fly} hero />
+          <BlogArticle on={on} fly={fly} hero={false} />
         </div>
       </div>
       <style>{`
@@ -254,7 +271,6 @@ function BlogCard({ out }: { out: boolean }) {
     </Card>
   );
 }
-
 
 /* ══ 실제 앱 화면 재현(사장님 2026-10-08 "인스타·쇼츠 틀은 실제랑 똑같이 — 좋아요도 뭣도") ══
    §8.7-I "짝퉁 실물 재현 금지"의 이유 = 어설픈 흉내. 여기서는 실제 앱 치수·아이콘·문구를 정확히 재현해 그 우려를 없앤다.
@@ -266,13 +282,13 @@ const IG_HEART = 'M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959
 /** 인스타그램 피드 게시물 — 머리(프로필 고리·계정·더보기) / 4:5 사진 넘김(1/2 표시·파란 점) / 하트·댓글·공유·저장 / 좋아요·본문·댓글·시간 */
 const INSTA_SLIDES = [PHOTOS[1], G('dog1-before')];
 
-function InstaPost({ out }: { out: boolean }) {
+function InstaPost({ on, fly }: { on: boolean; fly: boolean }) {
   const [idx, setIdx] = useState(0);
   const [likes, setLikes] = useState(126);
   const [liked, setLiked] = useState(false);
   const [burst, setBurst] = useState(0); // 사진 가운데 큰 하트 — 바뀔 때마다 한 번 뜬다
   useEffect(() => {
-    if (!out) return;
+    if (!on) return;
     let n = 0;
     const id = setInterval(() => {
       n += 1;
@@ -284,7 +300,7 @@ function InstaPost({ out }: { out: boolean }) {
       }
     }, 2800);
     return () => clearInterval(id);
-  }, [out]);
+  }, [on]);
   return (
     <div className="flex h-full flex-col bg-white text-black" style={{ ...APP_FONT, border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
       {/* 머리 */}
@@ -300,12 +316,12 @@ function InstaPost({ out }: { out: boolean }) {
       </div>
       {/* 사진 넘김 */}
       <span className="relative block aspect-[4/5] shrink-0 overflow-hidden bg-[#efefef]">
-        {out ? (
+        {on ? (
           <>
             {INSTA_SLIDES.map((src, i) => (
               <motion.span key={i} className="absolute inset-0 block" initial={i === 0 ? false : { x: '100%' }} animate={{ x: `${(i - idx) * 100}%` }} transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}>
                 {i === 0 ? (
-                  <FlyPhoto i={1} className="absolute inset-0 h-full w-full" />
+                  <FlyPhoto i={1} fly={fly} className="absolute inset-0 h-full w-full" />
                 ) : (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
@@ -319,9 +335,7 @@ function InstaPost({ out }: { out: boolean }) {
               </motion.svg>
             )}
           </>
-        ) : (
-          <Slot className="absolute inset-0" />
-        )}
+        ) : null}
       </span>
       {/* 버튼 줄 + 넘김 점(가운데) */}
       <div className="relative flex items-center gap-3 px-2.5 pb-1 pt-2">
@@ -337,12 +351,13 @@ function InstaPost({ out }: { out: boolean }) {
         </span>
         <svg className="ml-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinejoin="round" aria-hidden><polygon points="20 21 12 13.44 4 21 4 3 20 3 20 21" /></svg>
       </div>
-      <motion.div initial={false} animate={{ opacity: out ? 1 : 0 }} transition={{ delay: out ? 0.8 : 0 }} className="flex-1 px-2.5 pb-2.5">
+      {/* 좋아요·본문·댓글·시간 = 처음부터 고정(틀). 좋아요 숫자만 사진이 자리 잡은 뒤 오른다 */}
+      <div className="flex-1 px-2.5 pb-2.5">
         <p className="text-[11px] font-semibold leading-[1.5]">좋아요 <NumberFlow value={likes} />개</p>
         <p className="text-[11px] leading-[1.45]"><span className="font-semibold">{SHOP_ID}</span> 콩이 동그란 얼굴 컷 <span className="whitespace-nowrap text-[#00376b]">#말티즈미용</span> <span className="whitespace-nowrap text-[#00376b]">#동네애견미용</span></p>
         <p className="mt-0.5 text-[11px] leading-[1.45] text-[#737373]">댓글 8개 모두 보기</p>
         <p className="text-[10px] leading-[1.6] text-[#737373]">1시간 전</p>
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -358,19 +373,50 @@ function RailBtn({ d, label }: { d: string; label: React.ReactNode }) {
 }
 
 /** 유튜브 쇼츠 재생 화면 — 위(검색·더보기) / 오른쪽 세로 줄(좋아요·싫어요·댓글·공유·리믹스·음원) / 아래(채널·구독·제목·음원) / 빨간 재생 막대.
-    영상은 사장님이 쇼츠 프로그램으로 만든다 — 그 전까지 솜이 사진을 천천히 당겨 보이게 깔아 둔다(가짜 영상 파일은 쓰지 않는다) */
-function ShortsPlayer({ out }: { out: boolean }) {
+    영상 = 사장님 제작 "솜이 미용 전 → 후"(2026-10-09, 원본 media/groom-shorts/shorts-somi.mp4 1080×1920 15초).
+    홈페이지용 = public/video/shorts-somi-720.mp4(720×1280, H.264 화질 23, 1.4MB) + 포스터 = 13초 전·후 비교 장면.
+    소리 없음·자동 반복·인라인 재생. 화면 틀(세로 줄·채널·제목)은 처음부터 고정, 영상만 on 이 되면 서서히 나타나며 재생 시작.
+    재생 막대 = 실제 재생 위치. */
+function ShortsPlayer({ on }: { on: boolean }) {
   const [likes, setLikes] = useState(384);
+  const [progress, setProgress] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (!out) return;
+    const v = videoRef.current;
+    if (!v) return;
+    if (on) {
+      v.currentTime = 0;
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+    }
+  }, [on]);
+  useEffect(() => {
+    if (!on) return;
     let n = 0;
     const id = setInterval(() => { n += 1; setLikes((v) => v + 1 + (n % 2)); }, 3400);
     return () => clearInterval(id);
-  }, [out]);
+  }, [on]);
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#0f0f0f] text-white" style={APP_FONT}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={G('dog4-after')} alt="" className="s4f-kenburns absolute inset-0 h-full w-full object-cover" />
+      <motion.video
+        ref={videoRef}
+        src="/video/shorts-somi-720.mp4"
+        poster="/video/shorts-somi-poster.jpg"
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label="솜이 미용 전 → 후 쇼츠 영상"
+        onTimeUpdate={(e) => {
+          const v = e.currentTarget;
+          if (v.duration) setProgress(v.currentTime / v.duration);
+        }}
+        initial={false}
+        animate={{ opacity: on ? 1 : 0, scale: on ? 1 : 1.05 }}
+        transition={SETTLE}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
       <span className="pointer-events-none absolute inset-x-0 top-0 h-[22%]" style={{ background: 'linear-gradient(rgba(0,0,0,0.35), transparent)' }} />
       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%]" style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.62))' }} />
       {/* 위 */}
@@ -406,30 +452,24 @@ function ShortsPlayer({ out }: { out: boolean }) {
           <span className="truncate">원본 오디오 · {SHOP_ID}</span>
         </span>
       </span>
-      {/* 재생 막대 */}
+      {/* 재생 막대 — 실제 재생 위치 */}
       <span className="absolute inset-x-0 bottom-0 block h-[2px] bg-white/30">
-        <span className="s4f-progress block h-full bg-[#ff0033]" />
+        <span className="block h-full origin-left bg-[#ff0033]" style={{ transform: `scaleX(${progress})` }} />
       </span>
-      <style>{`
-        .s4f-kenburns { animation: s4fKb 14s ease-in-out infinite alternate; transform-origin: 50% 40%; }
-        @keyframes s4fKb { from { transform: scale(1); } to { transform: scale(1.08); } }
-        .s4f-progress { animation: s4fProg 14s linear infinite; transform-origin: left; }
-        @keyframes s4fProg { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-      `}</style>
     </div>
   );
 }
 
-/** 가운데 = 앱이 만드는 자리. 심벌 + "콘텐츠가 됩니다" + 만들어지는 세 가지(채널에 도착할 때마다 체크).
+/** 가운데 = 앱이 만드는 자리. 심벌 + "콘텐츠가 됩니다" + 만들어지는 세 가지(그 채널에 사진·영상이 자리 잡을 때마다 체크).
     사장님 2026-10-08 "로고만 덩그러니 + 글자 = 안 예쁘다 · 글이 아니라 콘텐츠" */
 const MAKES = [
-  { icon: ICON.blog, name: '블로그 글' },
-  { icon: ICON.insta, name: '인스타 게시물' },
-  { icon: ICON.shorts, name: '쇼츠 영상' },
-];
+  { key: 'blog', icon: ICON.blog, name: '블로그 글' },
+  { key: 'insta', icon: ICON.insta, name: '인스타 게시물' },
+  { key: 'shorts', icon: ICON.shorts, name: '쇼츠 영상' },
+] as const;
+type Arrived = { blog: boolean; insta: boolean; shorts: boolean };
 
-function MakerCard({ phase }: { phase: Phase }) {
-  const out = phase === 'output';
+function MakerCard({ done }: { done: Arrived }) {
   return (
     <div className="mx-auto w-full max-w-[260px] bg-white p-3 md:max-w-none" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
       <div className="flex items-center gap-2 md:flex-col md:items-start">
@@ -438,20 +478,23 @@ function MakerCard({ phase }: { phase: Phase }) {
         <p className="text-[13px] font-bold leading-[1.3] tracking-[-0.02em] text-text-primary">콘텐츠가 됩니다</p>
       </div>
       <ul className="mt-2.5 space-y-1.5 border-t pt-2.5" style={{ borderColor: BORDER }}>
-        {MAKES.map((m, i) => (
-          <li key={m.name} className="flex items-center gap-1.5 text-[11px] font-medium text-text-body">
-            {m.icon}
-            <span className="min-w-0 flex-1 truncate">{m.name}</span>
-            <motion.span
-              initial={false}
-              animate={out ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0.25 }}
-              transition={{ delay: out ? 0.55 + i * 0.18 : 0, type: 'spring', stiffness: 420, damping: 20 }}
-              className={`rounded-dot flex h-[14px] w-[14px] shrink-0 items-center justify-center transition-colors duration-300 ${out ? 'bg-[#0070f3]' : 'bg-[#e5e5e5]'}`}
-            >
-              <svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" aria-hidden><path d="M3 8.5l3.2 3L13 5" /></svg>
-            </motion.span>
-          </li>
-        ))}
+        {MAKES.map((m, i) => {
+          const ok = done[m.key];
+          return (
+            <li key={m.name} className="flex items-center gap-1.5 text-[11px] font-medium text-text-body">
+              {m.icon}
+              <span className="min-w-0 flex-1 truncate">{m.name}</span>
+              <motion.span
+                initial={false}
+                animate={ok ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0.25 }}
+                transition={{ delay: ok ? 0.45 + i * 0.12 : 0, type: 'spring', stiffness: 420, damping: 20 }}
+                className={`rounded-dot flex h-[14px] w-[14px] shrink-0 items-center justify-center transition-colors duration-300 ${ok ? 'bg-[#0070f3]' : 'bg-[#e5e5e5]'}`}
+              >
+                <svg width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" aria-hidden><path d="M3 8.5l3.2 3L13 5" /></svg>
+              </motion.span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -460,9 +503,17 @@ function MakerCard({ phase }: { phase: Phase }) {
 export function S4Flow({ freeze }: { freeze?: Phase }) {
   const ref = useRef<HTMLDivElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const blogRef = useRef<HTMLDivElement>(null);
+  const instaRef = useRef<HTMLDivElement>(null);
+  const shortsRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const fly = !isMobile;
   const inView = useInView(ref, { once: true, amount: 0.25 });
-  /* 휴대폰은 결과 카드가 사진첩 아래에 있다 → 결과가 화면에 들어올 때 날아가야 손님이 그 장면을 본다(PC는 둘이 함께 보임) */
   const resultsInView = useInView(resultsRef, { once: true, amount: 0.3 });
+  /* 휴대폰 = 카드마다 화면에 40% 들어오면 그 카드만 채워진다(손님이 내려 보는 만큼 하나씩) */
+  const blogIn = useInView(blogRef, { once: true, amount: 0.4 });
+  const instaIn = useInView(instaRef, { once: true, amount: 0.4 });
+  const shortsIn = useInView(shortsRef, { once: true, amount: 0.4 });
   const [phase, setPhase] = useState<Phase>(freeze ?? 'input');
   const [pickedAt, setPickedAt] = useState(0);
   useEffect(() => {
@@ -471,13 +522,18 @@ export function S4Flow({ freeze }: { freeze?: Phase }) {
     return () => clearTimeout(t1);
   }, [inView, freeze]);
   useEffect(() => {
-    if (freeze || phase !== 'picked' || !resultsInView) return;
-    /* 고르는 장면(번호 + 말풍선)은 최소 2.1초 보여 준 뒤 날린다 */
+    if (freeze || phase !== 'picked') return;
+    /* PC = 결과가 화면에 들어와 있어야 날린다(날아가는 길이 보이게). 고르는 장면(번호 + 말풍선)은 최소 2.1초 */
+    if (!isMobile && !resultsInView) return;
     const wait = Math.max(300, 2100 - (Date.now() - pickedAt));
     const t2 = setTimeout(() => setPhase('output'), wait);
     return () => clearTimeout(t2);
-  }, [phase, resultsInView, pickedAt, freeze]);
+  }, [phase, resultsInView, pickedAt, freeze, isMobile]);
   const out = phase === 'output';
+  const picked = phase !== 'input';
+  const arrived: Arrived = isMobile
+    ? { blog: picked && blogIn, insta: picked && instaIn, shorts: picked && shortsIn }
+    : { blog: out, insta: out, shorts: out };
   const s = multiChannel.steps;
 
   return (
@@ -486,45 +542,40 @@ export function S4Flow({ freeze }: { freeze?: Phase }) {
         {/* ── 올리세요: 내 폰 사진첩에서 고른다 ── */}
         <div className="min-w-0">
           <Label>{s[0].title}</Label>
-          <PhoneGallery phase={phase} />
+          <PhoneGallery phase={phase} fly={fly} />
         </div>
 
-        <Arrow on={phase !== 'input'} />
+        <Arrow on={picked} />
 
         {/* ── 콘텐츠가 됩니다: 앱이 만드는 자리 ── */}
         <div className="md:self-center">
-          <MakerCard phase={phase} />
+          <MakerCard done={arrived} />
         </div>
 
-        <Arrow on={out} />
+        <Arrow on={isMobile ? arrived.blog : out} />
 
-        {/* ── 확인하고 발행: 채널마다 살아 움직임(인스타·쇼츠 = 실제 앱 화면) ── */}
+        {/* ── 확인하고 발행: 채널마다 살아 움직임(인스타·쇼츠 = 실제 앱 화면). 틀은 처음부터 고정, 사진·영상만 채워진다 ── */}
         <div ref={resultsRef} className="min-w-0">
           <Label>{s[2].title}</Label>
           <div className="grid grid-cols-2 gap-2.5 md:grid-cols-[0.8fr_1fr_1.17fr] md:gap-3">
             {/* 블로그 — 글이 위로 흐른다(우리 카드 문법 유지) */}
-            <div className="col-span-2 flex h-[300px] flex-col md:col-span-1 md:h-auto">
+            <div ref={blogRef} className="col-span-2 flex h-[300px] flex-col md:col-span-1 md:h-auto">
               <ChannelTag icon={ICON.blog} name="블로그" />
-              <BlogCard out={out} />
+              <BlogCard on={arrived.blog} fly={fly} />
             </div>
             {/* 휴대폰 = 인스타 아래에 쇼츠를 세로로(사장님 2026-10-08 "슬라이드처럼 하지 말고 인스타 아래에").
-                반씩 나란히 두면 폭 145px라 실제 화면 부속이 넘치고 겹쳤다(실측) → 둘 다 전폭. PC = 이 묶음이 사라지고(contents) 격자 칸으로 */}
+                PC = 이 묶음이 사라지고(contents) 격자 칸으로 */}
             <div className="col-span-2 flex flex-col gap-2.5 md:contents">
               {/* 인스타그램 — 실제 피드 게시물 */}
-              <div className="flex min-w-0 flex-col">
+              <div ref={instaRef} className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.insta} name="인스타그램" />
-                <InstaPost out={out} />
+                <InstaPost on={arrived.insta} fly={fly} />
               </div>
               {/* 쇼츠 — 실제 재생 화면(9:16) */}
-              <div className="flex min-w-0 flex-col">
+              <div ref={shortsRef} className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.shorts} name="쇼츠·릴스" />
-                <span className="relative block aspect-[9/16] w-full" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-                  <span className={`absolute inset-0 block ${out ? 'invisible' : ''}`}><Slot className="h-full w-full" /></span>
-                  {out && (
-                    <motion.span layoutId="s4f-v" transition={FLY} className="absolute inset-0 block overflow-hidden">
-                      <ShortsPlayer out={out} />
-                    </motion.span>
-                  )}
+                <span className="relative block aspect-[9/16] w-full overflow-hidden" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
+                  <ShortsPlayer on={arrived.shorts} />
                 </span>
               </div>
             </div>
