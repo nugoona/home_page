@@ -101,12 +101,12 @@ function Arrow({ on }: { on: boolean }) {
 const G_FRAME_W = 540;
 const G_SCREEN = { left: 31.7, top: 12.35, width: 35.9, height: 74.7 }; // phone-frame.png 화면 영역(%) — S2와 동일
 const G_VISIBLE_W = Math.round(G_FRAME_W * 0.386); // 보이는 폭 ≈ 208(베젤 포함)
-const G_VISIBLE_H = 443; // 결과 카드 높이에 맞춰 폰 칸을 채운다(빈 여백 금지). 아래는 홀더 컷(§8.18-B)
+const G_VISIBLE_H = 386; // 폰 아래 둥근 모서리가 시작되기 전에서 자른다 — 그 아래는 화면 흰 바탕이 모서리 밖으로 삐져나와 보였다(사장님 2026-10-08 "사진 아래 하얀 거"). 사진이 잘린 선까지 찬다(홀더 컷 §8.18-B)
 const G_LEFT = -Math.round(G_FRAME_W * 0.304);
 const G_TOP = -Math.round(G_FRAME_W * 0.1105);
 /* 미용사 사진첩 15칸 — 오늘 미용한 아이들(전·중·후)과 가게. 같은 사진 두 번 금지.
    pick = 선택 순번, fly = 날아갈 사진 번호, video = 쇼츠로 갈 영상(썸네일 = 솜이 미용 중) */
-const GALLERY: { src: string; pick?: number; fly?: number; video?: boolean }[] = [
+const GALLERY: { src: string; pick?: number; fly?: number; video?: boolean; zoom?: string }[] = [
   { src: G('dog1-before') },
   { src: G('dog1-after'), pick: 1, fly: 1 },
   { src: G('shop-props') },
@@ -122,13 +122,17 @@ const GALLERY: { src: string; pick?: number; fly?: number; video?: boolean }[] =
   { src: G('dog3-during') },
   { src: G('dog4-after') },
   { src: G('shop-waiting') },
+  /* 6번째 줄 — 폰 아래까지 사진이 차게(사장님 2026-10-08 "사진 아래 하얀 거 안 나오게"). 남은 1장 + 연속 촬영처럼 확대한 2장 */
+  { src: G('shop-entrance') },
+  { src: G('dog2-after'), zoom: '50% 30%' },
+  { src: G('dog1-during'), zoom: '60% 35%' },
 ];
 
 function PhoneGallery({ phase }: { phase: Phase }) {
   const picked = phase !== 'input';
   const out = phase === 'output';
   return (
-    <div className="relative mx-auto w-fit md:mx-0">
+    <div className="relative flex w-full flex-col items-center md:block md:w-fit">
       <div className="relative overflow-hidden" style={{ width: G_VISIBLE_W, height: G_VISIBLE_H }}>
         <div style={{ position: 'relative', width: G_FRAME_W, left: G_LEFT, top: G_TOP, filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.10))' }}>
           <div className="absolute z-[1] overflow-hidden bg-white" style={{ left: `${G_SCREEN.left}%`, top: `${G_SCREEN.top}%`, width: `${G_SCREEN.width}%`, height: `${G_SCREEN.height}%`, borderRadius: 16 }}>
@@ -140,7 +144,7 @@ function PhoneGallery({ phase }: { phase: Phase }) {
               {GALLERY.map((g, i) => (
                 <span key={i} className="relative block aspect-square overflow-hidden bg-[#171717]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={g.src} alt="" className="absolute inset-0 h-full w-full object-cover" style={g.zoom ? { transform: 'scale(1.9)', transformOrigin: g.zoom } : undefined} />
                   {g.video && (
                     <>
                       {!out && <motion.span layoutId="s4f-v" transition={FLY} className="absolute inset-0 block bg-[#171717]/0" />}
@@ -175,13 +179,13 @@ function PhoneGallery({ phase }: { phase: Phase }) {
         </div>
       </div>
       {/* 잘린 단면 밀착 구획선 — S2 폰과 같은 문법 */}
-      <span aria-hidden className="absolute inset-x-0 h-[3px]" style={{ top: G_VISIBLE_H - 3, background: 'radial-gradient(ellipse 52% 100% at 50% 100%, #8f8f8f 0%, rgba(143,143,143,0.35) 60%, transparent 100%)' }} />
+      <span aria-hidden className="absolute left-1/2 h-[3px] -translate-x-1/2 md:left-0 md:translate-x-0" style={{ width: G_VISIBLE_W, top: G_VISIBLE_H - 3, background: 'radial-gradient(ellipse 52% 100% at 50% 100%, #8f8f8f 0%, rgba(143,143,143,0.35) 60%, transparent 100%)' }} />
       {/* 말 한마디 — 폰 밖 말풍선(미용사가 폰에 대고 말하는 장면). 다 고른 뒤에 뜬다 */}
       <motion.p
         initial={false}
         animate={picked ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
         transition={{ delay: picked ? 1.2 : 0, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-[3] -mt-10 ml-8 flex w-max max-w-[240px] items-center gap-2 bg-white py-2 pl-2 pr-3 text-[12px] font-medium leading-[1.4] text-text-primary md:ml-12"
+        className="relative z-[3] -mt-10 flex w-full max-w-[260px] items-center gap-2 bg-white px-3 py-2 text-[12px] font-medium leading-[1.4] text-text-primary md:ml-12 md:mt-5 md:w-max md:max-w-[240px] md:pl-2"
         style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}
       >
         <span className="rounded-dot flex h-6 w-6 shrink-0 items-center justify-center bg-[#0070f3]">
