@@ -72,8 +72,8 @@ function MiniReport() {
 export default function MobileAssetTimeline() {
   const { head, cells } = homeV2.asset;
   const products = [
-    { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠', msg: cells[0].msg, mock: <MiniContent /> },
-    { logo: '/img/logo/na.svg?v=20', name: '누구나 광고', msg: cells[1].msg, mock: <MiniReport /> },
+    { logo: '/img/brand/content/symbol.svg', name: '누구나 콘텐츠', msg: cells[0].msg, mock: <MiniContent /> },
+    { logo: '/img/brand/ad/symbol.svg', name: '누구나 광고', msg: cells[1].msg, mock: <MiniReport /> },
   ];
 
   return (

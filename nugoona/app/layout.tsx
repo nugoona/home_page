@@ -43,12 +43,13 @@ export const metadata: Metadata = {
     images: ['/img/icons/logo2.webp'],
   },
   icons: {
-    // 마스터 N 아이콘(로고 시스템 직각·톤온톤, 2026-07-11 확정 — 벡터 마감 전 브라우저 렌더 PNG)
+    // ★2026-10-08 새 회사 심벌(사장님 확정 2026-10-07, DESIGN §8.8 — 구 마스터 N 대체)
     icon: [
-      { url: '/img/logo/n-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/img/logo/n-16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/img/brand/company/favicon.ico', sizes: 'any' },
+      { url: '/img/brand/company/png/symbol-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/img/brand/company/png/symbol-16.png', sizes: '16x16', type: 'image/png' },
     ],
-    apple: '/img/logo/n-180.png',
+    apple: '/img/brand/company/png/symbol-256.png',
   },
   robots: { index: true, follow: true },
 };

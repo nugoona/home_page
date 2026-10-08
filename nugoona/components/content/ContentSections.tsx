@@ -111,7 +111,7 @@ function S2PhoneApp() {
     <div style={{ width: 1080, transformOrigin: '0 0', transform: `scale(${P_SCALE})`, fontFamily: 'var(--font-kr)', padding: '150px 90px 0', boxSizing: 'border-box' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo/nc.svg?v=16" alt="" style={{ width: 56, height: 56 }} />
+        <img src="/img/brand/content/symbol.svg" alt="" style={{ width: 56, height: 56 }} />
         <span style={{ fontSize: 38, fontWeight: 700, color: '#16161a', letterSpacing: '-0.01em' }}>누구나 콘텐츠</span>
       </div>
       <p style={{ fontSize: 58, fontWeight: 800, color: '#16161a', letterSpacing: '-0.02em', margin: '30px 0 0' }}>새 글 쓰기</p>
@@ -482,7 +482,7 @@ function BridgeBeamScene() {
         <span ref={fromA} aria-hidden className="absolute right-0 top-1/2 h-0 w-0" />
         <div className="flex items-center gap-1.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/logo/nc.svg?v=16" alt="" className="h-[13px] w-[13px]" />
+          <img src="/img/brand/content/symbol.svg" alt="" className="h-[13px] w-[13px]" />
           <span className="text-[10px] font-semibold text-text-body md:text-[12px]">누구나 콘텐츠</span>
         </div>
         <p className="mt-1.5 text-[11.5px] font-bold leading-[1.35] text-text-primary md:text-[16.5px]">가을 수분 관리,<br className="md:hidden" /> 이렇게 준비했어요</p>
@@ -1240,7 +1240,7 @@ function S5NewsCard({ dark }: { dark?: boolean }) {
     >
       <div className="flex items-center gap-2 border-b px-3.5 py-2.5" style={{ borderColor: dark ? S5_DARK_LINE : BORDER }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo/nc.svg?v=16" alt="" className="h-[16px] w-[16px]" />
+        <img src="/img/brand/content/symbol.svg" alt="" className="h-[16px] w-[16px]" />
         <span className={`text-[12px] font-bold tracking-[-0.01em] md:text-[14px] ${dark ? 'text-white' : 'text-text-primary'}`}>이번 주 수집</span>
         <span className={`ml-auto text-[10px] tracking-[0.04em] ${dark ? 'text-white/40' : 'text-text-muted'}`} style={EN}>WEEKLY</span>
       </div>
@@ -1583,7 +1583,7 @@ function S9MockPhotoQnA() {
       className="flex w-full flex-1 flex-col border border-border-default bg-bg">
       <div className="flex items-center gap-1.5 border-b border-border-default px-5 py-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo/nc.svg?v=16" alt="" className="h-[14px] w-[14px]" />
+        <img src="/img/brand/content/symbol.svg" alt="" className="h-[14px] w-[14px]" />
         <span className="text-[12px] font-bold text-text-primary">연남 작은 네일</span>
       </div>
       {/* 남는 높이는 사진 장면이 쓴다. 모바일에서는 원본의 가로 비율을 유지한다. */}
@@ -1665,7 +1665,7 @@ function S9MockNotifications() {
           initial={{ y: 18, scale: 0.98 }} animate={{ y: inView ? 0 : 18, scale: inView ? 1 : 0.98 }} transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}>
           <div className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/nc.svg?v=16" alt="" className="h-4 w-4" />
+            <img src="/img/brand/content/symbol.svg" alt="" className="h-4 w-4" />
             <span className="text-[11px] font-semibold text-text-primary">누구나 콘텐츠</span>
             <span className="ml-auto text-[10px] font-medium text-text-weak">알림 예시</span>
           </div>

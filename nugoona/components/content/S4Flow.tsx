@@ -208,7 +208,7 @@ export function S4Flow({ freeze }: { freeze?: Phase }) {
         {/* ── 글이 됩니다: 만드는 자리 = 누구나 콘텐츠 ── */}
         <div className="flex flex-row items-center justify-center gap-3 md:flex-col md:gap-2.5 md:self-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/logo/nc.svg?v=16" alt="누구나 콘텐츠" className="h-14 w-14 md:h-[84px] md:w-[84px]" />
+          <img src="/img/brand/content/symbol.svg" alt="누구나 콘텐츠" className="h-14 w-14 md:h-[84px] md:w-[84px]" />
           <p className="text-center text-[14px] font-bold tracking-[-0.02em] text-text-primary">{s[1].title}</p>
         </div>
 

@@ -139,8 +139,8 @@ export default function BrandPhilosophySection() {
         </h2>
         <div className="mt-10 divide-y divide-white/[0.1] border-y border-white/[0.1]">
           {[
-            { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠', text: '콘텐츠로 발견되고' },
-            { logo: '/img/logo/na.svg?v=20', name: '누구나 광고', text: '광고로 고객을 만납니다' },
+            { logo: '/img/brand/content/symbol.svg', name: '누구나 콘텐츠', text: '콘텐츠로 발견되고' },
+            { logo: '/img/brand/ad/symbol.svg', name: '누구나 광고', text: '광고로 고객을 만납니다' },
           ].map((d, i) => (
             <RevealLine key={d.name} delay={0.45 + i * 0.15}>
               <span className="flex items-center gap-4 py-7">
@@ -172,8 +172,8 @@ export default function BrandPhilosophySection() {
           key === 'head'
             ? headBlock
             : key === 'decl1'
-              ? declCell('/img/logo/nc.svg?v=16', '누구나 콘텐츠', '콘텐츠로 발견되고', 0.08)
-              : declCell('/img/logo/na.svg?v=20', '누구나 광고', '광고로 고객을 만납니다', 0.16)
+              ? declCell('/img/brand/content/symbol.svg', '누구나 콘텐츠', '콘텐츠로 발견되고', 0.08)
+              : declCell('/img/brand/ad/symbol.svg', '누구나 광고', '광고로 고객을 만납니다', 0.16)
         }
       />
     </section>

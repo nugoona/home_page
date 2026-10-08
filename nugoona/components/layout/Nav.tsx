@@ -63,8 +63,10 @@ export default function Nav() {
         style={{ top: hasPromo ? '40px' : '0px' }}
       >
         <div className="max-w-[1200px] mx-auto h-full flex items-center justify-between px-6">
-          <Link href="/" className="text-[20px] font-semibold text-text-primary tracking-[-0.02em]" style={{ fontFamily: 'var(--font-en)' }}>
-            NGN
+          {/* ★2026-10-08 새 회사 로고(가로·영문 NUGOONA, 흰 바탕이라 dark-text) — 구 "NGN" 글자 대체. 파일 그대로(DESIGN §8.8) */}
+          <Link href="/" className="-ml-1.5 flex items-center" aria-label="누구나 컴퍼니 홈">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/brand/company/horizontal-en-dark-text.svg" alt="NUGOONA" className="block h-[42px] w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

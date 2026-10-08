@@ -227,8 +227,8 @@ export default function S6AssetStacks() {
   const { head, cells, conclusion } = homeV2.asset;
   /* ★ 정식 제품명 + 로고 (표기 규칙: "누구나 콘텐츠"/"누구나 광고" — 임의 축약 금지) */
   const products = [
-    { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠' },
-    { logo: '/img/logo/na.svg?v=20', name: '누구나 광고' },
+    { logo: '/img/brand/content/symbol.svg', name: '누구나 콘텐츠' },
+    { logo: '/img/brand/ad/symbol.svg', name: '누구나 광고' },
   ];
   const mocks = [<ContentStack key="c" />, <ReportStack key="r" />];
   const headRevealRef = useRevealOnView<HTMLDivElement>();

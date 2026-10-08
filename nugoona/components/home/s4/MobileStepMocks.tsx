@@ -25,7 +25,7 @@ function NcDocMobile() {
       {/* 앱바 — 누구나 콘텐츠 + DONE */}
       <div className="flex items-center gap-2 border-b px-3.5 py-2.5" style={{ borderColor: '#F1F1F1' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo/nc.svg?v=16" alt="" className="h-[16px] w-[16px]" />
+        <img src="/img/brand/content/symbol.svg" alt="" className="h-[16px] w-[16px]" />
         <span className="text-[12px] font-semibold tracking-[-0.01em] text-text-body" style={KR}>누구나 콘텐츠</span>
         <span className="ml-auto flex items-center gap-1 text-[10px] font-bold tracking-[0.04em] text-accent" style={EN}>
           <span className="rounded-dot h-[5px] w-[5px] bg-accent" />DONE

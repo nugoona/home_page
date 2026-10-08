@@ -96,7 +96,7 @@ export function AdsAnswerScene() {
           <span ref={naOut} aria-hidden className="absolute right-0 top-1/2 h-0 w-0" />
           <div className="flex items-center gap-2.5 bg-white px-4 py-3 md:px-5 md:py-3.5" style={{ border: `1px solid ${C_BORDER}`, boxShadow: C_SHADOW }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/na.svg?v=16" alt="" className="h-[26px] w-[26px] md:h-[31px] md:w-[31px]" />
+            <img src="/img/brand/ad/symbol.svg" alt="" className="h-[26px] w-[26px] md:h-[31px] md:w-[31px]" />
             <span className="text-[13.5px] font-bold tracking-[-0.01em] text-text-primary md:text-[15px]">누구나 광고</span>
           </div>
         </div>
@@ -1627,7 +1627,7 @@ export function AdsEvolveScene() {
         {/* 중앙(하단) = NA 로고 — 원형(사장님 "동그라미로") */}
         <span className="absolute flex h-[76px] w-[76px] -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white" style={{ border: `1px solid ${C_BORDER}`, boxShadow: '0 8px 22px rgba(0,0,0,0.1)', borderRadius: '50%' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/logo/na.svg?v=16" alt="누구나 광고" className="h-[38px] w-[38px]" />
+          <img src="/img/brand/ad/symbol.svg" alt="누구나 광고" className="h-[38px] w-[38px]" />
         </span>
       </div>
     </div>

@@ -221,7 +221,7 @@ export default function S41SearchScene({ part, hideHead, video = false }: { part
         >
           <div className="flex items-center gap-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo/nc.svg?v=16" alt="" className="h-[15px] w-[15px]" />
+            <img src="/img/brand/content/symbol.svg" alt="" className="h-[15px] w-[15px]" />
             <span className="text-[11px] font-semibold tracking-[-0.01em] text-text-body">누구나 콘텐츠</span>
             <span className="ml-auto text-[10px] tracking-[0.04em] text-text-muted" style={{ fontFamily: 'var(--font-en)' }}>
               DRAFT → DONE

@@ -81,8 +81,8 @@ function BranchFlow({ uid }: { uid: string }) {
 
       {/* 우: 로고(그리드 한 칸 크기) + 정식 제품명 — 박스·서브 없음(사장님 2026-07-15) */}
       {[
-        { logo: '/img/logo/nc.svg?v=16', name: '누구나 콘텐츠', top: '22.1%' },
-        { logo: '/img/logo/na.svg?v=20', name: '누구나 광고', top: '77.9%' },
+        { logo: '/img/brand/content/symbol.svg', name: '누구나 콘텐츠', top: '22.1%' },
+        { logo: '/img/brand/ad/symbol.svg', name: '누구나 광고', top: '77.9%' },
       ].map((p) => (
         <div
           key={p.name}
@@ -249,7 +249,7 @@ function ProductText({
      "실제 제공 범위와 요금 조건을 맞춰 사용한다"는 단서를 달았다).
      영상은 §7 스튜디오 도입으로 상품이 되었으므로 "짧은 영상까지"는 남겼다. */
 const NC = {
-  logo: '/img/logo/nc.svg?v=16',
+  logo: '/img/brand/content/symbol.svg',
   name: '누구나 콘텐츠',
   headHtml: '찍어둔 사진과 영상이<br>가게 콘텐츠가 됩니다',
   /* ★2026-09-19 §3.4 콘텐츠 순환을 **이 문장에 흡수**했다(구 "발행 일정과 검색 노출을 한곳에서 확인합니다").
@@ -262,7 +262,7 @@ const NC = {
   tint: '#0070f3', // 제품 컬러 코딩(모바일 스티키 바 라인 — S7 점 색과 동일 계열)
 };
 const NA = {
-  logo: '/img/logo/na.svg?v=20',
+  logo: '/img/brand/ad/symbol.svg',
   name: '누구나 광고',
   headHtml: '광고를 만들고 운영하며<br>매출과 성과를 이해합니다',
   desc: '메타·구글 광고를 만들고, 쇼핑몰 매출과 광고 성과를 한 화면에서 확인합니다',
