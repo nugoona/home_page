@@ -22,7 +22,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { LayoutGroup, motion, useInView } from 'framer-motion';
+import { LayoutGroup, motion } from 'framer-motion';
 import NumberFlow from '@number-flow/react';
 import { multiChannel } from '@/lib/content/content';
 
@@ -45,7 +45,7 @@ const SETTLE = { duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, numb
 function FlyPhoto({ i, className = '', fly = true }: { i: number; className?: string; fly?: boolean }) {
   if (!fly) {
     /* eslint-disable-next-line @next/next/no-img-element */
-    return <motion.img src={PHOTOS[i]} alt="" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} transition={SETTLE} className={`block object-cover ${className}`} />;
+    return <img src={PHOTOS[i]} alt="" className={`block object-cover ${className}`} />;
   }
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
@@ -53,18 +53,6 @@ function FlyPhoto({ i, className = '', fly = true }: { i: number; className?: st
   );
 }
 
-/** 휴대폰 판정(md 900px 미만) — 첫 렌더는 PC로 가정하고 붙은 뒤에 고친다 */
-function useIsMobile() {
-  const [m, setM] = useState(false);
-  useEffect(() => {
-    const q = window.matchMedia('(max-width: 899px)');
-    const on = () => setM(q.matches);
-    on();
-    q.addEventListener('change', on);
-    return () => q.removeEventListener('change', on);
-  }, []);
-  return m;
-}
 
 function Label({ children }: { children: React.ReactNode }) {
   return <p className="mb-2.5 text-[14px] font-bold tracking-[-0.02em] text-text-primary">{children}</p>;
@@ -265,7 +253,7 @@ function BlogCard({ on, fly }: { on: boolean; fly: boolean }) {
         </div>
       </div>
       <style>{`
-        .s4f-blog-scroll { animation: s4fBlog 26s linear 2.4s infinite; will-change: transform; }
+        .s4f-blog-scroll { animation: s4fBlog 26s linear infinite; will-change: transform; }
         @keyframes s4fBlog { from { transform: translateY(0); } to { transform: translateY(-50%); } }
       `}</style>
     </Card>
@@ -406,7 +394,8 @@ function ShortsPlayer({ on }: { on: boolean }) {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
+        autoPlay
         aria-label="솜이 미용 전 → 후 쇼츠 영상"
         onTimeUpdate={(e) => {
           const v = e.currentTarget;
@@ -500,66 +489,39 @@ function MakerCard({ done }: { done: Arrived }) {
   );
 }
 
-export function S4Flow({ freeze }: { freeze?: Phase }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
-  const blogRef = useRef<HTMLDivElement>(null);
-  const instaRef = useRef<HTMLDivElement>(null);
-  const shortsRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-  const fly = !isMobile;
-  const inView = useInView(ref, { once: true, amount: 0.25 });
-  const resultsInView = useInView(resultsRef, { once: true, amount: 0.3 });
-  /* 휴대폰 = 카드마다 화면에 40% 들어오면 그 카드만 채워진다(손님이 내려 보는 만큼 하나씩) */
-  const blogIn = useInView(blogRef, { once: true, amount: 0.4 });
-  const instaIn = useInView(instaRef, { once: true, amount: 0.4 });
-  const shortsIn = useInView(shortsRef, { once: true, amount: 0.4 });
-  const [phase, setPhase] = useState<Phase>(freeze ?? 'input');
-  const [pickedAt, setPickedAt] = useState(0);
-  useEffect(() => {
-    if (freeze || !inView) return;
-    const t1 = setTimeout(() => { setPhase('picked'); setPickedAt(Date.now()); }, 300);
-    return () => clearTimeout(t1);
-  }, [inView, freeze]);
-  useEffect(() => {
-    if (freeze || phase !== 'picked') return;
-    /* PC = 결과가 화면에 들어와 있어야 날린다(날아가는 길이 보이게). 고르는 장면(번호 + 말풍선)은 최소 2.1초 */
-    if (!isMobile && !resultsInView) return;
-    const wait = Math.max(300, 2100 - (Date.now() - pickedAt));
-    const t2 = setTimeout(() => setPhase('output'), wait);
-    return () => clearTimeout(t2);
-  }, [phase, resultsInView, pickedAt, freeze, isMobile]);
-  const out = phase === 'output';
-  const picked = phase !== 'input';
-  const arrived: Arrived = isMobile
-    ? { blog: picked && blogIn, insta: picked && instaIn, shorts: picked && shortsIn }
-    : { blog: out, insta: out, shorts: out };
+/* ★2026-10-09 사장님 "등장할 때 애니메이션 시작하지 말고 처음부터 무한 루프로" — 스크롤해 도착하면 이미 움직이고 있다.
+   폰 사진첩 = 선택·말풍선까지 다 된 정지 화면. 블로그 흐름·인스타 넘김·쇼츠 영상 = 처음부터 반복. 단계 진행(고르기→날아감) 없음.
+   freeze 인자는 시험 페이지 호환용으로만 남긴다(무시). */
+export function S4Flow(_props: { freeze?: Phase }) {
+  const phase: Phase = 'output';
+  const fly = false;
+  const arrived: Arrived = { blog: true, insta: true, shorts: true };
   const s = multiChannel.steps;
 
   return (
     <LayoutGroup id="s4flow">
-      <div ref={ref} className="relative mx-auto flex w-full max-w-[1040px] flex-col md:grid md:grid-cols-[208px_36px_128px_36px_1fr] md:items-start">
+      <div className="relative mx-auto flex w-full max-w-[1040px] flex-col md:grid md:grid-cols-[208px_36px_128px_36px_1fr] md:items-start">
         {/* ── 올리세요: 내 폰 사진첩에서 고른다 ── */}
         <div className="min-w-0">
           <Label>{s[0].title}</Label>
           <PhoneGallery phase={phase} fly={fly} />
         </div>
 
-        <Arrow on={picked} />
+        <Arrow on />
 
         {/* ── 콘텐츠가 됩니다: 앱이 만드는 자리 ── */}
         <div className="md:self-center">
           <MakerCard done={arrived} />
         </div>
 
-        <Arrow on={isMobile ? arrived.blog : out} />
+        <Arrow on />
 
         {/* ── 확인하고 발행: 채널마다 살아 움직임(인스타·쇼츠 = 실제 앱 화면). 틀은 처음부터 고정, 사진·영상만 채워진다 ── */}
-        <div ref={resultsRef} className="min-w-0">
+        <div className="min-w-0">
           <Label>{s[2].title}</Label>
           <div className="grid grid-cols-2 gap-2.5 md:grid-cols-[0.8fr_1fr_1.17fr] md:gap-3">
             {/* 블로그 — 글이 위로 흐른다(우리 카드 문법 유지) */}
-            <div ref={blogRef} className="col-span-2 flex h-[300px] flex-col md:col-span-1 md:h-auto">
+            <div className="col-span-2 flex h-[300px] flex-col md:col-span-1 md:h-auto">
               <ChannelTag icon={ICON.blog} name="블로그" />
               <BlogCard on={arrived.blog} fly={fly} />
             </div>
@@ -567,12 +529,12 @@ export function S4Flow({ freeze }: { freeze?: Phase }) {
                 PC = 이 묶음이 사라지고(contents) 격자 칸으로 */}
             <div className="col-span-2 flex flex-col gap-2.5 md:contents">
               {/* 인스타그램 — 실제 피드 게시물 */}
-              <div ref={instaRef} className="flex min-w-0 flex-col">
+              <div className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.insta} name="인스타그램" />
                 <InstaPost on={arrived.insta} fly={fly} />
               </div>
               {/* 쇼츠 — 실제 재생 화면(9:16) */}
-              <div ref={shortsRef} className="flex min-w-0 flex-col">
+              <div className="flex min-w-0 flex-col">
                 <ChannelTag icon={ICON.shorts} name="쇼츠·릴스" />
                 <span className="relative block aspect-[9/16] w-full overflow-hidden" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
                   <ShortsPlayer on={arrived.shorts} />
