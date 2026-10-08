@@ -16,28 +16,28 @@ const interTight = Inter_Tight({
 
 export const metadata: Metadata = {
   title: {
-    default: 'NGN — 누구나 마케팅하는 시대',
-    template: '%s | NGN',
+    default: 'NUGOONA — 누구나 마케팅하는 시대',
+    template: '%s | NUGOONA',
   },
   description:
     '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이 스스로 이해하고 운영하세요.',
   keywords: [
     '온라인광고', '검색노출', '콘텐츠자동화', '광고대시보드', '메타광고',
-    '구글광고', '네이버노출', '이커머스마케팅', 'NGN', '누구나컴퍼니',
+    '구글광고', '네이버노출', '이커머스마케팅', 'NUGOONA', 'NGN', '누구나컴퍼니',
   ],
   authors: [{ name: '누구나컴퍼니' }],
   metadataBase: new URL('https://www.nugoona.co.kr'),
   openGraph: {
-    title: 'NGN — 누구나 마케팅하는 시대',
+    title: 'NUGOONA — 누구나 마케팅하는 시대',
     description:
       '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이.',
     type: 'website',
-    siteName: 'NGN',
+    siteName: 'NUGOONA',
     images: ['/img/icons/logo2.webp'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NGN — 누구나 마케팅하는 시대',
+    title: 'NUGOONA — 누구나 마케팅하는 시대',
     description:
       '광고도 노출도, 한 화면에서 이해하고 직접 합니다. 검색 노출부터 광고 성과까지, 대행 없이.',
     images: ['/img/icons/logo2.webp'],
