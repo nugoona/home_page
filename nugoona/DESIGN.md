@@ -647,7 +647,15 @@
 
 ### 렌더 캡처 노하우 (전부 실증)
 - **형제 숨김 + 뷰포트 확대 + scroll 0 + 문서좌표 clip**이 기본. 스크롤 상태에서 캡처 = 백지.
-- FadeUp 노출 = `[style*="opacity: 0"]{opacity:1!important}` 스타일 주입(전역 opacity 강제는 노이즈 왜곡).
+- 🛑 **FadeUp 노출용 `[style*="opacity: 0"]{opacity:1!important}` 전역 주입 금지(2026-10-08 사고로 폐기).**
+  접근성용으로 숨겨 둔 **Radix RadioGroup 의 `<input type=radio>`(`appearance:auto`)가 함께 깨어나**
+  브라우저가 직접 그리는 **기본 라디오 동그라미**가 글자 위에 뜬다. `/start` 에서 이것을 진짜 결함으로
+  오인해 하루를 썼다(원 중심 = 숨김 input rect 중심과 일치로 확정, 라디오만 숨기면 사라짐으로 재확인).
+  전역 `border-radius:0 !important` 로도 안 막히고(네이티브 컨트롤이라 CSS 밖), `elementsFromPoint` 는
+  `pointer-events:none` 을 건너뛰어 DOM 조사로도 안 잡힌다 — **눈으로만 보이는 유령이 된다.**
+  ✅ 대신: ⑴스크롤로 페이지를 끝까지 훑어 등장 반응을 **실제로 소화**시킨 뒤 찍는다(권장, 실화면과 같다)
+  ⑵꼭 강제로 켜야 하면 **대상 요소만** 지정한다(`input,select,textarea` 는 제외).
+  **검사 도구가 화면을 바꾸면 그 도구로 본 것은 더 이상 증거가 아니다.**
 - 큰 뷰포트에서 clip 좌표가 어긋나면(dpr 1.25 환경) 좌표 계산을 버리고 형제 숨김으로 대상만 남겨 찍는다.
 - 요소 위치는 `getBoundingClientRect().top + scrollY`로 실측 후 클립.
 
