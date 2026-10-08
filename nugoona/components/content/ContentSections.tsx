@@ -1555,151 +1555,152 @@ export function ContentS8Visual({ enrich = false }: { enrich?: boolean } = {}) {
   );
 }
 
-/* ═══════════════ S9 · 기능 — 좌 = 구획선 칸 기능 리스트 / 우 = 실서비스 화면(사장님 2026-07-18:
-   "왼쪽 텍스트 정렬(구획선 네모칸), 오른쪽 실서비스 화면 차용 — 정교하게 구현했구나 느낌").
-   우측 실화면 = 업로드 앱 실물 "썸네일 디자인 고르기" 바텀시트 재현(ThumbnailSheet.tsx·module.css 실측
-   + /thumbs 실제 서비스 에셋 6장 — 픽셀 근사 아닌 실코드·실에셋 차용, §8.17 타 프로젝트 실코드 허용) */
+/* ═══════════════ S9 · 기능 — 01~04 두 열, 05 앱 문의 한 단.
+   2026-10-08 지정 범위: 대표 이미지 비교→영상, 검토→폰 알림, 일정 제목→베타 채널.
+   장면은 기능 설명 예시이며, 실제 영상 재생기·운영체제 화면을 복제하지 않는다. */
 
-/* 기능 5개 확정(사장님 2026-07-18): 사진 질문 = 최중요 맨 위 / 쇼츠 = 프리미엄 배지·전문가 편집 /
-   말로 수정·검토·일정·음성 업로드 = 중복·부차로 제외. 행 = [좌 텍스트 | 우 목업] */
-
-/** 행 1 목업 — 사진 질문(실기기 answer 화면 실측: 실제 폴백 질문·placeholder 토씨 그대로, Vercel 마감) */
-function S9MockPhotoQnA() {
+/** 갤러리 aceternity/text-generate-effect: 단어별 순차 등장만 발췌, 흐림·자체 색 제거.
+    부모 장면이 화면에 들어올 때 한 번 재생한다. */
+function S9AnswerText({ text, inView }: { text: string; inView: boolean }) {
+  const words = text.split(' ');
   return (
-    /* PC 통확대 = zoom 1.3(사장님 2026-07-20 "PC인데 글자 너무 작아" — S9 목업 4종 공통) */
-    <div className="w-full bg-white md:max-w-[460px] md:[zoom:1.3]" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-      <div className="flex items-center gap-1.5 border-b px-3.5 py-2.5" style={{ borderColor: BORDER }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo/nc.svg?v=16" alt="" className="h-[14px] w-[14px]" />
-        <span className="text-[11px] font-bold text-text-primary">AI가 물어봐요</span>
-      </div>
-      {/* 업종 = 꽃집(업종당 1회 규칙 — 사장님 2026-07-18) */}
-      <div className="flex gap-3 p-3.5">
-        <span className="h-[64px] w-[64px] shrink-0 overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/content/biz-flower.jpg" alt="" className="h-full w-full object-cover" loading="lazy" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="text-[12.5px] font-bold leading-[1.45] tracking-[-0.01em] text-text-primary">이 사진은 무엇인가요? 자랑할 점은?</p>
-          <div className="mt-2 border bg-[#fafafa] px-2.5 py-2" style={{ borderColor: BORDER }}>
-            <p className="text-[11px] font-medium text-text-primary">이번 주 들어온 작약으로 만든 다발이에요<span className="ml-0.5 inline-block h-[11px] w-[1.5px] translate-y-[1.5px] bg-[#0070f3]" /></p>
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-1.5 border-t bg-white px-3.5 py-2" style={{ borderColor: '#f4f5f7' }}>
-        <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#0070f3" strokeWidth="2.2" strokeLinecap="round" aria-hidden><path d="M3 8.5l3.2 3L13 5" /></svg>
-        <span className="text-[10.5px] font-semibold text-accent">답 한 줄이 글에 더해집니다</span>
-      </div>
-    </div>
-  );
-}
-
-/** 발행 전 검토 화면의 핵심 행동 */
-function S9MockReview() {
-  return (
-    <div className="w-full bg-white p-3.5 md:max-w-[460px] md:[zoom:1.3]" style={{ border: `1px solid ${BORDER}`, boxShadow: MINI_SHADOW }}>
-      {/* 라벨 색 = 진하게(사장님 2026-07-20 "회색 글자 잘 안 보여") */}
-      <p className="text-[10.5px] font-bold text-[#495057]">발행 전 검토</p>
-      <p className="mt-1 border-l-2 pl-2.5 text-[12px] font-medium leading-[1.5] text-text-body" style={{ borderColor: '#d4d4d4', ...QUOTE }}>&ldquo;이번 주 들어온 작약으로 만든 꽃다발&rdquo;</p>
-      <p className="mt-3 flex items-center gap-1.5">
-        <span className="flex h-[14px] items-center bg-[#171717] px-1 text-[8px] font-bold text-white" style={EN}>AI</span>
-        <span className="text-[10.5px] font-bold text-[#495057]">완성된 글</span>
-      </p>
-      <div className="mt-1 border bg-[#fafafa] px-2.5 py-2" style={{ borderColor: BORDER }}>
-        {/* PC = 자간 촘촘·한 줄(사장님 2026-07-20 — zoom 1.3이라 시각 크기는 유지됨) */}
-        <p className="text-[12px] font-medium leading-[1.55] text-text-primary">내용을 읽고 직접 고치거나, 그대로 발행할 수 있습니다.</p>
-      </div>
-      <span className="mt-2.5 flex h-8 w-full items-center justify-center bg-[#0070f3] text-[11.5px] font-bold text-white">이대로 올리기</span>
-    </div>
-  );
-}
-
-/** 행 4 목업 — 대표 이미지: **같은 사진 + 같은 제목**에 텍스트 디자인만 다른 5종(사장님 교정 2026-07-18).
-    각 디자인 = 실서비스 템플릿 HTML 실측 재현(089 테두리 박스 / 095 캡션+흰 띠 / 100 다크 글래스 / 091 하단 / 104 우측) + "외 10종" */
-function S9ThumbBase({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="relative block aspect-square overflow-hidden" style={{ border: `1px solid ${BORDER}` }}>
-      {/* 업종 분산 — 피자(같은 사진에 디자인만 다름) */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/img/unsplash/webp/photo-1565299624946-b28f40a0ae38.webp" alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-      {children}
+    <span>
+      {words.map((word, i) => (
+        <motion.span key={`${word}-${i}`} initial={{ opacity: 0 }} animate={{ opacity: inView ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: 0.3 + i * 0.09 }}>
+          {word}{i < words.length - 1 ? ' ' : ''}
+        </motion.span>
+      ))}
     </span>
   );
 }
 
-function S9MockThumbs() {
+/** 행 1 목업 — 네일 사진을 직접 따로 떼었을 때의 질문·답변 예시(지도 24번). */
+function S9MockPhotoQnA() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.35 });
   return (
-    /* 모바일 = 꽉 채움(max-w 제한 제거, 사장님 2026-07-20 "왼쪽 치우치고 작아") + PC zoom 1.3 */
-    <div className="w-full bg-white p-3 md:max-w-[460px] md:[zoom:1.3]" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-      {/* 타이포 오버레이 5종 재디자인(사장님 2026-07-20 "하나도 예쁘지 않아") — 원칙: 글자 크게,
-          장식 최소(헤어라인·자간·웨이트 변주만), 스크림은 글자 받침 용도로만 */}
-      <div className="grid grid-cols-3 gap-1.5">
-        {/* A — 에디토리얼 센터: 넓은 자간 EN 라벨 + 헤어라인 + 큰 제목 */}
-        <S9ThumbBase>
-          <span aria-hidden className="absolute inset-0 bg-black/45" />
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-[5px]">
-            <span className="text-[4.5px] font-semibold tracking-[0.3em] text-white/85" style={EN}>DONGNE BISTRO</span>
-            <span aria-hidden className="block h-[1px] w-[16px] bg-white/80" />
-            <span className="text-[12px] font-extrabold tracking-[0.06em] text-white">화덕 피자</span>
-          </span>
-        </S9ThumbBase>
-        {/* B — 하단 좌정렬: 진한 하단 그라디언트 + 좌하 큰 제목 */}
-        <S9ThumbBase>
-          <span aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%)' }} />
-          <span className="absolute inset-x-[9%] bottom-[9%]">
-            <span className="block text-[4.5px] font-semibold tracking-[0.22em] text-white/75" style={EN}>SINCE 2019</span>
-            <span className="mt-[2px] block text-[12.5px] font-extrabold leading-[1.15] text-white">화덕 피자</span>
-          </span>
-        </S9ThumbBase>
-        {/* C — 헤어라인 프레임: 인셋 프레임 + 중앙 제목 */}
-        <S9ThumbBase>
-          <span aria-hidden className="absolute inset-0 bg-black/35" />
-          <span aria-hidden className="absolute inset-[7%] border border-white/85" />
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-[3px]">
-            <span className="text-[11.5px] font-bold tracking-[0.14em] text-white">화덕 피자</span>
-            <span className="text-[4px] font-semibold tracking-[0.26em] text-white/80" style={EN}>WOOD FIRED</span>
-          </span>
-        </S9ThumbBase>
-        {/* D — 우측 세로 타이포(구 상단 화이트 밴드 = 카드 흰 배경과 붙어 보여 교체, 사장님 2026-07-20) */}
-        <S9ThumbBase>
-          <span aria-hidden className="absolute inset-0" style={{ background: 'linear-gradient(100deg, rgba(0,0,0,0) 32%, rgba(0,0,0,0.62) 100%)' }} />
-          <span className="absolute right-[7%] top-1/2 -translate-y-1/2 whitespace-nowrap text-[11.5px] font-extrabold tracking-[0.3em] text-white" style={{ writingMode: 'vertical-rl' }}>화덕 피자</span>
-        </S9ThumbBase>
-        {/* E — 하단 다크 밴드: 제목 + 우측 EN 캡션 */}
-        <S9ThumbBase>
-          <span className="absolute inset-x-0 bottom-0 flex items-baseline justify-between bg-[rgba(10,10,14,0.88)] px-[8%] py-[6px]">
-            <span className="text-[10px] font-extrabold text-white">화덕 피자</span>
-            <span className="text-[4px] font-semibold tracking-[0.2em] text-white/70" style={EN}>BISTRO</span>
-          </span>
-        </S9ThumbBase>
-        {/* 더 많은 디자인 */}
-        <span className="flex aspect-square flex-col items-center justify-center gap-0.5 bg-[#fafafa]" style={{ border: `1px solid ${BORDER}` }}>
-          <span className="text-[13px] font-extrabold leading-none text-text-primary" style={EN}>+10</span>
-          <span className="text-[7px] font-medium text-text-muted">더 많은 디자인</span>
-        </span>
+    <div ref={ref} data-s9-scene="photo"
+      className="flex w-full flex-1 flex-col border border-border-default bg-bg">
+      <div className="flex items-center gap-1.5 border-b border-border-default px-5 py-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/img/logo/nc.svg?v=16" alt="" className="h-[14px] w-[14px]" />
+        <span className="text-[12px] font-bold text-text-primary">연남 작은 네일</span>
       </div>
-      {/* (하단 작은 회색 캡션 = 삭제 — 사장님 2026-07-20 "작은 글씨 지우라고 했잖아" 공통 원칙 재확인) */}
+      {/* 남는 높이는 사진 장면이 쓴다. 모바일에서는 원본의 가로 비율을 유지한다. */}
+      <div className="flex flex-1 flex-col gap-4 p-5 max-sm:gap-3 max-sm:p-4">
+        <div className="relative min-h-[180px] flex-1 overflow-hidden border border-border-default max-md:aspect-[800/533] max-md:flex-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/content/biz-nail.jpg" alt="아이보리 네일에 파란 프렌치 포인트를 넣은 손톱" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-[12.5px] font-bold leading-[1.45] tracking-[-0.01em] text-text-primary">이 사진은 무엇인가요? 자랑할 점은?</p>
+          <div className="mt-3 border-l border-accent pl-3">
+            <p className="text-[12px] font-medium leading-[1.6] text-text-primary"><S9AnswerText text="아이보리 네일에 파란 프렌치 포인트를 넣었어요" inView={inView} /></p>
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5 border-t border-border-default px-5 py-3">
+        <span className="text-[11px] font-semibold text-accent">답 한 줄이 글에 더해집니다</span>
+      </div>
+    </div>
+  );
+}
+/** 갤러리 svg/line-draw: 원본→완성물의 연결선만 한 번 그린다. */
+function S9MockVideo() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.35 });
+  return (
+    <div ref={ref} data-s9-scene="video"
+      className="grid min-h-[280px] grid-cols-[minmax(0,1fr)_32px_minmax(0,1.15fr)] items-center border border-border-default bg-bg p-5 max-sm:p-4"
+      aria-label="올린 영상에서 세로 완성물로 이어지는 필라테스 영상 예시"
+    >
+      <div className="min-w-0">
+        <p className="mb-3 text-[11px] font-semibold text-text-weak">올린 영상</p>
+        <div className="relative aspect-video overflow-hidden bg-bg-dark">
+          {/* 실제 영상 재생기가 아닌 장면 예시. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/content/biz-pilates.jpg" alt="개인 필라테스 수업 장면" className="h-full w-full object-cover" loading="lazy" />
+        </div>
+        <p className="mt-3 text-[12px] font-semibold text-text-primary">개인 필라테스</p>
+      </div>
+      <svg viewBox="0 0 32 16" className="w-full self-center text-accent" aria-hidden="true">
+        <motion.path d="M4 8 H28 M23 3 L28 8 L23 13" fill="none" stroke="currentColor" strokeWidth="1" pathLength={1}
+          initial={{ pathLength: 0 }} animate={{ pathLength: inView ? 1 : 0 }} transition={{ duration: 1.2, ease: EASE, delay: 0.2 }} />
+      </svg>
+      <motion.div className="min-w-0 border border-border-default" initial={{ y: 12 }} animate={{ y: inView ? 0 : 12 }} transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}>
+        <div className="relative aspect-[9/13] overflow-hidden bg-bg-dark">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/content/biz-pilates.jpg" alt="" className="h-full w-full object-cover" loading="lazy" />
+          <div className="absolute inset-x-0 bottom-0 bg-bg-dark px-3 py-3 text-white">
+            <p className="text-[14px] font-semibold leading-snug">내 몸에 맞춘<br />한 번의 움직임</p>
+            <p className="mt-2 text-[11px] font-medium leading-[1.5] text-white/80">유튜브 쇼츠 · 인스타그램 릴스</p>
+          </div>
+        </div>
+        <div className="border-t border-border-default px-3 py-2.5">
+          <p className="text-[11px] font-semibold text-text-primary">직접 확인 후 발행</p>
+          <p className="mt-1 text-[11px] font-semibold text-accent">AI 자동 쇼츠 · 베타</p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+const S9_NOTIFICATION_KINDS = [
+  '글 완성', '답변 요청', '올릴 글 부족',
+  '발행 날짜 변경', '발행 완료', '목표 검색어 찾기 완료',
+];
+
+/** 갤러리 aceternity/card-stack: 깊이·높이 차를 발췌. 순환·라운드·그림자는 제외.
+    운영체제 복제가 아닌 서비스 알림 예시이며, 검색어 찾기는 선정 완료를 뜻한다. */
+function S9MockNotifications() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.35 });
+  return (
+    <div ref={ref} data-s9-scene="notifications"
+      className="flex min-h-[280px] flex-col justify-center py-5">
+      <div className="relative pt-3">
+        <motion.div aria-hidden="true" className="absolute inset-x-3 top-0 h-12 border border-border-mid bg-bg"
+          initial={{ y: 10, scale: 0.96 }} animate={{ y: inView ? 0 : 10, scale: inView ? 1 : 0.96 }} transition={{ duration: 0.9, ease: EASE }} />
+        <motion.div className="relative border border-border-default bg-bg p-5"
+          initial={{ y: 18, scale: 0.98 }} animate={{ y: inView ? 0 : 18, scale: inView ? 1 : 0.98 }} transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}>
+          <div className="flex items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/logo/nc.svg?v=16" alt="" className="h-4 w-4" />
+            <span className="text-[11px] font-semibold text-text-primary">누구나 콘텐츠</span>
+            <span className="ml-auto text-[10px] font-medium text-text-weak">알림 예시</span>
+          </div>
+          <p className="mt-5 text-[clamp(18px,2vw,23px)] font-semibold leading-[1.45] tracking-[-0.025em] text-text-primary">
+            글이 완성됐어요.<br />확인해 주세요.
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border-default pt-4">
+            {S9_NOTIFICATION_KINDS.map((kind, i) => (
+              <span key={kind} className={`text-[11px] font-medium leading-[1.5] ${i === 0 ? 'text-accent' : 'text-text-weak'}`}>{kind}</span>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
 
 function S9MockSchedule() {
   const rows = [
-    ['9월 8일 오전 10시', '순두부짬뽕을 찾는 이유', '예약'],
-    ['9월 4일 오후 7시', '탕수육 한 접시', '발행'],
-    ['9월 1일 오전 11시', '속초 청학동에서 20년', '발행'],
+    ['9월 8일 오전 10시', '구글 비즈니스 게시 · 베타', '예약'],
+    ['9월 4일 오후 7시', '네이버 플레이스 소식 · 베타', '발행'],
+    ['9월 1일 오전 11시', '카카오채널 단골 알림 · 베타', '발행'],
   ];
   return (
-    <div className="w-full overflow-hidden bg-white md:max-w-[460px] md:[zoom:1.3]" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
-      <div className="flex items-center border-b px-3.5 py-2.5" style={{ borderColor: BORDER }}>
-        <span className="text-[11px] font-bold text-text-primary">발행 일정</span>
-        <span className="ml-auto text-[9.5px] font-semibold text-accent">앞으로 1건</span>
+    <div className="w-full overflow-hidden border border-border-default bg-bg">
+      <div className="flex items-center border-b border-border-default px-4 py-3">
+        <span className="text-[12px] font-bold text-text-primary">발행 일정</span>
+        <span className="ml-auto text-[11px] font-semibold text-accent">앞으로 1건</span>
       </div>
       {rows.map(([date, title, state]) => (
-        <div key={title} className="flex items-center gap-3 border-b px-3.5 py-2.5 last:border-b-0" style={{ borderColor: '#f0f0f0' }}>
-          <span className="w-[82px] shrink-0 text-[9.5px] font-medium text-text-weak">{date}</span>
-          <span className="min-w-0 flex-1 truncate text-[11px] font-semibold text-text-primary">{title}</span>
-          <span className={`text-[9.5px] font-bold ${state === '예약' ? 'text-accent' : 'text-[#16823b]'}`}>{state}</span>
+        <div key={title} className="flex items-center gap-3 border-b border-border-default px-4 py-4 last:border-b-0 max-sm:gap-2">
+          <span className="w-[82px] shrink-0 text-[10px] font-medium leading-[1.5] text-text-weak">{date}</span>
+          <span className="min-w-0 flex-1 text-[12px] font-semibold leading-[1.5] text-text-primary">{title}</span>
+          <span className={`shrink-0 text-[11px] font-bold ${state === '예약' ? 'text-accent' : 'text-text-primary'}`}>{state}</span>
         </div>
       ))}
     </div>
@@ -1713,7 +1714,7 @@ function S9FeatHead({ n, title, sub, dark, badge }: { n: string; title: string; 
   return (
     <div className="min-w-0">
       <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
-        <span className={`flex h-[22px] items-center px-2 text-[11px] font-bold leading-none tracking-[0.04em] ${dark ? 'bg-white text-[#171717]' : 'bg-[#171717] text-white'}`} style={EN}>{n}</span>
+        <span className={`flex h-[22px] items-center px-2 text-[11px] font-bold leading-none tracking-[0.04em] ${dark ? 'bg-bg text-text-primary' : 'bg-text-primary text-white'}`} style={EN}>{n}</span>
         <span className={`text-[16px] font-bold tracking-[-0.02em] ${dark ? 'text-white' : 'text-text-primary'}`}>{title}</span>
         {badge}
       </p>
@@ -1730,17 +1731,17 @@ export function ContentS9Grid() {
           거대 공백(§8.16-A6 위반)·목업 크기 제각각 반려. 셀 = 번호 헤드 위 + 목업 아래 꽉, S4·카탈로그 문법 통일) */}
       <FadeUp>
         <div className="grid grid-cols-2 gap-x-10 gap-y-12 max-md:grid-cols-1 max-md:gap-y-10">
-          <div>
-            <S9FeatHead n="01" title="사진에 대해 물어봐요" sub="사진만으로 애매하면 AI가 먼저 물어봅니다. 답 한 줄이 더해질수록 글은 더 정확하고 풍성해집니다." />
-            <div className="mt-4 max-md:mt-3"><S9MockPhotoQnA /></div>
+          <div className="flex flex-col">
+            <S9FeatHead n="01" title="사진에 대해 물어봐요" sub="사진을 따로 떼면, 이 사진에 대해 답할 수 있어요." />
+            <div className="mt-4 flex flex-1 max-md:mt-3"><S9MockPhotoQnA /></div>
           </div>
           <div>
-            <S9FeatHead n="02" title="대표 이미지 만들기" sub="다양한 디자인 중에 고르면 사진과 제목이 얹힌 대표 이미지가 됩니다." />
-            <div className="mt-4 max-md:mt-3"><S9MockThumbs /></div>
+            <S9FeatHead n="02" title="영상으로 쇼츠·릴스까지" sub="올린 영상을 세로 완성물로. 직접 확인하고 발행합니다." />
+            <div className="mt-4 max-md:mt-3"><S9MockVideo /></div>
           </div>
           <div>
-            <S9FeatHead n="03" title="발행 전에 직접 확인" sub="완성된 글을 읽고 고치거나, 그대로 발행할 수 있습니다." />
-            <div className="mt-4 max-md:mt-3"><S9MockReview /></div>
+            <S9FeatHead n="03" title="필요한 순간, 폰으로 알림" sub="앱을 열어보지 않아도 확인할 일을 알려드립니다." />
+            <div className="mt-4 max-md:mt-3"><S9MockNotifications /></div>
           </div>
           <div>
             <S9FeatHead n="04" title="발행 일정과 이력" sub="앞으로 나갈 글과 이미 발행된 글을 날짜순으로 확인합니다." />
@@ -1751,15 +1752,15 @@ export function ContentS9Grid() {
 
       {/* 앱 안 문의는 제품의 마지막 안전망이므로 한 단 크게 보여준다. */}
       <FadeUp>
-        <div className="relative overflow-hidden px-6 pb-6 pt-7 max-md:px-5" style={{ backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.16)' }}>
-          <BorderBeam size={180} duration={9} colorFrom="#0070f3" colorTo="#4d9fff" borderWidth={1.5} />
+        <div className="relative overflow-hidden border border-white/20 bg-bg-dark px-6 pb-6 pt-7 max-md:px-5">
+          <BorderBeam size={180} duration={12} colorFrom="var(--color-accent)" colorTo="var(--color-accent)" borderWidth={1} />
           <S9FeatHead
             n="05"
             dark
             title="앱 안에서 바로 문의"
             sub="문제가 생긴 화면과 사진을 함께 보내면, 답변이 같은 문의함에 도착합니다."
             badge={
-              <span className="flex h-[20px] items-center bg-[#0070f3] px-2 text-[10px] font-bold tracking-[0.06em] text-white" style={EN}>
+              <span className="flex h-[20px] items-center border border-white/30 px-2 text-[10px] font-bold tracking-[0.06em] text-white" style={EN}>
                 SUPPORT
               </span>
             }
@@ -1767,13 +1768,13 @@ export function ContentS9Grid() {
           <div className="mt-5 grid grid-cols-[1fr_auto] gap-4 border border-white/15 bg-white/[0.06] p-4 max-md:grid-cols-1">
             <div>
               <p className="text-[12px] font-bold text-white">글 표지가 이상하게 보여요</p>
-              <p className="mt-1 text-[11px] leading-[1.55] text-white/65">현재 화면과 사진 2장이 함께 전달됐어요.</p>
+              <p className="mt-1 text-[11px] leading-[1.55] text-white/80">현재 화면과 사진 2장이 함께 전달됐어요.</p>
               <div className="mt-3 flex gap-2">
                 {['현재 화면', '원본 사진'].map((label) => <span key={label} className="border border-white/20 px-2 py-1 text-[9.5px] font-semibold text-white/70">{label}</span>)}
               </div>
             </div>
             <div className="flex min-w-[180px] flex-col justify-center border-l border-white/15 pl-4 max-md:border-l-0 max-md:border-t max-md:pl-0 max-md:pt-4">
-              <p className="text-[10px] font-semibold text-[#4d9fff]">답변 도착</p>
+              <p className="text-[10px] font-semibold text-white">답변 도착</p>
               <p className="mt-1 text-[11px] font-medium leading-[1.5] text-white">확인했습니다. 다시 열면 수정된 표지가 보여요.</p>
             </div>
           </div>
