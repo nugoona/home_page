@@ -18,7 +18,7 @@ import { LayoutGroup, motion, useInView } from 'framer-motion';
 import { VerticalVideoFrame } from './ContentSections';
 import { multiChannel } from '@/lib/content/content';
 
-type Phase = 'input' | 'output';
+type Phase = 'input' | 'picked' | 'output';
 
 const BORDER = '#ECECEC';
 const CARD_SHADOW = '0 1px 2px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.04)';
@@ -73,7 +73,7 @@ function Slot({ className = '' }: { className?: string }) {
 function Arrow() {
   return (
     <>
-      <span className="hidden items-center justify-center md:flex" aria-hidden>
+      <span className="hidden items-center justify-center md:flex md:self-center" aria-hidden>
         <svg width="44" height="14" viewBox="0 0 44 14" fill="none"><line x1="2" y1="7" x2="32" y2="7" stroke="#171717" strokeWidth="1.6" /><path d="M32 1.8L40 7l-8 5.2z" fill="#171717" /></svg>
       </span>
       <span className="flex justify-center py-3 md:hidden" aria-hidden>
@@ -83,53 +83,130 @@ function Arrow() {
   );
 }
 
+/* ── 폰 사진첩 — 같은 페이지 S2 폰과 같은 프레임(phone-frame.png·화면 좌표) / 내용은 다르게(S2 = 앱 새 글, 여기 = 사진첩 고르기) ── */
+const G_FRAME_W = 540;
+const G_SCREEN = { left: 31.7, top: 12.35, width: 35.9, height: 74.7 }; // phone-frame.png 화면 영역(%) — S2와 동일
+const G_VISIBLE_W = Math.round(G_FRAME_W * 0.386); // 보이는 폭 ≈ 208(베젤 포함)
+const G_VISIBLE_H = 408; // 결과 카드 높이에 맞춰 폰 칸을 채운다(빈 여백 금지). 아래는 홀더 컷(§8.18-B)
+const G_LEFT = -Math.round(G_FRAME_W * 0.304);
+const G_TOP = -Math.round(G_FRAME_W * 0.1105);
+/* 사진첩 15칸(폰 칸을 끝까지 채움): 고를 것 4개(사진 3 + 영상 1) + 펜션 사장님 사진첩에 있을 법한 사진.
+   같은 사진 두 번 금지(눈에 바로 걸린다). pick = 선택 순번, fly = 날아갈 사진 번호 */
+const GALLERY: { src?: string; pick?: number; fly?: number; video?: boolean }[] = [
+  { src: '/img/content/biz-interior-1.jpg' },
+  { src: PHOTOS[0], pick: 1, fly: 0 },
+  { src: '/img/content/atlas-main.jpg' },
+  { src: PHOTOS[1], pick: 2, fly: 1 },
+  { video: true, pick: 4 },
+  { src: '/img/content/biz-interior-2.jpg' },
+  { src: '/img/content/hero-2.jpg' },
+  { src: PHOTOS[2], pick: 3, fly: 2 },
+  { src: '/img/content/biz-interior-3.jpg' },
+  { src: '/img/content/atlas-space.jpg' },
+  { src: '/img/content/biz-flower.jpg' },
+  { src: '/img/content/biz-interior-4.jpg' },
+  { src: '/img/content/hero-3.jpg' },
+  { src: '/img/content/atlas-wide.jpg' },
+  { src: '/img/content/atlas-video.jpg' },
+];
+
+function PhoneGallery({ phase }: { phase: Phase }) {
+  const picked = phase !== 'input';
+  const out = phase === 'output';
+  return (
+    <div className="relative mx-auto w-fit md:mx-0">
+      <div className="relative overflow-hidden" style={{ width: G_VISIBLE_W, height: G_VISIBLE_H }}>
+        <div style={{ position: 'relative', width: G_FRAME_W, left: G_LEFT, top: G_TOP, filter: 'drop-shadow(0 6px 14px rgba(0,0,0,0.10))' }}>
+          <div className="absolute z-[1] overflow-hidden bg-white" style={{ left: `${G_SCREEN.left}%`, top: `${G_SCREEN.top}%`, width: `${G_SCREEN.width}%`, height: `${G_SCREEN.height}%`, borderRadius: 16 }}>
+            <div className="flex items-end justify-between px-3 pb-2 pt-8">
+              <span className="text-[13px] font-bold text-text-primary">최근 항목</span>
+              <motion.span initial={false} animate={{ opacity: picked ? 1 : 0 }} transition={{ delay: picked ? 0.9 : 0 }} className="text-[11px] font-bold text-[#0070f3]">4개 선택</motion.span>
+            </div>
+            <div className="grid grid-cols-3 gap-[2px]">
+              {GALLERY.map((g, i) => (
+                <span key={i} className="relative block aspect-square overflow-hidden bg-[#171717]">
+                  {g.src && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={g.src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                  )}
+                  {g.video && (
+                    <>
+                      {!out && <motion.span layoutId="s4f-v" transition={FLY} className="absolute inset-0 block bg-[#171717]" />}
+                      <span className="absolute inset-0 z-[1] flex items-center justify-center" aria-hidden><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5 19 12 8 18.5z" /></svg></span>
+                      <span className="absolute bottom-1 right-1.5 z-[1] text-[9px] font-semibold text-white" style={EN}>0:24</span>
+                    </>
+                  )}
+                  {g.fly !== undefined && !out && <FlyPhoto i={g.fly} className="absolute inset-0 h-full w-full" />}
+                  {/* 선택 표시 — 고른 칸 = 파란 테두리 + 번호 원(순서대로), 나머지 = 빈 원 */}
+                  {g.pick ? (
+                    <>
+                      <motion.span initial={false} animate={{ opacity: picked ? 1 : 0 }} transition={{ delay: picked ? 0.22 * (g.pick - 1) : 0 }} className="absolute inset-0 z-[1] block" style={{ boxShadow: 'inset 0 0 0 2px #0070f3' }} />
+                      <motion.span
+                        initial={false}
+                        animate={picked ? { scale: 1, opacity: 1 } : { scale: 0.4, opacity: 0 }}
+                        transition={{ delay: picked ? 0.22 * (g.pick - 1) : 0, type: 'spring', stiffness: 420, damping: 22 }}
+                        className="rounded-dot absolute right-1 top-1 z-[2] flex h-[17px] w-[17px] items-center justify-center bg-[#0070f3] text-[10px] font-bold text-white"
+                        style={{ boxShadow: '0 0 0 1.5px #fff', ...EN }}
+                      >
+                        {g.pick}
+                      </motion.span>
+                    </>
+                  ) : (
+                    <span className="rounded-dot absolute right-1 top-1 z-[2] block h-[15px] w-[15px] border-[1.5px] border-white/90" />
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/shots/content/phone-frame.png" alt="" className="relative z-[2] block w-full" />
+        </div>
+      </div>
+      {/* 잘린 단면 밀착 구획선 — S2 폰과 같은 문법 */}
+      <span aria-hidden className="absolute inset-x-0 h-[3px]" style={{ top: G_VISIBLE_H - 3, background: 'radial-gradient(ellipse 52% 100% at 50% 100%, #8f8f8f 0%, rgba(143,143,143,0.35) 60%, transparent 100%)' }} />
+      {/* 말 한마디 — 폰 밖 말풍선(손님이 폰에 대고 말하는 장면). 다 고른 뒤에 뜬다 */}
+      <motion.p
+        initial={false}
+        animate={picked ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ delay: picked ? 1.2 : 0, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-[3] -mt-10 ml-8 flex w-max max-w-[240px] items-center gap-2 bg-white py-2 pl-2 pr-3 text-[12px] font-medium leading-[1.4] text-text-primary md:ml-12"
+        style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}
+      >
+        <span className="rounded-dot flex h-6 w-6 shrink-0 items-center justify-center bg-[#0070f3]">
+          <svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.7" aria-hidden><rect x="8" y="3" width="4" height="9" rx="2" /><path d="M5 9v1a5 5 0 0 0 10 0V9M10 15v3" /></svg>
+        </span>
+        &ldquo;새로 단장한 객실로 소개글 써줘&rdquo;
+      </motion.p>
+    </div>
+  );
+}
+
 export function S4Flow({ freeze }: { freeze?: Phase }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
   const [phase, setPhase] = useState<Phase>(freeze ?? 'input');
   useEffect(() => {
     if (freeze || !inView) return;
-    const t = setTimeout(() => setPhase('output'), 450);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setPhase('picked'), 300);
+    const t2 = setTimeout(() => setPhase('output'), 2400);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [inView, freeze]);
   const out = phase === 'output';
   const s = multiChannel.steps;
 
   return (
     <LayoutGroup id="s4flow">
-      <div ref={ref} className="relative mx-auto flex w-full max-w-[1040px] flex-col md:grid md:grid-cols-[232px_52px_104px_52px_1fr] md:items-center">
-        {/* ── 올리세요: 사진 3 + 영상 1 + 메모 ── */}
+      <div ref={ref} className="relative mx-auto flex w-full max-w-[1040px] flex-col md:grid md:grid-cols-[232px_44px_104px_44px_1fr] md:items-start">
+        {/* ── 올리세요: 내 폰 사진첩에서 고른다(사장님 "업로드했다는 느낌이 안 든다" → 손님이 매일 하는 동작으로) ── */}
         <div className="min-w-0">
           <Label>{s[0].title}</Label>
-          <Card className="p-3">
-            <div className="grid grid-cols-4 gap-1.5 md:grid-cols-2">
-              {PHOTOS.map((src, i) => (
-                <span key={src} className="relative block aspect-[4/3]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
-                  {!out && <FlyPhoto i={i} className="absolute inset-0 h-full w-full" />}
-                </span>
-              ))}
-              <span className="relative block aspect-[4/3] bg-[#171717]">
-                <span className="absolute inset-0 flex items-center justify-center" aria-hidden>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5 19 12 8 18.5z" /></svg>
-                </span>
-                {!out && <motion.span layoutId="s4f-v" transition={FLY} className="absolute inset-0 block bg-[#171717]" />}
-              </span>
-            </div>
-            <p className="mt-2.5 flex items-center gap-2 border border-[#0070f3]/40 px-2.5 py-2 text-[12px] font-medium leading-[1.4] text-text-primary">
-              <span className="rounded-dot flex h-6 w-6 shrink-0 items-center justify-center bg-[#0070f3]">
-                <svg width="11" height="11" viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.7" aria-hidden><rect x="8" y="3" width="4" height="9" rx="2" /><path d="M5 9v1a5 5 0 0 0 10 0V9M10 15v3" /></svg>
-              </span>
-              &ldquo;새로 단장한 객실로 소개글 써줘&rdquo;
-            </p>
-          </Card>
+          <PhoneGallery phase={phase} />
         </div>
 
         <Arrow />
 
         {/* ── 글이 됩니다: 만드는 자리 = 누구나 콘텐츠 ── */}
-        <div className="flex flex-row items-center justify-center gap-3 md:flex-col md:gap-2.5">
+        <div className="flex flex-row items-center justify-center gap-3 md:flex-col md:gap-2.5 md:self-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/img/logo/nc.svg?v=16" alt="누구나 콘텐츠" className="h-14 w-14 md:h-[84px] md:w-[84px]" />
           <p className="text-center text-[14px] font-bold tracking-[-0.02em] text-text-primary">{s[1].title}</p>
