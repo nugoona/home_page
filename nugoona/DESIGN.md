@@ -703,7 +703,7 @@
 2. **배경 장식(빔 등)의 좌표는 그리드 라인과 동기화** — 그리드 열·행을 바꾸면 빔 루프 코너(1/cols·1/rows 계열)도 같이 바꿔야 한다(사장님 "빔이 그리드를 안 따라가" 실증).
 3. **`[text-wrap:balance]` + 한국어 = 줄 머리 쉼표** 유발 — 여러 줄 문장엔 수동 `<br>` 또는 balance 제거.
 4. tsc는 반드시 `nugoona/`에서 + `${PIPESTATUS[0]}`로 판정(다른 cwd의 "exit=0"은 head 파이프의 가짜 통과 — 실증).
-5. 렌더 검증 시 `* {opacity:1!important}` 강제는 노이즈 레이어(0.035)까지 올려 **캡처가 실물과 달라짐** — 캡처용 강제는 FadeUp 셀렉터(`[style*="opacity: 0"]`)만.
+5. 렌더 검증 시 `* {opacity:1!important}` 강제는 노이즈 레이어(0.035)까지 올려 **캡처가 실물과 달라짐** — 🛑 FadeUp 셀렉터(`[style*="opacity: 0"]`) 전역 강제도 금지(2026-10-08 폐기, 숨긴 라디오가 깨어나 유령 동그라미 → 위 "렌더 캡처 노하우" 참조). 스크롤로 등장 반응을 실제로 소화시킨 뒤 찍는다.
 6. **원(circle)을 그리는 두 가지 함정(2026-07-15 실증)**: ①전역 직각 리셋(`border-radius:0!important`)이 rounded-full·인라인 radius까지 덮음 → HTML 원은 **`.rounded-dot`(50%!important) 예외 유틸 필수** ②`preserveAspectRatio="none"` SVG 안의 circle은 화면비 따라 타원으로 찌그러짐 → 원은 SVG 밖 HTML로 분리.
 
 ### E. 텍스트 규칙 (2026-07-14 감량 확정과 세트)
