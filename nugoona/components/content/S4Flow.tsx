@@ -25,6 +25,8 @@ import { useEffect, useRef, useState } from 'react';
 import { LayoutGroup, motion } from 'framer-motion';
 import NumberFlow from '@number-flow/react';
 import { multiChannel } from '@/lib/content/content';
+import FadeUp from '@/components/motion/FadeUp';
+import { Eyebrow } from './ContentSections';
 
 type Phase = 'input' | 'picked' | 'output';
 
@@ -54,9 +56,6 @@ function FlyPhoto({ i, className = '', fly = true }: { i: number; className?: st
 }
 
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <p className="mb-2.5 text-[14px] font-bold tracking-[-0.02em] text-text-primary">{children}</p>;
-}
 
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <div className={`overflow-hidden bg-white ${className}`} style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>{children}</div>;
@@ -81,7 +80,8 @@ const ICON = {
     </svg>
   ),
   fb: <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="12" fill="#1877F2" /><path d="M15.6 12.9l.5-3h-2.9V8c0-.85.4-1.6 1.7-1.6h1.3V3.8s-1.2-.2-2.3-.2c-2.4 0-3.9 1.4-3.9 4v2.3H7.4v3H10v7h3.2v-7z" fill="#fff" /></svg>,
-  shorts: <span className="flex h-[14px] w-[14px] items-center justify-center bg-[#171717]"><svg width="7" height="7" viewBox="0 0 24 24" fill="#fff"><path d="M9 6.5 18 12l-9 5.5z" /></svg></span>,
+  /* 유튜브 쇼츠 로고(사장님 2026-10-09 "쇼츠·릴스 아이콘은 왜 없어? 유튜브 아이콘이라도") — Simple Icons youtubeshorts 모양 */
+  shorts: <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><path d="M17.77 10.32l-1.2-.5L18 9.06a3.74 3.74 0 0 0-3.5-6.62L6 6.94a3.74 3.74 0 0 0 .23 6.74l1.2.49L6 14.93a3.75 3.75 0 0 0 3.5 6.63l8.5-4.5a3.74 3.74 0 0 0-.23-6.74z" fill="#FF0000" /><path d="M10 14.65v-5.3L15 12l-5 2.65z" fill="#fff" /></svg>,
 };
 
 /** 화살(§8.7-A 정본: PC = 선 1.6px + 채운 삼각 / 모바일 = 가는 선 + V촉).
@@ -496,14 +496,12 @@ export function S4Flow(_props: { freeze?: Phase }) {
   const phase: Phase = 'output';
   const fly = false;
   const arrived: Arrived = { blog: true, insta: true, shorts: true };
-  const s = multiChannel.steps;
 
   return (
     <LayoutGroup id="s4flow">
       <div className="relative mx-auto flex w-full max-w-[1040px] flex-col md:grid md:grid-cols-[208px_36px_128px_36px_1fr] md:items-start">
         {/* ── 올리세요: 내 폰 사진첩에서 고른다 ── */}
         <div className="min-w-0">
-          <Label>{s[0].title}</Label>
           <PhoneGallery phase={phase} fly={fly} />
         </div>
 
@@ -518,7 +516,6 @@ export function S4Flow(_props: { freeze?: Phase }) {
 
         {/* ── 확인하고 발행: 채널마다 살아 움직임(인스타·쇼츠 = 실제 앱 화면). 틀은 처음부터 고정, 사진·영상만 채워진다 ── */}
         <div className="min-w-0">
-          <Label>{s[2].title}</Label>
           <div className="grid grid-cols-2 gap-2.5 md:grid-cols-[0.8fr_1fr_1.17fr] md:gap-3">
             {/* 블로그 — 글이 위로 흐른다(우리 카드 문법 유지) */}
             <div className="col-span-2 flex h-[300px] flex-col md:col-span-1 md:h-auto">
@@ -545,5 +542,25 @@ export function S4Flow(_props: { freeze?: Phase }) {
         </div>
       </div>
     </LayoutGroup>
+  );
+}
+
+/** /content 채널 구간 — 사장님 확정 2026-10-09 "이 섹션은 완성".
+    구성 = 눈썹(Channels) + 제목 + 점무늬 무대(S4Flow). 설명 두 줄·배지·단계 이름(올리세요·확인하고 발행)·페이스북 없음
+    (사장님 "이미지로 다 뭔 말인지 알 수 있는데 쓸데없는 텍스트는 싫어"). 구 ContentS4 는 /content2 비교 시안에 남아 있다. */
+export function ContentChannels() {
+  return (
+    <div className="mx-auto max-w-[1200px] px-12 py-24 max-md:px-6 max-md:py-20">
+      <FadeUp>
+        <Eyebrow label="Channels" />
+        <h2
+          className="text-[clamp(26px,3.4vw,38px)] font-bold leading-[1.26] tracking-[-0.04em] text-balance text-text-primary max-md:text-[26px]"
+          dangerouslySetInnerHTML={{ __html: multiChannel.heading }}
+        />
+      </FadeUp>
+      <div className="relative mt-10 px-8 py-10 max-md:mt-8 max-md:px-4 max-md:py-7" style={{ background: '#FAFAFA', backgroundImage: 'radial-gradient(#dcdcdc 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+        <S4Flow />
+      </div>
+    </div>
   );
 }

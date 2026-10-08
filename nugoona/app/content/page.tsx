@@ -4,8 +4,9 @@ import Section from '@/components/layout/Section';
 import FadeUp from '@/components/motion/FadeUp';
 import { SpacerRow } from '@/components/layout/OccupancyGrid';
 import ContentHero from '@/components/content/ContentHero';
+import { ContentChannels } from '@/components/content/S4Flow';
 import {
-  ContentS2, ContentS3, ContentS4, ContentS5Visual, ContentS7Visual,
+  ContentS2, ContentS3, ContentS5Visual, ContentS7Visual,
   ContentS8Visual, ContentS9Grid, ContentS10Visual, ContentS11Cta, Eyebrow,
 } from '@/components/content/ContentSections';
 
@@ -65,13 +66,10 @@ export default function ContentPage() {
         </Section>
         <SpacerRow top />
 
-        {/* ── S4 채널마다 발행(CHANNELS) — 회색 밴드(사장님 2026-07-18 "다크 없애고 회색으로".
-             중간 다크 폐기 — 다크는 S1·S11 양끝만. 흰 목업 창이 회색 위에 카드로 뜸 = Ramp 문법) ── */}
+        {/* ── S4 채널(CHANNELS) — ★2026-10-09 사장님 확정: 폰 사진첩에서 고른 사진·영상이 블로그·인스타·쇼츠로(처음부터 무한 반복).
+             구 회색 밴드 + 01→02→03 나열(ContentS4)은 "설명서 같다"로 교체 — /content2 비교 시안에만 남음 ── */}
         <Section noBorder>
-          <div className="bg-[#eef0f3]">
-            {/* ★2026-10-08 개선안 §4.2 사진 맡기기 선택 + §4.4 쇼츠·릴스(빈 세로 틀) — /content2 시안에서 승격 */}
-            <ContentS4 choice shorts />
-          </div>
+          <ContentChannels />
         </Section>
         <SpacerRow top />
 
