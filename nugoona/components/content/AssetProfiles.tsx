@@ -171,10 +171,12 @@ function InstaProfile() {
 }
 
 /* ── 유튜브 채널 쇼츠 탭(계정 주인 화면) — 채널 사진·이름·@·구독자·동영상 수 / 채널 맞춤설정·동영상 관리 / 탭 / 9:16 썸네일 격자 ── */
-const SHORTS = [
+/* 첫 칸 = 사장님 제작 쇼츠(2026-10-09, 원본 media/flower-shorts/shorts-flower.mp4) — 소리 없이 자동 반복 재생 */
+const SHORTS: { img: string; v: string; video?: boolean }[] = [
+  { img: 'f-bouquet', v: '2.8천회', video: true },
   { img: 'f-make-2-gather', v: '1.2천회' }, { img: 'f-hand-tulip', v: '846회' }, { img: 'f-make-3-wrap', v: '2.3천회' },
   { img: 'f-hand-gerbera', v: '598회' }, { img: 'f-basket', v: '1.1천회' }, { img: 'f-make-1-trim', v: '931회' },
-  { img: 'f-hand-sunflower', v: '1.7천회' }, { img: 'f-door-buckets', v: '702회' }, { img: 'f-hand-carnation', v: '3.4천회' },
+  { img: 'f-hand-sunflower', v: '1.7천회' }, { img: 'f-hand-carnation', v: '3.4천회' },
 ];
 
 function ShortsChannel() {
@@ -204,8 +206,12 @@ function ShortsChannel() {
         <div className="grid grid-cols-3 gap-[3px] p-[3px]">
           {SHORTS.map((s) => (
             <span key={s.img} className="relative block aspect-[9/16] overflow-hidden" style={{ borderRadius: 6 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={F(s.img)} alt="" className="h-full w-full object-cover" />
+              {s.video ? (
+                <video src="/video/shorts-flower-720.mp4" poster="/video/shorts-flower-poster.jpg" muted loop autoPlay playsInline preload="auto" aria-label="하루꽃집 꽃다발 만들기 쇼츠" className="h-full w-full object-cover" />
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={F(s.img)} alt="" className="h-full w-full object-cover" />
+              )}
               <span className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3" style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.55))' }} />
               <span className="absolute bottom-1 left-1.5 flex items-center gap-0.5 text-[9px] font-semibold text-white">
                 <svg width="8" height="8" viewBox="0 0 24 24" fill="#fff" aria-hidden><path d="M8 5v14l11-7z" /></svg>
