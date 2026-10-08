@@ -49,7 +49,6 @@
   | `/home2` `/content2` `/ads2` | **비교 시안(2026-09-18) — 낙점 전 임시** | 개선안 반영안을 원본과 나란히 보기 위한 페이지. Nav 미등록 · metadata `robots: noindex`. **원본 파일 무수정이 원칙**: 공용 부품에는 기본값이 꺼짐인 선택 인자만 더하고 시안 경로에서만 켠다.
     실측 목록(2026-09-19) — 메인: `TwoAppsRail video` → `S41SearchScene video` / `NcMobileMock video`(+`NcMobileMockVideo` 래퍼) · `S3GraphicA both` → `OrbitScene both`·`MobileOurWay both`·`MobileOrbit both`.
     콘텐츠: `ContentHero flow`(설명 교체 + 첫 화면 시작 링크) · `ContentS4 choice·shorts` → `InputCard batch`·`S4FormatRow shorts`·`S4FormatRowPC shorts` · `ContentS8Visual enrich` → `S8TopicSteps shoot`·`S8SearchBox cta` · `ContentS11Cta cta`.
-    ★**2026-10-08 원본 승격**: `ContentS4 choice·shorts`는 이제 **원본 `/content`에서도 켠다**(리빌딩 채널 구간 — 개선안 §4.2 사진 맡기기 선택·§4.4 쇼츠·릴스). 쇼츠 칸은 사진+재생 단추(가짜 영상)를 버리고 **빈 세로 9:16 틀 `VerticalVideoFrame`**(잉크 필 + 재생 표시 + "세로 영상")으로 교체 — 사장님 "지금은 프레임만" 결정. 모바일은 세 형식 3칸 유지 + 쇼츠만 아래 가로 한 줄(2×2면 틀이 옆 카드의 두 배 길이).
     공통: `Footer`(경로 감지 — 인자가 아니라 `usePathname`).
     ⛔ 폐기된 인자 — `TwoAppsRail loop`·`S41SearchScene loop`·`MobileProductCarousel loopNote`·`S8SearchBox framed`.
     loop 계열은 §7-9(목업 아래 단독 한 줄 금지)에 걸려 걷어냈고, 그 내용은 `TwoAppsRail`의 NC `desc` 문장에 흡수했다. `/ads2`만 성격이 다르다 = 구간 **순서**만 재배치한 조립본(내용 무변경). 낙점 후 원본에 반영하고 이 세 폴더와 `scripts/ui-shots.mjs`의 등록 줄을 함께 지운다. ⛔ 한 문장 때문에 컴포넌트를 통째로 복제하지 않는다(개선안 작업요청서 §0.5). |
@@ -704,7 +703,7 @@
 2. **배경 장식(빔 등)의 좌표는 그리드 라인과 동기화** — 그리드 열·행을 바꾸면 빔 루프 코너(1/cols·1/rows 계열)도 같이 바꿔야 한다(사장님 "빔이 그리드를 안 따라가" 실증).
 3. **`[text-wrap:balance]` + 한국어 = 줄 머리 쉼표** 유발 — 여러 줄 문장엔 수동 `<br>` 또는 balance 제거.
 4. tsc는 반드시 `nugoona/`에서 + `${PIPESTATUS[0]}`로 판정(다른 cwd의 "exit=0"은 head 파이프의 가짜 통과 — 실증).
-5. 렌더 검증 시 `* {opacity:1!important}` 강제는 노이즈 레이어(0.035)까지 올려 **캡처가 실물과 달라짐** — 🛑 FadeUp 셀렉터(`[style*="opacity: 0"]`) 전역 강제도 금지(2026-10-08 폐기, 숨긴 라디오가 깨어나 유령 동그라미 → 위 "렌더 캡처 노하우" 참조). 스크롤로 등장 반응을 실제로 소화시킨 뒤 찍는다.
+5. 렌더 검증 시 `* {opacity:1!important}` 강제는 노이즈 레이어(0.035)까지 올려 **캡처가 실물과 달라짐** — 캡처용 강제는 FadeUp 셀렉터(`[style*="opacity: 0"]`)만.
 6. **원(circle)을 그리는 두 가지 함정(2026-07-15 실증)**: ①전역 직각 리셋(`border-radius:0!important`)이 rounded-full·인라인 radius까지 덮음 → HTML 원은 **`.rounded-dot`(50%!important) 예외 유틸 필수** ②`preserveAspectRatio="none"` SVG 안의 circle은 화면비 따라 타원으로 찌그러짐 → 원은 SVG 밖 HTML로 분리.
 
 ### E. 텍스트 규칙 (2026-07-14 감량 확정과 세트)

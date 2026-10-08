@@ -148,19 +148,23 @@ export default function ContentPage() {
         </Section>
         <SpacerRow top />
 
-        {/* ── S10 자산(ASSET) — 여백 휴식(편집 리듬 매핑: 상하 여백 확대, 느리고 차분한 감속 구간) ── */}
+        {/* ── S10 자산(ASSET) — ★2026-10-08 홈 S6 문법으로 재배치: 제목 위 + 아래 두 칸(블로그 | 유튜브, 가는 선 구분).
+             구 [좌 제목 | 우 그림] 2단은 그림이 길어지며 제목 위아래가 비었다(사장님 "빈 여백은 있으면 안 돼") ── */}
         <Section noBorder>
-          <div className="px-12 py-32 max-w-[1200px] mx-auto max-md:px-6 max-md:py-24">
-            <div className="grid grid-cols-2 items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
-              <SectionHead
-                eyebrow="Asset"
-                heading={<>서비스 이용이 끝나도<br />쌓인 글은 그대로 남습니다</>}
-                sub="발행된 글은 고객님의 계정에 쌓입니다."
-              />
-              <FadeUp delay={0.1}>
-                <ContentS10Visual />
-              </FadeUp>
-            </div>
+          <div className="mx-auto max-w-[1200px] px-12 pb-12 pt-20 max-md:px-6 max-md:pb-10 max-md:pt-14">
+            <SectionHead
+              eyebrow="Asset"
+              heading={<>서비스 이용이 끝나도<br />쌓인 글은 그대로 남습니다</>}
+              sub="발행된 글은 고객님의 계정에 쌓입니다."
+            />
+          </div>
+          <div className="grid grid-cols-2 border-t border-[#ECECEC] max-md:grid-cols-1">
+            <FadeUp delay={0.05} className="flex items-start justify-center px-12 py-14 max-md:px-6 max-md:py-10">
+              <ContentS10Visual part="blog" />
+            </FadeUp>
+            <FadeUp delay={0.12} className="flex items-start justify-center border-l border-[#ECECEC] px-12 py-14 max-md:border-l-0 max-md:border-t max-md:px-6 max-md:py-10">
+              <ContentS10Visual part="youtube" />
+            </FadeUp>
           </div>
         </Section>
         <SpacerRow thin noMobileGrid />

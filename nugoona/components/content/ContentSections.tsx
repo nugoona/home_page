@@ -784,13 +784,13 @@ export function InputCard({ batch = false }: { batch?: boolean } = {}) {
 /** 세로 영상 자리(9:16) — ★2026-10-08 사장님 "새로 만들게 차라리. 지금은 프레임만 넣어놔".
     실제 영상 파일은 쓰지 않는다(손님 얼굴·남의 상품 → 동의 문제). 가짜 화면·짝퉁 UI로 채우지 않는다.
     다크 필 = 태그·칩과 같은 잉크(§8.17). 홈페이지용 영상이 생기면 이 안에 <video>만 넣으면 된다. */
-function VerticalVideoFrame({ className = '' }: { className?: string }) {
+function VerticalVideoFrame({ className = '', label = true }: { className?: string; label?: boolean }) {
   return (
     <span aria-hidden className={`relative flex aspect-[9/16] items-center justify-center bg-[#171717] ${className}`}>
       <span className="rounded-dot flex h-9 w-9 items-center justify-center border border-white/70">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M8 5.5 19 12 8 18.5z" /></svg>
       </span>
-      <span className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white/70">세로 영상</span>
+      {label && <span className="absolute bottom-2 left-2.5 text-[10px] font-semibold text-white/70">세로 영상</span>}
     </span>
   );
 }
@@ -1793,34 +1793,68 @@ const S10_POSTS = [
   { title: '라탄으로 톤을 맞춘 거실', date: '3월 12일', img: '/img/content/biz-interior-4.jpg' },
 ];
 
-export function ContentS10Visual() {
+/* ★2026-10-08 쇼츠도 쌓인다 — 영상은 콘텐츠 쪽에서도 서비스(사장님 결정). 앱이 고객님 유튜브에 직접 올리므로
+   영상 역시 고객님 계정에 남는다. 영상 자리는 S4와 같은 빈 세로 틀(실제 영상·가짜 화면 금지 — "지금은 프레임만") */
+const S10_SHORTS = [
+  { title: '거실 조명 바꾸는 날', date: '4월 3일' },
+  { title: '작은 방 시공 전후', date: '3월 27일' },
+  { title: '라탄 거실 완성', date: '3월 13일' },
+];
+
+/** 브라우저 크롬 — 홈 S6 실측(신호등 + 자물쇠 + 라벨) */
+function S10Chrome({ label }: { label: string }) {
   return (
-    <div className="mx-auto w-full max-w-[400px] overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }} role="img" aria-label="고객님의 블로그에 쌓인 글">
-      {/* 브라우저 크롬 — 홈 S6 실측(신호등 + 자물쇠 + 고객님의 블로그) */}
-      <div className="relative flex h-9 items-center border-b px-3.5" style={{ borderColor: BORDER }}>
-        <div className="flex items-center gap-1">
-          <span className="rounded-dot h-[9px] w-[9px] bg-[#ec6a5e]" />
-          <span className="rounded-dot h-[9px] w-[9px] bg-[#f4bf4f]" />
-          <span className="rounded-dot h-[9px] w-[9px] bg-[#61c454]" />
+    <div className="relative flex h-9 items-center border-b px-3.5" style={{ borderColor: BORDER }}>
+      <div className="flex items-center gap-1">
+        <span className="rounded-dot h-[9px] w-[9px] bg-[#ec6a5e]" />
+        <span className="rounded-dot h-[9px] w-[9px] bg-[#f4bf4f]" />
+        <span className="rounded-dot h-[9px] w-[9px] bg-[#61c454]" />
+      </div>
+      <span className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap text-[11.5px] text-[#7d7d7d]">
+        <svg width="11" height="11" viewBox="0 0 13 13" fill="none" aria-hidden>
+          <rect x="2.2" y="5.6" width="8.6" height="6" rx="1.2" stroke="#7d7d7d" strokeWidth="1.1" />
+          <path d="M4.1 5.4V4a2.4 2.4 0 0 1 4.8 0v1.4" stroke="#7d7d7d" strokeWidth="1.1" />
+        </svg>
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/** part 없음 = 두 창 세로 스택(/content2 시안) · part 지정 = 한 창만(원본 /content는 홈 S6처럼 두 칸에 나눠 놓는다) */
+export function ContentS10Visual({ part }: { part?: 'blog' | 'youtube' } = {}) {
+  return (
+    <div className="mx-auto flex w-full max-w-[400px] flex-col gap-3" role="img" aria-label={part === 'youtube' ? '고객님의 유튜브에 쌓인 쇼츠' : part === 'blog' ? '고객님의 블로그에 쌓인 글' : '고객님의 블로그와 유튜브에 쌓인 콘텐츠'}>
+      {part !== 'youtube' && (
+      <div className="overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
+        <S10Chrome label="고객님의 블로그" />
+        {/* 글 컬렉션 — 갤러리 D6 MinimalCard 원본(다층 그림자 마감) */}
+        <div className="grid grid-cols-2 gap-2.5 px-3.5 pb-3.5 pt-3.5">
+          {S10_POSTS.map((p) => (
+            <MinimalCard key={p.title} className="p-1.5">
+              <MinimalCardImage src={p.img} alt="" className="mb-2 h-[72px]" />
+              <MinimalCardTitle className="mt-0 px-0.5 text-[11px] leading-[1.35]">{p.title}</MinimalCardTitle>
+              <MinimalCardDescription className="mt-0.5 px-0.5 pb-1 text-[9.5px]">{p.date}</MinimalCardDescription>
+            </MinimalCard>
+          ))}
         </div>
-        <span className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap text-[11.5px] text-[#7d7d7d]">
-          <svg width="11" height="11" viewBox="0 0 13 13" fill="none" aria-hidden>
-            <rect x="2.2" y="5.6" width="8.6" height="6" rx="1.2" stroke="#7d7d7d" strokeWidth="1.1" />
-            <path d="M4.1 5.4V4a2.4 2.4 0 0 1 4.8 0v1.4" stroke="#7d7d7d" strokeWidth="1.1" />
-          </svg>
-          고객님의 블로그
-        </span>
       </div>
-      {/* 글 컬렉션 — 갤러리 D6 MinimalCard 원본(다층 그림자 마감) */}
-      <div className="grid grid-cols-2 gap-2.5 px-3.5 pb-3.5 pt-3.5">
-        {S10_POSTS.map((p) => (
-          <MinimalCard key={p.title} className="p-1.5">
-            <MinimalCardImage src={p.img} alt="" className="mb-2 h-[72px]" />
-            <MinimalCardTitle className="mt-0 px-0.5 text-[11px] leading-[1.35]">{p.title}</MinimalCardTitle>
-            <MinimalCardDescription className="mt-0.5 px-0.5 pb-1 text-[9.5px]">{p.date}</MinimalCardDescription>
-          </MinimalCard>
-        ))}
+      )}
+      {part !== 'blog' && (
+      <div className="overflow-hidden bg-white" style={{ border: `1px solid ${BORDER}`, boxShadow: CARD_SHADOW }}>
+        <S10Chrome label="고객님의 유튜브" />
+        <div className="grid grid-cols-3 gap-2.5 p-3.5">
+          {S10_SHORTS.map((v) => (
+            <div key={v.title} className="min-w-0">
+              {/* 유튜브 창 안이라 영상임이 이미 분명 — "세로 영상" 글자 반복 생략 */}
+              <VerticalVideoFrame className="w-full" label={false} />
+              <p className="mt-2 truncate px-0.5 text-[11px] font-semibold leading-[1.35] text-text-primary">{v.title}</p>
+              <p className="mt-0.5 px-0.5 text-[9.5px] text-text-weak">쇼츠 · {v.date}</p>
+            </div>
+          ))}
+        </div>
       </div>
+      )}
     </div>
   );
 }
