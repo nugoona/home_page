@@ -784,7 +784,7 @@ export function InputCard({ batch = false }: { batch?: boolean } = {}) {
 /** 세로 영상 자리(9:16) — ★2026-10-08 사장님 "새로 만들게 차라리. 지금은 프레임만 넣어놔".
     실제 영상 파일은 쓰지 않는다(손님 얼굴·남의 상품 → 동의 문제). 가짜 화면·짝퉁 UI로 채우지 않는다.
     다크 필 = 태그·칩과 같은 잉크(§8.17). 홈페이지용 영상이 생기면 이 안에 <video>만 넣으면 된다. */
-function VerticalVideoFrame({ className = '', label = true }: { className?: string; label?: boolean }) {
+export function VerticalVideoFrame({ className = '', label = true }: { className?: string; label?: boolean }) {
   return (
     <span aria-hidden className={`relative flex aspect-[9/16] items-center justify-center bg-[#171717] ${className}`}>
       <span className="rounded-dot flex h-9 w-9 items-center justify-center border border-white/70">
