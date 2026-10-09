@@ -5,9 +5,12 @@ import FadeUp from '@/components/motion/FadeUp';
 import { SpacerRow } from '@/components/layout/OccupancyGrid';
 import ContentHero from '@/components/content/ContentHero';
 import { ContentChannels } from '@/components/content/S4Flow';
+import { AssetProfiles } from '@/components/content/AssetProfiles';
+import { FeaturePrinciples } from '@/components/content/FeaturePrinciples';
+import { StartScene } from '@/components/content/StartScene';
 import {
   ContentS2, ContentS3, ContentS5Visual, ContentS7Visual,
-  ContentS8Visual, ContentS9Grid, ContentS10Visual, ContentS11Cta, Eyebrow,
+  ContentS11Cta, Eyebrow,
 } from '@/components/content/ContentSections';
 
 export const metadata: Metadata = {
@@ -120,27 +123,25 @@ export default function ContentPage() {
               heading="상호명만 넣어주세요"
               sub="가게 운영만으로도 하루는 이미 벅찹니다."
             />
-            <FadeUp delay={0.1}>
-              <div className="mt-12 max-md:mt-8">
-                <ContentS8Visual />
-              </div>
-            </FadeUp>
+            {/* ★2026-10-09 사장님 확정 — 01 가게 이름 → 02 조사한 재료(지도·메뉴판·리뷰·손님 검색어) → 03 그 재료로 쓴 블로그 글.
+                 문법 = 광고 AdsCanvasFlow · 휴대폰 = 세로 줄기 · 규칙 = DESIGN §8.19 */}
+            <div className="mx-auto mt-12 w-full max-w-[980px] max-md:mt-8">
+              <StartScene />
+            </div>
           </div>
         </Section>
         <SpacerRow top />
 
-        {/* ── S9 기능(FEATURES) — 회색 밴드(편집 리듬 매핑: 부가 기능 카탈로그 묶음 표시.
-             페이지 유일의 회색. 내부 흰 목업 창이 회색 위에서 카드로 뜸) ── */}
+        {/* ── S9 기능(FEATURES) — ★2026-10-09 사장님 확정: 넷 중 손님 불안을 푸는 둘만(문의함·사진 질문). 알림·발행 일정은 "어느 앱에나 있는 기본"이라 뺌.
+             흰 바탕(구 회색 밴드 + ContentS9Grid 폐기) · 글자 최소 · 앱 실제 화면을 다듬은 그림 ── */}
         <Section noBorder>
-          <div className="bg-[#eef0f3]">
-            <div className={WRAP}>
-              <SectionHead
-                eyebrow="Features"
-                heading="이 밖에도 필요한 기능을 담았습니다"
-              />
-              <div className="mt-12 max-md:mt-8">
-                <ContentS9Grid />
-              </div>
+          <div className={WRAP}>
+            <SectionHead
+              eyebrow="Features"
+              heading="이 밖에도 필요한 기능을 담았습니다"
+            />
+            <div className="mt-12 max-md:mt-8">
+              <FeaturePrinciples />
             </div>
           </div>
         </Section>
@@ -149,20 +150,18 @@ export default function ContentPage() {
         {/* ── S10 자산(ASSET) — ★2026-10-08 홈 S6 문법으로 재배치: 제목 위 + 아래 두 칸(블로그 | 유튜브, 가는 선 구분).
              구 [좌 제목 | 우 그림] 2단은 그림이 길어지며 제목 위아래가 비었다(사장님 "빈 여백은 있으면 안 돼") ── */}
         <Section noBorder>
-          <div className="mx-auto max-w-[1200px] px-12 pb-12 pt-20 max-md:px-6 max-md:pb-10 max-md:pt-14">
+          <div className="mx-auto max-w-[1200px] px-12 pb-10 pt-20 max-md:px-6 max-md:pb-8 max-md:pt-14">
             <SectionHead
               eyebrow="Asset"
               heading={<>서비스 이용이 끝나도<br />쌓인 콘텐츠는 그대로 남습니다</>}
               sub="발행된 글과 영상은 고객님의 계정에 쌓입니다."
             />
           </div>
-          <div className="grid grid-cols-2 border-t border-[#ECECEC] max-md:grid-cols-1">
-            <FadeUp delay={0.05} className="flex items-start justify-center px-12 py-14 max-md:px-6 max-md:py-10">
-              <ContentS10Visual part="blog" />
-            </FadeUp>
-            <FadeUp delay={0.12} className="flex items-start justify-center border-l border-[#ECECEC] px-12 py-14 max-md:border-l-0 max-md:border-t max-md:px-6 max-md:py-10">
-              <ContentS10Visual part="youtube" />
-            </FadeUp>
+          {/* ★2026-10-09 사장님 확정 — 동네 꽃집 실제 프로필 화면 3개(블로그·인스타·유튜브 쇼츠), 처음부터 무한 반복 */}
+          <div className="mx-auto max-w-[1200px] px-12 pb-20 max-md:px-6 max-md:pb-14">
+            <div className="relative px-8 py-10 max-md:px-4 max-md:py-7" style={{ background: '#FAFAFA', backgroundImage: 'radial-gradient(#dcdcdc 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+              <div className="mx-auto max-w-[1040px]"><AssetProfiles /></div>
+            </div>
           </div>
         </Section>
         <SpacerRow thin noMobileGrid />
