@@ -9,7 +9,7 @@ import { AssetProfiles } from '@/components/content/AssetProfiles';
 import { FeaturePrinciples } from '@/components/content/FeaturePrinciples';
 import { StartScene } from '@/components/content/StartScene';
 import {
-  ContentS2, ContentS3, ContentS5Visual, ContentS7Visual,
+  ContentS2, ContentS5Visual, ContentS7Visual,
   ContentS11Cta, Eyebrow,
 } from '@/components/content/ContentSections';
 
@@ -57,15 +57,31 @@ export default function ContentPage() {
         </Section>
         <SpacerRow top />
 
+        {/* ★2026-10-09 사장님 확정 순서(직원 세션): 히어로 → 왜 필요한가(S2) → 이름만 넣으면 시작(S8) → 사진이 여러 채널 콘텐츠로(S4)
+             → 지금 몇 위인지 확인(S7) → 노출 방식이 바뀌어도 계속 반영(S5, 덜 중요하지만 "계속 업데이트된다"를 알려야 해서 유지)
+             → 걱정 해소 기능(S9) → 끝나도 남는다(S10) → CTA. 구 S3 브리지(세 칸 = S4·S5·S7 미리 요약)는 중복이라 삭제. */}
         {/* ── S2 쌓임(BUILD-UP) ── */}
         <Section noBorder>
           <ContentS2 />
         </Section>
         <SpacerRow top />
 
-        {/* ── S3 브리지(OVERVIEW) ── */}
+        {/* ── S8 시작(START) ── */}
         <Section noBorder>
-          <ContentS3 />
+          <div className={WRAP}>
+            {/* 위계 역전(사장님 2026-07-20 PC·모바일 공통): 메인 = "상호명만 넣어주세요"(행동),
+                구 헤딩("가게 운영만으로도…")은 서브로 강등 */}
+            <SectionHead
+              eyebrow="Start"
+              heading="상호명만 넣어주세요"
+              sub="가게 운영만으로도 하루는 이미 벅찹니다."
+            />
+            {/* ★2026-10-09 사장님 확정 — 01 가게 이름 → 02 조사한 재료(지도·메뉴판·리뷰·손님 검색어) → 03 그 재료로 쓴 블로그 글.
+                 문법 = 광고 AdsCanvasFlow · 휴대폰 = 세로 줄기 · 규칙 = DESIGN §8.19 */}
+            <div className="mx-auto mt-12 w-full max-w-[980px] max-md:mt-8">
+              <StartScene />
+            </div>
+          </div>
         </Section>
         <SpacerRow top />
 
@@ -73,25 +89,6 @@ export default function ContentPage() {
              구 회색 밴드 + 01→02→03 나열(ContentS4)은 "설명서 같다"로 교체 — /content2 비교 시안에만 남음 ── */}
         <Section noBorder>
           <ContentChannels />
-        </Section>
-        <SpacerRow top />
-
-        {/* ── S5 노출 소식 반영(NEWS · 킬러) — 라이트 원복(사장님 2026-07-18 "뉴스는 라이트로".
-             다크 네이티브 버전은 dark prop으로 보존 — S4 다크와 교체됨) ── */}
-        <Section noBorder>
-          <div className={WRAP}>
-            {/* 2026-07-20 PC 개편: 좌 헤딩 레일 | 우 흐름도(구 중앙 좁은 흐름도+좌우 텅 해소). 모바일 세로 불변 */}
-            <div className="grid grid-cols-[1fr_1.3fr] items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
-              <SectionHead
-                eyebrow="News"
-                heading={<>노출 방식이 바뀌어도<br />알아서 따라갑니다</>}
-                sub="검색에 도움 되는 변화를 주 1회 모아 앞으로 쓰는 글에 반영합니다."
-              />
-              <FadeUp delay={0.1}>
-                <ContentS5Visual />
-              </FadeUp>
-            </div>
-          </div>
         </Section>
         <SpacerRow top />
 
@@ -113,20 +110,20 @@ export default function ContentPage() {
         </Section>
         <SpacerRow top />
 
-        {/* ── S8 시작(START) ── */}
+        {/* ── S5 노출 소식 반영(NEWS · 킬러) — 라이트 원복(사장님 2026-07-18 "뉴스는 라이트로".
+             다크 네이티브 버전은 dark prop으로 보존 — S4 다크와 교체됨) ── */}
         <Section noBorder>
           <div className={WRAP}>
-            {/* 위계 역전(사장님 2026-07-20 PC·모바일 공통): 메인 = "상호명만 넣어주세요"(행동),
-                구 헤딩("가게 운영만으로도…")은 서브로 강등 */}
-            <SectionHead
-              eyebrow="Start"
-              heading="상호명만 넣어주세요"
-              sub="가게 운영만으로도 하루는 이미 벅찹니다."
-            />
-            {/* ★2026-10-09 사장님 확정 — 01 가게 이름 → 02 조사한 재료(지도·메뉴판·리뷰·손님 검색어) → 03 그 재료로 쓴 블로그 글.
-                 문법 = 광고 AdsCanvasFlow · 휴대폰 = 세로 줄기 · 규칙 = DESIGN §8.19 */}
-            <div className="mx-auto mt-12 w-full max-w-[980px] max-md:mt-8">
-              <StartScene />
+            {/* 2026-07-20 PC 개편: 좌 헤딩 레일 | 우 흐름도(구 중앙 좁은 흐름도+좌우 텅 해소). 모바일 세로 불변 */}
+            <div className="grid grid-cols-[1fr_1.3fr] items-center gap-12 max-md:grid-cols-1 max-md:gap-8">
+              <SectionHead
+                eyebrow="News"
+                heading={<>노출 방식이 바뀌어도<br />알아서 따라갑니다</>}
+                sub="검색에 도움 되는 변화를 주 1회 모아 앞으로 쓰는 글에 반영합니다."
+              />
+              <FadeUp delay={0.1}>
+                <ContentS5Visual />
+              </FadeUp>
             </div>
           </div>
         </Section>
