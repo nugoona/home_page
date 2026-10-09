@@ -16,7 +16,8 @@ import NumberFlow from '@number-flow/react';
 
 const BORDER = '#ECECEC';
 const CARD_SHADOW = '0 1px 2px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.04)';
-const APP_FONT = { fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Malgun Gothic", sans-serif' } as const;
+/* 카드 안 글꼴 = 사이트 글꼴(Pretendard). 시스템 글꼴 목록은 윈도우·일부 안드로이드에서 맑은 고딕으로 떨어져 폐기(사장님 2026-10-09, DESIGN §8.19-D) */
+const APP_FONT = { fontFamily: 'var(--font-kr)' } as const;
 const F = (n: string) => `/img/content/flower/${n}.jpg`;
 const SHOP = '하루꽃집';
 const SHOP_ID = 'haru_flower';

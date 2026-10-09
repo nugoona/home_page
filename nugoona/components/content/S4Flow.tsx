@@ -263,7 +263,8 @@ function BlogCard({ on, fly }: { on: boolean; fly: boolean }) {
 /* ══ 실제 앱 화면 재현(사장님 2026-10-08 "인스타·쇼츠 틀은 실제랑 똑같이 — 좋아요도 뭣도") ══
    §8.7-I "짝퉁 실물 재현 금지"의 이유 = 어설픈 흉내. 여기서는 실제 앱 치수·아이콘·문구를 정확히 재현해 그 우려를 없앤다.
    글꼴 = 각 앱처럼 기기 기본 글꼴. 블로그는 "어쩔 수 없다"(사장님) — 우리 카드 문법 유지 */
-const APP_FONT = { fontFamily: '-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Malgun Gothic", sans-serif' } as const;
+/* 카드 안 글꼴 = 사이트 글꼴(Pretendard). 시스템 글꼴 목록은 윈도우·일부 안드로이드에서 맑은 고딕으로 떨어져 폐기(사장님 2026-10-09, DESIGN §8.19-D) */
+const APP_FONT = { fontFamily: 'var(--font-kr)' } as const;
 const SHOP_ID = 'monggeul_grooming';
 const IG_HEART = 'M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938z';
 
